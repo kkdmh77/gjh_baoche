@@ -190,6 +190,22 @@ DEF_SINGLETON(UIFactory);
     }
 }
 
+// 清空通知数字显示
++ (void)clearApplicationBadgeNumber
+{
+    UIApplication *application = [UIApplication sharedApplication];
+    
+    if (0 != application.applicationIconBadgeNumber)
+    {
+        application.applicationIconBadgeNumber = 0;
+    }
+    else
+    {
+        application.applicationIconBadgeNumber = 1;
+        application.applicationIconBadgeNumber = 0;
+    }
+}
+
 + (NSStringEncoding)getGBKEncoding
 {
     

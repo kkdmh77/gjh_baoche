@@ -28,11 +28,14 @@ AS_SINGLETON(UIFactory);
 - (void)sendEmail:(NSString *)emailAddr;                        //发送邮件
 + (void)openUrl:(NSString *)url;                                //打开网页
 
-// 本地通知
+/// 本地通知
 + (BOOL)isRegisteredForLocalNotifications;
 + (BOOL)addLocalNotificationWithFireDate:(NSDate *)fireDate
                             alertBodyStr:(NSString *)alertBody
                           alertActionStr:(NSString *)alertAction;
+
+/// 清空通知数字显示
++ (void)clearApplicationBadgeNumber;
 
 + (NSStringEncoding)getGBKEncoding;                             //获得中文gbk编码
 

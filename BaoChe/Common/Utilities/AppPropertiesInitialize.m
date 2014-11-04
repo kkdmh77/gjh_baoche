@@ -36,6 +36,9 @@ static NSString * const kRecipesStoreName = @"Recipes.sqlite";
     // 初始化coreData库
     [MagicalRecord setupCoreDataStackWithStoreNamed:kRecipesStoreName];
     
+    // 清空通知数字显示
+    [UIFactory clearApplicationBadgeNumber];
+    
     // ...
 }
 
