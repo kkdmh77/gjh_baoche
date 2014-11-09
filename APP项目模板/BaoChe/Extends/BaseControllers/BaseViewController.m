@@ -71,8 +71,14 @@
     // 设置界面本地的所有文字显示(涉及多语言)
     [self setPageLocalizableText];
     
+    /**
+     *o2o返回键放在了低栏,这里屏蔽掉(默认是调用@selector(backViewController))
+     */
     // 返回Btn
-    [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left normalImg:[UIImage imageNamed:@"Return_btn_3.png"] highlightedImg:[UIImage imageNamed:@"Return_btn_4.png"] action:@selector(backViewController)];
+    [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left
+                                 normalImg:[UIImage imageNamed:@"Return_btn_3.png"]
+                            highlightedImg:[UIImage imageNamed:@"Return_btn_4.png"]
+                                    action:NULL];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -171,6 +177,19 @@
         [self.view insertSubview:backgroundStatusImgView atIndex:0];
     }
     backgroundStatusImgView.image = backgroundImage;
+}
+
+- (void)setupTableViewWithFrame:(CGRect)frame style:(UITableViewStyle)style registerNibName:(NSString *)nibName reuseIdentifier:(NSString *)identifier
+{
+    _tableView = InsertTableView(nil, frame, self, self, style);
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor = [UIColor clearColor];
+    if ([nibName isAbsoluteValid] && [identifier isAbsoluteValid])
+    {
+        [_tableView registerNib:[UINib nibWithNibName:nibName bundle:nil] forCellReuseIdentifier:identifier];
+    }
+    
+    [self.view addSubview:_tableView];
 }
 
 - (void)showHUDInfoByType:(HUDInfoType)type
@@ -303,6 +322,33 @@
             
         }];
     }
+}
+
+#pragma mark - UITableViewDataSource & UITableViewDelegate methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 0;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 0.0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // do nothing
 }
 
 @end

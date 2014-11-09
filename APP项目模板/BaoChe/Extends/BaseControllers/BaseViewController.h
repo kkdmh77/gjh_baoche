@@ -22,9 +22,12 @@ typedef NS_ENUM(NSInteger, BarbuttonItemPosition)
     BarbuttonItemPosition_Right
 };
 
-@interface BaseViewController : UIViewController
+@interface BaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
+@protected
     UIImageView *backgroundStatusImgView; // 背景图
+    
+    UITableView *_tableView;              // default is nil
 }
 
 /// 布局子视图的Y坐标的起点(IOS7为20,IOS7以下为0)
@@ -74,6 +77,14 @@ typedef NS_ENUM(NSInteger, BarbuttonItemPosition)
  @ 创建时间    2014-07-18
  */
 - (void)setupBackgroundImage:(UIImage *)backgroundImage;
+
+/**
+ @ 方法描述    设置tableView
+ @ 输入参数    registerNibName: cell的注册名 reuseIdentifier: cell的重用标识符
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-07-18
+ */
+- (void)setupTableViewWithFrame:(CGRect)frame style:(UITableViewStyle)style registerNibName:(NSString *)nibName reuseIdentifier:(NSString *)identifier;
 
 /**
  @ 方法描述    HUD显示文字信息
