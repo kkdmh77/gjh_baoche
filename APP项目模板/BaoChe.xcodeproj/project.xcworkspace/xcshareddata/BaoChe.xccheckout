@@ -22,17 +22,17 @@
 		<string>https://github.com/alexkung/gjh_baoche.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BaoChe/BaoChe.xcodeproj</string>
+	<string>APP项目模板/BaoChe.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++3947</key>
-		<string>../../..BaoChe/Class/Nimbus/src/webcontroller/resources/NimbusWebController.bundle</string>
+		<string>../../..APP%E9%A1%B9%E7%9B%AE%E6%A8%A1%E6%9D%BF/Class/Nimbus/src/webcontroller/resources/NimbusWebController.bundle</string>
 		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++422</key>
-		<string>../../..BaoChe/Class/Nimbus/src/photos/resources/NimbusPhotos.bundle</string>
+		<string>../../..APP%E9%A1%B9%E7%9B%AE%E6%A8%A1%E6%9D%BF/Class/Nimbus/src/photos/resources/NimbusPhotos.bundle</string>
 		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++4580</key>
-		<string>../../..BaoChe/Class/Nimbus/src/overview/resources/NimbusOverviewer.bundle</string>
+		<string>../../../APP%E9%A1%B9%E7%9B%AE%E6%A8%A1%E6%9D%BF/Class/Nimbus/src/overview/resources/NimbusOverviewer.bundle</string>
 		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++9572</key>
-		<string>../../..BaoChe/Class/IQKeyBoardManager/IQKeyboardManager.bundle</string>
+		<string>../../..APP%E9%A1%B9%E7%9B%AE%E6%A8%A1%E6%9D%BF/Class/IQKeyBoardManager/IQKeyboardManager.bundle</string>
 		<key>6F0AFF7670DF53B01B9750C1B70D3F65B81DAC33</key>
 		<string>../../..</string>
 	</dict>
