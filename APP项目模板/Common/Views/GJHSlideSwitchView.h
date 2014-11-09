@@ -48,6 +48,8 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
 @property (nonatomic, strong) UIImage *shadowImage;
 @property (nonatomic, strong) UIButton *rigthSideButton;
 
+@property (nonatomic, assign) BOOL isTabItemEqualWidthInFullScreenWidth; // 顶部标签子视图是否等宽且只限制在屏幕宽度中显示(scrollview不横向滚动) default is NO
+
 /*!
  * @method 初始化
  * @abstract

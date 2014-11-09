@@ -143,9 +143,19 @@
     for (int i = 0; i < [_titlesArray count]; i++) {
         NSString *title = [_titlesArray objectAtIndex:i];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGSize textSize = [title sizeWithFont:[UIFont systemFontOfSize:kFontSizeOfTabButton]
-                               constrainedToSize:CGSizeMake(_topScrollView.bounds.size.width, kHeightOfTopScrollView)
-                                   lineBreakMode:NSLineBreakByTruncatingTail];
+        
+        CGSize textSize = CGSizeZero;
+        if (!_isTabItemEqualWidthInFullScreenWidth)
+        {
+            textSize = [title sizeWithFont:[UIFont systemFontOfSize:kFontSizeOfTabButton]
+                         constrainedToSize:CGSizeMake(_topScrollView.bounds.size.width, kHeightOfTopScrollView)
+                             lineBreakMode:NSLineBreakByTruncatingTail];
+        }
+        else
+        {
+            textSize = CGSizeMake((self.bounds.size.width - _rigthSideButton.bounds.size.width - kWidthOfButtonMargin * (_titlesArray.count + 1)) / _titlesArray.count, kHeightOfTopScrollView);
+        }
+        
         //累计每个tab文字的长度
         topScrollViewContentWidth += kWidthOfButtonMargin+textSize.width;
         //设置按钮尺寸
