@@ -9,12 +9,21 @@
 #import "BaseViewController.h"
 #import "HUDManager.h"
 #import "InterfaceHUDManager.h"
+#import "LanguagesManager.h"
 
 @interface BaseViewController ()
 
 @end
 
 @implementation BaseViewController
+
+- (void)dealloc
+{
+    // 注销本地语言切换通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:LanguageTypeDidChangedNotificationKey
+                                                  object:nil];
+}
 
 - (void)loadView
 {
@@ -67,6 +76,11 @@
      shadow, NSShadowAttributeName,
      [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];
      */
+    
+    // 注册本地语言切换通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setPageLocalizableText)
+                                                 name:LanguageTypeDidChangedNotificationKey
+                                               object:nil];
     
     // 设置界面本地的所有文字显示(涉及多语言)
     [self setPageLocalizableText];
