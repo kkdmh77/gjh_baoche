@@ -170,7 +170,7 @@
             button.selected = YES;
         }
         [button setTitle:title forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont boldSystemFontOfSize:kFontSizeOfTabButton];
+        button.titleLabel.font = [UIFont systemFontOfSize:kFontSizeOfTabButton];
         [button setTitleColor:self.tabItemNormalColor forState:UIControlStateNormal];
         [button setTitleColor:self.tabItemSelectedColor forState:UIControlStateSelected];
         [button setBackgroundImage:self.tabItemNormalBackgroundImage forState:UIControlStateNormal];

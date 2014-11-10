@@ -48,9 +48,10 @@
 - (void)dealloc
 {
     [self clearDelegate];
-    
+    /*
     // 自动的登录相关
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:didLoginSuccessNotificationKey object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:didLoginSuccessNotificationKey object:nil];
+     */
 }
 
 - (void)viewDidLoad
@@ -63,9 +64,10 @@
     // 请求网络数据
     [self getNetworkData];
      */
-    
+    /*
     // 自动的登录相关
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginSuccessAction) name:didLoginSuccessNotificationKey object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginSuccessAction) name:didLoginSuccessNotificationKey object:nil];
+     */
 }
 
 // 有的类需要登录后才能请求服务器数据(此方法会在自动弹出登录界面并且登录成功后调用以再次发起推出登录界面控制器的网络请求)
@@ -164,6 +166,11 @@
 
 - (void)setDefaultNetFailedBlockImplementationWithNetRequest:(NetRequest *)request error:(NSError *)error otherExecuteBlock:(void (^)(void))otherBlock
 {
+    [self setDefaultNetFailedBlockImplementationWithNetRequest:request error:error isAddFailedActionView:YES otherExecuteBlock:otherBlock];
+}
+
+- (void)setDefaultNetFailedBlockImplementationWithNetRequest:(NetRequest *)request error:(NSError *)error isAddFailedActionView:(BOOL)isAddActionView otherExecuteBlock:(void (^)(void))otherBlock
+{
     // 无数据
     if (error.code == MyHTTPCodeType_DataSourceNotFound)
     {
@@ -188,8 +195,11 @@
             [self showHUDInfoByString:OperationFailure];
         }
         
-        // 给主view赋值状态背景图(点击重新刷新的图)
-        [self setLoadFailureStatusView];
+        // 设置主view的状态背景图(点击重新刷新的图)
+        if (isAddActionView)
+        {
+            [self setLoadFailureStatusView];
+        }
     }
     
     if (otherBlock)
