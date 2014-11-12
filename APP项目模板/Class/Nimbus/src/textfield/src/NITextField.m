@@ -30,11 +30,11 @@
     
     // 算出placeholder rect的originY
     UIFont *font = self.placeholderFont != nil ? self.placeholderFont : self.font;
-    CGRect drawRect = CGRectMake(0, (rect.size.height - font.lineHeight) / 2, rect.size.width, rect.size.height);
+    CGRect drawRect = CGRectMake(0, (rect.size.height - font.lineHeight) / 2, rect.size.width, font.lineHeight);
 
     [self.placeholder drawInRect:drawRect
                         withFont:(self.placeholderFont != nil ? self.placeholderFont : self.font)
-                   lineBreakMode:NSLineBreakByClipping
+                   lineBreakMode:NSLineBreakByTruncatingTail
                        alignment:self.textAlignment];
 
     CGContextRestoreGState(cx);
