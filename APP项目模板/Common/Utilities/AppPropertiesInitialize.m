@@ -10,6 +10,8 @@
 
 static NSString * const kRecipesStoreName = @"Recipes.sqlite";
 
+static UIView *statusBarCoverView = nil;
+
 @implementation AppPropertiesInitialize
 
 + (void)startAppPropertiesInitialize
@@ -83,6 +85,19 @@ static NSString * const kRecipesStoreName = @"Recipes.sqlite";
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:enable];
     [[IQKeyboardManager sharedManager] setShouldPlayInputClicks:NO];
     if (IOS7) [[IQKeyboardManager sharedManager] setShouldToolbarUsesTextFieldTintColor:enable];
+}
+
++ (void)setBackgroundColorToStatusBar:(UIColor *)color
+{
+    if (!statusBarCoverView)
+    {
+        CGRect statusBarRect = [[UIApplication sharedApplication] statusBarFrame];
+        statusBarCoverView = [[UIView alloc] initWithFrame:statusBarRect];
+        statusBarCoverView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        
+        [[UIApplication sharedApplication].keyWindow addSubview:statusBarCoverView];
+    }
+    statusBarCoverView.backgroundColor = color;
 }
 
 @end

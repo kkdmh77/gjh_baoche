@@ -29,9 +29,18 @@
  @ 方法描述    对键盘事件进行设置取消or开启
  @ 输入参数    是否取消
  @ 返回值      void
- @ 创建人      熊耀文
+ @ 创建人      龚俊慧
  @ 创建时间    2014-09-24
  */
 + (void)setKeyboardManagerEnable:(BOOL)enable;
+
+/**
+ @ 方法描述    给状态栏设置背景颜色
+ @ 输入参数    color: 颜色
+ @ 返回值      void
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-11-14
+ */
++ (void)setBackgroundColorToStatusBar:(UIColor *)color;
 
 @end
