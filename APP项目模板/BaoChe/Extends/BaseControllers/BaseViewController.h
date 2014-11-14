@@ -22,6 +22,9 @@ typedef NS_ENUM(NSInteger, BarbuttonItemPosition)
     BarbuttonItemPosition_Right
 };
 
+typedef void (^PickPhotoFinishHandle) (NSArray *pickedImageArray);
+typedef void (^PickPhotoCancelHandle) (void);
+
 @interface BaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
 @protected
@@ -165,5 +168,36 @@ typedef NS_ENUM(NSInteger, BarbuttonItemPosition)
  @ 创建时间    2014-07-18
  */
 - (void)addBackSwipeGesture;
+
+/**
+ @ 方法描述    从相机或者相册选取单张照片
+ @ 输入参数    isCropped: 是否裁剪
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-11-13
+ */
+- (void)pickSinglePhotoFromCameraOrAlbumByIsCropped:(BOOL)isCropped
+                                       cancelHandle:(PickPhotoCancelHandle)cancelHandle
+                                finishPickingHandle:(PickPhotoFinishHandle)finishHandle;
+
+/**
+ @ 方法描述    从相册选取照片
+ @ 输入参数    isCropped: 是否裁剪(只选取1张时) maxNumberOfSelection: 最大选取张数
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-11-13
+ */
+- (void)pickPhotoFromAlbumWithMaxNumberOfSelection:(NSInteger)maxNumber
+                                         isCropped:(BOOL)isCropped
+                                      cancelHandle:(PickPhotoCancelHandle)cancelHandle
+                               finishPickingHandle:(PickPhotoFinishHandle)finishHandle;
+
+/**
+ @ 方法描述    从相机选取照片
+ @ 输入参数    isCropped: 是否裁剪
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-11-13
+ */
+- (void)pickPhotoFromCameraByIsCropped:(BOOL)isCropped
+                          cancelHandle:(PickPhotoCancelHandle)cancelHandle
+                   finishPickingHandle:(PickPhotoFinishHandle)finishHandle;
 
 @end

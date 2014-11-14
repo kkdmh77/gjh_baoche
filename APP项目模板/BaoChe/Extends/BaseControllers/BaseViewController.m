@@ -10,8 +10,14 @@
 #import "HUDManager.h"
 #import "InterfaceHUDManager.h"
 #import "LanguagesManager.h"
+#import "CTAssetsPickerController.h"
 
-@interface BaseViewController ()
+@interface BaseViewController () <UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate>
+{
+    PickPhotoFinishHandle _pickPhotoFinishHandle;
+    PickPhotoCancelHandle _pickPhotoCancelHandle;
+    BOOL                  _isCropped;
+}
 
 @end
 
@@ -45,7 +51,7 @@
 {
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 1)] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:HEXCOLOR(0XFF3366) size:CGSizeMake(1, 1)] forBarMetrics:UIBarMetricsDefault];
     
     if (IOS7)
     {
@@ -102,7 +108,7 @@
     if (IOS7)
     {
         [self setNeedsStatusBarAppearanceUpdate];
-//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
 }
 
@@ -281,6 +287,72 @@
     }
 }
 
+- (void)pickSinglePhotoFromCameraOrAlbumByIsCropped:(BOOL)isCropped cancelHandle:(PickPhotoCancelHandle)cancelHandle finishPickingHandle:(PickPhotoFinishHandle)finishHandle
+{
+    _pickPhotoFinishHandle = [finishHandle copy];
+    _pickPhotoCancelHandle = [cancelHandle copy];
+    _isCropped = isCropped;
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:LocalizedStr(All_Cancel) destructiveButtonTitle:nil otherButtonTitles:LocalizedStr(All_PickFromCamera), LocalizedStr(All_PickFromAlbum), nil];
+    
+    [sheet showInView:self.view];
+}
+
+- (void)pickPhotoFromAlbumWithMaxNumberOfSelection:(NSInteger)maxNumber isCropped:(BOOL)isCropped cancelHandle:(PickPhotoCancelHandle)cancelHandle finishPickingHandle:(PickPhotoFinishHandle)finishHandle
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        _pickPhotoFinishHandle = [finishHandle copy];
+        _pickPhotoCancelHandle = [cancelHandle copy];
+        
+        if (1 == maxNumber)
+        {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePicker.delegate = self;
+            imagePicker.allowsEditing = isCropped;
+            [imagePicker.navigationBar setBackgroundImage:[UIImage imageWithColor:Common_ThemeColor size:CGSizeMake(1, 1)] forBarMetrics:UIBarMetricsDefault];
+            
+            [self presentViewController:imagePicker modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:nil];
+        }
+        else
+        {
+            CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
+            picker.maximumNumberOfSelection = maxNumber;
+            picker.assetsFilter = [ALAssetsFilter allAssets];
+            picker.delegate = self;
+            picker.showsCancelButton = YES;
+            [picker.navigationBar setBackgroundImage:[UIImage imageWithColor:Common_ThemeColor size:CGSizeMake(1, 1)] forBarMetrics:UIBarMetricsDefault];
+            
+            [self presentViewController:picker modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:nil];
+        }
+    }
+}
+
+- (void)pickPhotoFromCameraByIsCropped:(BOOL)isCropped cancelHandle:(PickPhotoCancelHandle)cancelHandle finishPickingHandle:(PickPhotoFinishHandle)finishHandle
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        _pickPhotoFinishHandle = [finishHandle copy];
+        _pickPhotoCancelHandle = [cancelHandle copy];
+        
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = isCropped;
+        [imagePicker.navigationBar setBackgroundImage:[UIImage imageWithColor:Common_ThemeColor size:CGSizeMake(1, 1)] forBarMetrics:UIBarMetricsDefault];
+        
+        [self presentViewController:imagePicker modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:nil];
+    }
+}
+
+- (void)clearPickPhotoCallBackHandle
+{
+    _pickPhotoFinishHandle = nil;
+    _pickPhotoCancelHandle = nil;
+    _isCropped = NO;
+}
+
 #pragma mark - 设置基本属性
 
 - (void)setPageLocalizableText
@@ -363,6 +435,75 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // do nothing
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+    /*
+    if (UIImagePickerControllerSourceTypeCamera == picker.sourceType)
+    {
+        UIImageWriteToSavedPhotosAlbum(image, nil, NULL, NULL);
+    }
+    */
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+     if (_pickPhotoFinishHandle) _pickPhotoFinishHandle(@[image]);
+    [self clearPickPhotoCallBackHandle];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if (_pickPhotoCancelHandle) _pickPhotoCancelHandle();
+    [self clearPickPhotoCallBackHandle];
+}
+
+#pragma mark - CTAssetsPickerControllerDelegate
+
+- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
+{
+    NSMutableArray *selectedImageArray = [NSMutableArray arrayWithCapacity:assets.count];
+    
+    for (ALAsset *asset in assets)
+    {
+        UIImage *selectedImage = [UIImage imageWithCGImage:asset.defaultRepresentation.fullScreenImage];
+        [selectedImageArray addObject:selectedImage];
+    }
+    if (_pickPhotoFinishHandle) _pickPhotoFinishHandle(selectedImageArray);
+    
+    [self clearPickPhotoCallBackHandle];
+}
+
+- (void)assetsPickerControllerDidCancel:(CTAssetsPickerController *)picker
+{
+    if (_pickPhotoCancelHandle) _pickPhotoCancelHandle();
+    
+    [self clearPickPhotoCallBackHandle];
+}
+
+#pragma mark - CTAssetsPickerControllerDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *butTitleStr = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
+    if ([butTitleStr isEqualToString:LocalizedStr(All_PickFromCamera)])
+    {
+        [self pickPhotoFromCameraByIsCropped:_isCropped
+                                cancelHandle:_pickPhotoCancelHandle
+                         finishPickingHandle:_pickPhotoFinishHandle];
+    }
+    else if ([butTitleStr isEqualToString:LocalizedStr(All_PickFromAlbum)])
+    {
+        [self pickPhotoFromAlbumWithMaxNumberOfSelection:1
+                                               isCropped:_isCropped
+                                            cancelHandle:_pickPhotoCancelHandle
+                                     finishPickingHandle:_pickPhotoFinishHandle];
+    }
 }
 
 @end
