@@ -8,6 +8,12 @@
 
 #import "GJHSlideSwitchView.h"
 
+static CGFloat kHeightOfTopScrollView = 0.0f;           // 会根据文字和图片自动调整
+static const CGFloat kWidthOfButtonMargin = 20.0f;
+static const CGFloat kFontSizeOfTabButton = 14.0f;
+static const NSUInteger kTagOfRightSideButton = 999;
+static const CGFloat kHeightOfShadowImageView = 3.0f;
+
 @implementation GJHSlideSwitchView
 
 @synthesize topScrollBtnsArray = _topScrollBtnsArray;
@@ -55,10 +61,18 @@
 
 - (id)initWithFrame:(CGRect)frame titlesArray:(NSArray *)titles
 {
+    return [self initWithFrame:frame titlesArray:titles imageNamesArray:nil selectedImageNamesArray:nil];
+}
+
+- (id)initWithFrame:(CGRect)frame titlesArray:(NSArray *)titles imageNamesArray:(NSArray *)namesArray selectedImageNamesArray:(NSArray *)selectedNamesArray
+{
     self = [super initWithFrame:frame];
     if (self)
     {
         self.titlesArray = titles;
+        self.imageNamesArray = namesArray;
+        self.selectedImageNamesArray = selectedNamesArray;
+        
         [self initValues];
     }
     return self;
@@ -85,7 +99,7 @@
         //如果有设置右侧视图，缩小顶部滚动视图的宽度以适应按钮
         if (self.rigthSideButton.bounds.size.width > 0) {
             _rigthSideButton.frame = CGRectMake(self.bounds.size.width - self.rigthSideButton.bounds.size.width, 0,
-                                                _rigthSideButton.bounds.size.width, _topScrollView.bounds.size.height);
+                                                _rigthSideButton.bounds.size.width, kHeightOfTopScrollView);
             
             _topScrollView.frame = CGRectMake(0, 0,
                                               self.bounds.size.width - self.rigthSideButton.bounds.size.width, kHeightOfTopScrollView);
@@ -100,6 +114,23 @@
     }
 }
 
+// 调整视图高度
+- (void)resizeHeight
+{
+    if ([_titlesArray isAbsoluteValid] && ![_imageNamesArray isAbsoluteValid])
+    {
+        self.frameHeight = MAX(self.frameHeight, kDefaultSlideSwitchViewHeight);
+    }
+    else if ([_titlesArray isAbsoluteValid] && [_imageNamesArray isAbsoluteValid])
+    {
+        UIImage *image = [UIImage imageNamed:_imageNamesArray[0]];
+        self.frameHeight = MAX(self.frameHeight, kDefaultSlideSwitchViewHeight + image.size.height);
+    }
+    
+    kHeightOfTopScrollView = self.frameHeight;
+    _topScrollView.frameHeight = kHeightOfTopScrollView;
+}
+
 /*!
  * @method 创建子视图UI
  * @abstract
@@ -109,6 +140,10 @@
  */
 - (void)buildUI
 {
+    // 调整视图高度
+    [self resizeHeight];
+    
+    // 创建子视图
     [self createNameButtons];
     
     //选中第一个view
@@ -142,44 +177,84 @@
     CGFloat xOffset = kWidthOfButtonMargin;
     for (int i = 0; i < [_titlesArray count]; i++) {
         NSString *title = [_titlesArray objectAtIndex:i];
+        UIImage *normalImage = i < _imageNamesArray.count ? [UIImage imageNamed:_imageNamesArray[i]] : nil;
+        UIImage *selectedImage = i < _selectedImageNamesArray.count ? [UIImage imageNamed:_selectedImageNamesArray[i]] : nil;
+
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
+        CGSize btnSize = CGSizeZero;
         CGSize textSize = CGSizeZero;
+        
+        textSize = [title sizeWithFont:[UIFont systemFontOfSize:kFontSizeOfTabButton]
+                     constrainedToSize:CGSizeMake(_topScrollView.bounds.size.width, kHeightOfTopScrollView)
+                         lineBreakMode:NSLineBreakByTruncatingTail];
         if (!_isTabItemEqualWidthInFullScreenWidth)
         {
-            textSize = [title sizeWithFont:[UIFont systemFontOfSize:kFontSizeOfTabButton]
-                         constrainedToSize:CGSizeMake(_topScrollView.bounds.size.width, kHeightOfTopScrollView)
-                             lineBreakMode:NSLineBreakByTruncatingTail];
+            if (normalImage)
+            {
+                btnSize = CGSizeMake(MAX(textSize.width, normalImage.size.width), kHeightOfTopScrollView);
+            }
+            else
+            {
+                btnSize = textSize;
+            }
         }
         else
         {
-            textSize = CGSizeMake((self.bounds.size.width - _rigthSideButton.bounds.size.width - kWidthOfButtonMargin * (_titlesArray.count + 1)) / _titlesArray.count, kHeightOfTopScrollView);
+            btnSize = CGSizeMake((self.bounds.size.width - _rigthSideButton.bounds.size.width - kWidthOfButtonMargin * (_titlesArray.count + 1)) / _titlesArray.count, kHeightOfTopScrollView);
         }
         
         //累计每个tab文字的长度
-        topScrollViewContentWidth += kWidthOfButtonMargin+textSize.width;
+        topScrollViewContentWidth += kWidthOfButtonMargin+btnSize.width;
         //设置按钮尺寸
         [button setFrame:CGRectMake(xOffset,0,
-                                    textSize.width, kHeightOfTopScrollView)];
+                                    btnSize.width, kHeightOfTopScrollView)];
         //计算下一个tab的x偏移量
-        xOffset += textSize.width + kWidthOfButtonMargin;
+        xOffset += btnSize.width + kWidthOfButtonMargin;
         
         [button setTag:i+100];
         if (i == 0) {
-            _shadowImageView.frame = CGRectMake(kWidthOfButtonMargin, kHeightOfTopScrollView - kHeightOfShadowImageView, textSize.width, kHeightOfShadowImageView);
+            _shadowImageView.frame = CGRectMake(kWidthOfButtonMargin, kHeightOfTopScrollView - kHeightOfShadowImageView, btnSize.width, kHeightOfShadowImageView);
             button.selected = YES;
         }
+        /*
         [button setTitle:title forState:UIControlStateNormal];
+         */
         button.titleLabel.font = [UIFont systemFontOfSize:kFontSizeOfTabButton];
         [button setTitleColor:self.tabItemNormalColor forState:UIControlStateNormal];
         [button setTitleColor:self.tabItemSelectedColor forState:UIControlStateSelected];
         [button setBackgroundImage:self.tabItemNormalBackgroundImage forState:UIControlStateNormal];
         [button setBackgroundImage:self.tabItemSelectedBackgroundImage forState:UIControlStateSelected];
+        if (normalImage)
+        {
+            button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, kDefaultSlideSwitchViewHeight / 2 + 5, 0);
+            
+            [button setImage:normalImage forState:UIControlStateNormal];
+            [button setImage:selectedImage forState:UIControlStateSelected];
+            
+            // 有图片的情况下,在btn上单独放label,btn只显示图片
+            UILabel *titleLabel = InsertLabel(button, CGRectMake(0, 0, button.boundsWidth, textSize.height), NSTextAlignmentCenter, title, [UIFont systemFontOfSize:kFontSizeOfTabButton], _tabItemNormalColor, NO);
+            titleLabel.tag = 8888;
+            titleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+            titleLabel.highlightedTextColor = _tabItemSelectedColor;
+            titleLabel.center = CGPointMake(button.boundsWidth / 2, button.boundsHeight / 2 + normalImage.size.height / 2);
+            if (0 == i)
+            {
+                titleLabel.highlighted = YES;
+            }
+        }
+        else
+        {
+            [button setTitle:title forState:UIControlStateNormal];
+        }
+        
         [button addTarget:self action:@selector(selectNameButton:) forControlEvents:UIControlEventTouchUpInside];
         [_topScrollView addSubview:button];
         
         [_topScrollBtnsArray addObject:button];
     }
+    
+    [_topScrollView bringSubviewToFront:_shadowImageView];
     
     //设置顶部滚动视图的内容总尺寸
     _topScrollView.contentSize = CGSizeMake(topScrollViewContentWidth, kHeightOfTopScrollView);
@@ -212,6 +287,8 @@
         //取之前的按钮
         UIButton *lastButton = (UIButton *)[_topScrollView viewWithTag:_userSelectedChannelID];
         lastButton.selected = NO;
+        ((UILabel *)[lastButton viewWithTag:8888]).highlighted = NO;
+        
         //赋值按钮ID
         _userSelectedChannelID = sender.tag;
     }
@@ -219,6 +296,7 @@
     //按钮选中状态
     if (!sender.selected) {
         sender.selected = YES;
+        ((UILabel *)[sender viewWithTag:8888]).highlighted = YES;
         
         [UIView animateWithDuration:0.2 animations:^{
             

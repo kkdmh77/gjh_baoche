@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-static const CGFloat kHeightOfTopScrollView = 38.0f;
-static const CGFloat kWidthOfButtonMargin = 35.0f;
-static const CGFloat kFontSizeOfTabButton = 17.0f;
-static const NSUInteger kTagOfRightSideButton = 999;
-static const CGFloat kHeightOfShadowImageView = 3.0f;
+static const CGFloat kDefaultSlideSwitchViewHeight = 38.0f; // 纯文字时候的推荐高度,如果有图片则会在此基础上再加上图片的尺寸高度
 
 @protocol GJHSlideSwitchViewDelegate;
 
@@ -35,10 +31,13 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
     UIButton *_rigthSideButton;                     // 右侧按钮
 }
 
-@property (nonatomic, strong) NSArray *titlesArray; // 顶部页签视图的标题数组
-@property (nonatomic, strong) NSMutableArray *topScrollBtnsArray; // 顶部页签视图的子视图数组
+@property (nonatomic, strong) NSArray *titlesArray;                     // 顶部页签视图的标题数组
+@property (nonatomic, strong) NSArray *imageNamesArray;                 // 顶部页签视图的图片名数组
+@property (nonatomic, strong) NSArray *selectedImageNamesArray;         // 顶部页签视图的选择状态的图片名数组
+
+@property (nonatomic, strong) NSMutableArray *topScrollBtnsArray;       // 顶部页签视图的子视图数组
 @property (nonatomic, strong) UIScrollView *topScrollView;
-@property (nonatomic, strong) UIColor *topScrollViewBackgroundColor; // 顶部页签视图背景颜色
+@property (nonatomic, strong) UIColor *topScrollViewBackgroundColor;    // 顶部页签视图背景颜色
 @property (nonatomic, assign) NSInteger userSelectedChannelID;
 @property (nonatomic, assign) id<GJHSlideSwitchViewDelegate> slideSwitchViewDelegate;
 @property (nonatomic, strong) UIColor *tabItemNormalColor;
@@ -58,6 +57,15 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
  * @result
  */
 - (id)initWithFrame:(CGRect)frame titlesArray:(NSArray *)titles;
+
+/*!
+ * @method 初始化
+ * @abstract
+ * @discussion
+ * @param frame 标题数组 图片名数组
+ * @result
+ */
+- (id)initWithFrame:(CGRect)frame titlesArray:(NSArray *)titles imageNamesArray:(NSArray *)namesArray selectedImageNamesArray:(NSArray *)selectedNamesArray;
 
 /*!
  * @method 创建子视图UI
