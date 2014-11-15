@@ -313,7 +313,9 @@
             imagePicker.allowsEditing = isCropped;
             [imagePicker.navigationBar setBackgroundImage:[UIImage imageWithColor:Common_ThemeColor size:CGSizeMake(1, 1)] forBarMetrics:UIBarMetricsDefault];
             
-            [self presentViewController:imagePicker modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:nil];
+            [self presentViewController:imagePicker modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:^{
+                
+            }];
         }
         else
         {
@@ -342,7 +344,9 @@
         imagePicker.allowsEditing = isCropped;
         [imagePicker.navigationBar setBackgroundImage:[UIImage imageWithColor:Common_ThemeColor size:CGSizeMake(1, 1)] forBarMetrics:UIBarMetricsDefault];
         
-        [self presentViewController:imagePicker modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:nil];
+        [self presentViewController:imagePicker modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:^{
+            
+        }];
     }
 }
 
