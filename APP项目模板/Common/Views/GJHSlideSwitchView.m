@@ -328,6 +328,7 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
  */
 - (void)adjustScrollViewContentX:(UIButton *)sender
 {
+    /*
     //如果 当前显示的最后一个tab文字超出右边界
     if (sender.frame.origin.x - _topScrollView.contentOffset.x > self.bounds.size.width - (kWidthOfButtonMargin+sender.bounds.size.width)) {
         //向左滚动视图，显示完整tab文字
@@ -338,6 +339,31 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
     if (sender.frame.origin.x - _topScrollView.contentOffset.x < kWidthOfButtonMargin) {
         //向右滚动视图（tab文字的x坐标 - 按钮间隔 = 新的滚动视图左边界在整个视图的x坐标），使文字显示完整
         [_topScrollView setContentOffset:CGPointMake(sender.frame.origin.x - kWidthOfButtonMargin, 0)  animated:YES];
+    }
+     */
+    
+    // 让当前选中的item位于scrollView的中间
+    if (_topScrollView.contentSize.width > _topScrollView.frame.size.width)
+    {
+        if ((sender.frame.origin.x + sender.frame.size.width / 2) > _topScrollView.frame.size.width / 2)
+        {
+            if ((_topScrollView.contentSize.width - (sender.frame.origin.x + sender.frame.size.width / 2)) >= _topScrollView.frame.size.width / 2)
+            {
+                [_topScrollView setContentOffset:CGPointMake((sender.frame.origin.x + sender.frame.size.width / 2) - _topScrollView.frame.size.width / 2, 0) animated:YES];
+            }
+            else
+            {
+                [_topScrollView setContentOffset:CGPointMake(_topScrollView.contentSize.width - _topScrollView.frame.size.width, 0) animated:YES];
+            }
+        }
+        else
+        {
+            [_topScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        }
+    }
+    else
+    {
+        [_topScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     }
 }
 
