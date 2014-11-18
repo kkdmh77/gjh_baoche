@@ -19,7 +19,7 @@ UIScrollView *InsertScrollViewCanWebImagesByUrls(UIView *superView, CGRect rect,
     
     /*
     UIView *backView = InsertView(superView, rect);//加一个背景图,让page在scroll的上面
-    backView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    backView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
      */
     
     //加滚动的scrollView
@@ -30,12 +30,12 @@ UIScrollView *InsertScrollViewCanWebImagesByUrls(UIView *superView, CGRect rect,
     for (int i = 0; i < netImageUrlArray.count; i++)
     {
         MyScaleScrollView *scaleScroll = [[[MyScaleScrollView alloc] initWithFrame:scrollView.bounds] autorelease];
-        scaleScroll.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        scaleScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         scaleScroll.tag = 1000 + i;
         [scrollView addSubview:scaleScroll];
         
         UIButton *tempBtn = InsertImageButton(scaleScroll, scaleScroll.bounds, SubviewTag, nil, nil, nil, NULL);
-        tempBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        tempBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         tempBtn.userInteractionEnabled = NO;
         
         NSString *imgUrlStr = [netImageUrlArray objectAtIndex:i];
@@ -96,12 +96,12 @@ UIScrollView *InsertScrollViewByLocalImages(UIView *superView, CGRect rect, int 
         else
             imgBtnBackView = InsertView(nil, scrollView.bounds);
         
-        imgBtnBackView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        imgBtnBackView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         imgBtnBackView.tag = 1000 + i;
         [scrollView addSubview:imgBtnBackView];
         
         UIButton *tempBtn = InsertImageButton(imgBtnBackView, imgBtnBackView.bounds, SubviewTag, nil, nil, nil, NULL);
-        tempBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        tempBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         tempBtn.userInteractionEnabled = NO;
         
         //imgNameOrPathStr有可能是沙盒里的图片路径也有可能是bundle里的图片名
@@ -154,12 +154,12 @@ UIScrollView *InsertScrollViewCanScrollSubViews(UIView *superView, CGRect rect, 
     for (int i = 0; i < scrollCount; i++)
     {
         MyScaleScrollView *scaleScroll = [[[MyScaleScrollView alloc] initWithFrame:scrollView.bounds] autorelease];
-        scaleScroll.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        scaleScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         scaleScroll.tag = 1000 + i;
         [scrollView addSubview:scaleScroll];
 
         UIButton *tempBtn = InsertImageButton(scaleScroll, scaleScroll.bounds, SubviewTag, nil, nil, nil, NULL);
-        tempBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        tempBtn.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         tempBtn.userInteractionEnabled = NO;
 
         if (!netImageIdArray || 0 == netImageIdArray.count || scrollCount != netImageIdArray.count)
@@ -203,7 +203,7 @@ UIScrollView *InsertScrollViewCanScrollSubViews(UIView *superView, CGRect rect, 
 UIScrollView *InsertScrollView(UIView *superView, CGRect rect, int tag,id<UIScrollViewDelegate> delegate)
 {
     UIScrollView *scrollView = [[[UIScrollView alloc] initWithFrame:rect] autorelease];
-    scrollView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     scrollView.tag = tag;
     scrollView.backgroundColor = [UIColor whiteColor];
     scrollView.delegate = delegate;
@@ -371,7 +371,9 @@ UIWebView *InsertWebView(id superView,CGRect cRect, id<UIWebViewDelegate>delegat
     tempWebView.backgroundColor = [UIColor clearColor];
     tempWebView.delegate = delegate;
     tempWebView.scalesPageToFit = NO;
+    /*
     tempWebView.scrollView.scrollEnabled = NO;//不让webview滚动
+     */
     
     if (superView)
         [superView addSubview:tempWebView];
