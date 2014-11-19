@@ -184,22 +184,22 @@
 
 - (CGSize)sizeWithFont:(UIFont *)font constrainedToWidth:(CGFloat)width
 {
-    CGSize size = CGSizeMake(width, 0.0);
+    CGSize size = CGSizeZero;
     
     if ([self respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
     {
         // iOS7 methods
         CGRect strRect = [self boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX)
-                                              options:NSStringDrawingUsesLineFragmentOrigin
-                                           attributes:@{NSFontAttributeName:font}
-                                              context:nil];
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:@{NSFontAttributeName:font}
+                                            context:nil];
         
-        size.height = strRect.size.height;
+        size = strRect.size;
     }
     else
     {
         // Pre-iOS7 methods
-        size.height = [self sizeWithFont:font constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)].height;
+        size = [self sizeWithFont:font constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)];
     }
     
     return size;
