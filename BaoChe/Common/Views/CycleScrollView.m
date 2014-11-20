@@ -15,12 +15,11 @@
 
 @interface CycleScrollView ()
 {
+    BOOL _isShouldAutoScroll;    // 是否应该自动滚动
+    
     NSInteger _totalPages;
     
-    NSMutableArray *_curViews;
-    NSMutableArray *_totalViewsArray;
-    
-    NSArray *_curImageDataSourceArray;
+    NSMutableArray *_curImageDataSourceArray;
     
     BOOL _isAutoScroll;
     BOOL _isCanZoom;
@@ -47,17 +46,12 @@
     if (self)
     {
         self.delegate = delegate;
-        _curImageDataSourceArray = urlsStrArray;
+        self.imageDataSourceArray = urlsStrArray;
         _viewContentMode = contenMode;
         _isAutoScroll = YesOrNo;
         _isCanZoom = canZoom;
         
-        if([self setTotalSubviews])
-        {
-            [self setup];
-            [self loadData];
-            [self setAutoScroll];
-        }
+        [self configureUI];
     }
     return self;
 }
@@ -68,24 +62,48 @@
     if (self)
     {
         self.delegate = delegate;
-        _curImageDataSourceArray = names;
+        self.imageDataSourceArray = names;
         _viewContentMode = contenMode;
         _isAutoScroll = YesOrNo;
         _isCanZoom = canZoom;
         
-        if([self setTotalSubviews])
-        {
-            [self setup];
-            [self loadData];
-            [self setAutoScroll];
-        }
+        [self configureUI];
     }
     return self;
+}
+
+- (void)configureUI
+{
+    if([_imageDataSourceArray isAbsoluteValid])
+    {
+        _isShouldAutoScroll = _isAutoScroll;
+        
+        [self setup];
+        [self loadData];
+        [self setAutoScroll];
+    }
+    else
+    {
+        _isShouldAutoScroll = NO;
+        
+        if (_scrollView)
+        {
+            [_scrollView removeFromSuperview];
+            _scrollView = nil;
+        }
+        if (_pageControl)
+        {
+            [_pageControl removeFromSuperview];
+            _pageControl = nil;
+        }
+    }
 }
 
 - (void)setup
 {
     // Initialization code
+    if (_scrollView) [_scrollView removeFromSuperview];
+    
     _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     _scrollView.delegate = self;
     _scrollView.contentSize = CGSizeMake(self.bounds.size.width * 3, self.bounds.size.height);
@@ -93,6 +111,9 @@
     _scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
     _scrollView.pagingEnabled = YES;
     [self addSubview:_scrollView];
+    
+    // pageControl
+    if (_pageControl) [_pageControl removeFromSuperview];
     
     CGRect rect = self.bounds;
     rect.origin.y = rect.size.height - 30;
@@ -102,103 +123,102 @@
     
     [self addSubview:_pageControl];
     
+    // 初始化值
+    [self initializationValues];
+}
+
+- (void)initializationValues
+{
     // 默认从第0页开始
     _currentPage = 0;
-    _totalPages = _curImageDataSourceArray.count;
+    _totalPages = _imageDataSourceArray.count;
     _pageControl.numberOfPages = _totalPages;
 }
 
-// 加载scrollView所有的子视图
-- (BOOL)setTotalSubviews
+// 获取一个加载图片的scrollView子视图
+// ImageDataSourceStr: 图片名或者图片URL
+- (UIView *)getOnceSubviewOfScrollViewWithCurImageDataSourceStr:(NSString *)dataSource
 {
-    if (_curImageDataSourceArray && 0 != _curImageDataSourceArray.count)
+    if (dataSource && [dataSource isSafeObject])
     {
-        _totalViewsArray = [NSMutableArray arrayWithCapacity:_curImageDataSourceArray.count];
-        
-        for (NSString *imgeDataSourceItemString in _curImageDataSourceArray)
-        {
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
 
-            // 是一个有效的url
-            if ([StringJudgeManager isValidateStr:imgeDataSourceItemString regexStr:UrlRegex])
+        // 是一个有效的url
+        if ([StringJudgeManager isValidateStr:dataSource regexStr:UrlRegex])
+        {
+            NSURL *url = [NSURL URLWithString:dataSource];
+            
+            [imageView gjh_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"shangpinxiangqing-morentupian"] imageShowStyle:_viewContentMode options:SDWebImageCacheMemoryOnly success:nil failure:nil];
+            
+            if (_isCanZoom)
             {
-                NSURL *url = [NSURL URLWithString:imgeDataSourceItemString];
+                MyScaleScrollView *zoomScroll = [[MyScaleScrollView alloc] initWithFrame:self.bounds];
+                imageView.tag = SubviewTag;
+                imageView.frame = zoomScroll.bounds;
+                [zoomScroll addSubview:imageView];
                 
-                [imageView gjh_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"shangpinxiangqing-morentupian"] imageShowStyle:_viewContentMode options:SDWebImageCacheMemoryOnly success:nil failure:nil];
-                
-                if (_isCanZoom)
-                {
-                    MyScaleScrollView *zoomScroll = [[MyScaleScrollView alloc] initWithFrame:self.bounds];
-                    imageView.tag = SubviewTag;
-                    imageView.frame = zoomScroll.bounds;
-                    [zoomScroll addSubview:imageView];
-                    
-                    [_totalViewsArray addObject:zoomScroll];
-                }
-                else
-                {
-                    [_totalViewsArray addObject:imageView];
-                }
+                return zoomScroll;
             }
-            // 为本地图片名
             else
             {
-                UIImage *image = nil;
-                
-                // imgeDataSourceItemString有可能是沙盒里的图片路径也有可能是bundle里的图片名
-                if ([[NSFileManager defaultManager] isReadableFileAtPath:imgeDataSourceItemString])
-                {
-                    image = [UIImage imageWithContentsOfFile:imgeDataSourceItemString];
-                }
-                else
-                {
-                    image = [UIImage imageNamed:imgeDataSourceItemString];
-                }
-                
-                switch (_viewContentMode)
-                {
-                    case ViewShowStyle_AutoResizing:
-                    {
-                        imageView.contentMode = UIViewContentModeScaleAspectFit;
-                    }
-                        break;
-                    case ViewShowStyle_Square:
-                    {
-                        image = [image squareImage];
-                    }
-                        break;
-                    case ViewShowStyle_None:
-                    {
-                        // do nothing
-                    }
-                        break;
-                        
-                    default:
-                        break;
-                }
-                
-                imageView.image = image;
-                
-                if (_isCanZoom)
-                {
-                    MyScaleScrollView *zoomScroll = [[MyScaleScrollView alloc] initWithFrame:self.bounds];
-                    imageView.tag = SubviewTag;
-                    imageView.frame = zoomScroll.bounds;
-                    [zoomScroll addSubview:imageView];
-                    
-                    [_totalViewsArray addObject:zoomScroll];
-                }
-                else
-                {
-                    [_totalViewsArray addObject:imageView];
-                }
+                return imageView;
             }
         }
-        
-        return YES;
+        // 为本地图片名
+        else
+        {
+            UIImage *image = nil;
+            
+            // imgeDataSourceItemString有可能是沙盒里的图片路径也有可能是bundle里的图片名
+            if ([[NSFileManager defaultManager] isReadableFileAtPath:dataSource])
+            {
+                image = [UIImage imageWithContentsOfFile:dataSource];
+            }
+            else
+            {
+                image = [UIImage imageNamed:dataSource];
+            }
+            
+            switch (_viewContentMode)
+            {
+                case ViewShowStyle_AutoResizing:
+                {
+                    imageView.contentMode = UIViewContentModeScaleAspectFit;
+                }
+                    break;
+                case ViewShowStyle_Square:
+                {
+                    image = [image squareImage];
+                }
+                    break;
+                case ViewShowStyle_None:
+                {
+                    // do nothing
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            imageView.image = image;
+            
+            if (_isCanZoom)
+            {
+                MyScaleScrollView *zoomScroll = [[MyScaleScrollView alloc] initWithFrame:self.bounds];
+                imageView.tag = SubviewTag;
+                imageView.frame = zoomScroll.bounds;
+                [zoomScroll addSubview:imageView];
+                
+                return zoomScroll;
+            }
+            else
+            {
+                return imageView;
+            }
+        }
     }
-    
-    return NO;
+    return nil;
 }
 
 - (void)setAutoScroll
@@ -206,14 +226,14 @@
     if (_isAutoScroll)
     {
         [GCDThread enqueueBackground:^{
-            while (YES)
+            while (_isShouldAutoScroll)
             {
                 [NSThread sleepForTimeInterval:AutoScrollIntervalTime];
 
                 [GCDThread enqueueForeground:^{
-                    
-//                    DLog(@" %d == %@",_currentPage,NSStringFromCGPoint(_scrollView.contentOffset));
-                    
+                    /*
+                    DLog(@" %d == %@",_currentPage,NSStringFromCGPoint(_scrollView.contentOffset));
+                    */
                     [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width * 2, 0) animated:YES];
                 }];
             }
@@ -240,7 +260,9 @@
 
 - (void)loadData
 {
-//    _pageControl.currentPage = _currentPage;
+    /*
+    _pageControl.currentPage = _currentPage;
+     */
     _pageControl.currentPage = [self validPageValue:_currentPage];
     
     // 从scrollView上移除所有的subview
@@ -254,14 +276,15 @@
     
     for (int i = 0; i < 3; i++)
     {
-        UIView *v = [_curViews objectAtIndex:i];
-        v.userInteractionEnabled = YES;
+        UIView *view = [self getOnceSubviewOfScrollViewWithCurImageDataSourceStr:_curImageDataSourceArray[i]];
+        view.userInteractionEnabled = YES;
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handleTap:)];
-        [v addGestureRecognizer:singleTap];
+        [view addGestureRecognizer:singleTap];
         
-        v.frame = CGRectOffset(self.bounds, self.bounds.size.width * i, 0);
-        [_scrollView addSubview:v];
+        view.frame = CGRectOffset(self.bounds, self.bounds.size.width * i, 0);
+        
+        [_scrollView addSubview:view];
     }
     
     [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0)];
@@ -273,22 +296,29 @@
     _currentPage = page = [self validPageValue:page];
     int last = [self validPageValue:_currentPage + 1];
     
-    if (!_curViews)
+    if (!_curImageDataSourceArray)
     {
-        _curViews = [[NSMutableArray alloc] init];
+        _curImageDataSourceArray = [[NSMutableArray alloc] init];
     }
     
-    [_curViews removeAllObjects];
+    [_curImageDataSourceArray removeAllObjects];
     
-    [_curViews addObject:_totalViewsArray[pre]];
-    [_curViews addObject:_totalViewsArray[page]];
-    [_curViews addObject:_totalViewsArray[last]];
+    [_curImageDataSourceArray addObject:_imageDataSourceArray[pre]];
+    [_curImageDataSourceArray addObject:_imageDataSourceArray[page]];
+    [_curImageDataSourceArray addObject:_imageDataSourceArray[last]];
 }
 
 - (int)validPageValue:(NSInteger)value
 {
-    if(value < 0) value = _totalPages - 1;
-    if(value > _totalPages - 1) value = 0;
+    if (_totalPages >= 2)
+    {
+        if(value < 0) value = _totalPages - 1;
+        if(value > _totalPages - 1) value = 0;
+    }
+    else
+    {
+        value = 0;
+    }
     
     return value;
 }
