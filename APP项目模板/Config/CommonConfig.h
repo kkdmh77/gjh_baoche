@@ -33,6 +33,9 @@
 // 无网络连接操作
 #define NoNetworkConnectionAction   SimpleAlert(UIAlertViewStyleDefault, AlertTitle, NoConnectionNetwork, 1000, nil, nil, Confirm)
 
+// 安全的对象
+#define SafetyObject(obj)           ([obj isSafeObject] ? obj : nil)
+
 /**
  * A helper macro to keep the interfaces compatiable with pre ARC compilers.
  * Useful when you put nimbus in a library and link it to a GCC LLVM compiler.
