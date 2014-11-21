@@ -99,6 +99,12 @@
                                  normalImg:[UIImage imageNamed:@"Return_btn_3.png"]
                             highlightedImg:[UIImage imageNamed:@"Return_btn_4.png"]
                                     action:NULL];
+    
+    // 加此代码可以在自定义leftBarButtonItem之后还保持IOS7以上系统自带的滑动返回效果
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)])
+    {
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -116,11 +122,21 @@
 {
     [self hideHUD];
     
+    /*
+     * @捕捉设置给leftBarButtonItem的回调方法
+     *
+     if (![[self.navigationController viewControllers] containsObject:self])
+     {
+     // the view has been removed from the navigation stack, back is probably the cause
+     // this will be slow with a large stack however.
+     [self backViewController];
+     }
+     */
+    
     [super viewWillDisappear:animated];
 }
 
 ////////////////////////////////////////////////////////////////////////////
-
 
 - (float)subViewsOriginY
 {
