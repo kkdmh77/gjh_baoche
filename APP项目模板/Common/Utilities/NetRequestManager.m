@@ -9,6 +9,7 @@
 #import "NetRequestManager.h"
 #import "DownloadCache.h"
 #import "CoreDataManager.h"
+#import "CoreData+MagicalRecord.h"
 
 static NSString * const CacheKey = @"CacheKey";
 static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
@@ -524,26 +525,48 @@ DEF_SINGLETON(NetRequestManager);
 
 + (void)storeResponseData:(NSData *)data cacheKey:(NSString *)key expiresInSeconds:(NSTimeInterval)expiresInSeconds
 {
-    DownloadCache *downloadCache = [[CoreDataManager shareCoreDataManagerManager] createEmptyObjectWithEntityName:@"DownloadCache"];
+    /*
+     DownloadCache *downloadCache = [[CoreDataManager shareCoreDataManagerManager] createEmptyObjectWithEntityName:@"DownloadCache"];
+     */
+    DownloadCache *downloadCache = [DownloadCache MR_createEntity];
     downloadCache.key = key;
     downloadCache.cacheDate = [NSDate date];
     downloadCache.expiresInSeconds = [NSNumber numberWithDouble:expiresInSeconds];
     downloadCache.contentData = data;
     downloadCache.expiryDate = [[NSDate date] dateByAddingTimeInterval:expiresInSeconds];
-    
-    [[CoreDataManager shareCoreDataManagerManager] save];
+    /*
+     [[CoreDataManager shareCoreDataManagerManager] save];
+     */
+    [downloadCache.managedObjectContext MR_saveToPersistentStoreAndWait];
 }
 
 + (NSData *)cachedResponseDataForKey:(NSString *)key
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"key == %@",key];/*用CONTAINS和LIKE(通配符)也可以,一定要注意字符串不能用''单引号括住*/
     
-    NSArray *array = [[CoreDataManager shareCoreDataManagerManager] getListWithPredicate:predicate sortDescriptors:nil entityName:@"DownloadCache" limitNum:[NSNumber numberWithInt:1]];
+    /*
+     NSArray *array = [[CoreDataManager shareCoreDataManagerManager] getListWithPredicate:predicate sortDescriptors:nil entityName:@"DownloadCache" limitNum:[NSNumber numberWithInt:1]];
+     
+     if (array && 0 != array.count)
+     {
+     DownloadCache *downloadCache = [array lastObject];
+     
+     // 存储的数据已过期
+     if (NSOrderedDescending == [[NSDate date] compare:downloadCache.expiryDate])
+     {
+     // 删除过期数据
+     [self removeCachedDataForKey:key];
+     
+     return nil;
+     }
+     return downloadCache.contentData;
+     }
+     return nil;
+     */
     
-    if (array && 0 != array.count)
+    DownloadCache *downloadCache = [DownloadCache MR_findFirstWithPredicate:predicate];
+    if (downloadCache)
     {
-        DownloadCache *downloadCache = [array lastObject];
-        
         // 存储的数据已过期
         if (NSOrderedDescending == [[NSDate date] compare:downloadCache.expiryDate])
         {
@@ -560,20 +583,27 @@ DEF_SINGLETON(NetRequestManager);
 + (void)removeCachedDataForKey:(NSString *)key
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"key == %@",key];/*用CONTAINS和LIKE(通配符)也可以,一定要注意字符串不能用''单引号括住*/
+    /*
+     NSArray *array = [[CoreDataManager shareCoreDataManagerManager] getListWithPredicate:predicate sortDescriptors:nil entityName:@"DownloadCache" limitNum:[NSNumber numberWithInt:1]];
+     
+     if (array && 0 != array.count)
+     {
+     DownloadCache *downloadCache = [array lastObject];
+     
+     [[CoreDataManager shareCoreDataManagerManager] deleteObject:downloadCache];
+     }
+     */
     
-    NSArray *array = [[CoreDataManager shareCoreDataManagerManager] getListWithPredicate:predicate sortDescriptors:nil entityName:@"DownloadCache" limitNum:[NSNumber numberWithInt:1]];
-    
-    if (array && 0 != array.count)
-    {
-        DownloadCache *downloadCache = [array lastObject];
-        
-        [[CoreDataManager shareCoreDataManagerManager] deleteObject:downloadCache];
-    }
+    [DownloadCache MR_deleteAllMatchingPredicate:predicate];
 }
 
 + (void)clearAllCachedResponses
 {
-    [[CoreDataManager shareCoreDataManagerManager] removeAllObjectWithEntityName:@"DownloadCache"];
+    /*
+     [[CoreDataManager shareCoreDataManagerManager] removeAllObjectWithEntityName:@"DownloadCache"];
+     */
+    
+    [DownloadCache MR_truncateAll];
 }
 
 @end
