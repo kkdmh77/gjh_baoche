@@ -13,8 +13,7 @@
 
 + (id) initWithDict:(NSDictionary*)dict
 {
-    // 子类实现
-    return nil;
+    return [[self alloc] initWithDict:dict];
 }
 
 - (id) initWithDict:(NSDictionary*)dict

@@ -10,11 +10,6 @@
 
 @implementation FAQEntity
 
-+ (id)initWithDict:(NSDictionary *)dict
-{
-    return [[self alloc] initWithDict:dict];
-}
-
 - (id)initWithDict:(NSDictionary *)dict
 {
     self = [super init];
@@ -28,12 +23,9 @@
 
 @end
 
-@implementation _168Entity
+///////////////////////////////////////////////////////////////
 
-+ (id)initWithDict:(NSDictionary *)dict
-{
-    return [[self alloc] initWithDict:dict];
-}
+@implementation _168Entity
 
 - (id)initWithDict:(NSDictionary *)dict
 {
