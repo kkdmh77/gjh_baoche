@@ -56,7 +56,7 @@
  * @param success A block to be executed when the image request succeed This block has no return value and takes the retrieved image as argument.
  * @param failure A block object to be executed when the image request failed. This block has no return value and takes the error object describing the network or parsing error that occurred (may be nil).
  */
-- (void)setImageWithURL:(NSURL *)url success:(SDWebImageSuccessBlock)success failure:(SDWebImageFailureBlock)failure;
+- (void)setImageWithURL:(NSURL *)url success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
 
 /**
  * Set the imageView `image` with an `url`, placeholder.
@@ -68,7 +68,7 @@
  * @param success A block to be executed when the image request succeed This block has no return value and takes the retrieved image as argument.
  * @param failure A block object to be executed when the image request failed. This block has no return value and takes the error object describing the network or parsing error that occurred (may be nil).
  */
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder success:(SDWebImageSuccessBlock)success failure:(SDWebImageFailureBlock)failure;
+- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
 
 /**
  * Set the imageView `image` with an `url`, placeholder and custom options.
@@ -81,7 +81,7 @@
  * @param success A block to be executed when the image request succeed This block has no return value and takes the retrieved image as argument.
  * @param failure A block object to be executed when the image request failed. This block has no return value and takes the error object describing the network or parsing error that occurred (may be nil).
  */
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options success:(SDWebImageSuccessBlock)success failure:(SDWebImageFailureBlock)failure;
+- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
 #endif
 
 /**
@@ -115,6 +115,17 @@
  */
 - (void)setBackgroundImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options;
 
+/**
+ * 设置btn的网络背景图片
+ * 参数:URL,占位图,缓存策略,是否根据图片尺寸调整父视图的大小
+ * 返回值:void
+ * author:龚俊慧
+ * 2013-09-11
+ */
+/*
+- (void)setBackgroundImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options resize:(BOOL)resize;
+ */
+
 #if NS_BLOCKS_AVAILABLE
 /**
  * Set the backgroundImageView `image` with an `url`.
@@ -125,7 +136,7 @@
  * @param success A block to be executed when the image request succeed This block has no return value and takes the retrieved image as argument.
  * @param failure A block object to be executed when the image request failed. This block has no return value and takes the error object describing the network or parsing error that occurred (may be nil).
  */
-- (void)setBackgroundImageWithURL:(NSURL *)url success:(SDWebImageSuccessBlock)success failure:(SDWebImageFailureBlock)failure;
+- (void)setBackgroundImageWithURL:(NSURL *)url success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
 
 /**
  * Set the backgroundImageView `image` with an `url`, placeholder.
@@ -137,7 +148,7 @@
  * @param success A block to be executed when the image request succeed This block has no return value and takes the retrieved image as argument.
  * @param failure A block object to be executed when the image request failed. This block has no return value and takes the error object describing the network or parsing error that occurred (may be nil).
  */
-- (void)setBackgroundImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder success:(SDWebImageSuccessBlock)success failure:(SDWebImageFailureBlock)failure;
+- (void)setBackgroundImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
 
 /**
  * Set the backgroundImageView `image` with an `url`, placeholder and custom options.
@@ -150,7 +161,16 @@
  * @param success A block to be executed when the image request succeed This block has no return value and takes the retrieved image as argument.
  * @param failure A block object to be executed when the image request failed. This block has no return value and takes the error object describing the network or parsing error that occurred (may be nil).
  */
-- (void)setBackgroundImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options success:(SDWebImageSuccessBlock)success failure:(SDWebImageFailureBlock)failure;
+- (void)setBackgroundImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
+
+/**
+ @ 方法描述    新增可以选择图片显示样式的接口
+ @ 输入参数    ImageShowStyle: 样式枚举(详见UIButton+BackgroundImage类)
+ @ 返回值      void
+ @ 创建人      龚俊慧
+ @ 创建时间    2013-07-15
+ */
+- (void)setBackgroundImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder imageShowStyle:(int)style options:(SDWebImageOptions)options success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
 #endif
 
 

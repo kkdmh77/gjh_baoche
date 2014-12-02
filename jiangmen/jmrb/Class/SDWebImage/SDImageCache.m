@@ -123,11 +123,6 @@ static natural_t get_free_memory(void)
     return instance;
 }
 
-+ (void) setMaxCacheAge:(NSInteger)maxCacheAge
-{
-    cacheMaxCacheAge = maxCacheAge;
-}
-
 #pragma mark SDImageCache (private)
 
 - (NSString *)cachePathForKey:(NSString *)key
@@ -420,7 +415,7 @@ static natural_t get_free_memory(void)
 {
     int size = 0;
     
-    for(id key in [memCache allKeys])
+    for (id key in [memCache allKeys])
     {
         UIImage *img = [memCache valueForKey:key];
         size += [UIImageJPEGRepresentation(img, 0) length];

@@ -243,7 +243,7 @@ CG_INLINE  void deleteFile() {
         CFUUIDRef deviceId = CFUUIDCreate (NULL);   
         CFStringRef deviceIdStringRef = CFUUIDCreateString(NULL,deviceId);
         CFRelease(deviceId);
-        deviceIdString = (NSString *)deviceIdStringRef; 
+        deviceIdString = (__bridge NSString *)deviceIdStringRef;
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"尊敬的中山日报客户" message:@"本程序将会使用你的UDID作为统计使用" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
 //        [alert show];
 //        [alert release];

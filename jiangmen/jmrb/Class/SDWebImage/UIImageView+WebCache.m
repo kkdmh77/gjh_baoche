@@ -7,32 +7,9 @@
  */
 
 #import "UIImageView+WebCache.h"
+#import "UIImage+SSToolkitAdditions.h"
 
 @implementation UIImageView (WebCache)
-
-- (CGSize)doubleSizeIfRetina:(CGSize) size
-{
-    BOOL isRetina = ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2);
-    size = isRetina ? CGSizeMake(size.width *2, size.height *2) : size;
-    return size;
-}
-
-- (void)setImageWithURL:(NSURL *)url andCropToBounds:(CGRect)bounds
-{
-    [self setImageWithURL:url placeholderImage:nil options:0 andCropToBounds: bounds];
-}
-
-- (void)setImageWithURL:(NSURL *)url andResize:(CGSize)size
-{
-    size = [self doubleSizeIfRetina:size];
-    [self setImageWithURL:url placeholderImage:nil options:0 andResize:size];
-}
-
-- (void)setImageWithURL:(NSURL *)url andResize:(CGSize)size withContentMode:(UIViewContentMode)mode
-{
-    size = [self doubleSizeIfRetina:size];
-    [self setImageWithURL:url placeholderImage:nil options:0 andResize:size withContentMode:mode];
-}
 
 - (void)setImageWithURL:(NSURL *)url
 {
@@ -43,82 +20,6 @@
 {
     [self setImageWithURL:url placeholderImage:placeholder options:0];
 }
-
--(void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder andCropToBounds:(CGRect)bounds{
-    [self setImageWithURL:url placeholderImage:nil options:0 andCropToBounds: bounds];
-}
-
-
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options  andCropToBounds:(CGRect)bounds;
-{
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    
-    // Remove in progress downloader from queue
-    [manager cancelForDelegate:self];
-    
-    self.image = placeholder;
-    
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"crop", @"transformation",
-                              NSStringFromCGRect(bounds), @"bounds", nil];
-    
-    if (url)
-    {
-        [manager downloadWithURL:url delegate:self options:options userInfo:userInfo];
-    }
-}
-
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options  andResize:(CGSize)size
-{
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    
-    // Remove in progress downloader from queue
-    [manager cancelForDelegate:self];
-    
-    self.image = placeholder;
-    
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"resize", @"transformation",
-                              NSStringFromCGSize(size), @"size", nil];
-    
-    if (url)
-    {
-        [manager downloadWithURL:url delegate:self options:options userInfo:userInfo];
-    }
-}
-
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options  andResize:(CGSize)size withContentMode:(UIViewContentMode)mode
-{
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    
-    // Remove in progress downloader from queue
-    [manager cancelForDelegate:self];
-    
-    self.image = placeholder;
-    
-    
-    NSString *mode_str = nil;
-    
-    if (mode == UIViewContentModeScaleAspectFit)
-    {
-        mode_str = @"UIViewContentModeScaleAspectFit";
-    }
-    else
-    {
-        if (mode == UIViewContentModeScaleAspectFill)
-        {
-            mode_str = @"UIViewContentModeScaleAspectFill";
-        }
-    }
-
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"resize", @"transformation",
-                              NSStringFromCGSize(size), @"size",
-                              mode_str, @"content_mode", nil];
-    
-    if (url)
-    {
-        [manager downloadWithURL:url delegate:self options:options userInfo:userInfo];
-    }
-}
-
 
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options
 {
@@ -136,17 +37,17 @@
 }
 
 #if NS_BLOCKS_AVAILABLE
-- (void)setImageWithURL:(NSURL *)url success:(SDWebImageSuccessBlock)success failure:(SDWebImageFailureBlock)failure;
+- (void)setImageWithURL:(NSURL *)url success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
 {
     [self setImageWithURL:url placeholderImage:nil success:success failure:failure];
 }
 
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder success:(SDWebImageSuccessBlock)success failure:(SDWebImageFailureBlock)failure;
+- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
 {
     [self setImageWithURL:url placeholderImage:placeholder options:0 success:success failure:failure];
 }
 
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options success:(SDWebImageSuccessBlock)success failure:(SDWebImageFailureBlock)failure;
+- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
 {
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
 
@@ -160,6 +61,23 @@
         [manager downloadWithURL:url delegate:self options:options success:success failure:failure];
     }
 }
+
+// 新增方法
+- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder imageShowStyle:(int)style options:(SDWebImageOptions)options success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure
+{
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    
+    // Remove in progress downloader from queue
+    [manager cancelForDelegate:self];
+    
+    self.image = placeholder;
+    
+    if (url)
+    {
+        NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:style], @"imageShowStyle", nil];
+        [manager downloadWithURL:url delegate:self options:options userInfo:info success:success failure:failure];
+    }
+}
 #endif
 
 - (void)cancelCurrentImageLoad
@@ -167,14 +85,72 @@
     [[SDWebImageManager sharedManager] cancelForDelegate:self];
 }
 
-- (void)webImageManager:(SDWebImageManager *)imageManager didProgressWithPartialImage:(UIImage *)image forURL:(NSURL *)url
+- (void)webImageManager:(SDWebImageManager *)imageManager didProgressWithPartialImage:(UIImage *)image forURL:(NSURL *)url userInfo:(NSDictionary *)info
 {
+    if ([info objectForKey:@"imageShowStyle"])
+    {
+        int styleValue = [[info objectForKey:@"imageShowStyle"] intValue];
+        
+        switch (styleValue)
+        {
+            case 0:
+            {
+                self.contentMode = UIViewContentModeScaleAspectFit;
+            }
+                break;
+            case 1:
+            {
+                self.contentMode = UIViewContentModeScaleToFill;
+                image = [image squareImage];
+            }
+                break;
+            case 2:
+            {
+                // do nothing
+                self.contentMode = UIViewContentModeScaleToFill;
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
     self.image = image;
     [self setNeedsLayout];
 }
 
-- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image
+- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image forURL:(NSURL *)url userInfo:(NSDictionary *)info
 {
+    if ([info objectForKey:@"imageShowStyle"])
+    {
+        int styleValue = [[info objectForKey:@"imageShowStyle"] intValue];
+        
+        switch (styleValue)
+        {
+            case 0:
+            {
+                self.contentMode = UIViewContentModeScaleAspectFit;
+            }
+                break;
+            case 1:
+            {
+                self.contentMode = UIViewContentModeScaleToFill;
+                image = [image squareImage];
+            }
+                break;
+            case 2:
+            {
+                // do nothing
+                self.contentMode = UIViewContentModeScaleToFill;
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
     self.image = image;
     [self setNeedsLayout];
 }
