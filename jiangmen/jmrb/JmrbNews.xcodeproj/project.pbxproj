@@ -595,6 +595,8 @@
 		2B3913F41A2CC78A00A9DA2A /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3913F31A2CC78A00A9DA2A /* libz.1.2.5.dylib */; };
 		2B3913F61A2CC79B00A9DA2A /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3913F51A2CC79B00A9DA2A /* libsqlite3.0.dylib */; };
 		2B3913F81A2CC7AE00A9DA2A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3913F71A2CC7AE00A9DA2A /* libicucore.dylib */; };
+		2BDE1BE91A2E1672009E78FB /* NewsCell_ Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE71A2E1672009E78FB /* NewsCell_ Normal.m */; };
+		2BDE1BEA1A2E1672009E78FB /* NewsCell_ Normal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE81A2E1672009E78FB /* NewsCell_ Normal.xib */; };
 		43C896C21A2D5768002F5E5F /* ImageContant.h in Sources */ = {isa = PBXBuildFile; fileRef = EA9D1F43154B7BE900E9219A /* ImageContant.h */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		43C896D71A2D68CF002F5E5F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C896C51A2D68CE002F5E5F /* AFHTTPRequestOperation.m */; };
 		43C896D81A2D68CF002F5E5F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C896C71A2D68CE002F5E5F /* AFHTTPRequestOperationManager.m */; };
@@ -1686,6 +1688,9 @@
 		2B3913F31A2CC78A00A9DA2A /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		2B3913F51A2CC79B00A9DA2A /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		2B3913F71A2CC7AE00A9DA2A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		2BDE1BE61A2E1672009E78FB /* NewsCell_ Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NewsCell_ Normal.h"; sourceTree = "<group>"; };
+		2BDE1BE71A2E1672009E78FB /* NewsCell_ Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NewsCell_ Normal.m"; sourceTree = "<group>"; };
+		2BDE1BE81A2E1672009E78FB /* NewsCell_ Normal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "NewsCell_ Normal.xib"; sourceTree = "<group>"; };
 		43C896C41A2D68CE002F5E5F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		43C896C51A2D68CE002F5E5F /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		43C896C61A2D68CE002F5E5F /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -2860,6 +2865,7 @@
 		05C6DF3D165F24E000498178 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2BDE1BE51A2E1619009E78FB /* News */,
 				05C6DF3E165F24E000498178 /* Tail */,
 				05C6DFE2165F24E000498178 /* Top */,
 			);
@@ -3513,6 +3519,16 @@
 				2B390F6B1A2CBF0D00A9DA2A /* PublicDocuments.h */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		2BDE1BE51A2E1619009E78FB /* News */ = {
+			isa = PBXGroup;
+			children = (
+				2BDE1BE61A2E1672009E78FB /* NewsCell_ Normal.h */,
+				2BDE1BE71A2E1672009E78FB /* NewsCell_ Normal.m */,
+				2BDE1BE81A2E1672009E78FB /* NewsCell_ Normal.xib */,
+			);
+			path = News;
 			sourceTree = "<group>";
 		};
 		43C896C31A2D68CE002F5E5F /* AFNetworking */ = {
@@ -5294,6 +5310,7 @@
 				0535D8201654E70500D10324 /* NavigationBar_detail_page_toolbar_next_icon_tapped@2x.png in Resources */,
 				0535D8211654E70500D10324 /* NavigationBar_detail_page_toolbar_prev_icon@2x.png in Resources */,
 				2B390F541A2CBDEE00A9DA2A /* cb_mono_off.png in Resources */,
+				2BDE1BEA1A2E1672009E78FB /* NewsCell_ Normal.xib in Resources */,
 				0535D8221654E70500D10324 /* NavigationBar_detail_page_toolbar_prev_icon_tapped@2x.png in Resources */,
 				0535D8231654E70500D10324 /* NavigationBar_detail_page_toolbar_share_icon@2x.png in Resources */,
 				0535D8241654E70500D10324 /* NavigationBar_detail_page_toolbar_share_icon_tapped@2x.png in Resources */,
@@ -5761,6 +5778,7 @@
 				43C899561A2D792D002F5E5F /* NISDKAvailability.m in Sources */,
 				2B390F3E1A2CBDEE00A9DA2A /* SDWebImageDecoder.m in Sources */,
 				43C89B671A2DE0DA002F5E5F /* NewsVC.m in Sources */,
+				2BDE1BE91A2E1672009E78FB /* NewsCell_ Normal.m in Sources */,
 				05C6E014165F24E000498178 /* MoreKeepVC.m in Sources */,
 				43C899A31A2D792D002F5E5F /* NICellCatalog.m in Sources */,
 				43C897A51A2D6B8D002F5E5F /* NSNumber+MagicalDataImport.m in Sources */,
