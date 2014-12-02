@@ -17,6 +17,9 @@
 //#import "MobClick.h"
 //#import "UIImageView+WebCache.h"
 #import "CommonUtil.h"
+#import "BaseTabBarVC.h"
+#import "AppPropertiesInitialize.h"
+#import "NewsManagerVC.h"
 
 @interface AppDelegate(Private)
 
@@ -202,7 +205,22 @@ CG_INLINE  void deleteFile() {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // 进行应用程序一系列属性的初始化设置
+    [AppPropertiesInitialize startAppPropertiesInitialize];
+    
+    BaseTabBarVC *baseTabBarController = [[BaseTabBarVC alloc] init];
+    baseTabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:[NewsManagerVC new]]];
+    
+    self.window.rootViewController = baseTabBarController;
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    return YES;
+    
+    /*
     //推送
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound)];
     
@@ -319,6 +337,7 @@ CG_INLINE  void deleteFile() {
 //    [settingsDict writeToFile:finalPath atomically:YES];
     
     return YES;
+     */
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
