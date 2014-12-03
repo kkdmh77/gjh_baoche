@@ -53,8 +53,7 @@
     _slideSwitchView.slideSwitchViewDelegate = self;
     _slideSwitchView.tabItemNormalColor = HEXCOLOR(0X636363);
     _slideSwitchView.tabItemSelectedColor = HEXCOLOR(0X005BA5);
-    _slideSwitchView.shadowImage = [[UIImage imageNamed:@"red_line_and_shadow.png"]
-                                    stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
+    _slideSwitchView.shadowImage = [UIImage imageWithColor:HEXCOLOR(0XE0E0E0) size:CGSizeMake(1, 1)];
     [self.view addSubview:_slideSwitchView];
     
     self.vc1 = [[NewsVC alloc] init];

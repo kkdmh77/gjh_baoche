@@ -164,6 +164,8 @@
         CGSize textSize = [vc.title sizeWithFont:[UIFont systemFontOfSize:kFontSizeOfTabButton]
                                constrainedToSize:CGSizeMake(_topScrollView.bounds.size.width, kHeightOfTopScrollView)
                                    lineBreakMode:NSLineBreakByTruncatingTail];
+        textSize.width += 20;
+        
         //累计每个tab文字的长度
         topScrollViewContentWidth += kWidthOfButtonMargin+textSize.width;
         //设置按钮尺寸
@@ -174,7 +176,8 @@
         
         [button setTag:i+100];
         if (i == 0) {
-            _shadowImageView.frame = CGRectMake(kWidthOfButtonMargin, 0, textSize.width, _shadowImage.size.height);
+            _shadowImageView.frame = CGRectMake(kWidthOfButtonMargin, (kHeightOfTopScrollView - textSize.height - 10) / 2, textSize.width, textSize.height + 10);
+            [_shadowImageView setRadius:_shadowImageView.boundsHeight / 2];
             button.selected = YES;
         }
         [button setTitle:vc.title forState:UIControlStateNormal];
@@ -221,7 +224,7 @@
         
         [UIView animateWithDuration:0.25 animations:^{
             
-            [_shadowImageView setFrame:CGRectMake(sender.frame.origin.x, 0, sender.frame.size.width, _shadowImage.size.height)];
+            [_shadowImageView setFrame:CGRectMake(sender.frame.origin.x, (kHeightOfTopScrollView - _shadowImageView.boundsHeight) / 2, sender.frame.size.width, _shadowImageView.boundsHeight)];
             
         } completion:^(BOOL finished) {
             if (finished) {
