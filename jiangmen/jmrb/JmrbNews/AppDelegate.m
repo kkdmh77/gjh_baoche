@@ -205,6 +205,7 @@ CG_INLINE  void deleteFile() {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /*
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     // 进行应用程序一系列属性的初始化设置
@@ -219,8 +220,8 @@ CG_INLINE  void deleteFile() {
     [self.window makeKeyAndVisible];
     
     return YES;
+    */
     
-    /*
     //推送
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound)];
     
@@ -337,7 +338,7 @@ CG_INLINE  void deleteFile() {
 //    [settingsDict writeToFile:finalPath atomically:YES];
     
     return YES;
-     */
+     
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

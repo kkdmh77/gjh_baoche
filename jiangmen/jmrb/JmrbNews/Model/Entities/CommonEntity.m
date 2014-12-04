@@ -15,7 +15,11 @@
     self = [super init];
     if (self)
     {
-        
+        self.newsId = [[dict objectForKey:@"newsId"] integerValue];
+        self.newsImageUrlStr = [UrlManager getImageRequestUrlStrByUrlComponent:dict[@"newsSpicture"]];
+        self.newsTitleStr = [dict objectForKey:@"newsTitle"];
+        self.newsDescStr = [dict objectForKey:@"newsAbstract"];
+        self.newsCommentCount = [[dict objectForKey:@"commCount"] integerValue];
     }
     return self;
 }
@@ -32,6 +36,23 @@
     if (self)
     {
         
+    }
+    return self;
+}
+
+@end
+
+///////////////////////////////////////////////////////////////
+
+@implementation NewsTypeEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        self.newsTypeId = [[dict objectForKey:@"newstypeId"] integerValue];
+        self.newsTypeNameStr = [dict objectForKey:@"newstypeName"];
     }
     return self;
 }

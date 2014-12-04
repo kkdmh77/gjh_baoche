@@ -66,12 +66,12 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
 //数据解析
 - (BOOL)isParseSuccessWithResponseData:(NSData *)data result:(id *)result
 {
-    if (!networkDataIsJsonType)
-    {
-        *result = data;
-        
-        return YES;
-    }
+//    if (!networkDataIsJsonType)
+//    {
+//        *result = data;
+//        
+//        return YES;
+//    }
     
     NSError *err = nil;
     
@@ -85,31 +85,6 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
         return NO;
     }
 //    NSLog(@"resultDic = %@",*result);
-    
-    // 做服务器返回的业务code判断,因为如果服务器方法报错或者业务逻辑出错HTTP码还是返回的200,但是加了自己定义的一套code码(详情可参考WIKI上面的约定)
-    NSNumber *myCodeNum = [*result objectForKey:@"code"];
-    NSString *myMsgStr = [*result objectForKey:@"msg"];
-    
-    if (!myCodeNum || MyHTTPCodeType_Success != myCodeNum.integerValue)
-    {
-        err = [[NSError alloc] initWithDomain:@"MYSERVER_ERROR_DOMAIN" code:myCodeNum.integerValue userInfo:[NSDictionary dictionaryWithObjectsAndKeys:myMsgStr, NSLocalizedDescriptionKey, nil]];
-        
-        *result = err;
-        /*
-        // 自动跳入登录页面
-        if (MyHTTPCodeType_TokenOverdue == myCodeNum.integerValue || MyHTTPCodeType_TokenIncomplete == myCodeNum.integerValue || MyHTTPCodeType_TokenIllegal == myCodeNum.integerValue)
-        {
-            if ([delegate isKindOfClass:[UIViewController class]])
-            {
-                UIViewController *sendRequestVC = (UIViewController *)delegate;
-                
-                LoginVC *login = [LoginVC loadFromNib];
-                [sendRequestVC presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:nil];
-            }
-        }
-        */
-        return NO;
-    }
     
     return YES;
 }
@@ -334,6 +309,7 @@ DEF_SINGLETON(NetRequestManager);
      @ 修改开始
      */
     // 修改开始
+    /*
     NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding([netRequest.asiFormRequest stringEncoding]));
     
     if ([methodType isEqualToString:RequestMethodType_GET])
@@ -353,6 +329,7 @@ DEF_SINGLETON(NetRequestManager);
             [netRequest.asiFormRequest setPostBody:[NSMutableData dataWithData:postBodyData]];
         }
     }
+     */
     // 修改结束
     
     if ([fileDic isAbsoluteValid])
@@ -385,7 +362,7 @@ DEF_SINGLETON(NetRequestManager);
      @ 修改开始
      */
     // 修改开始
-    /*
+    
     if ([parameterDic isAbsoluteValid])
     {
         for (NSString *key in parameterDic.allKeys)
@@ -393,7 +370,7 @@ DEF_SINGLETON(NetRequestManager);
             [netRequest.asiFormRequest setPostValue:[parameterDic objectForKey:key] forKey:key];
         }
     }
-     */
+    
     // 修改结束
     
     // 判断是否要作数据缓存
@@ -408,12 +385,17 @@ DEF_SINGLETON(NetRequestManager);
             // 存在缓存数据且没有过期
             if (cacheData)
             {
-                netRequest.didUseCachedResponse = YES;
+                id result = nil;
                 
-                if (netRequest.delegate && [netRequest.delegate respondsToSelector:@selector(netRequest:successWithInfoObj:)])
+                if ([netRequest isParseSuccessWithResponseData:cacheData result:&result])
                 {
-                    [netRequest.delegate netRequest:netRequest successWithInfoObj:[NSJSONSerialization JSONObjectWithData:cacheData options:NSJSONReadingMutableContainers error:NULL]];
+                    netRequest.didUseCachedResponse = YES;
+                    netRequest.resultInfoObj = result;
                     
+                    if (netRequest.delegate && [netRequest.delegate respondsToSelector:@selector(netRequest:successWithInfoObj:)])
+                    {
+                        [netRequest.delegate netRequest:netRequest successWithInfoObj:result];
+                    }
                     return;
                 }
             }

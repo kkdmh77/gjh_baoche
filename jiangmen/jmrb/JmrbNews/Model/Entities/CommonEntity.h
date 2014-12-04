@@ -10,6 +10,7 @@
 
 @interface News_NormalEntity : NetItem
 
+@property (nonatomic, assign) NSInteger newsId;
 @property (nonatomic, copy) NSString *newsImageUrlStr;
 @property (nonatomic, copy) NSString *newsTitleStr;
 @property (nonatomic, copy) NSString *newsDescStr;
@@ -24,5 +25,14 @@
 @property (nonatomic, copy) NSString *imageGroupNameStr;        // 图片组标题
 @property (nonatomic, strong) NSArray *imageUrlsStrArray;       // 图片组的urls
 @property (nonatomic, assign) NSInteger imageCommentCount;      // 图片的评论数
+
+@end
+
+///////////////////////////////////////////////////////////////
+
+@interface NewsTypeEntity : NetItem
+
+@property (nonatomic, copy) NSString *newsTypeNameStr;   // 新闻类型名称
+@property (nonatomic, assign) NSInteger newsTypeId;      // 新闻类型ID
 
 @end

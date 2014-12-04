@@ -21,8 +21,8 @@
     
     NSString *nameSpace = nil;
     
-    nameSpace = Request_NameSpace;
-//    nameSpace = Request_NameSpace_company_internal;
+//    nameSpace = Request_NameSpace;
+    nameSpace = Request_NameSpace_company_internal;
     
 //    if (0 == serviceSeletedValue.intValue)
 //        nameSpace = Request_NameSpace_gov;
@@ -55,7 +55,7 @@
     NSString *nameSpace = nil;
     
 //    nameSpace = Img_NameSpace;
-//    nameSpace = Img_NameSpace_company_internal;
+    nameSpace = Img_NameSpace_company_internal;
     
 //    if (0 == serviceSeletedValue.intValue)
 //        nameSpace = Img_NameSpace_gov;
@@ -94,7 +94,7 @@
     if (nameSpaceStr && 0 != nameSpaceStr.length)
     {
         // 不用stringByAppendingPathComponent:,这个会自动把http://中的一个/去掉
-        NSString *urlStr = [nameSpaceStr stringByAppendingFormat:@"/%@",methodName];
+        NSString *urlStr = [nameSpaceStr stringByAppendingFormat:@"-%@",methodName];
         
         if (dic && 0 != dic.count)
         {
@@ -103,6 +103,19 @@
         url = [NSURL URLWithString:urlStr];
     }
     return url;
+}
+
++ (NSString *)getImageRequestUrlStrByUrlComponent:(NSString *)urlComponent
+{
+    NSString *imageNameSpaceStr = [self getImageNameSpace];
+    
+    NSString *imageUrlStr = nil;
+    
+    if ([imageNameSpaceStr isAbsoluteValid] && [urlComponent isAbsoluteValid])
+    {
+        imageUrlStr = [imageNameSpaceStr stringByAppendingString:urlComponent];
+    }
+    return imageUrlStr;
 }
 
 @end

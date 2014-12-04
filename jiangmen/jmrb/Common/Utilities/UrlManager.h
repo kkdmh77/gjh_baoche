@@ -46,4 +46,6 @@
  */
 + (NSURL *)getRequestUrlByMethodName:(NSString *)methodName andArgsDic:(NSDictionary *)dic;
 
++ (NSString *)getImageRequestUrlStrByUrlComponent:(NSString *)urlComponent;
+
 @end

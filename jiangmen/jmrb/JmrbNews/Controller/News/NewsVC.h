@@ -7,7 +7,12 @@
 //
 
 #import "BaseNetworkViewController.h"
+#import "CommonEntity.h"
 
 @interface NewsVC : BaseNetworkViewController
+
+@property (nonatomic, strong) NewsTypeEntity *newsTypeEntity;
+
+- (void)viewDidCurrentView;
 
 @end

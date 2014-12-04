@@ -18,6 +18,7 @@
     #import "ATBLibs.h"
     #import "CommonCategories.h"
     #import "LanguagesManager.h"
+    #import "UrlManager.h"
 
     //define this constant if you want to use Masonry without the 'mas_' prefix
 //    #define MAS_SHORTHAND
