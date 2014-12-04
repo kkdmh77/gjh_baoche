@@ -408,12 +408,17 @@ DEF_SINGLETON(NetRequestManager);
             // 存在缓存数据且没有过期
             if (cacheData)
             {
-                netRequest.didUseCachedResponse = YES;
+                id result = nil;
                 
-                if (netRequest.delegate && [netRequest.delegate respondsToSelector:@selector(netRequest:successWithInfoObj:)])
+                if ([netRequest isParseSuccessWithResponseData:cacheData result:&result])
                 {
-                    [netRequest.delegate netRequest:netRequest successWithInfoObj:[NSJSONSerialization JSONObjectWithData:cacheData options:NSJSONReadingMutableContainers error:NULL]];
+                    netRequest.didUseCachedResponse = YES;
+                    netRequest.resultInfoObj = result;
                     
+                    if (netRequest.delegate && [netRequest.delegate respondsToSelector:@selector(netRequest:successWithInfoObj:)])
+                    {
+                        [netRequest.delegate netRequest:netRequest successWithInfoObj:result];
+                    }
                     return;
                 }
             }
