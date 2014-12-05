@@ -890,6 +890,7 @@
 		43D01EEC1A31510B004AA52B /* VideoNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D01EEA1A31510B004AA52B /* VideoNewsCell.m */; };
 		43D01EED1A31510B004AA52B /* VideoNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D01EEB1A31510B004AA52B /* VideoNewsCell.xib */; };
 		43D01EEF1A315761004AA52B /* videoPlayCount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D01EEE1A315761004AA52B /* videoPlayCount@2x.png */; };
+		43D01EF21A316133004AA52B /* DetailNewsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D01EF11A316133004AA52B /* DetailNewsVC.m */; };
 		43D212C81A300814000F0E0B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43D212C61A300814000F0E0B /* Model.xcdatamodeld */; };
 		43D212DA1A302BEC000F0E0B /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 43D212CA1A302BEC000F0E0B /* MJRefresh.bundle */; };
 		43D212DB1A302BEC000F0E0B /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D212CD1A302BEC000F0E0B /* MJRefreshBaseView.m */; };
@@ -2302,6 +2303,8 @@
 		43D01EEA1A31510B004AA52B /* VideoNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoNewsCell.m; sourceTree = "<group>"; };
 		43D01EEB1A31510B004AA52B /* VideoNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoNewsCell.xib; sourceTree = "<group>"; };
 		43D01EEE1A315761004AA52B /* videoPlayCount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "videoPlayCount@2x.png"; sourceTree = "<group>"; };
+		43D01EF01A316133004AA52B /* DetailNewsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailNewsVC.h; sourceTree = "<group>"; };
+		43D01EF11A316133004AA52B /* DetailNewsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailNewsVC.m; sourceTree = "<group>"; };
 		43D212C71A300814000F0E0B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		43D212CA1A302BEC000F0E0B /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		43D212CB1A302BEC000F0E0B /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
@@ -4709,6 +4712,8 @@
 				43C89B661A2DE0DA002F5E5F /* NewsVC.m */,
 				43D212EA1A308D5D000F0E0B /* VideoNewsListVC.h */,
 				43D212EB1A308D5D000F0E0B /* VideoNewsListVC.m */,
+				43D01EF01A316133004AA52B /* DetailNewsVC.h */,
+				43D01EF11A316133004AA52B /* DetailNewsVC.m */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -5758,6 +5763,7 @@
 				43C89AE41A2D895A002F5E5F /* ATB_NetworkFunc.m in Sources */,
 				43C899401A2D792D002F5E5F /* NICollectionViewCellFactory.m in Sources */,
 				43C89AE11A2D895A002F5E5F /* ATB_CGContext.m in Sources */,
+				43D01EF21A316133004AA52B /* DetailNewsVC.m in Sources */,
 				43C897171A2D6B5C002F5E5F /* FUITextField.m in Sources */,
 				EA9D216E154B7BE900E9219A /* WBUtil.m in Sources */,
 				EA9D216F154B7BE900E9219A /* YungShareManager.m in Sources */,

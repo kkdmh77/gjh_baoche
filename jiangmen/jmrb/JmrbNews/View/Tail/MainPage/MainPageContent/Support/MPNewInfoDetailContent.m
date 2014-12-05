@@ -279,16 +279,21 @@
     UIImage *image = nil;
     
     NSString *bodyString = [_newsItemDic objectForKey:@"newsContent"];
-    if ([bodyString isKindOfClass:[NSString class]]) {
+    if ([bodyString isKindOfClass:[NSString class]])
+    {
         NSString *htmlString=nil;
         NSString *newsVideoUrl = [_newsItemDic objectForKey:@"newsVideoUrl"];
-        if([[_newsItemDic objectForKey:@"newsClassify"] intValue]==2 && newsVideoUrl!=nil &&newsVideoUrl.length>10){
+        
+        if([[_newsItemDic objectForKey:@"newsClassify"] intValue]==2 && newsVideoUrl!=nil &&newsVideoUrl.length>10)
+        {
             NSString *embedHTML = [NSString stringWithFormat:@"<video width=\"300\" height=\"200\" poster=\"%@\" autoplay=\"autoplay\" autobuffer=\"autobuffer\" loop=\"loop\">\
                                    <source src=\"%@\" type='video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\"'>\
                                    </video>",[NSString stringWithFormat:@"%@%@",Web_URL ,[_newsItemDic objectForKey:@"newsSpicture"]],newsVideoUrl];
             
             htmlString= [NSString stringWithFormat:@"<html> \n <head> \n <style type=\"text/css\"> \n body {text-align:justify; font-size: %ipx; line-height:%ipx}\n  </style> \n </head> \n <body>%@\n%@</body> \n </html>", _newFontSize,_newFontSize+10,embedHTML,bodyString];
-        }else{
+        }
+        else
+        {
             htmlString= [NSString stringWithFormat:@"<html> \n <head> \n <style type=\"text/css\"> \n body {text-align:justify; font-size: %ipx; line-height:%ipx}\n  </style> \n </head> \n <body>%@</body> \n </html>", _newFontSize,_newFontSize+10,bodyString];
             
         }

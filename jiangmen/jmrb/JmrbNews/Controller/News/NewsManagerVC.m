@@ -105,6 +105,7 @@
         NewsVC *newsVC = [[NewsVC alloc] init];
         newsVC.newsTypeEntity = entity;
         
+        [self addChildViewController:newsVC];
         [_newsViewControllersArray addObject:newsVC];
     }
     

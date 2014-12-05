@@ -23,6 +23,8 @@
                            @"getNewsType.action",
                            @"getNewsList.action",
                            
+                           @"getNews.action",
+                           
                            // 图片
                            
                            // 视频

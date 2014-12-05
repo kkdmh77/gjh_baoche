@@ -11,6 +11,7 @@
 #import "CommonEntity.h"
 #import "VideoNewsCell.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
+#import "DetailNewsVC.h"
 
 @interface VideoNewsListVC ()
 {
@@ -189,6 +190,11 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    VideoNewsEntity *entity = _netVideosEntityArray[indexPath.row];
+    
+    DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
+    detailNews.newsId = entity.videoNewsId;
+    [self pushViewController:detailNews];
 }
 
 @end

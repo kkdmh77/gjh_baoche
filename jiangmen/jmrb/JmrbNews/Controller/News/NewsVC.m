@@ -11,6 +11,8 @@
 #import "NewsCell_Image.h"
 #import "MJRefresh.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
+#import "DetailNewsVC.h"
+#import "NewsManagerVC.h"
 #import "GCDThread.h"
 
 NSString * const cellIdentifier_normal = @"cellIdentifier_normal";
@@ -210,6 +212,15 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    News_NormalEntity *entity = _netNewsEntityArray[indexPath.row];
+    
+    UIViewController *vc = self.parentViewController;
+    if ([vc isKindOfClass:[NewsManagerVC class]])
+    {
+        DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
+        detailNews.newsId = entity.newsId;
+        [vc.navigationController pushViewController:detailNews animated:YES];
+    }
 }
 
 @end

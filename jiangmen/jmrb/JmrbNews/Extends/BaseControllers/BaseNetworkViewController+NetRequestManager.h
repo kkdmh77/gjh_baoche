@@ -14,6 +14,8 @@ typedef enum
     NetNewsRequestType_GetAllNewsType                       = 0, // 获取新闻所有分类(GET)
     NetNewsRequestType_GetNewsList                             , // 获取新闻列表(POST)
     
+    NetNewsRequestType_GetNewsDeatil                           , // 获取新闻详情(POST)
+    
     // 图片
     
     // 视频
