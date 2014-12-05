@@ -86,6 +86,8 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     }
 //    NSLog(@"resultDic = %@",*result);
     
+//    *result = [*result objectForKey:@"response"];
+    
     return YES;
 }
 

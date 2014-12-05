@@ -6,11 +6,13 @@
 //
 //
 
-#import "VideoListVC.h"
+#import "VideoNewsListVC.h"
 #import "MJRefresh.h"
+#import "CommonEntity.h"
+#import "VideoNewsCell.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
 
-@interface VideoListVC ()
+@interface VideoNewsListVC ()
 {
     NSMutableArray *_netVideosEntityArray;
     
@@ -19,13 +21,26 @@
 
 @end
 
-@implementation VideoListVC
+static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
+
+@implementation VideoNewsListVC
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+        _curPageIndex = 1;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self initialization];
+    [self getNetworkData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,9 +62,26 @@
         STRONGSELF
         if (NetVideosRequestType_GetVideosList == request.tag)
         {
+            [strongSelf->_tableView headerEndRefreshing];
+            [strongSelf->_tableView footerEndRefreshing];
             
+            if (1 == strongSelf->_curPageIndex)
+            {
+                strongSelf->_netVideosEntityArray = [strongSelf parseNetDataWithDic:successInfoObj];
+            }
+            else
+            {
+                [strongSelf->_netVideosEntityArray addObjectsFromArray:[strongSelf parseNetDataWithDic:successInfoObj]];
+            }
+            [strongSelf reloadTableData];
         }
         
+    } failedBlock:^(NetRequest *request, NSError *error) {
+        STRONGSELF
+        [strongSelf->_tableView headerEndRefreshing];
+        [strongSelf->_tableView footerEndRefreshing];
+        
+        [weakSelf setDefaultNetFailedBlockImplementationWithNetRequest:request error:error otherExecuteBlock:nil];
     }];
 }
 
@@ -79,15 +111,27 @@
          cacheSeconds:CacheNetDataTimeType_OneMinute];
 }
 
-- (void)parseNetDataWithDic:(NSDictionary *)dic
+- (NSMutableArray *)parseNetDataWithDic:(NSDictionary *)dic
 {
+    NSArray *videosItemList = [[dic objectForKey:@"response"] objectForKey:@"item"];
     
+    NSMutableArray *tempVideosEntityArray = [NSMutableArray arrayWithCapacity:videosItemList.count];
+    
+    if ([videosItemList isAbsoluteValid])
+    {
+        for (NSDictionary *videoItemDic in videosItemList)
+        {
+            VideoNewsEntity *entity = [VideoNewsEntity initWithDict:videoItemDic];
+            [tempVideosEntityArray addObject:entity];
+        }
+    }
+    return tempVideosEntityArray;
 }
 
 - (void)initialization
 {
     // tab
-    [self setupTableViewWithFrame:self.view.bounds style:UITableViewStylePlain registerNibName:nil reuseIdentifier:nil];
+    [self setupTableViewWithFrame:self.view.bounds style:UITableViewStylePlain registerNibName:NSStringFromClass([VideoNewsCell class]) reuseIdentifier:cellIdentifer_videoNews];
     
     // 上、下拉刷新
     [_tableView addHeaderWithTarget:self action:@selector(tabHeaderRefreshing)];
@@ -124,17 +168,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return _netVideosEntityArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 0;
+    return [VideoNewsCell getCellHeight];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    VideoNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifer_videoNews];
+    
+    VideoNewsEntity *entity = _netVideosEntityArray[indexPath.row];
+    [cell loadCellShowDataWithItemEntity:entity];
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

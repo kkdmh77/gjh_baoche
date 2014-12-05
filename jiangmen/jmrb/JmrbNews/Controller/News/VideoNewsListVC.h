@@ -8,6 +8,6 @@
 
 #import "BaseNetworkViewController.h"
 
-@interface VideoListVC : BaseNetworkViewController
+@interface VideoNewsListVC : BaseNetworkViewController
 
 @end

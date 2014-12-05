@@ -20,6 +20,7 @@
 #import "BaseTabBarVC.h"
 #import "AppPropertiesInitialize.h"
 #import "NewsManagerVC.h"
+#import "VideoNewsListVC.h"
 
 @interface AppDelegate(Private)
 
@@ -205,14 +206,20 @@ CG_INLINE  void deleteFile() {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /*
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     // 进行应用程序一系列属性的初始化设置
     [AppPropertiesInitialize startAppPropertiesInitialize];
     
+    NewsManagerVC *newsManager = [[[NewsManagerVC alloc] init] autorelease];
+    UINavigationController *newsManagerNav = [[[UINavigationController alloc] initWithRootViewController:newsManager] autorelease];
+    
+    VideoNewsListVC *videoNewsList = [[[VideoNewsListVC alloc] init] autorelease];
+    UINavigationController *videoNewsListNav = [[[UINavigationController alloc] initWithRootViewController:videoNewsList] autorelease];
+    
     BaseTabBarVC *baseTabBarController = [[[BaseTabBarVC alloc] init] autorelease];
-    baseTabBarController.viewControllers = @[[[[UINavigationController alloc] initWithRootViewController:[[NewsManagerVC new] autorelease]] autorelease]];
+    baseTabBarController.viewControllers = @[newsManagerNav, videoNewsListNav];
     
     self.window.rootViewController = baseTabBarController;
     
@@ -220,8 +227,8 @@ CG_INLINE  void deleteFile() {
     [self.window makeKeyAndVisible];
     
     return YES;
-    */
     
+    /*
     //推送
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound)];
     
@@ -338,7 +345,7 @@ CG_INLINE  void deleteFile() {
 //    [settingsDict writeToFile:finalPath atomically:YES];
     
     return YES;
-     
+     */
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

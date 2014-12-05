@@ -58,3 +58,22 @@
 }
 
 @end
+
+///////////////////////////////////////////////////////////////
+
+@implementation VideoNewsEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        self.videoNewsId = [[dict objectForKey:@"newsId"] integerValue];
+        self.videoNameStr = [dict objectForKey:@"newsTitle"];
+        self.videoImageUrlStr = [UrlManager getImageRequestUrlStrByUrlComponent:dict[@"newsSpicture"]];
+        self.videoPalyCount = [[dict objectForKey:@"newsClicked"] integerValue];
+    }
+    return self;
+}
+
+@end
