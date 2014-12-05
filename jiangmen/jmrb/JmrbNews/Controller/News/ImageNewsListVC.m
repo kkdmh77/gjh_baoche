@@ -1,30 +1,28 @@
 //
-//  VideoListVC.m
+//  ImageNewsListVC.m
 //  JmrbNews
 //
-//  Created by swift on 14/12/4.
+//  Created by 龚 俊慧 on 14/12/5.
 //
 //
 
-#import "VideoNewsListVC.h"
+#import "ImageNewsListVC.h"
 #import "MJRefresh.h"
-#import "CommonEntity.h"
-#import "VideoNewsCell.h"
+#import "ImageNewsCell.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
-#import "DetailNewsVC.h"
 
-@interface VideoNewsListVC ()
+static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
+
+@interface ImageNewsListVC ()
 {
-    NSMutableArray *_netVideoNewsEntityArray;
+    NSMutableArray *_netImageNewsEntityArray;
     
     NSInteger      _curPageIndex;
 }
 
 @end
 
-static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
-
-@implementation VideoNewsListVC
+@implementation ImageNewsListVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,7 +51,7 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:@"视频新闻"];
+    [self setNavigationItemTitle:@"图片新闻"];
 }
 
 - (void)setNetworkRequestStatusBlocks
@@ -61,18 +59,18 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
     WEAKSELF
     [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
         STRONGSELF
-        if (NetVideosRequestType_GetVideosList == request.tag)
+        if (NetImagesRequestType_GetImagesList == request.tag)
         {
             [strongSelf->_tableView headerEndRefreshing];
             [strongSelf->_tableView footerEndRefreshing];
             
             if (1 == strongSelf->_curPageIndex)
             {
-                strongSelf->_netVideoNewsEntityArray = [strongSelf parseNetDataWithDic:successInfoObj];
+                strongSelf->_netImageNewsEntityArray = [strongSelf parseNetDataWithDic:successInfoObj];
             }
             else
             {
-                [strongSelf->_netVideoNewsEntityArray addObjectsFromArray:[strongSelf parseNetDataWithDic:successInfoObj]];
+                [strongSelf->_netImageNewsEntityArray addObjectsFromArray:[strongSelf parseNetDataWithDic:successInfoObj]];
             }
             [strongSelf reloadTableData];
         }
@@ -101,11 +99,11 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
     NSDictionary *dic = @{@"pageNum": @(_curPageIndex),
                           @"pageSize": @(15)};
     
-    [self sendRequest:[[self class] getRequestURLStr:NetVideosRequestType_GetVideosList]
+    [self sendRequest:[[self class] getRequestURLStr:NetImagesRequestType_GetImagesList]
          parameterDic:dic
        requestHeaders:nil
     requestMethodType:RequestMethodType_POST
-           requestTag:NetVideosRequestType_GetVideosList
+           requestTag:NetImagesRequestType_GetImagesList
              delegate:self
              userInfo:nil
        netCachePolicy:cachePolicy
@@ -114,25 +112,25 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
 
 - (NSMutableArray *)parseNetDataWithDic:(NSDictionary *)dic
 {
-    NSArray *videosItemList = [[dic objectForKey:@"response"] objectForKey:@"item"];
+    NSArray *imagesItemList = [[dic objectForKey:@"response"] objectForKey:@"item"];
     
-    NSMutableArray *tempVideosEntityArray = [NSMutableArray arrayWithCapacity:videosItemList.count];
+    NSMutableArray *tempImagesEntityArray = [NSMutableArray arrayWithCapacity:imagesItemList.count];
     
-    if ([videosItemList isAbsoluteValid])
+    if ([imagesItemList isAbsoluteValid])
     {
-        for (NSDictionary *videoItemDic in videosItemList)
+        for (NSDictionary *imageItemDic in imagesItemList)
         {
-            VideoNewsEntity *entity = [VideoNewsEntity initWithDict:videoItemDic];
-            [tempVideosEntityArray addObject:entity];
+            ImageNewsEntity *entity = [ImageNewsEntity initWithDict:imageItemDic];
+            [tempImagesEntityArray addObject:entity];
         }
     }
-    return tempVideosEntityArray;
+    return tempImagesEntityArray;
 }
 
 - (void)initialization
 {
     // tab
-    [self setupTableViewWithFrame:self.view.bounds style:UITableViewStylePlain registerNibName:NSStringFromClass([VideoNewsCell class]) reuseIdentifier:cellIdentifer_videoNews];
+    [self setupTableViewWithFrame:self.view.bounds style:UITableViewStylePlain registerNibName:NSStringFromClass([ImageNewsCell class]) reuseIdentifier:cellIdentifer_imageNews];
     
     // 上、下拉刷新
     [_tableView addHeaderWithTarget:self action:@selector(tabHeaderRefreshing)];
@@ -169,20 +167,22 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _netVideoNewsEntityArray.count;
+    return 10;
+    return _netImageNewsEntityArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [VideoNewsCell getCellHeight];
+    return 218;
+    return [ImageNewsCell getCellHeight];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    VideoNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifer_videoNews];
+    ImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifer_imageNews];
     
-    VideoNewsEntity *entity = _netVideoNewsEntityArray[indexPath.row];
-    [cell loadCellShowDataWithItemEntity:entity];
+//    ImageNewsEntity *entity = _netImageNewsEntityArray[indexPath.row];
+//    [cell loadCellShowDataWithItemEntity:entity];
     
     return cell;
 }
@@ -190,12 +190,7 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    VideoNewsEntity *entity = _netVideoNewsEntityArray[indexPath.row];
     
-    DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
-    detailNews.newsId = entity.videoNewsId;
-    detailNews.hidesBottomBarWhenPushed = YES;
-    [self pushViewController:detailNews];
 }
 
 @end

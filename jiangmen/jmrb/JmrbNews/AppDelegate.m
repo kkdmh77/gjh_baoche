@@ -20,6 +20,7 @@
 #import "BaseTabBarVC.h"
 #import "AppPropertiesInitialize.h"
 #import "NewsManagerVC.h"
+#import "ImageNewsListVC.h"
 #import "VideoNewsListVC.h"
 
 @interface AppDelegate(Private)
@@ -215,11 +216,14 @@ CG_INLINE  void deleteFile() {
     NewsManagerVC *newsManager = [[[NewsManagerVC alloc] init] autorelease];
     UINavigationController *newsManagerNav = [[[UINavigationController alloc] initWithRootViewController:newsManager] autorelease];
     
+    ImageNewsListVC *imageNewsList = [[[ImageNewsListVC alloc] init] autorelease];
+    UINavigationController *imageNewsListNav = [[[UINavigationController alloc] initWithRootViewController:imageNewsList] autorelease];
+    
     VideoNewsListVC *videoNewsList = [[[VideoNewsListVC alloc] init] autorelease];
     UINavigationController *videoNewsListNav = [[[UINavigationController alloc] initWithRootViewController:videoNewsList] autorelease];
     
     BaseTabBarVC *baseTabBarController = [[[BaseTabBarVC alloc] init] autorelease];
-    baseTabBarController.viewControllers = @[newsManagerNav, videoNewsListNav];
+    baseTabBarController.viewControllers = @[newsManagerNav, imageNewsListNav, videoNewsListNav];
     
     self.window.rootViewController = baseTabBarController;
     

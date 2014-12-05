@@ -47,3 +47,15 @@
 @property (nonatomic, assign) NSInteger videoPalyCount;     // 视频播放数
 
 @end
+
+///////////////////////////////////////////////////////////////
+
+@interface ImageNewsEntity : NetItem
+
+@property (nonatomic, assign) NSInteger imageNewsId;
+@property (nonatomic, copy) NSString *imageNewsNameStr;     // 图片新闻名
+@property (nonatomic, strong) NSArray *imageUrlsStrArray;   // 图片组的urls
+@property (nonatomic, assign) NSInteger imageCommentCount;  // 图片评论数
+@property (nonatomic, assign) NSInteger imagePraiseCount;   // 图片赞的数量
+
+@end

@@ -219,6 +219,7 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
     {
         DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
         detailNews.newsId = entity.newsId;
+        detailNews.hidesBottomBarWhenPushed = YES;
         [vc.navigationController pushViewController:detailNews animated:YES];
     }
 }

@@ -26,6 +26,7 @@
                            @"getNews.action",
                            
                            // 图片
+                           @"getHotNewsPic.action",
                            
                            // 视频
                            @"getVideoInfor.action",

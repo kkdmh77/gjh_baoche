@@ -96,9 +96,9 @@
      */
     // 返回Btn
     [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left
-                                 normalImg:[UIImage imageNamed:@"Return_btn_3.png"]
-                            highlightedImg:[UIImage imageNamed:@"Return_btn_4.png"]
-                                    action:NULL];
+                                 normalImg:[UIImage imageNamed:@"navBack"]
+                            highlightedImg:[UIImage imageNamed:@"navBack"]
+                                    action:@selector(backViewController)];
     
     // 加此代码可以在自定义leftBarButtonItem之后还保持IOS7以上系统自带的滑动返回效果
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)])

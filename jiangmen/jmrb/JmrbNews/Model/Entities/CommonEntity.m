@@ -77,3 +77,19 @@
 }
 
 @end
+
+///////////////////////////////////////////////////////////////
+
+@implementation ImageNewsEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        
+    }
+    return self;
+}
+
+@end

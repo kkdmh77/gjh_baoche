@@ -12,14 +12,15 @@ typedef enum
 {
     // 新闻
     NetNewsRequestType_GetAllNewsType                       = 0, // 获取新闻所有分类(GET)
-    NetNewsRequestType_GetNewsList                             , // 获取新闻列表(POST)
+    NetNewsRequestType_GetNewsList                             , // 获取普通新闻列表(POST)
     
     NetNewsRequestType_GetNewsDeatil                           , // 获取新闻详情(POST)
     
     // 图片
+    NetImagesRequestType_GetImagesList                         , // 获取图片新闻列表(POST)
     
     // 视频
-    NetVideosRequestType_GetVideosList                         , // 获取视频列表(POST)
+    NetVideosRequestType_GetVideosList                         , // 获取视频新闻列表(POST)
     
 } NetRequestType;
 

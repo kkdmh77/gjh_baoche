@@ -69,7 +69,7 @@ int webTextFontValue = 15;
                     CGFloat imageHeight = imageWidth * .67;
                      */
                     
-                    NSString *headerHTML = [NSString stringWithFormat:@"<p style=\"color: black; margin-left: 10px; margin-top: 20; margin-bottom: 0; font-size: 20px; line-height: 20px\"> %@ </p> \n <p style=\"color: black; margin-left: 10px; margin-top: 20; margin-bottom: 15; font-size: 10px; line-height: 10px\"> %@ </p> \n <hr noshade color=\"#DFDEDF\"; size=1>",@"在 XHTML 1.0 Strict DTD 中，hr 元素的所有呈现属性均不被支持。在 XHTML 1.0 Strict DTD 中，hr 元素的所有呈现属性均不被支持。", subtitleStr];
+                    NSString *headerHTML = [NSString stringWithFormat:@"<p style=\"color: black; margin-left: 10px; margin-top: 20; margin-bottom: 0; font-size: 20px; line-height: 20px\"> %@ </p> \n <p style=\"color: black; margin-left: 10px; margin-top: 20; margin-bottom: 15; font-size: 10px; line-height: 10px\"> %@ </p> \n <hr noshade color=\"#DFDEDF\"; size=1>",newsTitleStr, subtitleStr];
                     
                     if(newsType == 2 && videoUrl != nil && videoUrl.length > 10)
                     {
@@ -81,14 +81,14 @@ int webTextFontValue = 15;
                     }
                     else
                     {
-                        NSString *imageHTML = nil;
+                        NSString *imageHTML = @"";
                         
                         if ([imageUrlStr isAbsoluteValid])
                         {
                             imageHTML = [NSString stringWithFormat:@"<img src=\"%@\" style=\"width: 100%%; border: none; margin: auto; display: block\">",imageUrlStr];
                         }
                         
-                        htmlString = [NSString stringWithFormat:@"<html> \n <head> \n <style type=\"text/css\"> \n body {text-align:justify; font-size: %ipx; line-height:%ipx}\n  </style> \n </head> \n <body>%@\n%@</body> \n </html>", webTextFontValue, webTextFontValue + 10, imageHTML, bodyString];
+                        htmlString = [NSString stringWithFormat:@"<html> \n <head> \n <style type=\"text/css\"> \n body {text-align:justify; font-size: %ipx; line-height:%ipx}\n  </style> \n </head> \n <body>%@\n%@\n%@</body> \n </html>", webTextFontValue, webTextFontValue + 10, headerHTML, imageHTML, bodyString];
                         
                     }
                     
@@ -114,6 +114,8 @@ int webTextFontValue = 15;
     _webView = InsertWebView(self.view, self.view.bounds, self, 1000);
 //    _webView.allowsInlineMediaPlayback = NO;
 //    _webView.mediaPlaybackRequiresUserAction = NO;
+    
+    [_webView keepAutoresizingInFull];
 }
 
 #pragma mark - UIWebViewDelegate methods
