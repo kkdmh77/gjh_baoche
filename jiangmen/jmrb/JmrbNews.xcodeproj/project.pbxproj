@@ -612,6 +612,9 @@
 		2B92B3F21A3201E3001ECC45 /* imageNewsCell_Share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B92B3EF1A3201E3001ECC45 /* imageNewsCell_Share@2x.png */; };
 		2BDE1BE91A2E1672009E78FB /* NewsCell_Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */; };
 		2BDE1BEA1A2E1672009E78FB /* NewsCell_Normal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */; };
+		43C8960C1A32E36B000E1D2C /* imageNewsCell_CommentCountBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C8960A1A32E36B000E1D2C /* imageNewsCell_CommentCountBG@2x.png */; };
+		43C8960D1A32E36B000E1D2C /* imageNewsCell_ImgCountBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C8960B1A32E36B000E1D2C /* imageNewsCell_ImgCountBG@2x.png */; };
+		43C896101A32E6DC000E1D2C /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C8960F1A32E6DC000E1D2C /* ImagePreviewController.m */; };
 		43C896C21A2D5768002F5E5F /* ImageContant.h in Sources */ = {isa = PBXBuildFile; fileRef = EA9D1F43154B7BE900E9219A /* ImageContant.h */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		43C896D71A2D68CF002F5E5F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C896C51A2D68CE002F5E5F /* AFHTTPRequestOperation.m */; };
 		43C896D81A2D68CF002F5E5F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C896C71A2D68CE002F5E5F /* AFHTTPRequestOperationManager.m */; };
@@ -1739,6 +1742,10 @@
 		2BDE1BE61A2E1672009E78FB /* NewsCell_Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell_Normal.h; sourceTree = "<group>"; };
 		2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell_Normal.m; sourceTree = "<group>"; };
 		2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell_Normal.xib; sourceTree = "<group>"; };
+		43C8960A1A32E36B000E1D2C /* imageNewsCell_CommentCountBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imageNewsCell_CommentCountBG@2x.png"; sourceTree = "<group>"; };
+		43C8960B1A32E36B000E1D2C /* imageNewsCell_ImgCountBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imageNewsCell_ImgCountBG@2x.png"; sourceTree = "<group>"; };
+		43C8960E1A32E6DC000E1D2C /* ImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewController.h; sourceTree = "<group>"; };
+		43C8960F1A32E6DC000E1D2C /* ImagePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewController.m; sourceTree = "<group>"; };
 		43C896C41A2D68CE002F5E5F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		43C896C51A2D68CE002F5E5F /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		43C896C61A2D68CE002F5E5F /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -4767,6 +4774,8 @@
 				43D01EF11A316133004AA52B /* DetailNewsVC.m */,
 				2B92B3E51A31F4C8001ECC45 /* ImageNewsListVC.h */,
 				2B92B3E61A31F4C8001ECC45 /* ImageNewsListVC.m */,
+				43C8960E1A32E6DC000E1D2C /* ImagePreviewController.h */,
+				43C8960F1A32E6DC000E1D2C /* ImagePreviewController.m */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -4811,6 +4820,8 @@
 		43C89B6C1A2DEB5A002F5E5F /* News */ = {
 			isa = PBXGroup;
 			children = (
+				43C8960A1A32E36B000E1D2C /* imageNewsCell_CommentCountBG@2x.png */,
+				43C8960B1A32E36B000E1D2C /* imageNewsCell_ImgCountBG@2x.png */,
 				2B92B3ED1A3201E3001ECC45 /* imageNewsCell_Comment@2x.png */,
 				2B92B3EE1A3201E3001ECC45 /* imageNewsCell_Praise@2x.png */,
 				2B92B3EF1A3201E3001ECC45 /* imageNewsCell_Share@2x.png */,
@@ -5481,7 +5492,9 @@
 				0535D8321654E70500D10324 /* refresh@2x.png in Resources */,
 				0535D8331654E70500D10324 /* refresh_tapped@2x.png in Resources */,
 				0535D8341654E70500D10324 /* send@2x.png in Resources */,
+				43C8960C1A32E36B000E1D2C /* imageNewsCell_CommentCountBG@2x.png in Resources */,
 				0535D8351654E70500D10324 /* send_tapped@2x.png in Resources */,
+				43C8960D1A32E36B000E1D2C /* imageNewsCell_ImgCountBG@2x.png in Resources */,
 				0535D8361654E70500D10324 /* share_background@2x.png in Resources */,
 				0535D8371654E70500D10324 /* share_button@2x.png in Resources */,
 				0535D8381654E70500D10324 /* share_button_tapped@2x.png in Resources */,
@@ -5890,6 +5903,7 @@
 				43C89AFB1A2D895A002F5E5F /* ATBitmapRGBAData.m in Sources */,
 				43C89B031A2D895A002F5E5F /* ATSeedFill.mm in Sources */,
 				43C897B31A2D6B8D002F5E5F /* NSPersistentStore+MagicalRecord.m in Sources */,
+				43C896101A32E6DC000E1D2C /* ImagePreviewController.m in Sources */,
 				43C897B91A2D6B8D002F5E5F /* MagicalRecord+Setup.m in Sources */,
 				43C89AF51A2D895A002F5E5F /* NSObject+JsonStringWriter.m in Sources */,
 				43C89AE21A2D895A002F5E5F /* ATB_Controls.m in Sources */,

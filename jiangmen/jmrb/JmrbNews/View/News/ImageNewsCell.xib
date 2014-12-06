@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -43,18 +43,6 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="888人赞" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBN-lI-s7F" customClass="NIAttributedLabel">
                         <rect key="frame" x="10" y="145" width="52" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="NP4-ym-KKb"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看全部8888条评论" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMu-fT-J3u" customClass="NIAttributedLabel">
-                        <rect key="frame" x="180" y="141" width="130" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="25" id="qYu-pk-yAF"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -85,25 +73,38 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zft-ug-Nun">
+                        <rect key="frame" x="152" y="141" width="158" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="158" id="3mg-qA-ZLj"/>
+                            <constraint firstAttribute="height" constant="25" id="chT-cj-oyZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                        <state key="normal" title="查看全部888条评论" backgroundImage="imageNewsCell_CommentCountBG.png">
+                            <color key="titleColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="dMu-fT-J3u" firstAttribute="trailing" secondItem="7uM-Dd-k7c" secondAttribute="trailing" id="2kt-Aj-PUF"/>
+                    <constraint firstItem="zft-ug-Nun" firstAttribute="centerY" secondItem="vBN-lI-s7F" secondAttribute="centerY" id="4ps-OM-W23"/>
                     <constraint firstItem="OiJ-qN-JWQ" firstAttribute="leading" secondItem="O6C-Gb-gh5" secondAttribute="trailing" constant="5" id="5oh-97-2tK"/>
                     <constraint firstItem="7uM-Dd-k7c" firstAttribute="leading" secondItem="vBN-lI-s7F" secondAttribute="leading" id="5rD-GF-t9l"/>
                     <constraint firstItem="OiJ-qN-JWQ" firstAttribute="width" secondItem="O6C-Gb-gh5" secondAttribute="width" id="8o9-jH-nlh"/>
                     <constraint firstItem="QW8-5s-KSX" firstAttribute="centerY" secondItem="KXd-oq-JF6" secondAttribute="centerY" id="92u-Qp-esL"/>
-                    <constraint firstItem="dMu-fT-J3u" firstAttribute="centerY" secondItem="vBN-lI-s7F" secondAttribute="centerY" id="BLd-5f-9el"/>
                     <constraint firstItem="it1-be-bfR" firstAttribute="width" secondItem="QW8-5s-KSX" secondAttribute="width" id="DYQ-6Y-rt0"/>
                     <constraint firstItem="it1-be-bfR" firstAttribute="centerY" secondItem="QW8-5s-KSX" secondAttribute="centerY" id="DcW-25-GMT"/>
                     <constraint firstItem="O6C-Gb-gh5" firstAttribute="top" secondItem="7uM-Dd-k7c" secondAttribute="bottom" constant="13" id="FbG-OA-Kr7"/>
                     <constraint firstItem="it1-be-bfR" firstAttribute="top" secondItem="vBN-lI-s7F" secondAttribute="bottom" constant="13" id="KOz-fv-tXL"/>
+                    <constraint firstItem="zft-ug-Nun" firstAttribute="trailing" secondItem="KXd-oq-JF6" secondAttribute="trailing" id="Kuv-qK-dGG"/>
                     <constraint firstItem="OiJ-qN-JWQ" firstAttribute="height" secondItem="O6C-Gb-gh5" secondAttribute="height" id="MKv-Xs-Uoe"/>
+                    <constraint firstItem="zft-ug-Nun" firstAttribute="trailing" secondItem="7uM-Dd-k7c" secondAttribute="trailing" id="Ole-5p-dmk"/>
                     <constraint firstItem="OiJ-qN-JWQ" firstAttribute="height" secondItem="c5h-Oe-B6P" secondAttribute="height" id="SgW-uC-lt2"/>
                     <constraint firstItem="vBN-lI-s7F" firstAttribute="top" secondItem="O6C-Gb-gh5" secondAttribute="bottom" constant="13" id="Vtj-IQ-Vwj"/>
                     <constraint firstItem="7uM-Dd-k7c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="Y24-ZT-8O3"/>
                     <constraint firstItem="it1-be-bfR" firstAttribute="height" secondItem="QW8-5s-KSX" secondAttribute="height" id="dWK-WB-8Ik"/>
                     <constraint firstItem="O6C-Gb-gh5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e3e-sj-AnO"/>
-                    <constraint firstItem="KXd-oq-JF6" firstAttribute="trailing" secondItem="dMu-fT-J3u" secondAttribute="trailing" id="gDT-3Z-9RO"/>
                     <constraint firstItem="c5h-Oe-B6P" firstAttribute="leading" secondItem="OiJ-qN-JWQ" secondAttribute="trailing" constant="5" id="gZT-mx-aax"/>
                     <constraint firstItem="OiJ-qN-JWQ" firstAttribute="top" secondItem="c5h-Oe-B6P" secondAttribute="top" id="gaU-7l-kcD"/>
                     <constraint firstAttribute="trailing" secondItem="c5h-Oe-B6P" secondAttribute="trailing" id="oCV-cP-SYX"/>
@@ -115,11 +116,23 @@
                     <constraint firstItem="it1-be-bfR" firstAttribute="leading" secondItem="vBN-lI-s7F" secondAttribute="leading" id="y7h-ju-CmB"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="commentBtn" destination="QW8-5s-KSX" id="iLA-Lw-Tn4"/>
+                <outlet property="commentCountBtn" destination="zft-ug-Nun" id="nUd-hg-jgV"/>
+                <outlet property="imageNewsNameLabel" destination="7uM-Dd-k7c" id="b4n-eR-iyT"/>
+                <outlet property="praiseBtn" destination="it1-be-bfR" id="2t2-Nz-vgc"/>
+                <outlet property="praiseCountLabel" destination="vBN-lI-s7F" id="W6i-bK-OKw"/>
+                <outlet property="previewImageViewOne" destination="O6C-Gb-gh5" id="66a-md-04E"/>
+                <outlet property="previewImageViewThree" destination="c5h-Oe-B6P" id="6Ss-Hp-Q5O"/>
+                <outlet property="previewImageViewTwo" destination="OiJ-qN-JWQ" id="sYx-6X-vWd"/>
+                <outlet property="shareBtn" destination="KXd-oq-JF6" id="bw2-Qo-pzc"/>
+            </connections>
             <point key="canvasLocation" x="331" y="284"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="imageNewsCell_Comment.png" width="72" height="27"/>
+        <image name="imageNewsCell_CommentCountBG.png" width="158" height="25"/>
         <image name="imageNewsCell_Praise.png" width="72" height="27"/>
         <image name="imageNewsCell_Share.png" width="39" height="27"/>
     </resources>

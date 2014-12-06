@@ -10,6 +10,7 @@
 #import "MJRefresh.h"
 #import "ImageNewsCell.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
+#import "ImagePreviewController.h"
 
 static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
 
@@ -40,6 +41,13 @@ static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
     
     [self initialization];
     [self getNetworkData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -162,27 +170,35 @@ static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return _netImageNewsEntityArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
-    return _netImageNewsEntityArray.count;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 218;
     return [ImageNewsCell getCellHeight];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return CellSeparatorSpace;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [UIView new];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifer_imageNews];
     
-//    ImageNewsEntity *entity = _netImageNewsEntityArray[indexPath.row];
-//    [cell loadCellShowDataWithItemEntity:entity];
+    ImageNewsEntity *entity = _netImageNewsEntityArray[indexPath.section];
+    [cell loadCellShowDataWithItemEntity:entity];
     
     return cell;
 }
@@ -190,7 +206,12 @@ static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ImageNewsEntity *entity = _netImageNewsEntityArray[indexPath.section];
     
+    ImagePreviewController *imagePreview = [ImagePreviewController new];
+    imagePreview.imageSourceArray = entity.imageUrlsStrArray;
+    imagePreview.hidesBottomBarWhenPushed = YES;
+    [self pushViewController:imagePreview];
 }
 
 @end

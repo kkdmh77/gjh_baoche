@@ -87,7 +87,24 @@
     self = [super init];
     if (self)
     {
+        self.imageNewsId = [dict[@"newsId"] integerValue];
+        self.imageNewsNameStr = dict[@"newsTitle"];
+        self.imageCommentCount = [dict[@"commCount"] integerValue];
+        self.imagePraiseCount = 0;
         
+        NSArray *imageUrlItemList = dict[@"rbNewspics"];
+        if ([imageUrlItemList isAbsoluteValid])
+        {
+            NSMutableArray *tempUrlsArray = [NSMutableArray arrayWithCapacity:imageUrlItemList.count];
+            
+            for (NSDictionary *imageUrlItem in imageUrlItemList)
+            {
+                NSString *imageUrl = [UrlManager getImageRequestUrlStrByUrlComponent:imageUrlItem[@"newspic"]];
+                [tempUrlsArray addObject:imageUrl];
+            }
+            
+            self.imageUrlsStrArray = tempUrlsArray;
+        }
     }
     return self;
 }

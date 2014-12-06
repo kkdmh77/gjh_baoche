@@ -20,7 +20,7 @@
 
 @implementation NewsCell_Image
 
-CGFloat defaultImageNewsCellHeight = 0;
+CGFloat defaultNormalNews_ImageCellHeight = 0;
 
 - (void)awakeFromNib
 {
@@ -56,12 +56,12 @@ CGFloat defaultImageNewsCellHeight = 0;
 
 + (CGFloat)getCellHeight
 {
-    if (0 == defaultImageNewsCellHeight)
+    if (0 == defaultNormalNews_ImageCellHeight)
     {
         NewsCell_Image *cell = [NewsCell_Image loadFromNib];
-        defaultImageNewsCellHeight = cell.boundsHeight;
+        defaultNormalNews_ImageCellHeight = cell.boundsHeight;
     }
-    return defaultImageNewsCellHeight;
+    return defaultNormalNews_ImageCellHeight;
 }
 
 - (void)loadCellShowDataWithItemEntity:(News_NormalEntity *)entity

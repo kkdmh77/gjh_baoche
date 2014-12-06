@@ -34,7 +34,7 @@
 #define Common_BlackColor                   HEXCOLOR(0X000000)                  // 黑色    适用范围:TAB未选中状态的主标题
 #define Common_InkGreenColor                HEXCOLOR(0X7A97A1)                  // 墨绿色  适用范围:TAB的子标题
 #define Common_LiteBlueColor                HEXCOLOR(0X169DCE)                  // 浅蓝色  适用范围:TAB选中状态的主标题
-#define Common_OrangeColor                  HEXCOLOR(0XFF8C00)                  // 橙黄色  适用范围:产品详情页 价格、选择按钮选中边框、购物车按钮等的颜色
+#define Common_BlueColor                    HEXCOLOR(0X005BA5)                  // 蓝色    适用范围:...
 
 #define PageBackgroundColor                 HEXCOLOR(0XE8EEF0)                  // 灰蓝色  viewController的背景色
 #define CellSeparatorColor                  HEXCOLOR(0XE0E0E0)                  // 灰白色  tabViewCell的间隔线

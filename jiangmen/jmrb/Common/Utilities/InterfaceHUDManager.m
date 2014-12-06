@@ -63,7 +63,7 @@ DEF_SINGLETON(InterfaceHUDManager);
     }
     else
     {
-        alert.messageLabel.textColor = Common_OrangeColor;
+        alert.messageLabel.textColor = Common_BlueColor;
     }
     
     if (!cancelBlock && !otherBlock)
