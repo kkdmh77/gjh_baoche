@@ -13,7 +13,7 @@
 
 #define AutoScrollIntervalTime 4.0
 
-@interface CycleScrollView ()
+@interface CycleScrollView () <UIGestureRecognizerDelegate>
 {
     BOOL _isShouldAutoScroll;    // 是否应该自动滚动
     
@@ -280,6 +280,7 @@
         view.userInteractionEnabled = YES;
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handleTap:)];
+        singleTap.delegate = self;
         [view addGestureRecognizer:singleTap];
         
         view.frame = CGRectOffset(self.bounds, self.bounds.size.width * i, 0);
@@ -375,6 +376,17 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView
 {
     [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0) animated:YES];
+}
+
+#pragma mark - custom methods
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if (touch.tapCount == 1)
+    {
+        return YES;
+    }
+    return NO;
 }
 
 @end
