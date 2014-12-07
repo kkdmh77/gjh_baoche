@@ -282,6 +282,14 @@
                                                                                     action:@selector(handleTap:)];
         [view addGestureRecognizer:singleTap];
         
+        // 用双击手势替代MyScaleScrollView自身的UITouch双击点击监测,因为singleTap的单击会与touch的监测相冲突(一个双击会被singleTap视为2个快速的单击)
+        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(handleDoubleTap:)];
+        
+        doubleTap.numberOfTapsRequired = 2;
+        [singleTap requireGestureRecognizerToFail:doubleTap];
+        [view addGestureRecognizer:doubleTap];
+        
         view.frame = CGRectOffset(self.bounds, self.bounds.size.width * i, 0);
         
         [_scrollView addSubview:view];
@@ -328,6 +336,19 @@
     if ([_delegate respondsToSelector:@selector(didClickPage:atIndex:)])
     {
         [_delegate didClickPage:self atIndex:_currentPage];
+    }
+}
+
+- (void)handleDoubleTap:(UITapGestureRecognizer *)doubleTap
+{
+    UIView *tapView = doubleTap.view;
+    
+    if ([tapView isKindOfClass:[MyScaleScrollView class]])
+    {
+        MyScaleScrollView *zoomScroll = (MyScaleScrollView *)tapView;
+        
+        CGPoint tapPoint = [doubleTap locationInView:tapView];
+        [zoomScroll zoomToPointInRootView:tapPoint];
     }
 }
 
