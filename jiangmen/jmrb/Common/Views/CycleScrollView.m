@@ -13,7 +13,7 @@
 
 #define AutoScrollIntervalTime 4.0
 
-@interface CycleScrollView () <UIGestureRecognizerDelegate>
+@interface CycleScrollView ()
 {
     BOOL _isShouldAutoScroll;    // 是否应该自动滚动
     
@@ -280,8 +280,15 @@
         view.userInteractionEnabled = YES;
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handleTap:)];
-        singleTap.delegate = self;
         [view addGestureRecognizer:singleTap];
+        
+        // 用双击手势替代MyScaleScrollView自身的UITouch双击点击监测,因为singleTap的单击会与touch的监测相冲突(一个双击会被singleTap视为2个快速的单击)
+        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(handleDoubleTap:)];
+        
+        doubleTap.numberOfTapsRequired = 2;
+        [singleTap requireGestureRecognizerToFail:doubleTap];
+        [view addGestureRecognizer:doubleTap];
         
         view.frame = CGRectOffset(self.bounds, self.bounds.size.width * i, 0);
         
@@ -332,6 +339,19 @@
     }
 }
 
+- (void)handleDoubleTap:(UITapGestureRecognizer *)doubleTap
+{
+    UIView *tapView = doubleTap.view;
+    
+    if ([tapView isKindOfClass:[MyScaleScrollView class]])
+    {
+        MyScaleScrollView *zoomScroll = (MyScaleScrollView *)tapView;
+        
+        CGPoint tapPoint = [doubleTap locationInView:tapView];
+        [zoomScroll zoomToPointInRootView:tapPoint];
+    }
+}
+
 /*
 - (void)setViewContent:(UIView *)view atIndex:(NSInteger)index
 {
@@ -376,17 +396,6 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView
 {
     [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0) animated:YES];
-}
-
-#pragma mark - custom methods
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    if (touch.tapCount == 1)
-    {
-        return YES;
-    }
-    return NO;
 }
 
 @end
