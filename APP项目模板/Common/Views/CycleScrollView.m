@@ -383,6 +383,11 @@
     {
         _currentPage = [self validPageValue:_currentPage + 1];
         [self loadData];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(didScrollToPage:atPage:)])
+        {
+            [_delegate didScrollToPage:self atPage:_currentPage];
+        }
     }
     
     // 往上翻
@@ -390,6 +395,11 @@
     {
         _currentPage = [self validPageValue:_currentPage - 1];
         [self loadData];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(didScrollToPage:atPage:)])
+        {
+            [_delegate didScrollToPage:self atPage:_currentPage];
+        }
     }
 }
 

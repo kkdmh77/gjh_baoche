@@ -346,6 +346,7 @@
 		43D1F58219FB4C1A0049518E /* deps in Resources */ = {isa = PBXBuildFile; fileRef = 43D1F4CF19FB4C1A0049518E /* deps */; };
 		43D1F58319FB4C1A0049518E /* NimbusWebController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 43D1F4D119FB4C1A0049518E /* NimbusWebController.bundle */; };
 		43D1F58419FB4C1A0049518E /* NIWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1F4D519FB4C1A0049518E /* NIWebController.m */; };
+		43D669B41A357F7B0017DCAB /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D669B31A357F7B0017DCAB /* ImagePreviewController.m */; };
 		43DC9D551A2F2F0400B09C58 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DC9D371A2F2F0300B09C58 /* IQNSArray+Sort.m */; };
 		43DC9D561A2F2F0400B09C58 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DC9D391A2F2F0300B09C58 /* IQUIView+Hierarchy.m */; };
 		43DC9D571A2F2F0400B09C58 /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DC9D3B1A2F2F0300B09C58 /* IQUIWindow+Hierarchy.m */; };
@@ -1067,6 +1068,8 @@
 		43D1F4D419FB4C1A0049518E /* NIWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIWebController.h; sourceTree = "<group>"; };
 		43D1F4D519FB4C1A0049518E /* NIWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIWebController.m; sourceTree = "<group>"; };
 		43D1F58719FB4C2B0049518E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		43D669B21A357F7B0017DCAB /* ImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewController.h; sourceTree = "<group>"; };
+		43D669B31A357F7B0017DCAB /* ImagePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewController.m; sourceTree = "<group>"; };
 		43DC9D361A2F2F0300B09C58 /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
 		43DC9D371A2F2F0300B09C58 /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
 		43DC9D381A2F2F0300B09C58 /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
@@ -2010,6 +2013,8 @@
 		43D1F0ED19FB3AFB0049518E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				43D669B21A357F7B0017DCAB /* ImagePreviewController.h */,
+				43D669B31A357F7B0017DCAB /* ImagePreviewController.m */,
 				43D1F0EE19FB3AFB0049518E /* VPImageCropperViewController.h */,
 				43D1F0EF19FB3AFB0049518E /* VPImageCropperViewController.m */,
 			);
@@ -2876,6 +2881,7 @@
 				43D1F2AE19FB3AFB0049518E /* ATBLibs+UIColor.m in Sources */,
 				43D1F29319FB3AFB0049518E /* SDWebImageManager.m in Sources */,
 				43D1F4DA19FB4C1A0049518E /* NIAttributedLabel.m in Sources */,
+				43D669B41A357F7B0017DCAB /* ImagePreviewController.m in Sources */,
 				43D1F2AA19FB3AFB0049518E /* ATBLibs+NSDate.m in Sources */,
 				43D1F31519FB3AFB0049518E /* PopupController.m in Sources */,
 				43D1F29C19FB3AFB0049518E /* AppSoundManager.m in Sources */,
