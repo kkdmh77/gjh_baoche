@@ -17,8 +17,8 @@
     {
         self.adId = [[dict objectForKey:@"adId"] integerValue];
         self.newsId = [[dict objectForKey:@"newsId"] integerValue];
-        self.adImageUrlStr = [UrlManager getImageRequestUrlStrByUrlComponent:dict[@"adSrc"]];
-        self.adNameStr = [dict objectForKey:@"adName"];
+        self.adImageUrlStr = dict[@"adSrc"] ? [UrlManager getImageRequestUrlStrByUrlComponent:dict[@"adSrc"]] : [UrlManager getImageRequestUrlStrByUrlComponent:dict[@"newsSpicture"]];
+        self.newsNameStr = [dict objectForKey:@"newsTitle"];
     }
     return self;
 }

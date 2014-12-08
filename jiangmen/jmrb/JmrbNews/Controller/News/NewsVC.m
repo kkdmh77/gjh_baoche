@@ -13,6 +13,7 @@
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "DetailNewsVC.h"
 #import "NewsManagerVC.h"
+#import "CycleScrollView.h"
 #import "GCDThread.h"
 
 NSString * const cellIdentifier_normal = @"cellIdentifier_normal";
@@ -85,12 +86,21 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
             // 请求广告
             if (!strongSelf->_netAdsEntityArray)
             {
-                [strongSelf getNetAdListDataWithNetCachePolicy:NetAskServerIfModifiedWhenStaleCachePolicy];
+                if ([strongSelf.newsTypeEntity.newsTypeNameStr isEqualToString:@"焦点" ])
+                {
+                    [strongSelf getNetAdListDataWithNetCachePolicy:NetAskServerIfModifiedWhenStaleCachePolicy];
+                }
+                else
+                {
+                    [strongSelf parseHotNewsData];
+                    [strongSelf configureTabHeaderBannerScrollView];
+                }
             }
         }
         else if (NetNewsRequestType_GetAdsList)
         {
             [strongSelf parseAdNetDataWithDic:successInfoObj];
+            [strongSelf configureTabHeaderBannerScrollView];
         }
     } failedBlock:^(NetRequest *request, NSError *error) {
         STRONGSELF
@@ -133,21 +143,16 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
 
 - (void)getNetAdListDataWithNetCachePolicy:(NetCachePolicy)cachePolicy
 {
-    NSDictionary *adItemDic = [_networkDataDic objectForKey:@"newshot"];
-    NSInteger adId = [[adItemDic objectForKey:@"adId"] integerValue];
-    
-    if (adId)
-    {
-        [self sendRequest:[[self class] getRequestURLStr:NetNewsRequestType_GetAdsList]
-             parameterDic:@{@"adId": @(adId)}
-           requestHeaders:nil
-        requestMethodType:RequestMethodType_POST
-               requestTag:NetNewsRequestType_GetAdsList
-                 delegate:self
-                 userInfo:nil
-           netCachePolicy:cachePolicy
-             cacheSeconds:CacheNetDataTimeType_OneMinute];
-    }
+
+    [self sendRequest:[[self class] getRequestURLStr:NetNewsRequestType_GetAdsList]
+         parameterDic:@{@"adId": @(1)}
+       requestHeaders:nil
+    requestMethodType:RequestMethodType_POST
+           requestTag:NetNewsRequestType_GetAdsList
+             delegate:self
+             userInfo:nil
+       netCachePolicy:cachePolicy
+         cacheSeconds:CacheNetDataTimeType_OneMinute];
 }
 
 - (NSMutableArray *)parseNetDataWithDic:(NSDictionary *)dic
@@ -166,6 +171,19 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
         }
     }
     return tempNewsEntityArray;
+}
+
+- (void)parseHotNewsData
+{
+    NSDictionary *hotNewsItemDic = [_networkDataDic objectForKey:@"newshot"];
+    
+    if ([hotNewsItemDic isAbsoluteValid])
+    {
+        _netAdsEntityArray = [NSMutableArray array];
+        
+        AdsEntity *entity = [AdsEntity initWithDict:hotNewsItemDic];
+        [_netAdsEntityArray addObject:entity];
+    }
 }
 
 - (void)parseAdNetDataWithDic:(NSDictionary *)dic
@@ -199,6 +217,26 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
     [_tableView addFooterWithTarget:self action:@selector(tabFooterRefreshing)];
     
     [self.view addSubview:_tableView];
+}
+
+- (void)configureTabHeaderBannerScrollView
+{
+    if ([_netAdsEntityArray isAbsoluteValid])
+    {
+        NSMutableArray *imageSourceArray = [NSMutableArray arrayWithCapacity:_netAdsEntityArray.count];
+        for (AdsEntity *item in _netAdsEntityArray)
+        {
+            [imageSourceArray addObject:item.adImageUrlStr];
+        }
+        
+        CycleScrollView *scrollView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, _tableView.boundsWidth, 200)
+                                                             viewContentMode:ViewShowStyle_None
+                                                                    delegate:nil
+                                                             imgUrlsStrArray:imageSourceArray
+                                                                isAutoScroll:NO
+                                                                   isCanZoom:NO];
+        _tableView.tableHeaderView = scrollView;
+    }
 }
 
 - (void)viewDidCurrentView

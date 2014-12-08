@@ -13,7 +13,7 @@
 @property (nonatomic, assign) NSInteger adId;
 @property (nonatomic, assign) NSInteger newsId;
 @property (nonatomic, copy) NSString *adImageUrlStr;
-@property (nonatomic, copy) NSString *adNameStr;
+@property (nonatomic, copy) NSString *newsNameStr;
 
 @end
 
