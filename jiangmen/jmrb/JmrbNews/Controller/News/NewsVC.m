@@ -20,6 +20,7 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
 
 @interface NewsVC ()
 {
+    NSMutableArray *_netAdsEntityArray;
     NSMutableArray *_netNewsEntityArray;
     
     NSInteger      _curPageIndex;
@@ -80,6 +81,16 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
                 [strongSelf->_netNewsEntityArray addObjectsFromArray:[strongSelf parseNetDataWithDic:successInfoObj]];
             }
             [strongSelf reloadTableData];
+            
+            // 请求广告
+            if (!strongSelf->_netAdsEntityArray)
+            {
+                [strongSelf getNetAdListDataWithNetCachePolicy:NetAskServerIfModifiedWhenStaleCachePolicy];
+            }
+        }
+        else if (NetNewsRequestType_GetAdsList)
+        {
+            [strongSelf parseAdNetDataWithDic:successInfoObj];
         }
     } failedBlock:^(NetRequest *request, NSError *error) {
         STRONGSELF
@@ -120,9 +131,29 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
          cacheSeconds:CacheNetDataTimeType_OneMinute];
 }
 
+- (void)getNetAdListDataWithNetCachePolicy:(NetCachePolicy)cachePolicy
+{
+    NSDictionary *adItemDic = [_networkDataDic objectForKey:@"newshot"];
+    NSInteger adId = [[adItemDic objectForKey:@"adId"] integerValue];
+    
+    if (adId)
+    {
+        [self sendRequest:[[self class] getRequestURLStr:NetNewsRequestType_GetAdsList]
+             parameterDic:@{@"adId": @(adId)}
+           requestHeaders:nil
+        requestMethodType:RequestMethodType_POST
+               requestTag:NetNewsRequestType_GetAdsList
+                 delegate:self
+                 userInfo:nil
+           netCachePolicy:cachePolicy
+             cacheSeconds:CacheNetDataTimeType_OneMinute];
+    }
+}
+
 - (NSMutableArray *)parseNetDataWithDic:(NSDictionary *)dic
 {
-    NSArray *newsItemList = [[dic objectForKey:@"response"] objectForKey:@"item"];
+    _networkDataDic = [dic objectForKey:@"response"];
+    NSArray *newsItemList = [_networkDataDic objectForKey:@"item"];
     
     NSMutableArray *tempNewsEntityArray = [NSMutableArray arrayWithCapacity:newsItemList.count];
 
@@ -135,6 +166,22 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
         }
     }
     return tempNewsEntityArray;
+}
+
+- (void)parseAdNetDataWithDic:(NSDictionary *)dic
+{
+    NSArray *adItemsList = [[dic objectForKey:@"response"] objectForKey:@"item"];
+    
+    if ([adItemsList isAbsoluteValid])
+    {
+        _netAdsEntityArray = [NSMutableArray arrayWithCapacity:adItemsList.count];
+        
+        for (NSDictionary *adItem in adItemsList)
+        {
+            AdsEntity *entity = [AdsEntity initWithDict:adItem];
+            [_netAdsEntityArray addObject:entity];
+        }
+    }
 }
 
 // 设置界面

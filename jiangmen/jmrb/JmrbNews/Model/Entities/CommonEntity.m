@@ -8,6 +8,25 @@
 
 #import "CommonEntity.h"
 
+@implementation AdsEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        self.adId = [[dict objectForKey:@"adId"] integerValue];
+        self.newsId = [[dict objectForKey:@"newsId"] integerValue];
+        self.adImageUrlStr = [UrlManager getImageRequestUrlStrByUrlComponent:dict[@"adSrc"]];
+        self.adNameStr = [dict objectForKey:@"adName"];
+    }
+    return self;
+}
+
+@end
+
+///////////////////////////////////////////////////////////////
+
 @implementation News_NormalEntity
 
 - (id)initWithDict:(NSDictionary *)dict

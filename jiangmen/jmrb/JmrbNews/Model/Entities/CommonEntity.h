@@ -8,6 +8,17 @@
 
 #import "NetItemList.h"
 
+@interface AdsEntity : NetItem
+
+@property (nonatomic, assign) NSInteger adId;
+@property (nonatomic, assign) NSInteger newsId;
+@property (nonatomic, copy) NSString *adImageUrlStr;
+@property (nonatomic, copy) NSString *adNameStr;
+
+@end
+
+///////////////////////////////////////////////////////////////
+
 @interface News_NormalEntity : NetItem
 
 @property (nonatomic, assign) NSInteger newsId;
@@ -22,6 +33,7 @@
 
 @interface News_ImageEntity : NetItem
 
+@property (nonatomic, assign) NSInteger newsId;
 @property (nonatomic, copy) NSString *imageGroupNameStr;        // 图片组标题
 @property (nonatomic, strong) NSArray *imageUrlsStrArray;       // 图片组的urls
 @property (nonatomic, assign) NSInteger imageCommentCount;      // 图片的评论数

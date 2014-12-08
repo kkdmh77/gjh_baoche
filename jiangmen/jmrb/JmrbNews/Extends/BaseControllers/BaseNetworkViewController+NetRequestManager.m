@@ -22,6 +22,7 @@
                            // 新闻
                            @"getNewsType.action",
                            @"getNewsList.action",
+                           @"getAds.action",
                            
                            @"getNews.action",
                            

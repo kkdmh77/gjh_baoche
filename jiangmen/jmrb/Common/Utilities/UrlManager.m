@@ -113,7 +113,12 @@
     
     if ([imageNameSpaceStr isAbsoluteValid] && [urlComponent isAbsoluteValid])
     {
-        imageUrlStr = [imageNameSpaceStr stringByAppendingString:urlComponent];
+        if ([urlComponent hasPrefix:@"/"])
+        {
+            urlComponent = [urlComponent stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+        }
+        
+        imageUrlStr = [imageNameSpaceStr stringByAppendingFormat:@"/%@",urlComponent];
     }
     return imageUrlStr;
 }
