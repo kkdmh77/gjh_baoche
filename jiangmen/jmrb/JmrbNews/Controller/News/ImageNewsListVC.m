@@ -208,8 +208,18 @@ static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ImageNewsEntity *entity = _netImageNewsEntityArray[indexPath.section];
     
+    NSMutableArray *tempImageItemsArray = [NSMutableArray array];
+    for (NSString *imageUrlStr in entity.imageUrlsStrArray)
+    {
+        NSString *desc = [NSString stringWithFormat:@"暂无描述%d",[entity.imageUrlsStrArray indexOfObject:imageUrlStr]];
+        
+        ImageItem *item = [[ImageItem alloc] initWithImageUrlOrName:imageUrlStr imageDesc:desc];
+        [tempImageItemsArray addObject:item];
+    }
+    
     ImagePreviewController *imagePreview = [ImagePreviewController new];
-    imagePreview.imageSourceArray = entity.imageUrlsStrArray;
+    imagePreview.titleStr = entity.imageNewsNameStr;
+    imagePreview.imageItemsArray = tempImageItemsArray;
     imagePreview.hidesBottomBarWhenPushed = YES;
     [self pushViewController:imagePreview];
 }

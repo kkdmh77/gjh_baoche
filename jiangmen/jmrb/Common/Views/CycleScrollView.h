@@ -81,6 +81,7 @@ typedef enum
 
 @optional
 - (void)didClickPage:(CycleScrollView *)csView atIndex:(NSInteger)index;
+- (void)didScrollToPage:(CycleScrollView *)csView atPage:(NSInteger)page;
 
 @end
 
