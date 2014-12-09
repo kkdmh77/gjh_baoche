@@ -370,6 +370,7 @@ CG_INLINE  void deleteFile() {
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    /*
     [[ZSSourceModel defaultSource] setDownLoadSummary:[[[NSUserDefaults standardUserDefaults] objectForKey:Define_DownLoadDataSummary] doubleValue]];
     [[ZSSourceModel defaultSource] collectDownLoadDataSummary];
     
@@ -428,6 +429,7 @@ CG_INLINE  void deleteFile() {
             }
         }
     }
+     */
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

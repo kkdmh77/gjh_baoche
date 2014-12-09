@@ -19,12 +19,14 @@
 NSString * const cellIdentifier_normal = @"cellIdentifier_normal";
 NSString * const cellIdentifier_image = @"cellIdentifier_image";
 
-@interface NewsVC ()
+@interface NewsVC () <CycleScrollViewDelegate>
 {
     NSMutableArray *_netAdsEntityArray;
     NSMutableArray *_netNewsEntityArray;
     
     NSInteger      _curPageIndex;
+    
+    UILabel        *_bannerTitleLabel;
 }
 
 @end
@@ -176,12 +178,17 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
 - (void)parseHotNewsData
 {
     NSDictionary *hotNewsItemDic = [_networkDataDic objectForKey:@"newshot"];
+    NSArray *imageItemList = [hotNewsItemDic objectForKey:@"rbNewspics"];
     
-    if ([hotNewsItemDic isAbsoluteValid])
+    if ([imageItemList isAbsoluteValid])
     {
         _netAdsEntityArray = [NSMutableArray array];
         
         AdsEntity *entity = [AdsEntity initWithDict:hotNewsItemDic];
+        // 图片单独取
+        NSDictionary *imageItemDic = [imageItemList lastObject];
+        entity.adImageUrlStr = [UrlManager getImageRequestUrlStrByUrlComponent:imageItemDic[@"newspic"]];
+        
         [_netAdsEntityArray addObject:entity];
     }
 }
@@ -229,12 +236,21 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
             [imageSourceArray addObject:item.adImageUrlStr];
         }
         
-        CycleScrollView *scrollView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, _tableView.boundsWidth, 200)
+        CycleScrollView *scrollView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, _tableView.boundsWidth, _tableView.boundsWidth * 0.53)
                                                              viewContentMode:ViewShowStyle_None
-                                                                    delegate:nil
+                                                                    delegate:self
                                                              imgUrlsStrArray:imageSourceArray
                                                                 isAutoScroll:NO
                                                                    isCanZoom:NO];
+        scrollView.pageControl.frameOriginY -= 20;
+        
+        _bannerTitleLabel = InsertLabel(scrollView, CGRectZero, NSTextAlignmentCenter, [self curIndexAdEntityByIndex:0].newsNameStr, SP15Font, [UIColor whiteColor], NO);
+        [_bannerTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.equalTo(CGSizeMake(scrollView.boundsWidth, 25));
+            make.left.equalTo(@(0));
+            make.bottom.equalTo(@(0));
+        }];
+        
         _tableView.tableHeaderView = scrollView;
     }
 }
@@ -261,6 +277,11 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
 - (void)reloadTableData
 {
     [_tableView reloadData];
+}
+
+- (AdsEntity *)curIndexAdEntityByIndex:(NSInteger)index
+{
+    return _netAdsEntityArray[index];
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -304,6 +325,25 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
     {
         DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
         detailNews.newsId = entity.newsId;
+        detailNews.hidesBottomBarWhenPushed = YES;
+        [vc.navigationController pushViewController:detailNews animated:YES];
+    }
+}
+
+#pragma mark - CycleScrollViewDelegate methods
+
+- (void)didScrollToPage:(CycleScrollView *)csView atPage:(NSInteger)page
+{
+    _bannerTitleLabel.text = [self curIndexAdEntityByIndex:page].newsNameStr;
+}
+
+- (void)didClickPage:(CycleScrollView *)csView atIndex:(NSInteger)index
+{
+    UIViewController *vc = self.parentViewController;
+    if ([vc isKindOfClass:[NewsManagerVC class]])
+    {
+        DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
+        detailNews.newsId = [self curIndexAdEntityByIndex:index].newsId;
         detailNews.hidesBottomBarWhenPushed = YES;
         [vc.navigationController pushViewController:detailNews animated:YES];
     }
