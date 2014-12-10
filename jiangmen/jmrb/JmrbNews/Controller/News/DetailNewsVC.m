@@ -8,6 +8,8 @@
 
 #import "DetailNewsVC.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
+#import "CommentSendController.h"
+#import "AppPropertiesInitialize.h"
 
 @interface DetailNewsVC () <UIWebViewDelegate>
 {
@@ -26,6 +28,20 @@ int webTextFontValue = 15;
     
     [self initialization];
     [self getNetworkData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [AppPropertiesInitialize setKeyboardManagerEnable:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [AppPropertiesInitialize setKeyboardManagerEnable:YES];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,19 +127,26 @@ int webTextFontValue = 15;
 
 - (void)initialization
 {
-    _webView = InsertWebView(self.view, self.view.bounds, self, 1000);
-//    _webView.allowsInlineMediaPlayback = NO;
-//    _webView.mediaPlaybackRequiresUserAction = NO;
-    
+    _webView = InsertWebView(self.view, CGRectDecreaseSize(self.view.bounds, 0, 45), self, 1000);
     [_webView keepAutoresizingInFull];
     
     // 评论输入框
-    UITextField *commentTF = InsertTextField(self.view, self, CGRectZero, @"test", SP15Font, NSTextAlignmentLeft, UIControlContentVerticalAlignmentCenter);
-    commentTF.backgroundColor = [UIColor blueColor];
-    [commentTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(CGSizeMake(self.viewBoundsWidth, 40));
+    UIView *commentToolBarView = InsertView(self.view, CGRectZero);
+    commentToolBarView.backgroundColor = [UIColor whiteColor];
+    commentToolBarView.alpha = 0.8;
+    [commentToolBarView addTarget:self action:@selector(operationSendCommentGesture:)];
+    [commentToolBarView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(CGSizeMake(self.viewBoundsWidth, 45));
         make.left.equalTo(@(0));
         make.bottom.equalTo(@(0));
+    }];
+}
+
+- (void)operationSendCommentGesture:(UITapGestureRecognizer *)gesture
+{
+    [[CommentSendController sharedInstance] showCommentInputViewAndSendUrl:nil
+                                                            completeHandle:^(BOOL isSendSuccess) {
+        
     }];
 }
 

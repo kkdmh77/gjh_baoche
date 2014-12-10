@@ -7,6 +7,14 @@
 //
 
 #import "PopupController.h"
+#import "AppDelegate.h"
+
+@interface PopupController ()
+{
+    UIView *_containerView; // 显示popup视图的容器
+}
+
+@end
 
 @implementation PopupController
 
@@ -42,6 +50,13 @@
     _contentView = nil;
     [_tapView removeFromSuperview];
     _tapView = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
 }
 
 - (void)removeViewsFromSuperview
@@ -55,6 +70,13 @@
     {
         [_contentView removeFromSuperview];
     }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
 }
 
 - (void)setTopframe:(CGRect)topframe
@@ -85,7 +107,7 @@
     }
     else if ([animationID isEqualToString:[[self class] nameOfHideAnimation]])
     {
-//        [self clearViews];
+        [self removeViewsFromSuperview];
         
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
         if ([_delegate respondsToSelector:@selector(PopupControllerDidHidden:)])
@@ -119,6 +141,38 @@
     }
     
     [inView addSubview:_contentView];
+    _containerView = inView;
+    
+    // 注册键盘
+    if (PopAnimatedType_Input == type)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShowOperation:)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHiddenOperation:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+        _contentView.frame = CGRectMake(0, _containerView.frameHeight, _contentView.boundsWidth, _contentView.boundsHeight);
+        
+        // 弹出键盘
+        if ([_contentView canBecomeFirstResponder])
+        {
+            [_contentView becomeFirstResponder];
+        }
+        else
+        {
+            for (UIView *subview in _contentView.subviews)
+            {
+                if ([subview canBecomeFirstResponder])
+                {
+                    [subview becomeFirstResponder];
+                    break;
+                }
+            }
+        }
+    }
     
     // 执行动画
     if (_animated)
@@ -128,7 +182,6 @@
         
         _animatedType = type;
         
-        WEAKSELF
         switch (_animatedType)
         {
             case PopAnimatedType_Fade:
@@ -147,7 +200,7 @@
                 animationBeginBlock = ^{
                     _contentView.transform = CGAffineTransformIdentity;
                     
-                    _contentView.alpha = 0.0;
+                    _contentView.alpha = 1.0;
                     _contentView.frame = CGRectMake(0, 0, _contentView.frameWidth, _contentView.frameHeight);
                     _contentView.transform = CGAffineTransformMakeTranslation(0, -_contentView.boundsHeight);
                 };
@@ -163,7 +216,7 @@
                 animationBeginBlock = ^{
                     _contentView.transform = CGAffineTransformIdentity;
                     
-                    _contentView.alpha = 0.0;
+                    _contentView.alpha = 1.0;
                     _contentView.frame = CGRectMake(0, inView.frameHeight - _contentView.frameHeight, _contentView.frameWidth, _contentView.frameHeight);
                     _contentView.transform = CGAffineTransformMakeTranslation(0, _contentView.boundsHeight);
                 };
@@ -197,7 +250,7 @@
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
        
         _tapView.alpha = 0.0f;
-        animationBeginBlock();
+        if (animationBeginBlock) animationBeginBlock();
         
         [UIView beginAnimations:[[self class] nameOfShowAnimation] context:nil];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
@@ -206,7 +259,7 @@
         [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
       
         _tapView.alpha = 0.5f;
-        animationExecuteBlock();
+        if (animationExecuteBlock) animationExecuteBlock();
         
         [UIView commitAnimations];
     }
@@ -221,11 +274,12 @@
 
 - (void)hide
 {
+    [_contentView endEditing:YES];
+
     if (_animated)
     {
         void (^animationExecuteBlock)();
         
-        WEAKSELF
         switch (_animatedType)
         {
             case PopAnimatedType_Fade:
@@ -238,7 +292,7 @@
             case PopAnimatedType_CurlUp:
             {
                 animationExecuteBlock = ^{
-                    _contentView.alpha = 0.0;
+                    _contentView.alpha = 1.0;
                     _contentView.transform = CGAffineTransformMakeTranslation(0, -_contentView.boundsHeight);
                 };
             }
@@ -246,7 +300,7 @@
             case PopAnimatedType_CurlDown:
             {
                 animationExecuteBlock = ^{
-                    _contentView.alpha = 0.0;
+                    _contentView.alpha = 1.0;
                     _contentView.transform = CGAffineTransformMakeTranslation(0, _contentView.boundsHeight);
                 };
             }
@@ -272,7 +326,7 @@
         [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
         
         _tapView.alpha = 0.0f;
-        animationExecuteBlock();
+        if (animationExecuteBlock) animationExecuteBlock();
         
         [UIView commitAnimations];
     }
@@ -300,12 +354,52 @@
 
 - (void) ATTapViewDidTouchEnded:(ATTapView*)aView
 {
-    [_contentView endEditing:YES];
-    
     if (_behaviorType == PopupBehavior_AutoHidden)
     {
         [self hide];
     }
+}
+
+#pragma mark - 键盘相关类
+
+- (void)keyboardWillShowOperation:(NSNotification *)notification
+{
+    // get keyboard size and loctaion
+    CGRect keyboardBounds;
+    [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
+    NSNumber *duration = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    
+    /*
+    // Need to translate the bounds to account for rotation.
+    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
+     */
+    
+    [UIView animateWithDuration:[duration doubleValue] delay:0.0 options:[curve intValue] animations:^{
+        
+        // 改变contentView的frame
+        _contentView.frame = CGRectMake(0, _containerView.frameHeight - _contentView.boundsHeight - keyboardBounds.size.height, _contentView.boundsWidth, _contentView.boundsHeight);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)keyboardWillHiddenOperation:(NSNotification *)notification
+{
+    CGRect keyboardBounds;
+    [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
+    NSNumber *duration = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    
+    [UIView animateWithDuration:[duration doubleValue] delay:0.0 options:[curve intValue] animations:^{
+        
+        // 改变contentView的frame
+        _contentView.frame = CGRectMake(0, _containerView.frameHeight, _contentView.boundsWidth, _contentView.boundsHeight);
+        
+    } completion:^(BOOL finished) {
+       
+    }];
 }
 
 @end

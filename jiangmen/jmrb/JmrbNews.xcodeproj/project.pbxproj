@@ -894,6 +894,7 @@
 		43C89B671A2DE0DA002F5E5F /* NewsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C89B661A2DE0DA002F5E5F /* NewsVC.m */; };
 		43C89B691A2DE5E4002F5E5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43C89B681A2DE5E4002F5E5F /* Images.xcassets */; };
 		43C89B6E1A2DEB5A002F5E5F /* jiahao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C89B6D1A2DEB5A002F5E5F /* jiahao@2x.png */; };
+		43CBD1FA1A381B3F00406432 /* CommentSendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CBD1F91A381B3F00406432 /* CommentSendController.m */; };
 		43D01EEC1A31510B004AA52B /* VideoNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D01EEA1A31510B004AA52B /* VideoNewsCell.m */; };
 		43D01EED1A31510B004AA52B /* VideoNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D01EEB1A31510B004AA52B /* VideoNewsCell.xib */; };
 		43D01EEF1A315761004AA52B /* videoPlayCount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D01EEE1A315761004AA52B /* videoPlayCount@2x.png */; };
@@ -2316,6 +2317,8 @@
 		43C89B661A2DE0DA002F5E5F /* NewsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsVC.m; sourceTree = "<group>"; };
 		43C89B681A2DE5E4002F5E5F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		43C89B6D1A2DEB5A002F5E5F /* jiahao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiahao@2x.png"; sourceTree = "<group>"; };
+		43CBD1F81A381B3F00406432 /* CommentSendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentSendController.h; sourceTree = "<group>"; };
+		43CBD1F91A381B3F00406432 /* CommentSendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentSendController.m; sourceTree = "<group>"; };
 		43D01EE91A31510B004AA52B /* VideoNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoNewsCell.h; sourceTree = "<group>"; };
 		43D01EEA1A31510B004AA52B /* VideoNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoNewsCell.m; sourceTree = "<group>"; };
 		43D01EEB1A31510B004AA52B /* VideoNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoNewsCell.xib; sourceTree = "<group>"; };
@@ -4619,6 +4622,8 @@
 		43C89A9B1A2D895A002F5E5F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				43CBD1F81A381B3F00406432 /* CommentSendController.h */,
+				43CBD1F91A381B3F00406432 /* CommentSendController.m */,
 				43C89A9C1A2D895A002F5E5F /* VPImageCropperViewController.h */,
 				43C89A9D1A2D895A002F5E5F /* VPImageCropperViewController.m */,
 			);
@@ -6091,6 +6096,7 @@
 				43C89B0E1A2D895A002F5E5F /* NSNumber+SSToolkitAdditions.m in Sources */,
 				43C89AF01A2D895A002F5E5F /* ATBLibs+UIImage.m in Sources */,
 				43D212DD1A302BEC000F0E0B /* MJRefreshFooterView.m in Sources */,
+				43CBD1FA1A381B3F00406432 /* CommentSendController.m in Sources */,
 				2B390F1B1A2CBDEE00A9DA2A /* ASIFormDataRequest.m in Sources */,
 				2B390F411A2CBDEE00A9DA2A /* SDWebImagePrefetcher.m in Sources */,
 				05C6E040165F24E000498178 /* PSDiscussCellV.m in Sources */,

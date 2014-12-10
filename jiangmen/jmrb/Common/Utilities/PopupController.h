@@ -36,6 +36,8 @@ typedef enum
     PopAnimatedType_CurlDown,     // 由下到上出现
     PopAnimatedType_MiddleFlyIn,  // 由中间飞入出现
     
+    PopAnimatedType_Input,        // 文字输入(由下到上弹出键盘的高度)
+    
 }PopAnimatedType;
 
 
