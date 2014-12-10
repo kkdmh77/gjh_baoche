@@ -10,10 +10,11 @@
 #import "StringJudgeManager.h"
 #import "MyScaleScrollView.h"
 #import "GCDThread.h"
+#import "InterfaceHUDManager.h"
 
 #define AutoScrollIntervalTime 4.0
 
-@interface CycleScrollView ()
+@interface CycleScrollView () <UIActionSheetDelegate>
 {
     BOOL _isShouldAutoScroll;    // 是否应该自动滚动
     
@@ -24,6 +25,8 @@
     BOOL _isAutoScroll;
     BOOL _isCanZoom;
     ViewShowStyle _viewContentMode;
+    
+    UIImage *_curShowImage;
 }
 
 @end
@@ -50,6 +53,7 @@
         _viewContentMode = contenMode;
         _isAutoScroll = YesOrNo;
         _isCanZoom = canZoom;
+        self.canBeLongPressToSaveImage = YES;
         
         [self configureUI];
     }
@@ -66,6 +70,7 @@
         _viewContentMode = contenMode;
         _isAutoScroll = YesOrNo;
         _isCanZoom = canZoom;
+        self.canBeLongPressToSaveImage = YES;
         
         [self configureUI];
     }
@@ -290,8 +295,12 @@
         [singleTap requireGestureRecognizerToFail:doubleTap];
         [view addGestureRecognizer:doubleTap];
         
-        view.frame = CGRectOffset(self.bounds, self.bounds.size.width * i, 0);
+        // 长按手势
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                action:@selector(handleLongPress:)];
+        [view addGestureRecognizer:longPress];
         
+        view.frame = CGRectOffset(self.bounds, self.bounds.size.width * i, 0);
         [_scrollView addSubview:view];
     }
     
@@ -352,6 +361,35 @@
     }
 }
 
+- (void)handleLongPress:(UILongPressGestureRecognizer *)longPress
+{
+    if (_canBeLongPressToSaveImage && UIGestureRecognizerStateBegan == longPress.state)
+    {
+        UIView *longPressView = longPress.view;
+        _curShowImage = nil;
+        
+        if ([longPressView isKindOfClass:[UIImageView class]])
+        {
+            _curShowImage = ((UIImageView *)longPressView).image;
+        }
+        else if ([longPressView isKindOfClass:[MyScaleScrollView class]])
+        {
+            UIImageView *imageView = (UIImageView *)[longPressView viewWithTag:SubviewTag];
+            _curShowImage = imageView.image;
+        }
+        
+        if (_curShowImage)
+        {
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                     delegate:self
+                                                            cancelButtonTitle:LocalizedStr(All_Cancel)
+                                                       destructiveButtonTitle:nil
+                                                            otherButtonTitles:LocalizedStr(All_SaveToAlbum), nil];
+            [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+        }
+    }
+}
+
 /*
 - (void)setViewContent:(UIView *)view atIndex:(NSInteger)index
 {
@@ -406,6 +444,33 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView
 {
     [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0) animated:YES];
+}
+
+#pragma mark - UIActionSheetDelegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *clickBtnTitleStr = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
+    if ([clickBtnTitleStr isEqualToString:LocalizedStr(All_SaveToAlbum)])
+    {
+        UIImageWriteToSavedPhotosAlbum(_curShowImage,
+                                       self,
+                                       @selector(image:didFinishSavingWithError:contextInfo:),
+                                       nil);
+    }
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (!error)
+    {
+        [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:LocalizedStr(All_SaveSuccess)];
+    }
+    else
+    {
+        [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:LocalizedStr(All_OperationFailure)];
+    }
 }
 
 @end
