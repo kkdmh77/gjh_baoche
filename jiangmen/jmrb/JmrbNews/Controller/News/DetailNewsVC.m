@@ -116,6 +116,15 @@ int webTextFontValue = 15;
 //    _webView.mediaPlaybackRequiresUserAction = NO;
     
     [_webView keepAutoresizingInFull];
+    
+    // 评论输入框
+    UITextField *commentTF = InsertTextField(self.view, self, CGRectZero, @"test", SP15Font, NSTextAlignmentLeft, UIControlContentVerticalAlignmentCenter);
+    commentTF.backgroundColor = [UIColor blueColor];
+    [commentTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(CGSizeMake(self.viewBoundsWidth, 40));
+        make.left.equalTo(@(0));
+        make.bottom.equalTo(@(0));
+    }];
 }
 
 #pragma mark - UIWebViewDelegate methods
