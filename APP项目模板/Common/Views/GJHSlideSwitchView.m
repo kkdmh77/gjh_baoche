@@ -166,8 +166,10 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
  */
 - (void)createNameButtons
 {
+    UIImage *shadowImage = [_shadowImageArray isAbsoluteValid] ? _shadowImageArray[0] : _shadowImage;
+    
     _shadowImageView = [[UIImageView alloc] init];
-    [_shadowImageView setImage:_shadowImage];
+    [_shadowImageView setImage:shadowImage];
     [_topScrollView addSubview:_shadowImageView];
     _topScrollView.backgroundColor = _topScrollViewBackgroundColor;
     
@@ -179,7 +181,9 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
         NSString *title = [_titlesArray objectAtIndex:i];
         UIImage *normalImage = i < _imageNamesArray.count ? [UIImage imageNamed:_imageNamesArray[i]] : nil;
         UIImage *selectedImage = i < _selectedImageNamesArray.count ? [UIImage imageNamed:_selectedImageNamesArray[i]] : nil;
-
+        UIColor *normalTextColor = i < _tabItemNormalColorArray.count ? _tabItemNormalColorArray[i] : _tabItemNormalColor;
+        UIColor *selectedTextColor = i < _tabItemSelectedColorArray.count ? _tabItemSelectedColorArray[i] : _tabItemSelectedColor;
+        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
         CGSize btnSize = CGSizeZero;
@@ -221,8 +225,8 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
         [button setTitle:title forState:UIControlStateNormal];
          */
         button.titleLabel.font = [UIFont systemFontOfSize:kFontSizeOfTabButton];
-        [button setTitleColor:self.tabItemNormalColor forState:UIControlStateNormal];
-        [button setTitleColor:self.tabItemSelectedColor forState:UIControlStateSelected];
+        [button setTitleColor:normalTextColor forState:UIControlStateNormal];
+        [button setTitleColor:selectedTextColor forState:UIControlStateSelected];
         [button setBackgroundImage:self.tabItemNormalBackgroundImage forState:UIControlStateNormal];
         [button setBackgroundImage:self.tabItemSelectedBackgroundImage forState:UIControlStateSelected];
         if (normalImage)
@@ -233,10 +237,10 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
             [button setImage:selectedImage forState:UIControlStateSelected];
             
             // 有图片的情况下,在btn上单独放label,btn只显示图片
-            UILabel *titleLabel = InsertLabel(button, CGRectMake(0, 0, button.boundsWidth, textSize.height), NSTextAlignmentCenter, title, [UIFont systemFontOfSize:kFontSizeOfTabButton], _tabItemNormalColor, NO);
+            UILabel *titleLabel = InsertLabel(button, CGRectMake(0, 0, button.boundsWidth, textSize.height), NSTextAlignmentCenter, title, [UIFont systemFontOfSize:kFontSizeOfTabButton], normalTextColor, NO);
             titleLabel.tag = 8888;
             titleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-            titleLabel.highlightedTextColor = _tabItemSelectedColor;
+            titleLabel.highlightedTextColor = selectedTextColor;
             titleLabel.center = CGPointMake(button.boundsWidth / 2, button.boundsHeight / 2 + normalImage.size.height / 2);
             if (0 == i)
             {
@@ -302,6 +306,11 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
             
             [_shadowImageView setFrame:CGRectMake(sender.frame.origin.x, kHeightOfTopScrollView - kHeightOfShadowImageView, sender.frame.size.width, kHeightOfShadowImageView)];
             
+            // 更换shadowImageView的image
+            NSInteger selectedBtnIndex = [_topScrollBtnsArray indexOfObject:sender];
+            UIImage *shadowImage = selectedBtnIndex < _shadowImageArray.count ? _shadowImageArray[selectedBtnIndex] : _shadowImage;
+            _shadowImageView.image = shadowImage;
+            
         } completion:^(BOOL finished) {
             if (finished) {
                 //设置新页出现
@@ -340,7 +349,7 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
         //向右滚动视图（tab文字的x坐标 - 按钮间隔 = 新的滚动视图左边界在整个视图的x坐标），使文字显示完整
         [_topScrollView setContentOffset:CGPointMake(sender.frame.origin.x - kWidthOfButtonMargin, 0)  animated:YES];
     }
-     */
+    */
     
     // 让当前选中的item位于scrollView的中间
     if (_topScrollView.contentSize.width > _topScrollView.frame.size.width)

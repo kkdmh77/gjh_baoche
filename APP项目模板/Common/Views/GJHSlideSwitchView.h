@@ -40,11 +40,19 @@ static const CGFloat kDefaultSlideSwitchViewHeight = 38.0f; // 纯文字时候�
 @property (nonatomic, strong) UIColor *topScrollViewBackgroundColor;    // 顶部页签视图背景颜色
 @property (nonatomic, assign) NSInteger userSelectedChannelID;
 @property (nonatomic, assign) id<GJHSlideSwitchViewDelegate> slideSwitchViewDelegate;
-@property (nonatomic, strong) UIColor *tabItemNormalColor;
-@property (nonatomic, strong) UIColor *tabItemSelectedColor;
-@property (nonatomic, strong) UIImage *tabItemNormalBackgroundImage;
-@property (nonatomic, strong) UIImage *tabItemSelectedBackgroundImage;
-@property (nonatomic, strong) UIImage *shadowImage;
+
+@property (nonatomic, strong) UIColor *tabItemNormalColor;              // btn正常时的字体颜色
+@property (nonatomic, strong) NSArray *tabItemNormalColorArray;         // btn正常时的字体颜色数组(如果有数组会用数组里的颜色赋值给对应的btn,如果没有就统一用tabItemNormalColor)
+
+@property (nonatomic, strong) UIColor *tabItemSelectedColor;            // btn选择时的字体颜色
+@property (nonatomic, strong) NSArray *tabItemSelectedColorArray;       // btn选择时的字体颜色数组(如果有数组会用数组里的颜色赋值给对应的btn,如果没有就统一用tabItemSelectedColor)
+
+@property (nonatomic, strong) UIImage *tabItemNormalBackgroundImage;    // btn正常时的背景图
+@property (nonatomic, strong) UIImage *tabItemSelectedBackgroundImage;  // btn选择时的背景图
+
+@property (nonatomic, strong) UIImage *shadowImage;                     // btn选择时的下划线图
+@property (nonatomic, strong) NSArray *shadowImageArray;                // btn选择时的下划线图数组(如果有数组会用数组里的图赋值给对应的btn,如果没有就统一用shadowImage)
+
 @property (nonatomic, strong) UIButton *rigthSideButton;
 
 @property (nonatomic, assign) BOOL isTabItemEqualWidthInFullScreenWidth; // 顶部标签子视图是否等宽且只限制在屏幕宽度中显示(scrollview不横向滚动) default is NO
