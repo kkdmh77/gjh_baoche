@@ -23,6 +23,7 @@
     _success = success;
     _failed = failed;
     
+    /*
     if ([userName isAbsoluteValid])
     {
         if ([password isAbsoluteValid] && password.length >= 6)
@@ -44,6 +45,7 @@
     {
         [HUDManager showAutoHideHUDWithToShowStr:[LanguagesManager getStr:Login_NoUserShowInfoKey] HUDMode:MBProgressHUDModeText];
     }
+     */
 }
 
 - (void)dealloc

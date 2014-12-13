@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B176D6D1A3C851B0094EC96 /* AllBusListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */; };
 		4372D7741A0879FD00CEA66D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4372D7761A0879FD00CEA66D /* InfoPlist.strings */; };
 		43D1ED1A19FB37F30049518E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1919FB37F30049518E /* main.m */; };
 		43D1ED1D19FB37F30049518E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1C19FB37F30049518E /* AppDelegate.m */; };
@@ -366,6 +367,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B176D6B1A3C851B0094EC96 /* AllBusListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllBusListVC.h; sourceTree = "<group>"; };
+		2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllBusListVC.m; sourceTree = "<group>"; };
 		4372D7751A0879FD00CEA66D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4372D7771A087A1600CEA66D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		43D1ED1419FB37F30049518E /* BaoChe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaoChe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1110,6 +1113,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B176D6A1A3C85020094EC96 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2B176D6B1A3C851B0094EC96 /* AllBusListVC.h */,
+				2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		43D1ED0B19FB37F30049518E = {
 			isa = PBXGroup;
 			children = (
@@ -1145,6 +1157,7 @@
 		43D1ED1619FB37F30049518E /* BaoChe */ = {
 			isa = PBXGroup;
 			children = (
+				2B176D6A1A3C85020094EC96 /* Controllers */,
 				43D1ED4719FB3AD40049518E /* Extends */,
 				43D1ED4F19FB3AD40049518E /* Model */,
 				43D1ED1B19FB37F30049518E /* AppDelegate.h */,
@@ -2792,6 +2805,7 @@
 				43D1F1D119FB3AFB0049518E /* MASConstraint.m in Sources */,
 				43D1F30B19FB3AFB0049518E /* DrawLineUIBtn.m in Sources */,
 				43D1F16C19FB3AFB0049518E /* AFURLConnectionOperation.m in Sources */,
+				2B176D6D1A3C851B0094EC96 /* AllBusListVC.m in Sources */,
 				43D1F4FC19FB4C1A0049518E /* NIViewRecycler.m in Sources */,
 				43D1F2AE19FB3AFB0049518E /* ATBLibs+UIColor.m in Sources */,
 				43D1F29319FB3AFB0049518E /* SDWebImageManager.m in Sources */,

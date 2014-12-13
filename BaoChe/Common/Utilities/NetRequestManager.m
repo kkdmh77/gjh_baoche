@@ -85,31 +85,6 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     }
 //    NSLog(@"resultDic = %@",*result);
     
-    // 做服务器返回的业务code判断,因为如果服务器方法报错或者业务逻辑出错HTTP码还是返回的200,但是加了自己定义的一套code码(详情可参考WIKI上面的约定)
-    NSNumber *myCodeNum = [*result objectForKey:@"code"];
-    NSString *myMsgStr = [*result objectForKey:@"msg"];
-    
-    if (!myCodeNum || MyHTTPCodeType_Success != myCodeNum.integerValue)
-    {
-        err = [[NSError alloc] initWithDomain:@"MYSERVER_ERROR_DOMAIN" code:myCodeNum.integerValue userInfo:[NSDictionary dictionaryWithObjectsAndKeys:myMsgStr, NSLocalizedDescriptionKey, nil]];
-        
-        *result = err;
-        /*
-        // 自动跳入登录页面
-        if (MyHTTPCodeType_TokenOverdue == myCodeNum.integerValue || MyHTTPCodeType_TokenIncomplete == myCodeNum.integerValue || MyHTTPCodeType_TokenIllegal == myCodeNum.integerValue)
-        {
-            if ([delegate isKindOfClass:[UIViewController class]])
-            {
-                UIViewController *sendRequestVC = (UIViewController *)delegate;
-                
-                LoginVC *login = [LoginVC loadFromNib];
-                [sendRequestVC presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:nil];
-            }
-        }
-        */
-        return NO;
-    }
-    
     return YES;
 }
 
