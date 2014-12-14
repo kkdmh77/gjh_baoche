@@ -22,9 +22,15 @@ typedef NS_ENUM(NSInteger, BarbuttonItemPosition)
     BarbuttonItemPosition_Right
 };
 
-@interface BaseViewController : UIViewController
+typedef void (^PickPhotoFinishHandle) (NSArray *pickedImageArray);
+typedef void (^PickPhotoCancelHandle) (void);
+
+@interface BaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
+@protected
     UIImageView *backgroundStatusImgView; // 背景图
+    
+    UITableView *_tableView;              // default is nil
 }
 
 /// 布局子视图的Y坐标的起点(IOS7为20,IOS7以下为0)
@@ -74,6 +80,14 @@ typedef NS_ENUM(NSInteger, BarbuttonItemPosition)
  @ 创建时间    2014-07-18
  */
 - (void)setupBackgroundImage:(UIImage *)backgroundImage;
+
+/**
+ @ 方法描述    设置tableView
+ @ 输入参数    registerNibName: cell的注册名 reuseIdentifier: cell的重用标识符
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-07-18
+ */
+- (void)setupTableViewWithFrame:(CGRect)frame style:(UITableViewStyle)style registerNibName:(NSString *)nibName reuseIdentifier:(NSString *)identifier;
 
 /**
  @ 方法描述    HUD显示文字信息
@@ -154,5 +168,36 @@ typedef NS_ENUM(NSInteger, BarbuttonItemPosition)
  @ 创建时间    2014-07-18
  */
 - (void)addBackSwipeGesture;
+
+/**
+ @ 方法描述    从相机或者相册选取单张照片
+ @ 输入参数    isCropped: 是否裁剪
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-11-13
+ */
+- (void)pickSinglePhotoFromCameraOrAlbumByIsCropped:(BOOL)isCropped
+                                       cancelHandle:(PickPhotoCancelHandle)cancelHandle
+                                finishPickingHandle:(PickPhotoFinishHandle)finishHandle;
+
+/**
+ @ 方法描述    从相册选取照片
+ @ 输入参数    isCropped: 是否裁剪(只选取1张时) maxNumberOfSelection: 最大选取张数
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-11-13
+ */
+- (void)pickPhotoFromAlbumWithMaxNumberOfSelection:(NSInteger)maxNumber
+                                         isCropped:(BOOL)isCropped
+                                      cancelHandle:(PickPhotoCancelHandle)cancelHandle
+                               finishPickingHandle:(PickPhotoFinishHandle)finishHandle;
+
+/**
+ @ 方法描述    从相机选取照片
+ @ 输入参数    isCropped: 是否裁剪
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-11-13
+ */
+- (void)pickPhotoFromCameraByIsCropped:(BOOL)isCropped
+                          cancelHandle:(PickPhotoCancelHandle)cancelHandle
+                   finishPickingHandle:(PickPhotoFinishHandle)finishHandle;
 
 @end

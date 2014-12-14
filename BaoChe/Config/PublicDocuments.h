@@ -26,13 +26,15 @@
 #define SP16Font                            [UIFont systemFontOfSize:16.0]      // ...
 #define SP15Font                            [UIFont systemFontOfSize:15.0]      // ...
 #define SP14Font                            [UIFont systemFontOfSize:14.0]      // TAB的主标题
+#define SP13Font                            [UIFont systemFontOfSize:13.0]      // ...
 #define SP12Font                            [UIFont systemFontOfSize:12.0]      // ...
+#define SP11Font                            [UIFont systemFontOfSize:11.0]      // ...
 #define SP10Font                            [UIFont systemFontOfSize:10.0]      // TAB的子标题
 
 // 常规文字颜色
-#define Common_LiteGrayColor                HEXCOLOR(0X969A9B)                  // 浅灰色  适用范围:...
-#define Common_InkBlackColor                HEXCOLOR(0X545D61)                  // 墨黑色  适用范围:TAB未选中状态的主标题
-#define Common_InkGreenColor                HEXCOLOR(0X7A97A1)                  // 墨绿色  适用范围:TAB的子标题
+#define Common_GrayColor                    HEXCOLOR(0X888888)                  // 灰色    适用范围:TAB的子标题
+#define Common_BlackColor                   HEXCOLOR(0X333333)                  // 黑色    适用范围:TAB未选中状态的主标题
+#define Common_RedColor                     HEXCOLOR(0XE80000)                  // 红色    适用范围:TAB的子标题
 #define Common_LiteBlueColor                HEXCOLOR(0X169DCE)                  // 浅蓝色  适用范围:TAB选中状态的主标题
 #define Common_OrangeColor                  HEXCOLOR(0XFF8C00)                  // 橙黄色  适用范围:产品详情页 价格、选择按钮选中边框、购物车按钮等的颜色
 
@@ -41,7 +43,7 @@
 
 #define Common_LiteWhiteGrayColor           HEXCOLOR(0XB5C4C9)                  // 浅灰白色 适用范围:订单详情页面 小标题、时间、购买件数
 
-#define Common_ThemeBrownColor              HEXCOLOR(0X76823B)                  // 换了LOGO后的主题颜色
+#define Common_ThemeColor                   HEXCOLOR(0X1986D3)                  // 主题颜色
 #define Common_LiteBrownColor               HEXCOLOR(0X8E8F87)                  // 浅棕色，底部按钮文字未点中颜色
 
 #define LineWidth                           0.5                 // 全局线宽值  适用范围:cell的分割线、视图边框线宽

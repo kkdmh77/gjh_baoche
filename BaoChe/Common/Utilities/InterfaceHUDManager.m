@@ -52,14 +52,14 @@ DEF_SINGLETON(InterfaceHUDManager);
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message alertShowType:(AlertShowType)type cancelTitle:(NSString *)cancelTitle cancelBlock:(GJHAlertBlock)cancelBlock otherTitle:(NSString *)otherTitle otherBlock:(GJHAlertBlock)otherBlock
 {
     GJHAlertView *alert = [[GJHAlertView alloc] initWithTitle:title message:message isInputContentView:NO delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:otherTitle, nil];
-    alert.defaultButtonTitleColor = Common_InkGreenColor;
+    alert.defaultButtonTitleColor = [UIColor blackColor];
     alert.defaultButtonFont = SP16Font;
     alert.titleLabel.font = SP16Font;
-    alert.titleLabel.textColor = Common_InkGreenColor;
+    alert.titleLabel.textColor = [UIColor blackColor];
     alert.messageLabel.font = SP16Font;
     if (AlertShowType_Informative == type)
     {
-        alert.messageLabel.textColor = Common_InkGreenColor;
+        alert.messageLabel.textColor = [UIColor blackColor];
     }
     else
     {

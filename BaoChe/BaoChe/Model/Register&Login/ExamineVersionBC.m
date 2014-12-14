@@ -100,11 +100,13 @@
 {
     if ([self compareVersion])
     {
+        /*
         [[InterfaceHUDManager sharedInstance] showAlertWithTitle:nil message:[LanguagesManager getStr:Password_PasswordModifyFailKey] alertShowType:AlertShowType_Informative cancelTitle:@"取消" cancelBlock:^(GJHAlertView *alertView, NSInteger index) {
             
         } otherTitle:@"马上升级" otherBlock:^(GJHAlertView *alertView, NSInteger index) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[_appInfo objectForKey:@"trackViewUrl"]]];
         }];
+         */
     }
 }
 

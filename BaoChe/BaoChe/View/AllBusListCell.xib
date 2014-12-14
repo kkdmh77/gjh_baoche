@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AllBusListCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9297次(高级大巴)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2Y-tF-9bk">
+                        <rect key="frame" x="15" y="7" width="290" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="kJs-R7-3m3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次日18:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4s-7c-oFf">
+                        <rect key="frame" x="15" y="51" width="72" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="o6j-MD-apT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15:30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyz-fd-TmS">
+                        <rect key="frame" x="15" y="26" width="72" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="qzG-kV-Sfc"/>
+                            <constraint firstAttribute="width" constant="72" id="wyB-CZ-Szc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhongdian.png" translatesAutoresizingMaskIntoConstraints="NO" id="1EA-Zb-PZH">
+                        <rect key="frame" x="87" y="30" width="13" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="13" id="AWH-cf-0oO"/>
+                            <constraint firstAttribute="height" constant="13" id="WLl-Bp-XQL"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州天河" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAd-xY-29T">
+                        <rect key="frame" x="105" y="29" width="52" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="eN5-i5-nQ9"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2时30分钟" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fa6-RS-93T">
+                        <rect key="frame" x="164" y="30" width="57" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qishidian.png" translatesAutoresizingMaskIntoConstraints="NO" id="o5D-iv-LdB">
+                        <rect key="frame" x="87" y="52" width="13" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="HMB-C2-HYr"/>
+                            <constraint firstAttribute="width" constant="13" id="zXx-WE-R0K"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广工华立" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JzL-d3-dCh">
+                        <rect key="frame" x="105" y="51" width="52" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="bsg-SZ-jPy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="途径福田、松岗、珠海" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gw-bX-l4L">
+                        <rect key="frame" x="164" y="52" width="120" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥888" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gz-Ha-ndz">
+                        <rect key="frame" x="239" y="27" width="41" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="41" id="s08-MI-ij4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="busList_arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="uOL-eQ-0EW">
+                        <rect key="frame" x="290" y="26" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="02D-PF-6em"/>
+                            <constraint firstAttribute="width" constant="20" id="8Cu-IP-2fq"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="uOL-eQ-0EW" secondAttribute="centerY" id="13h-Ff-CdK"/>
+                    <constraint firstItem="JzL-d3-dCh" firstAttribute="leading" secondItem="o5D-iv-LdB" secondAttribute="trailing" constant="5" id="3na-ef-huy"/>
+                    <constraint firstItem="GAd-xY-29T" firstAttribute="centerY" secondItem="1EA-Zb-PZH" secondAttribute="centerY" id="3sg-om-7fP"/>
+                    <constraint firstAttribute="centerY" secondItem="5gz-Ha-ndz" secondAttribute="centerY" id="BXa-T7-CzK"/>
+                    <constraint firstAttribute="trailing" secondItem="S2Y-tF-9bk" secondAttribute="trailing" constant="15" id="Dik-gS-Vhh"/>
+                    <constraint firstItem="5gz-Ha-ndz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fa6-RS-93T" secondAttribute="trailing" constant="7" id="JXs-gC-bDj"/>
+                    <constraint firstItem="GAd-xY-29T" firstAttribute="leading" secondItem="1EA-Zb-PZH" secondAttribute="trailing" constant="5" id="LWf-fJ-pS1"/>
+                    <constraint firstItem="GAd-xY-29T" firstAttribute="centerY" secondItem="fa6-RS-93T" secondAttribute="centerY" id="NRJ-zc-wfs"/>
+                    <constraint firstItem="m4s-7c-oFf" firstAttribute="centerY" secondItem="o5D-iv-LdB" secondAttribute="centerY" id="Rvh-Ej-Ajq"/>
+                    <constraint firstItem="cyz-fd-TmS" firstAttribute="leading" secondItem="S2Y-tF-9bk" secondAttribute="leading" id="Tar-GL-y9d"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2gw-bX-l4L" secondAttribute="trailing" constant="10" id="Y0B-JP-Qkz"/>
+                    <constraint firstItem="cyz-fd-TmS" firstAttribute="top" secondItem="S2Y-tF-9bk" secondAttribute="bottom" constant="5" id="Yv2-aE-rgN"/>
+                    <constraint firstItem="JzL-d3-dCh" firstAttribute="centerY" secondItem="o5D-iv-LdB" secondAttribute="centerY" id="apI-kj-0fr"/>
+                    <constraint firstItem="S2Y-tF-9bk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="aw9-XZ-m3V"/>
+                    <constraint firstItem="uOL-eQ-0EW" firstAttribute="leading" secondItem="5gz-Ha-ndz" secondAttribute="trailing" constant="10" id="c9Y-xq-b9y"/>
+                    <constraint firstItem="2gw-bX-l4L" firstAttribute="leading" secondItem="JzL-d3-dCh" secondAttribute="trailing" constant="7" id="d6u-5h-hUK"/>
+                    <constraint firstItem="cyz-fd-TmS" firstAttribute="centerY" secondItem="1EA-Zb-PZH" secondAttribute="centerY" id="dJN-DK-gZR"/>
+                    <constraint firstItem="fa6-RS-93T" firstAttribute="leading" secondItem="GAd-xY-29T" secondAttribute="trailing" constant="7" id="egQ-w9-AwN"/>
+                    <constraint firstItem="1EA-Zb-PZH" firstAttribute="leading" secondItem="cyz-fd-TmS" secondAttribute="trailing" id="gDv-TY-nRK"/>
+                    <constraint firstItem="1EA-Zb-PZH" firstAttribute="leading" secondItem="o5D-iv-LdB" secondAttribute="leading" id="hj5-Tk-oF5"/>
+                    <constraint firstAttribute="trailing" secondItem="uOL-eQ-0EW" secondAttribute="trailing" constant="10" id="iFw-zq-Ny9"/>
+                    <constraint firstItem="JzL-d3-dCh" firstAttribute="centerY" secondItem="2gw-bX-l4L" secondAttribute="centerY" id="q76-Np-c47"/>
+                    <constraint firstItem="cyz-fd-TmS" firstAttribute="width" secondItem="m4s-7c-oFf" secondAttribute="width" id="sEH-f1-hJm"/>
+                    <constraint firstItem="S2Y-tF-9bk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="ucJ-JB-pDe"/>
+                    <constraint firstItem="m4s-7c-oFf" firstAttribute="leading" secondItem="cyz-fd-TmS" secondAttribute="leading" id="yDU-gl-zZB"/>
+                    <constraint firstItem="m4s-7c-oFf" firstAttribute="top" secondItem="cyz-fd-TmS" secondAttribute="bottom" constant="5" id="yWN-l1-DCo"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ThroughStationsLabel" destination="2gw-bX-l4L" id="vPD-GA-Bfp"/>
+                <outlet property="busNameLabel" destination="S2Y-tF-9bk" id="FwB-PL-Thn"/>
+                <outlet property="departureStationLabel" destination="GAd-xY-29T" id="571-9T-Mle"/>
+                <outlet property="departureTimeLabel" destination="cyz-fd-TmS" id="5vV-Jv-1Bk"/>
+                <outlet property="requiredTimeLabel" destination="fa6-RS-93T" id="3v2-Wg-B5Y"/>
+                <outlet property="terminalStationLabel" destination="JzL-d3-dCh" id="tlT-SX-aEx"/>
+                <outlet property="terminalTimeLabel" destination="m4s-7c-oFf" id="LAr-WS-5Lz"/>
+                <outlet property="ticketPriceLabel" destination="5gz-Ha-ndz" id="La2-QQ-mTX"/>
+            </connections>
+            <point key="canvasLocation" x="429" y="389"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="busList_arrow.png" width="19" height="19"/>
+        <image name="qishidian.png" width="14" height="14"/>
+        <image name="zhongdian.png" width="14" height="14"/>
+    </resources>
+</document>

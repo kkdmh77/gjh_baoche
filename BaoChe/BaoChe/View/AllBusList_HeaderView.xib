@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AllBusList_HeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQ9-IP-wko">
+                    <rect key="frame" x="8" y="0.0" width="55" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="55" id="xLV-OF-yl5"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="前一天" image="headerView_leftArrow.png">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3lP-Zd-nBY">
+                    <rect key="frame" x="257" y="0.0" width="55" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="55" id="GHl-98-uuJ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <inset key="titleEdgeInsets" minX="-25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="后一天" image="headerView_rightArrow.png">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3z1-Lc-2cF">
+                    <rect key="frame" x="68" y="0.0" width="184" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="09.18 周五">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="BQ9-IP-wko" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0iU-y0-fBT"/>
+                <constraint firstItem="3z1-Lc-2cF" firstAttribute="leading" secondItem="BQ9-IP-wko" secondAttribute="trailing" constant="5" id="5ta-VB-rC1"/>
+                <constraint firstAttribute="bottom" secondItem="BQ9-IP-wko" secondAttribute="bottom" id="BOx-pJ-9Ke"/>
+                <constraint firstItem="3lP-Zd-nBY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HP4-bD-34F"/>
+                <constraint firstItem="BQ9-IP-wko" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="KFE-jl-xig"/>
+                <constraint firstItem="3z1-Lc-2cF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Sw7-RM-GLv"/>
+                <constraint firstAttribute="trailing" secondItem="3lP-Zd-nBY" secondAttribute="trailing" constant="8" id="Z0Z-o4-vQS"/>
+                <constraint firstAttribute="bottom" secondItem="3z1-Lc-2cF" secondAttribute="bottom" id="f3E-cc-NoH"/>
+                <constraint firstItem="3lP-Zd-nBY" firstAttribute="leading" secondItem="3z1-Lc-2cF" secondAttribute="trailing" constant="5" id="fyV-mh-j24"/>
+                <constraint firstAttribute="bottom" secondItem="3lP-Zd-nBY" secondAttribute="bottom" id="w7j-Px-I1q"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="curShowDayBtn" destination="3z1-Lc-2cF" id="7Mj-EX-UZG"/>
+                <outlet property="nextDayBtn" destination="3lP-Zd-nBY" id="zFz-ac-kGh"/>
+                <outlet property="preDayBtn" destination="BQ9-IP-wko" id="dor-HH-lvG"/>
+            </connections>
+            <point key="canvasLocation" x="441" y="422"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="headerView_leftArrow.png" width="13" height="13"/>
+        <image name="headerView_rightArrow.png" width="13" height="13"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

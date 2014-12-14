@@ -24,7 +24,7 @@
     // 进行应用程序一系列属性的初始化设置
     [AppPropertiesInitialize startAppPropertiesInitialize];
     
-    self.window.rootViewController = [AllBusListVC new];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[AllBusListVC new]];;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

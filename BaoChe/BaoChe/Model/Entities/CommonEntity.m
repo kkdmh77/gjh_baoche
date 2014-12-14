@@ -8,12 +8,7 @@
 
 #import "CommonEntity.h"
 
-@implementation FAQEntity
-
-+ (id)initWithDict:(NSDictionary *)dict
-{
-    return [[self alloc] initWithDict:dict];
-}
+@implementation AllBusListItemEntity
 
 - (id)initWithDict:(NSDictionary *)dict
 {
@@ -28,30 +23,3 @@
 
 @end
 
-@implementation _168Entity
-
-+ (id)initWithDict:(NSDictionary *)dict
-{
-    return [[self alloc] initWithDict:dict];
-}
-
-- (id)initWithDict:(NSDictionary *)dict
-{
-    self = [super init];
-    if (self)
-    {
-        self.ID = [[dict objectForKey:@"id"] integerValue];
-        self.productId = [[dict objectForKey:@"productId"] integerValue];
-        self.tag = [[dict objectForKey:@"tag"] integerValue];
-        self.productPictureUrlStr = [dict objectForKey:@"picture"];
-        self.productNameStr = [dict objectForKey:@"productName"];
-        self.productDescStr = [dict objectForKey:@"productDesc1"];
-        self.marketPrice = [[dict objectForKey:@"price"] doubleValue];;
-        self.promotionPrice = [[dict objectForKey:@"promotionPrice"] doubleValue];
-        self.saleStatus = [[dict objectForKey:@"saleStatus"] integerValue];
-        self.saleNum = [[dict objectForKey:@"saleNum"] integerValue];
-    }
-    return self;
-}
-
-@end
