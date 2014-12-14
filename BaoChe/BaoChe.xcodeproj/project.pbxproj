@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2B176D6D1A3C851B0094EC96 /* AllBusListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */; };
+		2BD868231A3DC70300BC46BF /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868221A3DC70300BC46BF /* HomePageVC.m */; };
+		2BD868261A3DCF0900BC46BF /* HomePageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */; };
+		2BD868281A3DCF1600BC46BF /* HomePageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */; };
 		4372D7741A0879FD00CEA66D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4372D7761A0879FD00CEA66D /* InfoPlist.strings */; };
 		43D1ED1A19FB37F30049518E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1919FB37F30049518E /* main.m */; };
 		43D1ED1D19FB37F30049518E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1C19FB37F30049518E /* AppDelegate.m */; };
@@ -394,6 +397,11 @@
 /* Begin PBXFileReference section */
 		2B176D6B1A3C851B0094EC96 /* AllBusListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllBusListVC.h; sourceTree = "<group>"; };
 		2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllBusListVC.m; sourceTree = "<group>"; };
+		2BD868211A3DC70300BC46BF /* HomePageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageVC.h; sourceTree = "<group>"; };
+		2BD868221A3DC70300BC46BF /* HomePageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageVC.m; sourceTree = "<group>"; };
+		2BD868241A3DCF0900BC46BF /* HomePageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageHeaderView.h; sourceTree = "<group>"; };
+		2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageHeaderView.m; sourceTree = "<group>"; };
+		2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageHeaderView.xib; sourceTree = "<group>"; };
 		4372D7751A0879FD00CEA66D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4372D7771A087A1600CEA66D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		43D1ED1419FB37F30049518E /* BaoChe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaoChe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1178,10 +1186,30 @@
 		2B176D6A1A3C85020094EC96 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2BD8681F1A3DC6EA00BC46BF /* HomePage */,
 				2B176D6B1A3C851B0094EC96 /* AllBusListVC.h */,
 				2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2BD8681F1A3DC6EA00BC46BF /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				2BD868211A3DC70300BC46BF /* HomePageVC.h */,
+				2BD868221A3DC70300BC46BF /* HomePageVC.m */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		2BD868201A3DC6F200BC46BF /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				2BD868241A3DCF0900BC46BF /* HomePageHeaderView.h */,
+				2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */,
+				2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */,
+			);
+			path = HomePage;
 			sourceTree = "<group>";
 		};
 		43D1ED0B19FB37F30049518E = {
@@ -2659,6 +2687,7 @@
 		43D775321A3D367300C088CE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2BD868201A3DC6F200BC46BF /* HomePage */,
 				43D775331A3D36BB00C088CE /* AllBusListCell.h */,
 				43D775341A3D36BB00C088CE /* AllBusListCell.m */,
 				43D775351A3D36BB00C088CE /* AllBusListCell.xib */,
@@ -2830,6 +2859,7 @@
 				43D1F58219FB4C1A0049518E /* deps in Resources */,
 				43D1F57A19FB4C1A0049518E /* Icon-Small@2x.png in Resources */,
 				43D1ED2819FB37F30049518E /* Images.xcassets in Resources */,
+				2BD868281A3DCF1600BC46BF /* HomePageHeaderView.xib in Resources */,
 				43D1F55619FB4C1A0049518E /* deps in Resources */,
 				43D1F4E619FB4C1A0049518E /* deps in Resources */,
 				43D1F57E19FB4C1A0049518E /* nimbus64x64.png in Resources */,
@@ -2930,6 +2960,7 @@
 				43D1F1C819FB3AFB0049518E /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				43D1F2EF19FB3AFB0049518E /* NSObject+SSToolkitAdditions.m in Sources */,
 				43D1F4E219FB4C1A0049518E /* NICollectionViewActions.m in Sources */,
+				2BD868261A3DCF0900BC46BF /* HomePageHeaderView.m in Sources */,
 				43D1F1C419FB3AFB0049518E /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				43D7756F1A3D88D000C088CE /* CalendarDayModel.m in Sources */,
 				43D1F55319FB4C1A0049518E /* NINetworkTableViewController.m in Sources */,
@@ -3157,6 +3188,7 @@
 				43D1F1A419FB3AFB0049518E /* UISlider+FlatUI.m in Sources */,
 				43D1F19F19FB3AFB0049518E /* UIFont+FlatUI.m in Sources */,
 				43D775761A3D88D000C088CE /* NSDate+WQCalendarLogic.m in Sources */,
+				2BD868231A3DC70300BC46BF /* HomePageVC.m in Sources */,
 				43D1F1BB19FB3AFB0049518E /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				43D1F2FA19FB3AFB0049518E /* UIScreen+SSToolkitAdditions.m in Sources */,
 				43D1F1BD19FB3AFB0049518E /* NSManagedObject+MagicalAggregation.m in Sources */,

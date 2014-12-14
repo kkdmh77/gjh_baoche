@@ -37,7 +37,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
 
 - (void)setPageLocalizableText
 {
-    
+    [self setNavigationItemTitle:@"订票中心"];
 }
 
 - (void)setNetworkRequestStatusBlocks

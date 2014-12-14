@@ -63,7 +63,6 @@ static NSString *DayCell = @"DayCell";
 
 - (void)initView{
     
-    
     [self setTitle:@"选择日期"];
     
     CalendarMonthCollectionViewLayout *layout = [CalendarMonthCollectionViewLayout new];

@@ -23,8 +23,10 @@
 @property (weak, nonatomic) UILabel *day7OfTheWeekLabel;
 @end
 
-
+/*
 #define CATDayLabelWidth  40.0f
+ */
+#define CATDayLabelWidth  ((IPHONE_WIDTH - 5 * 8) / 7)
 #define CATDayLabelHeight 20.0f
 
 @implementation CalendarMonthHeaderView
@@ -55,7 +57,7 @@
     self.clipsToBounds = YES;
     
     //月份
-    UILabel *masterLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 10.0f, 300.0f, 30.f)];
+    UILabel *masterLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 10.0f, IPHONE_WIDTH - 10 * 2, 30.f)];
     [masterLabel setBackgroundColor:[UIColor clearColor]];
     [masterLabel setTextAlignment:NSTextAlignmentCenter];
     [masterLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:17.0f]];
