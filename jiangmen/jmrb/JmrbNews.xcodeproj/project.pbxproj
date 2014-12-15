@@ -612,6 +612,7 @@
 		2B92B3F21A3201E3001ECC45 /* imageNewsCell_Share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B92B3EF1A3201E3001ECC45 /* imageNewsCell_Share@2x.png */; };
 		2BDE1BE91A2E1672009E78FB /* NewsCell_Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */; };
 		2BDE1BEA1A2E1672009E78FB /* NewsCell_Normal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */; };
+		43C82ED71A3EADF800F5EC84 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43C82ED91A3EADF800F5EC84 /* Localizable.strings */; };
 		43C8960C1A32E36B000E1D2C /* imageNewsCell_CommentCountBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C8960A1A32E36B000E1D2C /* imageNewsCell_CommentCountBG@2x.png */; };
 		43C8960D1A32E36B000E1D2C /* imageNewsCell_ImgCountBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C8960B1A32E36B000E1D2C /* imageNewsCell_ImgCountBG@2x.png */; };
 		43C896101A32E6DC000E1D2C /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C8960F1A32E6DC000E1D2C /* ImagePreviewController.m */; };
@@ -1815,6 +1816,9 @@
 		2BDE1BE61A2E1672009E78FB /* NewsCell_Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell_Normal.h; sourceTree = "<group>"; };
 		2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell_Normal.m; sourceTree = "<group>"; };
 		2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell_Normal.xib; sourceTree = "<group>"; };
+		43C82ED81A3EADF800F5EC84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		43C82EDA1A3EADFC00F5EC84 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		43C82EDB1A3EAE0A00F5EC84 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		43C8960A1A32E36B000E1D2C /* imageNewsCell_CommentCountBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imageNewsCell_CommentCountBG@2x.png"; sourceTree = "<group>"; };
 		43C8960B1A32E36B000E1D2C /* imageNewsCell_ImgCountBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imageNewsCell_ImgCountBG@2x.png"; sourceTree = "<group>"; };
 		43C8960E1A32E6DC000E1D2C /* ImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewController.h; sourceTree = "<group>"; };
@@ -5391,6 +5395,7 @@
 				EA9D1F26154B792000E9219A /* InfoPlist.strings */,
 				EA9D1F29154B792000E9219A /* main.m */,
 				EA9D1F2B154B792000E9219A /* JmrbNews-Prefix.pch */,
+				43C82ED91A3EADF800F5EC84 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -5770,6 +5775,7 @@
 				0535D7991654E70500D10324 /* nav_arrow_left.png in Resources */,
 				0535D79A1654E70500D10324 /* nav_arrow_right.png in Resources */,
 				0535D79B1654E70500D10324 /* nav_bg.png in Resources */,
+				43C82ED71A3EADF800F5EC84 /* Localizable.strings in Resources */,
 				0535D79C1654E70500D10324 /* nav_selected_background.png in Resources */,
 				0535D79D1654E70500D10324 /* NavigationBar_detail_page_comments_icon.png in Resources */,
 				43C899DF1A2D792D002F5E5F /* deps in Resources */,
@@ -6651,6 +6657,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		43C82ED91A3EADF800F5EC84 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43C82ED81A3EADF800F5EC84 /* en */,
+				43C82EDA1A3EADFC00F5EC84 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		43C8FC9A1A3979E300C21C39 /* ShareSDKLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -6664,6 +6679,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				EA9D1F27154B792000E9219A /* en */,
+				43C82EDB1A3EAE0A00F5EC84 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -6705,8 +6721,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PROVISIONING_PROFILE = "F3442E38-F69E-478C-ADE4-90511196BC90";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F3442E38-F69E-478C-ADE4-90511196BC90";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv6 armv7";
@@ -6732,8 +6748,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -6775,7 +6791,11 @@
 				);
 				PRODUCT_NAME = JmrbNews;
 				PROVISIONING_PROFILE = "";
+<<<<<<< HEAD
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F3442E38-F69E-478C-ADE4-90511196BC90";
+=======
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+>>>>>>> 5aa092e17881fa39debd30de8537d2ea648aaff2
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
@@ -6816,7 +6836,11 @@
 				);
 				PRODUCT_NAME = JmrbNews;
 				PROVISIONING_PROFILE = "";
+<<<<<<< HEAD
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
+=======
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+>>>>>>> 5aa092e17881fa39debd30de8537d2ea648aaff2
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
@@ -6842,8 +6866,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
-				"PROVISIONING_PROFILE[sdk=*]" = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -6886,7 +6910,11 @@
 				);
 				PRODUCT_NAME = JmrbNews;
 				PROVISIONING_PROFILE = "";
+<<<<<<< HEAD
 				"PROVISIONING_PROFILE[sdk=*]" = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
+=======
+				"PROVISIONING_PROFILE[sdk=*]" = "";
+>>>>>>> 5aa092e17881fa39debd30de8537d2ea648aaff2
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;

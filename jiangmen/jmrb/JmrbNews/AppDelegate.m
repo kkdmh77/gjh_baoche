@@ -22,6 +22,7 @@
 #import "NewsManagerVC.h"
 #import "ImageNewsListVC.h"
 #import "VideoNewsListVC.h"
+#import <ShareSDK/ShareSDK.h>
 
 @interface AppDelegate(Private)
 
@@ -203,7 +204,16 @@ CG_INLINE  void deleteFile() {
     [super dealloc];
 }
 
-
+- (void)initializePlat
+{
+    /**
+     连接新浪微博开放平台应用以使用相关功能，此应用需要引用SinaWeiboConnection.framework
+     http://open.weibo.com上注册新浪微博开放平台应用，并将相关信息填写到以下字段
+     **/
+    [ShareSDK connectSinaWeiboWithAppKey:@"568898243"
+                               appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
+                             redirectUri:@"http://www.sharesdk.cn"];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -212,6 +222,13 @@ CG_INLINE  void deleteFile() {
     
     // 进行应用程序一系列属性的初始化设置
     [AppPropertiesInitialize startAppPropertiesInitialize];
+    
+    /**
+     注册SDK应用，此应用请到http://www.sharesdk.cn中进行注册申请。
+     此方法必须在启动时调用，否则会限制SDK的使用。
+     **/
+    [ShareSDK registerApp:@"4ad84fc80ed4"];
+    [self initializePlat];
     
     NewsManagerVC *newsManager = [[[NewsManagerVC alloc] init] autorelease];
     UINavigationController *newsManagerNav = [[[UINavigationController alloc] initWithRootViewController:newsManager] autorelease];
