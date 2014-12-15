@@ -5617,6 +5617,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0460;
+				TargetAttributes = {
+					EA9D1F18154B792000E9219A = {
+						DevelopmentTeam = 3UGNZCM9RN;
+					};
+				};
 			};
 			buildConfigurationList = EA9D1F13154B792000E9219A /* Build configuration list for PBXProject "JmrbNews" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -6743,8 +6748,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Liang Yongfeng (BX4D2M3SF8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Liang Yongfeng (BX4D2M3SF8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -6769,7 +6774,7 @@
 					"$(PROJECT_DIR)/ShareSDK/Extend/YiXinSDK",
 				);
 				PRODUCT_NAME = JmrbNews;
-				PROVISIONING_PROFILE = "F3442E38-F69E-478C-ADE4-90511196BC90";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F3442E38-F69E-478C-ADE4-90511196BC90";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv6 armv7";
@@ -6784,8 +6789,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiangmen Daily Newspaper Office (3UGNZCM9RN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiangmen Daily Newspaper Office (3UGNZCM9RN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -6810,7 +6815,7 @@
 					"$(PROJECT_DIR)/ShareSDK/Extend/YiXinSDK",
 				);
 				PRODUCT_NAME = JmrbNews;
-				PROVISIONING_PROFILE = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv6 armv7";
@@ -6853,8 +6858,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiangmen Daily Newspaper Office (3UGNZCM9RN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Jiangmen Daily Newspaper Office (3UGNZCM9RN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -6879,7 +6885,7 @@
 					"$(PROJECT_DIR)/ShareSDK/Extend/YiXinSDK",
 				);
 				PRODUCT_NAME = JmrbNews;
-				PROVISIONING_PROFILE = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=*]" = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv6 armv7";
