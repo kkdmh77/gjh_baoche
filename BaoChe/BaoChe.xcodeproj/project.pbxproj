@@ -11,6 +11,8 @@
 		2BD868231A3DC70300BC46BF /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868221A3DC70300BC46BF /* HomePageVC.m */; };
 		2BD868261A3DCF0900BC46BF /* HomePageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */; };
 		2BD868281A3DCF1600BC46BF /* HomePageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */; };
+		2BF2E0791A3F3B5B00F83491 /* HomePageTodayHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2E0771A3F3B5B00F83491 /* HomePageTodayHotCell.m */; };
+		2BF2E07A1A3F3B5B00F83491 /* HomePageTodayHotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */; };
 		4372D7741A0879FD00CEA66D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4372D7761A0879FD00CEA66D /* InfoPlist.strings */; };
 		43D1ED1A19FB37F30049518E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1919FB37F30049518E /* main.m */; };
 		43D1ED1D19FB37F30049518E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1C19FB37F30049518E /* AppDelegate.m */; };
@@ -402,6 +404,9 @@
 		2BD868241A3DCF0900BC46BF /* HomePageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageHeaderView.h; sourceTree = "<group>"; };
 		2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageHeaderView.m; sourceTree = "<group>"; };
 		2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageHeaderView.xib; sourceTree = "<group>"; };
+		2BF2E0761A3F3B5B00F83491 /* HomePageTodayHotCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageTodayHotCell.h; sourceTree = "<group>"; };
+		2BF2E0771A3F3B5B00F83491 /* HomePageTodayHotCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageTodayHotCell.m; sourceTree = "<group>"; };
+		2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageTodayHotCell.xib; sourceTree = "<group>"; };
 		4372D7751A0879FD00CEA66D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4372D7771A087A1600CEA66D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		43D1ED1419FB37F30049518E /* BaoChe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaoChe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1208,6 +1213,9 @@
 				2BD868241A3DCF0900BC46BF /* HomePageHeaderView.h */,
 				2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */,
 				2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */,
+				2BF2E0761A3F3B5B00F83491 /* HomePageTodayHotCell.h */,
+				2BF2E0771A3F3B5B00F83491 /* HomePageTodayHotCell.m */,
+				2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -2848,6 +2856,7 @@
 				43D1F1AC19FB3AFB0049518E /* IQKeyboardManager.bundle in Resources */,
 				43D1F56819FB4C1A0049518E /* deps in Resources */,
 				43D1ED4219FB3AAF0049518E /* CHANGELOG in Resources */,
+				2BF2E07A1A3F3B5B00F83491 /* HomePageTodayHotCell.xib in Resources */,
 				43D1F57C19FB4C1A0049518E /* Icon@2x.png in Resources */,
 				4372D7741A0879FD00CEA66D /* InfoPlist.strings in Resources */,
 				43D1F18819FB3AFB0049518E /* AQGridSelection.png in Resources */,
@@ -3136,6 +3145,7 @@
 				43D7754B1A3D678D00C088CE /* CTAssetsPickerController.m in Sources */,
 				43D1F29119FB3AFB0049518E /* SDWebImageDecoder.m in Sources */,
 				43D1F55819FB4C1A0049518E /* NIImageResponseSerializer.m in Sources */,
+				2BF2E0791A3F3B5B00F83491 /* HomePageTodayHotCell.m in Sources */,
 				43D1F1C319FB3AFB0049518E /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				43D1F30119FB3AFB0049518E /* PRPAlertView.m in Sources */,
 				43D1F1B219FB3AFB0049518E /* IQToolbar.m in Sources */,

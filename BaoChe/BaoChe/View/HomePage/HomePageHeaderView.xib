@@ -355,6 +355,7 @@
                 <outlet property="itemTwoBtn" destination="zKb-nZ-G6y" id="vNZ-vD-7hx"/>
                 <outlet property="itemTwoDescLabel" destination="Kax-1B-X9i" id="JUO-r9-TtM"/>
                 <outlet property="scrollBGView" destination="tab-gm-YJy" id="yT7-xX-jHl"/>
+                <outlet property="todayHotBtn" destination="gkP-T8-zbM" id="a3r-gu-IyX"/>
             </connections>
             <point key="canvasLocation" x="263" y="341.5"/>
         </view>

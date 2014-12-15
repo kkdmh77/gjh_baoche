@@ -13,8 +13,6 @@
     NSArray *_subViewColorsArray;
 }
 
-@property (weak, nonatomic) IBOutlet UIView *scrollBGView;
-
 @property (weak, nonatomic) IBOutlet UIButton *itemOneBtn;
 @property (weak, nonatomic) IBOutlet UILabel *itemOneDescLabel;
 
@@ -38,6 +36,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *itemEightBtn;
 @property (weak, nonatomic) IBOutlet UILabel *itemEightDescLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *todayHotBtn;
 
 @end
 
@@ -72,10 +72,10 @@
             subView.backgroundColor = [UIColor clearColor];
             
             [subView addLineWithPosition:ViewDrawLinePostionType_Right
-                               lineColor:HEXCOLOR(0XE7E7E7)
+                               lineColor:CellSeparatorColor
                                lineWidth:LineWidth];
             [subView addLineWithPosition:ViewDrawLinePostionType_Bottom
-                               lineColor:HEXCOLOR(0XE7E7E7)
+                               lineColor:CellSeparatorColor
                                lineWidth:LineWidth];
             
             for (UIView *view in subView.subviews)
@@ -97,6 +97,10 @@
             }
         }
     }
+    
+    _todayHotBtn.backgroundColor = HEXCOLOR(0XF0EFED);
+    _todayHotBtn.titleLabel.font = SP13Font;
+    [_todayHotBtn setTitleColor:HEXCOLOR(0X969696) forState:UIControlStateNormal];
 }
 
 - (void)setup

@@ -10,4 +10,6 @@
 
 @interface HomePageHeaderView : UIView
 
+@property (weak, nonatomic) IBOutlet UIView *scrollBGView;
+
 @end
