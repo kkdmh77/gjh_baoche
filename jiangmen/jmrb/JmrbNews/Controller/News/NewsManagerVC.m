@@ -10,8 +10,9 @@
 #import "NewsVC.h"
 #import "CommonEntity.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
+#import "LXActivity.h"
 
-@interface NewsManagerVC () <SUNSlideSwitchViewDelegate>
+@interface NewsManagerVC () <SUNSlideSwitchViewDelegate, LXActivityDelegate>
 {
     NSMutableArray *_netNewsTypeEntityArray;
     
@@ -113,7 +114,20 @@
     
     self.navigationItem.titleView = _slideSwitchView.topScrollView;
     self.navigationItem.leftBarButtonItem = nil;
-    [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Right normalImg:[UIImage imageNamed:@"jiahao"] highlightedImg:nil action:NULL];
+    [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Right
+                                 normalImg:[UIImage imageNamed:@"jiahao"]
+                            highlightedImg:nil
+                                    action:@selector(operationMoreAction:)];
+}
+
+- (void)operationMoreAction:(UIButton *)sender
+{
+    LXActivity *action = [[LXActivity alloc] initWithTitle:nil
+                                                  delegate:self
+                                         cancelButtonTitle:@"取消"
+                                         ShareButtonTitles:@[@"频道定制", @"个人中心个人中心", @"我的消息", @"设置"]
+                                 withShareButtonImagesName:@[@"tab_image_selected", @"tab_image_selected",@"tab_image_selected",@"tab_image_selected"]];
+    [action showInView:self.view];
 }
 
 #pragma mark - 滑动tab视图代理方法
@@ -138,6 +152,13 @@
     NewsVC *newsVC = _newsViewControllersArray[number];
     
     [newsVC viewDidCurrentView];
+}
+
+#pragma mark - LXActivityDelegate methods
+
+- (void)didClickOnImageIndex:(NSInteger *)imageIndex
+{
+    
 }
 
 @end

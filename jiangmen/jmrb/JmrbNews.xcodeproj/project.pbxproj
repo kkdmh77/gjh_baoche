@@ -981,6 +981,7 @@
 		43D212E01A302BEC000F0E0B /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D212D71A302BEC000F0E0B /* UIScrollView+MJRefresh.m */; };
 		43D212E11A302BEC000F0E0B /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D212D91A302BEC000F0E0B /* UIView+Extension.m */; };
 		43D212EC1A308D5D000F0E0B /* VideoNewsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D212EB1A308D5D000F0E0B /* VideoNewsListVC.m */; };
+		43D9634A1A405AED00282BA2 /* LXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D963491A405AED00282BA2 /* LXActivity.m */; };
 		43DC9D051A2F083600B09C58 /* NewsCell_Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DC9D031A2F083600B09C58 /* NewsCell_Image.m */; };
 		43DC9D061A2F083600B09C58 /* NewsCell_Image.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43DC9D041A2F083600B09C58 /* NewsCell_Image.xib */; };
 		43DEBF351A36FA1E007E6E6A /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DEBF171A36FA1E007E6E6A /* IQNSArray+Sort.m */; };
@@ -2498,6 +2499,8 @@
 		43D212D91A302BEC000F0E0B /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		43D212EA1A308D5D000F0E0B /* VideoNewsListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoNewsListVC.h; sourceTree = "<group>"; };
 		43D212EB1A308D5D000F0E0B /* VideoNewsListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoNewsListVC.m; sourceTree = "<group>"; };
+		43D963481A405AED00282BA2 /* LXActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXActivity.h; sourceTree = "<group>"; };
+		43D963491A405AED00282BA2 /* LXActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXActivity.m; sourceTree = "<group>"; };
 		43DC9D021A2F083600B09C58 /* NewsCell_Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell_Image.h; sourceTree = "<group>"; };
 		43DC9D031A2F083600B09C58 /* NewsCell_Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell_Image.m; sourceTree = "<group>"; };
 		43DC9D041A2F083600B09C58 /* NewsCell_Image.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell_Image.xib; sourceTree = "<group>"; };
@@ -3480,6 +3483,7 @@
 		2B390E741A2CBDEE00A9DA2A /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				43D963471A405AED00282BA2 /* LXActivity */,
 				43DEBF141A36FA1E007E6E6A /* IQKeyBoardManager */,
 				43D212C91A302BEC000F0E0B /* MJRefresh */,
 				43C89B571A2DDD90002F5E5F /* SlideSwitch */,
@@ -5229,6 +5233,15 @@
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
+		43D963471A405AED00282BA2 /* LXActivity */ = {
+			isa = PBXGroup;
+			children = (
+				43D963481A405AED00282BA2 /* LXActivity.h */,
+				43D963491A405AED00282BA2 /* LXActivity.m */,
+			);
+			path = LXActivity;
+			sourceTree = "<group>";
+		};
 		43DEBF141A36FA1E007E6E6A /* IQKeyBoardManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -6476,6 +6489,7 @@
 				43C89AFF1A2D895A002F5E5F /* ATPinyin+NSString.m in Sources */,
 				43C899C01A2D792D002F5E5F /* NIOverviewPageView.m in Sources */,
 				43C896DE1A2D68CF002F5E5F /* AFURLResponseSerialization.m in Sources */,
+				43D9634A1A405AED00282BA2 /* LXActivity.m in Sources */,
 				05C6E02C165F24E000498178 /* PersonNewsVC.m in Sources */,
 				43C89B0D1A2D895A002F5E5F /* NSMutableArray+SSToolkitAdditions.m in Sources */,
 				05C6E02F165F24E000498178 /* PictureNewInfoDetail.m in Sources */,
@@ -6791,11 +6805,7 @@
 				);
 				PRODUCT_NAME = JmrbNews;
 				PROVISIONING_PROFILE = "";
-<<<<<<< HEAD
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F3442E38-F69E-478C-ADE4-90511196BC90";
-=======
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
->>>>>>> 5aa092e17881fa39debd30de8537d2ea648aaff2
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
@@ -6836,11 +6846,7 @@
 				);
 				PRODUCT_NAME = JmrbNews;
 				PROVISIONING_PROFILE = "";
-<<<<<<< HEAD
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
-=======
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
->>>>>>> 5aa092e17881fa39debd30de8537d2ea648aaff2
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
@@ -6910,11 +6916,7 @@
 				);
 				PRODUCT_NAME = JmrbNews;
 				PROVISIONING_PROFILE = "";
-<<<<<<< HEAD
-				"PROVISIONING_PROFILE[sdk=*]" = "265EA0BC-B3D8-4572-811E-561B1F4D1603";
-=======
 				"PROVISIONING_PROFILE[sdk=*]" = "";
->>>>>>> 5aa092e17881fa39debd30de8537d2ea648aaff2
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;

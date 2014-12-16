@@ -110,6 +110,7 @@
     if (_scrollView) [_scrollView removeFromSuperview];
     
     _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    [_scrollView keepAutoresizingInFull];
     _scrollView.delegate = self;
     _scrollView.contentSize = CGSizeMake(self.bounds.size.width * 3, self.bounds.size.height);
     _scrollView.showsHorizontalScrollIndicator = NO;
