@@ -8,8 +8,8 @@
 
 #import "LXActivity.h"
 
-#define WINDOW_COLOR                            [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]
-#define ACTIONSHEET_BACKGROUNDCOLOR             [UIColor colorWithRed:106/255.00f green:106/255.00f blue:106/255.00f alpha:0.8]
+#define WINDOW_COLOR                            [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]
+#define ACTIONSHEET_BACKGROUNDCOLOR             HEXCOLOR(0XE9E9E9)
 #define ANIMATE_DURATION                        0.25f
 
 #define CORNER_RADIUS                           5
@@ -32,20 +32,20 @@
 /*
 #define SHARETITLE_INTERVAL_WIDTH               42.5
  */
-#define SHARETITLE_INTERVAL_WIDTH              ((IPHONE_WIDTH - SHAREBUTTON_WIDTH * 3) / 4)
+#define SHARETITLE_INTERVAL_WIDTH              ((IPHONE_WIDTH - SHARETITLE_WIDTH * 3) / 4)
 #define SHARETITLE_INTERVAL_HEIGHT              SHAREBUTTON_WIDTH+SHAREBUTTON_INTERVAL_HEIGHT
 #define SHARETITLE_FONT                         [UIFont fontWithName:@"Helvetica-Bold" size:14]
 
 #define TITLE_INTERVAL_HEIGHT                   15
 #define TITLE_HEIGHT                            35
 #define TITLE_INTERVAL_WIDTH                    30
-#define TITLE_WIDTH                             260
+#define TITLE_WIDTH                             (IPHONE_WIDTH - TITLE_INTERVAL_WIDTH * 2)
 #define TITLE_FONT                              [UIFont fontWithName:@"Helvetica-Bold" size:10]
 #define SHADOW_OFFSET                           CGSizeMake(0, 0.8f)
 #define TITLE_NUMBER_LINES                      2
 
 #define BUTTON_INTERVAL_HEIGHT                  20
-#define BUTTON_HEIGHT                           40
+#define BUTTON_HEIGHT                           50
 #define BUTTON_INTERVAL_WIDTH                   40
 #define BUTTON_WIDTH                            240
 #define BUTTONTITLE_FONT                        [UIFont fontWithName:@"HelveticaNeue-Bold" size:18]
@@ -234,8 +234,8 @@
         }
         //当有title或destructionButton或otherbuttons时
         if (self.isHadTitle == YES || self.isHadShareButton == YES) {
-            [cancelButton setFrame:CGRectMake(cancelButton.frame.origin.x, self.LXActivityHeight, cancelButton.frame.size.width, cancelButton.frame.size.height)];
-            self.LXActivityHeight = self.LXActivityHeight + cancelButton.frame.size.height+BUTTON_INTERVAL_HEIGHT;
+            [cancelButton setFrame:CGRectMake(cancelButton.frame.origin.x, self.LXActivityHeight + 15, cancelButton.frame.size.width, cancelButton.frame.size.height)];
+            self.LXActivityHeight = self.LXActivityHeight + cancelButton.frame.size.height+BUTTON_INTERVAL_HEIGHT - 5;
         }
         [self.backGroundView addSubview:cancelButton];
         
@@ -255,19 +255,20 @@
     UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(BUTTON_INTERVAL_WIDTH, BUTTON_INTERVAL_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT)];
      */
     UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, BUTTON_INTERVAL_HEIGHT, IPHONE_WIDTH, BUTTON_HEIGHT)];
+    /*
     cancelButton.layer.masksToBounds = YES;
     cancelButton.layer.cornerRadius = CORNER_RADIUS;
     
     cancelButton.layer.borderWidth = BUTTON_BORDER_WIDTH;
     cancelButton.layer.borderColor = BUTTON_BORDER_COLOR;
-
-    UIImage *image = [UIImage imageWithColor:CANCEL_BUTTON_COLOR];
+     */
+    UIImage *image = [UIImage imageWithColor:HEXCOLOR(0XD7D7D7)];
     [cancelButton setBackgroundImage:image forState:UIControlStateNormal];
 
     [cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
     cancelButton.titleLabel.font = BUTTONTITLE_FONT;
-    [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
+    [cancelButton setTitleColor:Common_BlueColor forState:UIControlStateNormal];
+    [cancelButton addLineWithPosition:ViewDrawLinePostionType_Top lineColor:[UIColor lightGrayColor] lineWidth:LineWidth];
     return cancelButton;
 }
 
@@ -284,7 +285,7 @@
     shareLabel.backgroundColor = [UIColor clearColor];
     shareLabel.textAlignment = NSTextAlignmentCenter;
     shareLabel.font = TITLE_FONT;
-    shareLabel.textColor = [UIColor whiteColor];
+    shareLabel.textColor = [UIColor darkGrayColor];
     return shareLabel;
 }
 
@@ -293,11 +294,13 @@
     UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(TITLE_INTERVAL_WIDTH, TITLE_INTERVAL_HEIGHT, TITLE_WIDTH, TITLE_HEIGHT)];
     titlelabel.backgroundColor = [UIColor clearColor];
     titlelabel.textAlignment = NSTextAlignmentCenter;
+    /*
     titlelabel.shadowColor = [UIColor blackColor];
     titlelabel.shadowOffset = SHADOW_OFFSET;
+     */
     titlelabel.font = SHARETITLE_FONT;
     titlelabel.text = title;
-    titlelabel.textColor = [UIColor whiteColor];
+    titlelabel.textColor = [UIColor darkGrayColor];
     titlelabel.numberOfLines = TITLE_NUMBER_LINES;
     return titlelabel;
 }
@@ -307,7 +310,7 @@
     if (self.delegate) {
         if (button.tag != self.postionIndexNumber-1) {
             if ([self.delegate respondsToSelector:@selector(didClickOnImageIndex:)] == YES) {
-                [self.delegate didClickOnImageIndex:(NSInteger *)button.tag];
+                [self.delegate didClickOnImageIndex:button.tag];
             }
         }
         else{
