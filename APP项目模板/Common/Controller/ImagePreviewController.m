@@ -166,8 +166,18 @@
         STRONGSELF
         strongSelf->_navBar.hidden = !strongSelf->_navBar.hidden;
         strongSelf->_imageDescBGView.hidden = !strongSelf->_imageDescBGView.hidden;
-        [UIApplication sharedApplication].statusBarHidden = strongSelf->_navBar.hidden;
+        [[UIApplication sharedApplication] setStatusBarHidden:strongSelf->_navBar.hidden withAnimation:UIStatusBarAnimationSlide];
+        if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)])
+        {
+            [self setNeedsStatusBarAppearanceUpdate];
+        }
     }];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    // 返回NO表示要显示,返回YES将hiden
+    return _navBar.hidden;
 }
 
 #pragma mark - CycleScrollViewDelegate methods

@@ -11,6 +11,7 @@
 #import "CommonEntity.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "LXActivity.h"
+#import "SettingVC.h"
 
 @interface NewsManagerVC () <SUNSlideSwitchViewDelegate, LXActivityDelegate>
 {
@@ -35,6 +36,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.leftBarButtonItem = nil;
     
     [self getNetworkData];
 }
@@ -90,7 +93,6 @@
 
 - (void)initialization
 {
-    self.title = @"滑动切换视图";
     self.slideSwitchView = [[SUNSlideSwitchView alloc] initWithFrame:self.view.bounds];
     [_slideSwitchView keepAutoresizingInFull];
     _slideSwitchView.slideSwitchViewDelegate = self;
@@ -125,7 +127,7 @@
     LXActivity *action = [[LXActivity alloc] initWithTitle:nil
                                                   delegate:self
                                          cancelButtonTitle:@"取消"
-                                         ShareButtonTitles:@[@"频道定制", @"个人中心个人中心", @"我的消息", @"设置"]
+                                         ShareButtonTitles:@[@"频道定制", @"个人中心", @"我的消息", @"设置"]
                                  withShareButtonImagesName:@[@"tab_image_selected", @"tab_image_selected",@"tab_image_selected",@"tab_image_selected"]];
     [action showInView:self.view];
 }
@@ -156,9 +158,37 @@
 
 #pragma mark - LXActivityDelegate methods
 
-- (void)didClickOnImageIndex:(NSInteger *)imageIndex
+- (void)didClickOnImageIndex:(NSInteger)imageIndex
 {
-    
+    switch (imageIndex) {
+        case 0:
+        {
+            
+        }
+            break;
+        case 1:
+        {
+            
+        }
+            break;
+        case 2:
+        {
+            
+        }
+            break;
+        case 3:
+        {
+            SettingVC *setting = [[SettingVC alloc] init];
+            UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController:setting];
+            [self presentViewController:settingNav
+                   modalTransitionStyle:UIModalTransitionStyleCoverVertical
+                             completion:nil];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end
