@@ -40,10 +40,10 @@
 - (void)getLocalTabShowData
 {
     NSArray *oneSectionTitleArray = @[@"收藏", @"清除缓存",@"关于"];
-    NSArray *oneSectionImageArray = @[@"tab_bbs_selected", @"tab_bbs_selected",@"tab_bbs_selected"];
+    NSArray *oneSectionImageArray = @[@"shoucang", @"shoucang",@"about"];
     
     NSArray *twoSectionTitleArray = @[@"退出"];
-    NSArray *twoSectionImageArray = @[@"tab_bbs_selected"];
+    NSArray *twoSectionImageArray = @[@"tuichu"];
     
     _tabTitleArray = @[oneSectionTitleArray, twoSectionTitleArray];
     _tabImageArray = @[oneSectionImageArray, twoSectionImageArray];
@@ -52,11 +52,6 @@
 - (void)setPageLocalizableText
 {
     [self setNavigationItemTitle:@"设置"];
-}
-
-- (void)getNetworkData
-{
-    [[NetRequestManager sharedInstance] sendRequest:[NSURL URLWithString:@"http://115.159.30.191:80/WOGO/upDownload"] parameterDic:@{@"userId": @"43", @"trancode": @"BC0025", @"goods":@"1"} requestTag:1000 delegate:self userInfo:nil];
 }
 
 - (void)initialization
@@ -97,6 +92,16 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 15;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

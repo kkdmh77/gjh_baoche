@@ -36,7 +36,7 @@
 #define Common_LiteBlueColor                HEXCOLOR(0X169DCE)                  // 浅蓝色  适用范围:TAB选中状态的主标题
 #define Common_BlueColor                    HEXCOLOR(0X005BA5)                  // 蓝色    适用范围:...
 
-#define PageBackgroundColor                 HEXCOLOR(0XE8EEF0)                  // 灰蓝色  viewController的背景色
+#define PageBackgroundColor                 HEXCOLOR(0XECECEC)                  // 灰蓝色  viewController的背景色
 #define CellSeparatorColor                  HEXCOLOR(0XE0E0E0)                  // 灰白色  tabViewCell的间隔线
 
 #define Common_LiteWhiteGrayColor           HEXCOLOR(0XB5C4C9)                  // 浅灰白色 适用范围:订单详情页面 小标题、时间、购买件数

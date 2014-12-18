@@ -613,6 +613,17 @@
 		2BDA30FD1A40747900EE1470 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDA30FC1A40747900EE1470 /* SettingVC.m */; };
 		2BDE1BE91A2E1672009E78FB /* NewsCell_Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */; };
 		2BDE1BEA1A2E1672009E78FB /* NewsCell_Normal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */; };
+		2BDF7CEA1A4316DD006C9E27 /* about@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CE31A4316DD006C9E27 /* about@2x.png */; };
+		2BDF7CEB1A4316DD006C9E27 /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CE41A4316DD006C9E27 /* phone@2x.png */; };
+		2BDF7CEC1A4316DD006C9E27 /* shoucang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CE51A4316DD006C9E27 /* shoucang@2x.png */; };
+		2BDF7CED1A4316DD006C9E27 /* tuichu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CE61A4316DD006C9E27 /* tuichu@2x.png */; };
+		2BDF7CEE1A4316DD006C9E27 /* weidenglutouxiang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CE71A4316DD006C9E27 /* weidenglutouxiang@2x.png */; };
+		2BDF7CEF1A4316DD006C9E27 /* xingbie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CE81A4316DD006C9E27 /* xingbie@2x.png */; };
+		2BDF7CF01A4316DD006C9E27 /* yonghuming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CE91A4316DD006C9E27 /* yonghuming@2x.png */; };
+		2BDF7CF41A4318FA006C9E27 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDF7CF21A4318FA006C9E27 /* LoginVC.m */; };
+		2BDF7CF51A4318FA006C9E27 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CF31A4318FA006C9E27 /* LoginVC.xib */; };
+		2BDF7CF91A432438006C9E27 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDF7CF71A432438006C9E27 /* RegisterVC.m */; };
+		2BDF7CFA1A432438006C9E27 /* RegisterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CF81A432438006C9E27 /* RegisterVC.xib */; };
 		43C82ED71A3EADF800F5EC84 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43C82ED91A3EADF800F5EC84 /* Localizable.strings */; };
 		43C8960C1A32E36B000E1D2C /* imageNewsCell_CommentCountBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C8960A1A32E36B000E1D2C /* imageNewsCell_CommentCountBG@2x.png */; };
 		43C8960D1A32E36B000E1D2C /* imageNewsCell_ImgCountBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C8960B1A32E36B000E1D2C /* imageNewsCell_ImgCountBG@2x.png */; };
@@ -1820,6 +1831,19 @@
 		2BDE1BE61A2E1672009E78FB /* NewsCell_Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell_Normal.h; sourceTree = "<group>"; };
 		2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell_Normal.m; sourceTree = "<group>"; };
 		2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell_Normal.xib; sourceTree = "<group>"; };
+		2BDF7CE31A4316DD006C9E27 /* about@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about@2x.png"; sourceTree = "<group>"; };
+		2BDF7CE41A4316DD006C9E27 /* phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@2x.png"; sourceTree = "<group>"; };
+		2BDF7CE51A4316DD006C9E27 /* shoucang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoucang@2x.png"; sourceTree = "<group>"; };
+		2BDF7CE61A4316DD006C9E27 /* tuichu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tuichu@2x.png"; sourceTree = "<group>"; };
+		2BDF7CE71A4316DD006C9E27 /* weidenglutouxiang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weidenglutouxiang@2x.png"; sourceTree = "<group>"; };
+		2BDF7CE81A4316DD006C9E27 /* xingbie@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xingbie@2x.png"; sourceTree = "<group>"; };
+		2BDF7CE91A4316DD006C9E27 /* yonghuming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yonghuming@2x.png"; sourceTree = "<group>"; };
+		2BDF7CF11A4318FA006C9E27 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		2BDF7CF21A4318FA006C9E27 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		2BDF7CF31A4318FA006C9E27 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
+		2BDF7CF61A432438006C9E27 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
+		2BDF7CF71A432438006C9E27 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
+		2BDF7CF81A432438006C9E27 /* RegisterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterVC.xib; sourceTree = "<group>"; };
 		43C82ED81A3EADF800F5EC84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43C82EDA1A3EADFC00F5EC84 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		43C82EDB1A3EAE0A00F5EC84 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -3852,6 +3876,12 @@
 			children = (
 				2BDA30FB1A40747900EE1470 /* SettingVC.h */,
 				2BDA30FC1A40747900EE1470 /* SettingVC.m */,
+				2BDF7CF11A4318FA006C9E27 /* LoginVC.h */,
+				2BDF7CF21A4318FA006C9E27 /* LoginVC.m */,
+				2BDF7CF31A4318FA006C9E27 /* LoginVC.xib */,
+				2BDF7CF61A432438006C9E27 /* RegisterVC.h */,
+				2BDF7CF71A432438006C9E27 /* RegisterVC.m */,
+				2BDF7CF81A432438006C9E27 /* RegisterVC.xib */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -3873,6 +3903,20 @@
 				2B92B3EA1A31F582001ECC45 /* ImageNewsCell.xib */,
 			);
 			path = News;
+			sourceTree = "<group>";
+		};
+		2BDF7CE21A4316DD006C9E27 /* SettingAndUserCenter */ = {
+			isa = PBXGroup;
+			children = (
+				2BDF7CE31A4316DD006C9E27 /* about@2x.png */,
+				2BDF7CE41A4316DD006C9E27 /* phone@2x.png */,
+				2BDF7CE51A4316DD006C9E27 /* shoucang@2x.png */,
+				2BDF7CE61A4316DD006C9E27 /* tuichu@2x.png */,
+				2BDF7CE71A4316DD006C9E27 /* weidenglutouxiang@2x.png */,
+				2BDF7CE81A4316DD006C9E27 /* xingbie@2x.png */,
+				2BDF7CE91A4316DD006C9E27 /* yonghuming@2x.png */,
+			);
+			path = SettingAndUserCenter;
 			sourceTree = "<group>";
 		};
 		43C896C31A2D68CE002F5E5F /* AFNetworking */ = {
@@ -5018,6 +5062,7 @@
 		43C89B6B1A2DEB5A002F5E5F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				2BDF7CE21A4316DD006C9E27 /* SettingAndUserCenter */,
 				2B92B3D21A31EF9E001ECC45 /* AppCommon */,
 				43C89B6C1A2DEB5A002F5E5F /* News */,
 			);
@@ -5790,6 +5835,7 @@
 				0535D7911654E70500D10324 /* Middle_people_life_icon_Down.png in Resources */,
 				0535D7921654E70500D10324 /* Middle_photo_point_icon.png in Resources */,
 				0535D7931654E70500D10324 /* Middle_photo_point_icon_Down.png in Resources */,
+				2BDF7CEC1A4316DD006C9E27 /* shoucang@2x.png in Resources */,
 				0535D7941654E70500D10324 /* Middle_times_point_icon.png in Resources */,
 				0535D7951654E70500D10324 /* Middle_times_point_icon_Down.png in Resources */,
 				0535D7961654E70500D10324 /* Middle_zhongshan_local_icon.png in Resources */,
@@ -5824,6 +5870,7 @@
 				0535D7AB1654E70500D10324 /* NavigationBar_return_button_normal.png in Resources */,
 				0535D7AC1654E70500D10324 /* NavigationBar_return_button_selected.png in Resources */,
 				2B390F561A2CBDEE00A9DA2A /* cb_mono_on.png in Resources */,
+				2BDF7CF01A4316DD006C9E27 /* yonghuming@2x.png in Resources */,
 				43DEBF401A36FA1E007E6E6A /* IQKeyboardManager.bundle in Resources */,
 				0535D7AD1654E70500D10324 /* newlistpg.png in Resources */,
 				0535D7AE1654E70500D10324 /* next.png in Resources */,
@@ -5859,6 +5906,7 @@
 				43C899DA1A2D792D002F5E5F /* lib.xcconfig in Resources */,
 				0535D7C71654E70500D10324 /* TarBar_BaoLiao_camera_button.png in Resources */,
 				43C8993B1A2D792D002F5E5F /* deps in Resources */,
+				2BDF7CF51A4318FA006C9E27 /* LoginVC.xib in Resources */,
 				0535D7C81654E70500D10324 /* TarBar_BaoLiao_sent_button.png in Resources */,
 				0535D7C91654E70500D10324 /* TarBar_BaoLiao_sent_button_taped.png in Resources */,
 				0535D7CA1654E70500D10324 /* TarBar_BaoLiaocamera_button_tapped.png in Resources */,
@@ -6015,6 +6063,7 @@
 				0535D8421654E70500D10324 /* TarBar_BaoLiao_sent_button_taped@2x.png in Resources */,
 				0535D8431654E70500D10324 /* TarBar_fullscreen_thumbnail@2x.png in Resources */,
 				0535D8441654E70500D10324 /* TarBar_Keep_title_icon_Down@2x.png in Resources */,
+				2BDF7CEF1A4316DD006C9E27 /* xingbie@2x.png in Resources */,
 				2B390F351A2CBDEE00A9DA2A /* blueArrow@2x.png in Resources */,
 				0535D8451654E70500D10324 /* TarBar_List@2x.png in Resources */,
 				0535D8461654E70500D10324 /* TarBar_List_Down@2x.png in Resources */,
@@ -6135,9 +6184,11 @@
 				05C6E025165F24E000498178 /* MoreOrderCell.xib in Resources */,
 				05C6E027165F24E000498178 /* NewsCell.xib in Resources */,
 				05C6E029165F24E000498178 /* PaperTarBarVC.xib in Resources */,
+				2BDF7CED1A4316DD006C9E27 /* tuichu@2x.png in Resources */,
 				05C6E02B165F24E000498178 /* SetViewController.xib in Resources */,
 				05C6E02D165F24E000498178 /* PersonNewsVC.xib in Resources */,
 				05C6E02E165F24E000498178 /* PictureNew.xib in Resources */,
+				2BDF7CEA1A4316DD006C9E27 /* about@2x.png in Resources */,
 				05C6E030165F24E000498178 /* PictureNewInfoDetail.xib in Resources */,
 				05C6E033165F24E000498178 /* PictureShowView1VC.xib in Resources */,
 				05C6E035165F24E000498178 /* PictureShowView2VC.xib in Resources */,
@@ -6165,6 +6216,7 @@
 				05C6E09C165F7AFF00498178 /* logintablebg.png in Resources */,
 				05C6E09D165F7AFF00498178 /* nouserpic.png in Resources */,
 				05C6E09E165F7AFF00498178 /* registerBtn_press.png in Resources */,
+				2BDF7CFA1A432438006C9E27 /* RegisterVC.xib in Resources */,
 				05C6E09F165F7AFF00498178 /* registerBtn.png in Resources */,
 				05C6E0A6165F7B0F00498178 /* cleanBtn_press@2x.png in Resources */,
 				05C6E0A7165F7B0F00498178 /* cleanBtn@2X.png in Resources */,
@@ -6204,6 +6256,7 @@
 				050EF2F0166C9730006B7BE0 /* baoniaoactiveicon@2x.png in Resources */,
 				050EF2F1166C9730006B7BE0 /* choujiangactiveicon@2x.png in Resources */,
 				2B390F371A2CBDEE00A9DA2A /* grayArrow@2x.png in Resources */,
+				2BDF7CEB1A4316DD006C9E27 /* phone@2x.png in Resources */,
 				050EF2F2166C9730006B7BE0 /* toupiaoactiveicon@2x.png in Resources */,
 				2B92B3F01A3201E3001ECC45 /* imageNewsCell_Comment@2x.png in Resources */,
 				050EF2FF166C9E44006B7BE0 /* BaoLiaoActiveViewController.xib in Resources */,
@@ -6242,6 +6295,7 @@
 				05DF6E681755AFE300E90A61 /* xiaoyanbtn_nor@2x.png in Resources */,
 				05DF6E691755AFE300E90A61 /* xiaoyanbtn@2x.png in Resources */,
 				05DF6E6C1755B14F00E90A61 /* submitbtn_nor.png in Resources */,
+				2BDF7CEE1A4316DD006C9E27 /* weidenglutouxiang@2x.png in Resources */,
 				05DF6E6D1755B14F00E90A61 /* submitbtn.png in Resources */,
 				05DF6E701755B15C00E90A61 /* submitbtn_nor@2x.png in Resources */,
 				05DF6E711755B15C00E90A61 /* submitbtn@2x.png in Resources */,
@@ -6438,6 +6492,7 @@
 				43C899BB1A2D792D002F5E5F /* NIDeviceInfo.m in Sources */,
 				43C89B1B1A2D895A002F5E5F /* UIScrollView+SSToolkitAdditions.m in Sources */,
 				05C6E006165F24E000498178 /* MPBigImage.m in Sources */,
+				2BDF7CF91A432438006C9E27 /* RegisterVC.m in Sources */,
 				05C6E008165F24E000498178 /* MPDiscussCellV.m in Sources */,
 				43C89B2C1A2D895A002F5E5F /* IntroductionViewManager.m in Sources */,
 				43C899B01A2D792D002F5E5F /* NINetworkTableViewController.m in Sources */,
@@ -6465,6 +6520,7 @@
 				2BDE1BE91A2E1672009E78FB /* NewsCell_Normal.m in Sources */,
 				05C6E014165F24E000498178 /* MoreKeepVC.m in Sources */,
 				43C899A31A2D792D002F5E5F /* NICellCatalog.m in Sources */,
+				2BDF7CF41A4318FA006C9E27 /* LoginVC.m in Sources */,
 				43C897A51A2D6B8D002F5E5F /* NSNumber+MagicalDataImport.m in Sources */,
 				43C899471A2D792D002F5E5F /* NICommonMetrics.m in Sources */,
 				43C89B401A2D910C002F5E5F /* Reachability.m in Sources */,
