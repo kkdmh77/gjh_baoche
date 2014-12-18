@@ -23,6 +23,7 @@
 #import "ImageNewsListVC.h"
 #import "VideoNewsListVC.h"
 #import <ShareSDK/ShareSDK.h>
+#import "WXApi.h"
 
 @interface AppDelegate(Private)
 
@@ -213,6 +214,15 @@ CG_INLINE  void deleteFile() {
     [ShareSDK connectSinaWeiboWithAppKey:@"568898243"
                                appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
                              redirectUri:@"http://www.sharesdk.cn"];
+    
+    /**
+     连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
+     http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
+     **/
+    //    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885" wechatCls:[WXApi class]];
+    [ShareSDK connectWeChatWithAppId:@"wx4a5daec79d057d08"
+                           appSecret:@"2ee5f23195aae0958901ee60ed55e531"
+                           wechatCls:[WXApi class]];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -472,7 +482,19 @@ CG_INLINE  void deleteFile() {
     NSLog(@"Registfail%@",error);
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url
+                        wxDelegate:self];
+}
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url
+                 sourceApplication:sourceApplication
+                        annotation:annotation
+                        wxDelegate:self];
+}
 
 #pragma mark - ImageQueueDelegate
 - (void)imageOperationCompleted:(UIImage *)_image atIndex:(NSInteger)_index {
