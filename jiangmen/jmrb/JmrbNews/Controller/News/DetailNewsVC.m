@@ -171,7 +171,7 @@ int webTextFontValue = 15;
     id<ISSContent> publishContent = [ShareSDK content:@"fen xiang"
                                        defaultContent:@""
                                                 image:nil
-                                                title:@"ShareSDK"
+                                                title:@"分享标题"
                                                   url:@"http://www.mob.com"
                                           description:NSLocalizedString(@"TEXT_TEST_MSG", @"这是一条测试信息")
                                             mediaType:SSPublishContentMediaTypeNews];
@@ -205,7 +205,7 @@ int webTextFontValue = 15;
                            content:publishContent
                      statusBarTips:YES
                        authOptions:nil
-                      shareOptions:[ShareSDK defaultShareOptionsWithTitle:@"xx"
+                      shareOptions:[ShareSDK defaultShareOptionsWithTitle:@"分享这条新闻"
                                                           oneKeyShareList:nil
                                                            qqButtonHidden:YES
                                                     wxSessionButtonHidden:YES
