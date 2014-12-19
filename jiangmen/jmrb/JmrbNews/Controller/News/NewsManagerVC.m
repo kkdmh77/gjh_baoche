@@ -12,6 +12,7 @@
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "LXActivity.h"
 #import "SettingVC.h"
+#import "LoginVC.h"
 
 @interface NewsManagerVC () <SUNSlideSwitchViewDelegate, LXActivityDelegate>
 {
@@ -168,7 +169,11 @@
             break;
         case 1:
         {
-            
+            LoginVC *login = [LoginVC loadFromNib];
+            UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+            [self presentViewController:loginNav
+                   modalTransitionStyle:UIModalTransitionStyleCoverVertical
+                             completion:nil];
         }
             break;
         case 2:
