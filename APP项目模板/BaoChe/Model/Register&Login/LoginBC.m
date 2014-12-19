@@ -10,39 +10,55 @@
 #import "HUDManager.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "UrlManager.h"
+#import "InterfaceHUDManager.h"
 
-@implementation LoginBC
+@interface LoginBC ()
 {
     successHandle   _success;
     failedHandle    _failed;
 }
 
+@end
 
-- (void)loginWithUserName:(NSString *)userName password:(NSString *)password keepLogin:(NSNumber *)keep successHandle:(successHandle)success failedHandle:(failedHandle)failed
+@implementation LoginBC
+
+- (void)loginWithUserName:(NSString *)userName password:(NSString *)password autoLogin:(BOOL)autoLogin successHandle:(successHandle)success failedHandle:(failedHandle)failed
 {
-    _success = success;
-    _failed = failed;
-    
     if ([userName isAbsoluteValid])
     {
-        if ([password isAbsoluteValid] && password.length >= 6)
+        if ([password isAbsoluteValid] && password.length >= 6 && password.length <= 16)
         {
-            [HUDManager showHUDWithToShowStr:[LanguagesManager getStr:Login_LoadingShowInfoKey] HUDMode:MBProgressHUDModeIndeterminate autoHide:NO afterDelay:0.1 userInteractionEnabled:NO];
-            //登录操作
+            _success = success;
+            _failed = failed;
+            
+            [HUDManager showHUDWithToShowStr:LocalizedStr(Login_LoadingShowInfoKey)
+                                     HUDMode:MBProgressHUDModeIndeterminate
+                                    autoHide:NO
+                                  afterDelay:0
+                      userInteractionEnabled:NO];
+            
+            // 登录操作
             NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_Login];
             NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
-            NSDictionary *dic = @{@"userName": userName, @"password": password};
+            NSDictionary *dic = @{@"username": userName,
+                                  @"password": password,
+                                  @"rememberMe": (autoLogin ? @"on" : @"")};
             
-            [[NetRequestManager sharedInstance] sendRequest:url parameterDic:dic requestMethodType:RequestMethodType_POST requestTag:NetUserCenterRequestType_Login delegate:self userInfo:nil];
+            [[NetRequestManager sharedInstance] sendRequest:url
+                                               parameterDic:dic
+                                          requestMethodType:RequestMethodType_POST
+                                                 requestTag:NetUserCenterRequestType_Login
+                                                   delegate:self
+                                                   userInfo:nil];
         }
         else
         {
-            [HUDManager showAutoHideHUDWithToShowStr:[LanguagesManager getStr:Login_NoPasswordShowInfoKey] HUDMode:MBProgressHUDModeText];
+            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入密码"];
         }
     }
     else
     {
-        [HUDManager showAutoHideHUDWithToShowStr:[LanguagesManager getStr:Login_NoUserShowInfoKey] HUDMode:MBProgressHUDModeText];
+        [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入用户名"];
     }
 }
 
@@ -56,6 +72,8 @@
 - (void)netRequest:(NetRequest *)request failedWithError:(NSError *)error
 {
     [HUDManager hideHUD];
+    [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:error.localizedDescription];
+    
     if (_failed)
     {
         _failed(error);
@@ -65,11 +83,11 @@
 - (void)netRequest:(NetRequest *)request successWithInfoObj:(id)infoObj
 {
     [HUDManager hideHUD];
+    
     if (_success)
     {
         _success(infoObj);
     }
 }
-
 
 @end
