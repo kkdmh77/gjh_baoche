@@ -45,22 +45,8 @@
                         <constraint firstAttribute="height" constant="40" id="xOg-hm-EkX"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qL1-BS-PRX">
-                    <rect key="frame" x="15" y="242" width="56" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="Wl8-BY-AUn"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="记住密码">
-                        <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="clickRememberBtn:" destination="-1" eventType="touchUpInside" id="D3u-8T-bV5"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQw-CI-kKa">
                     <rect key="frame" x="15" y="279" width="131" height="40"/>
                     <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -89,6 +75,23 @@
                         <action selector="clickRegisterBtn:" destination="-1" eventType="touchUpInside" id="x5L-ux-TDa"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qL1-BS-PRX">
+                    <rect key="frame" x="15" y="242" width="85" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Wl8-BY-AUn"/>
+                        <constraint firstAttribute="width" constant="85" id="eeb-gt-FXy"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="记住密码" image="jizhumima_normal.png">
+                        <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="jizhumima_highlight.png"/>
+                    <connections>
+                        <action selector="clickRememberBtn:" destination="-1" eventType="touchUpInside" id="D3u-8T-bV5"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -114,6 +117,8 @@
         </view>
     </objects>
     <resources>
+        <image name="jizhumima_highlight.png" width="19" height="20"/>
+        <image name="jizhumima_normal.png" width="19" height="20"/>
         <image name="weidenglutouxiang.png" width="47" height="47"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -128,8 +128,14 @@
     LXActivity *action = [[LXActivity alloc] initWithTitle:nil
                                                   delegate:self
                                          cancelButtonTitle:@"取消"
-                                         ShareButtonTitles:@[@"频道定制", @"个人中心", @"我的消息", @"设置"]
-                                 withShareButtonImagesName:@[@"tab_image_selected", @"tab_image_selected",@"tab_image_selected",@"tab_image_selected"]];
+                                         ShareButtonTitles:@[@"频道定制",
+                                                             @"个人中心",
+                                                             @"我的消息",
+                                                             @"设置"]
+                                 withShareButtonImagesName:@[@"pingdaodingzhi_normal",
+                                                             @"gerenzhongxing_normal",
+                                                             @"wodexiaoxi_normal",
+                                                             @"shezhi_normal"]];
     [action showInView:self.view];
 }
 

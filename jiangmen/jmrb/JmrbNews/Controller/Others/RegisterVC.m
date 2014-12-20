@@ -7,8 +7,20 @@
 //
 
 #import "RegisterVC.h"
+#import "FlatUIKit.h"
 
 @interface RegisterVC ()
+
+@property (weak, nonatomic) IBOutlet FUITextField *userNameTF;
+@property (weak, nonatomic) IBOutlet FUITextField *genderBGTF;
+@property (weak, nonatomic) IBOutlet UIButton *manBtn;
+@property (weak, nonatomic) IBOutlet UIButton *womenBtn;
+@property (weak, nonatomic) IBOutlet FUITextField *mobilePhoneNumTF;
+
+@property (weak, nonatomic) IBOutlet FUITextField *passwordTF;
+@property (weak, nonatomic) IBOutlet FUITextField *passwordConfirmTF;
+
+@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 
 @end
 
@@ -39,10 +51,24 @@
     {
         if ([subView isKindOfClass:[FUITextField class]])
         {
-            subView.backgroundColor = [UIColor whiteColor];
-            [subView addBorderToViewWitBorderColor:CellSeparatorColor borderWidth:LineWidth];
+            FUITextField *textField = (FUITextField *)subView;
+            
+            [textField addBorderToViewWitBorderColor:CellSeparatorColor borderWidth:LineWidth];
+            textField.leftViewMode = UITextFieldViewModeAlways;
+            textField.backgroundColor = HEXCOLOR(0XF7F7F7);
         }
     }
+    
+    _userNameTF.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yonghuming"]];
+    _genderBGTF.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"xingbie"]];
+    _mobilePhoneNumTF.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shoujihaoma"]];
+    _passwordTF.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mima"]];
+    _passwordConfirmTF.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zaicishurumima"]];
+    
+    _manBtn.selected = YES;
+    
+    _registerBtn.backgroundColor = Common_BlueColor;
+    [_registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (void)setup
@@ -51,10 +77,21 @@
     [self configureViewsProperties];
 }
 
+- (IBAction)clickManBtn:(UIButton *)sender
+{
+    _womenBtn.selected = NO;
+    _manBtn.selected = YES;
+}
+
+- (IBAction)clickWomenBtn:(UIButton *)sender
+{
+    _manBtn.selected = NO;
+    _womenBtn.selected = YES;
+}
+
 - (IBAction)clickRegisterBtn:(UIButton *)sender
 {
-    RegisterVC *registerVC = [RegisterVC loadFromNib];
-    [self pushViewController:registerVC];
+    
 }
 
 @end

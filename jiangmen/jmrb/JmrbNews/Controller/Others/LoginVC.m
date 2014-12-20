@@ -54,7 +54,7 @@
     
     [_passwordLabel addBorderToViewWitBorderColor:CellSeparatorColor borderWidth:LineWidth];
     _passwordLabel.leftViewMode = UITextFieldViewModeAlways;
-    _passwordLabel.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yonghuming"]];
+    _passwordLabel.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mima"]];
     _passwordLabel.backgroundColor = HEXCOLOR(0XF7F7F7);
     
     [_rememberPasswordBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -76,7 +76,7 @@
 
 - (IBAction)clickRememberBtn:(UIButton *)sender
 {
-    
+    sender.selected = !sender.selected;
 }
 
 - (IBAction)clickLoginBtn:(UIButton *)sender

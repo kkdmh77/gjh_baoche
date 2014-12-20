@@ -40,7 +40,7 @@
 - (void)getLocalTabShowData
 {
     NSArray *oneSectionTitleArray = @[@"收藏", @"清除缓存",@"关于"];
-    NSArray *oneSectionImageArray = @[@"shoucang", @"shoucang",@"about"];
+    NSArray *oneSectionImageArray = @[@"shoucang", @"shanchu",@"guanyu"];
     
     NSArray *twoSectionTitleArray = @[@"退出"];
     NSArray *twoSectionImageArray = @[@"tuichu"];
