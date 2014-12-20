@@ -71,7 +71,7 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
     // tab
     _tableView = InsertTableView(nil, self.view.bounds, self, self, UITableViewStylePlain);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = HEXCOLOR(0XECEBE8);
+    _tableView.backgroundColor = [UIColor clearColor];
     [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PassengersCell class]) bundle:nil] forCellReuseIdentifier:cellIdentifier_userCenterPassengersCell];
     [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([AddressCell class]) bundle:nil] forCellReuseIdentifier:cellIdentifier_userCenterAddressCell];
     
