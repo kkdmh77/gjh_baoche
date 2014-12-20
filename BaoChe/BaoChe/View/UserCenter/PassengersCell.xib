@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PassengersCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周杰伦" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYT-Ts-iE6">
+                        <rect key="frame" x="10" y="10" width="255" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="1bV-Ak-4Pl"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tc9-FB-dXS">
+                        <rect key="frame" x="275" y="16" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="FCK-oN-mb6"/>
+                            <constraint firstAttribute="height" constant="30" id="x4a-6R-di2"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="shanchu.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份证:4xxxxxxxxxxxxx" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EI4-7B-VMf">
+                        <rect key="frame" x="10" y="36" width="255" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="bYT-Ts-iE6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="0yW-MM-d3m"/>
+                    <constraint firstItem="EI4-7B-VMf" firstAttribute="top" secondItem="bYT-Ts-iE6" secondAttribute="bottom" constant="6" id="2jx-m3-nzb"/>
+                    <constraint firstItem="bYT-Ts-iE6" firstAttribute="trailing" secondItem="EI4-7B-VMf" secondAttribute="trailing" id="3mU-17-RAM"/>
+                    <constraint firstItem="Tc9-FB-dXS" firstAttribute="leading" secondItem="bYT-Ts-iE6" secondAttribute="trailing" constant="10" id="JIg-5l-abu"/>
+                    <constraint firstItem="bYT-Ts-iE6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="RGd-K4-WdQ"/>
+                    <constraint firstAttribute="trailing" secondItem="Tc9-FB-dXS" secondAttribute="trailing" constant="15" id="guE-9L-VH4"/>
+                    <constraint firstAttribute="centerY" secondItem="Tc9-FB-dXS" secondAttribute="centerY" id="mfw-Bm-dgV"/>
+                    <constraint firstItem="bYT-Ts-iE6" firstAttribute="leading" secondItem="EI4-7B-VMf" secondAttribute="leading" id="v57-6x-sN5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="IDCardLabel" destination="EI4-7B-VMf" id="26M-JX-n0g"/>
+                <outlet property="contactLabel" destination="bYT-Ts-iE6" id="gqx-oT-uax"/>
+            </connections>
+            <point key="canvasLocation" x="261" y="310"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="shanchu.png" width="30" height="30"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

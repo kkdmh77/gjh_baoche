@@ -10,6 +10,7 @@
 #import "AppPropertiesInitialize.h"
 #import "AllBusListVC.h"
 #import "HomePageVC.h"
+#import "UserCenterVC.h"
 
 @interface AppDelegate ()
 
@@ -25,7 +26,7 @@
     // 进行应用程序一系列属性的初始化设置
     [AppPropertiesInitialize startAppPropertiesInitialize];
     
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[HomePageVC new]];;
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[UserCenterVC new]];;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

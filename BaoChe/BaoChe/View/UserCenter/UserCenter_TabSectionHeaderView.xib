@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UserCenter_TabSectionHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="常用乘车人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kzc-0w-g1n">
+                    <rect key="frame" x="10" y="16" width="75" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhankaijiantou.png" translatesAutoresizingMaskIntoConstraints="NO" id="ll1-Tl-VnP">
+                    <rect key="frame" x="298" y="22" width="12" height="7"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3z-op-e69">
+                    <rect key="frame" x="246" y="16" width="42" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="添加" image="jianhao_lanse.png">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ll1-Tl-VnP" secondAttribute="trailing" constant="10" id="KBj-bJ-LsW"/>
+                <constraint firstItem="B3z-op-e69" firstAttribute="centerY" secondItem="Kzc-0w-g1n" secondAttribute="centerY" id="Obd-bI-irO"/>
+                <constraint firstItem="Kzc-0w-g1n" firstAttribute="centerY" secondItem="ll1-Tl-VnP" secondAttribute="centerY" id="Z5K-Pg-yvU"/>
+                <constraint firstItem="Kzc-0w-g1n" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="cLF-V4-fEK"/>
+                <constraint firstAttribute="centerY" secondItem="Kzc-0w-g1n" secondAttribute="centerY" id="eqI-34-fut"/>
+                <constraint firstItem="ll1-Tl-VnP" firstAttribute="leading" secondItem="B3z-op-e69" secondAttribute="trailing" constant="10" id="zvl-5W-7x2"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addBtn" destination="B3z-op-e69" id="MDK-sn-atm"/>
+                <outlet property="arrowImageView" destination="ll1-Tl-VnP" id="Nsu-qE-dcW"/>
+                <outlet property="titileLabel" destination="Kzc-0w-g1n" id="4bw-e4-PkN"/>
+            </connections>
+            <point key="canvasLocation" x="263" y="357"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="jianhao_lanse.png" width="12" height="12"/>
+        <image name="zhankaijiantou.png" width="12" height="7"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
