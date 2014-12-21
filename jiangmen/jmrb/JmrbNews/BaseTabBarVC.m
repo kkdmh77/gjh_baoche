@@ -57,39 +57,61 @@
         [aItem setTitleTextAttributes:@{UITextAttributeTextColor: HEXCOLOR(0X306CC5)} forState:UIControlStateSelected];
         [aItem setTitleTextAttributes:@{UITextAttributeTextColor: HEXCOLOR(0X4F555F)} forState:UIControlStateNormal];
         
+        NSString *title = nil;
+        UIImage *normalImage = nil;
+        UIImage *selectedImage = nil;
+        
         switch (i)
         {
             case 0:
             {
-                aItem.title = @"新闻";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"tab_news_selected"]
-                    withFinishedUnselectedImage:[UIImage imageNamed:@"tab_news_normal"]];
+                title = @"新闻";
+
+                normalImage = [UIImage imageNamed:@"tab_news_normal"];
+                selectedImage = [UIImage imageNamed:@"tab_news_selected"];
             }
                 break;
             case 1:
             {
-                aItem.title = @"图片";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"tab_image_selected"]
-                    withFinishedUnselectedImage:[UIImage imageNamed:@"tab_image_normal"]];
+                title = @"图片";
+              
+                normalImage = [UIImage imageNamed:@"tab_image_normal"];
+                selectedImage = [UIImage imageNamed:@"tab_image_selected"];
             }
                 break;
             case 2:
             {
-                aItem.title = @"视频";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"tab_video_selected"]
-                    withFinishedUnselectedImage:[UIImage imageNamed:@"tab_video_normal"]];
+                title = @"视频";
+                
+                normalImage = [UIImage imageNamed:@"tab_video_normal"];
+                selectedImage = [UIImage imageNamed:@"tab_video_selected"];
             }
                 break;
             case 3:
             {
-                aItem.title = @"论坛";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"tab_bbs_selected"]
-                    withFinishedUnselectedImage:[UIImage imageNamed:@"tab_bbs_normal"]];
+                title = @"论坛";
+                
+                normalImage = [UIImage imageNamed:@"tab_bbs_normal"];
+                selectedImage = [UIImage imageNamed:@"tab_bbs_selected"];
             }
                 break;
                 
             default:
                 break;
+        }
+        
+        if (IOS7)
+        {
+            normalImage = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            selectedImage = [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            
+            [aItem setImage:normalImage];
+            [aItem setSelectedImage:selectedImage];
+        }
+        else
+        {
+            [aItem setFinishedSelectedImage:normalImage
+                withFinishedUnselectedImage:selectedImage];
         }
     }
 }

@@ -54,38 +54,64 @@
     for (int i = 0; i < items.count; i++)
     {
         UITabBarItem *aItem = [items objectAtIndex:i];
-        [aItem setTitleTextAttributes:@{UITextAttributeTextColor: Common_InkBlackColor}
-                             forState:UIControlStateSelected];
+        [aItem setTitleTextAttributes:@{UITextAttributeTextColor: HEXCOLOR(0X306CC5)} forState:UIControlStateSelected];
+        [aItem setTitleTextAttributes:@{UITextAttributeTextColor: HEXCOLOR(0X4F555F)} forState:UIControlStateNormal];
+        
+        NSString *title = nil;
+        UIImage *normalImage = nil;
+        UIImage *selectedImage = nil;
         
         switch (i)
         {
             case 0:
             {
-                aItem.title = @"身边的事";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_22.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_21.png"]];
+                title = @"新闻";
+                
+                normalImage = [UIImage imageNamed:@"tab_news_normal"];
+                selectedImage = [UIImage imageNamed:@"tab_news_selected"];
             }
                 break;
             case 1:
             {
-                aItem.title = @"我的声音";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_32.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_31.png"]];
+                title = @"图片";
+                
+                normalImage = [UIImage imageNamed:@"tab_image_normal"];
+                selectedImage = [UIImage imageNamed:@"tab_image_selected"];
             }
                 break;
             case 2:
             {
-                aItem.title = @"公共服务";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_12.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_11.png"]];
+                title = @"视频";
+                
+                normalImage = [UIImage imageNamed:@"tab_video_normal"];
+                selectedImage = [UIImage imageNamed:@"tab_video_selected"];
             }
                 break;
             case 3:
             {
-                aItem.title = @"我的生活";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_highlight.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_normal.png"]];
+                title = @"论坛";
+                
+                normalImage = [UIImage imageNamed:@"tab_bbs_normal"];
+                selectedImage = [UIImage imageNamed:@"tab_bbs_selected"];
             }
                 break;
                 
             default:
                 break;
+        }
+        
+        if (IOS7)
+        {
+            normalImage = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            selectedImage = [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            
+            [aItem setImage:normalImage];
+            [aItem setSelectedImage:selectedImage];
+        }
+        else
+        {
+            [aItem setFinishedSelectedImage:normalImage
+                withFinishedUnselectedImage:selectedImage];
         }
     }
 }
