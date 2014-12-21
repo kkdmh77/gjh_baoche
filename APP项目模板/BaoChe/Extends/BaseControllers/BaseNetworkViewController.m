@@ -177,9 +177,22 @@
         [self showHUDInfoByString:[LanguagesManager getStr:All_DataSourceNotFoundKey]];
     }
     // 未登录或登录过期
-    else if (error.code == MyHTTPCodeType_TokenIllegal || error.code == MyHTTPCodeType_TokenIncomplete || error.code == MyHTTPCodeType_TokenOverdue)
+    else if (error.code == MyHTTPCodeType_TokenIllegal ||
+             error.code == MyHTTPCodeType_TokenIncomplete ||
+             error.code == MyHTTPCodeType_TokenOverdue)
     {
         [self showHUDInfoByString:@"未登录或登录已过期,请重新登录"];
+        
+        // 自动跳入登录页面
+        /*
+        LoginAndRegisterVC *login = [LoginAndRegisterVC loadFromNib];
+        UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+        [self presentViewController:loginNav
+               modalTransitionStyle:UIModalTransitionStyleCoverVertical
+                         completion:^{
+                             
+                         }];
+         */
     }
     else
     {

@@ -95,21 +95,10 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
         err = [[NSError alloc] initWithDomain:@"MYSERVER_ERROR_DOMAIN" code:myCodeNum.integerValue userInfo:[NSDictionary dictionaryWithObjectsAndKeys:myMsgStr, NSLocalizedDescriptionKey, nil]];
         
         *result = err;
-        /*
-        // 自动跳入登录页面
-        if (MyHTTPCodeType_TokenOverdue == myCodeNum.integerValue || MyHTTPCodeType_TokenIncomplete == myCodeNum.integerValue || MyHTTPCodeType_TokenIllegal == myCodeNum.integerValue)
-        {
-            if ([delegate isKindOfClass:[UIViewController class]])
-            {
-                UIViewController *sendRequestVC = (UIViewController *)delegate;
-                
-                LoginVC *login = [LoginVC loadFromNib];
-                [sendRequestVC presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:nil];
-            }
-        }
-        */
+       
         return NO;
     }
+    *result = [*result objectForKey:@"data"];
     
     return YES;
 }

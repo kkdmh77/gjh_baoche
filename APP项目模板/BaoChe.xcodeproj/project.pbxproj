@@ -11,6 +11,7 @@
 		43C86BEA1A15F14F00AD9B49 /* CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C86BE61A15F14F00AD9B49 /* CTAssetsPickerController.m */; };
 		43C86BEB1A15F14F00AD9B49 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43C86BE71A15F14F00AD9B49 /* Images.xcassets */; };
 		43C86BEC1A15F14F00AD9B49 /* NSDate+TimeInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C86BE91A15F14F00AD9B49 /* NSDate+TimeInterval.m */; };
+		43CB6B0F1A4662B6003829E6 /* BaseTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B0E1A4662B6003829E6 /* BaseTabBarVC.m */; };
 		43CBD1F71A38161900406432 /* CommentSendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CBD1F61A38161900406432 /* CommentSendController.m */; };
 		43CCC5AD1A1DC69B009E4A4C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43CCC5AF1A1DC69B009E4A4C /* Localizable.strings */; };
 		43D1ED1A19FB37F30049518E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1919FB37F30049518E /* main.m */; };
@@ -380,6 +381,8 @@
 		43C86BE71A15F14F00AD9B49 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		43C86BE81A15F14F00AD9B49 /* NSDate+TimeInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeInterval.h"; sourceTree = "<group>"; };
 		43C86BE91A15F14F00AD9B49 /* NSDate+TimeInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeInterval.m"; sourceTree = "<group>"; };
+		43CB6B0D1A4662B6003829E6 /* BaseTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarVC.h; sourceTree = "<group>"; };
+		43CB6B0E1A4662B6003829E6 /* BaseTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarVC.m; sourceTree = "<group>"; };
 		43CBD1F51A38161900406432 /* CommentSendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentSendController.h; sourceTree = "<group>"; };
 		43CBD1F61A38161900406432 /* CommentSendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentSendController.m; sourceTree = "<group>"; };
 		43CCC5AE1A1DC69B009E4A4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1248,6 +1251,8 @@
 		43D1ED4819FB3AD40049518E /* BaseControllers */ = {
 			isa = PBXGroup;
 			children = (
+				43CB6B0D1A4662B6003829E6 /* BaseTabBarVC.h */,
+				43CB6B0E1A4662B6003829E6 /* BaseTabBarVC.m */,
 				43D1ED4919FB3AD40049518E /* BaseNetworkViewController+NetRequestManager.h */,
 				43D1ED4A19FB3AD40049518E /* BaseNetworkViewController+NetRequestManager.m */,
 				43D1ED4B19FB3AD40049518E /* BaseNetworkViewController.h */,
@@ -2874,6 +2879,7 @@
 				43D1F1CA19FB3AFB0049518E /* MagicalRecord+ErrorHandling.m in Sources */,
 				43D1F54919FB4C1A0049518E /* NIMutableTableViewModel.m in Sources */,
 				43D1F2E719FB3AFB0049518E /* ATTapView.m in Sources */,
+				43CB6B0F1A4662B6003829E6 /* BaseTabBarVC.m in Sources */,
 				43D1ED6619FB3AD40049518E /* LoginBC.m in Sources */,
 				43D1F56919FB4C1A0049518E /* NIPagingScrollView.m in Sources */,
 				43D1F18319FB3AFB0049518E /* AQGridViewUpdateInfo.m in Sources */,
