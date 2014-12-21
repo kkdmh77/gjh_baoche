@@ -71,3 +71,14 @@
 @property (nonatomic, assign) NSInteger imagePraiseCount;   // 图片赞的数量
 
 @end
+
+///////////////////////////////////////////////////////////////
+
+@interface CommentEntity : NetItem
+
+@property (nonatomic, copy) NSString *criticsHeaderImageUrlStr;     // 评论人头像
+@property (nonatomic, copy) NSString *criticsName;                  // 评论人姓名
+@property (nonatomic, assign) NSTimeInterval commentTime;           // 评论时间
+@property (nonatomic, copy) NSString *commentContentStr;            // 评论内容
+
+@end

@@ -250,7 +250,7 @@ CG_INLINE  void deleteFile() {
     UINavigationController *videoNewsListNav = [[[UINavigationController alloc] initWithRootViewController:videoNewsList] autorelease];
     
     BaseTabBarVC *baseTabBarController = [[[BaseTabBarVC alloc] init] autorelease];
-    baseTabBarController.viewControllers = @[newsManagerNav, imageNewsListNav, videoNewsListNav];
+    baseTabBarController.viewControllers = @[newsManagerNav, imageNewsListNav, videoNewsListNav, [UIViewController new]];
     
     self.window.rootViewController = baseTabBarController;
     

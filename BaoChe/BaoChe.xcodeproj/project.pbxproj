@@ -35,6 +35,7 @@
 		2BF2E0791A3F3B5B00F83491 /* HomePageTodayHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2E0771A3F3B5B00F83491 /* HomePageTodayHotCell.m */; };
 		2BF2E07A1A3F3B5B00F83491 /* HomePageTodayHotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */; };
 		4372D7741A0879FD00CEA66D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4372D7761A0879FD00CEA66D /* InfoPlist.strings */; };
+		43CB6B201A46843C003829E6 /* BaseTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B1F1A46843C003829E6 /* BaseTabBarVC.m */; };
 		43D1ED1A19FB37F30049518E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1919FB37F30049518E /* main.m */; };
 		43D1ED1D19FB37F30049518E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1C19FB37F30049518E /* AppDelegate.m */; };
 		43D1ED2019FB37F30049518E /* BaoChe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1E19FB37F30049518E /* BaoChe.xcdatamodeld */; };
@@ -456,6 +457,8 @@
 		2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageTodayHotCell.xib; sourceTree = "<group>"; };
 		4372D7751A0879FD00CEA66D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4372D7771A087A1600CEA66D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		43CB6B1E1A46843C003829E6 /* BaseTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarVC.h; sourceTree = "<group>"; };
+		43CB6B1F1A46843C003829E6 /* BaseTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarVC.m; sourceTree = "<group>"; };
 		43D1ED1419FB37F30049518E /* BaoChe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaoChe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D1ED1819FB37F30049518E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43D1ED1919FB37F30049518E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1451,6 +1454,8 @@
 		43D1ED4819FB3AD40049518E /* BaseControllers */ = {
 			isa = PBXGroup;
 			children = (
+				43CB6B1E1A46843C003829E6 /* BaseTabBarVC.h */,
+				43CB6B1F1A46843C003829E6 /* BaseTabBarVC.m */,
 				43D1ED4919FB3AD40049518E /* BaseNetworkViewController+NetRequestManager.h */,
 				43D1ED4A19FB3AD40049518E /* BaseNetworkViewController+NetRequestManager.m */,
 				43D1ED4B19FB3AD40049518E /* BaseNetworkViewController.h */,
@@ -3236,6 +3241,7 @@
 				43D1F2B319FB3AFB0049518E /* ATUtf8.c in Sources */,
 				43D1F56319FB4C1A0049518E /* NIOverviewPageView.m in Sources */,
 				43D1F1C719FB3AFB0049518E /* NSPersistentStore+MagicalRecord.m in Sources */,
+				43CB6B201A46843C003829E6 /* BaseTabBarVC.m in Sources */,
 				43D1F1B919FB3AFB0049518E /* NSNumber+MagicalDataImport.m in Sources */,
 				43D1F55E19FB4C1A0049518E /* NIDeviceInfo.m in Sources */,
 				43D1F2E319FB3AFB0049518E /* ATSeedFill.mm in Sources */,

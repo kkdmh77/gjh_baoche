@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AppPropertiesInitialize.h"
+#import "BaseTabBarVC.h"
 #import "AllBusListVC.h"
 #import "HomePageVC.h"
 #import "UserCenterVC.h"
@@ -27,7 +28,22 @@
     // 进行应用程序一系列属性的初始化设置
     [AppPropertiesInitialize startAppPropertiesInitialize];
     
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[MoreVC new]];
+    AllBusListVC *allBusList = [[AllBusListVC alloc] init];
+    UINavigationController *allBusListNav = [[UINavigationController alloc] initWithRootViewController:allBusList];
+    
+    HomePageVC *homePage = [[HomePageVC alloc] init];
+    UINavigationController *homePageNav = [[UINavigationController alloc] initWithRootViewController:homePage];
+    
+    UserCenterVC *userCenter = [[UserCenterVC alloc] init];
+    UINavigationController *userCenterNav = [[UINavigationController alloc] initWithRootViewController:userCenter];
+    
+    MoreVC *more = [[MoreVC alloc] init];
+    UINavigationController *moreNav = [[UINavigationController alloc] initWithRootViewController:more];
+    
+    BaseTabBarVC *baseTabBarController = [[BaseTabBarVC alloc] init];
+    baseTabBarController.viewControllers = @[allBusListNav, homePageNav, userCenterNav, moreNav];
+    
+    self.window.rootViewController = baseTabBarController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

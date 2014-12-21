@@ -10,9 +10,11 @@
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "CommentSendController.h"
 #import "AppPropertiesInitialize.h"
+#import "CommentView.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDK/ISSShareViewDelegate.h>
 #import <ShareSDK/ISSViewDelegate.h>
+#import "CommentVC.h"
 
 @interface DetailNewsVC () <UIWebViewDelegate, ISSShareViewDelegate, ISSViewDelegate>
 {
@@ -137,27 +139,38 @@ int webTextFontValue = 15;
 
 - (void)initialization
 {
-    _webView = InsertWebView(self.view, CGRectDecreaseSize(self.view.bounds, 0, 45), self, 1000);
-    [_webView keepAutoresizingInFull];
-    
+    WEAKSELF
     // 评论输入框
-    UIView *commentToolBarView = InsertView(self.view, CGRectZero);
-    commentToolBarView.backgroundColor = [UIColor whiteColor];
-    commentToolBarView.alpha = 0.8;
-    [commentToolBarView addTarget:self action:@selector(operationSendCommentGesture:)];
-    [commentToolBarView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(CGSizeMake(self.viewBoundsWidth, 45));
-        make.left.equalTo(@(0));
-        make.bottom.equalTo(@(0));
+    CommentView *comment = [CommentView loadFromNib];
+    comment.boundsWidth = self.viewBoundsWidth;
+    comment.origin = CGPointMake(0, self.view.boundsHeight - comment.boundsHeight);
+    comment.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [comment setRightBtnTitle:@"66评论"];
+    [comment setOperationHandle:^(CommentView *view, CommentViewOperationType type) {
+        
+        if (CommentViewOperationType_Input == type)
+        {
+            [[CommentSendController sharedInstance] showCommentInputViewAndSendUrl:nil
+                                                                    completeHandle:^(BOOL isSendSuccess) {
+                                                                        
+                                                                    }];
+        }
+        else
+        {
+            CommentVC *commentVC = [[CommentVC alloc] init];
+            [weakSelf pushViewController:commentVC];
+        }
     }];
+    [self.view addSubview:comment];
+    
+    // webView
+    _webView = InsertWebView(self.view, CGRectDecreaseSize(self.view.bounds, 0, comment.boundsHeight), self, 1000);
+    [_webView keepAutoresizingInFull];
 }
 
 - (void)operationSendCommentGesture:(UITapGestureRecognizer *)gesture
 {
-    [[CommentSendController sharedInstance] showCommentInputViewAndSendUrl:nil
-                                                            completeHandle:^(BOOL isSendSuccess) {
-        
-    }];
+    
 }
 
 - (void)operationShareAction:(UIButton *)sender

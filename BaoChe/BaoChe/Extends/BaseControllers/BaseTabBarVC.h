@@ -10,6 +10,4 @@
 
 @interface BaseTabBarVC : UITabBarController
 
-- (void)setTabBarItemsInfo;
-
 @end
