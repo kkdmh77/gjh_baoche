@@ -29,7 +29,7 @@ DEF_SINGLETON(CommentSendController);
 {
     if (!_commentInputShowPop)
     {
-        const CGFloat btnWidthAndHeight = 35.0;
+        const CGFloat btnWidthAndHeight = 30.0;
         const CGFloat viewBetweenSpaceValue = 10.0;
         
         UIView *containerView = InsertView(nil, CGRectMake(0, 0, IPHONE_WIDTH, 200));
@@ -51,8 +51,8 @@ DEF_SINGLETON(CommentSendController);
         UIButton *sendBtn = InsertImageButton(containerView,
                                               CGRectZero,
                                               1002,
-                                              [UIImage imageNamed:@"sned_comment_normal"],
-                                              [UIImage imageNamed:@"sned_comment_highlight"],
+                                              [UIImage imageNamed:@"send_comment_normal"],
+                                              [UIImage imageNamed:@"send_comment_highlight"],
                                               self,
                                               @selector(clickSendBtn:));
         [sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {

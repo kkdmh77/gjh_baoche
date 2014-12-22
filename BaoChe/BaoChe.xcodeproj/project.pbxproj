@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2B176D6D1A3C851B0094EC96 /* AllBusListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */; };
+		2B521ED51A4856410083DE33 /* OrderWriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B521ED41A4856410083DE33 /* OrderWriteVC.m */; };
+		2B521ED81A4858A00083DE33 /* OrderInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B521ED71A4858A00083DE33 /* OrderInfoView.m */; };
+		2B521EDA1A4858AC0083DE33 /* OrderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B521ED91A4858AC0083DE33 /* OrderInfoView.xib */; };
+		2B521EDD1A485E010083DE33 /* order_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B521EDB1A485E010083DE33 /* order_arrow@2x.png */; };
+		2B521EDE1A485E010083DE33 /* order_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B521EDC1A485E010083DE33 /* order_arrow@3x.png */; };
+		2B521EE01A48682C0083DE33 /* OrderContactInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B521EDF1A48682C0083DE33 /* OrderContactInfoView.xib */; };
 		2BD868231A3DC70300BC46BF /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868221A3DC70300BC46BF /* HomePageVC.m */; };
 		2BD868261A3DCF0900BC46BF /* HomePageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */; };
 		2BD868281A3DCF1600BC46BF /* HomePageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */; };
@@ -421,6 +427,14 @@
 /* Begin PBXFileReference section */
 		2B176D6B1A3C851B0094EC96 /* AllBusListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllBusListVC.h; sourceTree = "<group>"; };
 		2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllBusListVC.m; sourceTree = "<group>"; };
+		2B521ED31A4856410083DE33 /* OrderWriteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderWriteVC.h; sourceTree = "<group>"; };
+		2B521ED41A4856410083DE33 /* OrderWriteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderWriteVC.m; sourceTree = "<group>"; };
+		2B521ED61A4858A00083DE33 /* OrderInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoView.h; sourceTree = "<group>"; };
+		2B521ED71A4858A00083DE33 /* OrderInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoView.m; sourceTree = "<group>"; };
+		2B521ED91A4858AC0083DE33 /* OrderInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoView.xib; sourceTree = "<group>"; };
+		2B521EDB1A485E010083DE33 /* order_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_arrow@2x.png"; sourceTree = "<group>"; };
+		2B521EDC1A485E010083DE33 /* order_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_arrow@3x.png"; sourceTree = "<group>"; };
+		2B521EDF1A48682C0083DE33 /* OrderContactInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderContactInfoView.xib; sourceTree = "<group>"; };
 		2BD868211A3DC70300BC46BF /* HomePageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageVC.h; sourceTree = "<group>"; };
 		2BD868221A3DC70300BC46BF /* HomePageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageVC.m; sourceTree = "<group>"; };
 		2BD868241A3DCF0900BC46BF /* HomePageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageHeaderView.h; sourceTree = "<group>"; };
@@ -1276,6 +1290,8 @@
 		2BE0BE811A45336A000B8871 /* Bus */ = {
 			isa = PBXGroup;
 			children = (
+				2B521ED31A4856410083DE33 /* OrderWriteVC.h */,
+				2B521ED41A4856410083DE33 /* OrderWriteVC.m */,
 			);
 			path = Bus;
 			sourceTree = "<group>";
@@ -1292,6 +1308,10 @@
 		2BE0BE831A453372000B8871 /* Bus */ = {
 			isa = PBXGroup;
 			children = (
+				2B521ED61A4858A00083DE33 /* OrderInfoView.h */,
+				2B521ED71A4858A00083DE33 /* OrderInfoView.m */,
+				2B521ED91A4858AC0083DE33 /* OrderInfoView.xib */,
+				2B521EDF1A48682C0083DE33 /* OrderContactInfoView.xib */,
 			);
 			path = Bus;
 			sourceTree = "<group>";
@@ -2843,6 +2863,8 @@
 		43D775381A3D4BA500C088CE /* AllBusList */ = {
 			isa = PBXGroup;
 			children = (
+				2B521EDB1A485E010083DE33 /* order_arrow@2x.png */,
+				2B521EDC1A485E010083DE33 /* order_arrow@3x.png */,
 				43D775531A3D712900C088CE /* headerView_leftArrow@2x.png */,
 				43D775541A3D712900C088CE /* headerView_leftArrow@3x.png */,
 				43D775551A3D712900C088CE /* headerView_rightArrow@2x.png */,
@@ -2975,6 +2997,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B521EDA1A4858AC0083DE33 /* OrderInfoView.xib in Resources */,
 				2BE0BEA11A453C0E000B8871 /* youjiantou@3x.png in Resources */,
 				43D7755A1A3D712900C088CE /* headerView_rightArrow@3x.png in Resources */,
 				43D1F29819FB3AFB0049518E /* sr_refresh@2X.png in Resources */,
@@ -2990,6 +3013,7 @@
 				43D1F57819FB4C1A0049518E /* Icon-Small-50.png in Resources */,
 				43D775441A3D4BD900C088CE /* busList_arrow@3x.png in Resources */,
 				43D1F57F19FB4C1A0049518E /* unittest.xcconfig in Resources */,
+				2B521EDE1A485E010083DE33 /* order_arrow@3x.png in Resources */,
 				43D7753D1A3D4BA500C088CE /* qishidian@2x.png in Resources */,
 				43D1F1AC19FB3AFB0049518E /* IQKeyboardManager.bundle in Resources */,
 				43D1F56819FB4C1A0049518E /* deps in Resources */,
@@ -3013,6 +3037,7 @@
 				2BD868281A3DCF1600BC46BF /* HomePageHeaderView.xib in Resources */,
 				2BE0BE891A4533D9000B8871 /* PassengersCell.xib in Resources */,
 				43D1F55619FB4C1A0049518E /* deps in Resources */,
+				2B521EE01A48682C0083DE33 /* OrderContactInfoView.xib in Resources */,
 				43D1F4E619FB4C1A0049518E /* deps in Resources */,
 				43D1F57E19FB4C1A0049518E /* nimbus64x64.png in Resources */,
 				43D1F58019FB4C1A0049518E /* deps in Resources */,
@@ -3043,6 +3068,7 @@
 				2BE0BEAD1A45525A000B8871 /* AddressCell.xib in Resources */,
 				43D1F53619FB4C1A0049518E /* deps in Resources */,
 				43D1F4DE19FB4C1A0049518E /* deps in Resources */,
+				2B521EDD1A485E010083DE33 /* order_arrow@2x.png in Resources */,
 				43D1F53A19FB4C1A0049518E /* deps in Resources */,
 				43D1F2E119FB3AFB0049518E /* pinyin.correct in Resources */,
 				2BE0BEB61A459DB2000B8871 /* youjiantou_cell@3x.png in Resources */,
@@ -3090,6 +3116,7 @@
 				43D1F1B419FB3AFB0049518E /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				43D1F4F519FB4C1A0049518E /* NINonRetainingCollections.m in Sources */,
 				43D1F28E19FB3AFB0049518E /* RegexKitLite.m in Sources */,
+				2B521ED81A4858A00083DE33 /* OrderInfoView.m in Sources */,
 				43D1F4F919FB4C1A0049518E /* NISDKAvailability.m in Sources */,
 				43D1F17B19FB3AFB0049518E /* SBJsonWriter.m in Sources */,
 				43D1F29519FB3AFB0049518E /* UIButton+WebCache.m in Sources */,
@@ -3363,6 +3390,7 @@
 				43D1F1BF19FB3AFB0049518E /* NSManagedObject+MagicalFinders.m in Sources */,
 				43D1F4E419FB4C1A0049518E /* NICollectionViewModel.m in Sources */,
 				43D1F1A519FB3AFB0049518E /* UIStepper+FlatUI.m in Sources */,
+				2B521ED51A4856410083DE33 /* OrderWriteVC.m in Sources */,
 				43D1F2D619FB3AFB0049518E /* ATBookAnimationView.m in Sources */,
 				43D1F4F619FB4C1A0049518E /* NIOperations.m in Sources */,
 				43D1F28F19FB3AFB0049518E /* MKAnnotationView+WebCache.m in Sources */,

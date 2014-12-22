@@ -11,6 +11,7 @@
 #import "AllBusListCell.h"
 #import "AllBusList_HeaderView.h"
 #import "CalendarHomeViewController.h"
+#import "OrderWriteVC.h"
 
 static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList";
 
@@ -137,6 +138,10 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    OrderWriteVC *orderWrite = [[OrderWriteVC alloc] init];
+    orderWrite.hidesBottomBarWhenPushed = YES;
+    [self pushViewController:orderWrite];
 }
 
 @end
