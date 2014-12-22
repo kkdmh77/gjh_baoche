@@ -38,8 +38,8 @@ DEF_SINGLETON(CommentSendController);
         UIButton *cancelBtn = InsertImageButton(containerView,
                                                 CGRectZero,
                                                 1000,
-                                                [UIImage imageWithColor:[UIColor yellowColor] size:CGSizeMake(1, 1)],
-                                                nil,
+                                                [UIImage imageNamed:@"cancel_comment_normal"],
+                                                [UIImage imageNamed:@"cancel_comment_highlight"],
                                                 self,
                                                 @selector(clickCancelBtn:));
         [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -51,8 +51,8 @@ DEF_SINGLETON(CommentSendController);
         UIButton *sendBtn = InsertImageButton(containerView,
                                               CGRectZero,
                                               1002,
-                                              [UIImage imageWithColor:[UIColor redColor] size:CGSizeMake(1, 1)],
-                                              nil,
+                                              [UIImage imageNamed:@"sned_comment_normal"],
+                                              [UIImage imageNamed:@"sned_comment_highlight"],
                                               self,
                                               @selector(clickSendBtn:));
         [sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {

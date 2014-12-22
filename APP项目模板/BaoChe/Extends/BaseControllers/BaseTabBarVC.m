@@ -100,6 +100,7 @@
                 break;
         }
         
+        aItem.title = title;
         if (IOS7)
         {
             normalImage = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

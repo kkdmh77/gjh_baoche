@@ -304,7 +304,7 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
         
         [UIView animateWithDuration:0.2 animations:^{
             
-            [_shadowImageView setFrame:CGRectMake(sender.frame.origin.x, kHeightOfTopScrollView - kHeightOfShadowImageView, sender.frame.size.width, kHeightOfShadowImageView)];
+            [_shadowImageView setFrame:CGRectMake(sender.frame.origin.x, _shadowImageView.frameOriginY, sender.frame.size.width, kHeightOfShadowImageView)];
             
             // 更换shadowImageView的image
             NSInteger selectedBtnIndex = [_topScrollBtnsArray indexOfObject:sender];
