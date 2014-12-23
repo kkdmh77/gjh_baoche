@@ -9,8 +9,15 @@
 #import "CommentVC.h"
 #import "CommentView.h"
 #import "CommentSendController.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
+#import "CommentCell.h"
+
+static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
 
 @interface CommentVC ()
+{
+    NSMutableArray *_netCommentEntityArray;
+}
 
 @end
 
@@ -20,6 +27,7 @@
 {
     [super viewDidLoad];
     
+    [self dddd];
     [self initialization];
     [self getNetworkData];
 }
@@ -30,6 +38,19 @@
 }
 
 #pragma mark - custom methods
+
+- (void)dddd
+{
+    CommentEntity *entity = [[CommentEntity alloc] init];
+    entity.criticsName = @"周杰伦";
+    entity.commentContentStr = @"阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方";
+    
+    CommentEntity *entity1 = [[CommentEntity alloc] init];
+    entity1.criticsName = @"周杰伦";
+    entity1.commentContentStr = @"阿斯顿发方";
+    
+    _netCommentEntityArray = [NSMutableArray arrayWithObjects:entity, entity1, nil];
+}
 
 - (void)setPageLocalizableText
 {
@@ -53,24 +74,12 @@
 
 - (void)getNetVideosListDataWithNetCachePolicy:(NetCachePolicy)cachePolicy
 {
-    /*
-     1.pageNum: 当前页数
-     2.pageSize: 每页行数
-     */
-    /*
-    NSDictionary *dic = @{@"pageNum": @(_curPageIndex),
-                          @"pageSize": @(15)};
+    NSDictionary *dic = @{@"newsId": @(_newsId)};
     
-    [self sendRequest:[[self class] getRequestURLStr:NetVideosRequestType_GetVideosList]
+    [self sendRequest:[[self class] getRequestURLStr:NetNewsRequestType_GetCommentList]
          parameterDic:dic
-       requestHeaders:nil
     requestMethodType:RequestMethodType_POST
-           requestTag:NetVideosRequestType_GetVideosList
-             delegate:self
-             userInfo:nil
-       netCachePolicy:cachePolicy
-         cacheSeconds:CacheNetDataTimeType_OneMinute];
-     */
+           requestTag:NetNewsRequestType_GetCommentList];
 }
 
 - (NSMutableArray *)parseNetDataWithDic:(NSDictionary *)dic
@@ -104,15 +113,20 @@
     [self.view addSubview:comment];
     
     // tab
-//    [self setupTableViewWithFrame:self.view.bounds
-//                            style:UITableViewStylePlain
-//                  registerNibName:NSStringFromClass([VideoNewsCell class])
-//                  reuseIdentifier:cellIdentifer_videoNews];
+    [self setupTableViewWithFrame:self.view.bounds
+                            style:UITableViewStylePlain
+                  registerNibName:NSStringFromClass([CommentCell class])
+                  reuseIdentifier:cellIdenfitier_comment];
 }
 
 - (void)reloadTableData
 {
     [_tableView reloadData];
+}
+
+- (CommentEntity *)curShowDataAtIndex:(NSInteger)index
+{
+    return index < _netCommentEntityArray.count ? _netCommentEntityArray[index] : nil;
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -124,24 +138,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return _netCommentEntityArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 0;
+    return [CommentCell getCellHeihgtWithItemEntity:[self curShowDataAtIndex:indexPath.row]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    VideoNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifer_videoNews];
+    CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdenfitier_comment];
     
-    VideoNewsEntity *entity = _netVideoNewsEntityArray[indexPath.row];
+    CommentEntity *entity = [self curShowDataAtIndex:indexPath.row];;
     [cell loadCellShowDataWithItemEntity:entity];
-     */
     
-    return nil;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

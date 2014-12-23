@@ -25,6 +25,7 @@
                            @"getAds.action",
                            
                            @"getNews.action",
+                           @"getComment.action",
                            
                            // 图片
                            @"getHotNewsPic.action",

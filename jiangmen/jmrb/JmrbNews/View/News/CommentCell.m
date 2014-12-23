@@ -8,7 +8,18 @@
 
 #import "CommentCell.h"
 
+@interface CommentCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *userHeaderImageView;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentContentLabel;
+
+@end
+
 @implementation CommentCell
+
+static CommentCell *defaultCell;
 
 - (void)awakeFromNib
 {
@@ -25,7 +36,13 @@
 
 - (void)configureViewsProperties
 {
-
+    _userNameLabel.textColor = Common_BlueColor;
+    _commentTimeLabel.textColor = Common_LiteGrayColor;
+    _commentContentLabel.textColor = Common_BlackColor;
+    
+    [self.contentView addLineWithPosition:ViewDrawLinePostionType_Bottom
+                                lineColor:CellSeparatorColor
+                                lineWidth:LineWidth];
 }
 
 - (void)setup
@@ -38,12 +55,32 @@
 
 + (CGFloat)getCellHeihgtWithItemEntity:(CommentEntity *)entity
 {
-    return 0;
+    if (!defaultCell)
+    {
+        defaultCell = [self loadFromNib];
+    }
+    
+    /*
+    [defaultCell loadCellShowDataWithItemEntity:entity];
+    
+    CGSize cellSize = [defaultCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    
+    return cellSize.height + 1;
+     */
+    return defaultCell.boundsHeight + ([entity.commentContentStr sizeWithFont:defaultCell.commentContentLabel.font constrainedToWidth:IPHONE_WIDTH  - 60].height - defaultCell.commentContentLabel.boundsHeight);
 }
 
 - (void)loadCellShowDataWithItemEntity:(CommentEntity *)entity
 {
+    [_userHeaderImageView gjh_setImageWithURL:[NSURL URLWithString:entity.criticsHeaderImageUrlStr]
+                             placeholderImage:nil
+                               imageShowStyle:ImageShowStyle_None
+                                      success:nil
+                                      failure:nil];
     
+    _userNameLabel.text = @"xx";
+    _commentTimeLabel.text = @"2小时前";
+    _commentContentLabel.text = entity.commentContentStr;
 }
 
 @end

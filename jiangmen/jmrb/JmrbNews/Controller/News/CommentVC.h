@@ -10,4 +10,6 @@
 
 @interface CommentVC : BaseNetworkViewController
 
+@property (nonatomic, assign) NSInteger newsId;
+
 @end

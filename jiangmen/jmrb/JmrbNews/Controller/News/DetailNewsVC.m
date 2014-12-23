@@ -158,6 +158,7 @@ int webTextFontValue = 15;
         else
         {
             CommentVC *commentVC = [[CommentVC alloc] init];
+            commentVC.newsId = weakSelf.newsId;
             [weakSelf pushViewController:commentVC];
         }
     }];

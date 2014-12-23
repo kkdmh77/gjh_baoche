@@ -16,6 +16,7 @@ typedef enum
     NetNewsRequestType_GetAdsList                              , // 获取广告列表(POST)
     
     NetNewsRequestType_GetNewsDeatil                           , // 获取新闻详情(POST)
+    NetNewsRequestType_GetCommentList                          , // 获取新闻评论列表(GET)
     
     // 图片
     NetImagesRequestType_GetImagesList                         , // 获取图片新闻列表(POST)
