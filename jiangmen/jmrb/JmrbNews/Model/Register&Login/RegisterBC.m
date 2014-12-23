@@ -148,46 +148,62 @@
     }
 }
 
-- (void)registerWithNormalUserName:(NSString *)userName password:(NSString *)password passwordConfirm:(NSString *)passwordConfirm successHandle:(successHandle)success failedHandle:(failedHandle)failed
+- (void)registerWithNormalUserName:(NSString *)userName gender:(NSInteger)gender mobilePhoneNum:(NSString *)mobilePhone password:(NSString *)password passwordConfirm:(NSString *)passwordConfirm successHandle:(successHandle)success failedHandle:(failedHandle)failed
 {
     if ([userName isAbsoluteValid])
     {
-        if ([password isAbsoluteValid] && password.length >= 6 && password.length <= 16)
+        if (gender)
         {
-            if ([passwordConfirm isAbsoluteValid] && passwordConfirm.length >= 6 && passwordConfirm.length <= 16)
+            if ([StringJudgeManager isValidateStr:mobilePhone regexStr:MobilePhoneNumRegex])
             {
-                if ([password isEqualToString:passwordConfirm])
+                if ([password isAbsoluteValid] && password.length >= 6 && password.length <= 16)
                 {
-                    _success = success;
-                    _failed = failed;
-                    
-                    // 进行注册操作
-                    NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_Register];
-                    NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
-                    NSDictionary *dic = @{@"username": userName,
-                                          @"password": password};
-                    
-                    [[NetRequestManager sharedInstance] sendRequest:url
-                                                       parameterDic:dic
-                                                  requestMethodType:RequestMethodType_POST
-                                                         requestTag:NetUserCenterRequestType_Register
-                                                           delegate:self
-                                                           userInfo:nil];
-                    
+                    if ([passwordConfirm isAbsoluteValid] && passwordConfirm.length >= 6 && passwordConfirm.length <= 16)
+                    {
+                        if ([password isEqualToString:passwordConfirm])
+                        {
+                            _success = success;
+                            _failed = failed;
+                            
+                            // 进行注册操作
+                            NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_Register];
+                            NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
+                            NSDictionary *dic = @{@"userName": userName,
+                                                  @"userPassword": password,
+                                                  @"userPhone": mobilePhone,
+                                                  @"userSex": @1};
+                            
+                            [[NetRequestManager sharedInstance] sendRequest:url
+                                                               parameterDic:dic
+                                                          requestMethodType:RequestMethodType_POST
+                                                                 requestTag:NetUserCenterRequestType_Register
+                                                                   delegate:self
+                                                                   userInfo:nil];
+                            
+                        }
+                        else
+                        {
+                            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"2次密码输入不一致"];
+                        }
+                    }
+                    else
+                    {
+                        [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请再次输入密码"];
+                    }
                 }
                 else
                 {
-                    [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"2次密码输入不一致"];
+                    [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入密码"];
                 }
             }
             else
             {
-                [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请再次输入密码"];
+                [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入手机号码"];
             }
         }
         else
         {
-            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入密码"];
+            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请选择性别"];
         }
     }
     else

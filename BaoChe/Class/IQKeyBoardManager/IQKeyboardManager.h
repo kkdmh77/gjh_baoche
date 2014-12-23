@@ -1,5 +1,5 @@
 //
-// KeyboardManager.h
+// IQKeyboardManager.h
 // https://github.com/hackiftekhar/IQKeyboardManager
 // Copyright (c) 2013-14 Iftekhar Qurashi.
 //
@@ -21,12 +21,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/NSObject.h>
-#import <CoreGraphics/CGBase.h>
-#import <UIKit/UITextInputTraits.h>
 #import "IQKeyboardManagerConstants.h"
 
+#import <CoreGraphics/CGBase.h>
+
+#import <Foundation/NSObject.h>
+#import <Foundation/NSObjCRuntime.h>
+
+#import <UIKit/UITextInputTraits.h>
+
+
 @class UIFont;
+
+/*  @const kIQDoneButtonToolbarTag         Default tag for toolbar with Done button            -1002.   */
+extern NSInteger const kIQDoneButtonToolbarTag;
+/*  @const kIQPreviousNextButtonToolbarTag Default tag for toolbar with Previous/Next buttons  -1005.   */
+extern NSInteger const kIQPreviousNextButtonToolbarTag;
 
 
 /*!
@@ -36,11 +46,12 @@
  
     @class IQKeyboardManager
  
-	@abstract Keyboard TextField/TextView Manager
+	@abstract Keyboard TextField/TextView Manager. A generic version of KeyboardManagement. https://developer.apple.com/Library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html
  */
 @interface IQKeyboardManager : NSObject
 
 
+/*******************************************/
 
 
 //UIKeyboard handling
@@ -50,7 +61,7 @@
  
     @return Returns the default singleton instance.
  */
-+ (IQKeyboardManager*)sharedManager;
++ (instancetype)sharedManager;
 
 /*!
     @property enable
@@ -66,7 +77,15 @@
  */
 @property(nonatomic, assign) CGFloat keyboardDistanceFromTextField;
 
+/*!
+    @property preventShowingBottomBlankSpace
+ 
+    @abstract Prevent keyboard manager to slide up the rootView to more than keyboard height. Default is YES.
+ */
+@property(nonatomic, assign) BOOL preventShowingBottomBlankSpace;
 
+
+/*******************************************/
 
 
 //IQToolbar handling
@@ -102,11 +121,12 @@
 /*!
     @property placeholderFont
  
-    @abstract placeholder Font. Default is nil.
+    @abstract Placeholder Font. Default is nil.
  */
 @property(nonatomic, strong) UIFont *placeholderFont;
 
 
+/*******************************************/
 
 
 //TextView handling
@@ -119,6 +139,7 @@
 @property(nonatomic, assign) BOOL canAdjustTextView;
 
 
+/*******************************************/
 
 
 //Keyboard appearance overriding
@@ -126,18 +147,19 @@
 /*!
     @property overrideKeyboardAppearance
  
-    @abstract override the keyboardAppearance for all textField/textView. Default is NO.
+    @abstract Override the keyboardAppearance for all textField/textView. Default is NO.
  */
 @property(nonatomic, assign) BOOL overrideKeyboardAppearance;
 
 /*!
     @property keyboardAppearance
  
-    @abstract if overrideKeyboardAppearance is YES, then all the textField keyboardAppearance is set using this property.
+    @abstract If overrideKeyboardAppearance is YES, then all the textField keyboardAppearance is set using this property.
  */
 @property(nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
 
 
+/*******************************************/
 
 
 //Resign handling
@@ -157,6 +179,7 @@
 - (void)resignFirstResponder;
 
 
+/*******************************************/
 
 
 //Sound handling
@@ -169,6 +192,7 @@
 @property(nonatomic, assign) BOOL shouldPlayInputClicks;
 
 
+/*******************************************/
 
 
 //Animation handling
@@ -182,14 +206,18 @@
  */
 @property(nonatomic, assign) BOOL shouldAdoptDefaultKeyboardAnimation;
 
+
+/*******************************************/
+
 /**
  @ 修改描述     隐藏/显示 上一项/下一项按钮(新增)
  @ 修改人       龚俊慧
- @ 修改时间     2014-08-21
+ @ 修改时间     2014-12-03
  @ 修改开始
  */
 @property(nonatomic, assign) BOOL toolbarPreviousNextEnable; // default is YES
 // 修改结束
+
 
 //@final. Must not be used for subclassing.
 
@@ -198,14 +226,18 @@
  
     @abstract Should create only one instance of class. Should not call init.
  */
-- (id)init	__attribute__((unavailable("init is not available in IQKeyboardManager, Use sharedManager")));
+- (instancetype)init	__attribute__((unavailable("init is not available in IQKeyboardManager, Use sharedManager"))) NS_DESIGNATED_INITIALIZER;
 
 /*!
     @method new
  
     @abstract Should create only one instance of class. Should not call new.
  */
-+ (id)new	__attribute__((unavailable("new is not available in IQKeyboardManager, Use sharedManager")));
++ (instancetype)new	__attribute__((unavailable("new is not available in IQKeyboardManager, Use sharedManager")));
+
+
+/*******************************************/
+
 
 @end
 

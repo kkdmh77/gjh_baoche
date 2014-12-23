@@ -8,11 +8,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="OrderInfoView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单程" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQ1-Hq-ubR">
-                    <rect key="frame" x="0.0" y="0.0" width="30" height="18"/>
+                    <rect key="frame" x="10" y="10" width="30" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="623-79-Bi5"/>
                     </constraints>
@@ -21,22 +21,16 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9272次(高级大巴)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljC-F4-iDI">
-                    <rect key="frame" x="40" y="0.0" width="118" height="18"/>
+                    <rect key="frame" x="50" y="10" width="118" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWZ-7R-Gld">
-                    <rect key="frame" x="0.0" y="26" width="320" height="84"/>
+                    <rect key="frame" x="0.0" y="34" width="320" height="84"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广东华立" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4y-02-3dj">
                             <rect key="frame" x="10" y="4" width="60" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州天河" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FN-SQ-KQa">
-                            <rect key="frame" x="252" y="4" width="60" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -77,6 +71,12 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州天河" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FN-SQ-KQa">
+                            <rect key="frame" x="252" y="4" width="60" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -102,7 +102,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="途径信息:珠海、广州、中山、珠海、广州、中山" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eX7-6l-ILB">
-                    <rect key="frame" x="10" y="114" width="225" height="32"/>
+                    <rect key="frame" x="10" y="124" width="225" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="ufm-rT-Wl7"/>
                     </constraints>
@@ -111,13 +111,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="￥22" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZj-qa-bn4">
-                    <rect key="frame" x="258" y="117" width="47" height="27"/>
+                    <rect key="frame" x="258" y="127" width="47" height="27"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tRs-GT-c9d">
-                    <rect key="frame" x="247" y="117" width="1" height="27"/>
+                    <rect key="frame" x="247" y="127" width="1" height="27"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="naR-sY-Bxe"/>
@@ -132,13 +132,13 @@
                 <constraint firstItem="TZj-qa-bn4" firstAttribute="bottom" secondItem="tRs-GT-c9d" secondAttribute="bottom" id="Cv7-77-eIa"/>
                 <constraint firstItem="eX7-6l-ILB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="LKT-Rp-iTK"/>
                 <constraint firstItem="TZj-qa-bn4" firstAttribute="centerY" secondItem="eX7-6l-ILB" secondAttribute="centerY" id="MjU-U1-DXm"/>
-                <constraint firstItem="CQ1-Hq-ubR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="OV0-ol-vrZ"/>
-                <constraint firstItem="CQ1-Hq-ubR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="T77-AF-9ZF"/>
+                <constraint firstItem="CQ1-Hq-ubR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="OV0-ol-vrZ"/>
+                <constraint firstItem="CQ1-Hq-ubR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="T77-AF-9ZF"/>
                 <constraint firstItem="tRs-GT-c9d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eX7-6l-ILB" secondAttribute="trailing" constant="10" id="ZWk-dH-K5G"/>
                 <constraint firstItem="uWZ-7R-Gld" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cgP-R0-cwI"/>
                 <constraint firstAttribute="bottom" secondItem="eX7-6l-ILB" secondAttribute="bottom" constant="4" id="fkt-HX-g1v"/>
                 <constraint firstItem="TZj-qa-bn4" firstAttribute="top" secondItem="tRs-GT-c9d" secondAttribute="top" id="krk-YN-XhH"/>
-                <constraint firstItem="uWZ-7R-Gld" firstAttribute="top" secondItem="CQ1-Hq-ubR" secondAttribute="bottom" constant="8" id="mtT-TZ-djd"/>
+                <constraint firstItem="uWZ-7R-Gld" firstAttribute="top" secondItem="CQ1-Hq-ubR" secondAttribute="bottom" constant="6" id="mtT-TZ-djd"/>
                 <constraint firstItem="TZj-qa-bn4" firstAttribute="leading" secondItem="tRs-GT-c9d" secondAttribute="trailing" constant="10" id="nem-aL-Fif"/>
                 <constraint firstItem="ljC-F4-iDI" firstAttribute="leading" secondItem="CQ1-Hq-ubR" secondAttribute="trailing" constant="10" id="yAD-6n-MXO"/>
                 <constraint firstAttribute="trailing" secondItem="uWZ-7R-Gld" secondAttribute="trailing" id="yWD-Ci-F4h"/>
@@ -148,6 +148,20 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="busNameLabel" destination="ljC-F4-iDI" id="WJF-vm-tYb"/>
+                <outlet property="busTypeLabel" destination="CQ1-Hq-ubR" id="aXz-0W-AHu"/>
+                <outlet property="endStationLabel" destination="0FN-SQ-KQa" id="xtP-we-HRZ"/>
+                <outlet property="endTimeLabel" destination="hl9-ZP-PL0" id="HCW-uB-fJe"/>
+                <outlet property="endTime_dateLabel" destination="dqq-Us-v4Q" id="6mF-dz-zkA"/>
+                <outlet property="orderInfoBGView" destination="uWZ-7R-Gld" id="EMl-5i-Ffs"/>
+                <outlet property="priceLabel" destination="TZj-qa-bn4" id="gCs-q6-Vt8"/>
+                <outlet property="requireTimeLabel" destination="inY-6K-T6e" id="Wwx-TZ-rX4"/>
+                <outlet property="startStationLabel" destination="B4y-02-3dj" id="UE7-NE-k4Q"/>
+                <outlet property="startTimeLabel" destination="yja-G4-xsc" id="1Xc-Er-Cah"/>
+                <outlet property="startTime_DateLabel" destination="Bgt-7S-AyS" id="HOb-6X-VWy"/>
+                <outlet property="stationsLabel" destination="eX7-6l-ILB" id="uWE-pb-YMy"/>
+            </connections>
             <point key="canvasLocation" x="243" y="290"/>
         </view>
     </objects>

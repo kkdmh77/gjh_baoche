@@ -8,8 +8,14 @@
 
 #import "RegisterVC.h"
 #import "FlatUIKit.h"
+#import "RegisterBC.h"
+#import "LoginBC.h"
 
 @interface RegisterVC ()
+{
+    RegisterBC  *_registerBC;
+    LoginBC     *_loginBC;
+}
 
 @property (weak, nonatomic) IBOutlet FUITextField *userNameTF;
 @property (weak, nonatomic) IBOutlet FUITextField *genderBGTF;
@@ -25,6 +31,17 @@
 @end
 
 @implementation RegisterVC
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+        _registerBC = [[RegisterBC alloc] init];
+        _loginBC = [[LoginBC alloc] init];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -97,6 +114,35 @@
      userPhone  ：  联系电话
      userSex：用户的性别
      */
+    WEAKSELF
+    [_registerBC registerWithNormalUserName:_userNameTF.text
+                                     gender:0
+                             mobilePhoneNum:_mobilePhoneNumTF.text
+                                   password:_passwordTF.text
+                            passwordConfirm:_passwordConfirmTF.text
+                              successHandle:^(id successInfoObj) {
+                                  
+                                  [weakSelf loginWithUserName:_userNameTF.text
+                                                     password:_passwordTF.text];
+    } failedHandle:^(NSError *error) {
+        
+    }];
+}
+
+- (void)loginWithUserName:(NSString *)userName password:(NSString *)password
+{
+    /*
+     userName ：用户名
+     userPassword  ：密码
+     */
+    [_loginBC loginWithUserName:userName
+                       password:password
+                      autoLogin:YES
+                  successHandle:^(id successInfoObj) {
+        
+    } failedHandle:^(NSError *error) {
+        
+    }];
 }
 
 @end

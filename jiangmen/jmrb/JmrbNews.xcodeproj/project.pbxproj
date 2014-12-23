@@ -510,6 +510,9 @@
 		05FB1A331665F44F004EDEB5 /* RadioButton-Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 05FB1A311665F44F004EDEB5 /* RadioButton-Selected.png */; };
 		05FB1A341665F44F004EDEB5 /* RadioButton-Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 05FB1A321665F44F004EDEB5 /* RadioButton-Unselected.png */; };
 		05FC104E1678D18C003D43D3 /* MPNewInfoDetailContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05FC104D1678D18C003D43D3 /* MPNewInfoDetailContent.xib */; };
+		2B2A0CE51A49CBB00074B150 /* MyMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A0CE41A49CBB00074B150 /* MyMessageVC.m */; };
+		2B2A0CE91A49CC4B0074B150 /* MyMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A0CE71A49CC4B0074B150 /* MyMessageCell.m */; };
+		2B2A0CEA1A49CC4B0074B150 /* MyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2A0CE81A49CC4B0074B150 /* MyMessageCell.xib */; };
 		2B390F171A2CBDEE00A9DA2A /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B390E781A2CBDEE00A9DA2A /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2B390F181A2CBDEE00A9DA2A /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B390E7B1A2CBDEE00A9DA2A /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2B390F191A2CBDEE00A9DA2A /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B390E7D1A2CBDEE00A9DA2A /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1699,6 +1702,11 @@
 		05FB1A311665F44F004EDEB5 /* RadioButton-Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RadioButton-Selected.png"; sourceTree = "<group>"; };
 		05FB1A321665F44F004EDEB5 /* RadioButton-Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RadioButton-Unselected.png"; sourceTree = "<group>"; };
 		05FC104D1678D18C003D43D3 /* MPNewInfoDetailContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPNewInfoDetailContent.xib; sourceTree = "<group>"; };
+		2B2A0CE31A49CBB00074B150 /* MyMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageVC.h; sourceTree = "<group>"; };
+		2B2A0CE41A49CBB00074B150 /* MyMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageVC.m; sourceTree = "<group>"; };
+		2B2A0CE61A49CC4B0074B150 /* MyMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageCell.h; sourceTree = "<group>"; };
+		2B2A0CE71A49CC4B0074B150 /* MyMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageCell.m; sourceTree = "<group>"; };
+		2B2A0CE81A49CC4B0074B150 /* MyMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMessageCell.xib; sourceTree = "<group>"; };
 		2B390E771A2CBDEE00A9DA2A /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		2B390E781A2CBDEE00A9DA2A /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		2B390E791A2CBDEE00A9DA2A /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -3946,6 +3954,8 @@
 				2BDF7CF61A432438006C9E27 /* RegisterVC.h */,
 				2BDF7CF71A432438006C9E27 /* RegisterVC.m */,
 				2BDF7CF81A432438006C9E27 /* RegisterVC.xib */,
+				2B2A0CE31A49CBB00074B150 /* MyMessageVC.h */,
+				2B2A0CE41A49CBB00074B150 /* MyMessageVC.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -3968,6 +3978,9 @@
 				43CB6B191A46728C003829E6 /* CommentCell.h */,
 				43CB6B1A1A46728C003829E6 /* CommentCell.m */,
 				43CB6B1B1A46728C003829E6 /* CommentCell.xib */,
+				2B2A0CE61A49CC4B0074B150 /* MyMessageCell.h */,
+				2B2A0CE71A49CC4B0074B150 /* MyMessageCell.m */,
+				2B2A0CE81A49CC4B0074B150 /* MyMessageCell.xib */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -6148,6 +6161,7 @@
 				0535D80F1654E70500D10324 /* login_tapped@2x.png in Resources */,
 				0535D8101654E70500D10324 /* logout@2x.png in Resources */,
 				0535D8111654E70500D10324 /* logout_tapped@2x.png in Resources */,
+				2B2A0CEA1A49CC4B0074B150 /* MyMessageCell.xib in Resources */,
 				0535D8121654E70500D10324 /* mainbeijing@2x.png in Resources */,
 				0535D8131654E70500D10324 /* Middle_header_bg@2x.png in Resources */,
 				2B501FC21A45A72D00012CA7 /* xiugaiziliao@2x.png in Resources */,
@@ -6511,6 +6525,7 @@
 				EA9D214C154B7BE900E9219A /* ZSSourceModel.m in Sources */,
 				43C89ADC1A2D895A002F5E5F /* AppSmallUtils.m in Sources */,
 				43C899591A2D792D002F5E5F /* NIViewRecycler.m in Sources */,
+				2B2A0CE91A49CC4B0074B150 /* MyMessageCell.m in Sources */,
 				43C899411A2D792D002F5E5F /* NICollectionViewModel.m in Sources */,
 				43C897201A2D6B5C002F5E5F /* UIStepper+FlatUI.m in Sources */,
 				EA9D214D154B7BE900E9219A /* ImageLoaderQueue.m in Sources */,
@@ -6698,6 +6713,7 @@
 				2B390F5B1A2CBDEE00A9DA2A /* CFilteringJSONSerializer.m in Sources */,
 				43C8993F1A2D792D002F5E5F /* NICollectionViewActions.m in Sources */,
 				05C6E018165F24E000498178 /* MoreOrderChannelVC.m in Sources */,
+				2B2A0CE51A49CBB00074B150 /* MyMessageVC.m in Sources */,
 				43C899531A2D792D002F5E5F /* NIOperations.m in Sources */,
 				43C897C31A2D6B8D002F5E5F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				05C6E01A165F24E000498178 /* MoreReadModelVC.m in Sources */,
