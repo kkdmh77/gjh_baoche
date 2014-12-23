@@ -91,7 +91,12 @@
 
 - (IBAction)clickRegisterBtn:(UIButton *)sender
 {
-    
+    /*
+     userName ：用户名
+     userPassword  ：密码
+     userPhone  ：  联系电话
+     userSex：用户的性别
+     */
 }
 
 @end

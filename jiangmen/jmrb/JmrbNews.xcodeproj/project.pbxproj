@@ -986,6 +986,8 @@
 		43C8FD131A397C7400C21C39 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C8FD121A397C7400C21C39 /* libsqlite3.dylib */; };
 		43C8FD151A397C8800C21C39 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C8FD141A397C8800C21C39 /* Social.framework */; };
 		43C8FD171A397C8E00C21C39 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C8FD161A397C8E00C21C39 /* Accounts.framework */; };
+		43CA1DFE1A4990BA00B9E97C /* LoginBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CA1DFA1A4990BA00B9E97C /* LoginBC.m */; };
+		43CA1DFF1A4990BA00B9E97C /* RegisterBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CA1DFC1A4990BA00B9E97C /* RegisterBC.m */; };
 		43CB6B131A46639A003829E6 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B121A46639A003829E6 /* CommentView.m */; };
 		43CB6B151A4663A8003829E6 /* CommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43CB6B141A4663A8003829E6 /* CommentView.xib */; };
 		43CB6B181A466EAE003829E6 /* CommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B171A466EAE003829E6 /* CommentVC.m */; };
@@ -2542,6 +2544,10 @@
 		43C8FD121A397C7400C21C39 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		43C8FD141A397C8800C21C39 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		43C8FD161A397C8E00C21C39 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		43CA1DF91A4990BA00B9E97C /* LoginBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginBC.h; sourceTree = "<group>"; };
+		43CA1DFA1A4990BA00B9E97C /* LoginBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginBC.m; sourceTree = "<group>"; };
+		43CA1DFB1A4990BA00B9E97C /* RegisterBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterBC.h; sourceTree = "<group>"; };
+		43CA1DFC1A4990BA00B9E97C /* RegisterBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterBC.m; sourceTree = "<group>"; };
 		43CB6B111A46639A003829E6 /* CommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
 		43CB6B121A46639A003829E6 /* CommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
 		43CB6B141A4663A8003829E6 /* CommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentView.xib; sourceTree = "<group>"; };
@@ -5352,6 +5358,17 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		43CA1DF61A4990BA00B9E97C /* Register&Login */ = {
+			isa = PBXGroup;
+			children = (
+				43CA1DF91A4990BA00B9E97C /* LoginBC.h */,
+				43CA1DFA1A4990BA00B9E97C /* LoginBC.m */,
+				43CA1DFB1A4990BA00B9E97C /* RegisterBC.h */,
+				43CA1DFC1A4990BA00B9E97C /* RegisterBC.m */,
+			);
+			path = "Register&Login";
+			sourceTree = "<group>";
+		};
 		43CB6B101A466323003829E6 /* Others */ = {
 			isa = PBXGroup;
 			children = (
@@ -5603,6 +5620,7 @@
 		EA9D1F3B154B7BE900E9219A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				43CA1DF61A4990BA00B9E97C /* Register&Login */,
 				43C89B451A2D9314002F5E5F /* Entities */,
 				EA9D1F3E154B7BE900E9219A /* ZSCommunicateModel.h */,
 				EA9D1F3F154B7BE900E9219A /* ZSCommunicateModel.m */,
@@ -6716,7 +6734,9 @@
 				05C6E02F165F24E000498178 /* PictureNewInfoDetail.m in Sources */,
 				43C89B3B1A2D895A002F5E5F /* UIRefreshTabView.m in Sources */,
 				43C897BA1A2D6B8D002F5E5F /* MagicalRecord+ShorthandSupport.m in Sources */,
+				43CA1DFF1A4990BA00B9E97C /* RegisterBC.m in Sources */,
 				43C897B61A2D6B8D002F5E5F /* MagicalRecord+ErrorHandling.m in Sources */,
+				43CA1DFE1A4990BA00B9E97C /* LoginBC.m in Sources */,
 				43C899BD1A2D792D002F5E5F /* NIOverviewGraphView.m in Sources */,
 				43C89AF61A2D895A002F5E5F /* ATBookAnimationView.m in Sources */,
 				43C89B221A2D895A002F5E5F /* UIFactory.m in Sources */,

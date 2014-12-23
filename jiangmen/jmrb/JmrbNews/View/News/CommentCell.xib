@@ -65,7 +65,7 @@
                 <outlet property="userHeaderImageView" destination="JcD-7o-fsx" id="3PY-7z-FsC"/>
                 <outlet property="userNameLabel" destination="rh7-G6-hZj" id="BKR-TE-FIK"/>
             </connections>
-            <point key="canvasLocation" x="415" y="327.5"/>
+            <point key="canvasLocation" x="415" y="324.5"/>
         </tableViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

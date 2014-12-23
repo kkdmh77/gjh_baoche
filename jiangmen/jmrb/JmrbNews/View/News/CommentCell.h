@@ -11,7 +11,7 @@
 
 @interface CommentCell : UITableViewCell
 
-+ (CGFloat)getCellHeihgtWithItemEntity:(CommentEntity *)entity;
+- (CGFloat)getCellHeihgtWithItemEntity:(CommentEntity *)entity;
 - (void)loadCellShowDataWithItemEntity:(CommentEntity *)entity;
 
 @end

@@ -119,6 +119,12 @@ DEF_SINGLETON(CommentSendController);
 {
     if ([text isAbsoluteValid])
     {
+        /*
+         newsId 对应要评论亲的新闻
+         commentNickname：评论人的名称
+         commentContent：评论的内容
+         */
+        
         [[NetRequestManager sharedInstance] sendRequest:_toSendUrl
                                            parameterDic:@{@"comment": text}
                                              requestTag:1000

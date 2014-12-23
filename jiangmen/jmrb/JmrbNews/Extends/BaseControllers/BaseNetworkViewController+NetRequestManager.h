@@ -17,12 +17,17 @@ typedef enum
     
     NetNewsRequestType_GetNewsDeatil                           , // 获取新闻详情(POST)
     NetNewsRequestType_GetCommentList                          , // 获取新闻评论列表(GET)
+    NetNewsRequestType_AddOneComment                           , // 发送评论(POST)
     
     // 图片
     NetImagesRequestType_GetImagesList                         , // 获取图片新闻列表(POST)
     
     // 视频
     NetVideosRequestType_GetVideosList                         , // 获取视频新闻列表(POST)
+    
+    // 用户中心
+    NetUserCenterRequestType_Login                             ,
+    NetUserCenterRequestType_Register                          ,
     
 } NetRequestType;
 

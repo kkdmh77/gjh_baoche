@@ -19,6 +19,8 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
     NSMutableArray *_netCommentEntityArray;
 }
 
+@property (nonatomic, strong) CommentCell *heightToolCell;
+
 @end
 
 @implementation CommentVC
@@ -100,7 +102,9 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
         
         if (CommentViewOperationType_Input == type)
         {
-            [[CommentSendController sharedInstance] showCommentInputViewAndSendUrl:nil
+            NSURL *url = [NSURL URLWithString:[[self class] getRequestURLStr:NetNewsRequestType_AddOneComment]];
+            
+            [[CommentSendController sharedInstance] showCommentInputViewAndSendUrl:url
                                                                     completeHandle:^(BOOL isSendSuccess) {
                                                                         
                                                                     }];
@@ -143,7 +147,11 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [CommentCell getCellHeihgtWithItemEntity:[self curShowDataAtIndex:indexPath.row]];
+    if (!_heightToolCell)
+    {
+        self.heightToolCell = [tableView dequeueReusableCellWithIdentifier:cellIdenfitier_comment];
+    }
+    return [_heightToolCell getCellHeihgtWithItemEntity:[self curShowDataAtIndex:indexPath.row]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -81,7 +81,10 @@
 
 - (IBAction)clickLoginBtn:(UIButton *)sender
 {
-    
+    /*
+     userName ：用户名
+     userPassword  ：密码
+     */
 }
 
 - (IBAction)clickRegisterBtn:(UIButton *)sender

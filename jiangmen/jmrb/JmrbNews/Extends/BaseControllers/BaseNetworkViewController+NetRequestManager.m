@@ -26,12 +26,17 @@
                            
                            @"getNews.action",
                            @"getComment.action",
+                           @"addComment.action",
                            
                            // 图片
                            @"getHotNewsPic.action",
                            
                            // 视频
                            @"getVideoInfor.action",
+                           
+                           // 用户中心
+                           @"logon.action",
+                           @"addUser.action",
                            
                            nil];
     });
