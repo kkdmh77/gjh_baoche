@@ -84,7 +84,18 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
         
         return NO;
     }
-//    NSLog(@"resultDic = %@",*result);
+    
+    NSNumber *myCodeNum = [*result objectForKey:@"errorcode"];
+    NSString *myMsgStr = [*result objectForKey:@"msg"];
+    
+    if (!myCodeNum || 0 != myCodeNum.integerValue)
+    {
+        err = [[NSError alloc] initWithDomain:@"MYSERVER_ERROR_DOMAIN" code:myCodeNum.integerValue userInfo:[NSDictionary dictionaryWithObjectsAndKeys:myMsgStr, NSLocalizedDescriptionKey, nil]];
+        
+        *result = err;
+        
+        return NO;
+    }
     
 //    *result = [*result objectForKey:@"response"];
     

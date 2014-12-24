@@ -9,8 +9,13 @@
 #import "LoginVC.h"
 #import "FlatUIKit.h"
 #import "RegisterVC.h"
+#import "LoginBC.h"
+#import "UserInfoModel.h"
 
 @interface LoginVC ()
+{
+    LoginBC     *_loginBC;
+}
 
 @property (weak, nonatomic) IBOutlet UIButton *userHeaderImageView;
 @property (weak, nonatomic) IBOutlet FUITextField *userNameLabel;
@@ -22,6 +27,16 @@
 @end
 
 @implementation LoginVC
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+        _loginBC = [[LoginBC alloc] init];
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -51,13 +66,16 @@
     _userNameLabel.leftViewMode = UITextFieldViewModeAlways;
     _userNameLabel.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yonghuming"]];
     _userNameLabel.backgroundColor = HEXCOLOR(0XF7F7F7);
+    _userNameLabel.text = [UserInfoModel getUserDefaultLoginName];
     
     [_passwordLabel addBorderToViewWitBorderColor:CellSeparatorColor borderWidth:LineWidth];
     _passwordLabel.leftViewMode = UITextFieldViewModeAlways;
     _passwordLabel.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mima"]];
     _passwordLabel.backgroundColor = HEXCOLOR(0XF7F7F7);
+    _passwordLabel.text = [UserInfoModel getUserDefaultPassword];
     
     [_rememberPasswordBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    _rememberPasswordBtn.selected = YES;
     
     _loginBtn.backgroundColor = Common_BlueColor;
     [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -85,6 +103,23 @@
      userName ：用户名
      userPassword  ：密码
      */
+    WEAKSELF
+    [_loginBC loginWithUserName:_userNameLabel.text
+                       password:_passwordLabel.text
+                      autoLogin:YES
+                  successHandle:^(id successInfoObj) {
+                      
+                      [UserInfoModel setUserDefaultLoginName:_userNameLabel.text];
+                      if (weakSelf.rememberPasswordBtn.selected)
+                      {
+                          [UserInfoModel setUserDefaultPassword:_passwordLabel.text];
+                      }
+                      
+                      [weakSelf backViewController];
+                      
+                  } failedHandle:^(NSError *error) {
+                      
+                  }];
 }
 
 - (IBAction)clickRegisterBtn:(UIButton *)sender

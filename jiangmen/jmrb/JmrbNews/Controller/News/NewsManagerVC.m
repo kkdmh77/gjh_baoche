@@ -14,12 +14,16 @@
 #import "SettingVC.h"
 #import "LoginVC.h"
 #import "MyMessageVC.h"
+#import "UserInfoModel.h"
+#import "LoginBC.h"
 
 @interface NewsManagerVC () <SUNSlideSwitchViewDelegate, LXActivityDelegate>
 {
     NSMutableArray *_netNewsTypeEntityArray;
     
     NSMutableArray *_newsViewControllersArray;
+    
+    LoginBC        *_loginBC;
 }
 
 @end
@@ -30,7 +34,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
+        _loginBC = [[LoginBC alloc] init];
     }
     return self;
 }
@@ -51,9 +56,24 @@
 
 #pragma mark - custom methods
 
+- (void)autoLogin
+{
+    if ([[UserInfoModel getUserDefaultLoginName] isAbsoluteValid] && [[UserInfoModel getUserDefaultPassword] isAbsoluteValid])
+    {
+        [_loginBC loginWithUserName:[UserInfoModel getUserDefaultLoginName]
+                           password:[UserInfoModel getUserDefaultPassword]
+                          autoLogin:YES
+                      successHandle:^(id successInfoObj) {
+                          
+                      } failedHandle:^(NSError *error) {
+                          
+                      }];
+    }
+}
+
 - (void)setPageLocalizableText
 {
-    
+    [self autoLogin];
 }
 
 - (void)setNetworkRequestStatusBlocks

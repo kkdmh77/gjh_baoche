@@ -36,7 +36,7 @@ typedef void (^failedHandle)  (NSError *error);
 
 /// 普通用户名注册
 - (void)registerWithNormalUserName:(NSString *)userName
-                            gender:(NSInteger)gender
+                            gender:(NSString *)gender
                     mobilePhoneNum:(NSString *)mobilePhone
                           password:(NSString *)password
                    passwordConfirm:(NSString *)passwordConfirm

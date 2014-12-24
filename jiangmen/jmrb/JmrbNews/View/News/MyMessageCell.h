@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonEntity.h"
 
 @interface MyMessageCell : UITableViewCell
 
-+ (CGFloat)getCellHeight;
++ (CGFloat)getCellHeightWithItemEntity:(MyMessageEntity *)entity;
+- (void)loadCellShowDataWithItemEntity:(MyMessageEntity *)entity;
 
 @end

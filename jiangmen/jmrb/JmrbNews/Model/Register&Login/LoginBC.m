@@ -11,6 +11,7 @@
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "UrlManager.h"
 #import "InterfaceHUDManager.h"
+#import "UserInfoModel.h"
 
 @interface LoginBC ()
 {
@@ -31,7 +32,7 @@
             _success = success;
             _failed = failed;
             
-            [HUDManager showHUDWithToShowStr:LocalizedStr(Login_LoadingShowInfoKey)
+            [HUDManager showHUDWithToShowStr:@"登录中..."
                                      HUDMode:MBProgressHUDModeIndeterminate
                                     autoHide:NO
                                   afterDelay:0
@@ -84,6 +85,9 @@
 - (void)netRequest:(NetRequest *)request successWithInfoObj:(id)infoObj
 {
     [HUDManager hideHUD];
+    
+    NSNumber *userId = [[infoObj safeObjectForKey:@"response"] safeObjectForKey:@"userId"];
+    [UserInfoModel setUserDefaultUserId:userId];
     
     if (_success)
     {

@@ -10,10 +10,13 @@
 #import "PopupController.h"
 #import "NetRequestManager.h"
 #import "HPGrowingTextView.h"
+#import "UserInfoModel.h"
+#import "InterfaceHUDManager.h"
 
 @interface CommentSendController () <NetRequestDelegate>
 {
     NSURL                       *_toSendUrl;
+    NSInteger                   _newsId;
     SendCommentCompleteHandle   _completeHandle;
     PopupController             *_commentInputShowPop;
     UITextView                  *_inputTV;
@@ -25,7 +28,7 @@
 
 DEF_SINGLETON(CommentSendController);
 
-- (void)showCommentInputViewAndSendUrl:(NSURL *)url completeHandle:(SendCommentCompleteHandle)handle
+- (void)showCommentInputViewAndSendUrl:(NSURL *)url newsId:(NSInteger)newsId completeHandle:(SendCommentCompleteHandle)handle
 {
     if (!_commentInputShowPop)
     {
@@ -97,6 +100,7 @@ DEF_SINGLETON(CommentSendController);
     }
     
     _toSendUrl = url;
+    _newsId = newsId;
     _completeHandle = [handle copy];
     
     [_commentInputShowPop showInView:[UIApplication sharedApplication].keyWindow
@@ -124,12 +128,19 @@ DEF_SINGLETON(CommentSendController);
          commentNickname：评论人的名称
          commentContent：评论的内容
          */
+        if ([UserInfoModel getUserDefaultUserId])
+        {
         
-        [[NetRequestManager sharedInstance] sendRequest:_toSendUrl
-                                           parameterDic:@{@"comment": text}
-                                             requestTag:1000
-                                               delegate:self
-                                               userInfo:nil];
+            [[NetRequestManager sharedInstance] sendRequest:_toSendUrl
+                                               parameterDic:@{@"newsId": @(_newsId), @"commentContent": text, @"commentNickname": [UserInfoModel getUserDefaultLoginName]}
+                                                 requestTag:1000
+                                                   delegate:self
+                                                   userInfo:nil];
+        }
+        else
+        {
+            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"您还未登录,请先登录!"];
+        }
     }
     else
     {
@@ -149,6 +160,7 @@ DEF_SINGLETON(CommentSendController);
     if (_completeHandle) _completeHandle(YES);
 
     _toSendUrl = nil;
+    _newsId = NSNotFound;
     _completeHandle = nil;
     _inputTV.text = nil;
 }

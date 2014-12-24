@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -29,7 +29,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务器停机通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggn-9c-ZCy">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务器停机通知" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggn-9c-ZCy">
                         <rect key="frame" x="20" y="41" width="290" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -45,8 +45,14 @@
                     <constraint firstItem="SsQ-7S-uli" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="YBN-NV-eOx"/>
                     <constraint firstItem="SsQ-7S-uli" firstAttribute="leading" secondItem="Ggn-9c-ZCy" secondAttribute="leading" id="e95-Ry-j3D"/>
                     <constraint firstItem="GcC-QR-Cvu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SsQ-7S-uli" secondAttribute="trailing" constant="10" id="mb9-9e-NTg"/>
+                    <constraint firstAttribute="bottom" secondItem="Ggn-9c-ZCy" secondAttribute="bottom" constant="15" id="y2t-eK-7Ei"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="messageContentLabel" destination="Ggn-9c-ZCy" id="H45-l7-08t"/>
+                <outlet property="messageTitleLabel" destination="SsQ-7S-uli" id="oQu-nk-syd"/>
+                <outlet property="timeLabel" destination="GcC-QR-Cvu" id="aNi-cs-3S4"/>
+            </connections>
             <point key="canvasLocation" x="267" y="340.5"/>
         </tableViewCell>
     </objects>

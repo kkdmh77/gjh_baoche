@@ -113,10 +113,11 @@
      userPassword  ：密码
      userPhone  ：  联系电话
      userSex：用户的性别
+     1，表示男，0表示女
      */
     WEAKSELF
     [_registerBC registerWithNormalUserName:_userNameTF.text
-                                     gender:0
+                                     gender:_manBtn.selected ? @"1" : @"0"
                              mobilePhoneNum:_mobilePhoneNumTF.text
                                    password:_passwordTF.text
                             passwordConfirm:_passwordConfirmTF.text
@@ -135,10 +136,15 @@
      userName ：用户名
      userPassword  ：密码
      */
+    WEAKSELF
     [_loginBC loginWithUserName:userName
                        password:password
                       autoLogin:YES
                   successHandle:^(id successInfoObj) {
+                      
+                      [UserInfoModel setUserDefaultLoginName:userName];
+                      [weakSelf.navigationController dismissViewControllerAnimated:YES
+                                                                        completion:nil];
         
     } failedHandle:^(NSError *error) {
         

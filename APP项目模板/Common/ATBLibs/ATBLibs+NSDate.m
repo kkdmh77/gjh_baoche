@@ -33,6 +33,13 @@
     return destDateString;
 }
 
++ (NSString *)stringFromTimeIntervalSeconds:(NSTimeInterval)seconds withFormatter:(NSString *)formatter
+{
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:seconds];
+    
+    return [self stringFromDate:date withFormatter:formatter];
+}
+
 + (NSString *)timeIntervalStringSinceNowWithCompareTime:(NSTimeInterval)toCompareTime
 {
     if (0 == toCompareTime) return nil;
@@ -92,10 +99,3 @@
 }
 
 @end
-
-
-
-
-
-
-

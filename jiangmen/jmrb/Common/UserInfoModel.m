@@ -191,6 +191,21 @@
     [self setUserDefaultUserHeaderImgId:[userObj objectForKey:@"picId"]];
     [self setUserDefaultEmail:[userObj objectForKey:@"email"]];
     [self setUserDefaultIsBindGovWeb:[userObj objectForKey:@"hasBindGovWeb"]];
+    
+    /*
+    otherNewsCount = 0;
+    userId = 231;
+    userName = swift;
+    userPassword = 111111;
+    userPhone = 15855555558;
+    userPhoto = "";
+    userSex = 1;
+    userSexString = "\U7537";
+    userType = 0;
+    userTypeString = "\U666e\U901a\U7528\U6237";
+    userVerification = 0;
+    userVerificationString = "\U672a\U9a8c\U8bc1";
+     */
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

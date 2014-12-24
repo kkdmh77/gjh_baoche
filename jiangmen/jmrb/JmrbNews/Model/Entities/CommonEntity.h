@@ -82,3 +82,13 @@
 @property (nonatomic, copy) NSString *commentContentStr;            // 评论内容
 
 @end
+
+///////////////////////////////////////////////////////////////
+
+@interface MyMessageEntity : NetItem
+
+@property (nonatomic, copy) NSString *messageTitleStr;              // 消息标题
+@property (nonatomic, copy) NSString *messageContentStr;            // 消息内容
+@property (nonatomic, assign) NSTimeInterval messageTime;           // 消息时间
+
+@end

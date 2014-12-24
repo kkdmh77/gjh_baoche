@@ -27,7 +27,7 @@ static NSString * const cellIdentifier_myMessage = @"cellIdentifier_myMessage";
     [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left
                             barButtonTitle:Cancel
                                     action:@selector(backViewController)];
-    
+    [self dddd];
     [self initialization];
 }
 
@@ -37,6 +37,19 @@ static NSString * const cellIdentifier_myMessage = @"cellIdentifier_myMessage";
 }
 
 #pragma mark - custom methods
+
+- (void)dddd
+{
+    MyMessageEntity *entity = [[MyMessageEntity alloc] init];
+    entity.messageTitleStr = @"周杰伦";
+    entity.messageContentStr = @"我的消息";
+    
+    MyMessageEntity *entity1 = [[MyMessageEntity alloc] init];
+    entity1.messageTitleStr = @"周杰伦";
+    entity1.messageContentStr = @"我的消息我的消息我的消息我的消息我的消息我的消息我的消息";
+    
+    _netMyMessageEntityArray = [NSMutableArray arrayWithObjects:entity, entity1, nil];
+}
 
 - (void)setPageLocalizableText
 {
@@ -77,16 +90,16 @@ static NSString * const cellIdentifier_myMessage = @"cellIdentifier_myMessage";
     [_tableView reloadData];
 }
 
-//- (CommentEntity *)curShowDataAtIndex:(NSInteger)index
-//{
-//    return index < _netCommentEntityArray.count ? _netCommentEntityArray[index] : nil;
-//}
+- (MyMessageEntity *)curShowDataAtIndex:(NSInteger)index
+{
+    return index < _netMyMessageEntityArray.count ? _netMyMessageEntityArray[index] : nil;
+}
 
 #pragma mark - UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -96,15 +109,15 @@ static NSString * const cellIdentifier_myMessage = @"cellIdentifier_myMessage";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [MyMessageCell getCellHeight];
+    return [MyMessageCell getCellHeightWithItemEntity:[self curShowDataAtIndex:indexPath.row]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MyMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier_myMessage];
     
-//    CommentEntity *entity = [self curShowDataAtIndex:indexPath.row];;
-//    [cell loadCellShowDataWithItemEntity:entity];
+    MyMessageEntity *entity = [self curShowDataAtIndex:indexPath.row];;
+    [cell loadCellShowDataWithItemEntity:entity];
     
     return cell;
 }

@@ -58,11 +58,11 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
 {
     CommentEntity *entity = [[CommentEntity alloc] init];
     entity.criticsName = @"周杰伦";
-    entity.commentContentStr = @"阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方阿斯顿发方";
+    entity.commentContentStr = @"我的评论";
     
     CommentEntity *entity1 = [[CommentEntity alloc] init];
     entity1.criticsName = @"周杰伦";
-    entity1.commentContentStr = @"阿斯顿发方";
+    entity1.commentContentStr = @"我的评论我的评论我的评论我的评论我的评论我的评论我的评论我的评论";
     
     _netCommentEntityArray = [NSMutableArray arrayWithObjects:entity, entity1, nil];
 }
@@ -115,11 +115,13 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
         
         if (CommentViewOperationType_Input == type)
         {
-            NSURL *url = [NSURL URLWithString:[[self class] getRequestURLStr:NetNewsRequestType_AddOneComment]];
+            NSURL *url = [UrlManager getRequestUrlByMethodName:[[self class] getRequestURLStr:NetNewsRequestType_AddOneComment]];
             
             [[CommentSendController sharedInstance] showCommentInputViewAndSendUrl:url
+                                                                            newsId:_newsId
                                                                     completeHandle:^(BOOL isSendSuccess) {
                                                                         
+                                                                        [weakSelf showHUDInfoByString:isSendSuccess ? @"发送成功" : @"发送失败请重试"];
                                                                     }];
         }
         else

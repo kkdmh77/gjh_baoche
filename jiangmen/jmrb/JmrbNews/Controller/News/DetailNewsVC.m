@@ -150,9 +150,13 @@ int webTextFontValue = 15;
         
         if (CommentViewOperationType_Input == type)
         {
-            [[CommentSendController sharedInstance] showCommentInputViewAndSendUrl:nil
+            NSURL *url = [UrlManager getRequestUrlByMethodName:[[self class] getRequestURLStr:NetNewsRequestType_AddOneComment]];
+            
+            [[CommentSendController sharedInstance] showCommentInputViewAndSendUrl:url
+                                                                            newsId:_newsId
                                                                     completeHandle:^(BOOL isSendSuccess) {
                                                                         
+                                                                        [weakSelf showHUDInfoByString:isSendSuccess ? @"发送成功" : @"发送失败请重试"];
                                                                     }];
         }
         else

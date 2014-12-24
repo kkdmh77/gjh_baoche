@@ -148,11 +148,11 @@
     }
 }
 
-- (void)registerWithNormalUserName:(NSString *)userName gender:(NSInteger)gender mobilePhoneNum:(NSString *)mobilePhone password:(NSString *)password passwordConfirm:(NSString *)passwordConfirm successHandle:(successHandle)success failedHandle:(failedHandle)failed
+- (void)registerWithNormalUserName:(NSString *)userName gender:(NSString *)gender mobilePhoneNum:(NSString *)mobilePhone password:(NSString *)password passwordConfirm:(NSString *)passwordConfirm successHandle:(successHandle)success failedHandle:(failedHandle)failed
 {
     if ([userName isAbsoluteValid])
     {
-        if (gender)
+        if ([gender isAbsoluteValid])
         {
             if ([StringJudgeManager isValidateStr:mobilePhone regexStr:MobilePhoneNumRegex])
             {
@@ -171,7 +171,7 @@
                             NSDictionary *dic = @{@"userName": userName,
                                                   @"userPassword": password,
                                                   @"userPhone": mobilePhone,
-                                                  @"userSex": @1};
+                                                  @"userSex": gender};
                             
                             [[NetRequestManager sharedInstance] sendRequest:url
                                                                parameterDic:dic

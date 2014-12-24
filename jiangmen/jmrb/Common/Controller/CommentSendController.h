@@ -21,6 +21,8 @@ AS_SINGLETON(CommentSendController);
  @ 创建人      龚俊慧
  @ 创建时间    2014-12-10
  */
-- (void)showCommentInputViewAndSendUrl:(NSURL *)url completeHandle:(SendCommentCompleteHandle)handle;
+- (void)showCommentInputViewAndSendUrl:(NSURL *)url
+                                newsId:(NSInteger)newsId
+                        completeHandle:(SendCommentCompleteHandle)handle;
 
 @end
