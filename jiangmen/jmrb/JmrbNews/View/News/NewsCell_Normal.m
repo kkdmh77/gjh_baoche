@@ -44,6 +44,7 @@ CGFloat defaultNormalNewsCellHeight = 0;
     
     _newsCommentCountLabel.font = SP12Font;
     _newsCommentCountLabel.textColor = Common_LiteGrayColor;
+    _newsCommentCountLabel.backgroundColor = HEXCOLOR(0XFFFFFF);
     
     [self addLineWithPosition:ViewDrawLinePostionType_Bottom startPointOffset:10 endPointOffset:10 lineColor:CellSeparatorColor lineWidth:LineWidth];
 }
@@ -70,7 +71,7 @@ CGFloat defaultNormalNewsCellHeight = 0;
 {
     [_newsImageView gjh_setImageWithURL:[NSURL URLWithString:entity.newsImageUrlStr] placeholderImage:nil imageShowStyle:ImageShowStyle_None success:nil failure:nil];
     _newsTitleLabel.text = entity.newsTitleStr;
-    _newsCommentCountLabel.text = [NSString stringWithFormat:@"%d评",entity.newsCommentCount];
+    _newsCommentCountLabel.text = [NSString stringWithFormat:@" %d评",entity.newsCommentCount];
     
     if ([entity.newsDescStr isAbsoluteValid])
     {

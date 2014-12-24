@@ -53,21 +53,21 @@ static CommentCell *defaultCell;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-- (CGFloat)getCellHeihgtWithItemEntity:(CommentEntity *)entity
++ (CGFloat)getCellHeihgtWithItemEntity:(CommentEntity *)entity
 {
-//    if (!defaultCell)
-//    {
-//        defaultCell = [self loadFromNib];
-//    }
+    if (!defaultCell)
+    {
+        defaultCell = [self loadFromNib];
+    }
     
-    
+    /*
     [self loadCellShowDataWithItemEntity:entity];
     
     CGSize cellSize = [self.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     
     return cellSize.height + 1;
-     
-//    return defaultCell.boundsHeight + ([entity.commentContentStr sizeWithFont:defaultCell.commentContentLabel.font constrainedToWidth:IPHONE_WIDTH  - 60].height - defaultCell.commentContentLabel.boundsHeight);
+     */
+    return defaultCell.boundsHeight + ([entity.commentContentStr sizeWithFont:defaultCell.commentContentLabel.font constrainedToWidth:IPHONE_WIDTH  - 60].height - defaultCell.commentContentLabel.boundsHeight);
 }
 
 - (void)loadCellShowDataWithItemEntity:(CommentEntity *)entity

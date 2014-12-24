@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MyMessageCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务器停机通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsQ-7S-uli">
+                        <rect key="frame" x="20" y="15" width="105" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="rY1-Y3-b23"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-12-24" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcC-QR-Cvu">
+                        <rect key="frame" x="250" y="17" width="60" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务器停机通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggn-9c-ZCy">
+                        <rect key="frame" x="20" y="41" width="290" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="GcC-QR-Cvu" firstAttribute="centerY" secondItem="SsQ-7S-uli" secondAttribute="centerY" id="DeJ-CI-Ydk"/>
+                    <constraint firstAttribute="trailing" secondItem="GcC-QR-Cvu" secondAttribute="trailing" constant="10" id="Jcw-q2-3Vl"/>
+                    <constraint firstItem="Ggn-9c-ZCy" firstAttribute="top" secondItem="SsQ-7S-uli" secondAttribute="bottom" constant="8" id="N3b-uF-8q9"/>
+                    <constraint firstItem="SsQ-7S-uli" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="PqR-Zr-6JC"/>
+                    <constraint firstItem="GcC-QR-Cvu" firstAttribute="trailing" secondItem="Ggn-9c-ZCy" secondAttribute="trailing" id="XT8-aC-qJx"/>
+                    <constraint firstItem="SsQ-7S-uli" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="YBN-NV-eOx"/>
+                    <constraint firstItem="SsQ-7S-uli" firstAttribute="leading" secondItem="Ggn-9c-ZCy" secondAttribute="leading" id="e95-Ry-j3D"/>
+                    <constraint firstItem="GcC-QR-Cvu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SsQ-7S-uli" secondAttribute="trailing" constant="10" id="mb9-9e-NTg"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="267" y="340.5"/>
+        </tableViewCell>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

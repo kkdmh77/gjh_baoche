@@ -11,6 +11,7 @@
 #import "CommentSendController.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "CommentCell.h"
+#import "AppPropertiesInitialize.h"
 
 static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
 
@@ -18,8 +19,6 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
 {
     NSMutableArray *_netCommentEntityArray;
 }
-
-@property (nonatomic, strong) CommentCell *heightToolCell;
 
 @end
 
@@ -32,6 +31,20 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
     [self dddd];
     [self initialization];
     [self getNetworkData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [AppPropertiesInitialize setKeyboardManagerEnable:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [AppPropertiesInitialize setKeyboardManagerEnable:YES];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,7 +130,7 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
     [self.view addSubview:comment];
     
     // tab
-    [self setupTableViewWithFrame:self.view.bounds
+    [self setupTableViewWithFrame: CGRectDecreaseSize(self.view.bounds, 0, comment.boundsHeight)
                             style:UITableViewStylePlain
                   registerNibName:NSStringFromClass([CommentCell class])
                   reuseIdentifier:cellIdenfitier_comment];
@@ -147,11 +160,7 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!_heightToolCell)
-    {
-        self.heightToolCell = [tableView dequeueReusableCellWithIdentifier:cellIdenfitier_comment];
-    }
-    return [_heightToolCell getCellHeihgtWithItemEntity:[self curShowDataAtIndex:indexPath.row]];
+    return [CommentCell getCellHeihgtWithItemEntity:[self curShowDataAtIndex:indexPath.row]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

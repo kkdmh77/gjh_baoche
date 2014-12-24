@@ -145,6 +145,7 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
         if (!_passengersCellSectionHeader)
         {
             _passengersCellSectionHeader = [UserCenter_TabSectionHeaderView loadFromNib];
+            [_passengersCellSectionHeader setTitleString:@"常用乘车人"];
             _passengersCellSectionHeader.tag = section;
             [_passengersCellSectionHeader addTarget:self
                                              action:@selector(headerClicked:)
@@ -157,6 +158,7 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
         if (!_addressCellSectionHeader)
         {
             _addressCellSectionHeader = [UserCenter_TabSectionHeaderView loadFromNib];
+            [_addressCellSectionHeader setTitleString:@"常用收货地址"];
             _addressCellSectionHeader.tag = section;
             [_addressCellSectionHeader addTarget:self
                                              action:@selector(headerClicked:)

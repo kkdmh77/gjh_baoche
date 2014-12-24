@@ -118,6 +118,17 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contactBGView" destination="gzr-Tr-RIm" id="I2d-bS-law"/>
+                <outlet property="contactDescLabel" destination="oKc-I7-kS7" id="0xV-Ko-0V7"/>
+                <outlet property="contactTF" destination="cR9-vd-asW" id="Uq0-3K-bec"/>
+                <outlet property="mobilePhoneNumBGView" destination="teI-OR-f48" id="tpn-0C-PgG"/>
+                <outlet property="mobilePhoneNumDescLabel" destination="Adl-fb-Kzm" id="whE-Q9-Pcc"/>
+                <outlet property="mobilePhoneNumTF" destination="DR2-Gq-E4w" id="iYU-EV-am0"/>
+                <outlet property="remarkBGView" destination="CjF-Xw-Sax" id="Y5F-GI-fYX"/>
+                <outlet property="remarkDescLabel" destination="egE-eP-5Lb" id="ziY-eZ-2Tg"/>
+                <outlet property="remarkTV" destination="o23-al-dEv" id="b7D-M6-V4o"/>
+            </connections>
             <point key="canvasLocation" x="263" y="342"/>
         </view>
     </objects>

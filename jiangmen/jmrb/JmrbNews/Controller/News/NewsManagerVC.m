@@ -13,6 +13,7 @@
 #import "LXActivity.h"
 #import "SettingVC.h"
 #import "LoginVC.h"
+#import "MyMessageVC.h"
 
 @interface NewsManagerVC () <SUNSlideSwitchViewDelegate, LXActivityDelegate>
 {
@@ -73,7 +74,14 @@
 {
     [self sendRequest:[[self class] getRequestURLStr:NetNewsRequestType_GetAllNewsType]
          parameterDic:nil
-           requestTag:NetNewsRequestType_GetAllNewsType];
+       requestHeaders:nil
+    requestMethodType:RequestMethodType_POST
+           requestTag:NetNewsRequestType_GetAllNewsType
+             delegate:self
+             userInfo:nil
+       netCachePolicy:NetAskServerIfModifiedWhenStaleCachePolicy
+         cacheSeconds:CacheNetDataTimeType_OneDay];
+    ;
 }
 
 - (void)parseNetDataWithDic:(NSDictionary *)dic
@@ -184,7 +192,11 @@
             break;
         case 2:
         {
-            
+            MyMessageVC *myMessage = [MyMessageVC new];
+            UINavigationController *myMessageNav = [[UINavigationController alloc] initWithRootViewController:myMessage];
+            [self presentViewController:myMessageNav
+                   modalTransitionStyle:UIModalTransitionStyleCoverVertical
+                             completion:nil];
         }
             break;
         case 3:
