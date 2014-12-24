@@ -37,6 +37,7 @@
                            // 用户中心
                            @"logon.action",
                            @"addUser.action",
+                           @"getUser.action",
                            
                            nil];
     });

@@ -10,6 +10,9 @@
 
 @interface UserInfoModel : NSObject
 
++ (void)setUserDefaultMobilePhoneNum:(NSString *)mobilePhone;
++ (NSString *)getUserDefaultMobilePhoneNum;
+
 + (void)setUserDefaultEmail:(NSString *)email;
 + (NSString *)getUserDefaultEmail;
 

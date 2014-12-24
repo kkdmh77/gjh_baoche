@@ -87,7 +87,9 @@
     [HUDManager hideHUD];
     
     NSNumber *userId = [[infoObj safeObjectForKey:@"response"] safeObjectForKey:@"userId"];
+    NSString *userMobilePhone = [[infoObj safeObjectForKey:@"response"] safeObjectForKey:@"userPhone"];
     [UserInfoModel setUserDefaultUserId:userId];
+    [UserInfoModel setUserDefaultMobilePhoneNum:userMobilePhone];
     
     if (_success)
     {

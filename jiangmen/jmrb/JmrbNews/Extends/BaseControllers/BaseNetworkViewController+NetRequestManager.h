@@ -28,6 +28,7 @@ typedef enum
     // 用户中心
     NetUserCenterRequestType_Login                             ,
     NetUserCenterRequestType_Register                          ,
+    NetUserCenterRequestType_GetUserInfo                       ,
     
 } NetRequestType;
 

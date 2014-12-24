@@ -113,6 +113,7 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
+        cell.backgroundColor = CellBackgroundColor;
         cell.textLabel.font = SP14Font;
         cell.textLabel.textColor = Common_BlackColor;
     }

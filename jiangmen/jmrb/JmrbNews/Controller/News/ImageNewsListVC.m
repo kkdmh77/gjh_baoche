@@ -39,6 +39,8 @@ static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
 {
     [super viewDidLoad];
     
+    self.navigationItem.leftBarButtonItem = nil;
+    
     [self initialization];
     [self getNetworkData];
 }

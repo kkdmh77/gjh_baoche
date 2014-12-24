@@ -161,3 +161,23 @@
 }
 
 @end
+
+///////////////////////////////////////////////////////////////
+
+@implementation UserEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        self.userHeaderImageUrlStr = [dict safeObjectForKey:@"userPhoto"];
+        self.userNameStr = [dict safeObjectForKey:@"userName"];
+        self.userMobilePhoneStr = [dict safeObjectForKey:@"userPhone"];
+        self.gender = [[dict safeObjectForKey:@"userSex"] integerValue];
+        self.genderStr = [dict safeObjectForKey:@"userSexString"];
+    }
+    return self;
+}
+
+@end

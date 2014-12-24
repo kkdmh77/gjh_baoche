@@ -40,6 +40,8 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
 {
     [super viewDidLoad];
     
+    self.navigationItem.leftBarButtonItem = nil;
+    
     [self initialization];
     [self getNetworkData];
 }

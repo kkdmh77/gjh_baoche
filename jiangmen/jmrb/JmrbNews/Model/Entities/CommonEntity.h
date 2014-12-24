@@ -92,3 +92,15 @@
 @property (nonatomic, assign) NSTimeInterval messageTime;           // 消息时间
 
 @end
+
+///////////////////////////////////////////////////////////////
+
+@interface UserEntity : NetItem
+
+@property (nonatomic, copy) NSString *userHeaderImageUrlStr;
+@property (nonatomic, copy) NSString *userNameStr;
+@property (nonatomic, copy) NSString *userMobilePhoneStr;
+@property (nonatomic, assign) NSInteger gender;
+@property (nonatomic, copy) NSString *genderStr;
+
+@end

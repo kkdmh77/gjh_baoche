@@ -9,6 +9,7 @@
 #import "UserInfoModel.h"
 
 // 设置信息key值
+#define UserDefault_MobilePhoneNumKey                @"userDefault_MobilePhoneNumKey"    // 手机号码
 #define UserDefault_EmailKey                @"userDefault_EmailKey"             // 用户邮箱
 #define UserDefault_SessionKey              @"userDefault_SessionKey"           // 登录的会话
 #define UserDefault_UserIdKey               @"userDefault_UserIdKey"            // 用户ID
@@ -34,6 +35,18 @@
 + (void)saveUserDefaultInfo
 {
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void)setUserDefaultMobilePhoneNum:(NSString *)mobilePhone;
+{
+    [[NSUserDefaults standardUserDefaults] setObject:mobilePhone forKey:UserDefault_MobilePhoneNumKey];
+    [self saveUserDefaultInfo];
+}
+
++ (NSString *)getUserDefaultMobilePhoneNum;
+
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_MobilePhoneNumKey];
 }
 
 + (void)setUserDefaultEmail:(NSString *)email

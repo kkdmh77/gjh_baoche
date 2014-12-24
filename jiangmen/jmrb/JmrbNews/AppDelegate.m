@@ -232,6 +232,7 @@ CG_INLINE  void deleteFile() {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     [UserInfoModel setUserDefaultUserId:nil];
+    [UserInfoModel setUserDefaultMobilePhoneNum:nil];
     
     // 进行应用程序一系列属性的初始化设置
     [AppPropertiesInitialize startAppPropertiesInitialize];

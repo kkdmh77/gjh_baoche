@@ -31,7 +31,6 @@ int webTextFontValue = 15;
 {
     [super viewDidLoad];
     
-    [self initialization];
     [self getNetworkData];
 }
 
@@ -120,7 +119,7 @@ int webTextFontValue = 15;
                         
                     }
                     
-                    [strongSelf->_webView loadHTMLString:htmlString baseURL:nil];
+                    [strongSelf initializationWithHtmlString:htmlString andCommentCountStr:newsCommentCountStr];
                 }
             }
         }
@@ -137,7 +136,7 @@ int webTextFontValue = 15;
     }
 }
 
-- (void)initialization
+- (void)initializationWithHtmlString:(NSString *)htmlStr andCommentCountStr:(NSString *)commentCountStr
 {
     WEAKSELF
     // 评论输入框
@@ -145,7 +144,7 @@ int webTextFontValue = 15;
     comment.boundsWidth = self.viewBoundsWidth;
     comment.origin = CGPointMake(0, self.view.boundsHeight - comment.boundsHeight);
     comment.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [comment setRightBtnTitle:@"66评论"];
+    [comment setRightBtnTitle:commentCountStr];
     [comment setOperationHandle:^(CommentView *view, CommentViewOperationType type) {
         
         if (CommentViewOperationType_Input == type)
@@ -170,6 +169,7 @@ int webTextFontValue = 15;
     
     // webView
     _webView = InsertWebView(self.view, CGRectDecreaseSize(self.view.bounds, 0, comment.boundsHeight), self, 1000);
+    [_webView loadHTMLString:htmlStr baseURL:nil];
     [_webView keepAutoresizingInFull];
 }
 

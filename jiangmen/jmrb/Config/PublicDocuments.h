@@ -38,6 +38,7 @@
 
 #define PageBackgroundColor                 HEXCOLOR(0XECECEC)                  // 灰蓝色  viewController的背景色
 #define CellSeparatorColor                  HEXCOLOR(0XE0E0E0)                  // 灰白色  tabViewCell的间隔线
+#define CellBackgroundColor                 HEXCOLOR(0XFAFAFA) 
 
 #define Common_LiteWhiteGrayColor           HEXCOLOR(0XB5C4C9)                  // 浅灰白色 适用范围:订单详情页面 小标题、时间、购买件数
 

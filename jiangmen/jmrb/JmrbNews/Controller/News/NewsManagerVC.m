@@ -16,6 +16,7 @@
 #import "MyMessageVC.h"
 #import "UserInfoModel.h"
 #import "LoginBC.h"
+#import "UserCenterVC.h"
 
 @interface NewsManagerVC () <SUNSlideSwitchViewDelegate, LXActivityDelegate>
 {
@@ -203,11 +204,22 @@
             break;
         case 1:
         {
-            LoginVC *login = [LoginVC loadFromNib];
-            UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
-            [self presentViewController:loginNav
-                   modalTransitionStyle:UIModalTransitionStyleCoverVertical
-                             completion:nil];
+            if ([UserInfoModel getUserDefaultMobilePhoneNum])
+            {
+                UserCenterVC *userCenter = [[UserCenterVC alloc] init];
+                UINavigationController *userCenterNav = [[UINavigationController alloc] initWithRootViewController:userCenter];
+                [self presentViewController:userCenterNav
+                       modalTransitionStyle:UIModalTransitionStyleCoverVertical
+                                 completion:nil];
+            }
+            else
+            {
+                LoginVC *login = [LoginVC loadFromNib];
+                UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+                [self presentViewController:loginNav
+                       modalTransitionStyle:UIModalTransitionStyleCoverVertical
+                                 completion:nil];
+            }
         }
             break;
         case 2:

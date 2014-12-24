@@ -128,7 +128,7 @@ DEF_SINGLETON(CommentSendController);
          commentNickname：评论人的名称
          commentContent：评论的内容
          */
-        if ([UserInfoModel getUserDefaultUserId])
+        if ([UserInfoModel getUserDefaultMobilePhoneNum])
         {
         
             [[NetRequestManager sharedInstance] sendRequest:_toSendUrl
