@@ -11,6 +11,7 @@
 #import "UserInfoModel.h"
 #import "CommonEntity.h"
 #import "UserInfoModel.h"
+#import "ModifyUserInfoVC.h"
 
 static NSString * const userNameDescStr = @"用户名: ";
 static NSString * const genderDescStr = @"性   别: ";
@@ -22,7 +23,7 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
     NSMutableArray *_tabImageArray;
     
     UserEntity  *_userEntity;
-    UIImageView *_userHeaderImageView;
+    UIButton    *_userHeaderImageBtn;
 }
 
 @end
@@ -40,6 +41,13 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
     [self getNetworkData];
     [self getLocalTabShowData];
     [self initialization];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [_userHeaderImageBtn setRadius:_userHeaderImageBtn.boundsWidth / 2];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,11 +79,10 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
     
     [_tabTitleArray replaceObjectAtIndex:0 withObject:@[userNameStr, genderStr, mobilePhoneStr]];
     
-//    [_userHeaderImageView gjh_setImageWithURL:[NSURL URLWithString:_userEntity.userHeaderImageUrlStr]
-//                             placeholderImage:[UIImage imageNamed:@"weidenglutouxiang"]
-//                               imageShowStyle:ImageShowStyle_None
-//                                      success:nil
-//                                      failure:nil];
+    [_userHeaderImageBtn gjh_setBackgroundImageWithURL:[NSURL URLWithString:_userEntity.userHeaderImageUrlStr]
+                                      placeholderImage:[UIImage imageNamed:@"weidenglutouxiang"]
+                                               success:nil
+                                               failure:nil];
     
     [_tableView reloadData];
 }
@@ -117,13 +124,13 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
     UIView *bgView = InsertView(nil, CGRectMake(0, 0, _tableView.boundsWidth, 180));
     bgView.backgroundColor = [UIColor clearColor];
     
-    _userHeaderImageView = InsertImageView(bgView, CGRectZero, [UIImage imageNamed:@"weidenglutouxiang"], nil);
-    [_userHeaderImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    _userHeaderImageBtn = InsertImageButton(bgView, CGRectZero, 1000, [UIImage imageNamed:@"weidenglutouxiang"], nil, self, @selector(clickUserHeaderImagBtn:));
+    [_userHeaderImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.equalTo(CGSizeMake(100, 100));
         make.centerX.equalTo(bgView);
         make.top.equalTo(bgView).offset(@20);
     }];
-    
+
     UILabel *label = InsertLabel(bgView,
                                  CGRectZero,
                                  NSTextAlignmentCenter,
@@ -133,11 +140,28 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
                                  NO);
     [label sizeToFit];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_userHeaderImageView);
-        make.top.equalTo(_userHeaderImageView.mas_bottom).offset(@10);
+        make.centerX.equalTo(_userHeaderImageBtn);
+        make.top.equalTo(_userHeaderImageBtn.mas_bottom).offset(@10);
     }];
     
     _tableView.tableHeaderView = bgView;
+}
+
+- (void)clickUserHeaderImagBtn:(UIButton *)sender
+{
+    WEAKSELF
+    [self pickSinglePhotoFromCameraOrAlbumByIsCropped:YES cancelHandle:^{
+        
+    } finishPickingHandle:^(NSArray *pickedImageArray) {
+        STRONGSELF
+        if ([pickedImageArray isAbsoluteValid])
+        {
+            UIImage *image = pickedImageArray[0];
+            [strongSelf->_userHeaderImageBtn setBackgroundImage:image forState:UIControlStateNormal];
+            
+            // 发送请求
+        }
+    }];
 }
 
 - (void)parseNetDataWithDic:(NSDictionary *)dic
@@ -227,7 +251,9 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
     {
         if (0 == indexPath.row)
         {
-            
+            ModifyUserInfoVC *modifyUserInfo = [ModifyUserInfoVC loadFromNib];
+            modifyUserInfo.userEntity = _userEntity;
+            [self pushViewController:modifyUserInfo];
         }
         else if (1 == indexPath.section)
         {

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12E3067</string>
-		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.39</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">14B25</string>
+		<string key="IBDocument.InterfaceBuilderVersion">6250</string>
+		<string key="IBDocument.AppKitVersion">1343.16</string>
+		<string key="IBDocument.HIToolboxVersion">755.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">2083</string>
+			<string key="NS.object.0">6244</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -35,7 +35,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="191373211">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIScrollView" id="550429095">
@@ -47,7 +47,6 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{0, 160}, {320, 200}}</string>
 								<reference key="NSSuperview" ref="550429095"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="420801226"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -67,7 +66,6 @@
 								<array class="NSMutableArray" key="NSSubviews"/>
 								<string key="NSFrameSize">{320, 160}</string>
 								<reference key="NSSuperview" ref="550429095"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="139628099"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -82,7 +80,6 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{248, 131}, {64, 36}}</string>
 								<reference key="NSSuperview" ref="550429095"/>
-								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -95,7 +92,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{35, 135}, {250, 21}}</string>
 								<reference key="NSSuperview" ref="550429095"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="421306783"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -117,15 +113,15 @@
 									<double key="pointSize">17</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica</string>
+									<string key="NSName">HelveticaNeue</string>
 									<double key="NSSize">17</double>
 									<int key="NSfFlags">16</int>
 								</object>
+								<bool key="useAutomaticPreferredMaxLayoutWidth">YES</bool>
 							</object>
 						</array>
 						<string key="NSFrame">{{0, 70}, {320, 360}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="704235159"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -134,8 +130,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 430}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="550429095"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -152,7 +146,7 @@
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
-			<array class="NSMutableArray" key="connectionRecords">
+			<array key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view</string>
@@ -289,108 +283,15 @@
 			<nil key="sourceID"/>
 			<int key="maxID">24</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">MainPageFirstNewsListVC</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">clickPageControl:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">clickPageControl:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">clickPageControl:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="adsScrollView">UIScrollView</string>
-						<string key="newsAdsTitle">UILabel</string>
-						<string key="newsCell">NewsCell</string>
-						<string key="newsTableView">UITableView</string>
-						<string key="pageControl">UIPageControl</string>
-						<string key="showAllScrollView">UIScrollView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="adsScrollView">
-							<string key="name">adsScrollView</string>
-							<string key="candidateClassName">UIScrollView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newsAdsTitle">
-							<string key="name">newsAdsTitle</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newsCell">
-							<string key="name">newsCell</string>
-							<string key="candidateClassName">NewsCell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newsTableView">
-							<string key="name">newsTableView</string>
-							<string key="candidateClassName">UITableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="pageControl">
-							<string key="name">pageControl</string>
-							<string key="candidateClassName">UIPageControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="showAllScrollView">
-							<string key="name">showAllScrollView</string>
-							<string key="candidateClassName">UIScrollView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MainPageFirstNewsListVC.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NewsCell</string>
-					<string key="superclassName">UITableViewCell</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="newsDetailTitle">UILabel</string>
-						<string key="newsImageView">UIImageView</string>
-						<string key="newsReplayView">UILabel</string>
-						<string key="newsTitle">UILabel</string>
-						<string key="newstypeImageView">UIImageView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="newsDetailTitle">
-							<string key="name">newsDetailTitle</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newsImageView">
-							<string key="name">newsImageView</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newsReplayView">
-							<string key="name">newsReplayView</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newsTitle">
-							<string key="name">newsTitle</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newstypeImageView">
-							<string key="name">newstypeImageView</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NewsCell.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1552" key="NS.object.0"/>
+		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">NO</bool>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
+			<integer value="4600" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

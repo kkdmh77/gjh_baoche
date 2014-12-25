@@ -62,6 +62,8 @@
 
 - (void)configureViewsProperties
 {
+    [_userHeaderImageView setRadius:_userHeaderImageView.boundsWidth / 2];
+    
     [_userNameLabel addBorderToViewWitBorderColor:CellSeparatorColor borderWidth:LineWidth];
     _userNameLabel.leftViewMode = UITextFieldViewModeAlways;
     _userNameLabel.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yonghuming"]];

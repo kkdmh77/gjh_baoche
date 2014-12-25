@@ -1020,6 +1020,8 @@
 		43CDD44A1A47EA8100AF59A2 /* cancel_comment_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CDD4461A47EA8100AF59A2 /* cancel_comment_normal@2x.png */; };
 		43CDD44B1A47EA8100AF59A2 /* send_comment_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CDD4471A47EA8100AF59A2 /* send_comment_highlight@2x.png */; };
 		43CDD44C1A47EA8100AF59A2 /* send_comment_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CDD4481A47EA8100AF59A2 /* send_comment_normal@2x.png */; };
+		43CE863C1A4BC0ED00611360 /* ModifyUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CE863A1A4BC0ED00611360 /* ModifyUserInfoVC.m */; };
+		43CE863D1A4BC0ED00611360 /* ModifyUserInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43CE863B1A4BC0ED00611360 /* ModifyUserInfoVC.xib */; };
 		43D01EEC1A31510B004AA52B /* VideoNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D01EEA1A31510B004AA52B /* VideoNewsCell.m */; };
 		43D01EED1A31510B004AA52B /* VideoNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D01EEB1A31510B004AA52B /* VideoNewsCell.xib */; };
 		43D01EEF1A315761004AA52B /* videoPlayCount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D01EEE1A315761004AA52B /* videoPlayCount@2x.png */; };
@@ -2591,6 +2593,9 @@
 		43CDD4461A47EA8100AF59A2 /* cancel_comment_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_comment_normal@2x.png"; sourceTree = "<group>"; };
 		43CDD4471A47EA8100AF59A2 /* send_comment_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_comment_highlight@2x.png"; sourceTree = "<group>"; };
 		43CDD4481A47EA8100AF59A2 /* send_comment_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_comment_normal@2x.png"; sourceTree = "<group>"; };
+		43CE86391A4BC0ED00611360 /* ModifyUserInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyUserInfoVC.h; sourceTree = "<group>"; };
+		43CE863A1A4BC0ED00611360 /* ModifyUserInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyUserInfoVC.m; sourceTree = "<group>"; };
+		43CE863B1A4BC0ED00611360 /* ModifyUserInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyUserInfoVC.xib; sourceTree = "<group>"; };
 		43D01EE91A31510B004AA52B /* VideoNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoNewsCell.h; sourceTree = "<group>"; };
 		43D01EEA1A31510B004AA52B /* VideoNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoNewsCell.m; sourceTree = "<group>"; };
 		43D01EEB1A31510B004AA52B /* VideoNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoNewsCell.xib; sourceTree = "<group>"; };
@@ -3961,6 +3966,9 @@
 				2B2A0CE41A49CBB00074B150 /* MyMessageVC.m */,
 				2BD925D61A4B06170069509B /* UserCenterVC.h */,
 				2BD925D71A4B06170069509B /* UserCenterVC.m */,
+				43CE86391A4BC0ED00611360 /* ModifyUserInfoVC.h */,
+				43CE863A1A4BC0ED00611360 /* ModifyUserInfoVC.m */,
+				43CE863B1A4BC0ED00611360 /* ModifyUserInfoVC.xib */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -6147,6 +6155,7 @@
 				0535D8011654E70500D10324 /* discuss_background@2x.png in Resources */,
 				0535D8021654E70500D10324 /* discuss_submit@2x.png in Resources */,
 				0535D8031654E70500D10324 /* discuss_submit_tapped@2x.png in Resources */,
+				43CE863D1A4BC0ED00611360 /* ModifyUserInfoVC.xib in Resources */,
 				0535D8041654E70500D10324 /* discuss_text_input_background@2x.png in Resources */,
 				0535D8051654E70500D10324 /* discuss_text_input_background_default@2x.png in Resources */,
 				2B390F381A2CBDEE00A9DA2A /* whiteArrow.png in Resources */,
@@ -6847,6 +6856,7 @@
 				43D212E11A302BEC000F0E0B /* UIView+Extension.m in Sources */,
 				43D212DC1A302BEC000F0E0B /* MJRefreshConst.m in Sources */,
 				43C89B271A2D895A002F5E5F /* CoreDataManager.m in Sources */,
+				43CE863C1A4BC0ED00611360 /* ModifyUserInfoVC.m in Sources */,
 				05817E4E1665A755000D1B39 /* RegesterViewController.m in Sources */,
 				2B390F311A2CBDEE00A9DA2A /* LoadMoreTableFooterView.m in Sources */,
 				43D212EC1A308D5D000F0E0B /* VideoNewsListVC.m in Sources */,
