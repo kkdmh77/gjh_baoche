@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModifyUserInfoVC">
@@ -62,20 +62,6 @@
                         <constraint firstItem="IOe-N5-DHp" firstAttribute="leading" secondItem="W9f-sX-N0A" secondAttribute="leading" constant="10" id="zXZ-HM-meV"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6u-On-PIW">
-                    <rect key="frame" x="13" y="155" width="294" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Uzy-LJ-FTS"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="确认">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="clickModifyBtn:" destination="-1" eventType="touchUpInside" id="URL-JD-Tvn"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cUi-sf-cn9">
                     <rect key="frame" x="0.0" y="50" width="320" height="40"/>
                     <subviews>
@@ -105,6 +91,9 @@
                             </state>
                             <state key="selected" image="xingbie_xuanzhong.png"/>
                             <state key="highlighted" image="xingbie_xuanzhong.png"/>
+                            <connections>
+                                <action selector="clickManBtn:" destination="-1" eventType="touchUpInside" id="TMq-vb-8e8"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58l-wI-3n4">
                             <rect key="frame" x="155" y="0.0" width="35" height="40"/>
@@ -118,6 +107,9 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" image="xingbie_xuanzhong.png"/>
+                            <connections>
+                                <action selector="clickWomenBtn:" destination="-1" eventType="touchUpInside" id="T8O-6u-3pG"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -155,7 +147,7 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wtL-R4-t2H" customClass="FUITextField">
                             <rect key="frame" x="104" y="0.0" width="211" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,6 +164,20 @@
                         <constraint firstItem="wtL-R4-t2H" firstAttribute="leading" secondItem="QXX-UB-e5T" secondAttribute="trailing" id="yxB-SY-CFe"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6u-On-PIW">
+                    <rect key="frame" x="13" y="155" width="294" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Uzy-LJ-FTS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="确认">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="clickModifyBtn:" destination="-1" eventType="touchUpInside" id="URL-JD-Tvn"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

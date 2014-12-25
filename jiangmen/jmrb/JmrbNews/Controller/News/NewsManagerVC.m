@@ -146,10 +146,33 @@
     
     self.navigationItem.titleView = _slideSwitchView.topScrollView;
     self.navigationItem.leftBarButtonItem = nil;
-    [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Right
-                                 normalImg:[UIImage imageNamed:@"jiahao"]
-                            highlightedImg:nil
-                                    action:@selector(operationMoreAction:)];
+    
+    [self configureRightItemBtn];
+   
+}
+
+- (void)configureRightItemBtn
+{
+    /*
+     [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Right
+     normalImg:[UIImage imageNamed:@"jiahao"]
+     highlightedImg:nil
+     action:@selector(operationMoreAction:)];
+     */
+    UIView *view = InsertView(nil, CGRectMake(0, 0, 36, 30));
+    view.backgroundColor = [UIColor clearColor];
+    
+    InsertImageButton(view,
+                     CGRectMake(6, 0, 30, view.boundsHeight), 1000,
+                     [UIImage imageNamed:@"jiahao"],
+                     nil,
+                     self,
+                     @selector(operationMoreAction:));
+    InsertImageView(view,
+                    CGRectMake(0, 0, 6, view.boundsHeight),
+                    [UIImage imageNamed:@"yinyingxian"],
+                    nil);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:view];
 }
 
 - (void)operationMoreAction:(UIButton *)sender

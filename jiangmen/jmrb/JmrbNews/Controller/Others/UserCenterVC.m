@@ -12,6 +12,7 @@
 #import "CommonEntity.h"
 #import "UserInfoModel.h"
 #import "ModifyUserInfoVC.h"
+#import "ModifyPasswordVC.h"
 
 static NSString * const userNameDescStr = @"用户名: ";
 static NSString * const genderDescStr = @"性   别: ";
@@ -38,7 +39,6 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
                             barButtonTitle:Cancel
                                     action:@selector(backViewController)];
     
-    [self getNetworkData];
     [self getLocalTabShowData];
     [self initialization];
 }
@@ -47,6 +47,7 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
 {
     [super viewWillAppear:animated];
     
+    [self getNetworkData];
     [_userHeaderImageBtn setRadius:_userHeaderImageBtn.boundsWidth / 2];
 }
 
@@ -257,7 +258,8 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
         }
         else if (1 == indexPath.section)
         {
-            
+            ModifyPasswordVC *modifyPassword = [ModifyPasswordVC loadFromNib];
+            [self pushViewController:modifyPassword];
         }
             
     }

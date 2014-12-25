@@ -97,10 +97,13 @@
 
 @interface UserEntity : NetItem
 
+@property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, copy) NSString *userHeaderImageUrlStr;
 @property (nonatomic, copy) NSString *userNameStr;
+@property (nonatomic, copy) NSString *userPasswordStr;
 @property (nonatomic, copy) NSString *userMobilePhoneStr;
-@property (nonatomic, assign) NSInteger gender;
+@property (nonatomic, assign) NSInteger gender;                 // 1:表示男 0:表示女
 @property (nonatomic, copy) NSString *genderStr;
+@property (nonatomic, assign) NSNumber *isVerificationPhoneNum; // 是否验证手机号码 0.没有  1:通过
 
 @end

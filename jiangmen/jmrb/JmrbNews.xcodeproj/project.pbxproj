@@ -625,6 +625,9 @@
 		2B92B3F21A3201E3001ECC45 /* imageNewsCell_Share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B92B3EF1A3201E3001ECC45 /* imageNewsCell_Share@2x.png */; };
 		2BD925D81A4B06170069509B /* UserCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD925D71A4B06170069509B /* UserCenterVC.m */; };
 		2BD925DA1A4B128C0069509B /* jiantou_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD925D91A4B128C0069509B /* jiantou_cell@2x.png */; };
+		2BD9D1611A4C57B9003C6061 /* ModifyPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD9D15F1A4C57B9003C6061 /* ModifyPasswordVC.m */; };
+		2BD9D1621A4C57B9003C6061 /* ModifyPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD9D1601A4C57B9003C6061 /* ModifyPasswordVC.xib */; };
+		2BD9D1641A4C6EC3003C6061 /* yinyingxian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD9D1631A4C6EC3003C6061 /* yinyingxian@2x.png */; };
 		2BDA30FD1A40747900EE1470 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDA30FC1A40747900EE1470 /* SettingVC.m */; };
 		2BDE1BE91A2E1672009E78FB /* NewsCell_Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */; };
 		2BDE1BEA1A2E1672009E78FB /* NewsCell_Normal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */; };
@@ -1887,6 +1890,10 @@
 		2BD925D61A4B06170069509B /* UserCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterVC.h; sourceTree = "<group>"; };
 		2BD925D71A4B06170069509B /* UserCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterVC.m; sourceTree = "<group>"; };
 		2BD925D91A4B128C0069509B /* jiantou_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiantou_cell@2x.png"; sourceTree = "<group>"; };
+		2BD9D15E1A4C57B9003C6061 /* ModifyPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordVC.h; sourceTree = "<group>"; };
+		2BD9D15F1A4C57B9003C6061 /* ModifyPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordVC.m; sourceTree = "<group>"; };
+		2BD9D1601A4C57B9003C6061 /* ModifyPasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyPasswordVC.xib; sourceTree = "<group>"; };
+		2BD9D1631A4C6EC3003C6061 /* yinyingxian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yinyingxian@2x.png"; sourceTree = "<group>"; };
 		2BDA30FB1A40747900EE1470 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		2BDA30FC1A40747900EE1470 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		2BDE1BE61A2E1672009E78FB /* NewsCell_Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell_Normal.h; sourceTree = "<group>"; };
@@ -3969,6 +3976,9 @@
 				43CE86391A4BC0ED00611360 /* ModifyUserInfoVC.h */,
 				43CE863A1A4BC0ED00611360 /* ModifyUserInfoVC.m */,
 				43CE863B1A4BC0ED00611360 /* ModifyUserInfoVC.xib */,
+				2BD9D15E1A4C57B9003C6061 /* ModifyPasswordVC.h */,
+				2BD9D15F1A4C57B9003C6061 /* ModifyPasswordVC.m */,
+				2BD9D1601A4C57B9003C6061 /* ModifyPasswordVC.xib */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -5185,6 +5195,7 @@
 		43C89B6C1A2DEB5A002F5E5F /* News */ = {
 			isa = PBXGroup;
 			children = (
+				2BD9D1631A4C6EC3003C6061 /* yinyingxian@2x.png */,
 				43CDD4451A47EA8100AF59A2 /* cancel_comment_highlight@2x.png */,
 				43CDD4461A47EA8100AF59A2 /* cancel_comment_normal@2x.png */,
 				43CDD4471A47EA8100AF59A2 /* send_comment_highlight@2x.png */,
@@ -6508,7 +6519,9 @@
 				0599D8D61774395000B6124F /* toupiaosmall@2x.png in Resources */,
 				43C899D81A2D792D002F5E5F /* Icon.png in Resources */,
 				05D0E2751792D4CA000854FD /* MainPageFirstNewsListVC-5.xib in Resources */,
+				2BD9D1641A4C6EC3003C6061 /* yinyingxian@2x.png in Resources */,
 				05D0E2771793061A000854FD /* MPAdsInfoDetailContent-5.xib in Resources */,
+				2BD9D1621A4C57B9003C6061 /* ModifyPasswordVC.xib in Resources */,
 				057EA8DD1793E3F5009C26B5 /* default568@2x.png in Resources */,
 				2B501FC01A45A72D00012CA7 /* xingbie_xuanzhong@2x.png in Resources */,
 				052143B7179443FB00A73F40 /* MPDiscussVC-5.xib in Resources */,
@@ -6707,6 +6720,7 @@
 				05C6E00F165F24E000498178 /* MainPageNavigationBar.m in Sources */,
 				05C6E011165F24E000498178 /* MainPageVC.m in Sources */,
 				05C6E012165F24E000498178 /* MoreAboutVC.m in Sources */,
+				2BD9D1611A4C57B9003C6061 /* ModifyPasswordVC.m in Sources */,
 				2B390F431A2CBDEE00A9DA2A /* UIImageView+WebCache.m in Sources */,
 				43C89B2A1A2D895A002F5E5F /* HUDManager.m in Sources */,
 				43C899521A2D792D002F5E5F /* NINonRetainingCollections.m in Sources */,

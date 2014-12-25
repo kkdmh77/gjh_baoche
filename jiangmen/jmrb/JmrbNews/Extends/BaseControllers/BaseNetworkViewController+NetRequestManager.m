@@ -38,6 +38,8 @@
                            @"logon.action",
                            @"addUser.action",
                            @"getUser.action",
+                           @"updateUser.action",
+                           @"updatepsw.action",
                            
                            nil];
     });

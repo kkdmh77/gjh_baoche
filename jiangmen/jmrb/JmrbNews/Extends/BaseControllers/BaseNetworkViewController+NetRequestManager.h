@@ -26,9 +26,11 @@ typedef enum
     NetVideosRequestType_GetVideosList                         , // 获取视频新闻列表(POST)
     
     // 用户中心
-    NetUserCenterRequestType_Login                             ,
-    NetUserCenterRequestType_Register                          ,
-    NetUserCenterRequestType_GetUserInfo                       ,
+    NetUserCenterRequestType_Login                             , // 登陆
+    NetUserCenterRequestType_Register                          , // 注册
+    NetUserCenterRequestType_GetUserInfo                       , // 获取用户信息
+    NetUserCenterRequestType_ModifyUserInfo                    , // 修改用户信息
+    NetUserCenterRequestType_ModifyPassword                    , // 修改密码
     
 } NetRequestType;
 

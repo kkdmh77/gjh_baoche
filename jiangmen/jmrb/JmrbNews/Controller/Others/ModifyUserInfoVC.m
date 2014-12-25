@@ -7,6 +7,9 @@
 //
 
 #import "ModifyUserInfoVC.h"
+#import "FUITextField.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
+#import "StringJudgeManager.h"
 
 @interface ModifyUserInfoVC ()
 
@@ -45,14 +48,23 @@
 
 - (void)setPageLocalizableText
 {
-    
+    [self setNavigationItemTitle:@"修改资料"];
 }
 
 - (void)setNetworkRequestStatusBlocks
 {
     WEAKSELF
     [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
-        
+        STRONGSELF
+        if (NetUserCenterRequestType_ModifyUserInfo == request.tag)
+        {
+            NSString *userName = [[successInfoObj safeObjectForKey:@"response"] safeObjectForKey:@"userName"];
+            NSString *mobilePhone = [[successInfoObj safeObjectForKey:@"response"] safeObjectForKey:@"userPhone"];
+            [UserInfoModel setUserDefaultLoginName:userName];
+            [UserInfoModel setUserDefaultMobilePhoneNum:mobilePhone];
+            
+            [strongSelf backViewController];
+        }
     }];
 }
 
@@ -94,6 +106,17 @@
 {
     // 设置属性
     [self configureViewsProperties];
+    
+    _userNameTF.text = _userEntity.userNameStr;
+    if (1 == _userEntity.gender)
+    {
+        _manBtn.selected = YES;
+    }
+    else
+    {
+        _womenBtn.selected = YES;
+    }
+    _mobilePhoneTF.text = _userEntity.userMobilePhoneStr;
 }
 
 - (IBAction)clickManBtn:(UIButton *)sender
@@ -110,49 +133,48 @@
 
 - (IBAction)clickModifyBtn:(UIButton *)sender
 {
+    /*
+     userId:用户ID
+     userName ：用户名
+     userPassword  ：密码    	 	-不修改传@“”
+     userPhone  ：  联系电话
+     file:用户的头像				-不修改可以不传
+     userSex：用户的性别
+     userVerification:是否已经手机号码验证通过0.没有  1，通过  -直接传服务器返回的值
+     */
     if ([self isValidOfInputInfo])
     {
-        
+        [self sendRequest:[[self class] getRequestURLStr:NetUserCenterRequestType_ModifyUserInfo]
+             parameterDic:@{@"userId": [UserInfoModel getUserDefaultUserId],
+                            @"userName": _userNameTF.text,
+                            @"userPassword": @"",
+                            @"userPhone": _mobilePhoneTF.text,
+                            @"userSex": _manBtn.selected ? @"1" : @"0",
+                            @"userVerification": _userEntity.isVerificationPhoneNum}
+        requestMethodType:RequestMethodType_POST
+               requestTag:NetUserCenterRequestType_ModifyUserInfo];
     }
 }
 
 - (BOOL)isValidOfInputInfo
 {
-    /*
-    BOOL isValidOldPassword = NO, isValidNewPassword = NO, isValidNewPasswordConfirm = NO;
-    
-    if ([_oldPasswordTF.text isAbsoluteValid])
+    if ([_userNameTF hasText])
     {
-        isValidOldPassword = YES;
-        _oldPasswordErrorRemindLabel.hidden = YES;
-        
-        if (_theNewPasswordTF.text.length >= 6 && _theNewPasswordTF.text.length <= 16)
+        if ([StringJudgeManager isValidateStr:_mobilePhoneTF.text regexStr:MobilePhoneNumRegex])
         {
-            isValidNewPassword = YES;
-            _theNewPasswordErrorRemindLabel.hidden = YES;
-            
-            if ([_theNewPasswordTF.text isEqualToString:_theNewPasswordConfirmTF.text])
-            {
-                isValidNewPasswordConfirm = YES;
-                _theNewPasswordConfirmErrorRemindLabel.hidden = YES;
-            }
-            else
-            {
-                _theNewPasswordConfirmErrorRemindLabel.hidden = NO;
-            }
+            return YES;
         }
         else
         {
-            _theNewPasswordErrorRemindLabel.hidden = NO;
+            [self showHUDInfoByString:@"请输入手机号码"];
+            return NO;;
         }
     }
     else
     {
-        _oldPasswordErrorRemindLabel.hidden = NO;
+        [self showHUDInfoByString:@"请输入用户名"];
+        return NO;
     }
-    
-    return isValidOldPassword && isValidNewPassword && isValidNewPasswordConfirm;
-     */
 }
 
 @end
