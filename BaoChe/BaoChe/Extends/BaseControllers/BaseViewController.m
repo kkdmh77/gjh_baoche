@@ -51,7 +51,9 @@
 {
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:Common_ThemeColor size:CGSizeMake(1, 1)] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:HEXCOLOR(0XF5F5F5) size:CGSizeMake(1, 1)] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar addLineWithPosition:ViewDrawLinePostionType_Bottom lineColor:Common_ThemeColor lineWidth:LineWidth];
+    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     
     if (IOS7)
     {
@@ -96,8 +98,8 @@
      */
     // 返回Btn
     [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left
-                                 normalImg:[UIImage imageNamed:@"Return_btn_3.png"]
-                            highlightedImg:[UIImage imageNamed:@"Return_btn_4.png"]
+                                 normalImg:[UIImage imageNamed:@"navBack"]
+                            highlightedImg:nil
                                     action:@selector(backViewController)];
     
     // 加此代码可以在自定义leftBarButtonItem之后还保持IOS7以上系统自带的滑动返回效果
@@ -283,11 +285,11 @@
 {
     if (BarbuttonItemPosition_Left == position)
     {
-        self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 30, 30) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
+        self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 40, 40) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
     }
     else
     {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 30, 30) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 40, 40) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
     }
 }
 
@@ -295,11 +297,11 @@
 {
     if (BarbuttonItemPosition_Left == position)
     {
-        self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 50, 30) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
+        self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, [title stringSizeWithFont:SP15Font].width + 20, 30) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
     }
     else
     {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 50, 30) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, [title stringSizeWithFont:SP15Font].width + 20, 30) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
     }
 }
 
@@ -382,7 +384,7 @@
 
 - (void)setNavigationItemTitle:(NSString *)titleStr
 {
-    [self setNavigationItemTitle:titleStr titleFont:[UIFont boldSystemFontOfSize:NavTitleFontSize] titleColor:[UIColor whiteColor]];
+    [self setNavigationItemTitle:titleStr titleFont:[UIFont systemFontOfSize:NavTitleFontSize] titleColor:Common_ThemeColor];
 }
 
 - (void)setNavigationItemTitle:(NSString *)title titleFont:(UIFont *)font titleColor:(UIColor *)color

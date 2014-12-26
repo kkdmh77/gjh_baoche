@@ -25,7 +25,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
 {
     [super viewDidLoad];
     
-    [self getNetworkData];
+//    [self getNetworkData];
     [self initialization];
 }
 

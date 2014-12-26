@@ -61,25 +61,25 @@
         {
             case 0:
             {
-                aItem.title = @"身边的事";
+                aItem.title = @"买票";
                 [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_22.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_21.png"]];
             }
                 break;
             case 1:
             {
-                aItem.title = @"我的声音";
+                aItem.title = @"个人中心";
                 [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_32.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_31.png"]];
             }
                 break;
             case 2:
             {
-                aItem.title = @"公共服务";
+                aItem.title = @"更多";
                 [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_12.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_11.png"]];
             }
                 break;
             case 3:
             {
-                aItem.title = @"我的生活";
+                aItem.title = @"xx";
                 [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_highlight.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_normal.png"]];
             }
                 break;

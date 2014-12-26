@@ -14,6 +14,31 @@ typedef void (^failedHandle)  (NSError *error);
 
 @interface RegisterBC : NSObject <NetRequestDelegate>
 
-- (void)registerWithUserName:(NSString *)userName password:(NSString *)password passwordConfirm:(NSString *)passwordConfirm successHandle:(successHandle)success failedHandle:(failedHandle)failed;
+/// 获取验证码
+- (void)getVerificationCodeWithMobilePhoneNumber:(NSString *)phoneNumber
+                                   successHandle:(successHandle)success
+                                    failedHandle:(failedHandle)failed;
+
+/// 手机注册
+- (void)registerWithMobilePhoneUserName:(NSString *)userName
+                               password:(NSString *)password
+                        passwordConfirm:(NSString *)passwordConfirm
+                       verificationCode:(NSString *)verificationCode
+                          successHandle:(successHandle)success
+                           failedHandle:(failedHandle)failed;
+
+/// 邮箱注册
+- (void)registerWithEmailUserName:(NSString *)userName
+                               password:(NSString *)password
+                        passwordConfirm:(NSString *)passwordConfirm
+                          successHandle:(successHandle)success
+                           failedHandle:(failedHandle)failed;
+
+/// 普通用户名注册
+- (void)registerWithNormalUserName:(NSString *)userName
+                          password:(NSString *)password
+                   passwordConfirm:(NSString *)passwordConfirm
+                     successHandle:(successHandle)success
+                      failedHandle:(failedHandle)failed;
 
 @end

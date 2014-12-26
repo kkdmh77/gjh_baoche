@@ -13,6 +13,7 @@
 #import "HomePageVC.h"
 #import "UserCenterVC.h"
 #import "MoreVC.h"
+#import "LoginVC.h"
 
 @interface AppDelegate ()
 
@@ -40,8 +41,11 @@
     MoreVC *more = [[MoreVC alloc] init];
     UINavigationController *moreNav = [[UINavigationController alloc] initWithRootViewController:more];
     
+    LoginVC *login = [LoginVC loadFromNib];
+    UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+    
     BaseTabBarVC *baseTabBarController = [[BaseTabBarVC alloc] init];
-    baseTabBarController.viewControllers = @[allBusListNav, homePageNav, userCenterNav, moreNav];
+    baseTabBarController.viewControllers = @[allBusListNav, homePageNav, userCenterNav, moreNav, loginNav];
     
     self.window.rootViewController = baseTabBarController;
     

@@ -15,7 +15,10 @@ typedef void (^failedHandle)  (NSError *error);
 
 @interface LoginBC : NSObject<NetRequestDelegate>
 
-- (void)loginWithUserName:(NSString *)userName password:(NSString *)password keepLogin:(NSNumber *)keep successHandle:(successHandle)success failedHandle:(failedHandle)failed;
-
+- (void)loginWithUserName:(NSString *)userName
+                 password:(NSString *)password
+                autoLogin:(BOOL)autoLogin
+            successHandle:(successHandle)success
+             failedHandle:(failedHandle)failed;
 
 @end

@@ -13,6 +13,10 @@ typedef enum
     // 班车
     NetBusRequestType_GetAllBusList                       = 0, // 获取所有班车列表(GET)
     
+    // 用户中心
+    NetUserCenterRequestType_Register                        , // 注册
+    NetUserCenterRequestType_Login                           , // 登录
+    
 } NetRequestType;
 
 @interface BaseNetworkViewController (NetRequestManager)
