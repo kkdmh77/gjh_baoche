@@ -58,10 +58,8 @@
         STRONGSELF
         if (NetUserCenterRequestType_ModifyUserInfo == request.tag)
         {
-            NSString *userName = [[successInfoObj safeObjectForKey:@"response"] safeObjectForKey:@"userName"];
-            NSString *mobilePhone = [[successInfoObj safeObjectForKey:@"response"] safeObjectForKey:@"userPhone"];
-            [UserInfoModel setUserDefaultLoginName:userName];
-            [UserInfoModel setUserDefaultMobilePhoneNum:mobilePhone];
+            [UserInfoModel setUserDefaultLoginName:strongSelf.userNameTF.text];
+            [UserInfoModel setUserDefaultMobilePhoneNum:strongSelf.mobilePhoneTF.text];
             
             [strongSelf backViewController];
         }

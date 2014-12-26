@@ -88,6 +88,8 @@
     
     NSNumber *userId = [[infoObj safeObjectForKey:@"response"] safeObjectForKey:@"userId"];
     NSString *userMobilePhone = [[infoObj safeObjectForKey:@"response"] safeObjectForKey:@"userPhone"];
+    NSString *userName = [[infoObj safeObjectForKey:@"response"] safeObjectForKey:@"userName"];
+    [UserInfoModel setUserDefaultLoginName:userName];
     [UserInfoModel setUserDefaultUserId:userId];
     [UserInfoModel setUserDefaultMobilePhoneNum:userMobilePhone];
     

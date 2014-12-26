@@ -24,6 +24,8 @@
 #import "VideoNewsListVC.h"
 #import <ShareSDK/ShareSDK.h>
 #import "WXApi.h"
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
 #import "UserInfoModel.h"
 
 @interface AppDelegate(Private)
@@ -224,6 +226,28 @@ CG_INLINE  void deleteFile() {
     [ShareSDK connectWeChatWithAppId:@"wx4a5daec79d057d08"
                            appSecret:@"2ee5f23195aae0958901ee60ed55e531"
                            wechatCls:[WXApi class]];
+    
+    /**
+     连接QQ空间应用以使用相关功能，此应用需要引用QZoneConnection.framework
+     http://connect.qq.com/intro/login/上申请加入QQ登录，并将相关信息填写到以下字段
+     
+     如果需要实现SSO，需要导入TencentOpenAPI.framework,并引入QQApiInterface.h和TencentOAuth.h，将QQApiInterface和TencentOAuth的类型传入接口
+     **/
+    [ShareSDK connectQZoneWithAppKey:@"1103837301"
+                           appSecret:@"RQ9lwgEyey3flwUr"
+                   qqApiInterfaceCls:[QQApiInterface class]
+                     tencentOAuthCls:[TencentOAuth class]];
+    
+    /**
+     连接QQ应用以使用相关功能，此应用需要引用QQConnection.framework和QQApi.framework库
+     http://mobile.qq.com/api/上注册应用，并将相关信息填写到以下字段
+     **/
+    //旧版中申请的AppId（如：QQxxxxxx类型），可以通过下面方法进行初始化
+    //    [ShareSDK connectQQWithAppId:@"QQ075BCD15" qqApiCls:[QQApi class]];
+    
+    [ShareSDK connectQQWithQZoneAppKey:@"1103837301"
+                     qqApiInterfaceCls:[QQApiInterface class]
+                       tencentOAuthCls:[TencentOAuth class]];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

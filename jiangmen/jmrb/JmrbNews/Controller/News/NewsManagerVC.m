@@ -17,6 +17,7 @@
 #import "UserInfoModel.h"
 #import "LoginBC.h"
 #import "UserCenterVC.h"
+#import "ChannelEditVC.h"
 
 @interface NewsManagerVC () <SUNSlideSwitchViewDelegate, LXActivityDelegate>
 {
@@ -222,7 +223,11 @@
     switch (imageIndex) {
         case 0:
         {
-            
+            ChannelEditVC *channelEdit = [ChannelEditVC new];
+            UINavigationController *channelEditNav = [[UINavigationController alloc] initWithRootViewController:channelEdit];
+            [self presentViewController:channelEditNav
+                   modalTransitionStyle:UIModalTransitionStyleCoverVertical
+                             completion:nil];
         }
             break;
         case 1:

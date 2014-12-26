@@ -17,6 +17,36 @@
             endingLineNumber = "80"
             landmarkName = "-setNetworkRequestStatusBlocks"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[CommentVC setNetworkRequestStatusBlocks]_block_invoke"
+                  moduleName = "JmrbNews"
+                  urlString = "file:///Users/swift/Desktop/BaoChe/jiangmen/jmrb/JmrbNews/Controller/News/CommentVC.m"
+                  timestampString = "441280525.515659"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[CommentVC setNetworkRequestStatusBlocks]_block_invoke"
+                  moduleName = "JmrbNews"
+                  urlString = "file:///Users/swift/Desktop/BaoChe/jiangmen/jmrb/JmrbNews/Controller/News/CommentVC.m"
+                  timestampString = "441280525.515803"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "82">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

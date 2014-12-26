@@ -1019,6 +1019,13 @@
 		43CB6B5A1A469DAD003829E6 /* tab_news_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CB6B581A469DAD003829E6 /* tab_news_selected@2x.png */; };
 		43CB6B5B1A469DAD003829E6 /* tab_news_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CB6B591A469DAD003829E6 /* tab_news_selected@3x.png */; };
 		43CBD1FA1A381B3F00406432 /* CommentSendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CBD1F91A381B3F00406432 /* CommentSendController.m */; };
+		43CCFFD11A4D3E9A00449A3A /* ChannelEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CCFFD01A4D3E9A00449A3A /* ChannelEditVC.m */; };
+		43CCFFDF1A4D3EDA00449A3A /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CCFFD51A4D3EDA00449A3A /* LSCollectionViewHelper.m */; };
+		43CCFFE01A4D3EDA00449A3A /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CCFFD71A4D3EDA00449A3A /* LSCollectionViewLayoutHelper.m */; };
+		43CCFFE11A4D3EDA00449A3A /* DraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CCFFDA1A4D3EDA00449A3A /* DraggableCollectionViewFlowLayout.m */; };
+		43CCFFE21A4D3EDA00449A3A /* UICollectionView+Draggable.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CCFFDC1A4D3EDA00449A3A /* UICollectionView+Draggable.m */; };
+		43CCFFE61A4D602F00449A3A /* ChannelEditCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CCFFE41A4D602F00449A3A /* ChannelEditCollectionCell.m */; };
+		43CCFFE71A4D602F00449A3A /* ChannelEditCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43CCFFE51A4D602F00449A3A /* ChannelEditCollectionCell.xib */; };
 		43CDD4491A47EA8100AF59A2 /* cancel_comment_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CDD4451A47EA8100AF59A2 /* cancel_comment_highlight@2x.png */; };
 		43CDD44A1A47EA8100AF59A2 /* cancel_comment_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CDD4461A47EA8100AF59A2 /* cancel_comment_normal@2x.png */; };
 		43CDD44B1A47EA8100AF59A2 /* send_comment_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CDD4471A47EA8100AF59A2 /* send_comment_highlight@2x.png */; };
@@ -2596,6 +2603,21 @@
 		43CB6B591A469DAD003829E6 /* tab_news_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_news_selected@3x.png"; sourceTree = "<group>"; };
 		43CBD1F81A381B3F00406432 /* CommentSendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentSendController.h; sourceTree = "<group>"; };
 		43CBD1F91A381B3F00406432 /* CommentSendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentSendController.m; sourceTree = "<group>"; };
+		43CCFFCF1A4D3E9A00449A3A /* ChannelEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelEditVC.h; sourceTree = "<group>"; };
+		43CCFFD01A4D3E9A00449A3A /* ChannelEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelEditVC.m; sourceTree = "<group>"; };
+		43CCFFD41A4D3EDA00449A3A /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
+		43CCFFD51A4D3EDA00449A3A /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
+		43CCFFD61A4D3EDA00449A3A /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
+		43CCFFD71A4D3EDA00449A3A /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
+		43CCFFD91A4D3EDA00449A3A /* DraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		43CCFFDA1A4D3EDA00449A3A /* DraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		43CCFFDB1A4D3EDA00449A3A /* UICollectionView+Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Draggable.h"; sourceTree = "<group>"; };
+		43CCFFDC1A4D3EDA00449A3A /* UICollectionView+Draggable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Draggable.m"; sourceTree = "<group>"; };
+		43CCFFDD1A4D3EDA00449A3A /* UICollectionViewDataSource_Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewDataSource_Draggable.h; sourceTree = "<group>"; };
+		43CCFFDE1A4D3EDA00449A3A /* UICollectionViewLayout_Warpable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Warpable.h; sourceTree = "<group>"; };
+		43CCFFE31A4D602F00449A3A /* ChannelEditCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelEditCollectionCell.h; sourceTree = "<group>"; };
+		43CCFFE41A4D602F00449A3A /* ChannelEditCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelEditCollectionCell.m; sourceTree = "<group>"; };
+		43CCFFE51A4D602F00449A3A /* ChannelEditCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelEditCollectionCell.xib; sourceTree = "<group>"; };
 		43CDD4451A47EA8100AF59A2 /* cancel_comment_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_comment_highlight@2x.png"; sourceTree = "<group>"; };
 		43CDD4461A47EA8100AF59A2 /* cancel_comment_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_comment_normal@2x.png"; sourceTree = "<group>"; };
 		43CDD4471A47EA8100AF59A2 /* send_comment_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_comment_highlight@2x.png"; sourceTree = "<group>"; };
@@ -3613,6 +3635,7 @@
 		2B390E741A2CBDEE00A9DA2A /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				43CCFFD21A4D3EDA00449A3A /* DraggableCollectionView */,
 				43D963471A405AED00282BA2 /* LXActivity */,
 				43DEBF141A36FA1E007E6E6A /* IQKeyBoardManager */,
 				43D212C91A302BEC000F0E0B /* MJRefresh */,
@@ -3979,6 +4002,8 @@
 				2BD9D15E1A4C57B9003C6061 /* ModifyPasswordVC.h */,
 				2BD9D15F1A4C57B9003C6061 /* ModifyPasswordVC.m */,
 				2BD9D1601A4C57B9003C6061 /* ModifyPasswordVC.xib */,
+				43CCFFCF1A4D3E9A00449A3A /* ChannelEditVC.h */,
+				43CCFFD01A4D3E9A00449A3A /* ChannelEditVC.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -5412,6 +5437,9 @@
 				43CB6B111A46639A003829E6 /* CommentView.h */,
 				43CB6B121A46639A003829E6 /* CommentView.m */,
 				43CB6B141A4663A8003829E6 /* CommentView.xib */,
+				43CCFFE31A4D602F00449A3A /* ChannelEditCollectionCell.h */,
+				43CCFFE41A4D602F00449A3A /* ChannelEditCollectionCell.m */,
+				43CCFFE51A4D602F00449A3A /* ChannelEditCollectionCell.xib */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -5438,6 +5466,39 @@
 				43CB6B461A469B13003829E6 /* tab_video_selected@3x.png */,
 			);
 			path = AppCommon;
+			sourceTree = "<group>";
+		};
+		43CCFFD21A4D3EDA00449A3A /* DraggableCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				43CCFFD31A4D3EDA00449A3A /* Helpers */,
+				43CCFFD81A4D3EDA00449A3A /* Layout */,
+				43CCFFDB1A4D3EDA00449A3A /* UICollectionView+Draggable.h */,
+				43CCFFDC1A4D3EDA00449A3A /* UICollectionView+Draggable.m */,
+				43CCFFDD1A4D3EDA00449A3A /* UICollectionViewDataSource_Draggable.h */,
+				43CCFFDE1A4D3EDA00449A3A /* UICollectionViewLayout_Warpable.h */,
+			);
+			path = DraggableCollectionView;
+			sourceTree = "<group>";
+		};
+		43CCFFD31A4D3EDA00449A3A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				43CCFFD41A4D3EDA00449A3A /* LSCollectionViewHelper.h */,
+				43CCFFD51A4D3EDA00449A3A /* LSCollectionViewHelper.m */,
+				43CCFFD61A4D3EDA00449A3A /* LSCollectionViewLayoutHelper.h */,
+				43CCFFD71A4D3EDA00449A3A /* LSCollectionViewLayoutHelper.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		43CCFFD81A4D3EDA00449A3A /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				43CCFFD91A4D3EDA00449A3A /* DraggableCollectionViewFlowLayout.h */,
+				43CCFFDA1A4D3EDA00449A3A /* DraggableCollectionViewFlowLayout.m */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 		43D212C91A302BEC000F0E0B /* MJRefresh */ = {
@@ -6427,6 +6488,7 @@
 				054C23F416635C4900DD8874 /* loginbtn_press@2x.png in Resources */,
 				2B390F511A2CBDEE00A9DA2A /* cb_green_off@2x.png in Resources */,
 				054C23F516635C4900DD8874 /* loginbtn@2x.png in Resources */,
+				43CCFFE71A4D602F00449A3A /* ChannelEditCollectionCell.xib in Resources */,
 				05817E4F1665A755000D1B39 /* RegesterViewController.xib in Resources */,
 				05817E531665A8A7000D1B39 /* regeterbg.png in Resources */,
 				2B390F2A1A2CBDEE00A9DA2A /* AQGridSelection.png in Resources */,
@@ -6546,6 +6608,7 @@
 				43C897961A2D6B8D002F5E5F /* HPTextViewInternal.m in Sources */,
 				43C897181A2D6B5C002F5E5F /* UIBarButtonItem+FlatUI.m in Sources */,
 				43C89AEC1A2D895A002F5E5F /* ATBLibs+NSFileManager.m in Sources */,
+				43CCFFDF1A4D3EDA00449A3A /* LSCollectionViewHelper.m in Sources */,
 				EA9D2149154B7BE900E9219A /* RootManager.m in Sources */,
 				EA9D214B154B7BE900E9219A /* ZSCommunicateModel.m in Sources */,
 				43C8994A1A2D792D002F5E5F /* NIDeviceOrientation.m in Sources */,
@@ -6620,6 +6683,7 @@
 				43C89AE41A2D895A002F5E5F /* ATB_NetworkFunc.m in Sources */,
 				43C899401A2D792D002F5E5F /* NICollectionViewCellFactory.m in Sources */,
 				43C89AE11A2D895A002F5E5F /* ATB_CGContext.m in Sources */,
+				43CCFFD11A4D3E9A00449A3A /* ChannelEditVC.m in Sources */,
 				43D01EF21A316133004AA52B /* DetailNewsVC.m in Sources */,
 				43C897171A2D6B5C002F5E5F /* FUITextField.m in Sources */,
 				EA9D216E154B7BE900E9219A /* WBUtil.m in Sources */,
@@ -6761,6 +6825,7 @@
 				43C89B361A2D895A002F5E5F /* UpdataAppModel.m in Sources */,
 				05C6E026165F24E000498178 /* NewsCell.m in Sources */,
 				43C897A41A2D6B8D002F5E5F /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				43CCFFE11A4D3EDA00449A3A /* DraggableCollectionViewFlowLayout.m in Sources */,
 				43C899381A2D792D002F5E5F /* NSMutableAttributedString+NimbusAttributedLabel.m in Sources */,
 				2B390F3A1A2CBDEE00A9DA2A /* RadioButton.m in Sources */,
 				43C89B241A2D895A002F5E5F /* UserInfoModel.m in Sources */,
@@ -6791,6 +6856,7 @@
 				2B390F631A2CBDEE00A9DA2A /* CJSONSerializer.m in Sources */,
 				2B390F3F1A2CBDEE00A9DA2A /* SDWebImageDownloader.m in Sources */,
 				43C899DE1A2D792D002F5E5F /* NITextField.m in Sources */,
+				43CCFFE61A4D602F00449A3A /* ChannelEditCollectionCell.m in Sources */,
 				43C89B3A1A2D895A002F5E5F /* GJHSlideSwitchView.m in Sources */,
 				43DEBF381A36FA1E007E6E6A /* IQKeyboardManager.m in Sources */,
 				2B390F401A2CBDEE00A9DA2A /* SDWebImageManager.m in Sources */,
@@ -6836,6 +6902,7 @@
 				43C897AC1A2D6B8D002F5E5F /* NSManagedObject+MagicalRecord.m in Sources */,
 				43C897221A2D6B5C002F5E5F /* UITableViewCell+FlatUI.m in Sources */,
 				05C6E047165F24E000498178 /* SpecialViewController.m in Sources */,
+				43CCFFE01A4D3EDA00449A3A /* LSCollectionViewLayoutHelper.m in Sources */,
 				2B390F1E1A2CBDEE00A9DA2A /* ASINetworkQueue.m in Sources */,
 				43C89B2E1A2D895A002F5E5F /* LanguagesManager.m in Sources */,
 				43C899A21A2D792D002F5E5F /* NICellBackgrounds.m in Sources */,
@@ -6847,6 +6914,7 @@
 				43C89B321A2D895A002F5E5F /* PopupController.m in Sources */,
 				43D212DF1A302BEC000F0E0B /* UIScrollView+Extension.m in Sources */,
 				2B390F621A2CBDEE00A9DA2A /* CJSONScanner.m in Sources */,
+				43CCFFE21A4D3EDA00449A3A /* UICollectionView+Draggable.m in Sources */,
 				43C897211A2D6B5C002F5E5F /* UITabBar+FlatUI.m in Sources */,
 				43C89AF81A2D895A002F5E5F /* ATFlipAnimationView.m in Sources */,
 				05C6E04A165F24E000498178 /* VideoViewController.m in Sources */,

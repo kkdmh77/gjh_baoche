@@ -142,7 +142,6 @@
                       autoLogin:YES
                   successHandle:^(id successInfoObj) {
                       
-                      [UserInfoModel setUserDefaultLoginName:userName];
                       [weakSelf.navigationController dismissViewControllerAnimated:YES
                                                                         completion:nil];
         

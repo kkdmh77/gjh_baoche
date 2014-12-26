@@ -111,7 +111,6 @@
                       autoLogin:YES
                   successHandle:^(id successInfoObj) {
                       
-                      [UserInfoModel setUserDefaultLoginName:_userNameLabel.text];
                       if (weakSelf.rememberPasswordBtn.selected)
                       {
                           [UserInfoModel setUserDefaultPassword:_passwordLabel.text];
