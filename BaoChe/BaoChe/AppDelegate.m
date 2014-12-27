@@ -14,6 +14,7 @@
 #import "UserCenterVC.h"
 #import "MoreVC.h"
 #import "LoginVC.h"
+#import "BuyTicketVC.h"
 
 @interface AppDelegate ()
 
@@ -29,11 +30,12 @@
     // 进行应用程序一系列属性的初始化设置
     [AppPropertiesInitialize startAppPropertiesInitialize];
     
-    AllBusListVC *allBusList = [[AllBusListVC alloc] init];
-    UINavigationController *allBusListNav = [[UINavigationController alloc] initWithRootViewController:allBusList];
-    
+    BuyTicketVC *buyTicket = [BuyTicketVC loadFromNib];
+    UINavigationController *buyTicketNav = [[UINavigationController alloc] initWithRootViewController:buyTicket];
+    /*
     HomePageVC *homePage = [[HomePageVC alloc] init];
     UINavigationController *homePageNav = [[UINavigationController alloc] initWithRootViewController:homePage];
+     */
     
     UserCenterVC *userCenter = [[UserCenterVC alloc] init];
     UINavigationController *userCenterNav = [[UINavigationController alloc] initWithRootViewController:userCenter];
@@ -45,7 +47,7 @@
     UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
     
     BaseTabBarVC *baseTabBarController = [[BaseTabBarVC alloc] init];
-    baseTabBarController.viewControllers = @[allBusListNav, homePageNav, userCenterNav, moreNav, loginNav];
+    baseTabBarController.viewControllers = @[buyTicketNav, userCenterNav, moreNav, loginNav];
     
     self.window.rootViewController = baseTabBarController;
     

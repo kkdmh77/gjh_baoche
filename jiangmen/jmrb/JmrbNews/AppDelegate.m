@@ -248,6 +248,16 @@ CG_INLINE  void deleteFile() {
     [ShareSDK connectQQWithQZoneAppKey:@"1103837301"
                      qqApiInterfaceCls:[QQApiInterface class]
                        tencentOAuthCls:[TencentOAuth class]];
+    
+    /*
+     百度云推送相关Key
+     ID：
+     1043543
+     API Key：
+     Dt567y2T2djMG43Z0073dljU
+     Secret Key：
+     VWR4njGtHhgt7XGZPVGgZS6LGpATNy03
+     */
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

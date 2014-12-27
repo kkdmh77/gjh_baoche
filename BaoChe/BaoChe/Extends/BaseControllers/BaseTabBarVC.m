@@ -54,38 +54,65 @@
     for (int i = 0; i < items.count; i++)
     {
         UITabBarItem *aItem = [items objectAtIndex:i];
-        [aItem setTitleTextAttributes:@{UITextAttributeTextColor: Common_BlackColor}
-                             forState:UIControlStateSelected];
+        [aItem setTitleTextAttributes:@{UITextAttributeTextColor: Common_ThemeColor} forState:UIControlStateSelected];
+        [aItem setTitleTextAttributes:@{UITextAttributeTextColor: Common_BlackColor} forState:UIControlStateNormal];
+        
+        NSString *title = nil;
+        UIImage *normalImage = nil;
+        UIImage *selectedImage = nil;
         
         switch (i)
         {
             case 0:
             {
-                aItem.title = @"买票";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_22.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_21.png"]];
+                title = @"买票";
+                
+                normalImage = [UIImage imageNamed:@"maipiao_normal"];
+                selectedImage = [UIImage imageNamed:@"maipiao_selected"];
             }
                 break;
             case 1:
             {
-                aItem.title = @"个人中心";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_32.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_31.png"]];
+                title = @"个人中心";
+                
+                normalImage = [UIImage imageNamed:@"gerenzhongxin_normal"];
+                selectedImage = [UIImage imageNamed:@"gerenzhongxin_selected"];
             }
                 break;
             case 2:
             {
-                aItem.title = @"更多";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_12.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_11.png"]];
+                title = @"更多";
+                
+                normalImage = [UIImage imageNamed:@"gengduo_normal"];
+                selectedImage = [UIImage imageNamed:@"gengduo_selected"];
             }
                 break;
             case 3:
             {
-                aItem.title = @"xx";
-                [aItem setFinishedSelectedImage:[UIImage imageNamed:@"Navigation_Under_ico_highlight.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"Navigation_Under_ico_normal.png"]];
+                title = @"登录";
+                
+                normalImage = [UIImage imageNamed:@"gengduo_normal"];
+                selectedImage = [UIImage imageNamed:@"gengduo_selected"];
             }
                 break;
                 
             default:
                 break;
+        }
+        
+        aItem.title = title;
+        if (IOS7)
+        {
+            normalImage = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            selectedImage = [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            
+            [aItem setImage:normalImage];
+            [aItem setSelectedImage:selectedImage];
+        }
+        else
+        {
+            [aItem setFinishedSelectedImage:normalImage
+                withFinishedUnselectedImage:selectedImage];
         }
     }
 }
