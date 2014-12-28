@@ -629,6 +629,8 @@
 		2BD9D1621A4C57B9003C6061 /* ModifyPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD9D1601A4C57B9003C6061 /* ModifyPasswordVC.xib */; };
 		2BD9D1641A4C6EC3003C6061 /* yinyingxian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BD9D1631A4C6EC3003C6061 /* yinyingxian@2x.png */; };
 		2BDA30FD1A40747900EE1470 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDA30FC1A40747900EE1470 /* SettingVC.m */; };
+		2BDA45C01A50470500927CCA /* ChannelEditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDA45BE1A50470500927CCA /* ChannelEditHeaderView.m */; };
+		2BDA45C11A50470500927CCA /* ChannelEditHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDA45BF1A50470500927CCA /* ChannelEditHeaderView.xib */; };
 		2BDE1BE91A2E1672009E78FB /* NewsCell_Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */; };
 		2BDE1BEA1A2E1672009E78FB /* NewsCell_Normal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */; };
 		2BDF7CEC1A4316DD006C9E27 /* shoucang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CE51A4316DD006C9E27 /* shoucang@2x.png */; };
@@ -1903,6 +1905,9 @@
 		2BD9D1631A4C6EC3003C6061 /* yinyingxian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yinyingxian@2x.png"; sourceTree = "<group>"; };
 		2BDA30FB1A40747900EE1470 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		2BDA30FC1A40747900EE1470 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
+		2BDA45BD1A50470500927CCA /* ChannelEditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelEditHeaderView.h; sourceTree = "<group>"; };
+		2BDA45BE1A50470500927CCA /* ChannelEditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelEditHeaderView.m; sourceTree = "<group>"; };
+		2BDA45BF1A50470500927CCA /* ChannelEditHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelEditHeaderView.xib; sourceTree = "<group>"; };
 		2BDE1BE61A2E1672009E78FB /* NewsCell_Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell_Normal.h; sourceTree = "<group>"; };
 		2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell_Normal.m; sourceTree = "<group>"; };
 		2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell_Normal.xib; sourceTree = "<group>"; };
@@ -5440,6 +5445,9 @@
 				43CCFFE31A4D602F00449A3A /* ChannelEditCollectionCell.h */,
 				43CCFFE41A4D602F00449A3A /* ChannelEditCollectionCell.m */,
 				43CCFFE51A4D602F00449A3A /* ChannelEditCollectionCell.xib */,
+				2BDA45BD1A50470500927CCA /* ChannelEditHeaderView.h */,
+				2BDA45BE1A50470500927CCA /* ChannelEditHeaderView.m */,
+				2BDA45BF1A50470500927CCA /* ChannelEditHeaderView.xib */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -6323,6 +6331,7 @@
 				0535D84A1654E70500D10324 /* TarBar_login_title_icon_Down@2x.png in Resources */,
 				0535D84B1654E70500D10324 /* TarBar_MainPage@2x.png in Resources */,
 				0535D84C1654E70500D10324 /* TarBar_MainPage_Down@2x.png in Resources */,
+				2BDA45C11A50470500927CCA /* ChannelEditHeaderView.xib in Resources */,
 				43C89B6E1A2DEB5A002F5E5F /* jiahao@2x.png in Resources */,
 				0535D84D1654E70500D10324 /* TarBar_More@2x.png in Resources */,
 				43CB6B4E1A469B13003829E6 /* tab_image_selected@2x.png in Resources */,
@@ -6710,6 +6719,7 @@
 				43C89B611A2DDD90002F5E5F /* SUNSlideSwitchView.m in Sources */,
 				43C899F21A2D7B0A002F5E5F /* RegexKitLite.m in Sources */,
 				43C899571A2D792D002F5E5F /* NISnapshotRotation.m in Sources */,
+				2BDA45C01A50470500927CCA /* ChannelEditHeaderView.m in Sources */,
 				43C89AF91A2D895A002F5E5F /* ATJumpAnimation.m in Sources */,
 				43C897AD1A2D6B8D002F5E5F /* NSManagedObject+MagicalRequests.m in Sources */,
 				43C89B291A2D895A002F5E5F /* DrawLineUIBtn.m in Sources */,

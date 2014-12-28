@@ -9,6 +9,6 @@
 #import "BaseViewController.h"
 #import "UICollectionView+Draggable.h"
 
-@interface ChannelEditVC : BaseViewController <UICollectionViewDataSource_Draggable, UICollectionViewDelegate>
+@interface ChannelEditVC : BaseViewController <UICollectionViewDataSource_Draggable, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @end

@@ -9,14 +9,23 @@
 #import "ChannelEditVC.h"
 #import "DraggableCollectionViewFlowLayout.h"
 #import "ChannelEditCollectionCell.h"
+#import "ChannelEditHeaderView.h"
+#import "UserInfoModel.h"
+#import "CommonEntity.h"
+#import "BaseTabBarVC.h"
+#import "NewsManagerVC.h"
+#import <objc/runtime.h>
+#import "GCDThread.h"
 
 static NSString * const cellIdentifier_collecitonViewCell = @"cellIdentifier_collecitonViewCell";
+static NSString * const cellIdentifier_collecitonViewHeader = @"cellIdentifier_collecitonViewHeader";
 
 @interface ChannelEditVC ()
 {
     UICollectionView *_collectionView;
     
-    NSMutableArray *_array;
+    NSMutableArray *_selectedNewsTypeArray;
+    NSMutableArray *_unSelectNewsTypeArray;
 }
 
 @end
@@ -27,7 +36,8 @@ static NSString * const cellIdentifier_collecitonViewCell = @"cellIdentifier_col
 {
     [super viewDidLoad];
     
-    _array = [NSMutableArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",nil];
+    _selectedNewsTypeArray = [NSMutableArray arrayWithArray:[UserInfoModel getUserDefaultSelectedNewsTypesArray]];
+    _unSelectNewsTypeArray = [NSMutableArray arrayWithArray:[UserInfoModel getUserDefaultUnSelectNewsTypesArray]];
     
     [self initialization];
 }
@@ -39,6 +49,20 @@ static NSString * const cellIdentifier_collecitonViewCell = @"cellIdentifier_col
 }
 
 #pragma mark - custom methods
+
+- (void)backViewController
+{
+    [UserInfoModel setUserDefaultSelectedNewsTypesArray:_selectedNewsTypeArray];
+    [UserInfoModel setUserDefaultUnSelectNewsTypesArray:_unSelectNewsTypeArray];
+    
+    UIViewController *controller = objc_getAssociatedObject(self, class_getName([NewsManagerVC class]));
+    if ([controller isKindOfClass:[NewsManagerVC class]])
+    {
+        [((NewsManagerVC *)controller) configureSlideSwitchView];
+    }
+    
+    [super backViewController];
+}
 
 - (void)setPageLocalizableText
 {
@@ -61,18 +85,19 @@ static NSString * const cellIdentifier_collecitonViewCell = @"cellIdentifier_col
     _collectionView.scrollingEdgeInsets = UIEdgeInsetsMake(10, 15, 10, 15);
     _collectionView.backgroundColor = [UIColor clearColor];
     [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([ChannelEditCollectionCell class]) bundle:nil] forCellWithReuseIdentifier:cellIdentifier_collecitonViewCell];
+    [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([ChannelEditHeaderView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:cellIdentifier_collecitonViewHeader];
     [self.view addSubview:_collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.right.equalTo(self.view);
+        make.left.equalTo(self.view).offset(@15);
+        make.right.equalTo(self.view).offset(@(-15));
     }];
     
     // tableview
     _tableView = InsertTableView(self.view, CGRectZero, self, self, UITableViewStylePlain);
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_collectionView);
-        make.right.equalTo(_collectionView);
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view);
         make.top.equalTo(_collectionView.mas_bottom).offset(@0);
         make.height.equalTo(_collectionView);
         make.bottom.equalTo(self.view);
@@ -88,24 +113,32 @@ static NSString * const cellIdentifier_collecitonViewCell = @"cellIdentifier_col
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _array.count;
+    return _selectedNewsTypeArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier_collecitonViewCell forIndexPath:indexPath];
-    if (0 == indexPath.section && 0 == indexPath.item)
-    {
-        cell.backgroundColor = [UIColor grayColor];
-        cell.userInteractionEnabled = NO;
-    }
+    ChannelEditCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier_collecitonViewCell forIndexPath:indexPath];
+    
+    NewsTypeEntity *entity = _selectedNewsTypeArray[indexPath.item];
+    cell.titleLabel.text = entity.newsTypeNameStr;
     
     return cell;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
+    if (kind == UICollectionElementKindSectionHeader)
+    {
+        UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:cellIdentifier_collecitonViewHeader forIndexPath:indexPath];
+        return view;
+    }
     return nil;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(collectionView.boundsWidth, 50);
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
@@ -115,34 +148,68 @@ static NSString * const cellIdentifier_collecitonViewCell = @"cellIdentifier_col
 
 - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    [_array exchangeObjectAtIndex:fromIndexPath.item withObjectAtIndex:toIndexPath.item];
+    [_selectedNewsTypeArray exchangeObjectAtIndex:toIndexPath.item withObjectAtIndex:fromIndexPath.item];
+    
+    [_collectionView reloadData];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NewsTypeEntity *entity = _selectedNewsTypeArray[indexPath.item];
+    
+    [_unSelectNewsTypeArray addObject:entity];
+    [_selectedNewsTypeArray removeObjectAtIndex:indexPath.item];
+    
+    [_collectionView reloadData];
+    [_tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return _unSelectNewsTypeArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 0;
+    return 50;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    static NSString *cellIdentifier = @"cellIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell.textLabel.font = SP15Font;
+        cell.textLabel.textColor = Common_BlackColor;
+    }
+    
+    NewsTypeEntity *entity = _unSelectNewsTypeArray[indexPath.row];
+    cell.textLabel.text = entity.newsTypeNameStr;
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NewsTypeEntity *entity = _unSelectNewsTypeArray[indexPath.row];
+    
+    [_selectedNewsTypeArray addObject:entity];
+    [_unSelectNewsTypeArray removeObjectAtIndex:indexPath.row];
+    
+    [_collectionView reloadData];
+    [_tableView reloadData];
 }
 
 @end

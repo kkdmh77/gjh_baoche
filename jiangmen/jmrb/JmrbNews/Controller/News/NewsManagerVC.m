@@ -18,6 +18,7 @@
 #import "LoginBC.h"
 #import "UserCenterVC.h"
 #import "ChannelEditVC.h"
+#include <objc/runtime.h>
 
 @interface NewsManagerVC () <SUNSlideSwitchViewDelegate, LXActivityDelegate>
 {
@@ -137,6 +138,16 @@
 
 - (void)initialization
 {
+    [self configureSlideSwitchView];
+    [self configureRightItemBtn];
+}
+
+- (void)configureSlideSwitchView
+{
+    if (_slideSwitchView.superview)
+    {
+        [_slideSwitchView removeFromSuperview];
+    }
     self.slideSwitchView = [[SUNSlideSwitchView alloc] initWithFrame:self.view.bounds];
     [_slideSwitchView keepAutoresizingInFull];
     _slideSwitchView.slideSwitchViewDelegate = self;
@@ -146,7 +157,7 @@
     [self.view addSubview:_slideSwitchView];
     
     // 控制器
-    _newsViewControllersArray = [NSMutableArray arrayWithCapacity:_netNewsTypeEntityArray.count];
+    _newsViewControllersArray = [NSMutableArray array];
     for (NewsTypeEntity *entity in [UserInfoModel getUserDefaultSelectedNewsTypesArray])
     {
         NewsVC *newsVC = [[NewsVC alloc] init];
@@ -160,8 +171,6 @@
     
     self.navigationItem.titleView = _slideSwitchView.topScrollView;
     self.navigationItem.leftBarButtonItem = nil;
-    
-    [self configureRightItemBtn];
 }
 
 - (void)configureRightItemBtn
@@ -223,7 +232,7 @@
 
 - (void)slideSwitchView:(SUNSlideSwitchView *)view didselectTab:(NSUInteger)number
 {
-    NewsVC *newsVC = _newsViewControllersArray[number];
+    NewsVC *newsVC = number < _newsViewControllersArray.count ? _newsViewControllersArray[number] : nil;
     
     [newsVC viewDidCurrentView];
 }
@@ -237,6 +246,7 @@
         {
             ChannelEditVC *channelEdit = [ChannelEditVC new];
             UINavigationController *channelEditNav = [[UINavigationController alloc] initWithRootViewController:channelEdit];
+            objc_setAssociatedObject(channelEdit, class_getName([self class]), self, OBJC_ASSOCIATION_ASSIGN);
             [self presentViewController:channelEditNav
                    modalTransitionStyle:UIModalTransitionStyleCoverVertical
                              completion:nil];

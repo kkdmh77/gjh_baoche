@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) SUNSlideSwitchView *slideSwitchView;
 
+- (void)configureSlideSwitchView;
+
 @end
