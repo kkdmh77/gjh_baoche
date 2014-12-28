@@ -42,7 +42,7 @@
 
 ///////////////////////////////////////////////////////////////
 
-@interface NewsTypeEntity : NetItem
+@interface NewsTypeEntity : NetItem <NSCoding>
 
 @property (nonatomic, copy) NSString *newsTypeNameStr;   // 新闻类型名称
 @property (nonatomic, assign) NSInteger newsTypeId;      // 新闻类型ID

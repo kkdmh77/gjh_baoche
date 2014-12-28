@@ -48,7 +48,14 @@
     
     self.navigationItem.leftBarButtonItem = nil;
     
-    [self getNetworkData];
+    if ([UserInfoModel getUserDefaultSelectedNewsTypesArray])
+    {
+        [self initialization];
+    }
+    else
+    {
+        [self getNetworkData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,7 +94,7 @@
         {
             [strongSelf parseNetDataWithDic:successInfoObj];
             
-            [strongSelf initialization];
+            [strongSelf setupNewsTypeUserDefaultData];
         }
     }];
 }
@@ -102,7 +109,7 @@
              delegate:self
              userInfo:nil
        netCachePolicy:NetAskServerIfModifiedWhenStaleCachePolicy
-         cacheSeconds:CacheNetDataTimeType_OneDay];
+         cacheSeconds:CacheNetDataTimeType_OneWeek];
     ;
 }
 
@@ -122,6 +129,12 @@
     }
 }
 
+- (void)setupNewsTypeUserDefaultData
+{
+    [UserInfoModel setUserDefaultSelectedNewsTypesArray:_netNewsTypeEntityArray];
+    [self initialization];
+}
+
 - (void)initialization
 {
     self.slideSwitchView = [[SUNSlideSwitchView alloc] initWithFrame:self.view.bounds];
@@ -134,7 +147,7 @@
     
     // 控制器
     _newsViewControllersArray = [NSMutableArray arrayWithCapacity:_netNewsTypeEntityArray.count];
-    for (NewsTypeEntity *entity in _netNewsTypeEntityArray)
+    for (NewsTypeEntity *entity in [UserInfoModel getUserDefaultSelectedNewsTypesArray])
     {
         NewsVC *newsVC = [[NewsVC alloc] init];
         newsVC.newsTypeEntity = entity;
@@ -149,7 +162,6 @@
     self.navigationItem.leftBarButtonItem = nil;
     
     [self configureRightItemBtn];
-   
 }
 
 - (void)configureRightItemBtn

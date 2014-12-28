@@ -140,7 +140,7 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
              delegate:self
              userInfo:nil
        netCachePolicy:cachePolicy
-         cacheSeconds:CacheNetDataTimeType_OneMinute];
+         cacheSeconds:CacheNetDataTimeType_OneWeek];
 }
 
 - (void)getNetAdListDataWithNetCachePolicy:(NetCachePolicy)cachePolicy

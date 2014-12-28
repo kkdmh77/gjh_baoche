@@ -65,6 +65,22 @@
 
 @implementation NewsTypeEntity
 
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.newsTypeNameStr forKey:@"newsTypeNameStr"];
+    [aCoder encodeObject:@(self.newsTypeId) forKey:@"newsTypeId"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    
+    if (self = [super init])
+    {
+        self.newsTypeNameStr = [aDecoder decodeObjectForKey:@"newsTypeNameStr"];
+        self.newsTypeId = [[aDecoder decodeObjectForKey:@"newsTypeId"] integerValue];
+    }
+    return self;
+}
+
 - (id)initWithDict:(NSDictionary *)dict
 {
     self = [super init];

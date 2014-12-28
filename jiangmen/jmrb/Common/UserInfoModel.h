@@ -62,5 +62,12 @@
 + (void)setUserDefaultSearchHistoryArray:(NSArray*)historyArray;
 + (NSArray*)getUserDefaultSearchHistoryArray;
 
+//////////////////////////////////////////////////////////////////////////////////////////
+
++ (void)setUserDefaultSelectedNewsTypesArray:(NSArray*)newsTypes;
++ (NSArray *)getUserDefaultSelectedNewsTypesArray;
+
++ (void)setUserDefaultUnSelectNewsTypesArray:(NSArray*)newsTypes;
++ (NSArray *)getUserDefaultUnSelectNewsTypesArray;
 
 @end

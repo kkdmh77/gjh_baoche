@@ -29,6 +29,9 @@
 #define UserDefault_UserLoginToken_VKey     @"userDefault_UserLoginToken_VKey"  // 用户登陆成功后服务器返回的token(加密版)
 #define UserDefault_UserSearchHistroyKey    @"userDefault_UserSearchHistroyKey" // 用户搜索记录
 
+// 新闻
+#define UserDefault_SelectedNewsTypesKey     @"UserDefault_SelectedNewsTypesKey"
+#define UserDefault_UnSelectNewsTypesKey     @"UserDefault_UnSelectNewsTypesKey"
 
 @implementation UserInfoModel
 
@@ -266,6 +269,46 @@
 + (NSArray*)getUserDefaultSearchHistoryArray
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_UserSearchHistroyKey];
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
++ (void)setUserDefaultSelectedNewsTypesArray:(NSArray*)newsTypes
+{
+    NSData *encodedData = [NSKeyedArchiver archivedDataWithRootObject:newsTypes];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:encodedData forKey:UserDefault_SelectedNewsTypesKey];
+    [self saveUserDefaultInfo];
+}
++ (NSArray *)getUserDefaultSelectedNewsTypesArray
+{
+    NSData *unarchiverData = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_SelectedNewsTypesKey];
+    NSArray *array = nil;
+    if (unarchiverData)
+    {
+        array = [NSKeyedUnarchiver unarchiveObjectWithData:unarchiverData];
+    }
+    
+    return array;
+}
+
++ (void)setUserDefaultUnSelectNewsTypesArray:(NSArray*)newsTypes
+{
+    NSData *encodedData = [NSKeyedArchiver archivedDataWithRootObject:newsTypes];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:encodedData forKey:UserDefault_UnSelectNewsTypesKey];
+    [self saveUserDefaultInfo];
+}
++ (NSArray *)getUserDefaultUnSelectNewsTypesArray
+{
+    NSData *unarchiverData = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_UnSelectNewsTypesKey];
+    NSArray *array = nil;
+    if (unarchiverData)
+    {
+        array = [NSKeyedUnarchiver unarchiveObjectWithData:unarchiverData];
+    }
+    
+    return array;
 }
 
 @end
