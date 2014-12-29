@@ -1028,6 +1028,8 @@
 		43CCFFE21A4D3EDA00449A3A /* UICollectionView+Draggable.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CCFFDC1A4D3EDA00449A3A /* UICollectionView+Draggable.m */; };
 		43CCFFE61A4D602F00449A3A /* ChannelEditCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CCFFE41A4D602F00449A3A /* ChannelEditCollectionCell.m */; };
 		43CCFFE71A4D602F00449A3A /* ChannelEditCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43CCFFE51A4D602F00449A3A /* ChannelEditCollectionCell.xib */; };
+		43CD9B291A51830700731F7A /* ChannelEditFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CD9B271A51830700731F7A /* ChannelEditFooterView.m */; };
+		43CD9B2A1A51830700731F7A /* ChannelEditFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43CD9B281A51830700731F7A /* ChannelEditFooterView.xib */; };
 		43CDD4491A47EA8100AF59A2 /* cancel_comment_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CDD4451A47EA8100AF59A2 /* cancel_comment_highlight@2x.png */; };
 		43CDD44A1A47EA8100AF59A2 /* cancel_comment_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CDD4461A47EA8100AF59A2 /* cancel_comment_normal@2x.png */; };
 		43CDD44B1A47EA8100AF59A2 /* send_comment_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CDD4471A47EA8100AF59A2 /* send_comment_highlight@2x.png */; };
@@ -2623,6 +2625,9 @@
 		43CCFFE31A4D602F00449A3A /* ChannelEditCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelEditCollectionCell.h; sourceTree = "<group>"; };
 		43CCFFE41A4D602F00449A3A /* ChannelEditCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelEditCollectionCell.m; sourceTree = "<group>"; };
 		43CCFFE51A4D602F00449A3A /* ChannelEditCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelEditCollectionCell.xib; sourceTree = "<group>"; };
+		43CD9B261A51830700731F7A /* ChannelEditFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelEditFooterView.h; sourceTree = "<group>"; };
+		43CD9B271A51830700731F7A /* ChannelEditFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelEditFooterView.m; sourceTree = "<group>"; };
+		43CD9B281A51830700731F7A /* ChannelEditFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelEditFooterView.xib; sourceTree = "<group>"; };
 		43CDD4451A47EA8100AF59A2 /* cancel_comment_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_comment_highlight@2x.png"; sourceTree = "<group>"; };
 		43CDD4461A47EA8100AF59A2 /* cancel_comment_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_comment_normal@2x.png"; sourceTree = "<group>"; };
 		43CDD4471A47EA8100AF59A2 /* send_comment_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_comment_highlight@2x.png"; sourceTree = "<group>"; };
@@ -5448,6 +5453,9 @@
 				2BDA45BD1A50470500927CCA /* ChannelEditHeaderView.h */,
 				2BDA45BE1A50470500927CCA /* ChannelEditHeaderView.m */,
 				2BDA45BF1A50470500927CCA /* ChannelEditHeaderView.xib */,
+				43CD9B261A51830700731F7A /* ChannelEditFooterView.h */,
+				43CD9B271A51830700731F7A /* ChannelEditFooterView.m */,
+				43CD9B281A51830700731F7A /* ChannelEditFooterView.xib */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -6432,6 +6440,7 @@
 				05C6DFFF165F24E000498178 /* MainPageSecondNewsVC.xib in Resources */,
 				05C6E001165F24E000498178 /* MPDiscussVC.xib in Resources */,
 				05C6E003165F24E000498178 /* MPAdsInfoDetailContent.xib in Resources */,
+				43CD9B2A1A51830700731F7A /* ChannelEditFooterView.xib in Resources */,
 				05C6E007165F24E000498178 /* MPBigImage.xib in Resources */,
 				2B390F571A2CBDEE00A9DA2A /* cb_mono_on@2x.png in Resources */,
 				05C6E00A165F24E000498178 /* MPDiscussVCCell.xib in Resources */,
@@ -6613,6 +6622,7 @@
 				EA9D1F2A154B792000E9219A /* main.m in Sources */,
 				EA9D1F2E154B792000E9219A /* AppDelegate.m in Sources */,
 				2B390F581A2CBDEE00A9DA2A /* UIHelpers.m in Sources */,
+				43CD9B291A51830700731F7A /* ChannelEditFooterView.m in Sources */,
 				43C89AE81A2D895A002F5E5F /* ATBDataBase.m in Sources */,
 				43C897961A2D6B8D002F5E5F /* HPTextViewInternal.m in Sources */,
 				43C897181A2D6B5C002F5E5F /* UIBarButtonItem+FlatUI.m in Sources */,

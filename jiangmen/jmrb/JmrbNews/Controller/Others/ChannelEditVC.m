@@ -10,6 +10,7 @@
 #import "DraggableCollectionViewFlowLayout.h"
 #import "ChannelEditCollectionCell.h"
 #import "ChannelEditHeaderView.h"
+#import "ChannelEditFooterView.h"
 #import "UserInfoModel.h"
 #import "CommonEntity.h"
 #import "BaseTabBarVC.h"
@@ -19,6 +20,7 @@
 
 static NSString * const cellIdentifier_collecitonViewCell = @"cellIdentifier_collecitonViewCell";
 static NSString * const cellIdentifier_collecitonViewHeader = @"cellIdentifier_collecitonViewHeader";
+static NSString * const cellIdentifier_collecitonViewFooter = @"cellIdentifier_collecitonViewFooter";
 
 @interface ChannelEditVC ()
 {
@@ -86,6 +88,7 @@ static NSString * const cellIdentifier_collecitonViewHeader = @"cellIdentifier_c
     _collectionView.backgroundColor = [UIColor clearColor];
     [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([ChannelEditCollectionCell class]) bundle:nil] forCellWithReuseIdentifier:cellIdentifier_collecitonViewCell];
     [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([ChannelEditHeaderView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:cellIdentifier_collecitonViewHeader];
+    [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([ChannelEditFooterView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:cellIdentifier_collecitonViewFooter];
     [self.view addSubview:_collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
@@ -133,12 +136,22 @@ static NSString * const cellIdentifier_collecitonViewHeader = @"cellIdentifier_c
         UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:cellIdentifier_collecitonViewHeader forIndexPath:indexPath];
         return view;
     }
+    else
+    {
+        UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:cellIdentifier_collecitonViewFooter forIndexPath:indexPath];
+        return view;
+    }
     return nil;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     return CGSizeMake(collectionView.boundsWidth, 50);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    return CGSizeMake(collectionView.boundsWidth, 33);
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
@@ -148,9 +161,9 @@ static NSString * const cellIdentifier_collecitonViewHeader = @"cellIdentifier_c
 
 - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    [_selectedNewsTypeArray exchangeObjectAtIndex:toIndexPath.item withObjectAtIndex:fromIndexPath.item];
-    
-    [_collectionView reloadData];
+    NewsTypeEntity *entity = _selectedNewsTypeArray[fromIndexPath.row];
+    [_selectedNewsTypeArray removeObjectAtIndex:fromIndexPath.row];
+    [_selectedNewsTypeArray insertObject:entity atIndex:toIndexPath.row];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -189,6 +202,8 @@ static NSString * const cellIdentifier_collecitonViewHeader = @"cellIdentifier_c
     if (!cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell.backgroundColor = PageBackgroundColor;
+        cell.backgroundView = nil;
         cell.textLabel.font = SP15Font;
         cell.textLabel.textColor = Common_BlackColor;
     }
