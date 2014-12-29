@@ -77,7 +77,10 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
     WEAKSELF
     [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
         STRONGSELF
-        
+        if (NetNewsRequestType_GetCommentList == request.tag)
+        {
+            
+        }
         
     }];
 }
@@ -104,6 +107,14 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
 
 - (void)initialization
 {
+    const CGFloat space = 10;
+    
+    // 标题
+    UILabel *titleLabel = InsertLabel(self.view, CGRectMake(space, space, self.viewBoundsWidth - space * 2, 0), NSTextAlignmentLeft, _newsTitleStr, SP18Font, Common_BlackColor, YES);
+    UILabel *subTitleLabel = InsertLabel(self.view, CGRectMake(space, CGRectGetMaxY(titleLabel.frame) + space, self.viewBoundsWidth - space * 2, 0), NSTextAlignmentLeft, _subTitleStr, SP12Font, Common_LiteGrayColor, YES);
+    UIView *lineView = InsertView(self.view, CGRectMake(space, CGRectGetMaxY(subTitleLabel.frame) + space, self.viewBoundsWidth - space * 2, 1));
+    lineView.backgroundColor = CellSeparatorColor;
+    
     WEAKSELF
     // 评论输入框
     CommentView *comment = [CommentView loadFromNib];
@@ -132,7 +143,7 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
     [self.view addSubview:comment];
     
     // tab
-    [self setupTableViewWithFrame: CGRectDecreaseSize(self.view.bounds, 0, comment.boundsHeight)
+    [self setupTableViewWithFrame:CGRectMake(space, CGRectGetMaxY(lineView.frame) + space, self.viewBoundsWidth - space * 2, self.view.boundsHeight - comment.boundsHeight - CGRectGetMaxY(lineView.frame) - space)
                             style:UITableViewStylePlain
                   registerNibName:NSStringFromClass([CommentCell class])
                   reuseIdentifier:cellIdenfitier_comment];

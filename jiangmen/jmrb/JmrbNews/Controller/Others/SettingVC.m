@@ -7,6 +7,7 @@
 //
 
 #import "SettingVC.h"
+#import "UserInfoModel.h"
 
 @interface SettingVC ()
 {
@@ -45,8 +46,16 @@
     NSArray *twoSectionTitleArray = @[@"退出"];
     NSArray *twoSectionImageArray = @[@"tuichu"];
     
-    _tabTitleArray = @[oneSectionTitleArray, twoSectionTitleArray];
-    _tabImageArray = @[oneSectionImageArray, twoSectionImageArray];
+    if ([UserInfoModel getUserDefaultMobilePhoneNum])
+    {
+        _tabTitleArray = @[oneSectionTitleArray, twoSectionTitleArray];
+        _tabImageArray = @[oneSectionImageArray, twoSectionImageArray];
+    }
+    else
+    {
+        _tabTitleArray = @[oneSectionTitleArray];
+        _tabImageArray = @[oneSectionImageArray];
+    }
 }
 
 - (void)setPageLocalizableText
@@ -127,6 +136,32 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (0 == indexPath.section)
+    {
+        if (0 == indexPath.row)
+        {
+            
+        }
+        else if (1 == indexPath.row)
+        {
+            
+        }
+        else if (2 == indexPath.row)
+        {
+            
+        }
+    }
+    else if (1 == indexPath.section)
+    {
+        [UserInfoModel setUserDefaultLoginName:nil];
+        [UserInfoModel setUserDefaultPassword:nil];
+        
+        [UserInfoModel setUserDefaultUserId:nil];
+        [UserInfoModel setUserDefaultMobilePhoneNum:nil];
+        
+        [self backViewController];
+    }
 }
 
 @end

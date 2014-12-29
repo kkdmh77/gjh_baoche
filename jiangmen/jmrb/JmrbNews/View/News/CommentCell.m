@@ -36,6 +36,8 @@ static CommentCell *defaultCell;
 
 - (void)configureViewsProperties
 {
+    self.backgroundColor = HEXCOLOR(0XF9F9F9);
+    
     _userNameLabel.textColor = Common_BlueColor;
     _commentTimeLabel.textColor = Common_LiteGrayColor;
     _commentContentLabel.textColor = Common_BlackColor;
