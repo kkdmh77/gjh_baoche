@@ -19,6 +19,9 @@
 @interface DetailNewsVC () <UIWebViewDelegate, ISSShareViewDelegate, ISSViewDelegate>
 {
     UIWebView *_webView;
+    
+    NSString *_newsTitleStr;
+    NSString *_subTitleStr;
 }
 
 @end
@@ -57,6 +60,8 @@ int webTextFontValue = 15;
 
 - (void)setPageLocalizableText
 {
+    [self setNavigationItemTitle:@"江门日报"];
+    
     [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Right
                             barButtonTitle:@"分享"
                                     action:@selector(operationShareAction:)];
@@ -90,6 +95,9 @@ int webTextFontValue = 15;
                     NSString *imageUrlStr = [UrlManager getImageRequestUrlStrByUrlComponent:[newsDic objectForKey:@"newsSpicture"]];                                         // 图片URL
                     NSString *videoUrl = [newsDic objectForKey:@"newsVideoUrl"];                // 视频地址
                     NSInteger newsType = [[newsDic objectForKey:@"newsClassify"] integerValue]; // 新闻类型
+                    
+                    strongSelf->_newsTitleStr = newsTitleStr;
+                    strongSelf->_subTitleStr = subtitleStr;
                     
                     /*
                     CGFloat imageWidth = strongSelf->_webView.boundsWidth - 10 * 2;
@@ -162,6 +170,8 @@ int webTextFontValue = 15;
         {
             CommentVC *commentVC = [[CommentVC alloc] init];
             commentVC.newsId = weakSelf.newsId;
+            commentVC.newsTitleStr = _newsTitleStr;
+            commentVC.subTitleStr = _subTitleStr;
             [weakSelf pushViewController:commentVC];
         }
     }];

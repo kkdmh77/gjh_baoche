@@ -11,5 +11,7 @@
 @interface CommentVC : BaseNetworkViewController
 
 @property (nonatomic, assign) NSInteger newsId;
+@property (nonatomic, copy) NSString *newsTitleStr;
+@property (nonatomic, copy) NSString *subTitleStr;
 
 @end

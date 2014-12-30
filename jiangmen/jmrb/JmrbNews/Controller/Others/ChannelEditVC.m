@@ -28,6 +28,8 @@ static NSString * const cellIdentifier_collecitonViewFooter = @"cellIdentifier_c
     
     NSMutableArray *_selectedNewsTypeArray;
     NSMutableArray *_unSelectNewsTypeArray;
+    
+    ChannelEditCollectionCell *_coverCell;
 }
 
 @end
@@ -88,23 +90,38 @@ static NSString * const cellIdentifier_collecitonViewFooter = @"cellIdentifier_c
     _collectionView.backgroundColor = [UIColor clearColor];
     [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([ChannelEditCollectionCell class]) bundle:nil] forCellWithReuseIdentifier:cellIdentifier_collecitonViewCell];
     [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([ChannelEditHeaderView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:cellIdentifier_collecitonViewHeader];
-    [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([ChannelEditFooterView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:cellIdentifier_collecitonViewFooter];
     [self.view addSubview:_collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.left.equalTo(self.view).offset(@15);
         make.right.equalTo(self.view).offset(@(-15));
+        make.height.equalTo(@(200));
+    }];
+    
+    // header view
+    ChannelEditFooterView *headerView = [ChannelEditFooterView loadFromNib];
+    [self.view addSubview:headerView];
+    [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_collectionView);
+        make.right.equalTo(_collectionView);
+        make.top.equalTo(_collectionView.mas_bottom).offset(@0);
+        make.height.equalTo(@(33));
     }];
     
     // tableview
     _tableView = InsertTableView(self.view, CGRectZero, self, self, UITableViewStylePlain);
+    _tableView.backgroundColor = PageBackgroundColor;
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
-        make.top.equalTo(_collectionView.mas_bottom).offset(@0);
-        make.height.equalTo(_collectionView);
+        make.top.equalTo(headerView.mas_bottom).offset(@0);
         make.bottom.equalTo(self.view);
     }];
+}
+
+- (void)emptyMethod
+{
+    
 }
 
 #pragma mark - UICollectionViewDataSource & UICollectionViewDelegate methods
@@ -126,6 +143,18 @@ static NSString * const cellIdentifier_collecitonViewFooter = @"cellIdentifier_c
     NewsTypeEntity *entity = _selectedNewsTypeArray[indexPath.item];
     cell.titleLabel.text = entity.newsTypeNameStr;
     
+    /*
+    if (0 == indexPath.section && 0 == indexPath.item)
+    {
+        UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(emptyMethod)];
+        [cell addGestureRecognizer:gesture];
+    }
+    else
+    {
+        
+    }
+    */
+    
     return cell;
 }
 
@@ -136,11 +165,13 @@ static NSString * const cellIdentifier_collecitonViewFooter = @"cellIdentifier_c
         UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:cellIdentifier_collecitonViewHeader forIndexPath:indexPath];
         return view;
     }
+    /*
     else
     {
         UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:cellIdentifier_collecitonViewFooter forIndexPath:indexPath];
         return view;
     }
+     */
     return nil;
 }
 
@@ -149,10 +180,12 @@ static NSString * const cellIdentifier_collecitonViewFooter = @"cellIdentifier_c
     return CGSizeMake(collectionView.boundsWidth, 50);
 }
 
+/*
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
     return CGSizeMake(collectionView.boundsWidth, 33);
 }
+ */
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
 {
