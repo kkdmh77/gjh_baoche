@@ -239,6 +239,7 @@ static NSString * const cellIdentifier_collecitonViewFooter = @"cellIdentifier_c
         cell.backgroundView = nil;
         cell.textLabel.font = SP15Font;
         cell.textLabel.textColor = Common_BlackColor;
+        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tianjiapingdao"]];
     }
     
     NewsTypeEntity *entity = _unSelectNewsTypeArray[indexPath.row];

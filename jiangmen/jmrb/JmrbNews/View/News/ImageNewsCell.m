@@ -73,6 +73,20 @@ CGFloat defaultImageNewsCellHeight = 0;
     // 设置属性
     [self configureViewsProperties];
 }
+- (IBAction)clickCheckCommentBtn:(UIButton *)sender
+{
+    if (_handle) _handle(self, CellOperationType_CheckComment, sender);
+}
+
+- (IBAction)clickGoCommentBtn:(UIButton *)sender
+{
+    if (_handle) _handle(self, CellOperationType_GoComment, sender);
+}
+
+- (IBAction)clickShareBtn:(UIButton *)sender
+{
+    if (_handle) _handle(self, CellOperationType_Share, sender);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -88,7 +102,37 @@ CGFloat defaultImageNewsCellHeight = 0;
 
 - (void)loadCellShowDataWithItemEntity:(ImageNewsEntity *)entity
 {
+    UIButton *imageCountBtn = InsertImageButtonWithTitle(nil, CGRectZero, 8888, [UIImage imageNamed:@"jizhangtu"], nil, [NSString stringWithFormat:@"%d",entity.imageUrlsStrArray.count], UIEdgeInsetsMake(0, 0, 0, 18), SP14Font, [UIColor whiteColor], nil, NULL);
+    [imageCountBtn sizeToFit];
+    
     _imageNewsNameLabel.text = entity.imageNewsNameStr;
+    [_commentCountBtn setTitle:[NSString stringWithFormat:@"查看全部%d条评论", entity.imageCommentCount] forState:UIControlStateNormal];
+    
+    _previewImageViewOne.image = nil;
+    RemoveAllSubviews(_previewImageViewOne);
+    _previewImageViewTwo.image = nil;
+    RemoveAllSubviews(_previewImageViewTwo);
+    _previewImageViewThree.image = nil;
+    RemoveAllSubviews(_previewImageViewThree);
+    
+    if (3 <= entity.imageUrlsStrArray.count)
+    {
+        [_previewImageViewThree addSubview:imageCountBtn];
+    }
+    else if (2 == entity.imageUrlsStrArray.count)
+    {
+        [_previewImageViewTwo addSubview:imageCountBtn];
+    }
+    else if (2 == entity.imageUrlsStrArray.count)
+    {
+        [_previewImageViewOne addSubview:imageCountBtn];
+    }
+    
+    [imageCountBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(CGSizeMake(50, 24));
+        make.right.equalTo(imageCountBtn.superview).offset(@(-15));
+        make.bottom.equalTo(imageCountBtn.superview).offset(@(-3));
+    }];
     
     for (int i = 0; i < entity.imageUrlsStrArray.count; ++i)
     {

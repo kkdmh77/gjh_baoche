@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -36,25 +36,44 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vT-lU-7fR">
+                        <rect key="frame" x="10" y="55" width="90" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="88I-vp-O9s"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="8:88:88" backgroundImage="shipinshichang.png">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="QSJ-85-0Oi" firstAttribute="bottom" secondItem="0V5-Qt-6J6" secondAttribute="bottom" id="5vk-6y-oNZ"/>
                     <constraint firstItem="QSJ-85-0Oi" firstAttribute="trailing" secondItem="t1w-Ko-VLv" secondAttribute="trailing" id="Lrr-5K-oRf"/>
                     <constraint firstItem="0V5-Qt-6J6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="TVh-5E-vC4"/>
                     <constraint firstAttribute="centerY" secondItem="0V5-Qt-6J6" secondAttribute="centerY" id="iNg-lu-CNe"/>
+                    <constraint firstItem="2vT-lU-7fR" firstAttribute="leading" secondItem="0V5-Qt-6J6" secondAttribute="leading" id="j94-KF-bgj"/>
                     <constraint firstItem="t1w-Ko-VLv" firstAttribute="leading" secondItem="0V5-Qt-6J6" secondAttribute="trailing" constant="10" id="mX6-XD-t5J"/>
+                    <constraint firstItem="2vT-lU-7fR" firstAttribute="trailing" secondItem="0V5-Qt-6J6" secondAttribute="trailing" id="oTI-cF-eGu"/>
                     <constraint firstItem="0V5-Qt-6J6" firstAttribute="top" secondItem="t1w-Ko-VLv" secondAttribute="top" id="tVj-HP-t1J"/>
                     <constraint firstAttribute="trailing" secondItem="t1w-Ko-VLv" secondAttribute="trailing" constant="10" id="vNV-1F-rRO"/>
+                    <constraint firstItem="2vT-lU-7fR" firstAttribute="bottom" secondItem="0V5-Qt-6J6" secondAttribute="bottom" id="wAN-Et-tj8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="videoLongTimeBtn" destination="2vT-lU-7fR" id="Kac-lb-Ydg"/>
                 <outlet property="videoNewsImageView" destination="0V5-Qt-6J6" id="QUD-ZH-5aS"/>
                 <outlet property="videoNewsNameLabel" destination="t1w-Ko-VLv" id="NNB-tb-kf4"/>
                 <outlet property="videoNewsPlayCountLabel" destination="QSJ-85-0Oi" id="nOD-Ns-a21"/>
             </connections>
-            <point key="canvasLocation" x="385" y="374.5"/>
+            <point key="canvasLocation" x="292" y="301.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="shipinshichang.png" width="67" height="22"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

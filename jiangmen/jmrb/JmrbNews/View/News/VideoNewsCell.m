@@ -12,6 +12,7 @@
 @interface VideoNewsCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *videoNewsImageView;
+@property (weak, nonatomic) IBOutlet UIButton *videoLongTimeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *videoNewsNameLabel;
 @property (weak, nonatomic) IBOutlet NIAttributedLabel *videoNewsPlayCountLabel;
 
@@ -67,6 +68,7 @@ CGFloat defaultVideoNewsCellHeight = 0;
 - (void)loadCellShowDataWithItemEntity:(VideoNewsEntity *)entity
 {
      [_videoNewsImageView gjh_setImageWithURL:[NSURL URLWithString:entity.videoImageUrlStr] placeholderImage:nil imageShowStyle:ImageShowStyle_None success:nil failure:nil];
+    [_videoLongTimeBtn setTitle:entity.videoLongTimeStr forState:UIControlStateNormal];
     _videoNewsNameLabel.text = entity.videoNameStr;
     
     _videoNewsPlayCountLabel.text = [NSString stringWithFormat:@"  %d",entity.videoPalyCount];

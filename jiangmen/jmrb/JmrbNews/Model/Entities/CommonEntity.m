@@ -107,6 +107,7 @@
         self.videoNameStr = [dict objectForKey:@"newsTitle"];
         self.videoImageUrlStr = [UrlManager getImageRequestUrlStrByUrlComponent:dict[@"newsSpicture"]];
         self.videoPalyCount = [[dict objectForKey:@"newsClicked"] integerValue];
+        self.videoLongTimeStr = @"0:01:16";
     }
     return self;
 }

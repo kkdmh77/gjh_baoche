@@ -76,7 +76,7 @@ CGFloat defaultNormalNewsCellHeight = 0;
     if ([entity.newsDescStr isAbsoluteValid])
     {
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle.lineSpacing = 6.0;
+        paragraphStyle.lineSpacing = 4.0;
         
         NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:entity.newsDescStr];
         [attributedStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attributedStr.length)];

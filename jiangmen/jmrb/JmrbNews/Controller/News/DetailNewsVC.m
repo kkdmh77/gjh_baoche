@@ -63,7 +63,8 @@ int webTextFontValue = 15;
     [self setNavigationItemTitle:@"江门日报"];
     
     [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Right
-                            barButtonTitle:@"分享"
+                                 normalImg:[UIImage imageNamed:@"fengxiang"]
+                            highlightedImg:nil
                                     action:@selector(operationShareAction:)];
 }
 

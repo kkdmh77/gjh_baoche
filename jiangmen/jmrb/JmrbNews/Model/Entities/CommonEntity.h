@@ -57,6 +57,7 @@
 @property (nonatomic, copy) NSString *videoNameStr;         // 视频名称
 @property (nonatomic, copy) NSString *videoImageUrlStr;     // 视频列表页小图片
 @property (nonatomic, assign) NSInteger videoPalyCount;     // 视频播放数
+@property (nonatomic, copy) NSString *videoLongTimeStr;     // 视频时长
 
 @end
 

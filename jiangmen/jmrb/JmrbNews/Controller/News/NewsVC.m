@@ -245,6 +245,7 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
         scrollView.pageControl.frameOriginY -= 20;
         
         _bannerTitleLabel = InsertLabel(scrollView, CGRectZero, NSTextAlignmentCenter, [self curIndexAdEntityByIndex:0].newsNameStr, SP15Font, [UIColor whiteColor], NO);
+        _bannerTitleLabel.backgroundColor = HEXCOLORAL(0X666462, 0.5);
         [_bannerTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.equalTo(CGSizeMake(scrollView.boundsWidth, 25));
             make.left.equalTo(@(0));

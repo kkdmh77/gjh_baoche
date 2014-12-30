@@ -40,14 +40,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="888评" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDQ-62-6Yf">
-                        <rect key="frame" x="277" y="54" width="33" height="15"/>
+                        <rect key="frame" x="277" y="65" width="33" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="BKs-v7-yW6" firstAttribute="bottom" secondItem="BDQ-62-6Yf" secondAttribute="bottom" constant="3" id="4Ms-VB-yyA"/>
+                    <constraint firstItem="BKs-v7-yW6" firstAttribute="bottom" secondItem="BDQ-62-6Yf" secondAttribute="bottom" constant="-8" id="4Ms-VB-yyA"/>
                     <constraint firstItem="BKs-v7-yW6" firstAttribute="trailing" secondItem="NLn-kM-dob" secondAttribute="trailing" id="M8q-qp-w2V"/>
                     <constraint firstItem="BKs-v7-yW6" firstAttribute="bottom" secondItem="YtI-0e-Tbm" secondAttribute="bottom" id="QZi-oc-NQJ"/>
                     <constraint firstItem="NLn-kM-dob" firstAttribute="leading" secondItem="YtI-0e-Tbm" secondAttribute="trailing" constant="6" id="ZjQ-CH-w6A"/>
