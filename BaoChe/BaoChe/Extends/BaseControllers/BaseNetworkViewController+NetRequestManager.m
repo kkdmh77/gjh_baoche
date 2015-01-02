@@ -21,6 +21,7 @@
         urlForTypeArray = [NSMutableArray arrayWithObjects:
                            // 班车
                            @"schedulebus/bus/list",
+                           @"college/get_college",
                            
                            nil];
 

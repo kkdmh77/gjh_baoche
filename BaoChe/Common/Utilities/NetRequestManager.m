@@ -65,12 +65,12 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
 //数据解析
 - (BOOL)isParseSuccessWithResponseData:(NSData *)data result:(id *)result
 {
-    if (!networkDataIsJsonType)
-    {
-        *result = data;
-        
-        return YES;
-    }
+//    if (!networkDataIsJsonType)
+//    {
+//        *result = data;
+//        
+//        return YES;
+//    }
     
     NSError *err = nil;
     
@@ -83,7 +83,6 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
         
         return NO;
     }
-//    NSLog(@"resultDic = %@",*result);
     
     return YES;
 }
@@ -105,31 +104,6 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     if (self.delegate && [self.delegate respondsToSelector:@selector(netRequest:didReceiveResponseHeaders:)])
     {
         [delegate netRequest:self didReceiveResponseHeaders:responseHeaders];
-    }
-    
-    NSString *loginStatusStr = [responseHeaders objectForKey:@"sfStatus"]; // 登陆的状态.10000:已登录,正常状态, -10001:未登陆或者登陆session已过期
-    if (loginStatusStr && 0 != loginStatusStr.length)
-    {
-        if (NotLoginStatusErrorCode == loginStatusStr.intValue)
-        {
-            /*
-            if (self.delegate && [self.delegate respondsToSelector:@selector(netRequest:failedWithError:)])
-            {
-                NSError *error = [[NSError alloc] initWithDomain:@"LOGIN_STATUS_ERROR_DOMAIN" code:NotLoginStatusErrorCode userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"未登陆或者登陆session已过期", NSLocalizedDescriptionKey, nil]];
-                self.resultErorr = error;
-                
-                [delegate netRequest:self failedWithError:error];
-            }
-            */
-            /*
-            [[NetRequestManager sharedInstance] removeRequest:self];
-            
-            // session已经过期,重新自动登录
-            [[LoginSessionModel shareLoginSessionModel] login];
-            */
-            
-            return;
-        }
     }
     
     NSString *contentTypeStr = [responseHeaders objectForKey:@"Content-Type"];

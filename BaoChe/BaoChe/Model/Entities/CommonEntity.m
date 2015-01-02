@@ -23,3 +23,20 @@
 
 @end
 
+//////////////////////////////////////////////////////////////////////
+
+@implementation StartStationCollegeEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        self.keyId = [[dict safeObjectForKey:@"CollegeId"] integerValue];
+        self.collegeNameStr = [dict objectForKey:@"CollegeName"];
+        self.locationStr = [dict objectForKey:@"Location"];
+    }
+    return self;
+}
+
+@end

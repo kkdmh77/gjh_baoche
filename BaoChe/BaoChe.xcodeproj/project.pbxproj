@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B176D6D1A3C851B0094EC96 /* AllBusListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */; };
 		2B521ED51A4856410083DE33 /* OrderWriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B521ED41A4856410083DE33 /* OrderWriteVC.m */; };
 		2B521ED81A4858A00083DE33 /* BusInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B521ED71A4858A00083DE33 /* BusInfoView.m */; };
 		2B521EDA1A4858AC0083DE33 /* BusInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B521ED91A4858AC0083DE33 /* BusInfoView.xib */; };
@@ -17,6 +16,8 @@
 		2B6D6CAC1A5660A700286CE2 /* OrderInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6D6CAB1A5660A700286CE2 /* OrderInfoView.m */; };
 		2B6D6CAE1A5660BA00286CE2 /* OrderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D6CAD1A5660BA00286CE2 /* OrderInfoView.xib */; };
 		2B6D6CB11A566A1A00286CE2 /* DetailOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6D6CB01A566A1A00286CE2 /* DetailOrderVC.m */; };
+		2B6D6CB41A56D10200286CE2 /* AllBusListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6D6CB31A56D10200286CE2 /* AllBusListVC.m */; };
+		2B6D6CB71A56D13900286CE2 /* StartStationChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6D6CB61A56D13900286CE2 /* StartStationChooseVC.m */; };
 		2BD7EFFF1A49B8E700905645 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7EFE11A49B8E700905645 /* IQNSArray+Sort.m */; };
 		2BD7F0001A49B8E700905645 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7EFE31A49B8E700905645 /* IQUIView+Hierarchy.m */; };
 		2BD7F0011A49B8E700905645 /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7EFE51A49B8E700905645 /* IQUIWindow+Hierarchy.m */; };
@@ -464,8 +465,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2B176D6B1A3C851B0094EC96 /* AllBusListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllBusListVC.h; sourceTree = "<group>"; };
-		2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllBusListVC.m; sourceTree = "<group>"; };
 		2B521ED31A4856410083DE33 /* OrderWriteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderWriteVC.h; sourceTree = "<group>"; };
 		2B521ED41A4856410083DE33 /* OrderWriteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderWriteVC.m; sourceTree = "<group>"; };
 		2B521ED61A4858A00083DE33 /* BusInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusInfoView.h; sourceTree = "<group>"; };
@@ -479,6 +478,10 @@
 		2B6D6CAD1A5660BA00286CE2 /* OrderInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoView.xib; sourceTree = "<group>"; };
 		2B6D6CAF1A566A1A00286CE2 /* DetailOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailOrderVC.h; sourceTree = "<group>"; };
 		2B6D6CB01A566A1A00286CE2 /* DetailOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailOrderVC.m; sourceTree = "<group>"; };
+		2B6D6CB21A56D10200286CE2 /* AllBusListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllBusListVC.h; sourceTree = "<group>"; };
+		2B6D6CB31A56D10200286CE2 /* AllBusListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllBusListVC.m; sourceTree = "<group>"; };
+		2B6D6CB51A56D13900286CE2 /* StartStationChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartStationChooseVC.h; sourceTree = "<group>"; };
+		2B6D6CB61A56D13900286CE2 /* StartStationChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartStationChooseVC.m; sourceTree = "<group>"; };
 		2BD7EFE01A49B8E700905645 /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
 		2BD7EFE11A49B8E700905645 /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
 		2BD7EFE21A49B8E700905645 /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
@@ -1346,8 +1349,6 @@
 				2BE0BE811A45336A000B8871 /* Bus */,
 				2BE0BE821A45336A000B8871 /* UserCenter */,
 				2BD8681F1A3DC6EA00BC46BF /* HomePage */,
-				2B176D6B1A3C851B0094EC96 /* AllBusListVC.h */,
-				2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1517,8 +1518,12 @@
 		2BE0BE811A45336A000B8871 /* Bus */ = {
 			isa = PBXGroup;
 			children = (
+				2B6D6CB21A56D10200286CE2 /* AllBusListVC.h */,
+				2B6D6CB31A56D10200286CE2 /* AllBusListVC.m */,
 				2B521ED31A4856410083DE33 /* OrderWriteVC.h */,
 				2B521ED41A4856410083DE33 /* OrderWriteVC.m */,
+				2B6D6CB51A56D13900286CE2 /* StartStationChooseVC.h */,
+				2B6D6CB61A56D13900286CE2 /* StartStationChooseVC.m */,
 			);
 			path = Bus;
 			sourceTree = "<group>";
@@ -3374,6 +3379,7 @@
 				43D1F1D819FB3AFB0049518E /* View+MASAdditions.m in Sources */,
 				43D1F58119FB4C1A0049518E /* NITextField.m in Sources */,
 				43D1F2DB19FB3AFB0049518E /* ATBitmapRGBAData.m in Sources */,
+				2B6D6CB41A56D10200286CE2 /* AllBusListVC.m in Sources */,
 				43D1F2F219FB3AFB0049518E /* UIButton+BackgroundImage.m in Sources */,
 				43D1F31419FB3AFB0049518E /* PayManager.m in Sources */,
 				2BD7F0081A49B8E700905645 /* IQToolbar.m in Sources */,
@@ -3405,11 +3411,11 @@
 				43D1F56919FB4C1A0049518E /* NIPagingScrollView.m in Sources */,
 				43D1F18319FB3AFB0049518E /* AQGridViewUpdateInfo.m in Sources */,
 				43D1F2B019FB3AFB0049518E /* ATBLibs+UIView.m in Sources */,
+				2B6D6CB71A56D13900286CE2 /* StartStationChooseVC.m in Sources */,
 				43D1F1A019FB3AFB0049518E /* UIImage+FlatUI.m in Sources */,
 				43D1F1D119FB3AFB0049518E /* MASConstraint.m in Sources */,
 				43D1F30B19FB3AFB0049518E /* DrawLineUIBtn.m in Sources */,
 				43D1F16C19FB3AFB0049518E /* AFURLConnectionOperation.m in Sources */,
-				2B176D6D1A3C851B0094EC96 /* AllBusListVC.m in Sources */,
 				43D1F4FC19FB4C1A0049518E /* NIViewRecycler.m in Sources */,
 				43D1F2AE19FB3AFB0049518E /* ATBLibs+UIColor.m in Sources */,
 				43D1F29319FB3AFB0049518E /* SDWebImageManager.m in Sources */,

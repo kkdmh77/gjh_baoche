@@ -10,6 +10,7 @@
 #import "NIAttributedLabel.h"
 #import "AllBusListVC.h"
 #import "CalendarHomeViewController.h"
+#import "StartStationChooseVC.h"
 
 @interface BuyTicketVC ()
 
@@ -87,7 +88,9 @@
 
 - (IBAction)clickStartStationInputBtn:(UIButton *)sender
 {
-    
+    StartStationChooseVC *startStationChoose = [[StartStationChooseVC alloc] init];
+    startStationChoose.hidesBottomBarWhenPushed = YES;
+    [self pushViewController:startStationChoose];
 }
 
 - (IBAction)clickEndStationInputBtn:(UIButton *)sender

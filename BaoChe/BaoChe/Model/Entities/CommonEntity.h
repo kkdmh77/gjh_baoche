@@ -14,3 +14,14 @@
 @property (nonatomic, strong) NSString *answerStr;
 
 @end
+
+////////////////////////////////////////////////////////////////
+/// 出发点院校
+
+@interface StartStationCollegeEntity : NetItem
+
+@property (nonatomic, assign) NSInteger keyId;
+@property (nonatomic, copy) NSString *collegeNameStr;
+@property (nonatomic, copy) NSString *locationStr;
+
+@end
