@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /// 订单班车信息
-@interface OrderInfoView : UIView
+@interface BusInfoView : UIView
 
 + (CGFloat)getViewHeight;
 

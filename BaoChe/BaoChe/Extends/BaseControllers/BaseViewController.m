@@ -222,6 +222,7 @@
     _tableView = InsertTableView(nil, frame, self, self, style);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.backgroundView = nil;
     if ([nibName isAbsoluteValid] && [identifier isAbsoluteValid])
     {
         [_tableView registerNib:[UINib nibWithNibName:nibName bundle:nil] forCellReuseIdentifier:identifier];

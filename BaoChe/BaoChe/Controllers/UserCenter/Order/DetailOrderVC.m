@@ -1,26 +1,27 @@
 //
-//  OrderWriteVC.m
+//  DetailOrderVC.m
 //  BaoChe
 //
-//  Created by 龚 俊慧 on 14/12/22.
-//  Copyright (c) 2014年 com.gjh. All rights reserved.
+//  Created by 龚 俊慧 on 15/1/2.
+//  Copyright (c) 2015年 com.gjh. All rights reserved.
 //
 
-#import "OrderWriteVC.h"
+#import "DetailOrderVC.h"
 #import "BusInfoView.h"
 #import "PassengersCell.h"
+#import "OrderInfoView.h"
 #import "UserCenter_TabHeaderView.h"
 
-static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPassenger";
+static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_detailOrderPassenger";
 
-@interface OrderWriteVC ()
+@interface DetailOrderVC ()
 {
     UserCenter_TabSectionHeaderView    *_passengersCellSectionHeader;
 }
 
 @end
 
-@implementation OrderWriteVC
+@implementation DetailOrderVC
 
 - (void)viewDidLoad
 {
@@ -38,12 +39,12 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:@"订单填写"];
+    [self setNavigationItemTitle:@"订单详情"];
 }
 
 - (void)setNetworkRequestStatusBlocks
 {
-   
+    
 }
 
 - (void)getNetworkData
@@ -56,7 +57,7 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     [self setupTableViewWithFrame:self.view.bounds
                             style:UITableViewStylePlain
                   registerNibName:NSStringFromClass([PassengersCell class])
-                  reuseIdentifier:cellIdentifier_orderPassenger];
+                  reuseIdentifier:cellIdentifier_detailOrderPassenger];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 }
 
@@ -74,7 +75,7 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (1 == section)
+    if (2 == section)
     {
         return [self numberOfRowsInSection:section];;
     }
@@ -85,26 +86,26 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 {
     if (0 == indexPath.section)
     {
-        return [BusInfoView getViewHeight];
+        return [OrderInfoView getViewHeight];
     }
     else if (1 == indexPath.section)
     {
-        return [PassengersCell getCellHeight];
+        return [BusInfoView getViewHeight];
     }
     else if (2 == indexPath.section)
     {
-        return 50;
+        return [PassengersCell getCellHeight];
     }
     else if (3 == indexPath.section)
     {
-        return [OrderContactInfoView getViewHeight];
+        return 50;
     }
     return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (1 == section)
+    if (2 == section)
     {
         return 50;
     }
@@ -113,7 +114,7 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (0 == section || 3 == section)
+    if (1 == section || 3 == section)
     {
         return CellSeparatorSpace;
     }
@@ -122,16 +123,19 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (1 == section)
+    if (2 == section)
     {
         if (!_passengersCellSectionHeader)
         {
             _passengersCellSectionHeader = [UserCenter_TabSectionHeaderView loadFromNib];
+            _passengersCellSectionHeader.canOperation = NO;
             [_passengersCellSectionHeader setTitleString:@"乘客(2位)"];
+            /*
             _passengersCellSectionHeader.tag = section;
             [_passengersCellSectionHeader addTarget:self
-                           action:@selector(headerClicked:)
-                 forControlEvents:UIControlEventTouchUpInside];
+                                             action:@selector(headerClicked:)
+                                   forControlEvents:UIControlEventTouchUpInside];
+             */
         }
         return _passengersCellSectionHeader;
     }
@@ -147,7 +151,22 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 {
     if (0 == indexPath.section)
     {
-        static NSString *cellIdentifier = @"cellIdentifier_orderBusInfo";
+        static NSString *cellIdentifier = @"cellIdentifier_orderInfo";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            OrderInfoView *orderInfoView = [OrderInfoView loadFromNib];
+            orderInfoView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            [cell addSubview:orderInfoView];
+        }
+        
+        return cell;
+    }
+    else if (1 == indexPath.section)
+    {
+        static NSString *cellIdentifier = @"cellIdentifier_busInfo";
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!cell)
@@ -160,13 +179,34 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
         
         return cell;
     }
-    else if (1 == indexPath.section)
+    else if (2 == indexPath.section)
     {
-        PassengersCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier_orderPassenger];
+        PassengersCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier_detailOrderPassenger];
+        
+        switch (indexPath.row) {
+            case 0:
+            {
+                cell.btnType = OperationButType_DetailOrder_ToRefundTicket;
+            }
+                break;
+            case 1:
+            {
+                cell.btnType = OperationButType_DetailOrder_AlreadyRefundTicket;
+            }
+                break;
+            case 2:
+            {
+                cell.btnType = OperationButType_DetailOrder_GetTicket;
+            }
+                break;
+                
+            default:
+                break;
+        }
         
         return cell;
     }
-    else if (2 == indexPath.section)
+    else if (3 == indexPath.section)
     {
         static NSString *cellIdentifier = @"cellIdentifier_orderInsurance";
         
@@ -196,21 +236,6 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
         }
         return cell;
     }
-    else if (3 == indexPath.section)
-    {
-        static NSString *cellIdentifier = @"cellIdentifier_orderContactInfo";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (!cell)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-            OrderContactInfoView *orderContactInfoView = [OrderContactInfoView loadFromNib];
-            orderContactInfoView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-            [cell addSubview:orderContactInfoView];
-        }
-        
-        return cell;
-    }
     return nil;
 }
 
@@ -220,7 +245,7 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
+/*
 -(void)headerClicked:(UIButton *)sender
 {
     sender.selected = !sender.selected;
@@ -228,14 +253,18 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     [_tableView reloadSections:[NSIndexSet indexSetWithIndex:sender.tag]
               withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+*/
 
 - (int)numberOfRowsInSection:(NSInteger)section
 {
+    /*
     if (_passengersCellSectionHeader.selected)
     {
         return 2;
     }
     return 0;
+     */
+    return 3;
 }
 
 @end

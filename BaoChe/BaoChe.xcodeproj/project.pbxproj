@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		2B176D6D1A3C851B0094EC96 /* AllBusListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */; };
 		2B521ED51A4856410083DE33 /* OrderWriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B521ED41A4856410083DE33 /* OrderWriteVC.m */; };
-		2B521ED81A4858A00083DE33 /* OrderInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B521ED71A4858A00083DE33 /* OrderInfoView.m */; };
-		2B521EDA1A4858AC0083DE33 /* OrderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B521ED91A4858AC0083DE33 /* OrderInfoView.xib */; };
+		2B521ED81A4858A00083DE33 /* BusInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B521ED71A4858A00083DE33 /* BusInfoView.m */; };
+		2B521EDA1A4858AC0083DE33 /* BusInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B521ED91A4858AC0083DE33 /* BusInfoView.xib */; };
 		2B521EDD1A485E010083DE33 /* order_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B521EDB1A485E010083DE33 /* order_arrow@2x.png */; };
 		2B521EDE1A485E010083DE33 /* order_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B521EDC1A485E010083DE33 /* order_arrow@3x.png */; };
 		2B521EE01A48682C0083DE33 /* OrderContactInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B521EDF1A48682C0083DE33 /* OrderContactInfoView.xib */; };
+		2B6D6CAC1A5660A700286CE2 /* OrderInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6D6CAB1A5660A700286CE2 /* OrderInfoView.m */; };
+		2B6D6CAE1A5660BA00286CE2 /* OrderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D6CAD1A5660BA00286CE2 /* OrderInfoView.xib */; };
+		2B6D6CB11A566A1A00286CE2 /* DetailOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6D6CB01A566A1A00286CE2 /* DetailOrderVC.m */; };
 		2BD7EFFF1A49B8E700905645 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7EFE11A49B8E700905645 /* IQNSArray+Sort.m */; };
 		2BD7F0001A49B8E700905645 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7EFE31A49B8E700905645 /* IQUIView+Hierarchy.m */; };
 		2BD7F0011A49B8E700905645 /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7EFE51A49B8E700905645 /* IQUIWindow+Hierarchy.m */; };
@@ -61,6 +64,9 @@
 		2BDC3EAB1A4F0A9C007C1130 /* maipiao_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDC3E9F1A4F0A9C007C1130 /* maipiao_normal@3x.png */; };
 		2BDC3EAC1A4F0A9C007C1130 /* maipiao_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDC3EA01A4F0A9C007C1130 /* maipiao_selected@2x.png */; };
 		2BDC3EAD1A4F0A9C007C1130 /* maipiao_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDC3EA11A4F0A9C007C1130 /* maipiao_selected@3x.png */; };
+		2BDD6E4A1A5597E700329823 /* OrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD6E481A5597E700329823 /* OrderListCell.m */; };
+		2BDD6E4B1A5597E700329823 /* OrderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD6E491A5597E700329823 /* OrderListCell.xib */; };
+		2BDD6E4F1A55A41E00329823 /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD6E4E1A55A41E00329823 /* OrderListVC.m */; };
 		2BE0BE881A4533D9000B8871 /* PassengersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0BE861A4533D9000B8871 /* PassengersCell.m */; };
 		2BE0BE891A4533D9000B8871 /* PassengersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE0BE871A4533D9000B8871 /* PassengersCell.xib */; };
 		2BE0BE911A4536FC000B8871 /* jianhao_lanse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE0BE8B1A4536FC000B8871 /* jianhao_lanse@2x.png */; };
@@ -86,7 +92,6 @@
 		2BF2E07A1A3F3B5B00F83491 /* HomePageTodayHotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */; };
 		4372D7741A0879FD00CEA66D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4372D7761A0879FD00CEA66D /* InfoPlist.strings */; };
 		43CB6B201A46843C003829E6 /* BaseTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B1F1A46843C003829E6 /* BaseTabBarVC.m */; };
-		43CD9B251A5146B300731F7A /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43CD9B241A5146B300731F7A /* Images-2.xcassets */; };
 		43D1ED1A19FB37F30049518E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1919FB37F30049518E /* main.m */; };
 		43D1ED1D19FB37F30049518E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1C19FB37F30049518E /* AppDelegate.m */; };
 		43D1ED2019FB37F30049518E /* BaoChe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1E19FB37F30049518E /* BaoChe.xcdatamodeld */; };
@@ -463,12 +468,17 @@
 		2B176D6C1A3C851B0094EC96 /* AllBusListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllBusListVC.m; sourceTree = "<group>"; };
 		2B521ED31A4856410083DE33 /* OrderWriteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderWriteVC.h; sourceTree = "<group>"; };
 		2B521ED41A4856410083DE33 /* OrderWriteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderWriteVC.m; sourceTree = "<group>"; };
-		2B521ED61A4858A00083DE33 /* OrderInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoView.h; sourceTree = "<group>"; };
-		2B521ED71A4858A00083DE33 /* OrderInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoView.m; sourceTree = "<group>"; };
-		2B521ED91A4858AC0083DE33 /* OrderInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoView.xib; sourceTree = "<group>"; };
+		2B521ED61A4858A00083DE33 /* BusInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusInfoView.h; sourceTree = "<group>"; };
+		2B521ED71A4858A00083DE33 /* BusInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusInfoView.m; sourceTree = "<group>"; };
+		2B521ED91A4858AC0083DE33 /* BusInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusInfoView.xib; sourceTree = "<group>"; };
 		2B521EDB1A485E010083DE33 /* order_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_arrow@2x.png"; sourceTree = "<group>"; };
 		2B521EDC1A485E010083DE33 /* order_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_arrow@3x.png"; sourceTree = "<group>"; };
 		2B521EDF1A48682C0083DE33 /* OrderContactInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderContactInfoView.xib; sourceTree = "<group>"; };
+		2B6D6CAA1A5660A700286CE2 /* OrderInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoView.h; sourceTree = "<group>"; };
+		2B6D6CAB1A5660A700286CE2 /* OrderInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoView.m; sourceTree = "<group>"; };
+		2B6D6CAD1A5660BA00286CE2 /* OrderInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoView.xib; sourceTree = "<group>"; };
+		2B6D6CAF1A566A1A00286CE2 /* DetailOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailOrderVC.h; sourceTree = "<group>"; };
+		2B6D6CB01A566A1A00286CE2 /* DetailOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailOrderVC.m; sourceTree = "<group>"; };
 		2BD7EFE01A49B8E700905645 /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
 		2BD7EFE11A49B8E700905645 /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
 		2BD7EFE21A49B8E700905645 /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
@@ -535,6 +545,11 @@
 		2BDC3E9F1A4F0A9C007C1130 /* maipiao_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "maipiao_normal@3x.png"; sourceTree = "<group>"; };
 		2BDC3EA01A4F0A9C007C1130 /* maipiao_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "maipiao_selected@2x.png"; sourceTree = "<group>"; };
 		2BDC3EA11A4F0A9C007C1130 /* maipiao_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "maipiao_selected@3x.png"; sourceTree = "<group>"; };
+		2BDD6E471A5597E700329823 /* OrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListCell.h; sourceTree = "<group>"; };
+		2BDD6E481A5597E700329823 /* OrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListCell.m; sourceTree = "<group>"; };
+		2BDD6E491A5597E700329823 /* OrderListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListCell.xib; sourceTree = "<group>"; };
+		2BDD6E4D1A55A41E00329823 /* OrderListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListVC.h; sourceTree = "<group>"; };
+		2BDD6E4E1A55A41E00329823 /* OrderListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListVC.m; sourceTree = "<group>"; };
 		2BE0BE851A4533D9000B8871 /* PassengersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassengersCell.h; sourceTree = "<group>"; };
 		2BE0BE861A4533D9000B8871 /* PassengersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassengersCell.m; sourceTree = "<group>"; };
 		2BE0BE871A4533D9000B8871 /* PassengersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PassengersCell.xib; sourceTree = "<group>"; };
@@ -568,7 +583,6 @@
 		4372D7771A087A1600CEA66D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		43CB6B1E1A46843C003829E6 /* BaseTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarVC.h; sourceTree = "<group>"; };
 		43CB6B1F1A46843C003829E6 /* BaseTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarVC.m; sourceTree = "<group>"; };
-		43CD9B241A5146B300731F7A /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		43D1ED1419FB37F30049518E /* BaoChe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaoChe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D1ED1819FB37F30049518E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43D1ED1919FB37F30049518E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1476,6 +1490,30 @@
 			path = BuyTicket;
 			sourceTree = "<group>";
 		};
+		2BDD6E461A5597CF00329823 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				2BDD6E471A5597E700329823 /* OrderListCell.h */,
+				2BDD6E481A5597E700329823 /* OrderListCell.m */,
+				2BDD6E491A5597E700329823 /* OrderListCell.xib */,
+				2B6D6CAA1A5660A700286CE2 /* OrderInfoView.h */,
+				2B6D6CAB1A5660A700286CE2 /* OrderInfoView.m */,
+				2B6D6CAD1A5660BA00286CE2 /* OrderInfoView.xib */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		2BDD6E4C1A55A40C00329823 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				2BDD6E4D1A55A41E00329823 /* OrderListVC.h */,
+				2BDD6E4E1A55A41E00329823 /* OrderListVC.m */,
+				2B6D6CAF1A566A1A00286CE2 /* DetailOrderVC.h */,
+				2B6D6CB01A566A1A00286CE2 /* DetailOrderVC.m */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
 		2BE0BE811A45336A000B8871 /* Bus */ = {
 			isa = PBXGroup;
 			children = (
@@ -1488,6 +1526,7 @@
 		2BE0BE821A45336A000B8871 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				2BDD6E4C1A55A40C00329823 /* Order */,
 				2BDC3E671A4DA4C8007C1130 /* LoginVC.h */,
 				2BDC3E681A4DA4C8007C1130 /* LoginVC.m */,
 				2BDC3E691A4DA4C8007C1130 /* LoginVC.xib */,
@@ -1503,9 +1542,9 @@
 		2BE0BE831A453372000B8871 /* Bus */ = {
 			isa = PBXGroup;
 			children = (
-				2B521ED61A4858A00083DE33 /* OrderInfoView.h */,
-				2B521ED71A4858A00083DE33 /* OrderInfoView.m */,
-				2B521ED91A4858AC0083DE33 /* OrderInfoView.xib */,
+				2B521ED61A4858A00083DE33 /* BusInfoView.h */,
+				2B521ED71A4858A00083DE33 /* BusInfoView.m */,
+				2B521ED91A4858AC0083DE33 /* BusInfoView.xib */,
 				2B521EDF1A48682C0083DE33 /* OrderContactInfoView.xib */,
 			);
 			path = Bus;
@@ -1514,6 +1553,7 @@
 		2BE0BE841A453372000B8871 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				2BDD6E461A5597CF00329823 /* Order */,
 				2BE0BE851A4533D9000B8871 /* PassengersCell.h */,
 				2BE0BE861A4533D9000B8871 /* PassengersCell.m */,
 				2BE0BE871A4533D9000B8871 /* PassengersCell.xib */,
@@ -1615,7 +1655,6 @@
 				43D1ED2719FB37F30049518E /* Images.xcassets */,
 				43D1ED2919FB37F30049518E /* LaunchScreen.xib */,
 				43D1ED1E19FB37F30049518E /* BaoChe.xcdatamodeld */,
-				43CD9B241A5146B300731F7A /* Images-2.xcassets */,
 				43D1ED1719FB37F30049518E /* Supporting Files */,
 			);
 			path = BaoChe;
@@ -3174,7 +3213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B521EDA1A4858AC0083DE33 /* OrderInfoView.xib in Resources */,
+				2B521EDA1A4858AC0083DE33 /* BusInfoView.xib in Resources */,
 				2BE0BEA11A453C0E000B8871 /* youjiantou@3x.png in Resources */,
 				2BDC3E901A4EFDE4007C1130 /* qiehuan@2x.png in Resources */,
 				43D7755A1A3D712900C088CE /* headerView_rightArrow@3x.png in Resources */,
@@ -3202,7 +3241,6 @@
 				43D7753D1A3D4BA500C088CE /* qishidian@2x.png in Resources */,
 				43D1F56819FB4C1A0049518E /* deps in Resources */,
 				43D1ED4219FB3AAF0049518E /* CHANGELOG in Resources */,
-				43CD9B251A5146B300731F7A /* Images-2.xcassets in Resources */,
 				2BDC3EAB1A4F0A9C007C1130 /* maipiao_normal@3x.png in Resources */,
 				2BF2E07A1A3F3B5B00F83491 /* HomePageTodayHotCell.xib in Resources */,
 				43D1F57C19FB4C1A0049518E /* Icon@2x.png in Resources */,
@@ -3230,6 +3268,7 @@
 				2BD868281A3DCF1600BC46BF /* HomePageHeaderView.xib in Resources */,
 				2BDC3E821A4DB82C007C1130 /* login_user@3x.png in Resources */,
 				2BE0BE891A4533D9000B8871 /* PassengersCell.xib in Resources */,
+				2BDD6E4B1A5597E700329823 /* OrderListCell.xib in Resources */,
 				43D1F55619FB4C1A0049518E /* deps in Resources */,
 				2B521EE01A48682C0083DE33 /* OrderContactInfoView.xib in Resources */,
 				43D1F4E619FB4C1A0049518E /* deps in Resources */,
@@ -3259,6 +3298,7 @@
 				43D1F4E119FB4C1A0049518E /* deps in Resources */,
 				2BDC3E811A4DB82C007C1130 /* close@3x.png in Resources */,
 				43D1F58319FB4C1A0049518E /* NimbusWebController.bundle in Resources */,
+				2B6D6CAE1A5660BA00286CE2 /* OrderInfoView.xib in Resources */,
 				2BE0BE921A4536FC000B8871 /* jianhao_lanse@3x.png in Resources */,
 				43D1F56E19FB4C1A0049518E /* NimbusPhotos.bundle in Resources */,
 				43D1F57619FB4C1A0049518E /* Default@2x.png in Resources */,
@@ -3322,7 +3362,7 @@
 				43D1F56A19FB4C1A0049518E /* NIPagingScrollViewPage.m in Sources */,
 				43D1F4F519FB4C1A0049518E /* NINonRetainingCollections.m in Sources */,
 				43D1F28E19FB3AFB0049518E /* RegexKitLite.m in Sources */,
-				2B521ED81A4858A00083DE33 /* OrderInfoView.m in Sources */,
+				2B521ED81A4858A00083DE33 /* BusInfoView.m in Sources */,
 				2BD7EFFF1A49B8E700905645 /* IQNSArray+Sort.m in Sources */,
 				43D1F4F919FB4C1A0049518E /* NISDKAvailability.m in Sources */,
 				43D1F17B19FB3AFB0049518E /* SBJsonWriter.m in Sources */,
@@ -3447,6 +3487,7 @@
 				2BE0BEB11A459B0F000B8871 /* MoreVC.m in Sources */,
 				43D1F16719FB3AFB0049518E /* AFHTTPRequestOperation.m in Sources */,
 				43D1F2DC19FB3AFB0049518E /* ATLayout+UIView.m in Sources */,
+				2B6D6CB11A566A1A00286CE2 /* DetailOrderVC.m in Sources */,
 				43D1F2A819FB3AFB0049518E /* ATBLibs+DataContainer.m in Sources */,
 				43D1F17F19FB3AFB0049518E /* AQGridViewAnimatorItem.m in Sources */,
 				43D1F32619FB3AFB0049518E /* UpdataAppModel.m in Sources */,
@@ -3471,6 +3512,7 @@
 				43D775501A3D702400C088CE /* AllBusList_HeaderView.m in Sources */,
 				43D1F4F219FB4C1A0049518E /* NINavigationAppearance.m in Sources */,
 				43D1F17919FB3AFB0049518E /* SBJsonBase.m in Sources */,
+				2B6D6CAC1A5660A700286CE2 /* OrderInfoView.m in Sources */,
 				43D1F2A219FB3AFB0049518E /* ATB_Math.m in Sources */,
 				43D1F2A919FB3AFB0049518E /* ATBLibs+NSData+Base64.m in Sources */,
 				43D1F2B319FB3AFB0049518E /* ATUtf8.c in Sources */,
@@ -3562,8 +3604,10 @@
 				43D1F2EE19FB3AFB0049518E /* NSNumber+SSToolkitAdditions.m in Sources */,
 				43D1F57119FB4C1A0049518E /* NIPhotoScrubberView.m in Sources */,
 				43D1F32319FB3AFB0049518E /* ShowImgFullScreenManager.m in Sources */,
+				2BDD6E4F1A55A41E00329823 /* OrderListVC.m in Sources */,
 				43D1F1DB19FB3AFB0049518E /* MBProgressHUD.m in Sources */,
 				43D1F4E819FB4C1A0049518E /* NIActions.m in Sources */,
+				2BDD6E4A1A5597E700329823 /* OrderListCell.m in Sources */,
 				2BD7F0001A49B8E700905645 /* IQUIView+Hierarchy.m in Sources */,
 				43D1F1A719FB3AFB0049518E /* UITableViewCell+FlatUI.m in Sources */,
 				43D1F2F619FB3AFB0049518E /* UIColor+SSToolkitAdditions.m in Sources */,

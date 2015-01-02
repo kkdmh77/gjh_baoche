@@ -10,6 +10,7 @@
 #import "PassengersCell.h"
 #import "AddressCell.h"
 #import "UserCenter_TabHeaderView.h"
+#import "OrderListVC.h"
 
 static NSString * const cellIdentifier_userInfoHeader = @"cellIdentifier_userInfoHeader";
 static NSString * const cellIdentifier_userCenterPassengersCell = @"cellIdentifier_userCenterPassengersCell";
@@ -107,7 +108,10 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
     }
     else if (2 == indexPath.section)
     {
+        /*
         return [AddressCell getCellHeight];
+         */
+        return 50;
     }
     else if (3 == indexPath.section)
     {
@@ -120,7 +124,7 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
 {
     if (0 != section)
     {
-        if (3 == section)
+        if (3 == section || 2 == section)
         {
             return CellSeparatorSpace;
         }
@@ -153,6 +157,7 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
         }
         return _passengersCellSectionHeader;
     }
+    /*
     else if (2 == section)
     {
         if (!_addressCellSectionHeader)
@@ -166,6 +171,7 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
         }
         return _addressCellSectionHeader;
     }
+     */
     return nil;
 }
 
@@ -184,9 +190,24 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier_userInfoHeader];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.clipsToBounds = YES;
             
             UserCenter_TabHeaderView *headerView = [UserCenter_TabHeaderView loadFromNib];
             headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            WEAKSELF
+            [headerView setOperationHandle:^(UserCenter_TabHeaderView *view, UserCenterTabHeaderViewOperationType type, id sender) {
+                
+                if (type == UserCenterTabHeaderViewOperationType_CheckAllOrder)
+                {
+                    OrderListVC *orderList = [[OrderListVC alloc] init];
+                    orderList.hidesBottomBarWhenPushed = YES;
+                    [weakSelf pushViewController:orderList];
+                }
+                else
+                {
+                    
+                }
+            }];
             [cell addSubview:headerView];
         }
         return cell;
@@ -199,7 +220,29 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
     }
     else if (2 == indexPath.section)
     {
+        /*
         PassengersCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier_userCenterAddressCell];
+        return cell;
+         */
+        
+        static NSString *cellIdentifier = @"cellIdentifier_modifyPassword";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            
+            CGSize cellSize = [tableView rectForRowAtIndexPath:indexPath].size;
+            InsertLabel(cell,
+                        CGRectMake(10, 0, 100, cellSize.height),
+                        NSTextAlignmentLeft,
+                        @"需改密码",
+                        SP15Font,
+                        Common_BlackColor,
+                        NO);
+            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"youjiantou_cell"]];
+        }
+        
         return cell;
     }
     else if (3 == indexPath.section)
@@ -224,7 +267,7 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
                         NSTextAlignmentCenter,
                         @"退出登录",
                         SP15Font,
-                        HEXCOLOR(0XF7981C),
+                        Common_ThemeColor,
                         NO);
         }
         return cell;
@@ -263,10 +306,13 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
     }
     else if (2 == section)
     {
+        /*
         if (_addressCellSectionHeader.selected)
         {
             return 8;
         }
+         */
+        return 1;
     }
     return 0;
 }

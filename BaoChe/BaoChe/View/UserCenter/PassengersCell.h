@@ -8,7 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
+@class PassengersCell;
+
+typedef NS_ENUM(NSInteger, OperationButType)
+{
+    /// 联系人->删除
+    OperationButType_Delete = 0,
+    /// 订单详情->订单详情订票人->退票
+    OperationButType_DetailOrder_ToRefundTicket,
+    /// 订单详情->订单详情订票人->已退票
+    OperationButType_DetailOrder_AlreadyRefundTicket,
+    /// 订单详情->订单详情订票人->已出票
+    OperationButType_DetailOrder_GetTicket,
+};
+
+typedef void (^PassengersCellOperationHandle) (PassengersCell *cell, OperationButType type, id sender);
+
 @interface PassengersCell : UITableViewCell
+
+@property (nonatomic, assign) OperationButType btnType; // default is OperationButType_Delete
+@property (nonatomic, copy) PassengersCellOperationHandle operationHandle;
 
 + (CGFloat)getCellHeight;
 

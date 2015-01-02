@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 com.gjh. All rights reserved.
 //
 
-#import "OrderInfoView.h"
+#import "BusInfoView.h"
 
-@interface OrderInfoView ()
+@interface BusInfoView ()
 
 @property (weak, nonatomic) IBOutlet UILabel *busTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *busNameLabel;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation OrderInfoView
+@implementation BusInfoView
 
 static CGFloat defaultViewHeight = 0;
 
@@ -76,7 +76,7 @@ static CGFloat defaultViewHeight = 0;
 {
     if (0 == defaultViewHeight)
     {
-        OrderInfoView *view = [self loadFromNib];
+        BusInfoView *view = [self loadFromNib];
         defaultViewHeight = view.boundsHeight;
     }
     return defaultViewHeight;
@@ -149,7 +149,7 @@ static CGFloat defaultContactViewHeight = 0;
 {
     if (0 == defaultContactViewHeight)
     {
-        OrderInfoView *view = [self loadFromNib];
+        OrderContactInfoView *view = [self loadFromNib];
         defaultContactViewHeight = view.boundsHeight;
     }
     return defaultContactViewHeight;

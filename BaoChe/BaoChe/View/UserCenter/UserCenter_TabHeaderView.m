@@ -86,18 +86,34 @@ static CGFloat defaultViewHeight = 0;
     [self configureViewsProperties];
 }
 
+- (IBAction)clickUserHeaderImageBtn:(UIButton *)sender
+{
+    if (_operationHandle) _operationHandle(self, UserCenterTabHeaderViewOperationType_UserHeaderImageBtn, sender);
+}
+
+- (IBAction)clickCheckOrderBtn:(UIButton *)sender
+{
+    if (_operationHandle) _operationHandle(self, UserCenterTabHeaderViewOperationType_CheckAllOrder, sender);
+}
+
+///////////////////////////////////////////////////////////////////
+
 + (CGFloat)getViewHeight
 {
+    return 155;
+    
+    /*
     if (0 == defaultViewHeight)
     {
         UserCenter_TabHeaderView *view = [self loadFromNib];
         defaultViewHeight= view.boundsHeight    ;
     }
     return defaultViewHeight;
+     */
 }
 @end
 
-////////////////////////////////////////////////////////////////////////////////
+#pragma mark - //////////////////////////////////////////////////////////
 
 @interface UserCenter_TabSectionHeaderView ()
 
@@ -129,6 +145,26 @@ static CGFloat defaultViewHeight = 0;
 {
     // 设置属性
     [self configureViewsProperties];
+    
+    self.canOperation = YES;
+}
+
+- (void)setCanOperation:(BOOL)canOperation
+{
+    _canOperation = canOperation;
+    
+    if (_canOperation)
+    {
+        self.userInteractionEnabled = YES;
+        _addBtn.hidden = NO;
+        _arrowImageView.hidden = NO;
+    }
+    else
+    {
+        self.userInteractionEnabled = NO;
+        _addBtn.hidden = YES;
+        _arrowImageView.hidden = YES;
+    }
 }
 
 - (void)setTitleString:(NSString *)title

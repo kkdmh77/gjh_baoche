@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-static const CGFloat kHeightOfTopScrollView = 38.0f;
-static const CGFloat kWidthOfButtonMargin = 35.0f;
-static const CGFloat kFontSizeOfTabButton = 17.0f;
-static const NSUInteger kTagOfRightSideButton = 999;
-static const CGFloat kHeightOfShadowImageView = 3.0f;
+static const CGFloat kDefaultSlideSwitchViewHeight = 38.0f; // 纯文字时候的推荐高度,如果有图片则会在此基础上再加上图片的尺寸高度
 
 @protocol GJHSlideSwitchViewDelegate;
 
@@ -35,18 +31,31 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
     UIButton *_rigthSideButton;                     // 右侧按钮
 }
 
-@property (nonatomic, strong) NSArray *titlesArray; // 顶部页签视图的标题数组
-@property (nonatomic, strong) NSMutableArray *topScrollBtnsArray; // 顶部页签视图的子视图数组
+@property (nonatomic, strong) NSArray *titlesArray;                     // 顶部页签视图的标题数组
+@property (nonatomic, strong) NSArray *imageNamesArray;                 // 顶部页签视图的图片名数组
+@property (nonatomic, strong) NSArray *selectedImageNamesArray;         // 顶部页签视图的选择状态的图片名数组
+
+@property (nonatomic, strong) NSMutableArray *topScrollBtnsArray;       // 顶部页签视图的子视图数组
 @property (nonatomic, strong) UIScrollView *topScrollView;
-@property (nonatomic, strong) UIColor *topScrollViewBackgroundColor; // 顶部页签视图背景颜色
+@property (nonatomic, strong) UIColor *topScrollViewBackgroundColor;    // 顶部页签视图背景颜色
 @property (nonatomic, assign) NSInteger userSelectedChannelID;
 @property (nonatomic, assign) id<GJHSlideSwitchViewDelegate> slideSwitchViewDelegate;
-@property (nonatomic, strong) UIColor *tabItemNormalColor;
-@property (nonatomic, strong) UIColor *tabItemSelectedColor;
-@property (nonatomic, strong) UIImage *tabItemNormalBackgroundImage;
-@property (nonatomic, strong) UIImage *tabItemSelectedBackgroundImage;
-@property (nonatomic, strong) UIImage *shadowImage;
+
+@property (nonatomic, strong) UIColor *tabItemNormalColor;              // btn正常时的字体颜色
+@property (nonatomic, strong) NSArray *tabItemNormalColorArray;         // btn正常时的字体颜色数组(如果有数组会用数组里的颜色赋值给对应的btn,如果没有就统一用tabItemNormalColor)
+
+@property (nonatomic, strong) UIColor *tabItemSelectedColor;            // btn选择时的字体颜色
+@property (nonatomic, strong) NSArray *tabItemSelectedColorArray;       // btn选择时的字体颜色数组(如果有数组会用数组里的颜色赋值给对应的btn,如果没有就统一用tabItemSelectedColor)
+
+@property (nonatomic, strong) UIImage *tabItemNormalBackgroundImage;    // btn正常时的背景图
+@property (nonatomic, strong) UIImage *tabItemSelectedBackgroundImage;  // btn选择时的背景图
+
+@property (nonatomic, strong) UIImage *shadowImage;                     // btn选择时的下划线图
+@property (nonatomic, strong) NSArray *shadowImageArray;                // btn选择时的下划线图数组(如果有数组会用数组里的图赋值给对应的btn,如果没有就统一用shadowImage)
+
 @property (nonatomic, strong) UIButton *rigthSideButton;
+
+@property (nonatomic, assign) BOOL isTabItemEqualWidthInFullScreenWidth; // 顶部标签子视图是否等宽且只限制在屏幕宽度中显示(scrollview不横向滚动) default is NO
 
 /*!
  * @method 初始化
@@ -56,6 +65,15 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
  * @result
  */
 - (id)initWithFrame:(CGRect)frame titlesArray:(NSArray *)titles;
+
+/*!
+ * @method 初始化
+ * @abstract
+ * @discussion
+ * @param frame 标题数组 图片名数组
+ * @result
+ */
+- (id)initWithFrame:(CGRect)frame titlesArray:(NSArray *)titles imageNamesArray:(NSArray *)namesArray selectedImageNamesArray:(NSArray *)selectedNamesArray;
 
 /*!
  * @method 创建子视图UI

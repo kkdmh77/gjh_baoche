@@ -32,6 +32,7 @@
 #define SP10Font                            [UIFont systemFontOfSize:10.0]      // TAB的子标题
 
 // 常规文字颜色
+#define Common_DarkGrayColor                    HEXCOLOR(0X414141)                  // 深灰色  适用范围:TAB的子标题
 #define Common_GrayColor                    HEXCOLOR(0X888888)                  // 灰色    适用范围:TAB的子标题
 #define Common_BlackColor                   HEXCOLOR(0X333333)                  // 黑色    适用范围:TAB未选中状态的主标题
 #define Common_RedColor                     HEXCOLOR(0XE80000)                  // 红色    适用范围:TAB的子标题

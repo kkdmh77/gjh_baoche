@@ -106,7 +106,7 @@
     CalendarHomeViewController *calendar = [[CalendarHomeViewController alloc] init];
     calendar.hidesBottomBarWhenPushed = YES;
     calendar.calendartitle = @"选择日期";
-    [calendar setTrainToDay:365 ToDateforString:weakSelf.dateShowLabel.text];
+    [calendar setTrainToDay:60 ToDateforString:weakSelf.dateShowLabel.text];
     [calendar setCalendarblock:^(CalendarDayModel *model) {
         
         [weakSelf setDateShowLabelTextWithDate:model.date weekStr:[model getWeek]];
