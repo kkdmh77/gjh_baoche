@@ -21,6 +21,11 @@
 {
     [super viewDidLoad];
     
+    [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left
+                                 normalImg:nil
+                            highlightedImg:nil
+                                    action:NULL];
+    
     [self getLocalTabShowData];
     [self initialization];
 }

@@ -44,11 +44,8 @@
     MoreVC *more = [[MoreVC alloc] init];
     UINavigationController *moreNav = [[UINavigationController alloc] initWithRootViewController:more];
     
-    LoginVC *login = [LoginVC loadFromNib];
-    UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
-    
     BaseTabBarVC *baseTabBarController = [[BaseTabBarVC alloc] init];
-    baseTabBarController.viewControllers = @[buyTicketNav, userCenterNav, moreNav, loginNav];
+    baseTabBarController.viewControllers = @[buyTicketNav, userCenterNav, moreNav];
     
     self.window.rootViewController = baseTabBarController;
     

@@ -11,6 +11,7 @@
 #import "AddressCell.h"
 #import "UserCenter_TabHeaderView.h"
 #import "OrderListVC.h"
+#import "LoginVC.h"
 
 static NSString * const cellIdentifier_userInfoHeader = @"cellIdentifier_userInfoHeader";
 static NSString * const cellIdentifier_userCenterPassengersCell = @"cellIdentifier_userCenterPassengersCell";
@@ -29,6 +30,11 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left
+                                 normalImg:nil
+                            highlightedImg:nil
+                                    action:NULL];
     
     [self initialization];
 }
@@ -193,6 +199,7 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
             cell.clipsToBounds = YES;
             
             UserCenter_TabHeaderView *headerView = [UserCenter_TabHeaderView loadFromNib];
+            headerView.viewType = UserCenterHeaderViewType_NotLogin;
             headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
             WEAKSELF
             [headerView setOperationHandle:^(UserCenter_TabHeaderView *view, UserCenterTabHeaderViewOperationType type, id sender) {
@@ -203,9 +210,17 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
                     orderList.hidesBottomBarWhenPushed = YES;
                     [weakSelf pushViewController:orderList];
                 }
-                else
+                else if (type == UserCenterTabHeaderViewOperationType_UserHeaderImageBtn)
                 {
                     
+                }
+                else if (type == UserCenterTabHeaderViewOperationType_LoginAndRegister)
+                {
+                    LoginVC *login = [LoginVC loadFromNib];
+                    UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+                    [weakSelf presentViewController:loginNav
+                               modalTransitionStyle:UIModalTransitionStyleCoverVertical
+                                         completion:nil];
                 }
             }];
             [cell addSubview:headerView];

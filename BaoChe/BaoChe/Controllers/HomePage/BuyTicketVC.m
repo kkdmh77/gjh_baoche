@@ -11,6 +11,7 @@
 #import "AllBusListVC.h"
 #import "CalendarHomeViewController.h"
 #import "StartStationChooseVC.h"
+#import "EndStationChooseVC.h"
 
 @interface BuyTicketVC ()
 
@@ -30,6 +31,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left
+                                 normalImg:nil
+                            highlightedImg:nil
+                                    action:NULL];
     
     [self initialization];
 }
@@ -95,7 +101,9 @@
 
 - (IBAction)clickEndStationInputBtn:(UIButton *)sender
 {
-    
+    EndStationChooseVC *endStationChoose = [[EndStationChooseVC alloc] init];
+    endStationChoose.hidesBottomBarWhenPushed = YES;
+    [self pushViewController:endStationChoose];
 }
 
 - (IBAction)clickExchangeStationsBtn:(UIButton *)sender

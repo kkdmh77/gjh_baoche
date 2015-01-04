@@ -10,11 +10,17 @@
 
 @interface UserCenter_TabHeaderView ()
 
+// 登录后相关
 @property (weak, nonatomic) IBOutlet UIView *userInfoBGView;
 @property (weak, nonatomic) IBOutlet UIButton *userHeaderImageBtn;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mobilePhoneNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+
+// 未登录相关
+@property (weak, nonatomic) IBOutlet UIView *notLoginBGView;
+@property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *loginAndRegisterBtn;
 
 // 我的订单
 @property (weak, nonatomic) IBOutlet UIButton *myOrderBtn;
@@ -62,6 +68,12 @@ static CGFloat defaultViewHeight = 0;
     _mobilePhoneNumLabel.textColor = Common_ThemeColor;
     _addressLabel.textColor = HEXCOLOR(0X4F5256);
     
+    _notLoginBGView.backgroundColor = HEXCOLOR(0XF5FAFD);
+    _notLoginBGView.alpha = 1;
+    [_loginAndRegisterBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _loginAndRegisterBtn.backgroundColor = Common_ThemeColor;
+    [_loginAndRegisterBtn setRadius:4];
+    
     _myOrderBtn.backgroundColor = [UIColor whiteColor];
     [_myOrderBtn setTitleColor:blackColor forState:UIControlStateNormal];
     _checkOrderDescLabel.textColor = grayColor;
@@ -84,6 +96,22 @@ static CGFloat defaultViewHeight = 0;
 {
     // 设置属性
     [self configureViewsProperties];
+    
+    self.viewType = UserCenterHeaderViewType_NotLogin;
+}
+
+- (void)setViewType:(UserCenterHeaderViewType)viewType
+{
+    if (UserCenterHeaderViewType_Logined == viewType)
+    {
+        _userInfoBGView.hidden = NO;
+        _notLoginBGView.hidden = YES;
+    }
+    else
+    {
+        _userInfoBGView.hidden = YES;
+        _notLoginBGView.hidden = NO;
+    }
 }
 
 - (IBAction)clickUserHeaderImageBtn:(UIButton *)sender
@@ -94,6 +122,11 @@ static CGFloat defaultViewHeight = 0;
 - (IBAction)clickCheckOrderBtn:(UIButton *)sender
 {
     if (_operationHandle) _operationHandle(self, UserCenterTabHeaderViewOperationType_CheckAllOrder, sender);
+}
+
+- (IBAction)clickLoginAndRegisterBtn:(UIButton *)sender
+{
+    if (_operationHandle) _operationHandle(self, UserCenterTabHeaderViewOperationType_LoginAndRegister, sender);
 }
 
 ///////////////////////////////////////////////////////////////////

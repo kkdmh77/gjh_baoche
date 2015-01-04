@@ -1,23 +1,23 @@
 //
-//  StartStationChooseVC.m
+//  EndStationChooseVC.m
 //  BaoChe
 //
-//  Created by 龚 俊慧 on 15/1/2.
+//  Created by 龚 俊慧 on 15/1/4.
 //  Copyright (c) 2015年 com.gjh. All rights reserved.
 //
 
-#import "StartStationChooseVC.h"
+#import "EndStationChooseVC.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "CommonEntity.h"
 
-@interface StartStationChooseVC ()
+@interface EndStationChooseVC ()
 {
     NSMutableArray *_netCollegeEntityArray;
 }
 
 @end
 
-@implementation StartStationChooseVC
+@implementation EndStationChooseVC
 
 - (void)viewDidLoad
 {
@@ -35,7 +35,7 @@
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:@"选择出发地点"];
+    [self setNavigationItemTitle:@"选择目的地点"];
 }
 
 - (void)setNetworkRequestStatusBlocks

@@ -71,6 +71,41 @@
                         <constraint firstItem="BrJ-Wj-Jgl" firstAttribute="leading" secondItem="Eis-8J-Uqe" secondAttribute="trailing" constant="26" id="xOi-2r-2eT"/>
                     </constraints>
                 </view>
+                <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SrN-uv-l0w">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎来到U旅" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCd-Kr-Xer">
+                            <rect key="frame" x="117" y="25" width="86" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKC-hg-1Ni">
+                            <rect key="frame" x="123" y="51" width="75" height="35"/>
+                            <color key="backgroundColor" red="0.54061418920000004" green="0.81628315500000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="75" id="Wmw-ii-CMB"/>
+                                <constraint firstAttribute="height" constant="35" id="ij2-aR-rUq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="登录/注册">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="clickLoginAndRegisterBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="c2G-2Z-bQu"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="iKC-hg-1Ni" firstAttribute="centerX" secondItem="xCd-Kr-Xer" secondAttribute="centerX" id="9rr-JJ-W4v"/>
+                        <constraint firstAttribute="height" constant="105" id="HeB-gx-raF"/>
+                        <constraint firstItem="iKC-hg-1Ni" firstAttribute="top" secondItem="xCd-Kr-Xer" secondAttribute="bottom" constant="8" id="mtB-1o-xck"/>
+                        <constraint firstItem="xCd-Kr-Xer" firstAttribute="top" secondItem="SrN-uv-l0w" secondAttribute="top" constant="25" id="zCa-xN-E8f"/>
+                        <constraint firstAttribute="centerX" secondItem="xCd-Kr-Xer" secondAttribute="centerX" id="zPZ-UR-1dx"/>
+                    </constraints>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCY-Cg-CQQ">
                     <rect key="frame" x="0.0" y="105" width="320" height="50"/>
                     <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -162,13 +197,16 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="SrN-uv-l0w" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0Xc-8z-o91"/>
                 <constraint firstItem="QV9-fa-CJw" firstAttribute="leading" secondItem="SCY-Cg-CQQ" secondAttribute="trailing" constant="-17" id="6NI-Gm-X47"/>
                 <constraint firstItem="Qiu-3s-g6h" firstAttribute="top" secondItem="Rvq-Rc-mxa" secondAttribute="bottom" constant="8" id="D5L-4z-b9Z"/>
                 <constraint firstItem="SCY-Cg-CQQ" firstAttribute="top" secondItem="AZr-qb-peG" secondAttribute="bottom" id="FxC-FO-qmq"/>
                 <constraint firstItem="SCY-Cg-CQQ" firstAttribute="leading" secondItem="AZr-qb-peG" secondAttribute="leading" id="Gki-Wg-Nfz"/>
                 <constraint firstItem="SCY-Cg-CQQ" firstAttribute="trailing" secondItem="AZr-qb-peG" secondAttribute="trailing" id="HFW-su-cEK"/>
                 <constraint firstItem="Rvq-Rc-mxa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="Jat-YR-0Ur"/>
+                <constraint firstAttribute="trailing" secondItem="SrN-uv-l0w" secondAttribute="trailing" id="K9y-bP-OWY"/>
                 <constraint firstItem="o3c-6d-B0V" firstAttribute="centerY" secondItem="kHm-V3-Mma" secondAttribute="centerY" id="TGZ-Xb-b1W"/>
+                <constraint firstItem="SrN-uv-l0w" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bQa-4k-s96"/>
                 <constraint firstItem="rPi-dw-vfC" firstAttribute="top" secondItem="kHm-V3-Mma" secondAttribute="bottom" constant="8" id="efC-Xw-KBn"/>
                 <constraint firstItem="kHm-V3-Mma" firstAttribute="centerX" secondItem="rPi-dw-vfC" secondAttribute="centerX" id="fH4-mf-37S"/>
                 <constraint firstItem="Rvq-Rc-mxa" firstAttribute="top" secondItem="SCY-Cg-CQQ" secondAttribute="bottom" constant="10" id="fwY-cm-eb2"/>
@@ -193,17 +231,20 @@
                 <outlet property="checkOrderDescLabel" destination="j04-Pt-Jz1" id="NEd-bN-0fI"/>
                 <outlet property="doneBtn" destination="kHm-V3-Mma" id="qLt-vx-VeJ"/>
                 <outlet property="doneDescBtn" destination="rPi-dw-vfC" id="ExY-Jn-P7b"/>
+                <outlet property="loginAndRegisterBtn" destination="iKC-hg-1Ni" id="Yv0-I1-asd"/>
                 <outlet property="mobilePhoneNumLabel" destination="Otl-0o-Wol" id="mzw-RR-hDJ"/>
                 <outlet property="myOrderBtn" destination="SCY-Cg-CQQ" id="RdO-um-vMA"/>
                 <outlet property="noTransportBtn" destination="Rvq-Rc-mxa" id="Ed0-jy-dj9"/>
                 <outlet property="noTransportDescBtn" destination="Qiu-3s-g6h" id="1jO-kJ-0fw"/>
+                <outlet property="notLoginBGView" destination="SrN-uv-l0w" id="lHQ-O1-X19"/>
                 <outlet property="transportingBtn" destination="o3c-6d-B0V" id="gKm-Ps-pUa"/>
                 <outlet property="transportingDescBtn" destination="gCq-av-EZE" id="no1-qU-wAH"/>
                 <outlet property="userHeaderImageBtn" destination="Eis-8J-Uqe" id="xs0-F9-BfX"/>
                 <outlet property="userInfoBGView" destination="AZr-qb-peG" id="ecZ-HA-5rh"/>
                 <outlet property="userNameLabel" destination="BrJ-Wj-Jgl" id="EMM-aH-XP8"/>
+                <outlet property="welcomeLabel" destination="xCd-Kr-Xer" id="MEc-GE-i6J"/>
             </connections>
-            <point key="canvasLocation" x="263" y="353"/>
+            <point key="canvasLocation" x="178" y="109.5"/>
         </view>
     </objects>
     <resources>

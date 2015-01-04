@@ -16,12 +16,23 @@ typedef NS_ENUM(NSInteger, UserCenterTabHeaderViewOperationType)
     UserCenterTabHeaderViewOperationType_UserHeaderImageBtn = 0,
     /// 查看所有订单
     UserCenterTabHeaderViewOperationType_CheckAllOrder,
+    /// 登录/注册
+    UserCenterTabHeaderViewOperationType_LoginAndRegister,
+};
+
+typedef NS_ENUM(NSInteger, UserCenterHeaderViewType)
+{
+    /// 已登录
+    UserCenterHeaderViewType_Logined = 0,
+    /// 未登录
+    UserCenterHeaderViewType_NotLogin
 };
 
 typedef void (^UserCenterTabHeaderViewOperationHandle) (UserCenter_TabHeaderView *view, UserCenterTabHeaderViewOperationType type, id sender);
 
 @interface UserCenter_TabHeaderView : UIView
 
+@property (nonatomic, assign) UserCenterHeaderViewType viewType; // default is UserCenterHeaderViewType_NotLogin
 @property (nonatomic, copy) UserCenterTabHeaderViewOperationHandle operationHandle;
 
 + (CGFloat)getViewHeight;

@@ -18,6 +18,9 @@
 		2B6D6CB11A566A1A00286CE2 /* DetailOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6D6CB01A566A1A00286CE2 /* DetailOrderVC.m */; };
 		2B6D6CB41A56D10200286CE2 /* AllBusListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6D6CB31A56D10200286CE2 /* AllBusListVC.m */; };
 		2B6D6CB71A56D13900286CE2 /* StartStationChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6D6CB61A56D13900286CE2 /* StartStationChooseVC.m */; };
+		2BD74E5E1A59878B00172F95 /* SettlementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD74E5D1A59878B00172F95 /* SettlementView.m */; };
+		2BD74E621A59883200172F95 /* SettlementView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD74E611A59883200172F95 /* SettlementView.xib */; };
+		2BD74E651A59964100172F95 /* EndStationChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD74E641A59964100172F95 /* EndStationChooseVC.m */; };
 		2BD7EFFF1A49B8E700905645 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7EFE11A49B8E700905645 /* IQNSArray+Sort.m */; };
 		2BD7F0001A49B8E700905645 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7EFE31A49B8E700905645 /* IQUIView+Hierarchy.m */; };
 		2BD7F0011A49B8E700905645 /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD7EFE51A49B8E700905645 /* IQUIWindow+Hierarchy.m */; };
@@ -482,6 +485,11 @@
 		2B6D6CB31A56D10200286CE2 /* AllBusListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllBusListVC.m; sourceTree = "<group>"; };
 		2B6D6CB51A56D13900286CE2 /* StartStationChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartStationChooseVC.h; sourceTree = "<group>"; };
 		2B6D6CB61A56D13900286CE2 /* StartStationChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartStationChooseVC.m; sourceTree = "<group>"; };
+		2BD74E5C1A59878B00172F95 /* SettlementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementView.h; sourceTree = "<group>"; };
+		2BD74E5D1A59878B00172F95 /* SettlementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementView.m; sourceTree = "<group>"; };
+		2BD74E611A59883200172F95 /* SettlementView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettlementView.xib; sourceTree = "<group>"; };
+		2BD74E631A59964100172F95 /* EndStationChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndStationChooseVC.h; sourceTree = "<group>"; };
+		2BD74E641A59964100172F95 /* EndStationChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndStationChooseVC.m; sourceTree = "<group>"; };
 		2BD7EFE01A49B8E700905645 /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
 		2BD7EFE11A49B8E700905645 /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
 		2BD7EFE21A49B8E700905645 /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
@@ -1500,6 +1508,9 @@
 				2B6D6CAA1A5660A700286CE2 /* OrderInfoView.h */,
 				2B6D6CAB1A5660A700286CE2 /* OrderInfoView.m */,
 				2B6D6CAD1A5660BA00286CE2 /* OrderInfoView.xib */,
+				2BD74E5C1A59878B00172F95 /* SettlementView.h */,
+				2BD74E5D1A59878B00172F95 /* SettlementView.m */,
+				2BD74E611A59883200172F95 /* SettlementView.xib */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -1524,6 +1535,8 @@
 				2B521ED41A4856410083DE33 /* OrderWriteVC.m */,
 				2B6D6CB51A56D13900286CE2 /* StartStationChooseVC.h */,
 				2B6D6CB61A56D13900286CE2 /* StartStationChooseVC.m */,
+				2BD74E631A59964100172F95 /* EndStationChooseVC.h */,
+				2BD74E641A59964100172F95 /* EndStationChooseVC.m */,
 			);
 			path = Bus;
 			sourceTree = "<group>";
@@ -3270,6 +3283,7 @@
 				43D1F57A19FB4C1A0049518E /* Icon-Small@2x.png in Resources */,
 				2BDC3EA81A4F0A9C007C1130 /* gerenzhongxin_selected@2x.png in Resources */,
 				43D1ED2819FB37F30049518E /* Images.xcassets in Resources */,
+				2BD74E621A59883200172F95 /* SettlementView.xib in Resources */,
 				2BD868281A3DCF1600BC46BF /* HomePageHeaderView.xib in Resources */,
 				2BDC3E821A4DB82C007C1130 /* login_user@3x.png in Resources */,
 				2BE0BE891A4533D9000B8871 /* PassengersCell.xib in Resources */,
@@ -3509,6 +3523,7 @@
 				43D1F2AB19FB3AFB0049518E /* ATBLibs+NSFileManager.m in Sources */,
 				43D1F2D519FB3AFB0049518E /* NSObject+JsonStringWriter.m in Sources */,
 				43D1F1A919FB3AFB0049518E /* HPGrowingTextView.m in Sources */,
+				2BD74E5E1A59878B00172F95 /* SettlementView.m in Sources */,
 				43D1F56419FB4C1A0049518E /* NIOverviewSwizzling.m in Sources */,
 				43D1F16B19FB3AFB0049518E /* AFSecurityPolicy.m in Sources */,
 				43D1F2E819FB3AFB0049518E /* NSArray+SSToolkitAdditions.m in Sources */,
@@ -3558,6 +3573,7 @@
 				43D1F16F19FB3AFB0049518E /* AFURLSessionManager.m in Sources */,
 				43D1F2F519FB3AFB0049518E /* UIApplication+SSToolkitAdditions.m in Sources */,
 				43D1F2D819FB3AFB0049518E /* ATFlipAnimationView.m in Sources */,
+				2BD74E651A59964100172F95 /* EndStationChooseVC.m in Sources */,
 				43D1F29A19FB3AFB0049518E /* SRSlimeView.m in Sources */,
 				43D1ED1A19FB37F30049518E /* main.m in Sources */,
 				43D1F33219FB3AFB0049518E /* UIRefreshTabView.m in Sources */,

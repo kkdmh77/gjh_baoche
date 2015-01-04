@@ -10,6 +10,7 @@
 #import "BusInfoView.h"
 #import "PassengersCell.h"
 #import "UserCenter_TabHeaderView.h"
+#import "SettlementView.h"
 
 static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPassenger";
 
@@ -53,7 +54,21 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 - (void)initialization
 {
-    [self setupTableViewWithFrame:self.view.bounds
+    // settlement view
+    SettlementView *settlementView = [SettlementView loadFromNib];
+    settlementView.width = self.viewBoundsWidth;
+    settlementView.origin = CGPointMake(0, self.view.boundsHeight - settlementView.boundsHeight);
+    settlementView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [settlementView setSettlementPrice:100 count:4];
+    WEAKSELF
+    [settlementView setOperationHandle:^(SettlementView *view, SettlementViewOperationType type, id sender) {
+        
+        
+    }];
+    [self.view addSubview:settlementView];
+    
+    // tab
+    [self setupTableViewWithFrame:CGRectDecreaseSize(self.view.bounds, 0, settlementView.boundsHeight)
                             style:UITableViewStylePlain
                   registerNibName:NSStringFromClass([PassengersCell class])
                   reuseIdentifier:cellIdentifier_orderPassenger];
