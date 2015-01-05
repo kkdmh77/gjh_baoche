@@ -22,6 +22,7 @@
                            // 班车
                            @"schedulebus/bus/list",
                            @"college/get_college",
+                           @"bus/get_end_location",
                            
                            nil];
 

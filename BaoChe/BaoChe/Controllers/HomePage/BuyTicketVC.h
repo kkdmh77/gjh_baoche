@@ -10,4 +10,9 @@
 
 @interface BuyTicketVC : BaseNetworkViewController
 
+@property (nonatomic, assign) NSInteger startStationCollegeId;
+
+- (void)setStartStationStr:(NSString *)startStaion;
+- (void)setEndStationStr:(NSString *)endStation;
+
 @end
