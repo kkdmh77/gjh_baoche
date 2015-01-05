@@ -12,11 +12,13 @@
 #import "LanguagesManager.h"
 #import "CTAssetsPickerController.h"
 
-@interface BaseViewController () <UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate>
+@interface BaseViewController () <UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIScrollViewDelegate>
 {
     PickPhotoFinishHandle _pickPhotoFinishHandle;
     PickPhotoCancelHandle _pickPhotoCancelHandle;
     BOOL                  _isCropped;
+    
+    UIButton              *_footerRefreshBtn;
 }
 
 @end
@@ -226,6 +228,55 @@
     }
     
     [self.view addSubview:_tableView];
+}
+
+- (void)setupTabFooterRefreshStatusView:(UITableView *)tableView action:(SEL)action
+{
+    UIView *bgView = InsertView(nil, CGRectMake(0, 0, tableView.boundsWidth, 55));
+    bgView.backgroundColor = [UIColor whiteColor];
+    
+    _footerRefreshBtn = InsertImageButtonWithTitle(bgView,
+                                                   CGRectMake(10, 10, bgView.boundsWidth - 10 * 2, 55 - 10 * 2),
+                                                   1000,
+                                                   nil,
+                                                   nil,
+                                                   nil,
+                                                   UIEdgeInsetsZero,
+                                                   SP13Font,
+                                                   [UIColor grayColor],
+                                                   self,
+                                                   action);
+    _footerRefreshBtn.backgroundColor = [UIColor whiteColor];
+    [_footerRefreshBtn addBorderToViewWitBorderColor:[UIColor grayColor]
+                                         borderWidth:0.5];
+    [_footerRefreshBtn setRadius:4];
+    
+    // 设置默认显示类型
+    [self setupTabFooterRefreshStatusViewShowType:TabFooterRefreshStatusViewType_Loading];
+    
+    tableView.tableFooterView = bgView;
+}
+
+- (void)setupTabFooterRefreshStatusViewShowType:(TabFooterRefreshStatusViewType)type
+{
+    if (TabFooterRefreshStatusViewType_LoadMore == type)
+    {
+        [_footerRefreshBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_footerRefreshBtn setTitle:@"加载更多" forState:UIControlStateNormal];
+        _footerRefreshBtn.userInteractionEnabled = YES;
+    }
+    else if (TabFooterRefreshStatusViewType_Loading == type)
+    {
+        [_footerRefreshBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_footerRefreshBtn setTitle:@"正在加载..." forState:UIControlStateNormal];
+        _footerRefreshBtn.userInteractionEnabled = NO;
+    }
+    else if (TabFooterRefreshStatusViewType_NoMoreData == type)
+    {
+        [_footerRefreshBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_footerRefreshBtn setTitle:@"已无更多数据" forState:UIControlStateNormal];
+        _footerRefreshBtn.userInteractionEnabled = NO;
+    }
 }
 
 - (void)showHUDInfoByType:(HUDInfoType)type
@@ -523,6 +574,21 @@
                                                isCropped:_isCropped
                                             cancelHandle:_pickPhotoCancelHandle
                                      finishPickingHandle:_pickPhotoFinishHandle];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate methods
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView == _tableView)
+    {
+        // 滚动到了最底部
+        float value = fabsf(scrollView.contentOffset.y - (scrollView.contentSize.height - _tableView.boundsHeight));
+        if (value < 0.5)
+        {
+            if (_tabScrollToBottomOperationHandle) _tabScrollToBottomOperationHandle(scrollView);
+        }
     }
 }
 

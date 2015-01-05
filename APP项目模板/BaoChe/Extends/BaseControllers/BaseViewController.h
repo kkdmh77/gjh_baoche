@@ -22,6 +22,16 @@ typedef NS_ENUM(NSInteger, BarbuttonItemPosition)
     BarbuttonItemPosition_Right
 };
 
+typedef NS_ENUM(NSInteger, TabFooterRefreshStatusViewType)
+{
+    /// 加载更多
+    TabFooterRefreshStatusViewType_LoadMore = 0,
+    /// 正在加载
+    TabFooterRefreshStatusViewType_Loading,
+    /// 已无更多数据
+    TabFooterRefreshStatusViewType_NoMoreData,
+};
+
 typedef void (^PickPhotoFinishHandle) (NSArray *pickedImageArray);
 typedef void (^PickPhotoCancelHandle) (void);
 
@@ -52,6 +62,9 @@ typedef void (^PickPhotoCancelHandle) (void);
 @property (nonatomic, assign, readonly) CGFloat viewFrameHeight;
 /// 相当于self.view.frame.size.width
 @property (nonatomic, assign, readonly) CGFloat viewFrameWidth;
+
+/// tab滚到到最底部要执行的回调
+@property (nonatomic, copy) void (^tabScrollToBottomOperationHandle) (UIScrollView *scrollView);
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -88,6 +101,22 @@ typedef void (^PickPhotoCancelHandle) (void);
  @ 创建时间    2014-07-18
  */
 - (void)setupTableViewWithFrame:(CGRect)frame style:(UITableViewStyle)style registerNibName:(NSString *)nibName reuseIdentifier:(NSString *)identifier;
+
+/**
+ @ 方法描述    设置tableView滚动到最底部加载更多时的状态视图
+ @ 输入参数    tableView: 要加状态图的tab
+ @ 创建人      龚俊慧
+ @ 创建时间    2015-01-05
+ */
+- (void)setupTabFooterRefreshStatusView:(UITableView *)tableView action:(SEL)action;
+
+/**
+ @ 方法描述    设置tableView滚动到最底部加载更多时的状态视图的显示类型
+ @ 输入参数    type: 显示类型
+ @ 创建人      龚俊慧
+ @ 创建时间    2015-01-05
+ */
+- (void)setupTabFooterRefreshStatusViewShowType:(TabFooterRefreshStatusViewType)type;
 
 /**
  @ 方法描述    HUD显示文字信息
