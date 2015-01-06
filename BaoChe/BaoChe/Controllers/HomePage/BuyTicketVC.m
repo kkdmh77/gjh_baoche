@@ -12,6 +12,10 @@
 #import "CalendarHomeViewController.h"
 #import "StartStationChooseVC.h"
 #import "EndStationChooseVC.h"
+#include <objc/runtime.h>
+
+static NSString * const StartStationInputPlaceholderStr = @"请选择出发地";
+static NSString * const EndStationInputPlaceholderStr   = @"请选择目的地";
 
 @interface BuyTicketVC ()
 
@@ -60,10 +64,12 @@
     _startStationDescLabel.textColor = grayColor;
     _endStationDescLabel.textColor = grayColor;
     
+    [_startStationInputBtn setTitle:StartStationInputPlaceholderStr forState:UIControlStateNormal];
     [_startStationInputBtn setTitleColor:blackColor forState:UIControlStateNormal];
     _startStationInputBtn.backgroundColor = [UIColor whiteColor];
     [_startStationInputBtn setRadius:5];
     
+    [_endStationInputBtn setTitle:EndStationInputPlaceholderStr forState:UIControlStateNormal];
     [_endStationInputBtn setTitleColor:blackColor forState:UIControlStateNormal];
     _endStationInputBtn.backgroundColor = [UIColor whiteColor];
     [_endStationInputBtn setRadius:5];
@@ -92,9 +98,21 @@
     [_dateShowLabel setTextColor:Common_ThemeColor range:[resultDateStr rangeOfString:dateStr]];
 }
 
+- (void)setStartStationStr:(NSString *)startStaion
+{
+    [_startStationInputBtn setTitle:startStaion forState:UIControlStateNormal];
+}
+
+- (void)setEndStationStr:(NSString *)endStation
+{
+    [_endStationInputBtn setTitle:endStation forState:UIControlStateNormal];
+}
+
 - (IBAction)clickStartStationInputBtn:(UIButton *)sender
 {
     StartStationChooseVC *startStationChoose = [[StartStationChooseVC alloc] init];
+    
+    objc_setAssociatedObject(startStationChoose, class_getName([BuyTicketVC class]), self, OBJC_ASSOCIATION_ASSIGN);
     startStationChoose.hidesBottomBarWhenPushed = YES;
     [self pushViewController:startStationChoose];
 }
@@ -102,12 +120,23 @@
 - (IBAction)clickEndStationInputBtn:(UIButton *)sender
 {
     EndStationChooseVC *endStationChoose = [[EndStationChooseVC alloc] init];
+    endStationChoose.startStationCollegeId = _startStationCollegeId;
+    
+    objc_setAssociatedObject(endStationChoose, class_getName([BuyTicketVC class]), self, OBJC_ASSOCIATION_ASSIGN);
     endStationChoose.hidesBottomBarWhenPushed = YES;
     [self pushViewController:endStationChoose];
 }
 
 - (IBAction)clickExchangeStationsBtn:(UIButton *)sender
 {
+    NSString *startStationInputStr = [_startStationInputBtn titleForState:UIControlStateNormal];
+    NSString *endStationInputStr = [_endStationInputBtn titleForState:UIControlStateNormal];
+    
+    if (![startStationInputStr isEqualToString:StartStationInputPlaceholderStr] && ![endStationInputStr isEqualToString:EndStationInputPlaceholderStr])
+    {
+        [self setStartStationStr:endStationInputStr];
+        [self setEndStationStr:startStationInputStr];
+    }
     
 }
 

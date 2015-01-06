@@ -12,7 +12,8 @@ typedef enum
 {
     // 班车
     NetBusRequestType_GetAllBusList                       = 0, // 获取所有班车列表(GET)
-    NetBusRequestType_GetAllStartCollegesList                , // 获取起始点院校(GET)
+    NetBusRequestType_GetAllStartStationList                 , // 获取所有起始站点(GET)
+    NetBusRequestType_GetAllEndStationList                   , // 获取所有终点站点(GET)
     
     // 用户中心
     NetUserCenterRequestType_Register                        , // 注册

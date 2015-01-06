@@ -9,6 +9,8 @@
 #import "EndStationChooseVC.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "CommonEntity.h"
+#import "BuyTicketVC.h"
+#include <objc/runtime.h>
 
 @interface EndStationChooseVC ()
 {
@@ -43,7 +45,7 @@
     WEAKSELF
     [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
         STRONGSELF
-        if (NetBusRequestType_GetAllStartCollegesList == request.tag)
+        if (NetBusRequestType_GetAllEndStationList == request.tag)
         {
             [strongSelf parseNetworkDataWithSourceDic:successInfoObj];
             [strongSelf initialization];
@@ -53,10 +55,17 @@
 
 - (void)getNetworkData
 {
-    [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllStartCollegesList]
-         parameterDic:nil
-    requestMethodType:RequestMethodType_POST
-           requestTag:NetBusRequestType_GetAllStartCollegesList];
+    /*
+     学校ID:  @param CollegeId
+     是否返程: Str IsBack  N (默认)| Y
+     */
+    if (_startStationCollegeId)
+    {
+        [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllEndStationList]
+             parameterDic:@{@"CollegeId": @(_startStationCollegeId)}
+        requestMethodType:RequestMethodType_POST
+               requestTag:NetBusRequestType_GetAllEndStationList];
+    }
 }
 
 - (void)initialization
@@ -136,6 +145,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    StartStationCollegeEntity *entity = [self curDataWithIndex:indexPath.row];
+    
+    BuyTicketVC *buyTicket = objc_getAssociatedObject(self, class_getName([BuyTicketVC class]));
+    [buyTicket setEndStationStr:entity.collegeNameStr];
+    
+    [self backViewController];
 }
 
 @end
