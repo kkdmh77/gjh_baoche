@@ -16,8 +16,12 @@
 
 static NSString * const StartStationInputPlaceholderStr = @"请选择出发地";
 static NSString * const EndStationInputPlaceholderStr   = @"请选择目的地";
+static NSString * const DateInputPlaceholderStr         = @"请选择日期";
 
 @interface BuyTicketVC ()
+{
+    NSString *_startDateStr; // 出发日期
+}
 
 @property (weak, nonatomic) IBOutlet UIImageView *advertisingImageView;
 @property (weak, nonatomic) IBOutlet UILabel *startStationDescLabel;
@@ -78,7 +82,7 @@ static NSString * const EndStationInputPlaceholderStr   = @"请选择目的地";
     [_dateChooseBGBtn setRadius:5];
     
     _dateShowLabel.verticalTextAlignment = NIVerticalTextAlignmentMiddle;
-    _dateShowLabel.text = @"请选择日期";
+    _dateShowLabel.text = DateInputPlaceholderStr;
     
     _searchBtn.backgroundColor = Common_ThemeColor;
     [_searchBtn setRadius:5];
@@ -91,11 +95,13 @@ static NSString * const EndStationInputPlaceholderStr   = @"请选择目的地";
 
 - (void)setDateShowLabelTextWithDate:(NSDate *)date weekStr:(NSString *)weekStr
 {
-    NSString *dateStr = [NSDate stringFromDate:date withFormatter:DataFormatter_DateNoYear];
-    NSString *resultDateStr = [NSString stringWithFormat:@"%@  %@  %@", @"出发日期", dateStr, weekStr];
+    _startDateStr = [NSDate stringFromDate:date withFormatter:DataFormatter_Date];
+    
+    NSString *resultDateStr = [NSString stringWithFormat:@"%@  %@  %@", @"出发日期", _startDateStr, weekStr];
     
     _dateShowLabel.text = resultDateStr;
-    [_dateShowLabel setTextColor:Common_ThemeColor range:[resultDateStr rangeOfString:dateStr]];
+    [_dateShowLabel setTextColor:Common_ThemeColor
+                           range:[resultDateStr rangeOfString:_startDateStr]];
 }
 
 - (void)setStartStationStr:(NSString *)startStaion
@@ -108,6 +114,7 @@ static NSString * const EndStationInputPlaceholderStr   = @"请选择目的地";
     [_endStationInputBtn setTitle:endStation forState:UIControlStateNormal];
 }
 
+// 出发地
 - (IBAction)clickStartStationInputBtn:(UIButton *)sender
 {
     StartStationChooseVC *startStationChoose = [[StartStationChooseVC alloc] init];
@@ -117,16 +124,27 @@ static NSString * const EndStationInputPlaceholderStr   = @"请选择目的地";
     [self pushViewController:startStationChoose];
 }
 
+// 目的地
 - (IBAction)clickEndStationInputBtn:(UIButton *)sender
 {
-    EndStationChooseVC *endStationChoose = [[EndStationChooseVC alloc] init];
-    endStationChoose.startStationCollegeId = _startStationCollegeId;
+    NSString *startStationStr = [_startStationInputBtn titleForState:UIControlStateNormal];
     
-    objc_setAssociatedObject(endStationChoose, class_getName([BuyTicketVC class]), self, OBJC_ASSOCIATION_ASSIGN);
-    endStationChoose.hidesBottomBarWhenPushed = YES;
-    [self pushViewController:endStationChoose];
+    if (![startStationStr isEqualToString:StartStationInputPlaceholderStr])
+    {
+        EndStationChooseVC *endStationChoose = [[EndStationChooseVC alloc] init];
+        endStationChoose.startStation = startStationStr;
+        
+        objc_setAssociatedObject(endStationChoose, class_getName([BuyTicketVC class]), self, OBJC_ASSOCIATION_ASSIGN);
+        endStationChoose.hidesBottomBarWhenPushed = YES;
+        [self pushViewController:endStationChoose];
+    }
+    else
+    {
+        [self showHUDInfoByString:@"请先选择出发地点"];
+    }
 }
 
+// 出发地<->目的地切换
 - (IBAction)clickExchangeStationsBtn:(UIButton *)sender
 {
     NSString *startStationInputStr = [_startStationInputBtn titleForState:UIControlStateNormal];
@@ -140,12 +158,13 @@ static NSString * const EndStationInputPlaceholderStr   = @"请选择目的地";
     
 }
 
+// 出发日期
 - (IBAction)clickDateChooseBtn:(UIButton *)sender
 {
     WEAKSELF
     CalendarHomeViewController *calendar = [[CalendarHomeViewController alloc] init];
     calendar.hidesBottomBarWhenPushed = YES;
-    calendar.calendartitle = @"选择日期";
+    calendar.calendartitle = @"请选择日期";
     [calendar setTrainToDay:60 ToDateforString:weakSelf.dateShowLabel.text];
     [calendar setCalendarblock:^(CalendarDayModel *model) {
         
@@ -157,11 +176,40 @@ static NSString * const EndStationInputPlaceholderStr   = @"请选择目的地";
     [self pushViewController:calendar];
 }
 
+// 搜索
 - (IBAction)clickSearchBtn:(UIButton *)sender
 {
-    AllBusListVC *busList = [[AllBusListVC alloc] init];
-    busList.hidesBottomBarWhenPushed = YES;
-    [self pushViewController:busList];
+    NSString *startStationStr = [_startStationInputBtn titleForState:UIControlStateNormal];
+    NSString *endStationStr = [_endStationInputBtn titleForState:UIControlStateNormal];
+    
+    if (![startStationStr isEqualToString:StartStationInputPlaceholderStr])
+    {
+        if (![endStationStr isEqualToString:EndStationInputPlaceholderStr])
+        {
+            if (_startDateStr)
+            {
+                AllBusListVC *busList = [[AllBusListVC alloc] init];
+                busList.startStationStr = startStationStr;
+                busList.EndStationStr = endStationStr;
+                busList.startDateStr = _startDateStr;
+                
+                busList.hidesBottomBarWhenPushed = YES;
+                [self pushViewController:busList];
+            }
+            else
+            {
+                [self showHUDInfoByString:@"请选择出发日期"];
+            }
+        }
+        else
+        {
+            [self showHUDInfoByString:@"请选择目的地点"];
+        }
+    }
+    else
+    {
+        [self showHUDInfoByString:@"请选择出发地点"];
+    }
 }
 
 @end

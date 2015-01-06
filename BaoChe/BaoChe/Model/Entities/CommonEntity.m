@@ -40,3 +40,20 @@
 }
 
 @end
+
+//////////////////////////////////////////////////////////////////////
+
+@implementation EndStationEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        self.keyId = [[dict safeObjectForKey:@"BusId"] integerValue];
+        self.stationNameStr = [dict objectForKey:@"EndLocation"];
+    }
+    return self;
+}
+
+@end

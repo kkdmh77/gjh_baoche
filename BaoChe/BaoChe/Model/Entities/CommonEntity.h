@@ -25,3 +25,13 @@
 @property (nonatomic, copy) NSString *locationStr;
 
 @end
+
+////////////////////////////////////////////////////////////////
+/// 目的地
+
+@interface EndStationEntity : NetItem
+
+@property (nonatomic, assign) NSInteger keyId;
+@property (nonatomic, copy) NSString *stationNameStr;
+
+@end

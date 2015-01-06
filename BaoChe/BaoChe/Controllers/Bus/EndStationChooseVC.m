@@ -14,7 +14,7 @@
 
 @interface EndStationChooseVC ()
 {
-    NSMutableArray *_netCollegeEntityArray;
+    NSMutableArray *_netEndStationEntityArray;
 }
 
 @end
@@ -56,13 +56,12 @@
 - (void)getNetworkData
 {
     /*
-     学校ID:  @param CollegeId
-     是否返程: Str IsBack  N (默认)| Y
+     @param StartLocation 开始地点
      */
-    if (_startStationCollegeId)
+    if (_startStation)
     {
         [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllEndStationList]
-             parameterDic:@{@"CollegeId": @(_startStationCollegeId)}
+             parameterDic:@{@"StartLocation": _startStation}
         requestMethodType:RequestMethodType_POST
                requestTag:NetBusRequestType_GetAllEndStationList];
     }
@@ -79,20 +78,20 @@
 
 - (void)parseNetworkDataWithSourceDic:(NSDictionary *)dic
 {
-    NSArray *collegeList = [dic safeObjectForKey:@"list"];
-    _netCollegeEntityArray = [NSMutableArray arrayWithCapacity:collegeList.count];
+    NSArray *dataList = [dic safeObjectForKey:@"list"];
+    _netEndStationEntityArray = [NSMutableArray arrayWithCapacity:dataList.count];
     
-    for (NSDictionary *collegeDic in collegeList)
+    for (NSDictionary *dataDic in dataList)
     {
-        StartStationCollegeEntity *entity = [StartStationCollegeEntity initWithDict:collegeDic];
+        EndStationEntity *entity = [EndStationEntity initWithDict:dataDic];
         
-        [_netCollegeEntityArray addObject:entity];
+        [_netEndStationEntityArray addObject:entity];
     }
 }
 
-- (StartStationCollegeEntity *)curDataWithIndex:(NSInteger)index
+- (EndStationEntity *)curDataWithIndex:(NSInteger)index
 {
-    return index < _netCollegeEntityArray.count ? _netCollegeEntityArray[index] : nil;
+    return index < _netEndStationEntityArray.count ? _netEndStationEntityArray[index] : nil;
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate methods
@@ -104,7 +103,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _netCollegeEntityArray.count;
+    return _netEndStationEntityArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -135,9 +134,9 @@
         cell.textLabel.textColor = Common_BlackColor;
     }
     
-    StartStationCollegeEntity *entity = [self curDataWithIndex:indexPath.row];
+    EndStationEntity *entity = [self curDataWithIndex:indexPath.row];
     
-    cell.textLabel.text = entity.collegeNameStr;
+    cell.textLabel.text = entity.stationNameStr;
     
     return cell;
 }
@@ -145,10 +144,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    StartStationCollegeEntity *entity = [self curDataWithIndex:indexPath.row];
+    EndStationEntity *entity = [self curDataWithIndex:indexPath.row];
     
     BuyTicketVC *buyTicket = objc_getAssociatedObject(self, class_getName([BuyTicketVC class]));
-    [buyTicket setEndStationStr:entity.collegeNameStr];
+    [buyTicket setEndStationStr:entity.stationNameStr];
     
     [self backViewController];
 }

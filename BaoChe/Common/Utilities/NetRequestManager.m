@@ -286,6 +286,8 @@ DEF_SINGLETON(NetRequestManager);
     // 修改开始
     NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding([netRequest.asiFormRequest stringEncoding]));
     
+    [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@",charset]];
+    /*
     if ([methodType isEqualToString:RequestMethodType_GET])
     {
         [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@",charset]];
@@ -303,6 +305,7 @@ DEF_SINGLETON(NetRequestManager);
             [netRequest.asiFormRequest setPostBody:[NSMutableData dataWithData:postBodyData]];
         }
     }
+     */
     // 修改结束
     
     if ([fileDic isAbsoluteValid])
@@ -335,7 +338,7 @@ DEF_SINGLETON(NetRequestManager);
      @ 修改开始
      */
     // 修改开始
-    /*
+    
     if ([parameterDic isAbsoluteValid])
     {
         for (NSString *key in parameterDic.allKeys)
@@ -343,7 +346,7 @@ DEF_SINGLETON(NetRequestManager);
             [netRequest.asiFormRequest setPostValue:[parameterDic objectForKey:key] forKey:key];
         }
     }
-     */
+     
     // 修改结束
     
     // 判断是否要作数据缓存
