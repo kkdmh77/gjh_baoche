@@ -15,8 +15,7 @@
     self = [super init];
     if (self)
     {
-        self.questionStr = [dict objectForKey:@"question"];
-        self.answerStr = [dict objectForKey:@"answer"];
+        
     }
     return self;
 }

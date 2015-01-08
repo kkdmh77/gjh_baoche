@@ -99,7 +99,7 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
                 }
             }
         }
-        else if (NetNewsRequestType_GetAdsList)
+        else if (NetNewsRequestType_GetAdsList == request.tag)
         {
             [strongSelf parseAdNetDataWithDic:successInfoObj];
             [strongSelf configureTabHeaderBannerScrollView];
@@ -326,6 +326,7 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
     {
         DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
         detailNews.newsId = entity.newsId;
+        detailNews.newsShareurlStr = entity.newsShareurlStr;
         detailNews.hidesBottomBarWhenPushed = YES;
         [vc.navigationController pushViewController:detailNews animated:YES];
     }
@@ -345,6 +346,7 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
     {
         DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
         detailNews.newsId = [self curIndexAdEntityByIndex:index].newsId;
+        detailNews.newsShareurlStr = kNewsShareUrlStr;
         detailNews.hidesBottomBarWhenPushed = YES;
         [vc.navigationController pushViewController:detailNews animated:YES];
     }

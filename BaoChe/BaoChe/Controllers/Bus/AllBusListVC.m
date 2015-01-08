@@ -73,7 +73,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
                             @"EndLocation": _EndStationStr,
                             @"StartDate": _startDateStr,
                             @"limit": @100,
-                            @"per_page": @1}
+                            @"page": @1}
         requestMethodType:RequestMethodType_POST
                requestTag:NetBusRequestType_GetAllBusList];
     }

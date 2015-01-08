@@ -52,7 +52,7 @@
 
 - (id)initWithRequest:(NSURLRequest *)request {
   if ((self = [super initWithNibName:nil bundle:nil])) {
-    self.hidesBottomBarWhenPushed = YES;
+    self.hidesBottomBarWhenPushed = NO;
 
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
       self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -300,7 +300,7 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView*)webView {
-  self.title = NSLocalizedString(@"Loading...", @"");
+//  self.title = NSLocalizedString(@"Loading...", @"");
   if (!self.navigationItem.rightBarButtonItem) {
     [self.navigationItem setRightBarButtonItem:self.activityItem animated:YES];
   }
@@ -321,7 +321,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView*)webView {
   self.loadingURL = nil;
-  self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+//  self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
   if (self.navigationItem.rightBarButtonItem == self.activityItem) {
     [self.navigationItem setRightBarButtonItem:nil animated:YES];
   }

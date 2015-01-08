@@ -196,6 +196,7 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
     
     DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
     detailNews.newsId = entity.videoNewsId;
+    detailNews.newsShareurlStr = entity.newsShareurlStr;
     detailNews.hidesBottomBarWhenPushed = YES;
     [self pushViewController:detailNews];
 }

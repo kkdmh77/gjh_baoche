@@ -28,6 +28,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WeiboApi.h"
 #import "UserInfoModel.h"
+#import "NIWebController.h"
 
 @interface AppDelegate(Private)
 
@@ -299,8 +300,11 @@ CG_INLINE  void deleteFile() {
     VideoNewsListVC *videoNewsList = [[[VideoNewsListVC alloc] init] autorelease];
     UINavigationController *videoNewsListNav = [[[UINavigationController alloc] initWithRootViewController:videoNewsList] autorelease];
     
+    NIWebController *bbsVC = [[NIWebController alloc] initWithURL:[NSURL URLWithString:@"http://jmbbs.jmrb.com/forum.php"]];
+    UINavigationController *bbsNav = [[UINavigationController alloc] initWithRootViewController:bbsVC];
+    
     BaseTabBarVC *baseTabBarController = [[[BaseTabBarVC alloc] init] autorelease];
-    baseTabBarController.viewControllers = @[newsManagerNav, imageNewsListNav, videoNewsListNav, [UIViewController new]];
+    baseTabBarController.viewControllers = @[newsManagerNav, imageNewsListNav, videoNewsListNav, bbsNav];
     
     self.window.rootViewController = baseTabBarController;
     

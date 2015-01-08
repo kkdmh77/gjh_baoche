@@ -165,10 +165,10 @@ static NSString * const cellIdenfitier_comment = @"cellIdenfitier_comment";
      */
     
     // 创建分享内容
-    id<ISSContent> publishContent = [ShareSDK content:@"fen xiang"
+    id<ISSContent> publishContent = [ShareSDK content:[_newsShareurlStr isAbsoluteValid] ? _newsShareurlStr : kNewsShareUrlStr
                                        defaultContent:@""
                                                 image:nil
-                                                title:@"分享标题"
+                                                title:@"分享"
                                                   url:@"http://www.mob.com"
                                           description:NSLocalizedString(@"TEXT_TEST_MSG", @"这是一条测试信息")
                                             mediaType:SSPublishContentMediaTypeNews];
