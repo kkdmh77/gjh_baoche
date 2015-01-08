@@ -20,7 +20,7 @@
         
         urlForTypeArray = [NSMutableArray arrayWithObjects:
                            // 班车
-                           @"schedulebus/bus/list",
+                           @"bus/get_bus_list",
                            @"college/get_college",
                            @"bus/get_end_location",
                            

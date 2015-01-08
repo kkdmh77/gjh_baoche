@@ -15,8 +15,7 @@
     self = [super init];
     if (self)
     {
-        self.questionStr = [dict objectForKey:@"question"];
-        self.answerStr = [dict objectForKey:@"answer"];
+        
     }
     return self;
 }
@@ -35,6 +34,23 @@
         self.keyId = [[dict safeObjectForKey:@"CollegeId"] integerValue];
         self.collegeNameStr = [dict objectForKey:@"CollegeName"];
         self.locationStr = [dict objectForKey:@"Location"];
+    }
+    return self;
+}
+
+@end
+
+//////////////////////////////////////////////////////////////////////
+
+@implementation EndStationEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        self.keyId = [[dict safeObjectForKey:@"BusId"] integerValue];
+        self.stationNameStr = [dict objectForKey:@"EndLocation"];
     }
     return self;
 }

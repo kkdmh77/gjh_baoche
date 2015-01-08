@@ -10,6 +10,6 @@
 
 @interface EndStationChooseVC : BaseNetworkViewController
 
-@property (nonatomic, assign) NSInteger startStationCollegeId;
+@property (nonatomic, copy) NSString *startStation;
 
 @end

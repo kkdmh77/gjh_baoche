@@ -10,4 +10,8 @@
 
 @interface AllBusListVC : BaseNetworkViewController
 
+@property (nonatomic, copy) NSString *startStationStr;
+@property (nonatomic, copy) NSString *EndStationStr;
+@property (nonatomic, copy) NSString *startDateStr;
+
 @end

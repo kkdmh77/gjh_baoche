@@ -246,7 +246,7 @@ static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
         }
         else if (CellOperationType_Share == type)
         {
-            [weakSelf operationShareAction:sender];
+            [weakSelf operationShareAction:sender shareContent:entity.newsShareurlStr];
         }
     }];
     
@@ -274,7 +274,7 @@ static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
     [self pushViewController:imagePreview];
 }
 
-- (void)operationShareAction:(UIButton *)sender
+- (void)operationShareAction:(UIButton *)sender shareContent:(NSString *)content
 {
     /*
      // 定义菜单分享列表
@@ -282,10 +282,10 @@ static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
      */
     
     // 创建分享内容
-    id<ISSContent> publishContent = [ShareSDK content:@"fen xiang"
+    id<ISSContent> publishContent = [ShareSDK content:[content isAbsoluteValid] ? content : kNewsShareUrlStr
                                        defaultContent:@""
                                                 image:nil
-                                                title:@"分享标题"
+                                                title:@"分享"
                                                   url:@"http://www.mob.com"
                                           description:NSLocalizedString(@"TEXT_TEST_MSG", @"这是一条测试信息")
                                             mediaType:SSPublishContentMediaTypeNews];

@@ -26,6 +26,7 @@
 @property (nonatomic, copy) NSString *newsTitleStr;
 @property (nonatomic, copy) NSString *newsDescStr;
 @property (nonatomic, assign) NSInteger newsCommentCount;
+@property (nonatomic, copy) NSString *newsShareurlStr;
 
 @end
 
@@ -58,6 +59,7 @@
 @property (nonatomic, copy) NSString *videoImageUrlStr;     // 视频列表页小图片
 @property (nonatomic, assign) NSInteger videoPalyCount;     // 视频播放数
 @property (nonatomic, copy) NSString *videoLongTimeStr;     // 视频时长
+@property (nonatomic, copy) NSString *newsShareurlStr;
 
 @end
 
@@ -70,6 +72,7 @@
 @property (nonatomic, strong) NSArray *imageUrlsStrArray;   // 图片组的urls
 @property (nonatomic, assign) NSInteger imageCommentCount;  // 图片评论数
 @property (nonatomic, assign) NSInteger imagePraiseCount;   // 图片赞的数量
+@property (nonatomic, copy) NSString *newsShareurlStr;
 
 @end
 

@@ -142,7 +142,6 @@
     
     BuyTicketVC *buyTicket = objc_getAssociatedObject(self, class_getName([BuyTicketVC class]));
     [buyTicket setStartStationStr:entity.collegeNameStr];
-    buyTicket.startStationCollegeId = entity.keyId;
     
     [self backViewController];
 }

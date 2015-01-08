@@ -39,6 +39,7 @@
         self.newsTitleStr = [dict objectForKey:@"newsTitle"];
         self.newsDescStr = [dict objectForKey:@"newsAbstract"];
         self.newsCommentCount = [[dict objectForKey:@"commCount"] integerValue];
+        self.newsShareurlStr = [dict safeObjectForKey:@"newsShareurl"];
     }
     return self;
 }
@@ -107,7 +108,8 @@
         self.videoNameStr = [dict objectForKey:@"newsTitle"];
         self.videoImageUrlStr = [UrlManager getImageRequestUrlStrByUrlComponent:dict[@"newsSpicture"]];
         self.videoPalyCount = [[dict objectForKey:@"newsClicked"] integerValue];
-        self.videoLongTimeStr = @"0:01:16";
+        self.videoLongTimeStr = [dict safeObjectForKey:@"newsVideotimes"];
+        self.newsShareurlStr = [dict safeObjectForKey:@"newsShareurl"];
     }
     return self;
 }
@@ -127,6 +129,7 @@
         self.imageNewsNameStr = dict[@"newsTitle"];
         self.imageCommentCount = [dict[@"commCount"] integerValue];
         self.imagePraiseCount = 0;
+        self.newsShareurlStr = [dict safeObjectForKey:@"newsShareurl"];
         
         NSArray *imageUrlItemList = dict[@"rbNewspics"];
         if ([imageUrlItemList isAbsoluteValid])

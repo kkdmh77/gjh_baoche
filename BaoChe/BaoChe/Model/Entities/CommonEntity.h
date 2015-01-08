@@ -10,8 +10,15 @@
 
 @interface AllBusListItemEntity : NetItem
 
-@property (nonatomic, strong) NSString *questionStr;
-@property (nonatomic, strong) NSString *answerStr;
+@property (nonatomic, copy) NSString *busNameStr;
+@property (nonatomic, copy) NSString *busTypeStr;
+@property (nonatomic, assign) NSTimeInterval startTime;
+@property (nonatomic, assign) NSTimeInterval endTime;
+@property (nonatomic, copy) NSString *startStation;
+@property (nonatomic, copy) NSString *endStation;
+@property (nonatomic, copy) NSString *timeRequired;
+@property (nonatomic, copy) NSString *passStation;
+@property (nonatomic, assign) double price;
 
 @end
 
@@ -23,5 +30,15 @@
 @property (nonatomic, assign) NSInteger keyId;
 @property (nonatomic, copy) NSString *collegeNameStr;
 @property (nonatomic, copy) NSString *locationStr;
+
+@end
+
+////////////////////////////////////////////////////////////////
+/// 目的地
+
+@interface EndStationEntity : NetItem
+
+@property (nonatomic, assign) NSInteger keyId;
+@property (nonatomic, copy) NSString *stationNameStr;
 
 @end

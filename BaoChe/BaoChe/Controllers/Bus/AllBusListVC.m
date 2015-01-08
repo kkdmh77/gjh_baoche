@@ -25,7 +25,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
 {
     [super viewDidLoad];
     
-//    [self getNetworkData];
+    [self getNetworkData];
     [self initialization];
 }
 
@@ -38,7 +38,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:@"订票中心"];
+    [self setNavigationItemTitle:[NSString stringWithFormat:@"%@-%@",_startStationStr, _EndStationStr]];
 }
 
 - (void)setNetworkRequestStatusBlocks
@@ -55,9 +55,28 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
 
 - (void)getNetworkData
 {
-    [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllBusList]
-         parameterDic:nil
-           requestTag:NetBusRequestType_GetAllBusList];
+    /*
+     * @param str StartLocation   开始的站点
+     * @param str EndLocation   结束点
+     * @param str StartDate   传入时间字符串 2015-01-01
+     
+     * @param int limit  每页显示的条数
+     * @param int per_page 偏移量
+     */
+    
+    if ([_startStationStr isAbsoluteValid] &&
+        [_EndStationStr isAbsoluteValid] &&
+        [_startDateStr isAbsoluteValid])
+    {
+        [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllBusList]
+             parameterDic:@{@"StartLocation": _startStationStr,
+                            @"EndLocation": _EndStationStr,
+                            @"StartDate": _startDateStr,
+                            @"limit": @100,
+                            @"page": @1}
+        requestMethodType:RequestMethodType_POST
+               requestTag:NetBusRequestType_GetAllBusList];
+    }
 }
 
 - (void)initialization
@@ -77,7 +96,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
         {
             CalendarHomeViewController *calendar = [[CalendarHomeViewController alloc] init];
             calendar.calendartitle = @"选择日期";
-            [calendar setTrainToDay:365 ToDateforString:[headerView curShowDateBtnTitle]];
+            [calendar setTrainToDay:60 ToDateforString:[headerView curShowDateBtnTitle]];
             [calendar setCalendarblock:^(CalendarDayModel *model) {
                 
                 NSString *selectedDateStr = [NSString stringWithFormat:@"%@ %@",[model toString], [model getWeek]];

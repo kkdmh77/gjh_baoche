@@ -95,3 +95,5 @@
 
 //小得预览占位图片（logo）
 #define kSmallPreviewImage                  [UIImage imageNamed:@"dingdanxiangqing_shangpibtupian_morentupian"]
+
+#define kNewsShareUrlStr @"http://www.jmnews.com.cn"
