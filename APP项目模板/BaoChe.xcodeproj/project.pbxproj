@@ -11,6 +11,9 @@
 		43C86BEA1A15F14F00AD9B49 /* CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C86BE61A15F14F00AD9B49 /* CTAssetsPickerController.m */; };
 		43C86BEB1A15F14F00AD9B49 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43C86BE71A15F14F00AD9B49 /* Images.xcassets */; };
 		43C86BEC1A15F14F00AD9B49 /* NSDate+TimeInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C86BE91A15F14F00AD9B49 /* NSDate+TimeInterval.m */; };
+		43C919411A5E642D00017DE5 /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C9193C1A5E642D00017DE5 /* CommonUtil.m */; };
+		43C919421A5E642D00017DE5 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43C9193D1A5E642D00017DE5 /* libWeChatSDK.a */; };
+		43C919431A5E642D00017DE5 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43C9193E1A5E642D00017DE5 /* readme.txt */; };
 		43CB6B0F1A4662B6003829E6 /* BaseTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B0E1A4662B6003829E6 /* BaseTabBarVC.m */; };
 		43CBD1F71A38161900406432 /* CommentSendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CBD1F61A38161900406432 /* CommentSendController.m */; };
 		43CCC5AD1A1DC69B009E4A4C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43CCC5AF1A1DC69B009E4A4C /* Localizable.strings */; };
@@ -381,6 +384,12 @@
 		43C86BE71A15F14F00AD9B49 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		43C86BE81A15F14F00AD9B49 /* NSDate+TimeInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeInterval.h"; sourceTree = "<group>"; };
 		43C86BE91A15F14F00AD9B49 /* NSDate+TimeInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeInterval.m"; sourceTree = "<group>"; };
+		43C9193B1A5E642D00017DE5 /* CommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtil.h; sourceTree = "<group>"; };
+		43C9193C1A5E642D00017DE5 /* CommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtil.m; sourceTree = "<group>"; };
+		43C9193D1A5E642D00017DE5 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		43C9193E1A5E642D00017DE5 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		43C9193F1A5E642D00017DE5 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		43C919401A5E642D00017DE5 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		43CB6B0D1A4662B6003829E6 /* BaseTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarVC.h; sourceTree = "<group>"; };
 		43CB6B0E1A4662B6003829E6 /* BaseTabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarVC.m; sourceTree = "<group>"; };
 		43CBD1F51A38161900406432 /* CommentSendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentSendController.h; sourceTree = "<group>"; };
@@ -1113,6 +1122,7 @@
 				43D1F37C19FB40570049518E /* libsqlite3.0.dylib in Frameworks */,
 				43D1F37A19FB404D0049518E /* libz.1.2.5.dylib in Frameworks */,
 				43D1F37819FB403A0049518E /* MobileCoreServices.framework in Frameworks */,
+				43C919421A5E642D00017DE5 /* libWeChatSDK.a in Frameworks */,
 				43D1F37619FB40110049518E /* CoreText.framework in Frameworks */,
 				43D1F37419FB40000049518E /* CFNetwork.framework in Frameworks */,
 				43D1F37219FB3FF30049518E /* Security.framework in Frameworks */,
@@ -1144,6 +1154,27 @@
 				43C86BE91A15F14F00AD9B49 /* NSDate+TimeInterval.m */,
 			);
 			path = CTAssetsPickerController;
+			sourceTree = "<group>";
+		};
+		43C919391A5E642D00017DE5 /* WeChatSDK_1.4.1 */ = {
+			isa = PBXGroup;
+			children = (
+				43C9193A1A5E642D00017DE5 /* CommonUtil */,
+				43C9193D1A5E642D00017DE5 /* libWeChatSDK.a */,
+				43C9193E1A5E642D00017DE5 /* readme.txt */,
+				43C9193F1A5E642D00017DE5 /* WXApi.h */,
+				43C919401A5E642D00017DE5 /* WXApiObject.h */,
+			);
+			path = WeChatSDK_1.4.1;
+			sourceTree = "<group>";
+		};
+		43C9193A1A5E642D00017DE5 /* CommonUtil */ = {
+			isa = PBXGroup;
+			children = (
+				43C9193B1A5E642D00017DE5 /* CommonUtil.h */,
+				43C9193C1A5E642D00017DE5 /* CommonUtil.m */,
+			);
+			path = CommonUtil;
 			sourceTree = "<group>";
 		};
 		43D1ED0B19FB37F30049518E = {
@@ -1307,6 +1338,7 @@
 		43D1ED6819FB3AFA0049518E /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				43C919391A5E642D00017DE5 /* WeChatSDK_1.4.1 */,
 				43DC9D341A2F2F0300B09C58 /* IQKeyBoardManager */,
 				43C86BE41A15F14F00AD9B49 /* CTAssetsPickerController */,
 				43D1F38019FB4C1A0049518E /* Nimbus */,
@@ -2764,6 +2796,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43DC9D601A2F2F0400B09C58 /* IQKeyboardManager.bundle in Resources */,
+				43C919431A5E642D00017DE5 /* readme.txt in Resources */,
 				43D1F29819FB3AFB0049518E /* sr_refresh@2X.png in Resources */,
 				43D1F57919FB4C1A0049518E /* Icon-Small.png in Resources */,
 				43D1F56D19FB4C1A0049518E /* deps in Resources */,
@@ -3096,6 +3129,7 @@
 				43D1F18419FB3AFB0049518E /* AQGridViewUpdateItem.m in Sources */,
 				43D1F2F119FB3AFB0049518E /* NSURL+SSToolkitAdditions.m in Sources */,
 				43D1F16E19FB3AFB0049518E /* AFURLResponseSerialization.m in Sources */,
+				43C919411A5E642D00017DE5 /* CommonUtil.m in Sources */,
 				43D1F1A419FB3AFB0049518E /* UISlider+FlatUI.m in Sources */,
 				43D1F19F19FB3AFB0049518E /* UIFont+FlatUI.m in Sources */,
 				43D1F1BB19FB3AFB0049518E /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
@@ -3265,6 +3299,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Class/alipay",
+					"$(PROJECT_DIR)/Class/WeChatSDK_1.4.1",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3289,6 +3324,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Class/alipay",
+					"$(PROJECT_DIR)/Class/WeChatSDK_1.4.1",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
