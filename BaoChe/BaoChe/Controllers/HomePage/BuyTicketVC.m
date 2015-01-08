@@ -21,6 +21,7 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
 @interface BuyTicketVC ()
 {
     NSString *_startDateStr; // 出发日期
+    NSString *_startWeekStr; // 周几
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *advertisingImageView;
@@ -96,6 +97,7 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
 - (void)setDateShowLabelTextWithDate:(NSDate *)date weekStr:(NSString *)weekStr
 {
     _startDateStr = [NSDate stringFromDate:date withFormatter:DataFormatter_Date];
+    _startWeekStr = weekStr;
     
     NSString *resultDateStr = [NSString stringWithFormat:@"%@  %@  %@", @"出发日期", _startDateStr, weekStr];
     
@@ -165,7 +167,7 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
     CalendarHomeViewController *calendar = [[CalendarHomeViewController alloc] init];
     calendar.hidesBottomBarWhenPushed = YES;
     calendar.calendartitle = @"请选择日期";
-    [calendar setTrainToDay:60 ToDateforString:weakSelf.dateShowLabel.text];
+    [calendar setTrainToDay:60 ToDateforString:_startDateStr];
     [calendar setCalendarblock:^(CalendarDayModel *model) {
         
         [weakSelf setDateShowLabelTextWithDate:model.date weekStr:[model getWeek]];
@@ -192,6 +194,7 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
                 busList.startStationStr = startStationStr;
                 busList.EndStationStr = endStationStr;
                 busList.startDateStr = _startDateStr;
+                busList.startWeekStr = _startWeekStr;
                 
                 busList.hidesBottomBarWhenPushed = YES;
                 [self pushViewController:busList];

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonEntity.h"
 
 @interface AllBusListCell : UITableViewCell
 
 + (CGFloat)getCellHeight;
+- (void)loadCellShowDataWithItemEntity:(AllBusListItemEntity *)entity;
 
 @end

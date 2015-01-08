@@ -16,6 +16,9 @@
 static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList";
 
 @interface AllBusListVC ()
+{
+    NSMutableArray *_netBusEntityArray;
+}
 
 @end
 
@@ -25,8 +28,8 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
 {
     [super viewDidLoad];
     
-    [self getNetworkData];
     [self initialization];
+    [self getNetworkData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,7 +51,8 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
         STRONGSELF
         if (NetBusRequestType_GetAllBusList == request.tag)
         {
-            
+            [strongSelf parseNetworkDataWithSourceDic:successInfoObj];
+            [strongSelf reloadTabData];
         }
     }];
 }
@@ -79,36 +83,74 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
     }
 }
 
+- (void)parseNetworkDataWithSourceDic:(NSDictionary *)dic
+{
+    NSArray *dataList = [[dic safeObjectForKey:@"list"] safeObjectForKey:@"list"];
+    _netBusEntityArray = [NSMutableArray arrayWithCapacity:dataList.count];
+    
+    for (NSDictionary *dataDic in dataList)
+    {
+        AllBusListItemEntity *entity = [AllBusListItemEntity initWithDict:dataDic];
+        
+        [_netBusEntityArray addObject:entity];
+    }
+}
+
 - (void)initialization
 {
     // header
     __weak AllBusList_HeaderView *headerView = [AllBusList_HeaderView loadFromNib];
     headerView.width = self.viewBoundsWidth;
     headerView.origin = CGPointZero;
+    [headerView setCurShowDateBtnTitle:[NSString stringWithFormat:@"%@ %@", _startDateStr, _startWeekStr]];
     headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     WEAKSELF
     [headerView setOperationType:^(AllBusList_HeaderView *view, AllBusListHeaderViewOperationType type) {
+        
         if (AllBusListHeaderViewOperationType_PreDay == type)
         {
+            NSDate *startDate = [NSString dateFromString:_startDateStr withFormatter:DataFormatter_Date];
+            NSDate *preDate = [startDate dateBySubtractingDays:1];
+            NSString *preDateStr = [NSDate stringFromDate:preDate withFormatter:DataFormatter_Date];
             
+            weakSelf.startDateStr = preDateStr;
+            
+            NSString *curDateAndWeekStr = [NSString stringWithFormat:@"%@ %@",weakSelf.startDateStr, weakSelf.startWeekStr];
+            [headerView setCurShowDateBtnTitle:curDateAndWeekStr];
+            
+            [weakSelf getNetworkData];
         }
         else if (AllBusListHeaderViewOperationType_CurShowDay == type)
         {
             CalendarHomeViewController *calendar = [[CalendarHomeViewController alloc] init];
             calendar.calendartitle = @"选择日期";
-            [calendar setTrainToDay:60 ToDateforString:[headerView curShowDateBtnTitle]];
+            [calendar setTrainToDay:60 ToDateforString:_startDateStr];
             [calendar setCalendarblock:^(CalendarDayModel *model) {
+                
+                weakSelf.startDateStr = [model toString];
+                weakSelf.startWeekStr = [model getWeek];
                 
                 NSString *selectedDateStr = [NSString stringWithFormat:@"%@ %@",[model toString], [model getWeek]];
                 [headerView setCurShowDateBtnTitle:selectedDateStr];
+                
                 [weakSelf backViewController];
+                [weakSelf getNetworkData];
             }];
             
             [self pushViewController:calendar];
         }
         else
         {
+            NSDate *startDate = [NSString dateFromString:_startDateStr withFormatter:DataFormatter_Date];
+            NSDate *nextDate = [startDate dateByAddingDays:1];
+            NSString *nextDateStr = [NSDate stringFromDate:nextDate withFormatter:DataFormatter_Date];
             
+            weakSelf.startDateStr = nextDateStr;
+            
+            NSString *curDateAndWeekStr = [NSString stringWithFormat:@"%@ %@",weakSelf.startDateStr, weakSelf.startWeekStr];
+            [headerView setCurShowDateBtnTitle:curDateAndWeekStr];
+            
+            [weakSelf getNetworkData];
         }
     }];
     [self.view addSubview:headerView];
@@ -121,9 +163,14 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
     _tableView.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)curIndexTabCellShowData:(NSInteger)index
+- (void)reloadTabData
 {
-    
+    [_tableView reloadData];
+}
+
+- (AllBusListItemEntity *)curIndexTabCellShowData:(NSInteger)index
+{
+    return index < _netBusEntityArray.count ? _netBusEntityArray[index] : nil;
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -135,7 +182,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return _netBusEntityArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -147,9 +194,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
 {
     AllBusListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier_allBusList];
     
-    /*
-     [cell loadCellShowDataWithItemEntity:nil];
-     */
+     [cell loadCellShowDataWithItemEntity:[self curIndexTabCellShowData:indexPath.row]];
     
     return cell;
 }
@@ -158,7 +203,10 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    AllBusListItemEntity *entity = [self curIndexTabCellShowData:indexPath.row];
+    
     OrderWriteVC *orderWrite = [[OrderWriteVC alloc] init];
+    orderWrite.busId = entity.keyId;
     orderWrite.hidesBottomBarWhenPushed = YES;
     [self pushViewController:orderWrite];
 }

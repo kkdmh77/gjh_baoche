@@ -75,10 +75,24 @@
 
 + (void)getTimeIntervalSinceNowWithCompareTime:(NSTimeInterval)toCompareTime daysCount:(NSInteger *)days andHoursCount:(NSInteger *)hours minutesCount:(NSInteger *)minutes secondsCount:(NSInteger *)seconds
 {
-    if (0 == toCompareTime) return;
+    if (0 != toCompareTime)
+    {
+        NSTimeInterval nowTime = [[NSDate date] timeIntervalSince1970];
+
+        [self getTimeIntervalWithBeginCompareTime:nowTime
+                                   endCompareTime:toCompareTime
+                                        daysCount:days
+                                    andHoursCount:hours
+                                     minutesCount:minutes
+                                     secondsCount:seconds];
+    }
+}
+
++ (void)getTimeIntervalWithBeginCompareTime:(NSTimeInterval)beginTime endCompareTime:(NSTimeInterval)endTime daysCount:(NSInteger *)days andHoursCount:(NSInteger *)hours minutesCount:(NSInteger *)minutes secondsCount:(NSInteger *)seconds
+{
+    if (0 == beginTime || 0 == endTime) return;
     
-    NSTimeInterval nowTime = [[NSDate date] timeIntervalSince1970];
-    NSTimeInterval intervalTime = toCompareTime - nowTime;
+    NSTimeInterval intervalTime = fabs(endTime - beginTime);
     
     if (days != NULL)
     {

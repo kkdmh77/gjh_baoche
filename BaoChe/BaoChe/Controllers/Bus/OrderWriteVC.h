@@ -10,4 +10,6 @@
 
 @interface OrderWriteVC : BaseNetworkViewController
 
+@property (nonatomic, assign) NSInteger busId;
+
 @end

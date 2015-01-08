@@ -87,4 +87,16 @@ static CGFloat defaultCellHeight = 0;
     return defaultCellHeight;
 }
 
+- (void)loadCellShowDataWithItemEntity:(AllBusListItemEntity *)entity
+{
+    _busNameLabel.text = [NSString stringWithFormat:@"%@(%@)", entity.busNameStr, entity.busTypeStr];
+    _departureTimeLabel.text = entity.startTimeStr;
+    _terminalTimeLabel.text = entity.endTimeStr;
+    _departureStationLabel.text = entity.startStation;
+    _terminalStationLabel.text = entity.endStation;
+    _requiredTimeLabel.text = entity.timeRequired;
+    _ThroughStationsLabel.text = entity.passStation;
+    _ticketPriceLabel.text = [NSString stringWithFormat:@"￥%.2lf",entity.price];
+}
+
 @end

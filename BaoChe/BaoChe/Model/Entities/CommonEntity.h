@@ -10,10 +10,11 @@
 
 @interface AllBusListItemEntity : NetItem
 
+@property (nonatomic, assign) NSInteger keyId;
 @property (nonatomic, copy) NSString *busNameStr;
 @property (nonatomic, copy) NSString *busTypeStr;
-@property (nonatomic, assign) NSTimeInterval startTime;
-@property (nonatomic, assign) NSTimeInterval endTime;
+@property (nonatomic, copy) NSString *startTimeStr;
+@property (nonatomic, copy) NSString *endTimeStr;
 @property (nonatomic, copy) NSString *startStation;
 @property (nonatomic, copy) NSString *endStation;
 @property (nonatomic, copy) NSString *timeRequired;

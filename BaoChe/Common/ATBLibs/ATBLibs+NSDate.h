@@ -12,6 +12,7 @@ static NSString * const DataFormatter_DateAndTime   = @"yyyy-MM-dd HH:mm:ss";
 static NSString * const DataFormatter_Date          = @"yyyy-MM-dd";
 static NSString * const DataFormatter_DateNoYear    = @"MM-dd";
 static NSString * const DataFormatter_Time          = @"HH:mm:ss";
+static NSString * const DataFormatter_TimeNoSecond  = @"HH:mm";
 
 @interface NSDate(ATBLibsAddtions)
 
@@ -38,6 +39,14 @@ static NSString * const DataFormatter_Time          = @"HH:mm:ss";
                                  andHoursCount:(NSInteger *)hours
                                   minutesCount:(NSInteger *)minutes
                                   secondsCount:(NSInteger *)seconds;
+
+/// 计算2个时间点之间的天、时、分、秒数据
++ (void)getTimeIntervalWithBeginCompareTime:(NSTimeInterval)beginTime
+                             endCompareTime:(NSTimeInterval)endTime
+                                  daysCount:(NSInteger *)days
+                              andHoursCount:(NSInteger *)hours
+                               minutesCount:(NSInteger *)minutes
+                               secondsCount:(NSInteger *)seconds;
 
 @end
 
