@@ -497,6 +497,7 @@ DEF_SINGLETON(PayManager);
         if (kWXPayRequestTag_GetToken == request.tag)
         {
             self.accessToken = [infoObj safeObjectForKey:@"access_token"];
+            
             [self prepay];
         }
         else if (kWXPayRequestTag_GenPrepay == request.tag)
@@ -506,9 +507,10 @@ DEF_SINGLETON(PayManager);
             if (0 == errorCode)
             {
                 self.prepayid = [infoObj safeObjectForKey:@"prepayid"];
+                
                 [self pay];
             }
-            else if (errorCode == 48001)
+            else
             {
                 DLog(@"%@",[infoObj safeObjectForKey:@"errmsg"]);
                 

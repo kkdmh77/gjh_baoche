@@ -390,13 +390,14 @@ DEF_SINGLETON(NetRequestManager);
     {
         NSString *cacheKeyStr = [[url absoluteString] stringByAppendingFormat:@"/%@",[NSString urlArgsStringFromDictionary:parameterDic]];
         
-        // 如果存在缓存且没有过期则使用缓存数据,否则重新向服务器发送请求
+        // 如果存在缓存且没有过期则使用缓存数据,否则重新向服务器发送请求(成功委托只调用1次)
         if (NetAskServerIfModifiedWhenStaleCachePolicy == cachePolicy)
         {
             NSData *cacheData = [CachedDownloadManager cachedResponseDataForKey:cacheKeyStr];
             // 存在缓存数据且没有过期
             if (cacheData)
             {
+                [netRequest setValue:@(YES) forKey:@"networkDataIsJsonType"];
                 id result = nil;
                 
                 if ([netRequest isParseSuccessWithResponseData:cacheData result:&result])
@@ -415,6 +416,31 @@ DEF_SINGLETON(NetRequestManager);
             {
                 netRequest.asiFormRequest.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:cacheKeyStr,CacheKey,[NSNumber numberWithDouble:cacheSeconds],CacheExpiresInSecondsKey, nil];
             }
+        }
+        // 如果存在缓存且没有过期则使用缓存数据,然后再向服务器发送请求(成功委托会调用2次)
+        else if (NetUseCacheFirstWhenCacheValidAndAskServerAgain == cachePolicy)
+        {
+            NSData *cacheData = [CachedDownloadManager cachedResponseDataForKey:cacheKeyStr];
+            // 先用缓存数据
+            if (cacheData)
+            {
+                [netRequest setValue:@(YES) forKey:@"networkDataIsJsonType"];
+                id result = nil;
+                
+                if ([netRequest isParseSuccessWithResponseData:cacheData result:&result])
+                {
+                    netRequest.didUseCachedResponse = YES;
+                    netRequest.resultInfoObj = result;
+                    
+                    if (netRequest.delegate && [netRequest.delegate respondsToSelector:@selector(netRequest:successWithInfoObj:)])
+                    {
+                        [netRequest.delegate netRequest:netRequest successWithInfoObj:result];
+                    }
+                }
+            }
+            
+            // 再请求服务器
+            netRequest.asiFormRequest.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:cacheKeyStr,CacheKey,[NSNumber numberWithDouble:cacheSeconds],CacheExpiresInSecondsKey, nil];
         }
         // 无视缓存数据,总是向服务器请求新的数据
         else if (NetAlwaysAskServerCachePolicy == cachePolicy)
@@ -522,6 +548,9 @@ DEF_SINGLETON(NetRequestManager);
     /*
      DownloadCache *downloadCache = [[CoreDataManager shareCoreDataManagerManager] createEmptyObjectWithEntityName:@"DownloadCache"];
      */
+    // 删除可能存在的缓存
+    [self removeCachedDataForKey:key];
+    
     DownloadCache *downloadCache = [DownloadCache MR_createEntity];
     downloadCache.key = key;
     downloadCache.cacheDate = [NSDate date];

@@ -53,8 +53,6 @@ CGFloat defaultNormalNewsCellHeight = 0;
 {
     // 设置属性
     [self configureViewsProperties];
-    
-    _newsImageView.backgroundColor = [UIColor blueColor];
 }
 
 + (CGFloat)getCellHeight
@@ -69,7 +67,28 @@ CGFloat defaultNormalNewsCellHeight = 0;
 
 - (void)loadCellShowDataWithItemEntity:(News_NormalEntity *)entity
 {
-    [_newsImageView gjh_setImageWithURL:[NSURL URLWithString:entity.newsImageUrlStr] placeholderImage:nil imageShowStyle:ImageShowStyle_None success:nil failure:nil];
+    if ([entity.newsImageUrlStr isAbsoluteValid])
+    {
+        [_newsImageView gjh_setImageWithURL:[NSURL URLWithString:entity.newsImageUrlStr]
+                           placeholderImage:[UIImage imageNamed:@"placeholder_small"]
+                             imageShowStyle:ImageShowStyle_None
+                                    success:nil
+                                    failure:nil];
+        [_newsImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(75));
+            make.right.equalTo(_newsTitleLabel.mas_left).offset(@(-6));
+        }];
+    }
+    else
+    {
+        _newsImageView.image = nil;
+        
+        [_newsImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(0));
+            make.right.equalTo(_newsTitleLabel.mas_left).offset(@(0));
+        }];
+    }
+    
     _newsTitleLabel.text = entity.newsTitleStr;
     _newsCommentCountLabel.text = [NSString stringWithFormat:@" %d评",entity.newsCommentCount];
     

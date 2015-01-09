@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,11 +14,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YtI-0e-Tbm">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YtI-0e-Tbm">
                         <rect key="frame" x="9" y="13" width="75" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="EaW-Gi-wzx"/>
-                            <constraint firstAttribute="width" constant="75" id="lqH-SY-p1j"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="中澳联手追捕贪官：有商人用私人飞机带现金赴澳洲！" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKs-v7-yW6">
@@ -50,7 +49,6 @@
                     <constraint firstItem="BKs-v7-yW6" firstAttribute="bottom" secondItem="BDQ-62-6Yf" secondAttribute="bottom" constant="-8" id="4Ms-VB-yyA"/>
                     <constraint firstItem="BKs-v7-yW6" firstAttribute="trailing" secondItem="NLn-kM-dob" secondAttribute="trailing" id="M8q-qp-w2V"/>
                     <constraint firstItem="BKs-v7-yW6" firstAttribute="bottom" secondItem="YtI-0e-Tbm" secondAttribute="bottom" id="QZi-oc-NQJ"/>
-                    <constraint firstItem="NLn-kM-dob" firstAttribute="leading" secondItem="YtI-0e-Tbm" secondAttribute="trailing" constant="6" id="ZjQ-CH-w6A"/>
                     <constraint firstItem="BKs-v7-yW6" firstAttribute="leading" secondItem="NLn-kM-dob" secondAttribute="leading" id="bPB-wn-Tms"/>
                     <constraint firstItem="BKs-v7-yW6" firstAttribute="trailing" secondItem="BDQ-62-6Yf" secondAttribute="trailing" id="dU0-rF-x0X"/>
                     <constraint firstItem="NLn-kM-dob" firstAttribute="top" secondItem="YtI-0e-Tbm" secondAttribute="top" id="kBG-4y-txA"/>
