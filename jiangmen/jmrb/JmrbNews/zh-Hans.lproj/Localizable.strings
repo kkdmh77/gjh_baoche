@@ -6,3 +6,15 @@
 
 */
 
+// 所有模块
+"All_DataSourceNotFound"                        = "无法找到资源";
+"All_Confirm"                                   = "确定";
+"All_Cancel"                                    = "取消";
+"All_Delete"                                    = "删除";
+"All_Edit"                                      = "编辑";
+"All_Save"                                      = "保存";
+"All_PickFromCamera"                            = "拍照";
+"All_PickFromAlbum"                             = "从相册选择";
+"All_AreYouWantToGiveUpInputContent"            = "是否放弃您所输入的内容?";
+"All_SendSuccess"                               = "发送成功!";
+"All_LoadFailed"                                = "加载失败,请重试!";

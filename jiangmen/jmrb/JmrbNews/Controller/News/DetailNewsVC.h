@@ -11,6 +11,8 @@
 @interface DetailNewsVC : BaseNetworkViewController
 
 @property (nonatomic, assign) NSInteger newsId;
+@property (nonatomic, copy) NSString *newsImageUrlStr;
+@property (nonatomic, copy) NSString *newsTitleStr;
 @property (nonatomic, copy) NSString *newsShareurlStr;
 
 @end

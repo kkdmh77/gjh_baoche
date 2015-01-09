@@ -326,6 +326,8 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
     {
         DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
         detailNews.newsId = entity.newsId;
+        detailNews.newsImageUrlStr = entity.newsImageUrlStr;
+        detailNews.newsTitleStr = entity.newsTitleStr;
         detailNews.newsShareurlStr = entity.newsShareurlStr;
         detailNews.hidesBottomBarWhenPushed = YES;
         [vc.navigationController pushViewController:detailNews animated:YES];
@@ -344,8 +346,12 @@ NSString * const cellIdentifier_image = @"cellIdentifier_image";
     UIViewController *vc = self.parentViewController;
     if ([vc isKindOfClass:[NewsManagerVC class]])
     {
+        AdsEntity *entity = [self curIndexAdEntityByIndex:index];
+        
         DetailNewsVC *detailNews = [[DetailNewsVC alloc] init];
-        detailNews.newsId = [self curIndexAdEntityByIndex:index].newsId;
+        detailNews.newsId = entity.newsId;
+        detailNews.newsImageUrlStr = entity.adImageUrlStr;
+        entity.newsNameStr = entity.newsNameStr;
         detailNews.newsShareurlStr = kNewsShareUrlStr;
         detailNews.hidesBottomBarWhenPushed = YES;
         [vc.navigationController pushViewController:detailNews animated:YES];
