@@ -10,6 +10,9 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDK/ISSShareViewDelegate.h>
 #import <ShareSDK/ISSViewDelegate.h>
+#import "NewsCollectionEntity.h"
+#import "CoreData+MagicalRecord.h"
+#import "InterfaceHUDManager.h"
 
 @interface ShareManager () <ISSShareViewDelegate, ISSViewDelegate>
 
@@ -60,21 +63,34 @@ DEF_SINGLETON(ShareManager);
      shareViewDelegate:self];
      */
     
-    //自定义菜单项
-    id<ISSShareActionSheetItem> collectItem = [ShareSDK shareActionSheetItemWithTitle:@"收藏"
-                                                                                 icon:[UIImage imageNamed:@"gerenzhongxing_normal"]
-                                                                         clickHandler:^{
-                                                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"TEXT_TIPS", @"提示")
-                                                                                                                                 message:NSLocalizedString(@"TEXT_CUSTOM_ITEM_1_CLICK", @"自定义项1被点击了!")
-                                                                                                                                delegate:nil
-                                                                                                                       cancelButtonTitle:NSLocalizedString(@"TEXT_OK", @"确定")
-                                                                                                                       otherButtonTitles:nil];
-                                                                             [alertView show];
-                                                                         }];
-    
     NSArray *shareList = nil;
+    
     if (showCollect)
     {
+        //自定义菜单项
+        id<ISSShareActionSheetItem> collectItem = [ShareSDK shareActionSheetItemWithTitle:@"收藏" icon:[UIImage imageNamed:@"gerenzhongxing_normal"] clickHandler:^{
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"newsId == %d", newsId];
+            NSArray *didCollectedNewsArray = [NewsCollectionEntity MR_findAllWithPredicate:predicate];
+            
+            if ([didCollectedNewsArray isAbsoluteValid])
+            {
+                [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"您以收藏这条新闻了!"];
+            }
+            else
+            {
+                NewsCollectionEntity *collectEntity = [NewsCollectionEntity MR_createEntity];
+                collectEntity.newsId = @(newsId);
+                collectEntity.newsImageUrlStr = urlStr;
+                collectEntity.newsTitleStr = title;
+                collectEntity.collectTime = @([[NSDate date] timeIntervalSince1970]);
+                
+                [collectEntity.managedObjectContext MR_saveToPersistentStoreAndWait];
+                
+                [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"收藏成功!"];
+            }
+        }];
+        
         shareList = [ShareSDK customShareListWithType:
                      collectItem,
                      SHARE_TYPE_NUMBER(ShareTypeSinaWeibo),

@@ -13,6 +13,7 @@
 #import "UserInfoModel.h"
 #import "ModifyUserInfoVC.h"
 #import "ModifyPasswordVC.h"
+#import "NetRequestManager.h"
 
 static NSString * const userNameDescStr = @"用户名: ";
 static NSString * const genderDescStr = @"性   别: ";
@@ -48,7 +49,7 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
     [super viewWillAppear:animated];
     
     [self getNetworkData];
-    [_userHeaderImageBtn setRadius:_userHeaderImageBtn.boundsWidth / 2];
+    [_userHeaderImageBtn setRadius:50];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -160,7 +161,22 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
             UIImage *image = pickedImageArray[0];
             [strongSelf->_userHeaderImageBtn setBackgroundImage:image forState:UIControlStateNormal];
             
+            /*
+             userName ：用户名
+             userPassword  ：密码
+             file:用户的头像<file 形式>
+             */
             // 发送请求
+            
+            NSData *imgData = UIImageJPEGRepresentation(image, 0.2);
+            NSString *imageName = [NSString stringWithFormat:@"%@.png",[NSDate stringFromDate:[NSDate date] withFormatter:DataFormatter_DateAndTime]];
+            NSString *savePaht = GetTmpPathFileName(imageName);
+            
+            [imgData writeToFile:savePaht atomically:NO];
+            
+            NSURL *url = [UrlManager getRequestUrlByMethodName:[[self class] getRequestURLStr:NetUserCenterRequestType_UpdateUserHeaderImage]];
+            
+            [[NetRequestManager sharedInstance] sendUploadRequest:url parameterDic:@{@"userName": [UserInfoModel getUserDefaultLoginName], @"userPassword": [UserInfoModel getUserDefaultPassword]} requestMethodType:RequestMethodType_POST requestTag:NetUserCenterRequestType_UpdateUserHeaderImage delegate:self fileDic:@{@"file": savePaht}];
         }
     }];
 }
@@ -273,6 +289,23 @@ static NSString * const mobilePhoneDescStr = @"手机号: ";
         
         [self backViewController];
     }
+}
+
+#pragma mark - custom methods
+
+- (void)netRequest:(NetRequest *)request successWithInfoObj:(id)infoObj
+{
+    [super netRequest:request successWithInfoObj:infoObj];
+    
+    if (NetUserCenterRequestType_UpdateUserHeaderImage == request.tag)
+    {
+        [self getNetworkData];
+    }
+}
+
+- (void)netRequest:(NetRequest *)request failedWithError:(NSError *)error
+{
+    [super netRequest:request failedWithError:error];
 }
 
 @end

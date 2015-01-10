@@ -40,6 +40,7 @@
                            @"getUser.action",
                            @"updateUser.action",
                            @"updatepsw.action",
+                           @"getUserphoto.action",
                            
                            nil];
     });

@@ -192,7 +192,7 @@
     if (self)
     {
         self.userId = [[dict safeObjectForKey:@"userId"] integerValue];
-        self.userHeaderImageUrlStr = [dict safeObjectForKey:@"userPhoto"];
+        self.userHeaderImageUrlStr = [UrlManager getImageRequestUrlStrByUrlComponent:[dict safeObjectForKey:@"userPhoto"]];
         self.userNameStr = [dict safeObjectForKey:@"userName"];
         self.userPasswordStr = [dict safeObjectForKey:@"userPassword"];
         self.userMobilePhoneStr = [dict safeObjectForKey:@"userPhone"];

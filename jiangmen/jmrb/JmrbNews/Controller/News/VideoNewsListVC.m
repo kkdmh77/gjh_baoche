@@ -111,7 +111,7 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
              delegate:self
              userInfo:nil
        netCachePolicy:cachePolicy
-         cacheSeconds:CacheNetDataTimeType_OneMinute];
+         cacheSeconds:CacheNetDataTimeType_OneDay];
 }
 
 - (NSMutableArray *)parseNetDataWithDic:(NSDictionary *)dic

@@ -31,6 +31,7 @@ typedef enum
     NetUserCenterRequestType_GetUserInfo                       , // 获取用户信息
     NetUserCenterRequestType_ModifyUserInfo                    , // 修改用户信息
     NetUserCenterRequestType_ModifyPassword                    , // 修改密码
+    NetUserCenterRequestType_UpdateUserHeaderImage             , // 修改用户头像
     
 } NetRequestType;
 

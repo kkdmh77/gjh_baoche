@@ -631,6 +631,11 @@
 		2BDA30FD1A40747900EE1470 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDA30FC1A40747900EE1470 /* SettingVC.m */; };
 		2BDA45C01A50470500927CCA /* ChannelEditHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDA45BE1A50470500927CCA /* ChannelEditHeaderView.m */; };
 		2BDA45C11A50470500927CCA /* ChannelEditHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDA45BF1A50470500927CCA /* ChannelEditHeaderView.xib */; };
+		2BDE0ACB1A60CF0E003EA0C4 /* NewsCollectionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE0ACA1A60CF0E003EA0C4 /* NewsCollectionEntity.m */; };
+		2BDE0ACE1A60D765003EA0C4 /* CollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE0ACD1A60D765003EA0C4 /* CollectionVC.m */; };
+		2BDE0AD21A60DB1A003EA0C4 /* CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE0AD01A60DB1A003EA0C4 /* CollectionCell.m */; };
+		2BDE0AD31A60DB1A003EA0C4 /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDE0AD11A60DB1A003EA0C4 /* CollectionCell.xib */; };
+		2BDE0AD61A60DDDE003EA0C4 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE0AD51A60DDDE003EA0C4 /* AboutVC.m */; };
 		2BDE1BE91A2E1672009E78FB /* NewsCell_Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */; };
 		2BDE1BEA1A2E1672009E78FB /* NewsCell_Normal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */; };
 		2BDF7CEC1A4316DD006C9E27 /* shoucang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDF7CE51A4316DD006C9E27 /* shoucang@2x.png */; };
@@ -1918,6 +1923,15 @@
 		2BDA45BD1A50470500927CCA /* ChannelEditHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelEditHeaderView.h; sourceTree = "<group>"; };
 		2BDA45BE1A50470500927CCA /* ChannelEditHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelEditHeaderView.m; sourceTree = "<group>"; };
 		2BDA45BF1A50470500927CCA /* ChannelEditHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelEditHeaderView.xib; sourceTree = "<group>"; };
+		2BDE0AC91A60CF0E003EA0C4 /* NewsCollectionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCollectionEntity.h; sourceTree = "<group>"; };
+		2BDE0ACA1A60CF0E003EA0C4 /* NewsCollectionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCollectionEntity.m; sourceTree = "<group>"; };
+		2BDE0ACC1A60D765003EA0C4 /* CollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionVC.h; sourceTree = "<group>"; };
+		2BDE0ACD1A60D765003EA0C4 /* CollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionVC.m; sourceTree = "<group>"; };
+		2BDE0ACF1A60DB1A003EA0C4 /* CollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionCell.h; sourceTree = "<group>"; };
+		2BDE0AD01A60DB1A003EA0C4 /* CollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionCell.m; sourceTree = "<group>"; };
+		2BDE0AD11A60DB1A003EA0C4 /* CollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
+		2BDE0AD41A60DDDE003EA0C4 /* AboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
+		2BDE0AD51A60DDDE003EA0C4 /* AboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
 		2BDE1BE61A2E1672009E78FB /* NewsCell_Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell_Normal.h; sourceTree = "<group>"; };
 		2BDE1BE71A2E1672009E78FB /* NewsCell_Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell_Normal.m; sourceTree = "<group>"; };
 		2BDE1BE81A2E1672009E78FB /* NewsCell_Normal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell_Normal.xib; sourceTree = "<group>"; };
@@ -4031,6 +4045,10 @@
 				2BD9D1601A4C57B9003C6061 /* ModifyPasswordVC.xib */,
 				43CCFFCF1A4D3E9A00449A3A /* ChannelEditVC.h */,
 				43CCFFD01A4D3E9A00449A3A /* ChannelEditVC.m */,
+				2BDE0ACC1A60D765003EA0C4 /* CollectionVC.h */,
+				2BDE0ACD1A60D765003EA0C4 /* CollectionVC.m */,
+				2BDE0AD41A60DDDE003EA0C4 /* AboutVC.h */,
+				2BDE0AD51A60DDDE003EA0C4 /* AboutVC.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -5169,6 +5187,8 @@
 			children = (
 				43C89B461A2D9314002F5E5F /* CommonEntity.h */,
 				43C89B471A2D9314002F5E5F /* CommonEntity.m */,
+				2BDE0AC91A60CF0E003EA0C4 /* NewsCollectionEntity.h */,
+				2BDE0ACA1A60CF0E003EA0C4 /* NewsCollectionEntity.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -5469,6 +5489,9 @@
 		43CB6B101A466323003829E6 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				2BDE0ACF1A60DB1A003EA0C4 /* CollectionCell.h */,
+				2BDE0AD01A60DB1A003EA0C4 /* CollectionCell.m */,
+				2BDE0AD11A60DB1A003EA0C4 /* CollectionCell.xib */,
 				43CB6B111A46639A003829E6 /* CommentView.h */,
 				43CB6B121A46639A003829E6 /* CommentView.m */,
 				43CB6B141A4663A8003829E6 /* CommentView.xib */,
@@ -6353,6 +6376,7 @@
 				0535D8371654E70500D10324 /* share_button@2x.png in Resources */,
 				0535D8381654E70500D10324 /* share_button_tapped@2x.png in Resources */,
 				0535D8391654E70500D10324 /* shipinbeijing@2x.png in Resources */,
+				2BDE0AD31A60DB1A003EA0C4 /* CollectionCell.xib in Resources */,
 				2B501FBE1A45A72D00012CA7 /* wodexiaoxi_normal@2x.png in Resources */,
 				2B390F331A2CBDEE00A9DA2A /* blackArrow@2x.png in Resources */,
 				0535D83A1654E70500D10324 /* shipingbiaoshi@2x.png in Resources */,
@@ -6771,6 +6795,7 @@
 				43C899F21A2D7B0A002F5E5F /* RegexKitLite.m in Sources */,
 				43C899571A2D792D002F5E5F /* NISnapshotRotation.m in Sources */,
 				2BDA45C01A50470500927CCA /* ChannelEditHeaderView.m in Sources */,
+				2BDE0AD61A60DDDE003EA0C4 /* AboutVC.m in Sources */,
 				43C89AF91A2D895A002F5E5F /* ATJumpAnimation.m in Sources */,
 				43C897AD1A2D6B8D002F5E5F /* NSManagedObject+MagicalRequests.m in Sources */,
 				43C89B291A2D895A002F5E5F /* DrawLineUIBtn.m in Sources */,
@@ -6825,6 +6850,7 @@
 				05C6E002165F24E000498178 /* MPAdsInfoDetailContent.m in Sources */,
 				2B390F651A2CBDEE00A9DA2A /* UIImage+Resize.m in Sources */,
 				43C896DA1A2D68CF002F5E5F /* AFNetworkReachabilityManager.m in Sources */,
+				2BDE0ACB1A60CF0E003EA0C4 /* NewsCollectionEntity.m in Sources */,
 				43C899CE1A2D792D002F5E5F /* NIPhotoScrubberView.m in Sources */,
 				43C899BB1A2D792D002F5E5F /* NIDeviceInfo.m in Sources */,
 				43C89B1B1A2D895A002F5E5F /* UIScrollView+SSToolkitAdditions.m in Sources */,
@@ -6914,6 +6940,7 @@
 				43C89B221A2D895A002F5E5F /* UIFactory.m in Sources */,
 				43C896D91A2D68CF002F5E5F /* AFHTTPSessionManager.m in Sources */,
 				43C899941A2D792D002F5E5F /* NIInterapp.m in Sources */,
+				2BDE0ACE1A60D765003EA0C4 /* CollectionVC.m in Sources */,
 				43C89B511A2D932B002F5E5F /* BaseNetworkViewController.m in Sources */,
 				2B390F631A2CBDEE00A9DA2A /* CJSONSerializer.m in Sources */,
 				2B390F3F1A2CBDEE00A9DA2A /* SDWebImageDownloader.m in Sources */,
@@ -6981,6 +7008,7 @@
 				43C89AF81A2D895A002F5E5F /* ATFlipAnimationView.m in Sources */,
 				05C6E04A165F24E000498178 /* VideoViewController.m in Sources */,
 				43C89B3C1A2D895A002F5E5F /* YGButtonBox.m in Sources */,
+				2BDE0AD21A60DB1A003EA0C4 /* CollectionCell.m in Sources */,
 				43C89B281A2D895A002F5E5F /* DownloadCache.m in Sources */,
 				43C89B181A2D895A002F5E5F /* UIDevice+SSToolkitAdditions.m in Sources */,
 				05C6E04C165F24E000498178 /* DayWeather.m in Sources */,
