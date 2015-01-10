@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonEntity.h"
 
 /// 订单班车信息
 @interface BusInfoView : UIView
 
 + (CGFloat)getViewHeight;
+- (void)loadViewShowDataWithItemEntity:(AllBusListItemEntity *)entity;
 
 @end
 

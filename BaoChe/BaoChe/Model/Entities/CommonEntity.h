@@ -15,6 +15,9 @@
 @property (nonatomic, copy) NSString *busTypeStr;
 @property (nonatomic, copy) NSString *startTimeStr;
 @property (nonatomic, copy) NSString *endTimeStr;
+@property (nonatomic, copy) NSString *endDateRequireDescStr; // 次日、当日等
+@property (nonatomic, copy) NSString *startTime_DateStr;
+@property (nonatomic, copy) NSString *endTime_DateStr;
 @property (nonatomic, copy) NSString *startStation;
 @property (nonatomic, copy) NSString *endStation;
 @property (nonatomic, copy) NSString *timeRequired;

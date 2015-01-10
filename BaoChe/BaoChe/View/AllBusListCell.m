@@ -55,7 +55,7 @@ static CGFloat defaultCellHeight = 0;
     _terminalTimeLabel.textColor = Common_GrayColor;
     
     _terminalStationLabel.font = SP13Font;
-    _terminalStationLabel.textColor = Common_GrayColor;
+    _terminalStationLabel.textColor = Common_BlackColor;
     
     _ThroughStationsLabel.font = SP12Font;
     _ThroughStationsLabel.textColor = Common_GrayColor;
@@ -91,7 +91,7 @@ static CGFloat defaultCellHeight = 0;
 {
     _busNameLabel.text = [NSString stringWithFormat:@"%@(%@)", entity.busNameStr, entity.busTypeStr];
     _departureTimeLabel.text = entity.startTimeStr;
-    _terminalTimeLabel.text = entity.endTimeStr;
+    _terminalTimeLabel.text = [NSString stringWithFormat:@"%@%@", entity.endTimeStr, entity.endDateRequireDescStr];
     _departureStationLabel.text = entity.startStation;
     _terminalStationLabel.text = entity.endStation;
     _requiredTimeLabel.text = entity.timeRequired;

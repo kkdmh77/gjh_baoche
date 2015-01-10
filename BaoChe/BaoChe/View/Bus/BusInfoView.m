@@ -82,6 +82,20 @@ static CGFloat defaultViewHeight = 0;
     return defaultViewHeight;
 }
 
+- (void)loadViewShowDataWithItemEntity:(AllBusListItemEntity *)entity
+{
+    _busNameLabel.text = [NSString stringWithFormat:@"%@(%@)", entity.busNameStr, entity.busTypeStr];
+    _startTimeLabel.text = entity.startTimeStr;
+    _endTimeLabel.text = entity.endTimeStr;
+    _startStationLabel.text = entity.startStation;
+    _endStationLabel.text = entity.endStation;
+    _requireTimeLabel.text = entity.timeRequired;
+    _startTime_DateLabel.text = entity.startTime_DateStr;
+    _endTime_dateLabel.text = entity.endTime_DateStr;
+    _stationsLabel.text = entity.passStation;
+    _priceLabel.text = [NSString stringWithFormat:@"￥%.2lf",entity.price];
+}
+
 @end
 
 #pragma mark - OrderContactInfoView -----------------------------

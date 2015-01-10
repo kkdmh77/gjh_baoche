@@ -14,17 +14,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzr-Tr-RIm">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系姓名" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKc-I7-kS7">
-                            <rect key="frame" x="10" y="16" width="60" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系姓名:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKc-I7-kS7">
+                            <rect key="frame" x="10" y="16" width="65" height="18"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="60" id="J8H-aG-PTz"/>
+                                <constraint firstAttribute="width" constant="65" id="J8H-aG-PTz"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="周杰伦" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cR9-vd-asW">
-                            <rect key="frame" x="90" y="0.0" width="220" height="50"/>
+                            <rect key="frame" x="95" y="0.0" width="215" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
@@ -44,17 +44,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="teI-OR-f48">
                     <rect key="frame" x="0.0" y="50" width="320" height="50"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系手机" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adl-fb-Kzm">
-                            <rect key="frame" x="10" y="16" width="60" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系手机:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adl-fb-Kzm">
+                            <rect key="frame" x="10" y="16" width="65" height="18"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="60" id="nbG-cN-gVS"/>
+                                <constraint firstAttribute="width" constant="65" id="nbG-cN-gVS"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="13800138000" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DR2-Gq-E4w">
-                            <rect key="frame" x="90" y="0.0" width="220" height="50"/>
+                            <rect key="frame" x="95" y="0.0" width="215" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
@@ -74,17 +74,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjF-Xw-Sax">
                     <rect key="frame" x="0.0" y="100" width="320" height="70"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egE-eP-5Lb">
-                            <rect key="frame" x="10" y="26" width="60" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egE-eP-5Lb">
+                            <rect key="frame" x="10" y="26" width="65" height="18"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="60" id="tS9-kC-WQM"/>
+                                <constraint firstAttribute="width" constant="65" id="tS9-kC-WQM"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="备注" translatesAutoresizingMaskIntoConstraints="NO" id="o23-al-dEv">
-                            <rect key="frame" x="86" y="5" width="224" height="60"/>
+                            <rect key="frame" x="91" y="5" width="219" height="60"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
