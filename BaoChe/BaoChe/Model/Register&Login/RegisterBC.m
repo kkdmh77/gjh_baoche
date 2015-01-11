@@ -65,7 +65,9 @@
                         // 进行注册操作
                         NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_Register];
                         NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
-                        NSDictionary *dic = @{@"username": userName, @"password": password, @"checkCode": verificationCode};
+                        NSDictionary *dic = @{@"username": userName,
+                                              @"password": password,
+                                              @"Code": verificationCode};
                         
                         [[NetRequestManager sharedInstance] sendRequest:url
                                                            parameterDic:dic

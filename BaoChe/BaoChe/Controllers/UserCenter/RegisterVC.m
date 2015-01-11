@@ -156,6 +156,8 @@
                                 verificationCode:_verificationCodeTF.text
                                    successHandle:^(id successInfoObj) {
         
+                                       [weakSelf loginWithUserName:_userNameTF.text password:_passwordTF.text];
+                                       
     } failedHandle:^(NSError *error) {
         
     }];
