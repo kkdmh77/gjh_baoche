@@ -11,6 +11,7 @@
 @interface BaseNetworkViewController ()
 {
     UIImageView *netBackgroundStatusImgView;
+    UILabel     *netStatusRemindLabel;
 }
 
 @end
@@ -81,16 +82,46 @@
 // 设置网络背景状态图
 - (void)setNetworkStatusViewByImage:(UIImage *)image userInteractionEnabled:(BOOL)yesOrNo
 {
+    [self setNetworkStatusViewByImage:image
+                           remindText:nil
+               userInteractionEnabled:yesOrNo];
+}
+
+- (void)setNetworkStatusViewByImage:(UIImage *)image remindText:(NSString *)text userInteractionEnabled:(BOOL)yesOrNo
+{
+    [self setNetworkStatusViewWithFrame:self.view.bounds
+                                  Image:image
+                             remindText:text
+                 userInteractionEnabled:yesOrNo];
+}
+
+- (void)setNetworkStatusViewWithFrame:(CGRect)frame Image:(UIImage *)image remindText:(NSString *)text userInteractionEnabled:(BOOL)yesOrNo
+{
     if (!netBackgroundStatusImgView)
     {
-        netBackgroundStatusImgView = InsertImageView(self.view, self.view.bounds, nil, nil);
+        netBackgroundStatusImgView = InsertImageView(self.view, frame, nil, nil);
         netBackgroundStatusImgView.contentMode = UIViewContentModeScaleAspectFit;
         [netBackgroundStatusImgView keepAutoresizingInFull];
         
-        [self.view insertSubview:netBackgroundStatusImgView atIndex:0];
+        [self.view addSubview:netBackgroundStatusImgView];
+    }
+    if (!netStatusRemindLabel)
+    {
+        netStatusRemindLabel = InsertLabel(netBackgroundStatusImgView,
+                                           CGRectMake(0, 0, netBackgroundStatusImgView.boundsWidth - 10 * 2, 0),
+                                           NSTextAlignmentCenter,
+                                           text,
+                                           SP15Font,
+                                           [UIColor blackColor],
+                                           YES);
     }
     
     netBackgroundStatusImgView.image = image;
+    
+    netStatusRemindLabel.text = text;
+    [netStatusRemindLabel sizeToFit];
+    netStatusRemindLabel.frameOrigin = CGPointMake((netBackgroundStatusImgView.boundsWidth - netStatusRemindLabel.boundsWidth) / 2, netBackgroundStatusImgView.boundsHeight / 2 + 40);
+    
     [netBackgroundStatusImgView removeGestureWithTarget:self andAction:@selector(getNetworkData)];
     
     if (yesOrNo && [self respondsToSelector:@selector(getNetworkData)])
@@ -100,14 +131,28 @@
     }
 }
 
+- (void)setNoDataSourceStatusView
+{
+    [self setNoDataSourceStatusViewWithRemindText:nil];
+}
+
+- (void)setNoDataSourceStatusViewWithRemindText:(NSString *)remindText
+{
+    [self setNetworkStatusViewByImage:[UIImage imageNamed:@"gwc_kkry"]
+                           remindText:remindText
+               userInteractionEnabled:NO];
+}
+
 - (void)setNoNetworkConnectionStatusView
 {
-    [self setNetworkStatusViewByImage:[UIImage imageNamed:@"Unify_Image_w51"] userInteractionEnabled:YES];
+    [self setNetworkStatusViewByImage:[UIImage imageNamed:@"Unify_Image_w51"]
+               userInteractionEnabled:YES];
 }
 
 - (void)setLoadFailureStatusView
 {
-    [self setNetworkStatusViewByImage:[UIImage imageNamed:@"gouwuche_morentupian"] userInteractionEnabled:YES];
+    [self setNetworkStatusViewByImage:[UIImage imageNamed:@"gouwuche_morentupian"]
+               userInteractionEnabled:YES];
 }
 
 #pragma mark - 设置代码块
@@ -186,6 +231,12 @@
         else
         {
             [self showHUDInfoByString:[LanguagesManager getStr:All_DataSourceNotFoundKey]];
+        }
+        
+        // 没数据时的状态图
+        if (isAddActionView)
+        {
+            [self setNoDataSourceStatusViewWithRemindText:@"亲,还没有内容哦!"];
         }
     }
     // 未登录或登录过期

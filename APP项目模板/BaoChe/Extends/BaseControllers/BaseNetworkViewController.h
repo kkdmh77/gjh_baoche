@@ -68,7 +68,21 @@ typedef void (^ExtendVCNetRequestFailedBlock)    (NetRequest *request, NSError *
 
 
 /// 设置网络背景状态图
-- (void)setNetworkStatusViewByImage:(UIImage *)image userInteractionEnabled:(BOOL)yesOrNo;
+- (void)setNetworkStatusViewByImage:(UIImage *)image
+             userInteractionEnabled:(BOOL)yesOrNo;
+
+- (void)setNetworkStatusViewByImage:(UIImage *)image
+                         remindText:(NSString *)text
+             userInteractionEnabled:(BOOL)yesOrNo;
+
+- (void)setNetworkStatusViewWithFrame:(CGRect)frame
+                                Image:(UIImage *)image
+                           remindText:(NSString *)text
+               userInteractionEnabled:(BOOL)yesOrNo;
+
+/// 设置没有数据的背景图
+- (void)setNoDataSourceStatusView;
+- (void)setNoDataSourceStatusViewWithRemindText:(NSString *)remindText;
 
 /// 设置没有网络连接的背景图
 - (void)setNoNetworkConnectionStatusView;
