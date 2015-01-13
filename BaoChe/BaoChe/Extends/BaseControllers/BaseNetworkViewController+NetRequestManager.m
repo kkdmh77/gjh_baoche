@@ -24,6 +24,11 @@
                            @"college/get_college",
                            @"bus/get_end_location",
                            
+                           // 用户中心
+                           @"user/login",
+                           @"user/register",
+                           @"user/send_code",
+                           
                            nil];
 
         

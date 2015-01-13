@@ -206,7 +206,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
     AllBusListItemEntity *entity = [self curIndexTabCellShowData:indexPath.row];
     
     OrderWriteVC *orderWrite = [[OrderWriteVC alloc] init];
-    orderWrite.busId = entity.keyId;
+    orderWrite.busEntity = entity;
     orderWrite.hidesBottomBarWhenPushed = YES;
     [self pushViewController:orderWrite];
 }

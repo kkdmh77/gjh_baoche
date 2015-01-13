@@ -8,6 +8,12 @@
 
 #import "SettingVC.h"
 #import "UserInfoModel.h"
+#import "CollectionVC.h"
+#import "AboutVC.h"
+#import "PRPAlertView.h"
+#import "DownloadCache.h"
+#import "CoreData+MagicalRecord.h"
+#import "InterfaceHUDManager.h"
 
 @interface SettingVC ()
 {
@@ -141,15 +147,22 @@
     {
         if (0 == indexPath.row)
         {
-            
+            CollectionVC *collection = [[CollectionVC alloc] init];
+            [self pushViewController:collection];
         }
         else if (1 == indexPath.row)
         {
-            
+            [PRPAlertView showWithTitle:@"您是否要清除缓存?" message:nil cancelTitle:Cancel cancelBlock:nil otherTitle:Confirm otherBlock:^{
+                
+                [DownloadCache MR_truncateAll];
+                
+                [PRPAlertView showWithTitle:@"已成功清除缓存" message:nil cancelTitle:nil cancelBlock:nil otherTitle:Confirm otherBlock:nil];
+            }];
         }
         else if (2 == indexPath.row)
         {
-            
+            AboutVC *about = [[AboutVC alloc] init];
+            [self pushViewController:about];
         }
     }
     else if (1 == indexPath.section)

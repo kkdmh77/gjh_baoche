@@ -130,7 +130,7 @@ static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
              delegate:self
              userInfo:nil
        netCachePolicy:cachePolicy
-         cacheSeconds:CacheNetDataTimeType_OneMinute];
+         cacheSeconds:CacheNetDataTimeType_OneDay];
 }
 
 - (NSMutableArray *)parseNetDataWithDic:(NSDictionary *)dic

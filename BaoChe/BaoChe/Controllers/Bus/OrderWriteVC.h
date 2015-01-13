@@ -7,9 +7,10 @@
 //
 
 #import "BaseNetworkViewController.h"
+#import "CommonEntity.h"
 
 @interface OrderWriteVC : BaseNetworkViewController
 
-@property (nonatomic, assign) NSInteger busId;
+@property (nonatomic, strong) AllBusListItemEntity *busEntity;
 
 @end

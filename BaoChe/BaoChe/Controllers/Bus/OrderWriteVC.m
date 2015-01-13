@@ -62,7 +62,17 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     [settlementView setSettlementPrice:100 count:4];
     WEAKSELF
     [settlementView setOperationHandle:^(SettlementView *view, SettlementViewOperationType type, id sender) {
-        
+        /*
+         车次id  int ScheduleId
+         用户id  int  UserId'
+         数量	int	Tickets
+         价格    decimal   TotalAmount'
+         用户手机号 str Phone
+         用户地址  Str Address'
+         乘客列表  Str  PeopleList  json字符串
+         Eg : ‘[{“NameList” : “姓名”  : “IdentityList”  :  “身份证号码” },
+         {“NameList”: ”姓名2”,  ” IdentityList”  :  “4443434343” } ]
+         */
         
     }];
     [self.view addSubview:settlementView];
@@ -170,6 +180,8 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             BusInfoView *busInfoView = [BusInfoView loadFromNib];
             busInfoView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            [busInfoView loadViewShowDataWithItemEntity:_busEntity];
+            
             [cell addSubview:busInfoView];
         }
         

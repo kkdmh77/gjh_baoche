@@ -195,7 +195,7 @@ int webTextFontValue = 15;
                                                  NewsId:_newsId
                                             imageUrlStr:_newsImageUrlStr
                                                   title:_newsTitleStr
-                                         showCollectBtn:YES
+                                         showCollectBtn:[_newsImageUrlStr isAbsoluteValid] ? YES : NO
                                                  sender:sender];
 }
 

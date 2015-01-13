@@ -18,6 +18,7 @@ typedef enum
     // 用户中心
     NetUserCenterRequestType_Register                        , // 注册
     NetUserCenterRequestType_Login                           , // 登录
+    NetUserCenterRequestType_GetVerificationCode             , // 获取验证码
     
 } NetRequestType;
 

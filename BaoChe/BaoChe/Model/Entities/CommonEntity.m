@@ -36,18 +36,23 @@
                                        secondsCount:NULL];
         
         self.startTimeStr = [NSDate stringFromTimeIntervalSeconds:startTime withFormatter:DataFormatter_TimeNoSecond];
-        self.timeRequired = [NSString stringWithFormat:@"%d时%d分钟", hours, minutes];
+        self.endTimeStr = [NSDate stringFromTimeIntervalSeconds:endTime withFormatter:DataFormatter_TimeNoSecond];
+        
+        self.startTime_DateStr = [NSDate stringFromTimeIntervalSeconds:startTime withFormatter:DataFormatter_DateNoYear];
+        self.endTime_DateStr = [NSDate stringFromTimeIntervalSeconds:endTime withFormatter:DataFormatter_DateNoYear];
+        
+        self.timeRequired = [NSString stringWithFormat:@"%d时%d分钟", hours + 24 * days, minutes];
         if (0 == days)
         {
-            self.endTimeStr = [NSString stringWithFormat:@"当日%@", [NSDate stringFromTimeIntervalSeconds:endTime withFormatter:DataFormatter_TimeNoSecond]];
+            self.endDateRequireDescStr = [NSString stringWithFormat:@"当日"];
         }
         else if (1 == days)
         {
-            self.endTimeStr = [NSString stringWithFormat:@"次日%@", [NSDate stringFromTimeIntervalSeconds:endTime withFormatter:DataFormatter_TimeNoSecond]];
+            self.endDateRequireDescStr = [NSString stringWithFormat:@"次日"];
         }
         else if (2 == days)
         {
-            self.endTimeStr = [NSString stringWithFormat:@"后日%@", [NSDate stringFromTimeIntervalSeconds:endTime withFormatter:DataFormatter_TimeNoSecond]];
+            self.endDateRequireDescStr = [NSString stringWithFormat:@"后日"];
         }
     }
     return self;
