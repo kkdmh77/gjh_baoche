@@ -12,11 +12,19 @@
 
 @interface InterfaceHUDManager () <GJHAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 {
-    NSMutableArray  *_allProvinceAndCityDataArray;  // 从文件读取的全国省市区数据
+    NSMutableArray  *_allCountiesDataArray;  // 从文件读中取的全世界各个国家的省市区数据
+    
+    NSMutableArray  *_curCountiesArray;
+    NSMutableArray  *_curCountiesIdArray;
     
     NSMutableArray  *_curProvincesArray;
+    NSMutableArray  *_curProvincesIdArray;
+    
     NSMutableArray  *_curCitiesArray;
+    NSMutableArray  *_curCitiesIdArray;
+    
     NSMutableArray  *_curAreasArray;
+    NSMutableArray  *_curAreasIdArray;
     
     PopupController *_popupController;
     UIView          *_pickerView;
@@ -39,6 +47,20 @@
 
 DEF_SINGLETON(InterfaceHUDManager);
 
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        // 初始化数据
+        [self getProvinceAndCityData];
+        [self getPickerCurrentShowDatasWithCountryIndex:0
+                                         provincesIndex:0
+                                              cityIndex:0];
+    }
+    return self;
+}
+
 - (void)showAutoHideAlertWithMessage:(NSString *)message
 {
     [self showAlertWithTitle:nil message:message buttonTitle:nil];
@@ -52,18 +74,18 @@ DEF_SINGLETON(InterfaceHUDManager);
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message alertShowType:(AlertShowType)type cancelTitle:(NSString *)cancelTitle cancelBlock:(GJHAlertBlock)cancelBlock otherTitle:(NSString *)otherTitle otherBlock:(GJHAlertBlock)otherBlock
 {
     GJHAlertView *alert = [[GJHAlertView alloc] initWithTitle:title message:message isInputContentView:NO delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:otherTitle, nil];
-    alert.defaultButtonTitleColor = Common_InkGreenColor;
+    alert.defaultButtonTitleColor = Common_BlackColor;
     alert.defaultButtonFont = SP16Font;
     alert.titleLabel.font = SP16Font;
-    alert.titleLabel.textColor = Common_InkGreenColor;
+    alert.titleLabel.textColor = Common_BlackColor;
     alert.messageLabel.font = SP16Font;
     if (AlertShowType_Informative == type)
     {
-        alert.messageLabel.textColor = Common_InkGreenColor;
+        alert.messageLabel.textColor = Common_BlackColor;
     }
     else
     {
-        alert.messageLabel.textColor = Common_OrangeColor;
+        alert.messageLabel.textColor = Common_ThemeColor;
     }
     
     if (!cancelBlock && !otherBlock)
@@ -100,10 +122,10 @@ DEF_SINGLETON(InterfaceHUDManager);
 
 #pragma mark - /////////////////////////////////////////////////////////////////////////
 
-// 获取全国所有省市区的数据
+// 获取全世界各个国家所有省市区数据
 - (void)getProvinceAndCityData
 {
-    if (!_allProvinceAndCityDataArray)
+    if (!_allCountiesDataArray)
     {
         NSString *addressFileStr = GetApplicationPathFileName(@"Address", @"json");
         NSData *addressFileData = [NSData dataWithContentsOfFile:addressFileStr];
@@ -112,59 +134,148 @@ DEF_SINGLETON(InterfaceHUDManager);
         
         if ([addressDic isAbsoluteValid])
         {
-            _allProvinceAndCityDataArray = [addressDic objectForKey:@"province"];
+            _allCountiesDataArray = [[addressDic safeObjectForKey:@"data"] safeObjectForKey:@"countrieAddressInfo"];   // 全世界国家的地址
         }
 //        DLog(@"%@",addressDic);
     }
 }
 
-- (void)getPickerCurrentShowDatasWithProvincesIndex:(NSInteger)provincesIndex cityIndex:(NSInteger)cityIndex
+- (void)getPickerCurrentShowDatasWithCountryIndex:(NSInteger)countryIndex provincesIndex:(NSInteger)provincesIndex cityIndex:(NSInteger)cityIndex
 {
-    // 省(只要加载一次数据)
-    if (!_curProvincesArray)
+    // 国家(只要加载一次数据)
+    if (!_curCountiesArray)
     {
-        _curProvincesArray = [NSMutableArray array];
-        for (NSDictionary *province in _allProvinceAndCityDataArray)
+        _curCountiesArray = [NSMutableArray array];
+        _curCountiesIdArray = [NSMutableArray array];
+        for (NSDictionary *countryDic in _allCountiesDataArray)
         {
-            [_curProvincesArray addObject:[province objectForKey:@"name"]];
+            NSDictionary *country = [countryDic safeObjectForKey:@"country"];
+            
+            [_curCountiesArray addObject:[country objectForKey:@"name"]];
+            [_curCountiesIdArray addObject:[country safeObjectForKey:@"id"]];
         }
+    }
+    
+    // 省
+    _curProvincesArray = [NSMutableArray array];
+    _curProvincesIdArray = [NSMutableArray array];
+    NSDictionary *countryDic = [self getCountryDicWtihIndex:countryIndex];
+    NSArray *provinceArray = [countryDic safeObjectForKey:@"province"];
+    for (NSDictionary *province in provinceArray)
+    {
+        [_curProvincesArray addObject:[province objectForKey:@"name"]];
+        [_curProvincesIdArray addObject:[province safeObjectForKey:@"id"]];
     }
     
     // 市
     _curCitiesArray = [NSMutableArray array];
-    NSDictionary *provinceDic = [self getProvinceDicsWtihIndex:provincesIndex];
+    _curCitiesIdArray = [NSMutableArray array];
+    NSDictionary *provinceDic = provincesIndex < provinceArray.count ? provinceArray[provincesIndex] : nil;
     NSArray *cityArray = [provinceDic objectForKey:@"city"];
-    if ([cityArray isAbsoluteValid])
+    for (NSDictionary *city in cityArray)
     {
-        for (NSDictionary *city in cityArray)
-        {
-            [_curCitiesArray addObject:[city objectForKey:@"name"]];
-        }
+        [_curCitiesArray addObject:[city objectForKey:@"name"]];
+        [_curCitiesIdArray addObject:[city safeObjectForKey:@"id"]];
     }
     
     // 区
     _curAreasArray = [NSMutableArray array];
-    if ([cityArray isAbsoluteValid])
+    _curAreasIdArray = [NSMutableArray array];
+    NSDictionary *cityDic = cityIndex < cityArray.count ? cityArray[cityIndex] : nil;
+    NSArray *areaArray = [cityDic objectForKey:@"area"];
+    for (NSDictionary *area in areaArray)
     {
-        NSDictionary *cityDic = cityArray[cityIndex];
-        NSArray *areaArray = [cityDic objectForKey:@"area"];
-        if ([areaArray isAbsoluteValid])
+        [_curAreasArray addObject:[area objectForKey:@"name"]];
+        [_curAreasIdArray addObject:[area safeObjectForKey:@"id"]];
+    }
+}
+
+- (void)getCurCountryIndex:(NSInteger *)countryIndex provinceIndex:(NSInteger *)provinceIndex cityIndex:(NSInteger *)cityIndex areaIndex:(NSInteger *)areaIndex inAddressStr:(NSString *)addressStr
+{
+    *countryIndex = NSNotFound;
+    *provinceIndex = NSNotFound;
+    *cityIndex = NSNotFound;
+    *areaIndex = NSNotFound;
+    
+    // 国家的index
+    for (NSString *countryStr in _curCountiesArray)
+    {
+        if ([addressStr containsString:countryStr])
         {
-            for (NSDictionary *area in areaArray)
-            {
-                [_curAreasArray addObject:[area objectForKey:@"name"]];
-            }
+            *countryIndex = [_curCountiesArray indexOfObject:countryStr];
+            break;
+        }
+    }
+    if (*countryIndex == NSNotFound) return;
+    [self getPickerCurrentShowDatasWithCountryIndex:*countryIndex
+                                     provincesIndex:0
+                                          cityIndex:0];
+    
+    // 省的index
+    for (NSString *provinceStr in _curProvincesArray)
+    {
+        if ([addressStr containsString:provinceStr])
+        {
+            *provinceIndex = [_curProvincesArray indexOfObject:provinceStr];
+            break;
+        }
+    }
+    if (*provinceIndex == NSNotFound) return;
+    [self getPickerCurrentShowDatasWithCountryIndex:*countryIndex
+                                     provincesIndex:*provinceIndex
+                                          cityIndex:0];
+    
+    // 市的index
+    for (NSString *cityStr in _curCitiesArray)
+    {
+        if ([addressStr containsString:cityStr])
+        {
+            *cityIndex = [_curCitiesArray indexOfObject:cityStr];
+            break;
+        }
+    }
+    if (*cityIndex == NSNotFound) return;
+    [self getPickerCurrentShowDatasWithCountryIndex:*countryIndex
+                                     provincesIndex:*provinceIndex
+                                          cityIndex:*cityIndex];
+    
+    // 区的index
+    for (NSString *areaStr in _curAreasArray)
+    {
+        if ([addressStr containsString:areaStr])
+        {
+            *areaIndex = [_curAreasArray indexOfObject:areaStr];
+            break;
         }
     }
 }
 
-- (NSDictionary *)getProvinceDicsWtihIndex:(NSInteger)index
+- (NSArray *)getCurIdsArrayInAddressStr:(NSString *)addressStr
 {
-    if ([_allProvinceAndCityDataArray isAbsoluteValid])
-    {
-        return _allProvinceAndCityDataArray[index];
-    }
-    return nil;
+    NSInteger countryIndex;
+    NSInteger provinceIndex;
+    NSInteger cityIndex;
+    NSInteger areaIndex;
+    
+    [self getCurCountryIndex:&countryIndex
+               provinceIndex:&provinceIndex
+                   cityIndex:&cityIndex
+                   areaIndex:&areaIndex
+                inAddressStr:addressStr];
+    
+    NSNumber *countryId = countryIndex < _curCountiesIdArray.count ? _curCountiesIdArray[countryIndex] : @(NSNotFound);
+    NSNumber *provinceId = provinceIndex < _curProvincesIdArray.count ? _curProvincesIdArray[provinceIndex] : @(NSNotFound);
+    NSNumber *cityId = cityIndex < _curCitiesIdArray.count ? _curCitiesIdArray[cityIndex] : @(NSNotFound);
+    NSNumber *areaId = areaIndex < _curAreasIdArray.count ? _curAreasIdArray[areaIndex] : @(NSNotFound);
+    
+    return @[countryId, provinceId, cityId, areaId];
+}
+
+- (NSDictionary *)getCountryDicWtihIndex:(NSInteger)index
+{
+    NSDictionary *countryDic = index < _allCountiesDataArray.count ? _allCountiesDataArray[index] : nil;
+    
+    return [countryDic safeObjectForKey:@"country"];
 }
 
 - (void)showPickerWithTitle:(NSString *)title PickerShowType:(PickerShowType)type pickerCancelBlock:(PickerOperationBlock)pickerCancelBlock pickerConfirmBlock:(PickerOperationBlock)pickerConfirmBlock
@@ -207,54 +318,38 @@ DEF_SINGLETON(InterfaceHUDManager);
     }
     else
     {
-        // 初始化数据
-        [self getProvinceAndCityData];
-        [self getPickerCurrentShowDatasWithProvincesIndex:0 cityIndex:0];
-
         _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, IPHONE_WIDTH, 70)];
         [(UIPickerView *)_pickerView setShowsSelectionIndicator:YES];
         [(UIPickerView *)_pickerView setDataSource:self];
         [(UIPickerView *)_pickerView setDelegate:self];
         
+        [self getPickerCurrentShowDatasWithCountryIndex:0
+                                         provincesIndex:0
+                                              cityIndex:0];
+        
         // 默认被选中的位置
         if ([selectedStr isAbsoluteValid])
         {
-            NSInteger provinceIndex = 0;
-            NSInteger cityIndex = 0;
-            NSInteger areaIndex = 0;
+            NSInteger countryIndex;
+            NSInteger provinceIndex;
+            NSInteger cityIndex;
+            NSInteger areaIndex;
             
-            // 省的index
-            for (NSString *provinceStr in _curProvincesArray)
-            {
-                if ([selectedStr containsString:provinceStr])
-                {
-                    provinceIndex = [_curProvincesArray indexOfObject:provinceStr];
-                }
-            }
-            [self getPickerCurrentShowDatasWithProvincesIndex:provinceIndex cityIndex:0];
+            [self getCurCountryIndex:&countryIndex
+                       provinceIndex:&provinceIndex
+                           cityIndex:&cityIndex
+                           areaIndex:&areaIndex
+                        inAddressStr:selectedStr];
             
-            // 市的index
-            for (NSString *cityStr in _curCitiesArray)
-            {
-                if ([selectedStr containsString:cityStr])
-                {
-                    cityIndex = [_curCitiesArray indexOfObject:cityStr];
-                }
-            }
-            [self getPickerCurrentShowDatasWithProvincesIndex:provinceIndex cityIndex:cityIndex];
+            countryIndex = (countryIndex == NSNotFound ? 0 : countryIndex);
+            provinceIndex = (provinceIndex == NSNotFound ? 0 : provinceIndex);
+            cityIndex = (cityIndex == NSNotFound ? 0 : cityIndex);
+            areaIndex = (areaIndex == NSNotFound ? 0 : areaIndex);
             
-            // 区的index
-            for (NSString *areaStr in _curAreasArray)
-            {
-                if ([selectedStr containsString:areaStr])
-                {
-                    areaIndex = [_curAreasArray indexOfObject:areaStr];
-                }
-            }
-            
-            [(UIPickerView *)_pickerView selectRow:provinceIndex inComponent:0 animated:YES];
-            [(UIPickerView *)_pickerView selectRow:cityIndex inComponent:1 animated:YES];
-            [(UIPickerView *)_pickerView selectRow:areaIndex inComponent:2 animated:YES];
+            [(UIPickerView *)_pickerView selectRow:countryIndex inComponent:0 animated:YES];
+            [(UIPickerView *)_pickerView selectRow:provinceIndex inComponent:1 animated:YES];
+            [(UIPickerView *)_pickerView selectRow:cityIndex inComponent:2 animated:YES];
+            [(UIPickerView *)_pickerView selectRow:areaIndex inComponent:3 animated:YES];
         }
     }
     _pickerView.autoresizingMask = UIViewAutoresizingFlexibleHeight; // 这里设置了就可以自定义高度了,一般默认是无法修改其216像素的高度的
@@ -277,12 +372,15 @@ DEF_SINGLETON(InterfaceHUDManager);
     // 点击事件处理
     if ([sender.title isEqualToString:Cancel])
     {
-        if (_pickerCancelBlock) _pickerCancelBlock(nil);
+        if (_pickerCancelBlock) _pickerCancelBlock(nil, nil);
     }
     else
     {
+        NSArray *idsArray = nil;
+        
         // 组装被选择的字符串
         NSString *pickedContentStr = nil;
+        
         if (PickerShowType_Date == _pickerShowType)
         {
             pickedContentStr = [NSDate stringFromDate:((UIDatePicker *)_pickerView).date withFormatter:@"yyyy-MM-dd"];
@@ -291,18 +389,28 @@ DEF_SINGLETON(InterfaceHUDManager);
         {
             UIPickerView *picker = (UIPickerView *)_pickerView;
             
-            NSInteger provinceIndex = [picker selectedRowInComponent:0];
-            NSInteger cityIndex = [picker selectedRowInComponent:1];
-            NSInteger areaIndex = [picker selectedRowInComponent:2];
+            NSInteger countryIndex = [picker selectedRowInComponent:0];
+            NSInteger provinceIndex = [picker selectedRowInComponent:1];
+            NSInteger cityIndex = [picker selectedRowInComponent:2];
+            NSInteger areaIndex = [picker selectedRowInComponent:3];
+            
+            NSString *countryStr = [_curCountiesArray isAbsoluteValid] ? _curCountiesArray[countryIndex] : @"";
+            NSNumber *countryId = countryIndex < _curCountiesIdArray.count ? _curCountiesIdArray[countryIndex] : @(NSNotFound);
             
             NSString *provinceStr = [_curProvincesArray isAbsoluteValid] ? _curProvincesArray[provinceIndex] : @"";
-            NSString *cityStr = [_curCitiesArray isAbsoluteValid] ? _curCitiesArray[cityIndex] : @"";
-            NSString *areaStr = [_curAreasArray isAbsoluteValid] ? _curAreasArray[areaIndex] : @"";
+            NSNumber *provinceId = provinceIndex < _curProvincesIdArray.count ? _curProvincesIdArray[provinceIndex] : @(NSNotFound);
             
-            pickedContentStr = [NSString stringWithFormat:@"%@%@%@",provinceStr, cityStr, areaStr];
+            NSString *cityStr = [_curCitiesArray isAbsoluteValid] ? _curCitiesArray[cityIndex] : @"";
+            NSNumber *cityId = cityIndex < _curCitiesIdArray.count ? _curCitiesIdArray[cityIndex] : @(NSNotFound);
+            
+            NSString *areaStr = [_curAreasArray isAbsoluteValid] ? _curAreasArray[areaIndex] : @"";
+            NSNumber *areaId = areaIndex < _curAreasIdArray.count ? _curAreasIdArray[areaIndex] : @(NSNotFound);
+            
+            pickedContentStr = [NSString stringWithFormat:@"%@%@%@%@",countryStr, provinceStr, cityStr, areaStr];
+            idsArray = @[countryId, provinceId, cityId, areaId];
         }
         
-        if (_pickerConfirmBlock) _pickerConfirmBlock(pickedContentStr);
+        if (_pickerConfirmBlock) _pickerConfirmBlock(pickedContentStr, idsArray);
     }
     
     [self clearPickerProperties];
@@ -320,7 +428,7 @@ DEF_SINGLETON(InterfaceHUDManager);
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
@@ -329,15 +437,20 @@ DEF_SINGLETON(InterfaceHUDManager);
     {
         case 0:
         {
-            return _curProvincesArray.count;
+            return _curCountiesArray.count;
         }
             break;
         case 1:
         {
-            return _curCitiesArray.count;
+            return _curProvincesArray.count;
         }
             break;
         case 2:
+        {
+            return _curCitiesArray.count;
+        }
+            break;
+        case 3:
         {
             return _curAreasArray.count;
         }
@@ -359,17 +472,23 @@ DEF_SINGLETON(InterfaceHUDManager);
     {
         case 0:
         {
-            titleLabel.text = _curProvincesArray[row];
+            titleLabel.text = _curCountiesArray[row];
             return titleLabel;
         }
             break;
         case 1:
         {
-            titleLabel.text = _curCitiesArray[row];
+            titleLabel.text = _curProvincesArray[row];
             return titleLabel;
         }
             break;
         case 2:
+        {
+            titleLabel.text = _curCitiesArray[row];
+            return titleLabel;
+        }
+            break;
+        case 3:
         {
             titleLabel.text = _curAreasArray[row];
             return titleLabel;
@@ -419,25 +538,47 @@ DEF_SINGLETON(InterfaceHUDManager);
     if (0 == component)
     {
         // 更新数据
-        [self getPickerCurrentShowDatasWithProvincesIndex:row cityIndex:0];
+        [self getPickerCurrentShowDatasWithCountryIndex:row
+                                         provincesIndex:0
+                                              cityIndex:0];
         
         // 刷新数据
         [pickerView reloadComponent:1];
         [pickerView reloadComponent:2];
+        [pickerView reloadComponent:3];
         
         [pickerView selectRow:0 inComponent:1 animated:YES];
         [pickerView selectRow:0 inComponent:2 animated:YES];
+        [pickerView selectRow:0 inComponent:3 animated:YES];
     }
     else if (1 == component)
     {
         // 更新数据
-        NSInteger provinceIndex = [pickerView selectedRowInComponent:0];
-        [self getPickerCurrentShowDatasWithProvincesIndex:provinceIndex cityIndex:row];
+        NSInteger countryIndex = [pickerView selectedRowInComponent:0];
+        [self getPickerCurrentShowDatasWithCountryIndex:countryIndex
+                                         provincesIndex:row
+                                              cityIndex:0];
         
         // 刷新数据
         [pickerView reloadComponent:2];
-
+        [pickerView reloadComponent:3];
+        
         [pickerView selectRow:0 inComponent:2 animated:YES];
+        [pickerView selectRow:0 inComponent:3 animated:YES];
+    }
+    else if (2 == component)
+    {
+        // 更新数据
+        NSInteger countryIndex = [pickerView selectedRowInComponent:0];
+        NSInteger provinceIndex = [pickerView selectedRowInComponent:1];
+        [self getPickerCurrentShowDatasWithCountryIndex:countryIndex
+                                         provincesIndex:provinceIndex
+                                              cityIndex:row];
+        
+        // 刷新数据
+        [pickerView reloadComponent:3];
+
+        [pickerView selectRow:0 inComponent:3 animated:YES];
     }
 }
 

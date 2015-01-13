@@ -17,6 +17,7 @@
 		43CB6B0F1A4662B6003829E6 /* BaseTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B0E1A4662B6003829E6 /* BaseTabBarVC.m */; };
 		43CBD1F71A38161900406432 /* CommentSendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CBD1F61A38161900406432 /* CommentSendController.m */; };
 		43CCC5AD1A1DC69B009E4A4C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43CCC5AF1A1DC69B009E4A4C /* Localizable.strings */; };
+		43CEE99F1A65231100039643 /* Address.json in Resources */ = {isa = PBXBuildFile; fileRef = 43CEE99E1A65231100039643 /* Address.json */; };
 		43D1ED1A19FB37F30049518E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1919FB37F30049518E /* main.m */; };
 		43D1ED1D19FB37F30049518E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1C19FB37F30049518E /* AppDelegate.m */; };
 		43D1ED2019FB37F30049518E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1E19FB37F30049518E /* Model.xcdatamodeld */; };
@@ -396,6 +397,7 @@
 		43CBD1F61A38161900406432 /* CommentSendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentSendController.m; sourceTree = "<group>"; };
 		43CCC5AE1A1DC69B009E4A4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43CCC5B01A1DC69F009E4A4C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		43CEE99E1A65231100039643 /* Address.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Address.json; sourceTree = "<group>"; };
 		43D1ED1419FB37F30049518E /* BaoChe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaoChe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D1ED1819FB37F30049518E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43D1ED1919FB37F30049518E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1175,6 +1177,14 @@
 				43C9193C1A5E642D00017DE5 /* CommonUtil.m */,
 			);
 			path = CommonUtil;
+			sourceTree = "<group>";
+		};
+		43CEE99D1A65231100039643 /* AddressJson */ = {
+			isa = PBXGroup;
+			children = (
+				43CEE99E1A65231100039643 /* Address.json */,
+			);
+			path = AddressJson;
 			sourceTree = "<group>";
 		};
 		43D1ED0B19FB37F30049518E = {
@@ -2146,6 +2156,7 @@
 		43D1F16519FB3AFB0049518E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				43CEE99D1A65231100039643 /* AddressJson */,
 				43D1F16619FB3AFB0049518E /* image */,
 			);
 			path = Resource;
@@ -2805,6 +2816,7 @@
 				43D1F56819FB4C1A0049518E /* deps in Resources */,
 				43D1ED4219FB3AAF0049518E /* CHANGELOG in Resources */,
 				43D1F57C19FB4C1A0049518E /* Icon@2x.png in Resources */,
+				43CEE99F1A65231100039643 /* Address.json in Resources */,
 				4372D7741A0879FD00CEA66D /* InfoPlist.strings in Resources */,
 				43D1F18819FB3AFB0049518E /* AQGridSelection.png in Resources */,
 				43D1F17119FB3AFB0049518E /* Alixpay.bundle in Resources */,

@@ -10,7 +10,8 @@
 #import "GJHAlertView.h"
 
 typedef void (^GJHAlertBlock) (GJHAlertView *alertView, NSInteger index);
-typedef void (^PickerOperationBlock) (NSString *pickedContent);
+// idsArray: 存放顺序为 国家ID、省ID、市ID、区ID
+typedef void (^PickerOperationBlock) (NSString *pickedContent, NSArray *idsArray);
 
 typedef NS_ENUM(NSInteger, AlertShowType)
 {
@@ -64,5 +65,14 @@ AS_SINGLETON(InterfaceHUDManager);
          defaultSelectedStr:(NSString *)selectedStr
           pickerCancelBlock:(PickerOperationBlock)pickerCancelBlock
          pickerConfirmBlock:(PickerOperationBlock)pickerConfirmBlock;
+
+/**
+ @ 方法描述    获取所传地址中的 国家 省 市 区 的在世界地址中ID数组(存放顺序为 国家ID、省ID、市ID、区ID)
+ @ 输入参数    addressStr: 想获取ID的地址
+ @ 返回值      void
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-12-23
+ */
+- (NSArray *)getCurIdsArrayInAddressStr:(NSString *)addressStr;
 
 @end
