@@ -133,7 +133,7 @@
 
 - (void)setNoDataSourceStatusView
 {
-    [self setNoDataSourceStatusViewWithRemindText:nil];
+    [self setNoDataSourceStatusViewWithRemindText:@"亲,还没有内容哦!"];
 }
 
 - (void)setNoDataSourceStatusViewWithRemindText:(NSString *)remindText
@@ -146,12 +146,14 @@
 - (void)setNoNetworkConnectionStatusView
 {
     [self setNetworkStatusViewByImage:[UIImage imageNamed:@"Unify_Image_w51"]
+                           remindText:NoConnectionNetwork
                userInteractionEnabled:YES];
 }
 
 - (void)setLoadFailureStatusView
 {
     [self setNetworkStatusViewByImage:[UIImage imageNamed:@"gouwuche_morentupian"]
+                           remindText:OperationFailure
                userInteractionEnabled:YES];
 }
 
@@ -236,7 +238,7 @@
         // 没数据时的状态图
         if (isAddActionView)
         {
-            [self setNoDataSourceStatusViewWithRemindText:@"亲,还没有内容哦!"];
+            [self setNoDataSourceStatusView];
         }
     }
     // 未登录或登录过期
