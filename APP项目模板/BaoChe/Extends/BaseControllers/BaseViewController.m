@@ -346,11 +346,11 @@
 {
     if (BarbuttonItemPosition_Left == position)
     {
-        self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 50, 30) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
+        self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, [title stringSizeWithFont:SP15Font].width + 20, 30) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
     }
     else
     {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 50, 30) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, [title stringSizeWithFont:SP15Font].width + 20, 30) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
     }
 }
 

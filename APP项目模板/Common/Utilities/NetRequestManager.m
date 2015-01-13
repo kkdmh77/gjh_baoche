@@ -10,6 +10,7 @@
 #import "DownloadCache.h"
 #import "CoreDataManager.h"
 #import "CoreData+MagicalRecord.h"
+#import "UserInfoModel.h"
 
 static NSString * const CacheKey = @"CacheKey";
 static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
@@ -103,6 +104,30 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     return YES;
 }
 
+// 解析cookies
+- (NSArray *)cookiesArrayByResponseHeaders:(NSDictionary *)responseHeaders url:(NSURL *)url
+{
+    if (SafetyObject(responseHeaders) && [responseHeaders isAbsoluteValid])
+    {
+        BOOL isNeedToRequestSetCookies = NO;
+        NSArray *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:responseHeaders forURL:url];
+        for (NSHTTPCookie *cookieItem in cookies)
+        {
+            if ([cookieItem.name isEqualToString:@"ss"] && [cookieItem.value isAbsoluteValid] &&
+                ![cookieItem.value isEqualToString:@"\"\""])
+            {
+                isNeedToRequestSetCookies = YES;
+                break;
+            }
+        }
+        if (isNeedToRequestSetCookies)
+        {
+            return cookies;
+        }
+    }
+    return nil;
+}
+
 #pragma mark- ASIProgressDelegate methods
 
 - (void)setProgress:(float)newProgress
@@ -122,7 +147,15 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
         [delegate netRequest:self didReceiveResponseHeaders:responseHeaders];
     }
     
-    NSString *loginStatusStr = [responseHeaders objectForKey:@"sfStatus"]; // 登陆的状态.10000:已登录,正常状态, -10001:未登陆或者登陆session已过期
+    // 解析cookies
+    NSArray *cookies = [self cookiesArrayByResponseHeaders:responseHeaders url:request.url];
+    if ([cookies isAbsoluteValid])
+    {
+        [UserInfoModel setUserDefaultCookiesArray:cookies];
+    }
+    
+    // 登陆的状态.10000:已登录,正常状态, -10001:未登陆或者登陆session已过期
+    NSString *loginStatusStr = [responseHeaders objectForKey:@"sfStatus"];
     if (loginStatusStr && 0 != loginStatusStr.length)
     {
         if (NotLoginStatusErrorCode == loginStatusStr.intValue)
@@ -150,7 +183,8 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     NSString *contentTypeStr = [responseHeaders objectForKey:@"Content-Type"];
     
     // 判断从服务器请求下来的数据是否为json格式的
-    if (contentTypeStr && ([contentTypeStr containsString:@"application/json"] || [contentTypeStr containsString:@"text/json"]))
+    if (contentTypeStr && ([contentTypeStr containsString:@"application/json"] ||
+                           [contentTypeStr containsString:@"text/json"]))
     {
         networkDataIsJsonType = YES;
     }
@@ -295,6 +329,14 @@ DEF_SINGLETON(NetRequestManager);
     netRequest.asiFormRequest.delegate = netRequest;
     [netRequest.asiFormRequest setRequestMethod:methodType];
     netRequest.asiFormRequest.timeOutSeconds = 30;
+    
+    /*
+    // 设置session cookie
+    if ([UserInfoModel getUserDefaultCookiesArray])
+    {
+        [netRequest.asiFormRequest setRequestCookies:[NSMutableArray arrayWithArray:[UserInfoModel getUserDefaultCookiesArray]]];
+    }
+     */
     
     //设置session
     /*

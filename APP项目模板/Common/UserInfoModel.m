@@ -27,7 +27,7 @@
 #define UserDefault_UserLoginTokenKey       @"userDefault_UserLoginTokenKey"    // 用户登陆成功后服务器返回的token
 #define UserDefault_UserLoginToken_VKey     @"userDefault_UserLoginToken_VKey"  // 用户登陆成功后服务器返回的token(加密版)
 #define UserDefault_UserSearchHistroyKey    @"userDefault_UserSearchHistroyKey" // 用户搜索记录
-
+#define UserDefault_CookiesArrayKey         @"userDefault_CookiesArrayKey"      // HTTP响应cookies
 
 @implementation UserInfoModel
 
@@ -238,6 +238,26 @@
 + (NSArray*)getUserDefaultSearchHistoryArray
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_UserSearchHistroyKey];
+}
+
++ (void)setUserDefaultCookiesArray:(NSArray *)cookies
+{
+    NSData *cookiesEncodedData = [NSKeyedArchiver archivedDataWithRootObject:cookies];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:cookiesEncodedData forKey:UserDefault_CookiesArrayKey];
+    [self saveUserDefaultInfo];
+}
+
++ (NSArray *)getUserDefaultCookiesArray
+{
+    NSData *unarchiverData = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_CookiesArrayKey];
+    NSArray *cookiesArray = nil;
+    if (unarchiverData)
+    {
+        cookiesArray = [NSKeyedUnarchiver unarchiveObjectWithData:unarchiverData];
+    }
+    
+    return cookiesArray;
 }
 
 @end

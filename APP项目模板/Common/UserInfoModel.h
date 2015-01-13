@@ -59,5 +59,7 @@
 + (void)setUserDefaultSearchHistoryArray:(NSArray*)historyArray;
 + (NSArray*)getUserDefaultSearchHistoryArray;
 
++ (void)setUserDefaultCookiesArray:(NSArray *)cookies;
++ (NSArray *)getUserDefaultCookiesArray;
 
 @end
