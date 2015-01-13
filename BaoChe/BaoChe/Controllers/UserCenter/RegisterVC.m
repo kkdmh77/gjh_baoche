@@ -175,6 +175,9 @@
                       autoLogin:YES
                   successHandle:^(id successInfoObj) {
                       
+                      [UserInfoModel setUserDefaultLoginName:userName];
+                      [UserInfoModel setUserDefaultPassword:password];
+                      
                       [weakSelf.navigationController dismissViewControllerAnimated:YES
                                                                         completion:nil];
         

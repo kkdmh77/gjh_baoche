@@ -36,6 +36,8 @@
 		2BD868231A3DC70300BC46BF /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868221A3DC70300BC46BF /* HomePageVC.m */; };
 		2BD868261A3DCF0900BC46BF /* HomePageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */; };
 		2BD868281A3DCF1600BC46BF /* HomePageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */; };
+		2BDAA3B71A656869009D1C32 /* AddPassengersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAA3B51A656869009D1C32 /* AddPassengersVC.m */; };
+		2BDAA3B81A656869009D1C32 /* AddPassengersVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDAA3B61A656869009D1C32 /* AddPassengersVC.xib */; };
 		2BDC3E6D1A4DA4C8007C1130 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC3E681A4DA4C8007C1130 /* LoginVC.m */; };
 		2BDC3E6E1A4DA4C8007C1130 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDC3E691A4DA4C8007C1130 /* LoginVC.xib */; };
 		2BDC3E6F1A4DA4C8007C1130 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC3E6B1A4DA4C8007C1130 /* RegisterVC.m */; };
@@ -521,6 +523,9 @@
 		2BD868241A3DCF0900BC46BF /* HomePageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageHeaderView.h; sourceTree = "<group>"; };
 		2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageHeaderView.m; sourceTree = "<group>"; };
 		2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageHeaderView.xib; sourceTree = "<group>"; };
+		2BDAA3B41A656869009D1C32 /* AddPassengersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPassengersVC.h; sourceTree = "<group>"; };
+		2BDAA3B51A656869009D1C32 /* AddPassengersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPassengersVC.m; sourceTree = "<group>"; };
+		2BDAA3B61A656869009D1C32 /* AddPassengersVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPassengersVC.xib; sourceTree = "<group>"; };
 		2BDC3E671A4DA4C8007C1130 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		2BDC3E681A4DA4C8007C1130 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		2BDC3E691A4DA4C8007C1130 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
@@ -1522,6 +1527,9 @@
 				2BDD6E4E1A55A41E00329823 /* OrderListVC.m */,
 				2B6D6CAF1A566A1A00286CE2 /* DetailOrderVC.h */,
 				2B6D6CB01A566A1A00286CE2 /* DetailOrderVC.m */,
+				2BDAA3B41A656869009D1C32 /* AddPassengersVC.h */,
+				2BDAA3B51A656869009D1C32 /* AddPassengersVC.m */,
+				2BDAA3B61A656869009D1C32 /* AddPassengersVC.xib */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -3306,6 +3314,7 @@
 				2BE0BEB51A459DB2000B8871 /* youjiantou_cell@2x.png in Resources */,
 				43D1F1D919FB3AFB0049518E /* .gitattributes in Resources */,
 				2BDC3E7E1A4DB82C007C1130 /* clearText@2x.png in Resources */,
+				2BDAA3B81A656869009D1C32 /* AddPassengersVC.xib in Resources */,
 				43D775371A3D36BB00C088CE /* AllBusListCell.xib in Resources */,
 				43D1F55D19FB4C1A0049518E /* NimbusOverviewer.bundle in Resources */,
 				43D1F18C19FB3AFB0049518E /* AQGridSelectionRed.png in Resources */,
@@ -3641,6 +3650,7 @@
 				43D1F29219FB3AFB0049518E /* SDWebImageDownloader.m in Sources */,
 				43D1F57019FB4C1A0049518E /* NIPhotoScrollView.m in Sources */,
 				43D1F29F19FB3AFB0049518E /* ATB_BubbleMessageLabel.m in Sources */,
+				2BDAA3B71A656869009D1C32 /* AddPassengersVC.m in Sources */,
 				43D1F1D519FB3AFB0049518E /* MASViewConstraint.m in Sources */,
 				43D1F30D19FB3AFB0049518E /* InterfaceHUDManager.m in Sources */,
 				43D1F17419FB3AFB0049518E /* AlixPayOrder.m in Sources */,

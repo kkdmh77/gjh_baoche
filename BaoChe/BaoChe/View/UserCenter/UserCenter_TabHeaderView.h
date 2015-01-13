@@ -44,6 +44,7 @@ typedef void (^UserCenterTabHeaderViewOperationHandle) (UserCenter_TabHeaderView
 @interface UserCenter_TabSectionHeaderView : UIButton
 
 @property (nonatomic, assign) BOOL canOperation; // default is YES
+@property (weak, nonatomic)   IBOutlet UIButton *addBtn;
 
 - (void)setTitleString:(NSString *)title;
 

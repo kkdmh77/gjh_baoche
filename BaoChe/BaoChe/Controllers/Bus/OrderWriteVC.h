@@ -12,5 +12,6 @@
 @interface OrderWriteVC : BaseNetworkViewController
 
 @property (nonatomic, strong) AllBusListItemEntity *busEntity;
+@property (nonatomic, strong) NSMutableArray *passengersItemsArray;
 
 @end

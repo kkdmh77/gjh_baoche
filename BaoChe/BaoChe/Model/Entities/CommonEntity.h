@@ -46,3 +46,14 @@
 @property (nonatomic, copy) NSString *stationNameStr;
 
 @end
+
+////////////////////////////////////////////////////////////////
+/// 联系人
+
+@interface PassengersEntity : NetItem
+
+@property (nonatomic, copy) NSString *nameStr;      // 联系人名称
+@property (nonatomic, copy) NSString *idCartStr;    // 身份证号码
+
+@end
+

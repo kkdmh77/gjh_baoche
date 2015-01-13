@@ -83,6 +83,11 @@
 {
     [HUDManager hideHUD];
     
+    NSDictionary *userInfoDic = [infoObj safeObjectForKey:@"list"];
+    NSNumber *userId = [userInfoDic safeObjectForKey:@"UserId"];
+    
+    [UserInfoModel setUserDefaultUserId:userId];
+    
     if (_success)
     {
         _success(infoObj);
