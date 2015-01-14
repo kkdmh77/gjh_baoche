@@ -42,6 +42,10 @@
         };
         
         [self setDefaultNetFailedBlock];
+        
+        // 分页相关参数
+        _page = 1;
+        _pageSize = 20;
     }
     return self;
 }
@@ -155,6 +159,55 @@
     [self setNetworkStatusViewByImage:[UIImage imageNamed:@"gouwuche_morentupian"]
                            remindText:OperationFailure
                userInteractionEnabled:YES];
+}
+
+#pragma mark - 分页请求属性设置
+
+- (void)setPagingSuccessActionWithResultCount:(NSInteger)resultCount
+{
+    ++_page;
+    _isRequesting = NO;
+    
+    // 改变tab底部刷新视图的显示
+    if (resultCount < _pageSize)
+    {
+        _nextPageHasData = NO;
+        [self setupTabFooterRefreshStatusViewShowType:TabFooterRefreshStatusViewType_NoMoreData];
+    }
+    else
+    {
+        _nextPageHasData = YES;
+        [self setupTabFooterRefreshStatusViewShowType:TabFooterRefreshStatusViewType_Loading];
+    }
+}
+
+- (void)setPagingFailedActionWithRequest:(NetRequest *)request error:(NSError *)error
+{
+    [self showHUDInfoByString:error.localizedDescription];
+    _isRequesting = NO;
+    
+    // 第一页请求
+    if (_page == 1)
+    {
+        [self setDefaultNetFailedBlockImplementationWithNetRequest:request
+                                                             error:error
+                                             isAddFailedActionView:YES
+                                                       isAutoLogin:YES
+                                                 otherExecuteBlock:nil];
+    }
+    else
+    {
+        if (MyHTTPCodeType_DataSourceNotFound == error.code)
+        {
+            _nextPageHasData = NO;
+            [self setupTabFooterRefreshStatusViewShowType:TabFooterRefreshStatusViewType_NoMoreData];
+        }
+        else
+        {
+            _nextPageHasData = YES;
+            [self setupTabFooterRefreshStatusViewShowType:TabFooterRefreshStatusViewType_Loading];
+        }
+    }
 }
 
 #pragma mark - 设置代码块

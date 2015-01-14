@@ -40,6 +40,12 @@ typedef enum
 {
 @protected
     NSMutableDictionary         *_networkDataDic;
+    
+    // 分页相关参数
+    NSInteger        _page;
+    NSInteger        _pageSize;
+    BOOL             _isRequesting;      // 是否正在请求
+    BOOL             _nextPageHasData;   // 下一页是否还有数据
 }
 
 typedef void (^ExtendVCNetRequestNoNetworkBlock) (void);
@@ -92,6 +98,25 @@ typedef void (^ExtendVCNetRequestFailedBlock)    (NetRequest *request, NSError *
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ @ 方法描述    设置分页请求数据成功后的执行操作
+ @ 输入参数    resultCount: 分页请求下来的数据条数
+ @ 返回值      void
+ @ 创建人      龚俊慧
+ @ 创建时间    2015-01-14
+ */
+- (void)setPagingSuccessActionWithResultCount:(NSInteger)resultCount;
+
+/**
+ @ 方法描述    设置分页请求数据失败后的执行操作
+ @ 输入参数    error: 请求错误
+ @ 返回值      void
+ @ 创建人      龚俊慧
+ @ 创建时间    2015-01-14
+ */
+- (void)setPagingFailedActionWithRequest:(NetRequest *)request error:(NSError *)error;
+
+/////////////////////////////////////////////////////////////////////////////////////////
 
 /// 设置网络请求中每个阶段需要执行的代码块(子类必须实现)
 - (void)setNetworkRequestStatusBlocks;
