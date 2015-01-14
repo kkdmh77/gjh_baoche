@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonEntity.h"
 
 @class PassengersCell;
 
@@ -30,5 +31,6 @@ typedef void (^PassengersCellOperationHandle) (PassengersCell *cell, OperationBu
 @property (nonatomic, copy) PassengersCellOperationHandle operationHandle;
 
 + (CGFloat)getCellHeight;
+- (void)loadCellShowDataWithItemEntity:(PassengersEntity *)entity;
 
 @end

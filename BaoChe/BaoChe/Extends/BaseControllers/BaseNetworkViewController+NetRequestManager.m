@@ -25,8 +25,8 @@
                            @"bus/get_end_location",
                            
                            // 用户中心
-                           @"user/login",
                            @"user/register",
+                           @"user/login",
                            @"user/send_code",
                            
                            nil];

@@ -151,7 +151,6 @@ static CGFloat defaultViewHeight = 0;
 @interface UserCenter_TabSectionHeaderView ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titileLabel;
-@property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
 
 @end

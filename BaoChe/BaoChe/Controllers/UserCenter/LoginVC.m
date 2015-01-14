@@ -118,6 +118,7 @@
                       autoLogin:YES
                   successHandle:^(id successInfoObj) {
                       
+                      [UserInfoModel setUserDefaultLoginName:_userNameLabel.text];
                       [UserInfoModel setUserDefaultPassword:_passwordLabel.text];
                       
                       [weakSelf backViewController];

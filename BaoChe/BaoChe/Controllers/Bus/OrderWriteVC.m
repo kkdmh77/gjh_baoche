@@ -11,23 +11,42 @@
 #import "PassengersCell.h"
 #import "UserCenter_TabHeaderView.h"
 #import "SettlementView.h"
+#import "AddPassengersVC.h"
+#include <objc/runtime.h>
 
 static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPassenger";
 
 @interface OrderWriteVC ()
 {
-    UserCenter_TabSectionHeaderView    *_passengersCellSectionHeader;
+    UserCenter_TabSectionHeaderView *_passengersCellSectionHeader;
 }
 
 @end
 
 @implementation OrderWriteVC
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+        self.passengersItemsArray = [NSMutableArray array];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self initialization];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [_tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,6 +107,11 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 - (NSString *)curTitleWithIndex:(NSIndexPath *)indexPath
 {
     return nil;
+}
+
+- (void)setPassengersCellSectionHeaderTitleText
+{
+    [_passengersCellSectionHeader setTitleString:[NSString stringWithFormat:@"乘客(%d位)", _passengersItemsArray.count]];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate methods
@@ -152,12 +176,20 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
         if (!_passengersCellSectionHeader)
         {
             _passengersCellSectionHeader = [UserCenter_TabSectionHeaderView loadFromNib];
-            [_passengersCellSectionHeader setTitleString:@"乘客(2位)"];
+            
             _passengersCellSectionHeader.tag = section;
             [_passengersCellSectionHeader addTarget:self
-                           action:@selector(headerClicked:)
-                 forControlEvents:UIControlEventTouchUpInside];
+                                             action:@selector(headerClicked:)
+                                   forControlEvents:UIControlEventTouchUpInside];
+            [_passengersCellSectionHeader.addBtn addTarget:self
+                                                    action:@selector(clickAddPassengersBtn:)
+                                          forControlEvents:UIControlEventTouchUpInside];
+            
+            [self headerClicked:_passengersCellSectionHeader];
         }
+        
+        [self setPassengersCellSectionHeaderTitleText];
+        
         return _passengersCellSectionHeader;
     }
     return [UIView new];
@@ -190,6 +222,18 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     else if (1 == indexPath.section)
     {
         PassengersCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier_orderPassenger];
+        WEAKSELF
+        [cell setOperationHandle:^(PassengersCell *cell, OperationButType type, id sender) {
+            
+            // 删除乘车人
+            NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+            [weakSelf.passengersItemsArray removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+            [weakSelf setPassengersCellSectionHeaderTitleText];
+        }];
+        
+        PassengersEntity *entity = _passengersItemsArray[indexPath.row];
+        [cell loadCellShowDataWithItemEntity:entity];
         
         return cell;
     }
@@ -256,11 +300,19 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
               withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+- (void)clickAddPassengersBtn:(UIButton *)sender
+{
+    AddPassengersVC *addPassengers = [AddPassengersVC loadFromNib];
+    objc_setAssociatedObject(addPassengers, class_getName([self class]), self, OBJC_ASSOCIATION_ASSIGN);
+    
+    [self pushViewController:addPassengers];
+}
+
 - (int)numberOfRowsInSection:(NSInteger)section
 {
     if (_passengersCellSectionHeader.selected)
     {
-        return 2;
+        return _passengersItemsArray.count;
     }
     return 0;
 }
