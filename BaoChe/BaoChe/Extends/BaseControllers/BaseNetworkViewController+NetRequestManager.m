@@ -29,6 +29,9 @@
                            @"user/login",
                            @"user/send_code",
                            
+                           // 订单
+                           @"bus_order/create_order",
+                           
                            nil];
 
         

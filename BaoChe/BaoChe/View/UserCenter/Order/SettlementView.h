@@ -21,6 +21,7 @@ typedef void (^SettlementViewOperationHandle) (SettlementView *view, SettlementV
 @interface SettlementView : UIView
 
 @property (nonatomic, copy) SettlementViewOperationHandle operationHandle;
+@property (nonatomic, readonly) double totalPrice;
 
 /**
  @ 方法描述 : 设置结算描述

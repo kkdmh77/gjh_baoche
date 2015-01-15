@@ -16,6 +16,7 @@
 #import "LoginVC.h"
 #import "BuyTicketVC.h"
 #import "OrderListVC.h"
+#import "UserInfoModel.h"
 
 @interface AppDelegate ()
 
@@ -27,6 +28,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [UserInfoModel setUserDefaultUserId:nil];
     
     // 进行应用程序一系列属性的初始化设置
     [AppPropertiesInitialize startAppPropertiesInitialize];

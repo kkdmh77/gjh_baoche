@@ -24,4 +24,8 @@
 
 + (CGFloat)getViewHeight;
 
+@property (nonatomic, readonly) NSString *contactStr;
+@property (nonatomic, readonly) NSString *mobilePhoneNumStr;
+@property (nonatomic, readonly) NSString *remarkStr;
+
 @end

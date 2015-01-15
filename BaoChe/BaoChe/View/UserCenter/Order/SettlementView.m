@@ -10,6 +10,9 @@
 #import "NSMutableAttributedString+NimbusAttributedLabel.h"
 
 @interface SettlementView ()
+{
+    double _totalPrice;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *settlementBtn;
@@ -38,6 +41,9 @@
 {
     // 设置属性
     [self configureViewsProperties];
+    
+    _totalPrice = 0;
+    [self setSettlementPrice:0 count:0];
 }
 
 - (IBAction)clickSettlementBtn:(UIButton *)sender
@@ -47,7 +53,9 @@
 
 - (void)setSettlementPrice:(double)price count:(NSInteger)count
 {
-    NSString *priceStr = [NSString stringWithFormat:@"总价: ￥%.2f", price];
+    _totalPrice = price;
+    
+    NSString *priceStr = [NSString stringWithFormat:@"总价: ￥%.2f", _totalPrice];
     NSString *countStr = [NSString stringWithFormat:@"(%d张)", count];
     NSString *settlementStr = [NSString stringWithFormat:@"%@ %@", priceStr, countStr];
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:settlementStr];
@@ -57,6 +65,11 @@
     [attributedStr setFont:SP15Font range:[settlementStr rangeOfString:countStr]];
     
     _priceLabel.attributedText = attributedStr;
+}
+
+- (double)totalPrice
+{
+    return _totalPrice;
 }
 
 @end

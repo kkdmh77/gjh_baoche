@@ -20,6 +20,9 @@ typedef enum
     NetUserCenterRequestType_Login                           , // 登录
     NetUserCenterRequestType_GetVerificationCode             , // 获取验证码
     
+    // 订单
+    NetOrderRequesertType_CreateOrder                        , // 创建订单
+    
 } NetRequestType;
 
 @interface BaseNetworkViewController (NetRequestManager)
