@@ -13,12 +13,16 @@
 #import "SettlementView.h"
 #import "AddPassengersVC.h"
 #include <objc/runtime.h>
+#import "BaseNetworkViewController+NetRequestManager.h"
+#import "UserInfoModel.h"
 
 static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPassenger";
 
 @interface OrderWriteVC ()
 {
     UserCenter_TabSectionHeaderView *_passengersCellSectionHeader;
+    OrderContactInfoView            *_orderContactInfoView;
+    SettlementView                  *_settlementView;
 }
 
 @end
@@ -47,6 +51,8 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     [super viewWillAppear:animated];
     
     [_tableView reloadData];
+    [self setSettlementViewText];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,7 +69,14 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 - (void)setNetworkRequestStatusBlocks
 {
-   
+    WEAKSELF
+    [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
+        STRONGSELF
+        if (NetOrderRequesertType_CreateOrder == request.tag)
+        {
+            
+        }
+    }];
 }
 
 - (void)getNetworkData
@@ -74,30 +87,71 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 - (void)initialization
 {
     // settlement view
-    SettlementView *settlementView = [SettlementView loadFromNib];
-    settlementView.width = self.viewBoundsWidth;
-    settlementView.origin = CGPointMake(0, self.view.boundsHeight - settlementView.boundsHeight);
-    settlementView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [settlementView setSettlementPrice:100 count:4];
+    _settlementView = [SettlementView loadFromNib];
+    _settlementView.width = self.viewBoundsWidth;
+    _settlementView.origin = CGPointMake(0, self.view.boundsHeight - _settlementView.boundsHeight);
+    _settlementView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+     [self setSettlementViewText];
+    
     WEAKSELF
-    [settlementView setOperationHandle:^(SettlementView *view, SettlementViewOperationType type, id sender) {
+    [_settlementView setOperationHandle:^(SettlementView *view, SettlementViewOperationType type, id sender) {
         /*
-         车次id  int ScheduleId
-         用户id  int  UserId'
-         数量	int	Tickets
-         价格    decimal   TotalAmount'
-         用户手机号 str Phone
-         用户地址  Str Address'
-         乘客列表  Str  PeopleList  json字符串
+         车次id  int ScheduleId 必填
+         用户id  int  UserId'   必填
+         数量	int	Tickets   必填
+         价格    decimal   TotalAmount'   必填
+         用户手机号 str Phone    必填
+         用户地址  Str Address' （可选）
+         订单联系人姓名： str 'OrderContact',  （可选）
+         订单备注:     str    'OrderRemark'    （可选）
+         乘客列表  Str  PeopleList  json字符串  必填
          Eg : ‘[{“NameList” : “姓名”  : “IdentityList”  :  “身份证号码” },
          {“NameList”: ”姓名2”,  ” IdentityList”  :  “4443434343” } ]
          */
+        STRONGSELF
+        NSNumber *userId = [UserInfoModel getUserDefaultUserId];
+        
+        if (userId)
+        {
+            NSInteger buyTicketCount = strongSelf->_passengersItemsArray.count;
+            if (buyTicketCount > 0)
+            {
+                // 乘车人的JSON字符串
+                NSString *passengersJsonStr = nil;
+                NSMutableArray *tempArray = [NSMutableArray array];
+                for (PassengersEntity *entity in strongSelf->_passengersItemsArray)
+                {
+                    NSDictionary *dic = @{@"NameList": entity.nameStr,
+                                          @"IdentityList": entity.idCartStr};
+                    [tempArray addObject:dic];
+                }
+                passengersJsonStr = [tempArray jsonStringByError:NULL];
+                
+                [weakSelf sendRequest:[[weakSelf class] getRequestURLStr:NetOrderRequesertType_CreateOrder]
+                         parameterDic:@{@"ScheduleId": @(weakSelf.busEntity.keyId),
+                                        @"UserId": userId,
+                                        @"Tickets": @(buyTicketCount),
+                                        @"TotalAmount": @([weakSelf totalPrice]),
+                                        @"Phone": [UserInfoModel getUserDefaultLoginName],
+                                        @"PeopleList": passengersJsonStr}
+                    requestMethodType:RequestMethodType_POST
+                           requestTag:NetOrderRequesertType_CreateOrder];
+            }
+            else
+            {
+                [weakSelf showHUDInfoByString:@"还没有添加乘车人哦!"];
+            }
+        }
+        else
+        {
+            [weakSelf showHUDInfoByString:NotLogin];
+        }
         
     }];
-    [self.view addSubview:settlementView];
+    [self.view addSubview:_settlementView];
     
     // tab
-    [self setupTableViewWithFrame:CGRectDecreaseSize(self.view.bounds, 0, settlementView.boundsHeight)
+    [self setupTableViewWithFrame:CGRectDecreaseSize(self.view.bounds, 0, _settlementView.boundsHeight)
                             style:UITableViewStylePlain
                   registerNibName:NSStringFromClass([PassengersCell class])
                   reuseIdentifier:cellIdentifier_orderPassenger];
@@ -109,9 +163,20 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     return nil;
 }
 
+- (double)totalPrice
+{
+    return _busEntity.price * _passengersItemsArray.count;
+}
+
 - (void)setPassengersCellSectionHeaderTitleText
 {
     [_passengersCellSectionHeader setTitleString:[NSString stringWithFormat:@"乘客(%d位)", _passengersItemsArray.count]];
+}
+
+// 结算视图显示
+- (void)setSettlementViewText
+{
+    [_settlementView setSettlementPrice:[self totalPrice] count:_passengersItemsArray.count];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate methods
@@ -229,7 +294,9 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
             NSIndexPath *indexPath = [tableView indexPathForCell:cell];
             [weakSelf.passengersItemsArray removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+            
             [weakSelf setPassengersCellSectionHeaderTitleText];
+            [weakSelf setSettlementViewText];
         }];
         
         PassengersEntity *entity = _passengersItemsArray[indexPath.row];
@@ -275,9 +342,9 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
         if (!cell)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-            OrderContactInfoView *orderContactInfoView = [OrderContactInfoView loadFromNib];
-            orderContactInfoView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-            [cell addSubview:orderContactInfoView];
+            _orderContactInfoView = [OrderContactInfoView loadFromNib];
+            _orderContactInfoView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            [cell addSubview:_orderContactInfoView];
         }
         
         return cell;

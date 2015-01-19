@@ -151,6 +151,10 @@ static CGFloat defaultContactViewHeight = 0;
     
     _remarkDescLabel.textColor = blackColor;
     _remarkTV.textColor = grayColor;
+    
+    _contactTF.text = nil;
+    _mobilePhoneNumTF.text = nil;
+    _remarkTV.text = nil;
 }
 
 - (void)setup
@@ -167,6 +171,21 @@ static CGFloat defaultContactViewHeight = 0;
         defaultContactViewHeight = view.boundsHeight;
     }
     return defaultContactViewHeight;
+}
+
+- (NSString *)contactStr
+{
+    return _contactTF.text;
+}
+
+- (NSString *)mobilePhoneNumStr
+{
+    return _mobilePhoneNumTF.text;
+}
+
+- (NSString *)remarkStr
+{
+    return _remarkTV.text;
 }
 
 @end
