@@ -352,6 +352,9 @@
 		43D1F58219FB4C1A0049518E /* deps in Resources */ = {isa = PBXBuildFile; fileRef = 43D1F4CF19FB4C1A0049518E /* deps */; };
 		43D1F58319FB4C1A0049518E /* NimbusWebController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 43D1F4D119FB4C1A0049518E /* NimbusWebController.bundle */; };
 		43D1F58419FB4C1A0049518E /* NIWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1F4D519FB4C1A0049518E /* NIWebController.m */; };
+		43D4B6361A6CA6F200D59335 /* BaseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4B6351A6CA6F200D59335 /* BaseWebViewController.m */; };
+		43D4B63B1A6CA97B00D59335 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43D4B6391A6CA97B00D59335 /* WebViewJavascriptBridge.js.txt */; };
+		43D4B63C1A6CA97B00D59335 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4B63A1A6CA97B00D59335 /* WebViewJavascriptBridge.m */; };
 		43D669B41A357F7B0017DCAB /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D669B31A357F7B0017DCAB /* ImagePreviewController.m */; };
 		43DC9D551A2F2F0400B09C58 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DC9D371A2F2F0300B09C58 /* IQNSArray+Sort.m */; };
 		43DC9D561A2F2F0400B09C58 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DC9D391A2F2F0300B09C58 /* IQUIView+Hierarchy.m */; };
@@ -1085,6 +1088,11 @@
 		43D1F4D419FB4C1A0049518E /* NIWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIWebController.h; sourceTree = "<group>"; };
 		43D1F4D519FB4C1A0049518E /* NIWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIWebController.m; sourceTree = "<group>"; };
 		43D1F58719FB4C2B0049518E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		43D4B6341A6CA6F200D59335 /* BaseWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWebViewController.h; sourceTree = "<group>"; };
+		43D4B6351A6CA6F200D59335 /* BaseWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseWebViewController.m; sourceTree = "<group>"; };
+		43D4B6381A6CA97B00D59335 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
+		43D4B6391A6CA97B00D59335 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
+		43D4B63A1A6CA97B00D59335 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		43D669B21A357F7B0017DCAB /* ImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewController.h; sourceTree = "<group>"; };
 		43D669B31A357F7B0017DCAB /* ImagePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewController.m; sourceTree = "<group>"; };
 		43DC9D361A2F2F0300B09C58 /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
@@ -1292,6 +1300,8 @@
 		43D1ED4819FB3AD40049518E /* BaseControllers */ = {
 			isa = PBXGroup;
 			children = (
+				43D4B6341A6CA6F200D59335 /* BaseWebViewController.h */,
+				43D4B6351A6CA6F200D59335 /* BaseWebViewController.m */,
 				43CB6B0D1A4662B6003829E6 /* BaseTabBarVC.h */,
 				43CB6B0E1A4662B6003829E6 /* BaseTabBarVC.m */,
 				43D1ED4919FB3AD40049518E /* BaseNetworkViewController+NetRequestManager.h */,
@@ -1348,6 +1358,7 @@
 		43D1ED6819FB3AFA0049518E /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				43D4B6371A6CA97B00D59335 /* WebViewJavascriptBridge */,
 				43C919391A5E642D00017DE5 /* WeChatSDK_1.4.1 */,
 				43DC9D341A2F2F0300B09C58 /* IQKeyBoardManager */,
 				43C86BE41A15F14F00AD9B49 /* CTAssetsPickerController */,
@@ -2644,6 +2655,16 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		43D4B6371A6CA97B00D59335 /* WebViewJavascriptBridge */ = {
+			isa = PBXGroup;
+			children = (
+				43D4B6381A6CA97B00D59335 /* WebViewJavascriptBridge.h */,
+				43D4B6391A6CA97B00D59335 /* WebViewJavascriptBridge.js.txt */,
+				43D4B63A1A6CA97B00D59335 /* WebViewJavascriptBridge.m */,
+			);
+			path = WebViewJavascriptBridge;
+			sourceTree = "<group>";
+		};
 		43DC9D341A2F2F0300B09C58 /* IQKeyBoardManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2817,6 +2838,7 @@
 				43D1ED4219FB3AAF0049518E /* CHANGELOG in Resources */,
 				43D1F57C19FB4C1A0049518E /* Icon@2x.png in Resources */,
 				43CEE99F1A65231100039643 /* Address.json in Resources */,
+				43D4B63B1A6CA97B00D59335 /* WebViewJavascriptBridge.js.txt in Resources */,
 				4372D7741A0879FD00CEA66D /* InfoPlist.strings in Resources */,
 				43D1F18819FB3AFB0049518E /* AQGridSelection.png in Resources */,
 				43D1F17119FB3AFB0049518E /* Alixpay.bundle in Resources */,
@@ -3018,6 +3040,7 @@
 				43D1F1CF19FB3AFB0049518E /* MagicalRecord.m in Sources */,
 				43D1F53B19FB4C1A0049518E /* NILauncherButtonView.m in Sources */,
 				43D1F55719FB4C1A0049518E /* NIImageProcessing.m in Sources */,
+				43D4B63C1A6CA97B00D59335 /* WebViewJavascriptBridge.m in Sources */,
 				43D1F53E19FB4C1A0049518E /* NILauncherViewController.m in Sources */,
 				43D1F1D419FB3AFB0049518E /* MASViewAttribute.m in Sources */,
 				43D1F18619FB3AFB0049518E /* NSIndexSet+AQIsSetContiguous.m in Sources */,
@@ -3076,6 +3099,7 @@
 				43D1F17A19FB3AFB0049518E /* SBJsonParser.m in Sources */,
 				43D1F2AD19FB3AFB0049518E /* ATBLibs+UIBarItem.m in Sources */,
 				43D1F2AF19FB3AFB0049518E /* ATBLibs+UIImage.m in Sources */,
+				43D4B6361A6CA6F200D59335 /* BaseWebViewController.m in Sources */,
 				43D1F31319FB3AFB0049518E /* NetworkStatusManager.m in Sources */,
 				43DC9D5F1A2F2F0400B09C58 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				43DC9D5A1A2F2F0400B09C58 /* IQSegmentedNextPrevious.m in Sources */,
