@@ -46,4 +46,14 @@
  */
 + (NSURL *)getRequestUrlByMethodName:(NSString *)methodName andArgsDic:(NSDictionary *)dic;
 
+/**
+ @ 方法描述    组装image请求的URL
+ @ 输入参数    nameSpace: 请求域名 urlComponent: URL组成部分
+ @ 返回值      NSString
+ @ 创建人      龚俊慧
+ @ 创建时间    2015-01-20
+ */
++ (NSString *)getImageRequestUrlStrByUrlComponent:(NSString *)urlComponent;
++ (NSString *)getImageRequestUrlStrByNameSpace:(NSString *)nameSpace urlComponent:(NSString *)urlComponent;
+
 @end

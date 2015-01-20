@@ -100,9 +100,34 @@
         {
             urlStr = [urlStr stringByAppendingFormat:@"?%@",[NSString urlArgsStringFromDictionary:dic]];
         }
+        urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
         url = [NSURL URLWithString:urlStr];
     }
     return url;
+}
+
++ (NSString *)getImageRequestUrlStrByUrlComponent:(NSString *)urlComponent
+{
+    NSString *imageNameSpaceStr = [self getImageNameSpace];
+    
+    return [self getImageRequestUrlStrByNameSpace:imageNameSpaceStr  urlComponent:urlComponent];
+}
+
++ (NSString *)getImageRequestUrlStrByNameSpace:(NSString *)nameSpace urlComponent:(NSString *)urlComponent
+{
+    NSString *imageUrlStr = nil;
+    
+    if ([nameSpace isAbsoluteValid] && [urlComponent isAbsoluteValid])
+    {
+        if ([urlComponent hasPrefix:@"/"])
+        {
+            urlComponent = [urlComponent stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+        }
+        
+        imageUrlStr = [nameSpace stringByAppendingFormat:@"/%@",urlComponent];
+    }
+    return imageUrlStr;
 }
 
 @end
