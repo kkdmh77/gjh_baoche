@@ -36,7 +36,7 @@ DEF_SINGLETON(ShareManager);
                                        defaultContent:@""
                                                 image:nil
                                                 title:@"分享"
-                                                  url:@"http://www.mob.com"
+                                                  url:kNewsShareUrlStr
                                           description:NSLocalizedString(@"TEXT_TEST_MSG", @"这是一条测试信息")
                                             mediaType:SSPublishContentMediaTypeNews];
     // 创建容器
