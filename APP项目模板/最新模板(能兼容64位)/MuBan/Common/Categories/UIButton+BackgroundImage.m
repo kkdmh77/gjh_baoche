@@ -44,11 +44,11 @@
         
         if (image && !error)
         {
-            success(image);
+            if (success) success(image);
         }
         else
         {
-            failure(error);
+            if (failure) failure(error);
         }
     }];
 }

@@ -66,11 +66,12 @@
             weakSelf.image = image;
             [weakSelf setNeedsLayout];
             
-            success(image);
+            // 回调
+            if (success) success(image);
         }
         else
         {
-            failure(error);
+            if (failure) failure(error);
         }
     }];
 }
