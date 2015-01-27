@@ -61,6 +61,9 @@ typedef enum
     // 168小时
     Net168HourRequestType_GetAllPromotions                         , // 获取168小时的所有活动数据(GET)
     
+    // 上传deviceToken
+    NetUploadDeviceTokenRequestType_UploadDeviceToken              , // 上传deviceToken
+    
 } NetRequestType;
 
 @interface BaseNetworkViewController (NetRequestManager)
