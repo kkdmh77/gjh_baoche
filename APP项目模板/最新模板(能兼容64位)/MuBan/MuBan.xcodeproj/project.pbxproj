@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */; };
+		431F138A1A7762E9008C4544 /* HanyuPinyinOutputFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137F1A7762E9008C4544 /* HanyuPinyinOutputFormat.m */; };
+		431F138B1A7762E9008C4544 /* NSString+PinYin4Cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F13811A7762E9008C4544 /* NSString+PinYin4Cocoa.m */; };
+		431F138C1A7762E9008C4544 /* PinyinFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F13841A7762E9008C4544 /* PinyinFormatter.m */; };
+		431F138D1A7762E9008C4544 /* PinyinHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F13861A7762E9008C4544 /* PinyinHelper.m */; };
+		431F138E1A7762E9008C4544 /* unicode_to_hanyu_pinyin.txt in Resources */ = {isa = PBXBuildFile; fileRef = 431F13881A7762E9008C4544 /* unicode_to_hanyu_pinyin.txt */; };
 		432C318E1A7243840094A27E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 432C318D1A7243840094A27E /* main.m */; };
 		432C31911A7243840094A27E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 432C31901A7243840094A27E /* AppDelegate.m */; };
 		432C31941A7243840094A27E /* MuBan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 432C31921A7243840094A27E /* MuBan.xcdatamodeld */; };
@@ -395,6 +401,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		431F137C1A7762E9008C4544 /* ChineseToPinyinResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyinResource.h; sourceTree = "<group>"; };
+		431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyinResource.m; sourceTree = "<group>"; };
+		431F137E1A7762E9008C4544 /* HanyuPinyinOutputFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HanyuPinyinOutputFormat.h; sourceTree = "<group>"; };
+		431F137F1A7762E9008C4544 /* HanyuPinyinOutputFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HanyuPinyinOutputFormat.m; sourceTree = "<group>"; };
+		431F13801A7762E9008C4544 /* NSString+PinYin4Cocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PinYin4Cocoa.h"; sourceTree = "<group>"; };
+		431F13811A7762E9008C4544 /* NSString+PinYin4Cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PinYin4Cocoa.m"; sourceTree = "<group>"; };
+		431F13821A7762E9008C4544 /* PinYin4Objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinYin4Objc.h; sourceTree = "<group>"; };
+		431F13831A7762E9008C4544 /* PinyinFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinyinFormatter.h; sourceTree = "<group>"; };
+		431F13841A7762E9008C4544 /* PinyinFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinFormatter.m; sourceTree = "<group>"; };
+		431F13851A7762E9008C4544 /* PinyinHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinyinHelper.h; sourceTree = "<group>"; };
+		431F13861A7762E9008C4544 /* PinyinHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinyinHelper.m; sourceTree = "<group>"; };
+		431F13881A7762E9008C4544 /* unicode_to_hanyu_pinyin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unicode_to_hanyu_pinyin.txt; sourceTree = "<group>"; };
 		432C31881A7243840094A27E /* MuBan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuBan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		432C318C1A7243840094A27E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		432C318D1A7243840094A27E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1259,6 +1277,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		431F137A1A7762E9008C4544 /* PinYin4Objc */ = {
+			isa = PBXGroup;
+			children = (
+				431F137B1A7762E9008C4544 /* Classes */,
+				431F13871A7762E9008C4544 /* Resources */,
+			);
+			path = PinYin4Objc;
+			sourceTree = "<group>";
+		};
+		431F137B1A7762E9008C4544 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				431F137C1A7762E9008C4544 /* ChineseToPinyinResource.h */,
+				431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */,
+				431F137E1A7762E9008C4544 /* HanyuPinyinOutputFormat.h */,
+				431F137F1A7762E9008C4544 /* HanyuPinyinOutputFormat.m */,
+				431F13801A7762E9008C4544 /* NSString+PinYin4Cocoa.h */,
+				431F13811A7762E9008C4544 /* NSString+PinYin4Cocoa.m */,
+				431F13821A7762E9008C4544 /* PinYin4Objc.h */,
+				431F13831A7762E9008C4544 /* PinyinFormatter.h */,
+				431F13841A7762E9008C4544 /* PinyinFormatter.m */,
+				431F13851A7762E9008C4544 /* PinyinHelper.h */,
+				431F13861A7762E9008C4544 /* PinyinHelper.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		431F13871A7762E9008C4544 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				431F13881A7762E9008C4544 /* unicode_to_hanyu_pinyin.txt */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		432C317F1A7243840094A27E = {
 			isa = PBXGroup;
 			children = (
@@ -1339,6 +1392,7 @@
 		43D1C68B1A75E692004564C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				431F137A1A7762E9008C4544 /* PinYin4Objc */,
 				43D1C70B1A75E777004564C2 /* AFNetworking */,
 				43D1C73C1A75E777004564C2 /* AQGridView */,
 				43D1C75B1A75E777004564C2 /* ASIHttpRequst */,
@@ -3046,6 +3100,7 @@
 				43D1CABA1A75E779004564C2 /* deps in Resources */,
 				43D1CAD11A75E779004564C2 /* unittest.xcconfig in Resources */,
 				43D1CA3A1A75E778004564C2 /* deps in Resources */,
+				431F138E1A7762E9008C4544 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				43D1CA261A75E778004564C2 /* .gitattributes in Resources */,
 				43D1CAA41A75E779004564C2 /* deps in Resources */,
 				43D1CA961A75E779004564C2 /* deps in Resources */,
@@ -3108,6 +3163,7 @@
 				43D1CAA51A75E779004564C2 /* NINetworkTableViewController.m in Sources */,
 				43D1CC0A1A75EBFA004564C2 /* ATBDataBase.m in Sources */,
 				43D1CC601A75EBFA004564C2 /* CycleScrollView.m in Sources */,
+				431F138D1A7762E9008C4544 /* PinyinHelper.m in Sources */,
 				43D1CC351A75EBFA004564C2 /* UIButton+Cache.m in Sources */,
 				43D1CA331A75E778004564C2 /* NIBadgeView.m in Sources */,
 				43D1CA031A75E778004564C2 /* MagicalImportFunctions.m in Sources */,
@@ -3141,6 +3197,7 @@
 				43D1CA241A75E778004564C2 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				43D1CA0F1A75E778004564C2 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				43D1CC541A75EBFA004564C2 /* NetItemList.m in Sources */,
+				431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */,
 				43D1C9B41A75E778004564C2 /* AFSecurityPolicy.m in Sources */,
 				43D1CCA61A760F8C004564C2 /* LoginBC.m in Sources */,
 				43D1CABB1A75E779004564C2 /* NIPagingScrollView.m in Sources */,
@@ -3185,6 +3242,7 @@
 				43D1CC441A75EBFA004564C2 /* GCDThread.m in Sources */,
 				43D1CA1C1A75E778004564C2 /* MagicalRecord.m in Sources */,
 				43D1CAD61A75E779004564C2 /* NIWebController.m in Sources */,
+				431F138C1A7762E9008C4544 /* PinyinFormatter.m in Sources */,
 				43D1CA3C1A75E778004564C2 /* NIButtonUtilities.m in Sources */,
 				43D1CABC1A75E779004564C2 /* NIPagingScrollViewPage.m in Sources */,
 				43D1CC511A75EBFA004564C2 /* IntroductionViewManager.m in Sources */,
@@ -3360,6 +3418,7 @@
 				43D1C9F81A75E778004564C2 /* IQUIView+Hierarchy.m in Sources */,
 				43D1CC051A75EBFA004564C2 /* ATB_Math.m in Sources */,
 				43D1C9C81A75E778004564C2 /* AQGridViewAnimatorItem.m in Sources */,
+				431F138B1A7762E9008C4544 /* NSString+PinYin4Cocoa.m in Sources */,
 				43D1C9FC1A75E778004564C2 /* IQSegmentedNextPrevious.m in Sources */,
 				43D1CAB61A75E779004564C2 /* NIOverviewSwizzling.m in Sources */,
 				43D1CA381A75E778004564C2 /* NICollectionViewModel.m in Sources */,
@@ -3371,6 +3430,7 @@
 				43D1CC581A75EBFA004564C2 /* PopupController.m in Sources */,
 				43D1CC201A75EBFA004564C2 /* ATTimerManager.m in Sources */,
 				43D1CC3E1A75EBFA004564C2 /* UITableView+SSToolkitAdditions.m in Sources */,
+				431F138A1A7762E9008C4544 /* HanyuPinyinOutputFormat.m in Sources */,
 				43D1CA4C1A75E778004564C2 /* NISDKAvailability.m in Sources */,
 				43D1C9ED1A75E778004564C2 /* UINavigationBar+FlatUI.m in Sources */,
 				43D1CC141A75EBFA004564C2 /* ATSingleton.m in Sources */,
@@ -3539,6 +3599,7 @@
 					"\"$(SRCROOT)/Class/CrossBorderAlipay\"",
 				);
 				INFOPLIST_FILE = MuBan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3574,6 +3635,7 @@
 					"\"$(SRCROOT)/Class/CrossBorderAlipay\"",
 				);
 				INFOPLIST_FILE = MuBan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
