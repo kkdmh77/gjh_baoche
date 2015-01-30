@@ -31,14 +31,17 @@ DEF_SINGLETON(ShareManager);
      NSArray *shareList = [ShareSDK getShareListWithType:ShareTypeTwitter, ShareTypeFacebook, ShareTypeSinaWeibo, ShareTypeTencentWeibo, ShareTypeRenren, ShareTypeKaixin, ShareTypeSohuWeibo, ShareType163Weibo, nil];
      */
     
+    NSString *imagePath = GetApplicationPathFileName(@"120", @"png");
+    
     // 创建分享内容
     id<ISSContent> publishContent = [ShareSDK content:[content isAbsoluteValid] ? content : kNewsShareUrlStr
-                                       defaultContent:@""
+                                       defaultContent:kNewsShareUrlStr
                                                 image:nil
                                                 title:@"分享"
                                                   url:kNewsShareUrlStr
-                                          description:NSLocalizedString(@"TEXT_TEST_MSG", @"这是一条测试信息")
+                                          description:kNewsShareUrlStr
                                             mediaType:SSPublishContentMediaTypeNews];
+    
     // 创建容器
     id<ISSContainer> container = [ShareSDK container];
     [container setIPadContainerWithView:sender arrowDirect:UIPopoverArrowDirectionUp];
@@ -58,9 +61,18 @@ DEF_SINGLETON(ShareManager);
      nil]];
      */
     
+     id<ISSShareOptions> shareOptions = [ShareSDK simpleShareOptionsWithTitle:@"分享这条新闻" shareViewDelegate:self];
+    
     /*
-     id<ISSShareOptions> shareOptions = [ShareSDK simpleShareOptionsWithTitle:NSLocalizedString(@"TEXT_SHARE_TITLE", @"内容分享")
-     shareViewDelegate:self];
+     [ShareSDK defaultShareOptionsWithTitle:@"分享这条新闻"
+     oneKeyShareList:nil
+     qqButtonHidden:YES
+     wxSessionButtonHidden:YES
+     wxTimelineButtonHidden:YES
+     showKeyboardOnAppear:NO
+     shareViewDelegate:self
+     friendsViewDelegate:self
+     picViewerViewDelegate:self]
      */
     
     NSArray *shareList = nil;
@@ -119,15 +131,7 @@ DEF_SINGLETON(ShareManager);
                            content:publishContent
                      statusBarTips:YES
                        authOptions:nil
-                      shareOptions:[ShareSDK defaultShareOptionsWithTitle:@"分享这条新闻"
-                                                          oneKeyShareList:nil
-                                                           qqButtonHidden:YES
-                                                    wxSessionButtonHidden:YES
-                                                   wxTimelineButtonHidden:YES
-                                                     showKeyboardOnAppear:NO
-                                                        shareViewDelegate:self
-                                                      friendsViewDelegate:self
-                                                    picViewerViewDelegate:self]
+                      shareOptions:shareOptions
                             result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
                                 
                                 if (state == SSPublishContentStateSuccess)

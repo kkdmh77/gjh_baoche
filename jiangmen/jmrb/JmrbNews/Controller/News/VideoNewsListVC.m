@@ -55,7 +55,7 @@ static NSString * const cellIdentifer_videoNews = @"cellIdentifer_videoNews";
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:@"视频新闻"];
+    [self setNavigationItemTitle:@"腾讯新闻"];
 }
 
 - (void)setNetworkRequestStatusBlocks

@@ -74,7 +74,7 @@ static NSString * const cellIdentifer_imageNews = @"cellIdentifer_imageNews";
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:@"图片新闻"];
+    [self setNavigationItemTitle:@"腾讯新闻"];
 }
 
 - (void)setNetworkRequestStatusBlocks

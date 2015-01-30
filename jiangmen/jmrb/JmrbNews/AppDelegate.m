@@ -216,8 +216,8 @@ CG_INLINE  void deleteFile() {
      连接新浪微博开放平台应用以使用相关功能，此应用需要引用SinaWeiboConnection.framework
      http://open.weibo.com上注册新浪微博开放平台应用，并将相关信息填写到以下字段
      **/
-    [ShareSDK connectSinaWeiboWithAppKey:@"568898243"
-                               appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
+    [ShareSDK connectSinaWeiboWithAppKey:@"362411730"
+                               appSecret:@"62eb5aa4a40ad72dfacce871443028e6"
                              redirectUri:@"http://www.sharesdk.cn"];
     
     /**

@@ -76,6 +76,8 @@
     
     // DLog(@"token = %@", deviceTokenStr);
     
+    // 保存token值
+    [UserInfoModel setUserDefaultDeviceToken:deviceTokenStr];
     [self sendDeviceToken:deviceTokenStr];
 }
 
@@ -96,7 +98,8 @@
     NSURL *url = [UrlManager getRequestUrlByMethodName:[BaseNetworkViewController getRequestURLStr:NetUploadDeviceTokenRequestType_UploadDeviceToken]];
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:deviceToken forKey:@"token"];
+    [dic setObject:deviceToken forKey:@"deviceToken"];
+    [dic setObject:@"ios" forKey:@"deviceType"];
     if ([UserInfoModel getUserDefaultUserId])
     {
         [dic setObject:[UserInfoModel getUserDefaultUserId] forKey:@"userId"];
@@ -104,6 +107,7 @@
     
     [[NetRequestManager sharedInstance] sendRequest:url
                                        parameterDic:dic
+                                  requestMethodType:RequestMethodType_POST
                                          requestTag:1000
                                            delegate:self
                                            userInfo:nil];
@@ -114,7 +118,8 @@
     NSDictionary *apsDic = [userInfo safeObjectForKey:@"aps"];
     
     NSString *alertBodyStr = [apsDic safeObjectForKey:@"alert"];
-    NSNumber *commentId = [userInfo safeObjectForKey:@"commentId"];
+    NSNumber *commentId = [userInfo safeObjectForKey:@"id"];
+    NSInteger type = [[userInfo safeObjectForKey:@"type"] integerValue];
     
     // 应用正在使用状态
     if (application.applicationState == UIApplicationStateActive)
@@ -128,29 +133,39 @@
                             
                         } otherTitle:@"查看" otherBlock:^{
                             
-                            [weakSelf pushToCommentDetailVCWithCommentId:commentId];
+                            [weakSelf pushToCommentDetailVCWithCommentId:commentId type:type];
                         }];
     }
     else
     {
         // 打开应用后直接跳转
-        [self pushToCommentDetailVCWithCommentId:commentId];
+        [self pushToCommentDetailVCWithCommentId:commentId type:type];
     }
+    
+    [UIFactory clearApplicationBadgeNumber];
 }
 
-- (void)pushToCommentDetailVCWithCommentId:(NSNumber *)commentId
+// type 0: 晒单 1: 视频
+- (void)pushToCommentDetailVCWithCommentId:(NSNumber *)commentId type:(NSInteger)type
 {
     UIViewController *curSelectedController = [_baseTabBarController selectedViewController];
     
     if ([curSelectedController isKindOfClass:[UINavigationController class]])
     {
-        /*
-        CommentDetailVC *commentDetail = [[CommentDetailVC alloc] initWithCommentId:commentId.integerValue];
-        commentDetail.isFromShareOrderVC = YES;
-        commentDetail.hidesBottomBarWhenPushed = YES;
-        
-        [(UINavigationController *)curSelectedController pushViewController:commentDetail animated:YES];
-         */
+        if (0 == type)
+        {
+            /*
+            CommentDetailVC *commentDetail = [[CommentDetailVC alloc] initWithCommentId:commentId.integerValue];
+            commentDetail.isFromShareOrderVC = YES;
+            commentDetail.hidesBottomBarWhenPushed = YES;
+            
+            [(UINavigationController *)curSelectedController pushViewController:commentDetail animated:YES];
+             */
+        }
+        else if (1 == type)
+        {
+            
+        }
     }
 }
 
