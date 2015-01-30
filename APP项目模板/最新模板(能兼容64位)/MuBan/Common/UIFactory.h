@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "PinYin4Objc.h"
 
 @interface UIFactory : NSObject <MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 
@@ -37,6 +38,21 @@ AS_SINGLETON(UIFactory);
 /// 清空通知数字显示
 + (void)clearApplicationBadgeNumber;
 
+/// 注册远程推送
++ (void)registerRemoteNotification;
+
+/**
+ @ 方法描述    汉字转换为拼音,且截取首个英文字母并过滤重复的字母,然后排序再按照首个字母把汉字归组(龚归为G组)
+ @ 输入参数    CNStringArray: 要排序的中文数组 sortedFirstLetterArray: 转换为拼音并排好序的首字母数组
+ sortedSectionNSStringDic: 排序并按首字母为key值分组存储的中文数组字典
+ @ 返回值      Void
+ @ 创建人      龚俊慧
+ @ 创建时间    2014-11-10
+ */
++(void)toHanyuPinyinStringWithCNStringArray:(NSArray *)CNStringArray
+                     sortedFirstLetterArray:(NSMutableArray *__strong *)firstLetterArray
+                   sortedSectionCNStringDic:(NSMutableDictionary *__strong *)sectionCNStringDic;
+
 + (NSStringEncoding)getGBKEncoding;                             //获得中文gbk编码
 
 /*
@@ -45,8 +61,3 @@ AS_SINGLETON(UIFactory);
  */
 
 @end
-
-
-
-
-

@@ -62,4 +62,7 @@
 + (void)setUserDefaultCookiesArray:(NSArray *)cookies;
 + (NSArray *)getUserDefaultCookiesArray;
 
++ (void)setUserDefaultDeviceToken:(NSString *)token;
++ (NSString *)getUserDefaultDeviceToken;
+
 @end

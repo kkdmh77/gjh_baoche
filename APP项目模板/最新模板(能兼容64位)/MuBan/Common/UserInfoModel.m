@@ -28,6 +28,7 @@
 #define UserDefault_UserLoginToken_VKey     @"userDefault_UserLoginToken_VKey"  // 用户登陆成功后服务器返回的token(加密版)
 #define UserDefault_UserSearchHistroyKey    @"userDefault_UserSearchHistroyKey" // 用户搜索记录
 #define UserDefault_CookiesArrayKey         @"userDefault_CookiesArrayKey"      // HTTP响应cookies
+#define UserDefault_DeviceTokenKey          @"userDefault_DeviceTokenKey"       // 用户注册通知成功后返回的token
 
 @implementation UserInfoModel
 
@@ -258,6 +259,17 @@
     }
     
     return cookiesArray;
+}
+
++ (void)setUserDefaultDeviceToken:(NSString *)token
+{
+    [[NSUserDefaults standardUserDefaults] setObject:token forKey:UserDefault_DeviceTokenKey];
+    [self saveUserDefaultInfo];
+}
+
++ (NSString *)getUserDefaultDeviceToken
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_DeviceTokenKey];
 }
 
 @end

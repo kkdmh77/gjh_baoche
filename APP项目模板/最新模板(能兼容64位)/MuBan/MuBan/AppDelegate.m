@@ -7,9 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "BaseTabBarVC.h"
 #import "AppPropertiesInitialize.h"
+#import "PRPAlertView.h"
+#import "UrlManager.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <NetRequestDelegate>
+{
+    BaseTabBarVC *_baseTabBarController;
+}
 
 @end
 
@@ -52,6 +59,128 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
+}
+
+#pragma mark - /***************************推送相关***************************/
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    // register to receive notifications
+    [application registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString *deviceTokenStr = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    deviceTokenStr = [deviceTokenStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    // DLog(@"token = %@", deviceTokenStr);
+    
+    // 保存token值
+    [UserInfoModel setUserDefaultDeviceToken:deviceTokenStr];
+    [self sendDeviceToken:deviceTokenStr];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [self handleRemoteNotificationWithApplication:application notification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    [self handleRemoteNotificationWithApplication:application notification:userInfo];
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+- (void)sendDeviceToken:(NSString *)deviceToken
+{
+    NSURL *url = [UrlManager getRequestUrlByMethodName:[BaseNetworkViewController getRequestURLStr:NetUploadDeviceTokenRequestType_UploadDeviceToken]];
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:deviceToken forKey:@"deviceToken"];
+    [dic setObject:@"ios" forKey:@"deviceType"];
+    if ([UserInfoModel getUserDefaultUserId])
+    {
+        [dic setObject:[UserInfoModel getUserDefaultUserId] forKey:@"userId"];
+    }
+    
+    [[NetRequestManager sharedInstance] sendRequest:url
+                                       parameterDic:dic
+                                  requestMethodType:RequestMethodType_POST
+                                         requestTag:1000
+                                           delegate:self
+                                           userInfo:nil];
+}
+
+- (void)handleRemoteNotificationWithApplication:(UIApplication *)application notification:(NSDictionary *)userInfo
+{
+    NSDictionary *apsDic = [userInfo safeObjectForKey:@"aps"];
+    
+    NSString *alertBodyStr = [apsDic safeObjectForKey:@"alert"];
+    NSNumber *commentId = [userInfo safeObjectForKey:@"id"];
+    NSInteger type = [[userInfo safeObjectForKey:@"type"] integerValue];
+    
+    // 应用正在使用状态
+    if (application.applicationState == UIApplicationStateActive)
+    {
+        // 弹窗提示再跳转
+        WEAKSELF
+        [PRPAlertView showWithTitle:@"推送信息"
+                            message:alertBodyStr
+                        cancelTitle:LocalizedStr(All_Cancel)
+                        cancelBlock:^{
+                            
+                        } otherTitle:@"查看" otherBlock:^{
+                            
+                            [weakSelf pushToCommentDetailVCWithCommentId:commentId type:type];
+                        }];
+    }
+    else
+    {
+        // 打开应用后直接跳转
+        [self pushToCommentDetailVCWithCommentId:commentId type:type];
+    }
+    
+    [UIFactory clearApplicationBadgeNumber];
+}
+
+// type 0: 晒单 1: 视频
+- (void)pushToCommentDetailVCWithCommentId:(NSNumber *)commentId type:(NSInteger)type
+{
+    UIViewController *curSelectedController = [_baseTabBarController selectedViewController];
+    
+    if ([curSelectedController isKindOfClass:[UINavigationController class]])
+    {
+        if (0 == type)
+        {
+            /*
+            CommentDetailVC *commentDetail = [[CommentDetailVC alloc] initWithCommentId:commentId.integerValue];
+            commentDetail.isFromShareOrderVC = YES;
+            commentDetail.hidesBottomBarWhenPushed = YES;
+            
+            [(UINavigationController *)curSelectedController pushViewController:commentDetail animated:YES];
+             */
+        }
+        else if (1 == type)
+        {
+            
+        }
+    }
+}
+
+#pragma mark - NetRequestDelegate Methods
+
+// 发生请求成功时
+- (void)netRequest:(NetRequest *)request successWithDicInfo:(NSDictionary *)info
+{
+    NSLog(@"send the token success");
+}
+
+// 发送请求失败时
+- (void)netRequest:(NetRequest *)request failedWithError:(NSError *)error
+{
+    NSLog(@"send the token error : %@",error);
 }
 
 @end

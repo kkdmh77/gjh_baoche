@@ -65,6 +65,49 @@
     }
 }
 
+- (void)dynamicLoginWithUserName:(NSString *)userName verificationCode:(NSString *)code autoLogin:(BOOL)autoLogin showHUD:(BOOL)show successHandle:(successHandle)success failedHandle:(failedHandle)failed
+{
+    if ([userName isAbsoluteValid])
+    {
+        if ([code isAbsoluteValid])
+        {
+            _success = success;
+            _failed = failed;
+            
+            if (show)
+            {
+                [HUDManager showHUDWithToShowStr:LocalizedStr(Login_LoadingShowInfoKey)
+                                         HUDMode:MBProgressHUDModeIndeterminate
+                                        autoHide:NO
+                                      afterDelay:0
+                          userInteractionEnabled:NO];
+            }
+            
+            // 登录操作
+            NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:88];
+            NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
+            NSDictionary *dic = @{@"username": userName,
+                                  @"checkCode": code,
+                                  @"rememberMe": (autoLogin ? @"on" : @"")};
+            
+            [[NetRequestManager sharedInstance] sendRequest:url
+                                               parameterDic:dic
+                                          requestMethodType:RequestMethodType_POST
+                                                 requestTag:88
+                                                   delegate:self
+                                                   userInfo:nil];
+        }
+        else
+        {
+            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入验证码"];
+        }
+    }
+    else
+    {
+        [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入用户名"];
+    }
+}
+
 - (void)dealloc
 {
     [[NetRequestManager sharedInstance] clearDelegate:self];
@@ -86,6 +129,9 @@
 - (void)netRequest:(NetRequest *)request successWithInfoObj:(id)infoObj
 {
     [HUDManager hideHUD];
+    
+    // 发送通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginSuccessNotificationKey object:nil];
     
     if (_success)
     {

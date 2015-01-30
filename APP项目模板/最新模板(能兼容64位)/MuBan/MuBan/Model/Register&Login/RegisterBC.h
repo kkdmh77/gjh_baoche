@@ -29,10 +29,10 @@ typedef void (^failedHandle)  (NSError *error);
 
 /// 邮箱注册
 - (void)registerWithEmailUserName:(NSString *)userName
-                               password:(NSString *)password
-                        passwordConfirm:(NSString *)passwordConfirm
-                          successHandle:(successHandle)success
-                           failedHandle:(failedHandle)failed;
+                         password:(NSString *)password
+                  passwordConfirm:(NSString *)passwordConfirm
+                    successHandle:(successHandle)success
+                     failedHandle:(failedHandle)failed;
 
 /// 普通用户名注册
 - (void)registerWithNormalUserName:(NSString *)userName

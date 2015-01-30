@@ -98,7 +98,6 @@ DEF_SINGLETON(UIFactory);
     NSString *appUrlStr = [NSString stringWithFormat:kAPPCommentUrl, appID];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrlStr]];
      */
-    
 }
 
 + (void)call:(NSString *)telephoneNum
@@ -206,13 +205,91 @@ DEF_SINGLETON(UIFactory);
     }
 }
 
+// 注册远程推送
++ (void)registerRemoteNotification
+{
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
+    {
+        UIUserNotificationType myTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+    else
+    {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+    }
+}
+
++ (void)toHanyuPinyinStringWithCNStringArray:(NSArray *)CNStringArray sortedFirstLetterArray:(NSMutableArray *__strong *)firstLetterArray sortedSectionCNStringDic:(NSMutableDictionary *__strong *)sectionCNStringDic
+{
+    if (![CNStringArray isAbsoluteValid]) return;
+    
+    if (!*firstLetterArray) *firstLetterArray = [NSMutableArray arrayWithCapacity:CNStringArray.count];
+    if (!*sectionCNStringDic) *sectionCNStringDic = [NSMutableDictionary dictionaryWithCapacity:CNStringArray.count];
+    
+    const NSString *kPinyinKey = @"kPinyinKey";
+    const NSString *kHanziKey = @"kHanziKey";
+    
+    NSMutableArray *tempPinyinAndHanziObjArray = [NSMutableArray arrayWithCapacity:CNStringArray.count]; // 包含拼音和汉字对象的数组(用以拿拼音给汉字排序)
+    
+    // 把中文转换为拼音
+    HanyuPinyinOutputFormat *outputFormat=[[HanyuPinyinOutputFormat alloc] init];
+    [outputFormat setToneType:ToneTypeWithoutTone];
+    [outputFormat setVCharType:VCharTypeWithV];
+    [outputFormat setCaseType:CaseTypeUppercase];
+    
+    // 获取首字母数组
+    for (NSString *str in CNStringArray)
+    {
+        NSString *outputPinyin = [[PinyinHelper toHanyuPinyinStringWithNSString:str withHanyuPinyinOutputFormat:outputFormat withNSString:@""] uppercaseString];
+        NSString *firstLetterStr = [outputPinyin substringToIndex:1];
+        
+        if ([firstLetterStr isAbsoluteValid] && ![*firstLetterArray containsObject:firstLetterStr])
+        {
+            [*firstLetterArray addObject:firstLetterStr];
+        }
+        
+        // 配置拼音和汉字的对象数组
+        [tempPinyinAndHanziObjArray addObject:@{kHanziKey : str, kPinyinKey : outputPinyin}];
+    }
+    
+    // 排序首字母数组
+    [*firstLetterArray sortUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+        return [obj1 compare:obj2 options:NSCaseInsensitiveSearch];
+    }];
+    // 排序汉字
+    [tempPinyinAndHanziObjArray sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+        
+        return [[obj1 objectForKey:kPinyinKey ] compare:[obj2 objectForKey:kPinyinKey] options:NSCaseInsensitiveSearch];
+    }];
+    
+    // 获取分组存储的中文数组字典
+    for (NSString *firstLetterItem in *firstLetterArray)
+    {
+        NSMutableArray *oneSectionArray = [NSMutableArray array];
+        
+        for (NSDictionary *pinyinAndHanziObjItem in tempPinyinAndHanziObjArray)
+        {
+            NSString *pinyinStr = [pinyinAndHanziObjItem objectForKey:kPinyinKey];
+            NSString *hanziStr = [pinyinAndHanziObjItem objectForKey:kHanziKey];
+            
+            if ([pinyinStr hasPrefix:firstLetterItem])
+            {
+                [oneSectionArray addObject:hanziStr];
+            }
+        }
+        
+        [*sectionCNStringDic setObject:oneSectionArray forKey:firstLetterItem];
+    }
+}
+
 + (NSStringEncoding)getGBKEncoding
 {
     
     //获得中文gbk编码
     NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     return enc;
-    
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate & MFMessageComposeViewControllerDelegate methods
