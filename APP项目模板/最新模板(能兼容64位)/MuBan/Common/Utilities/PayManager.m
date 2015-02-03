@@ -7,9 +7,11 @@
 //
 
 #import "PayManager.h"
+#import "InterfaceHUDManager.h"
 
-#define kWXPayRequestTag_GetToken  1000 // 获取access_toke
-#define kWXPayRequestTag_GenPrepay 1001 // 生成预支付订单
+#define kWXPayRequestTag_GetToken       1000 // 获取access_toke
+#define kWXPayRequestTag_GetProductArgs 1001 // 从自己的服务器获取生成预支付订单时的必要参数
+#define kWXPayRequestTag_GenPrepay      1002 // 生成预支付订单
 
 @implementation Product
 
@@ -38,6 +40,8 @@
 @property (nonatomic, copy) NSString *package;
 @property (nonatomic, copy) NSString *prepayid;
 @property (nonatomic, copy) NSString *accessToken;
+
+@property (nonatomic, strong) NSDictionary *productArgs;
 
 @end
 
@@ -263,11 +267,35 @@ DEF_SINGLETON(PayManager);
                          tag:kWXPayRequestTag_GetToken];
 }
 
+//- (void)getProductArgs
+//{
+//    // http://mp.sephome.cn/openapi/wcpay/getWCPayRequestData
+//    // orderNo,body,totalFee
+//    
+//    NSMutableDictionary *postDataDic = [NSMutableDictionary dictionary];
+//    [postDataDic setObject:_toPayProduct.orderId forKey:@"orderNo"];
+//    [postDataDic setObject:_toPayProduct.productName forKey:@"body"];
+//    [postDataDic setObject:[NSString stringWithFormat:@"%.0lf", _toPayProduct.price * 100] forKey:@"totalFee"];
+//    [postDataDic setObject:[self genMD5Sign:postDataDic] forKey:@"sign"];
+//    
+//    [self sendRequestWithUrl:[NSURL URLWithString:@"http://appmp.vmei.com/openapi/wcpay/getWCPayRequestData"]
+//                parameterDic:postDataDic
+//                  methodType:RequestMethodType_POST
+//                         tag:kWXPayRequestTag_GetProductArgs];
+//    /*
+//    [self sendRequestWithUrl:[NSURL URLWithString:@"http://mp.sephome.cn/openapi/wcpay/getWCPayRequestData"]
+//                parameterDic:postDataDic
+//                  methodType:RequestMethodType_POST
+//                         tag:kWXPayRequestTag_GetProductArgs];
+//     */
+//}
+
 - (void)prepay
 {
     // https://api.weixin.qq.com/pay/genprepay?access_token=ACCESS_TOKEN
     
     NSDictionary *postDataDic = [self getProductArgs];
+     
     NSString *strUrl = [NSString stringWithFormat:@"https://api.weixin.qq.com/pay/genprepay?&access_token=%@",_accessToken];
     
     [self sendRequestWithUrl:[NSURL URLWithString:strUrl]
@@ -281,6 +309,7 @@ DEF_SINGLETON(PayManager);
  B)对所有待签名参数按照字段名的 ASCII 码从小到大排序(字典序)后,使用 URL 键值对的 格式(即 key1=value1&key2=value2...)拼接成字符串 string1。 注意:所有参数名均为小写字符
  C)对 string1 作签名算法,字段名和字段值都采用原始值,不进行 URL 转义。具体签名算法 为 SHA1
  */
+
 - (NSDictionary *)getProductArgs
 {
     self.timeStamp = [self genTimeStamp];
@@ -299,38 +328,59 @@ DEF_SINGLETON(PayManager);
     [params setObject:[self genSign:params] forKey:@"app_signature"];
     [params setObject:@"sha1" forKey:@"sign_method"];
     
-    /*
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error: &error];
-    NSLog(@"--- ProductArgs: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
-    return [NSMutableData dataWithData:jsonData];
-     */
+ 
+//    NSError *error = nil;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error: &error];
+//    NSLog(@"--- ProductArgs: %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+//    return [NSMutableData dataWithData:jsonData];
+ 
     return params;
 }
+
 
 #pragma mark  开始支付
 - (void)pay
 {
-    //构造支付请求
-    PayReq *request = [[PayReq alloc]init];
-    request.partnerId = kWXPartnerId;
-    request.prepayId = self.prepayid;
-    request.package = @"Sign=WXPay";
-    request.nonceStr = self.nonceStr;
-    request.timeStamp = [self.timeStamp integerValue];
-    
-    //构造参数列表
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:kWXAppID forKey:@"appid"];
-    [params setObject:kWXAppKey forKey:@"appkey"];
-    [params setObject:request.nonceStr forKey:@"noncestr"];
-    [params setObject:request.package forKey:@"package"];
-    [params setObject:request.partnerId forKey:@"partnerid"];
-    [params setObject:request.prepayId forKey:@"prepayid"];
-    [params setObject:self.timeStamp forKey:@"timestamp"];
-    request.sign = [self genSign:params];
-    
-    [WXApi sendReq:request];
+    if ([WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi])
+    {
+        //构造支付请求
+        PayReq *request = [[PayReq alloc]init];
+        // request.openID = kWXAppID;
+        request.partnerId = kWXPartnerId;
+        request.prepayId = self.prepayid;
+        request.package = @"Sign=WXPay";
+        
+        request.nonceStr = self.nonceStr;
+        request.timeStamp = [self.timeStamp integerValue];
+         
+        /*
+        request.nonceStr = [_productArgs safeObjectForKey:@"noncestr"];
+        request.timeStamp = [[_productArgs safeObjectForKey:@"timestamp"] integerValue];
+        */
+        //构造参数列表
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        [params setObject:kWXAppID forKey:@"appid"];
+        [params setObject:kWXAppKey forKey:@"appkey"];
+        [params setObject:request.nonceStr forKey:@"noncestr"];
+        [params setObject:request.package forKey:@"package"];
+        [params setObject:request.partnerId forKey:@"partnerid"];
+        [params setObject:request.prepayId forKey:@"prepayid"];
+        [params setObject:[NSString stringWithFormat:@"%ld", request.timeStamp] forKey:@"timestamp"];
+        request.sign = [self genSign:params];
+        
+        [WXApi sendReq:request];
+    }
+    else
+    {
+        if (_completeHandle) _completeHandle(PayResultStatusCode_Failed);
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"亲,你还没有安装客户端,无法进行支付哦!"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"知道了"
+                                                  otherButtonTitles: nil];
+        [alertView show];
+    }
 }
 
 //MARK: 注意:不能hardcode在客户端,建议genPackage这个过程都由服务器端完成
@@ -342,8 +392,10 @@ DEF_SINGLETON(PayManager);
     [params setObject:_toPayProduct.productName forKey:@"body"];
     [params setObject:@"1" forKey:@"fee_type"];
     [params setObject:@"UTF-8" forKey:@"input_charset"];
-    [params setObject:@"http://weixin.qq.com" forKey:@"notify_url"];
-    [params setObject:[self genOutTradNo] forKey:@"out_trade_no"];
+    // [params setObject:@"http://appmp.vmei.com/wcpay/notify/app" forKey:@"notify_url"];
+    [params setObject:@"http://mp.vmei.com/wcpay/notify/app" forKey:@"notify_url"];
+    // [params setObject:[self genOutTradNo] forKey:@"out_trade_no"];
+    [params setObject:_toPayProduct.orderId forKey:@"out_trade_no"];
     [params setObject:kWXPartnerId forKey:@"partner"];
     [params setObject:[CommonUtil getIPAddress:YES] forKey:@"spbill_create_ip"];
     [params setObject:[NSString stringWithFormat:@"%.0lf", _toPayProduct.price * 100] forKey:@"total_fee"]; // 微信支付单位是"分"
@@ -434,6 +486,31 @@ DEF_SINGLETON(PayManager);
     return result;
 }
 
+//MARK: sign MD5
+- (NSString *)genMD5Sign:(NSDictionary *)signParams
+{
+    // 排序
+    NSArray *keys = [signParams allKeys];
+    NSArray *sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSNumericSearch];
+    }];
+    
+    // 生成
+    NSMutableString *sign = [NSMutableString string];
+    for (NSString *key in sortedKeys)
+    {
+        [sign appendString:key];
+        [sign appendString:@"="];
+        [sign appendString:[signParams objectForKey:key]];
+        [sign appendString:@"&"];
+    }
+    NSString *signString = [[sign copy] substringWithRange:NSMakeRange(0, sign.length - 1)];
+    NSString *result = [[CommonUtil md5:signString] uppercaseString];
+   
+    return result;
+}
+
+
 /**
  * 注意: 商户系统内部的订单号,32个字符内、可包含字母,确保在商户系统唯一
  */
@@ -497,6 +574,15 @@ DEF_SINGLETON(PayManager);
         if (kWXPayRequestTag_GetToken == request.tag)
         {
             self.accessToken = [infoObj safeObjectForKey:@"access_token"];
+            
+            [self prepay];
+             /*
+            [self getProductArgs];
+              */
+        }
+        else if (kWXPayRequestTag_GetProductArgs == request.tag)
+        {
+            self.productArgs = infoObj;
             
             [self prepay];
         }
