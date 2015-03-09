@@ -19,8 +19,11 @@ static Reachability *hostReachbility;            // 检测网络实例需要强�
 
 + (BOOL)startNetworkStatusNotifier
 {
+    // 默认为有网
+    staticCurrentNetworkStatus = kReachableViaWWAN;
+    
     // 检测设备网络状态
-    hostReachbility = [Reachability reachabilityWithHostName:@"www.baidu.com"]; // 可以以多种形式初始化
+    hostReachbility = [Reachability reachabilityForInternetConnection]; // 可以以多种形式初始化
     
     // 获得设备现在的网络状态
     staticCurrentNetworkStatus = [hostReachbility currentReachabilityStatus];
