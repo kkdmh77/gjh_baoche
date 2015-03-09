@@ -31,12 +31,13 @@
         _failed = failed;
         
         NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_GetVerificationCode];
-        NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
-        NSDictionary *dic = @{@"Mobile": phoneNumber};
+        // NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
+        NSDictionary *dic = @{@"phone": phoneNumber};
+        NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr andArgsDic:dic];
         
         [[NetRequestManager sharedInstance] sendRequest:url
-                                           parameterDic:dic
-                                      requestMethodType:RequestMethodType_POST
+                                           parameterDic:nil
+                                      requestMethodType:RequestMethodType_GET
                                              requestTag:NetUserCenterRequestType_GetVerificationCode
                                                delegate:self
                                                userInfo:nil];
@@ -65,9 +66,9 @@
                         // 进行注册操作
                         NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_Register];
                         NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
-                        NSDictionary *dic = @{@"Mobile": userName,
-                                              @"Password": password,
-                                              @"Code": verificationCode};
+                        NSDictionary *dic = @{@"userName": userName,
+                                              @"password": password,
+                                              @"checkcode": verificationCode};
                         
                         [[NetRequestManager sharedInstance] sendRequest:url
                                                            parameterDic:dic

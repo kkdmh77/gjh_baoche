@@ -57,7 +57,7 @@
 {
     [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllStartStationList]
          parameterDic:nil
-    requestMethodType:RequestMethodType_POST
+    requestMethodType:RequestMethodType_GET
            requestTag:NetBusRequestType_GetAllStartStationList];
 }
 
@@ -72,7 +72,7 @@
 
 - (void)parseNetworkDataWithSourceDic:(NSDictionary *)dic
 {
-    NSArray *collegeList = [dic safeObjectForKey:@"list"];
+    NSArray *collegeList = [dic safeObjectForKey:@"origins"];
     _netCollegeEntityArray = [NSMutableArray arrayWithCapacity:collegeList.count];
     
     for (NSDictionary *collegeDic in collegeList)
@@ -130,7 +130,7 @@
     
     StartStationCollegeEntity *entity = [self curDataWithIndex:indexPath.row];
     
-    cell.textLabel.text = entity.collegeNameStr;
+    cell.textLabel.text = entity.locationStr;
     
     return cell;
 }
@@ -141,7 +141,7 @@
     StartStationCollegeEntity *entity = [self curDataWithIndex:indexPath.row];
     
     BuyTicketVC *buyTicket = objc_getAssociatedObject(self, class_getName([BuyTicketVC class]));
-    [buyTicket setStartStationStr:entity.collegeNameStr];
+    [buyTicket setStartStationEntity:entity];
     
     [self backViewController];
 }

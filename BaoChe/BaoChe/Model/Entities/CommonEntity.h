@@ -32,7 +32,7 @@
 @interface StartStationCollegeEntity : NetItem
 
 @property (nonatomic, assign) NSInteger keyId;
-@property (nonatomic, copy) NSString *collegeNameStr;
+//@property (nonatomic, copy) NSString *collegeNameStr;
 @property (nonatomic, copy) NSString *locationStr;
 
 @end

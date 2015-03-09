@@ -65,12 +65,12 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
 //数据解析
 - (BOOL)isParseSuccessWithResponseData:(NSData *)data result:(id *)result
 {
-//    if (!networkDataIsJsonType)
-//    {
-//        *result = data;
-//        
-//        return YES;
-//    }
+    if (!networkDataIsJsonType)
+    {
+        *result = data;
+        
+        return YES;
+    }
     
     NSError *err = nil;
     
@@ -85,10 +85,10 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     }
     
     // 做服务器返回的业务code判断,因为如果服务器方法报错或者业务逻辑出错HTTP码还是返回的200,但是加了自己定义的一套code码(详情可参考WIKI上面的约定)
-    NSNumber *myCodeNum = [*result objectForKey:@"status"];
+    NSNumber *myCodeNum = [*result objectForKey:@"apiCode"];
     NSString *myMsgStr = [*result objectForKey:@"msg"];
     
-    if (!myCodeNum || 1 != myCodeNum.integerValue)
+    if (!myCodeNum || MyHTTPCodeType_Success != myCodeNum.integerValue)
     {
         err = [[NSError alloc] initWithDomain:@"MYSERVER_ERROR_DOMAIN" code:myCodeNum.integerValue userInfo:[NSDictionary dictionaryWithObjectsAndKeys:myMsgStr, NSLocalizedDescriptionKey, nil]];
         
@@ -300,7 +300,7 @@ DEF_SINGLETON(NetRequestManager);
     NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding([netRequest.asiFormRequest stringEncoding]));
     
     [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@",charset]];
-    /*
+    
     if ([methodType isEqualToString:RequestMethodType_GET])
     {
         [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@",charset]];
@@ -318,7 +318,7 @@ DEF_SINGLETON(NetRequestManager);
             [netRequest.asiFormRequest setPostBody:[NSMutableData dataWithData:postBodyData]];
         }
     }
-     */
+    
     // 修改结束
     
     if ([fileDic isAbsoluteValid])
@@ -351,7 +351,7 @@ DEF_SINGLETON(NetRequestManager);
      @ 修改开始
      */
     // 修改开始
-    
+    /*
     if ([parameterDic isAbsoluteValid])
     {
         for (NSString *key in parameterDic.allKeys)
@@ -359,7 +359,7 @@ DEF_SINGLETON(NetRequestManager);
             [netRequest.asiFormRequest setPostValue:[parameterDic objectForKey:key] forKey:key];
         }
     }
-     
+     */
     // 修改结束
     
     // 判断是否要作数据缓存

@@ -7,10 +7,11 @@
 //
 
 #import "BaseNetworkViewController.h"
+#import "CommonEntity.h"
 
 @interface BuyTicketVC : BaseNetworkViewController
 
-- (void)setStartStationStr:(NSString *)startStaion;
-- (void)setEndStationStr:(NSString *)endStation;
+- (void)setStartStationEntity:(StartStationCollegeEntity *)startStaion;
+- (void)setEndStationEntity:(EndStationEntity *)endStation;
 
 @end
