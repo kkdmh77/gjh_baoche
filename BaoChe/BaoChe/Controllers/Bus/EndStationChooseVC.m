@@ -58,11 +58,13 @@
     /*
      @param StartLocation 开始地点
      */
-    if (_startStation)
+    if (_startStationId)
     {
-        [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllEndStationList]
-             parameterDic:@{@"StartLocation": _startStation}
-        requestMethodType:RequestMethodType_POST
+        NSString *urlStr = [NSString stringWithFormat:@"%@/%d/destination",[[self class] getRequestURLStr:NetBusRequestType_GetAllEndStationList],_startStationId];
+        
+        [self sendRequest:urlStr
+             parameterDic:nil
+        requestMethodType:RequestMethodType_GET
                requestTag:NetBusRequestType_GetAllEndStationList];
     }
 }
@@ -78,7 +80,7 @@
 
 - (void)parseNetworkDataWithSourceDic:(NSDictionary *)dic
 {
-    NSArray *dataList = [dic safeObjectForKey:@"list"];
+    NSArray *dataList = [dic safeObjectForKey:@"destinations"];
     _netEndStationEntityArray = [NSMutableArray arrayWithCapacity:dataList.count];
     
     for (NSDictionary *dataDic in dataList)
@@ -147,7 +149,7 @@
     EndStationEntity *entity = [self curDataWithIndex:indexPath.row];
     
     BuyTicketVC *buyTicket = objc_getAssociatedObject(self, class_getName([BuyTicketVC class]));
-    [buyTicket setEndStationStr:entity.stationNameStr];
+    [buyTicket setEndStationEntity:entity];
     
     [self backViewController];
 }

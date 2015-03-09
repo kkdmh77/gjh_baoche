@@ -21,13 +21,13 @@
         urlForTypeArray = [NSMutableArray arrayWithObjects:
                            // 班车
                            @"bus/get_bus_list",
-                           @"college/get_college",
-                           @"bus/get_end_location",
+                           @"origin",
+                           @"origin",
                            
                            // 用户中心
                            @"user/register",
                            @"user/login",
-                           @"user/send_code",
+                           @"user/verifyCode",
                            
                            // 订单
                            @"bus_order/create_order",

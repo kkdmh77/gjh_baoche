@@ -69,9 +69,9 @@
     self = [super init];
     if (self)
     {
-        self.keyId = [[dict safeObjectForKey:@"CollegeId"] integerValue];
-        self.collegeNameStr = [dict objectForKey:@"CollegeName"];
-        self.locationStr = [dict objectForKey:@"Location"];
+        self.keyId = [[dict safeObjectForKey:@"id"] integerValue];
+        // self.collegeNameStr = [dict objectForKey:@"CollegeName"];
+        self.locationStr = [dict objectForKey:@"name"];
     }
     return self;
 }
@@ -87,8 +87,8 @@
     self = [super init];
     if (self)
     {
-        self.keyId = [[dict safeObjectForKey:@"BusId"] integerValue];
-        self.stationNameStr = [dict objectForKey:@"EndLocation"];
+        self.keyId = [[dict safeObjectForKey:@"id"] integerValue];
+        self.stationNameStr = [dict objectForKey:@"name"];
     }
     return self;
 }

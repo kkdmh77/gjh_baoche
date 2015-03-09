@@ -3,7 +3,7 @@
 #define AppDownloadUrl                              @"https://itunes.apple.com/cn/app/zheng-min-tong/id675486231?mt=8"
 
 // Request的nameSpace
-#define Request_NameSpace                           @"http://120.24.237.122/index.php/api"                    // 调试
+#define Request_NameSpace                           @"http://121.42.145.68:8080/home-app"                    // 调试
 #define Request_NameSpace_company_internal          @""                                                       // 内网 测试
 #define Request_NameSpace_company_external          @""                                                       // 外网 测试
 

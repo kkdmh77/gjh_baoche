@@ -22,6 +22,9 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
 {
     NSString *_startDateStr; // 出发日期
     NSString *_startWeekStr; // 周几
+    
+    StartStationCollegeEntity *_startStation;
+    EndStationEntity          *_endStation;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *advertisingImageView;
@@ -106,14 +109,18 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
                            range:[resultDateStr rangeOfString:_startDateStr]];
 }
 
-- (void)setStartStationStr:(NSString *)startStaion
+- (void)setStartStationEntity:(StartStationCollegeEntity *)startStaion
 {
-    [_startStationInputBtn setTitle:startStaion forState:UIControlStateNormal];
+    _startStation = startStaion;
+    
+    [_startStationInputBtn setTitle:startStaion.locationStr forState:UIControlStateNormal];
 }
 
-- (void)setEndStationStr:(NSString *)endStation
+- (void)setEndStationEntity:(EndStationEntity *)endStation
 {
-    [_endStationInputBtn setTitle:endStation forState:UIControlStateNormal];
+    _endStation = endStation;
+    
+    [_endStationInputBtn setTitle:endStation.stationNameStr forState:UIControlStateNormal];
 }
 
 // 出发地
@@ -129,12 +136,10 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
 // 目的地
 - (IBAction)clickEndStationInputBtn:(UIButton *)sender
 {
-    NSString *startStationStr = [_startStationInputBtn titleForState:UIControlStateNormal];
-    
-    if (![startStationStr isEqualToString:StartStationInputPlaceholderStr])
+    if (_startStation)
     {
         EndStationChooseVC *endStationChoose = [[EndStationChooseVC alloc] init];
-        endStationChoose.startStation = startStationStr;
+        endStationChoose.startStationId = _startStation.keyId;
         
         objc_setAssociatedObject(endStationChoose, class_getName([BuyTicketVC class]), self, OBJC_ASSOCIATION_ASSIGN);
         endStationChoose.hidesBottomBarWhenPushed = YES;
@@ -154,10 +159,9 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
     
     if (![startStationInputStr isEqualToString:StartStationInputPlaceholderStr] && ![endStationInputStr isEqualToString:EndStationInputPlaceholderStr])
     {
-        [self setStartStationStr:endStationInputStr];
-        [self setEndStationStr:startStationInputStr];
+        [_startStationInputBtn setTitle:endStationInputStr forState:UIControlStateNormal];
+        [_endStationInputBtn setTitle:startStationInputStr forState:UIControlStateNormal];
     }
-    
 }
 
 // 出发日期
