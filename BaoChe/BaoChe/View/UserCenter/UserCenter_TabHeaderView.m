@@ -144,6 +144,27 @@ static CGFloat defaultViewHeight = 0;
     return defaultViewHeight;
      */
 }
+
+- (void)loadHeaderViewShowDataWithInfoEntity:(UserEntity *)entity
+{
+    [self setViewType:entity ? UserCenterHeaderViewType_Logined : UserCenterHeaderViewType_NotLogin];
+    
+    // 赋值
+    [_userHeaderImageBtn gjh_setBackgroundImageWithURL:[NSURL URLWithString:entity.userHeaderImageUrlStr]
+                                      placeholderImage:[UIImage imageNamed:@"weidenglutouxiang.png"]
+                                               success:nil
+                                               failure:nil];
+    
+    _userNameLabel.text = [entity.userNicknameStr isAbsoluteValid] ? entity.userNicknameStr : entity.userNameStr;
+    _mobilePhoneNumLabel.text = entity.mobilePhoneNumStr;
+    _addressLabel.text = nil;
+}
+
+- (void)setUserHeaderImage:(UIImage *)image
+{
+    [_userHeaderImageBtn setBackgroundImage:image forState:UIControlStateNormal];
+}
+
 @end
 
 #pragma mark - //////////////////////////////////////////////////////////

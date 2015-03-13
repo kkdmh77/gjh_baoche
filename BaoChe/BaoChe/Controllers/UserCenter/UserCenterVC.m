@@ -12,6 +12,10 @@
 #import "UserCenter_TabHeaderView.h"
 #import "OrderListVC.h"
 #import "LoginVC.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
+#import "CommonEntity.h"
+#import "LoginBC.h"
+#import "InterfaceHUDManager.h"
 
 static NSString * const cellIdentifier_userInfoHeader = @"cellIdentifier_userInfoHeader";
 static NSString * const cellIdentifier_userCenterPassengersCell = @"cellIdentifier_userCenterPassengersCell";
@@ -21,11 +25,26 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
 {
     UserCenter_TabSectionHeaderView    *_passengersCellSectionHeader;
     UserCenter_TabSectionHeaderView    *_addressCellSectionHeader;
+    
+    UserCenter_TabHeaderView           *_headerView;
+    
+    UserEntity                         *_userEntity;
+    
+    LoginBC                            *_loginBC;
 }
 
 @end
 
 @implementation UserCenterVC
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _loginBC = [[LoginBC alloc] init];
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -37,6 +56,13 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
                                     action:NULL];
     
     [self initialization];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self getNetworkData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,25 +78,27 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
 
 - (void)setNetworkRequestStatusBlocks
 {
-    /*
     WEAKSELF
     [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
         STRONGSELF
-        if (NetBusRequestType_GetAllBusList == request.tag)
+        if (NetUserCenterRequestType_GetUserInfo == request.tag)
         {
+            strongSelf->_userEntity = [UserEntity initWithDict:[successInfoObj safeObjectForKey:@"userInfo"]];
             
+            [strongSelf reloadData];
         }
+    } failedBlock:^(NetRequest *request, NSError *error) {
+        
     }];
-     */
 }
 
 - (void)getNetworkData
 {
-    /*
-    [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllBusList]
+    [self sendRequest:[[self class] getRequestURLStr:NetUserCenterRequestType_GetUserInfo]
          parameterDic:nil
-           requestTag:NetBusRequestType_GetAllBusList];
-     */
+       requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+    requestMethodType:RequestMethodType_GET
+           requestTag:NetUserCenterRequestType_GetUserInfo];
 }
 
 - (void)initialization
@@ -85,6 +113,26 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
     [self.view addSubview:_tableView];
 }
 
+- (void)reloadData
+{
+    [_tableView reloadData];
+    [self reloadTabHeaderViewData];
+}
+
+- (void)reloadTabHeaderViewData
+{
+    [_headerView loadHeaderViewShowDataWithInfoEntity:_userEntity];
+}
+
+- (void)clearAndReloadData
+{
+    // 清空数据
+    _userEntity = nil;
+    
+    // 刷新界面
+    [self reloadData];
+}
+
 - (void)curIndexTabCellShowData:(NSInteger)index
 {
     
@@ -94,7 +142,14 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    if ([[UserInfoModel getRequestHeader_TokenDic] isAbsoluteValid])
+    {
+        return 4;
+    }
+    else
+    {
+        return 3;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -198,11 +253,11 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.clipsToBounds = YES;
             
-            UserCenter_TabHeaderView *headerView = [UserCenter_TabHeaderView loadFromNib];
-            headerView.viewType = UserCenterHeaderViewType_NotLogin;
-            headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            _headerView = [UserCenter_TabHeaderView loadFromNib];
+            _headerView.viewType = UserCenterHeaderViewType_NotLogin;
+            _headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
             WEAKSELF
-            [headerView setOperationHandle:^(UserCenter_TabHeaderView *view, UserCenterTabHeaderViewOperationType type, id sender) {
+            [_headerView setOperationHandle:^(UserCenter_TabHeaderView *view, UserCenterTabHeaderViewOperationType type, id sender) {
                 
                 if (type == UserCenterTabHeaderViewOperationType_CheckAllOrder)
                 {
@@ -223,7 +278,7 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
                                          completion:nil];
                 }
             }];
-            [cell addSubview:headerView];
+            [cell addSubview:_headerView];
         }
         return cell;
     }
@@ -294,6 +349,35 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    switch (indexPath.section)
+    {
+        case 3:
+        {
+            WEAKSELF
+            [[InterfaceHUDManager sharedInstance] showAlertWithTitle:nil
+                                                             message:@"亲，真的要退出当前登录的账号吗？"
+                                                       alertShowType:AlertShowType_warning
+                                                         cancelTitle:LocalizedStr(All_Cancel)
+                                                         cancelBlock:nil
+                                                          otherTitle:LocalizedStr(All_Confirm)
+                                                          otherBlock:^(GJHAlertView *alertView, NSInteger index) {
+                  STRONGSELF
+                  [strongSelf->_loginBC logoutWithSuccessHandle:^(id successInfoObj) {
+                      
+                      // 清空然后刷新数据
+                      [strongSelf clearAndReloadData];
+                      
+                  } failedHandle:^(NSError *error) {
+                      
+                  }];
+            }];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

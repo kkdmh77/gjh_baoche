@@ -61,6 +61,23 @@
     }
 }
 
+- (void)logoutWithSuccessHandle:(successHandle)success failedHandle:(failedHandle)failed
+{
+    _success = success;
+    _failed = failed;
+    
+    NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_Logout];
+    NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
+    
+    [[NetRequestManager sharedInstance] sendRequest:url
+                                       parameterDic:nil
+                                     requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+                                  requestMethodType:RequestMethodType_GET
+                                         requestTag:NetUserCenterRequestType_Logout
+                                           delegate:self
+                                           userInfo:nil];
+}
+
 - (void)dealloc
 {
     [[NetRequestManager sharedInstance] clearDelegate:self];
@@ -83,10 +100,22 @@
 {
     [HUDManager hideHUD];
     
-    NSDictionary *userInfoDic = [infoObj safeObjectForKey:@"list"];
-    NSNumber *userId = [userInfoDic safeObjectForKey:@"UserId"];
-    
-    [UserInfoModel setUserDefaultUserId:userId];
+    // 登录成功后执行相关操作
+    if (request.tag == NetUserCenterRequestType_Login)
+    {
+        NSString *token = [infoObj safeObjectForKey:@"token"];
+        NSString *token_v = [infoObj safeObjectForKey:@"tokenV"];
+        
+        [UserInfoModel setUserDefaultLoginToken:token];
+        [UserInfoModel setUserDefaultLoginToken_V:token_v];
+    }
+    // 退出登录成功
+    else if (request.tag == NetUserCenterRequestType_Logout)
+    {
+        // 清空数据
+        [UserInfoModel setUserDefaultLoginToken:nil];
+        [UserInfoModel setUserDefaultLoginToken_V:nil];
+    }
     
     if (_success)
     {

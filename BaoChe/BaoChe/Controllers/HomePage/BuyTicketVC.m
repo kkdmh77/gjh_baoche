@@ -136,10 +136,12 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
 // 目的地
 - (IBAction)clickEndStationInputBtn:(UIButton *)sender
 {
-    if (_startStation)
+    NSString *startStationInputStr = [_startStationInputBtn titleForState:UIControlStateNormal];
+    
+    if (![startStationInputStr isEqualToString:StartStationInputPlaceholderStr])
     {
         EndStationChooseVC *endStationChoose = [[EndStationChooseVC alloc] init];
-        endStationChoose.startStationId = _startStation.keyId;
+        endStationChoose.startStation = startStationInputStr;
         
         objc_setAssociatedObject(endStationChoose, class_getName([BuyTicketVC class]), self, OBJC_ASSOCIATION_ASSIGN);
         endStationChoose.hidesBottomBarWhenPushed = YES;

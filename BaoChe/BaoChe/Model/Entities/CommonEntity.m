@@ -15,16 +15,16 @@
     self = [super init];
     if (self)
     {
-        self.keyId = [[dict safeObjectForKey:@"BusId"] integerValue];
-        self.busNameStr = [dict safeObjectForKey:@"BusName"];
-        self.busTypeStr = [dict safeObjectForKey:@"BusType"];
-        self.startStation = [dict safeObjectForKey:@"StartLocation"];
-        self.endStation = [dict safeObjectForKey:@"EndLocation"];
-        self.passStation = [dict safeObjectForKey:@"PassByInfo"];
-        self.price = [[dict safeObjectForKey:@"Price"] doubleValue];
+        self.keyId = [[dict safeObjectForKey:@"id"] integerValue];
+        self.busNameStr = [dict safeObjectForKey:@"name"];
+        self.busTypeStr = [dict safeObjectForKey:@"type"];
+        self.startStation = [dict safeObjectForKey:@"origin"];
+        self.endStation = [dict safeObjectForKey:@"destination"];
+        self.passStation = [dict safeObjectForKey:@"pass"];
+        self.price = [[dict safeObjectForKey:@"amount"] doubleValue];
         
-        NSTimeInterval startTime = [[dict safeObjectForKey:@"Start"] doubleValue];
-        NSTimeInterval endTime = [[dict safeObjectForKey:@"End"] doubleValue];
+        NSTimeInterval startTime = [[dict safeObjectForKey:@"leaveTime"] doubleValue];
+        NSTimeInterval endTime = [[dict safeObjectForKey:@"arriveTime"] doubleValue];
         
         NSInteger days, hours, minutes;
         
@@ -105,6 +105,24 @@
     if (self)
     {
         
+    }
+    return self;
+}
+@end
+
+//////////////////////////////////////////////////////////////////////
+
+@implementation UserEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        self.emailStr = [dict safeObjectForKey:@"email"];
+        self.userNicknameStr = [dict safeObjectForKey:@"nickname"];
+        self.mobilePhoneNumStr = [dict safeObjectForKey:@"phone"];
+        self.userNameStr = [dict safeObjectForKey:@"userName"];
     }
     return self;
 }

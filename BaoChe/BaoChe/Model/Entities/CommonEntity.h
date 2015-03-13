@@ -57,3 +57,17 @@
 
 @end
 
+////////////////////////////////////////////////////////////////
+/// 用户信息
+@interface UserEntity : NetItem
+
+@property (nonatomic, copy)     NSString  *userHeaderImageUrlStr;       // 用户头像
+@property (nonatomic, copy)     NSString  *userNameStr;                 // 用户名
+@property (nonatomic, copy)     NSString  *userNicknameStr;             // 昵称
+@property (nonatomic, copy)     NSString  *emailStr;                    // 邮箱
+@property (nonatomic, copy)     NSString  *QQStr;                       // QQ
+@property (nonatomic, copy)     NSString  *mobilePhoneNumStr;           // 手机号码
+@property (nonatomic, assign)   NSInteger notPayOrderCount;             // 未支付订单数
+
+@end
+

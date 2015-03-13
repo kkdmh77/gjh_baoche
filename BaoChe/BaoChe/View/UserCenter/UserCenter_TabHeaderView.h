@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonEntity.h"
 
 @class UserCenter_TabHeaderView;
 
@@ -36,6 +37,9 @@ typedef void (^UserCenterTabHeaderViewOperationHandle) (UserCenter_TabHeaderView
 @property (nonatomic, copy) UserCenterTabHeaderViewOperationHandle operationHandle;
 
 + (CGFloat)getViewHeight;
+
+- (void)loadHeaderViewShowDataWithInfoEntity:(UserEntity *)entity;
+- (void)setUserHeaderImage:(UIImage *)image;
 
 @end
 

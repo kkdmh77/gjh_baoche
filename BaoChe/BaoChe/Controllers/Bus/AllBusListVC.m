@@ -73,19 +73,17 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
         [_startDateStr isAbsoluteValid])
     {
         [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllBusList]
-             parameterDic:@{@"StartLocation": _startStationStr,
-                            @"EndLocation": _EndStationStr,
-                            @"StartDate": _startDateStr,
-                            @"limit": @100,
-                            @"page": @1}
-        requestMethodType:RequestMethodType_POST
+             parameterDic:@{@"origin": _startStationStr,
+                            @"destination": _EndStationStr,
+                            @"originDate": _startDateStr}
+        requestMethodType:RequestMethodType_GET
                requestTag:NetBusRequestType_GetAllBusList];
     }
 }
 
 - (void)parseNetworkDataWithSourceDic:(NSDictionary *)dic
 {
-    NSArray *dataList = [[dic safeObjectForKey:@"list"] safeObjectForKey:@"list"];
+    NSArray *dataList = [dic safeObjectForKey:@"cartInfos"];
     _netBusEntityArray = [NSMutableArray arrayWithCapacity:dataList.count];
     
     for (NSDictionary *dataDic in dataList)

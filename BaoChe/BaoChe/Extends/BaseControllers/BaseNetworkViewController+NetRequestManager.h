@@ -18,7 +18,10 @@ typedef enum
     // 用户中心
     NetUserCenterRequestType_Register                        , // 注册
     NetUserCenterRequestType_Login                           , // 登录
+    NetUserCenterRequestType_Logout                          , // 登出
     NetUserCenterRequestType_GetVerificationCode             , // 获取验证码
+    
+    NetUserCenterRequestType_GetUserInfo                     , // 获取用户信息
     
     // 订单
     NetOrderRequesertType_CreateOrder                        , // 创建订单

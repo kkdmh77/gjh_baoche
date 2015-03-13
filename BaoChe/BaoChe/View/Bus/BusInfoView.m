@@ -92,7 +92,7 @@ static CGFloat defaultViewHeight = 0;
     _requireTimeLabel.text = entity.timeRequired;
     _startTime_DateLabel.text = entity.startTime_DateStr;
     _endTime_dateLabel.text = entity.endTime_DateStr;
-    _stationsLabel.text = entity.passStation;
+    _stationsLabel.text = [NSString stringWithFormat:@"途径:%@", entity.passStation];
     _priceLabel.text = [NSString stringWithFormat:@"￥%.2lf",entity.price];
 }
 

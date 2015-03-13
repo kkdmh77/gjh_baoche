@@ -58,12 +58,10 @@
     /*
      @param StartLocation 开始地点
      */
-    if (_startStationId)
+    if ([_startStation isAbsoluteValid])
     {
-        NSString *urlStr = [NSString stringWithFormat:@"%@/%d/destination",[[self class] getRequestURLStr:NetBusRequestType_GetAllEndStationList],_startStationId];
-        
-        [self sendRequest:urlStr
-             parameterDic:nil
+        [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllEndStationList]
+             parameterDic:@{@"origin": _startStation}
         requestMethodType:RequestMethodType_GET
                requestTag:NetBusRequestType_GetAllEndStationList];
     }
