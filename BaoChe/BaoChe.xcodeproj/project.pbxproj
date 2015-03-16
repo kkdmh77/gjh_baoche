@@ -36,8 +36,6 @@
 		2BD868231A3DC70300BC46BF /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868221A3DC70300BC46BF /* HomePageVC.m */; };
 		2BD868261A3DCF0900BC46BF /* HomePageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */; };
 		2BD868281A3DCF1600BC46BF /* HomePageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */; };
-		2BDAA3B71A656869009D1C32 /* AddPassengersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAA3B51A656869009D1C32 /* AddPassengersVC.m */; };
-		2BDAA3B81A656869009D1C32 /* AddPassengersVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDAA3B61A656869009D1C32 /* AddPassengersVC.xib */; };
 		2BDC3E6D1A4DA4C8007C1130 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC3E681A4DA4C8007C1130 /* LoginVC.m */; };
 		2BDC3E6E1A4DA4C8007C1130 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDC3E691A4DA4C8007C1130 /* LoginVC.xib */; };
 		2BDC3E6F1A4DA4C8007C1130 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC3E6B1A4DA4C8007C1130 /* RegisterVC.m */; };
@@ -457,6 +455,9 @@
 		43D775741A3D88D000C088CE /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D775691A3D88D000C088CE /* CalendarViewController.m */; };
 		43D775751A3D88D000C088CE /* chack.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D7756A1A3D88D000C088CE /* chack.png */; };
 		43D775761A3D88D000C088CE /* NSDate+WQCalendarLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D7756D1A3D88D000C088CE /* NSDate+WQCalendarLogic.m */; };
+		43EF72A91AB6BB6E006D1C11 /* AddPassengersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EF72A51AB6BB6E006D1C11 /* AddPassengersVC.m */; };
+		43EF72AA1AB6BB6E006D1C11 /* AddPassengersVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EF72A61AB6BB6E006D1C11 /* AddPassengersVC.xib */; };
+		43EF72AB1AB6BB6E006D1C11 /* PassengerManagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EF72A81AB6BB6E006D1C11 /* PassengerManagerVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -523,9 +524,6 @@
 		2BD868241A3DCF0900BC46BF /* HomePageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageHeaderView.h; sourceTree = "<group>"; };
 		2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageHeaderView.m; sourceTree = "<group>"; };
 		2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageHeaderView.xib; sourceTree = "<group>"; };
-		2BDAA3B41A656869009D1C32 /* AddPassengersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPassengersVC.h; sourceTree = "<group>"; };
-		2BDAA3B51A656869009D1C32 /* AddPassengersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPassengersVC.m; sourceTree = "<group>"; };
-		2BDAA3B61A656869009D1C32 /* AddPassengersVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPassengersVC.xib; sourceTree = "<group>"; };
 		2BDC3E671A4DA4C8007C1130 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		2BDC3E681A4DA4C8007C1130 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		2BDC3E691A4DA4C8007C1130 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
@@ -1323,6 +1321,11 @@
 		43D7756B1A3D88D000C088CE /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		43D7756C1A3D88D000C088CE /* NSDate+WQCalendarLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+WQCalendarLogic.h"; sourceTree = "<group>"; };
 		43D7756D1A3D88D000C088CE /* NSDate+WQCalendarLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+WQCalendarLogic.m"; sourceTree = "<group>"; };
+		43EF72A41AB6BB6E006D1C11 /* AddPassengersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPassengersVC.h; sourceTree = "<group>"; };
+		43EF72A51AB6BB6E006D1C11 /* AddPassengersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPassengersVC.m; sourceTree = "<group>"; };
+		43EF72A61AB6BB6E006D1C11 /* AddPassengersVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPassengersVC.xib; sourceTree = "<group>"; };
+		43EF72A71AB6BB6E006D1C11 /* PassengerManagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassengerManagerVC.h; sourceTree = "<group>"; };
+		43EF72A81AB6BB6E006D1C11 /* PassengerManagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassengerManagerVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1527,9 +1530,6 @@
 				2BDD6E4E1A55A41E00329823 /* OrderListVC.m */,
 				2B6D6CAF1A566A1A00286CE2 /* DetailOrderVC.h */,
 				2B6D6CB01A566A1A00286CE2 /* DetailOrderVC.m */,
-				2BDAA3B41A656869009D1C32 /* AddPassengersVC.h */,
-				2BDAA3B51A656869009D1C32 /* AddPassengersVC.m */,
-				2BDAA3B61A656869009D1C32 /* AddPassengersVC.xib */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -1552,6 +1552,7 @@
 		2BE0BE821A45336A000B8871 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				43EF72A31AB6BB6E006D1C11 /* AddressManager */,
 				2BDD6E4C1A55A40C00329823 /* Order */,
 				2BDC3E671A4DA4C8007C1130 /* LoginVC.h */,
 				2BDC3E681A4DA4C8007C1130 /* LoginVC.m */,
@@ -3157,6 +3158,18 @@
 			path = ZFCalendar;
 			sourceTree = "<group>";
 		};
+		43EF72A31AB6BB6E006D1C11 /* AddressManager */ = {
+			isa = PBXGroup;
+			children = (
+				43EF72A41AB6BB6E006D1C11 /* AddPassengersVC.h */,
+				43EF72A51AB6BB6E006D1C11 /* AddPassengersVC.m */,
+				43EF72A61AB6BB6E006D1C11 /* AddPassengersVC.xib */,
+				43EF72A71AB6BB6E006D1C11 /* PassengerManagerVC.h */,
+				43EF72A81AB6BB6E006D1C11 /* PassengerManagerVC.m */,
+			);
+			path = AddressManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3314,7 +3327,7 @@
 				2BE0BEB51A459DB2000B8871 /* youjiantou_cell@2x.png in Resources */,
 				43D1F1D919FB3AFB0049518E /* .gitattributes in Resources */,
 				2BDC3E7E1A4DB82C007C1130 /* clearText@2x.png in Resources */,
-				2BDAA3B81A656869009D1C32 /* AddPassengersVC.xib in Resources */,
+				43EF72AA1AB6BB6E006D1C11 /* AddPassengersVC.xib in Resources */,
 				43D775371A3D36BB00C088CE /* AllBusListCell.xib in Resources */,
 				43D1F55D19FB4C1A0049518E /* NimbusOverviewer.bundle in Resources */,
 				43D1F18C19FB3AFB0049518E /* AQGridSelectionRed.png in Resources */,
@@ -3482,6 +3495,7 @@
 				43D1F56019FB4C1A0049518E /* NIOverviewGraphView.m in Sources */,
 				43D1F1C519FB3AFB0049518E /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				43D1F4E519FB4C1A0049518E /* NIMutableCollectionViewModel.m in Sources */,
+				43EF72AB1AB6BB6E006D1C11 /* PassengerManagerVC.m in Sources */,
 				2BE0BEAC1A45525A000B8871 /* AddressCell.m in Sources */,
 				43D1F2F319FB3AFB0049518E /* UIButton+Cache.m in Sources */,
 				43D1F55919FB4C1A0049518E /* NINetworkImageView.m in Sources */,
@@ -3650,7 +3664,7 @@
 				43D1F29219FB3AFB0049518E /* SDWebImageDownloader.m in Sources */,
 				43D1F57019FB4C1A0049518E /* NIPhotoScrollView.m in Sources */,
 				43D1F29F19FB3AFB0049518E /* ATB_BubbleMessageLabel.m in Sources */,
-				2BDAA3B71A656869009D1C32 /* AddPassengersVC.m in Sources */,
+				43EF72A91AB6BB6E006D1C11 /* AddPassengersVC.m in Sources */,
 				43D1F1D519FB3AFB0049518E /* MASViewConstraint.m in Sources */,
 				43D1F30D19FB3AFB0049518E /* InterfaceHUDManager.m in Sources */,
 				43D1F17419FB3AFB0049518E /* AlixPayOrder.m in Sources */,

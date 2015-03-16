@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "CommonEntity.h"
 
 @interface AddPassengersVC : BaseViewController
+
+@property (nonatomic, strong) PassengersEntity *defaultShowEntity;
 
 @end

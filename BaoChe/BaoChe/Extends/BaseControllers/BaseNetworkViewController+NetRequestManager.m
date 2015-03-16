@@ -32,6 +32,10 @@
                            
                            @"user",
                            
+                           @"passengerList",
+                           @"passenger",
+                           @"",
+                           
                            // 订单
                            @"bus_order/create_order",
                            

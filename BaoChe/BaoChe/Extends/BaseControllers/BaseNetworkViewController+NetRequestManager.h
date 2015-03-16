@@ -23,6 +23,10 @@ typedef enum
     
     NetUserCenterRequestType_GetUserInfo                     , // 获取用户信息
     
+    NetUserCenterRequestType_GetAllPassenger                 , // 获取所有乘客信息
+    NetUserCenterRequestType_AddPassenger                    , // 添加一个乘客信息
+    NetUserCenterRequestType_DeletePassenger                 , // 删除一个乘客信息
+    
     // 订单
     NetOrderRequesertType_CreateOrder                        , // 创建订单
     
