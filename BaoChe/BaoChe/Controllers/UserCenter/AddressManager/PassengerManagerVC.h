@@ -12,10 +12,10 @@ static NSString * const PassengerManagerCellSelectedNotificationKey = @"Passenge
 
 typedef NS_ENUM(NSInteger, UseType)
 {
-    /// 编辑地址
+    /// 编辑联系人
     UseType_Edit = 0,
     
-    /// 选择地址
+    /// 选择联系人
     UseType_Selector,
 };
 

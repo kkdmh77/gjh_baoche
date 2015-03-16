@@ -15,6 +15,7 @@
 #include <objc/runtime.h>
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "UserInfoModel.h"
+#import "PassengerManagerVC.h"
 
 static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPassenger";
 
@@ -122,7 +123,7 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
                 for (PassengersEntity *entity in strongSelf->_passengersItemsArray)
                 {
                     NSDictionary *dic = @{@"NameList": entity.nameStr,
-                                          @"IdentityList": entity.idCartStr};
+                                          @"IdentityList": entity.mobilePhoneStr};
                     [tempArray addObject:dic];
                 }
                 passengersJsonStr = [tempArray jsonStringByError:NULL];
@@ -369,10 +370,10 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 - (void)clickAddPassengersBtn:(UIButton *)sender
 {
-    AddPassengersVC *addPassengers = [AddPassengersVC loadFromNib];
-    objc_setAssociatedObject(addPassengers, class_getName([self class]), self, OBJC_ASSOCIATION_ASSIGN);
+    PassengerManagerVC *passengerManager = [PassengerManagerVC new];
+    passengerManager.useType = UseType_Selector;
     
-    [self pushViewController:addPassengers];
+    [self pushViewController:passengerManager];
 }
 
 - (int)numberOfRowsInSection:(NSInteger)section

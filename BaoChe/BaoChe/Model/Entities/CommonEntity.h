@@ -52,8 +52,9 @@
 
 @interface PassengersEntity : NetItem
 
-@property (nonatomic, copy) NSString *nameStr;      // 联系人名称
-@property (nonatomic, copy) NSString *idCartStr;    // 身份证号码
+@property (nonatomic, assign) NSInteger keyId;
+@property (nonatomic, copy) NSString *nameStr;           // 联系人名称
+@property (nonatomic, copy) NSString *mobilePhoneStr;    // 手机号码
 
 @end
 

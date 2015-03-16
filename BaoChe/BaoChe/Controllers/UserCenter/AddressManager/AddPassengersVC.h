@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 com.gjh. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseNetworkViewController.h"
 #import "CommonEntity.h"
 
-@interface AddPassengersVC : BaseViewController
+@interface AddPassengersVC : BaseNetworkViewController
 
 @property (nonatomic, strong) PassengersEntity *defaultShowEntity;
 

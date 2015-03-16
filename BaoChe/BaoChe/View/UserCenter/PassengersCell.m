@@ -133,7 +133,7 @@ static CGFloat defaultCellHeight = 0;
 - (void)loadCellShowDataWithItemEntity:(PassengersEntity *)entity
 {
     _contactLabel.text = entity.nameStr;
-    _IDCardLabel.text = entity.idCartStr;
+    _IDCardLabel.text = entity.mobilePhoneStr;
 }
 
 @end

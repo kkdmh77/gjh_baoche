@@ -67,7 +67,7 @@
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="13800138000" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E71-5N-Xxr">
                             <rect key="frame" x="80" y="0.0" width="230" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" red="0.54061418920000004" green="0.81628315500000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>

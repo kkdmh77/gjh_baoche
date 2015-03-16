@@ -11,6 +11,8 @@
 #include <objc/runtime.h>
 #import "CommonEntity.h"
 #import "StringJudgeManager.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
+#import "PassengerManagerVC.h"
 
 @interface AddPassengersVC ()
 
@@ -42,9 +44,25 @@
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:@"添加乘客"];
+    [self setNavigationItemTitle:@"添加联系人"];
     
     [self setup];
+}
+
+- (void)setNetworkRequestStatusBlocks
+{
+    WEAKSELF
+    [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
+        
+        if (NetUserCenterRequestType_AddPassenger == request.tag)
+        {
+            PassengerManagerVC *passengerManager = objc_getAssociatedObject(weakSelf, class_getName([PassengerManagerVC class]));
+            
+            [passengerManager getNetworkData];
+            
+            [weakSelf backViewController];
+        }
+    }];
 }
 
 - (void)configureViewsProperties
@@ -63,11 +81,11 @@
     
     _theContactDescLabel.textColor = blackColor;
     _theContactTF.textColor = grayColor;
-    _theContactTF.text = nil;
+    _theContactTF.text = _defaultShowEntity.nameStr;
     
     _idCardDescLabel.textColor = blackColor;
     _idCardTF.textColor = grayColor;
-    _idCardTF.text = nil;
+    _idCardTF.text = _defaultShowEntity.mobilePhoneStr;
     
     _addBtn.backgroundColor = Common_ThemeColor;
     [_addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -84,16 +102,14 @@
 {
     if ([_theContactTF hasText])
     {
-        if ([StringJudgeManager isValidateStr:_idCardTF.text regexStr:ID_CardNumRegex])
+        if ([StringJudgeManager isValidateStr:_idCardTF.text regexStr:MobilePhoneNumRegex])
         {
-            PassengersEntity *entity = [[PassengersEntity alloc] init];
-            entity.nameStr = _theContactTF.text;
-            entity.idCartStr = _idCardTF.text;
-            
-            OrderWriteVC *orderWrite = objc_getAssociatedObject(self, class_getName([OrderWriteVC class]));
-            [orderWrite.passengersItemsArray addObject:entity];
-            
-            [self backViewController];
+            // 添加联系人
+            [self sendRequest:[[self class] getRequestURLStr:NetUserCenterRequestType_AddPassenger]
+                 parameterDic:@{@"passengName": _theContactTF.text, @"phone": _idCardTF.text}
+               requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+            requestMethodType:RequestMethodType_POST
+                   requestTag:NetUserCenterRequestType_AddPassenger];
         }
         else
         {

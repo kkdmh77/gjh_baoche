@@ -104,7 +104,9 @@
     self = [super init];
     if (self)
     {
-        
+        self.keyId = [[dict safeObjectForKey:@"id"] integerValue];
+        self.nameStr = [dict safeObjectForKey:@"passengName"];
+        self.mobilePhoneStr = [dict safeObjectForKey:@"phone"];
     }
     return self;
 }

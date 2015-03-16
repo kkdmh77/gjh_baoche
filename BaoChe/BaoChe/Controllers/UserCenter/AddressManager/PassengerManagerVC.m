@@ -76,11 +76,11 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:LocalizedStr(NavTitle_AddressManagerKey)];
+    [self setNavigationItemTitle:@"常用联系人"];
     
     [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Right
-                            barButtonTitle:LocalizedStr(NavTitle_AddAddressKey)
-                                    action:@selector(clickAddOneAddressBtn:)];
+                            barButtonTitle:@"添加联系人"
+                                    action:@selector(clickAddOnePassengerBtn:)];
 }
 
 /*
@@ -105,7 +105,7 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
 // 解析数据
 - (NSMutableArray *)parseDataFromSourceDic:(NSDictionary *)dic
 {
-    NSArray *addressesArray = [dic objectForKey:@"addresses"];
+    NSArray *addressesArray = [dic objectForKey:@"passengers"];
     
     if ([addressesArray isAbsoluteValid])
     {
@@ -136,22 +136,6 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
                 
                 [strongSelf reloadTabData];
             }
-            /*
-            else if (NetUserCenterRequestType_ModifyOneAddress == request.tag)
-            {
-                NSIndexPath *indexPath = [request.userInfo objectForKey:addressRequestUserInfoKey_IndexPath];
-                
-                if (indexPath)
-                {
-                    // 更新内存里的数据
-                    // 修改成功后的地址
-                    AddressManagerAddressEntity *curAddressEntity = [AddressManagerAddressEntity initWithDict:[resultObj objectForKey:@"currentAddress"]];
-                    [strongSelf->_networkAddressesEntityArray replaceObjectAtIndex:indexPath.section withObject:curAddressEntity];
-                    
-                    [strongSelf reloadTabRowAtIndexPath:indexPath];
-                }
-            }
-             */
             else if (NetUserCenterRequestType_DeletePassenger == request.tag)
             {
                 NSIndexPath *indexPath = [request.userInfo objectForKey:addressRequestUserInfoKey_IndexPath];
@@ -173,6 +157,8 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
 {
     [self sendRequest:[[self class] getRequestURLStr:NetUserCenterRequestType_GetAllPassenger]
          parameterDic:nil
+       requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+    requestMethodType:RequestMethodType_GET
            requestTag:NetUserCenterRequestType_GetAllPassenger];
 }
 
@@ -180,16 +166,12 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
 - (void)initialization
 {
     // tab
-    [self setupTableViewWithFrame:CGRectInset(self.view.bounds, 10, 0)
+    [self setupTableViewWithFrame:CGRectInset(self.view.bounds, 0, 0)
                             style:UITableViewStylePlain
                   registerNibName:NSStringFromClass([PassengersCell class])
                   reuseIdentifier:cellReusableIdentifier];
     
     /*
-    // header view
-    _tableView.tableFooterView = InsertImageButtonWithTitle(nil, CGRectMake(0, 0, _tableView.boundsWidth, 35), 1000, nil, nil, LocalizedStr(AddressManager_AddNewAddress), UIEdgeInsetsZero, SP15Font, Common_BlackColor, self, @selector(clickAddOneAddressBtn:));
-    _tableView.tableFooterView.backgroundColor = HEXCOLOR(0XDDDCDA);
-    
     // 分割线
     [_tableView.tableFooterView addBorderToViewWitBorderColor:Common_LiteGrayColor borderWidth:LineWidth];
      */
@@ -200,9 +182,9 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
     [_tableView reloadData];
 }
 
-- (void)clickAddOneAddressBtn:(UIButton *)sender
+- (void)clickAddOnePassengerBtn:(UIButton *)sender
 {
-    [self pushToAddressAddOrEditVCWithAddressEntity:nil];
+    [self pushToAddPassengerVCWithPassengerEntity:nil];
 }
 
 - (PassengersEntity *)getTabCellShowDataWithArrayIndex:(NSInteger)index
@@ -210,9 +192,9 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
     return _networkPassengersEntityArray[index];
 }
 
-- (void)pushToAddressAddOrEditVCWithAddressEntity:(PassengersEntity *)entity
+- (void)pushToAddPassengerVCWithPassengerEntity:(PassengersEntity *)entity
 {
-    AddPassengersVC *addPassengers = [[AddPassengersVC alloc] init];
+    AddPassengersVC *addPassengers = [AddPassengersVC loadFromNib];
     addPassengers.defaultShowEntity = entity;
     
     objc_setAssociatedObject(addPassengers, object_getClassName(self), self, OBJC_ASSOCIATION_ASSIGN);
@@ -269,24 +251,16 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
 {
     PassengersCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReusableIdentifier];
     
+    PassengersEntity *entity = [self getTabCellShowDataWithArrayIndex:indexPath.section];
+
     WEAKSELF
     [cell setOperationHandle:^(PassengersCell *cell, OperationButType type, id sender){
         
         STRONGSELF
         NSIndexPath *indexPath = [strongSelf->_tableView indexPathForCell:cell];
-        PassengersEntity *entity = [weakSelf getTabCellShowDataWithArrayIndex:indexPath.section];
         
         switch (type)
         {
-            case CellOperationType_Edit:
-            {
-                /*
-                 // cell展开后把tab滚动到最佳显示位置
-                 [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-                 */
-                [strongSelf pushToAddressAddOrEditVCWithAddressEntity:entity];
-            }
-                break;
             case OperationButType_Delete:
             {
                   NSString *methodName = [[weakSelf class] getRequestURLStr:NetUserCenterRequestType_DeletePassenger];
@@ -294,10 +268,10 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
                   NSDictionary *userInfo = @{addressRequestUserInfoKey_IndexPath: indexPath};
                   
                   [weakSelf sendRequest:methodName
-                           parameterDic:@{@"id": @(entity.keyId)}
+                           parameterDic:@{}
                          requestHeaders:nil
                       requestMethodType:RequestMethodType_DELETE
-                             requestTag:NetUserCenterRequestType_DeleteOneAddress
+                             requestTag:NetUserCenterRequestType_DeletePassenger
                                delegate:self
                                userInfo:userInfo];
             }
@@ -307,8 +281,6 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
                 break;
         }
     }];
-    
-    PassengersEntity *entity = [self getTabCellShowDataWithArrayIndex:indexPath.section];
     
     // 加载数据
     [cell loadCellShowDataWithItemEntity:entity];
@@ -330,7 +302,7 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
     }
     else
     {
-        [self pushToAddressAddOrEditVCWithAddressEntity:entity];
+        [self pushToAddPassengerVCWithPassengerEntity:entity];
     }
 }
 
