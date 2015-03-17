@@ -124,10 +124,10 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
                 {
                     [tempArray addObject:@(entity.keyId)];
                 }
-                passengersJsonStr = [tempArray jsonStringByError:NULL];
+                passengersJsonStr = [tempArray componentsJoinedByString:@","];
                 
                 NSDictionary *dic = @{@"cartInfoId": @(weakSelf.busEntity.keyId),
-                                      @"passengerIds": passengersJsonStr,
+                                      @"passengerIdsStr": passengersJsonStr,
                                       @"paymentId": @(1)};
                 
                 [weakSelf sendRequest:[[weakSelf class] getRequestURLStr:NetOrderRequesertType_CreateOrder]
