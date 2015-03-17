@@ -40,9 +40,21 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:PassengerManagerCellSelectedNotificationKey
+                                                  object:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didSelectedPassenger:)
+                                                 name:PassengerManagerCellSelectedNotificationKey
+                                               object:nil];
     
     [self initialization];
 }
@@ -98,21 +110,9 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     [_settlementView setOperationHandle:^(SettlementView *view, SettlementViewOperationType type, id sender) {
         /*
          车次id  int ScheduleId 必填
-         用户id  int  UserId'   必填
-         数量	int	Tickets   必填
-         价格    decimal   TotalAmount'   必填
-         用户手机号 str Phone    必填
-         用户地址  Str Address' （可选）
-         订单联系人姓名： str 'OrderContact',  （可选）
-         订单备注:     str    'OrderRemark'    （可选）
-         乘客列表  Str  PeopleList  json字符串  必填
-         Eg : ‘[{“NameList” : “姓名”  : “IdentityList”  :  “身份证号码” },
-         {“NameList”: ”姓名2”,  ” IdentityList”  :  “4443434343” } ]
          */
         STRONGSELF
-        NSNumber *userId = [UserInfoModel getUserDefaultUserId];
-        
-        if (userId)
+        if ([UserInfoModel getRequestHeader_TokenDic])
         {
             NSInteger buyTicketCount = strongSelf->_passengersItemsArray.count;
             if (buyTicketCount > 0)
@@ -122,19 +122,17 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
                 NSMutableArray *tempArray = [NSMutableArray array];
                 for (PassengersEntity *entity in strongSelf->_passengersItemsArray)
                 {
-                    NSDictionary *dic = @{@"NameList": entity.nameStr,
-                                          @"IdentityList": entity.mobilePhoneStr};
-                    [tempArray addObject:dic];
+                    [tempArray addObject:@(entity.keyId)];
                 }
                 passengersJsonStr = [tempArray jsonStringByError:NULL];
                 
+                NSDictionary *dic = @{@"cartInfoId": @(weakSelf.busEntity.keyId),
+                                      @"passengerIds": passengersJsonStr,
+                                      @"paymentId": @(1)};
+                
                 [weakSelf sendRequest:[[weakSelf class] getRequestURLStr:NetOrderRequesertType_CreateOrder]
-                         parameterDic:@{@"ScheduleId": @(weakSelf.busEntity.keyId),
-                                        @"UserId": userId,
-                                        @"Tickets": @(buyTicketCount),
-                                        @"TotalAmount": @([weakSelf totalPrice]),
-                                        @"Phone": [UserInfoModel getUserDefaultLoginName],
-                                        @"PeopleList": passengersJsonStr}
+                         parameterDic:dic
+                       requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
                     requestMethodType:RequestMethodType_POST
                            requestTag:NetOrderRequesertType_CreateOrder];
             }
@@ -156,7 +154,7 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
                             style:UITableViewStylePlain
                   registerNibName:NSStringFromClass([PassengersCell class])
                   reuseIdentifier:cellIdentifier_orderPassenger];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    // _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 }
 
 - (NSString *)curTitleWithIndex:(NSIndexPath *)indexPath
@@ -178,6 +176,19 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 - (void)setSettlementViewText
 {
     [_settlementView setSettlementPrice:[self totalPrice] count:_passengersItemsArray.count];
+}
+
+// 接受通知
+- (void)didSelectedPassenger:(NSNotification *)notification
+{
+    PassengersEntity *entity = [notification object];
+    
+    if ([entity isKindOfClass:[PassengersEntity class]])
+    {
+        [_passengersItemsArray addObject:entity];
+        
+        [_tableView reloadData];
+    }
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate methods

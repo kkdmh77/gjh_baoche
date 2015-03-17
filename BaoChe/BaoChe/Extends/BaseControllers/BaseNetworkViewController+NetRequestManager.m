@@ -37,7 +37,7 @@
                            @"",
                            
                            // 订单
-                           @"bus_order/create_order",
+                           @"order",
                            
                            nil];
 
