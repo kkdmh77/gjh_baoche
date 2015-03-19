@@ -23,8 +23,8 @@
         self.passStation = [dict safeObjectForKey:@"pass"];
         self.price = [[dict safeObjectForKey:@"price"] doubleValue];
         
-        NSTimeInterval startTime = [[dict safeObjectForKey:@"leaveTime"] doubleValue];
-        NSTimeInterval endTime = [[dict safeObjectForKey:@"arriveTime"] doubleValue];
+        NSTimeInterval startTime = [[dict safeObjectForKey:@"leaveTime"] doubleValue] / 1000;
+        NSTimeInterval endTime = [[dict safeObjectForKey:@"arriveTime"] doubleValue] / 1000;
         
         NSInteger days, hours, minutes;
         
@@ -147,7 +147,7 @@
         self.busInfoEntity = [AllBusListItemEntity initWithDict:busInfoDic];
         self.orderNo = [orderInfoDic safeObjectForKey:@"orderNo"];
         self.orderTotalFee = [[orderInfoDic safeObjectForKey:@"orderTotalFee"] doubleValue];
-        self.orderTime = [[orderInfoDic safeObjectForKey:@"orderTime"] doubleValue];
+        self.orderTime = [[orderInfoDic safeObjectForKey:@"orderTime"] doubleValue] / 1000;
         self.mobilePhoneNumStr = [orderInfoDic safeObjectForKey:@"phone"];
         
         // 乘客信息数组

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonEntity.h"
 
 @interface OrderInfoView : UIView
 
 + (CGFloat)getViewHeight;
+- (void)loadViewShowDataWithItemEntity:(OrderListEntity *)entity;
 
 @end

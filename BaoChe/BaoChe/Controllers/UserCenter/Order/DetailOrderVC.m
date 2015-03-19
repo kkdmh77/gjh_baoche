@@ -77,7 +77,10 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
 {
     if (2 == section)
     {
-        return [self numberOfRowsInSection:section];;
+        /*
+        return [self numberOfRowsInSection:section];
+         */
+        return _defaultOrderEntity.passengersArray.count;
     }
     return 1;
 }
@@ -129,7 +132,7 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
         {
             _passengersCellSectionHeader = [UserCenter_TabSectionHeaderView loadFromNib];
             _passengersCellSectionHeader.canOperation = NO;
-            [_passengersCellSectionHeader setTitleString:@"乘客(2位)"];
+            [_passengersCellSectionHeader setTitleString:[NSString stringWithFormat:@"乘客(%i位)",_defaultOrderEntity.passengersArray.count]];
             /*
             _passengersCellSectionHeader.tag = section;
             [_passengersCellSectionHeader addTarget:self
@@ -159,6 +162,9 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             OrderInfoView *orderInfoView = [OrderInfoView loadFromNib];
             orderInfoView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            
+            [orderInfoView loadViewShowDataWithItemEntity:_defaultOrderEntity];
+            
             [cell addSubview:orderInfoView];
         }
         
@@ -174,6 +180,9 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             BusInfoView *busInfoView = [BusInfoView loadFromNib];
             busInfoView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            
+            [busInfoView loadViewShowDataWithItemEntity:_defaultOrderEntity.busInfoEntity];
+            
             [cell addSubview:busInfoView];
         }
         
@@ -182,6 +191,9 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
     else if (2 == indexPath.section)
     {
         PassengersCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier_detailOrderPassenger];
+        
+        PassengersEntity *entity = _defaultOrderEntity.passengersArray[indexPath.row];
+        [cell loadCellShowDataWithItemEntity:entity];
         
         switch (indexPath.row) {
             case 0:

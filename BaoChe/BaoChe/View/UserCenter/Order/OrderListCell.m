@@ -95,7 +95,20 @@ static CGFloat defaultCellHeight = 0;
     [attributedPriceStr setTextColor:Common_RedColor range:[resultPriceStr rangeOfString:priceStr]];
     _busPriceLabel.attributedText = attributedPriceStr;
     
-    _busNameLabel.text = [NSString stringWithFormat:@""];
+    _busNameLabel.text = [NSString stringWithFormat:@"%@(单程)", entity.busInfoEntity.busNameStr];
+    NSString *startAndEndTimeStr = [NSString stringWithFormat:@"%@ %@开 - %@ %@到",entity.busInfoEntity.startTime_DateStr, entity.busInfoEntity.startTimeStr,entity.busInfoEntity.endTime_DateStr, entity.busInfoEntity.endTimeStr];
+    _startAndEndTimeLabel.text = startAndEndTimeStr;
+    _startStationLabel.text = entity.busInfoEntity.startStation;
+    _endStationLabel.text = entity.busInfoEntity.endStation;
+    
+    // 乘车人
+    NSMutableArray *passengersNameArray = [NSMutableArray array];
+    for (PassengersEntity *passengerEntity in entity.passengersArray)
+    {
+        [passengersNameArray addObject:passengerEntity.nameStr];
+    }
+    NSString *passengersStr = [passengersNameArray componentsJoinedByString:@","];
+    _passengersLabel.text = [NSString stringWithFormat:@"%@(%i人)",passengersStr, entity.passengersArray.count];
 }
 
 @end

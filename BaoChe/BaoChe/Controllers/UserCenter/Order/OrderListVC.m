@@ -62,7 +62,7 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
          parameterDic:@{@"pageNo": @(1), @"pageSize": @(1000)}
        requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
     requestMethodType:RequestMethodType_GET
-           requestTag:NetBusRequestType_GetAllBusList];
+           requestTag:NetOrderRequesertType_GetAllOrderList];
 }
 
 - (void)initialization
@@ -139,7 +139,8 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 {
     OrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifer_orderList];
     
-    [cell loadCellShowDataWithItemEntity:nil];
+    OrderListEntity *entity = [self curIndexTabCellShowData:indexPath.section];
+    [cell loadCellShowDataWithItemEntity:entity];
     
     return cell;
 }
@@ -149,6 +150,7 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     DetailOrderVC *detailOrder = [[DetailOrderVC alloc] init];
+    detailOrder.defaultOrderEntity = [self curIndexTabCellShowData:indexPath.section];
     detailOrder.hidesBottomBarWhenPushed = YES;
     [self pushViewController:detailOrder];
 }

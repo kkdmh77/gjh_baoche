@@ -71,4 +71,13 @@ static CGFloat defaultViewHeight = 0;
     return defaultViewHeight;
 }
 
+-(void)loadViewShowDataWithItemEntity:(OrderListEntity *)entity
+{
+    _orderNumberLabel.text = entity.orderNo;
+    _mobilePhoneNumLabel.text = entity.mobilePhoneNumStr;
+    _paymentOrderLabel.text = [NSDate stringFromTimeIntervalSeconds:entity.orderTime withFormatter:DataFormatter_DateAndTime];
+    _buyCountLabel.text = [NSString stringWithFormat:@"%i", entity.passengersArray.count];
+    _totalPriceLabel.text = [NSString stringWithFormat:@"￥%.2lf",entity.orderTotalFee];
+}
+
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "BaseNetworkViewController.h"
+#import "CommonEntity.h"
 
 @interface DetailOrderVC : BaseNetworkViewController
+
+@property (nonatomic, strong) OrderListEntity *defaultOrderEntity;
 
 @end

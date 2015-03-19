@@ -16,6 +16,7 @@
 #import "CommonEntity.h"
 #import "LoginBC.h"
 #import "InterfaceHUDManager.h"
+#import "PassengerManagerVC.h"
 
 static NSString * const cellIdentifier_userInfoHeader = @"cellIdentifier_userInfoHeader";
 static NSString * const cellIdentifier_userCenterPassengersCell = @"cellIdentifier_userCenterPassengersCell";
@@ -154,7 +155,10 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    /*
     return [self numberOfRowsInSection:section];
+     */
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -165,7 +169,10 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
     }
     else if (1 == indexPath.section)
     {
+        /*
         return [PassengersCell getCellHeight];
+         */
+        return 50;
     }
     else if (2 == indexPath.section)
     {
@@ -185,58 +192,12 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
 {
     if (0 != section)
     {
-        if (3 == section || 2 == section)
-        {
-            return CellSeparatorSpace;
-        }
-        return 50;
+        return CellSeparatorSpace;
     }
     return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    if (0 == section || 3 == section)
-    {
-        return CellSeparatorSpace;
-    }
-    return 0.0;
-}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (1 == section)
-    {
-        if (!_passengersCellSectionHeader)
-        {
-            _passengersCellSectionHeader = [UserCenter_TabSectionHeaderView loadFromNib];
-            [_passengersCellSectionHeader setTitleString:@"常用乘车人"];
-            _passengersCellSectionHeader.tag = section;
-            [_passengersCellSectionHeader addTarget:self
-                                             action:@selector(headerClicked:)
-                                   forControlEvents:UIControlEventTouchUpInside];
-        }
-        return _passengersCellSectionHeader;
-    }
-    /*
-    else if (2 == section)
-    {
-        if (!_addressCellSectionHeader)
-        {
-            _addressCellSectionHeader = [UserCenter_TabSectionHeaderView loadFromNib];
-            [_addressCellSectionHeader setTitleString:@"常用收货地址"];
-            _addressCellSectionHeader.tag = section;
-            [_addressCellSectionHeader addTarget:self
-                                             action:@selector(headerClicked:)
-                                   forControlEvents:UIControlEventTouchUpInside];
-        }
-        return _addressCellSectionHeader;
-    }
-     */
-    return nil;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     return [UIView new];
 }
@@ -284,9 +245,25 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
     }
     else if (1 == indexPath.section)
     {
-        PassengersCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier_userCenterPassengersCell];
+        static NSString *cellIdentifier = @"cellIdentifier_PassengerManager";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            
+            CGSize cellSize = [tableView rectForRowAtIndexPath:indexPath].size;
+            InsertLabel(cell,
+                        CGRectMake(10, 0, 100, cellSize.height),
+                        NSTextAlignmentLeft,
+                        @"常用联系人",
+                        SP15Font,
+                        Common_BlackColor,
+                        NO);
+            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"youjiantou_cell"]];
+        }
+        
         return cell;
-
     }
     else if (2 == indexPath.section)
     {
@@ -352,6 +329,18 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
     
     switch (indexPath.section)
     {
+        case 1:
+        {
+            PassengerManagerVC *passengerManager = [[PassengerManagerVC alloc] init];
+            passengerManager.hidesBottomBarWhenPushed = YES;
+            [self pushViewController:passengerManager];
+        }
+            break;
+        case 2:
+        {
+            
+        }
+            break;
         case 3:
         {
             WEAKSELF
