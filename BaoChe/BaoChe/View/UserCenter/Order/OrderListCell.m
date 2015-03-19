@@ -70,8 +70,6 @@ static CGFloat defaultCellHeight = 0;
 {
     // 设置属性
     [self configureViewsProperties];
-    
-    [self loadCellShowDataWithItem];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -86,16 +84,18 @@ static CGFloat defaultCellHeight = 0;
     return defaultCellHeight;
 }
 
-- (void)loadCellShowDataWithItem
+- (void)loadCellShowDataWithItemEntity:(OrderListEntity *)entity
 {
     // 价钱
-    NSString *priceStr = [NSString stringWithFormat:@"￥%.2f",800.00f];
+    NSString *priceStr = [NSString stringWithFormat:@"￥%.2f",entity.orderTotalFee];
     NSString *priceDescStr = @"总价: ";
     NSString *resultPriceStr = [NSString stringWithFormat:@"%@%@", priceDescStr, priceStr];
     NSMutableAttributedString *attributedPriceStr = [[NSMutableAttributedString alloc] initWithString:resultPriceStr];
     [attributedPriceStr setFont:SP15Font range:[resultPriceStr rangeOfString:priceStr]];
     [attributedPriceStr setTextColor:Common_RedColor range:[resultPriceStr rangeOfString:priceStr]];
     _busPriceLabel.attributedText = attributedPriceStr;
+    
+    _busNameLabel.text = [NSString stringWithFormat:@""];
 }
 
 @end

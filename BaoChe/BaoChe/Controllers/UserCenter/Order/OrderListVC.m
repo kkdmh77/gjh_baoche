@@ -15,6 +15,9 @@
 static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 
 @interface OrderListVC () <GJHSlideSwitchViewDelegate>
+{
+    NSMutableArray *_netOrderEntityArray;
+}
 
 @end
 
@@ -24,7 +27,7 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 {
     [super viewDidLoad];
     
-//    [self getNetworkData];
+    [self getNetworkData];
     [self initialization];
 }
 
@@ -45,17 +48,20 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
     WEAKSELF
     [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
         STRONGSELF
-        if (NetBusRequestType_GetAllBusList == request.tag)
+        if (NetOrderRequesertType_GetAllOrderList == request.tag)
         {
-            
+            [strongSelf parseNetworkDataWithSourceDic:successInfoObj];
+            [strongSelf reloadTabData];
         }
     }];
 }
 
 - (void)getNetworkData
 {
-    [self sendRequest:[[self class] getRequestURLStr:NetBusRequestType_GetAllBusList]
-         parameterDic:nil
+    [self sendRequest:[[self class] getRequestURLStr:NetOrderRequesertType_GetAllOrderList]
+         parameterDic:@{@"pageNo": @(1), @"pageSize": @(1000)}
+       requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+    requestMethodType:RequestMethodType_GET
            requestTag:NetBusRequestType_GetAllBusList];
 }
 
@@ -79,16 +85,34 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
                   reuseIdentifier:cellIdentifer_orderList];
 }
 
-- (void)curIndexTabCellShowData:(NSInteger)index
+- (void)parseNetworkDataWithSourceDic:(NSDictionary *)dic
 {
+    NSArray *dataList = [dic safeObjectForKey:@"orders"];
+    _netOrderEntityArray = [NSMutableArray arrayWithCapacity:dataList.count];
     
+    for (NSDictionary *dataDic in dataList)
+    {
+        OrderListEntity *entity = [OrderListEntity initWithDict:dataDic];
+        
+        [_netOrderEntityArray addObject:entity];
+    }
+}
+        
+- (void)reloadTabData
+{
+    [_tableView reloadData];
+}
+
+- (OrderListEntity *)curIndexTabCellShowData:(NSInteger)index
+{
+    return index < _netOrderEntityArray.count ? _netOrderEntityArray[index] : nil;
 }
 
 #pragma mark - UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 10;
+    return _netOrderEntityArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -103,7 +127,7 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10;
+    return CellSeparatorSpace;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -115,9 +139,7 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 {
     OrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifer_orderList];
     
-    /*
-     [cell loadCellShowDataWithItemEntity:nil];
-     */
+    [cell loadCellShowDataWithItemEntity:nil];
     
     return cell;
 }

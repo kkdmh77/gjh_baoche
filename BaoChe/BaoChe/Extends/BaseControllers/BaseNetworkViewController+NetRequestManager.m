@@ -34,10 +34,11 @@
                            
                            @"passengerList",
                            @"passenger",
-                           @"",
+                           @"passenger/delete",
                            
                            // 订单
                            @"order",
+                           @"orderListAll",
                            
                            nil];
 

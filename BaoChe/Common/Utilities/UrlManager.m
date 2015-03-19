@@ -21,8 +21,8 @@
     
     NSString *nameSpace = nil;
     
-//    nameSpace = Request_NameSpace;
-    nameSpace = Request_NameSpace_company_internal;
+    nameSpace = Request_NameSpace;
+//    nameSpace = Request_NameSpace_company_internal;
     
 //    if (0 == serviceSeletedValue.intValue)
 //        nameSpace = Request_NameSpace_gov;

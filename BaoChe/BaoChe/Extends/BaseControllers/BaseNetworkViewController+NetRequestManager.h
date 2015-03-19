@@ -29,6 +29,7 @@ typedef enum
     
     // 订单
     NetOrderRequesertType_CreateOrder                        , // 创建订单
+    NetOrderRequesertType_GetAllOrderList                    , // 查询所有订单
     
 } NetRequestType;
 

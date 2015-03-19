@@ -258,6 +258,7 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
         
         STRONGSELF
         NSIndexPath *indexPath = [strongSelf->_tableView indexPathForCell:cell];
+        PassengersEntity *entity = [strongSelf getTabCellShowDataWithArrayIndex:indexPath.section];
         
         switch (type)
         {
@@ -268,9 +269,9 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
                   NSDictionary *userInfo = @{addressRequestUserInfoKey_IndexPath: indexPath};
                   
                   [weakSelf sendRequest:methodName
-                           parameterDic:@{}
-                         requestHeaders:nil
-                      requestMethodType:RequestMethodType_DELETE
+                           parameterDic:@{@"passengerId": @(entity.keyId)}
+                         requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+                      requestMethodType:RequestMethodType_GET
                              requestTag:NetUserCenterRequestType_DeletePassenger
                                delegate:self
                                userInfo:userInfo];

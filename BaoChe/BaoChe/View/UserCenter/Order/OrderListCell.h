@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonEntity.h"
 
 @interface OrderListCell : UITableViewCell
 
 + (CGFloat)getCellHeight;
+- (void)loadCellShowDataWithItemEntity:(OrderListEntity *)entity;
 
 @end

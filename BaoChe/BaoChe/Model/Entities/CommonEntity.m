@@ -21,7 +21,7 @@
         self.startStation = [dict safeObjectForKey:@"origin"];
         self.endStation = [dict safeObjectForKey:@"destination"];
         self.passStation = [dict safeObjectForKey:@"pass"];
-        self.price = [[dict safeObjectForKey:@"amount"] doubleValue];
+        self.price = [[dict safeObjectForKey:@"price"] doubleValue];
         
         NSTimeInterval startTime = [[dict safeObjectForKey:@"leaveTime"] doubleValue];
         NSTimeInterval endTime = [[dict safeObjectForKey:@"arriveTime"] doubleValue];
@@ -125,6 +125,48 @@
         self.userNicknameStr = [dict safeObjectForKey:@"nickname"];
         self.mobilePhoneNumStr = [dict safeObjectForKey:@"phone"];
         self.userNameStr = [dict safeObjectForKey:@"userName"];
+    }
+    return self;
+}
+
+@end
+
+//////////////////////////////////////////////////////////////////////
+
+@implementation OrderListEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        NSDictionary *orderInfoDic = [dict safeObjectForKey:@"orderInfo"];
+        NSDictionary *busInfoDic = [dict safeObjectForKey:@"cartInfo"];
+        
+        self.keyId = [[orderInfoDic safeObjectForKey:@"id"] integerValue];
+        self.busInfoEntity = [AllBusListItemEntity initWithDict:busInfoDic];
+        self.orderNo = [orderInfoDic safeObjectForKey:@"orderNo"];
+        self.orderTotalFee = [[orderInfoDic safeObjectForKey:@"orderTotalFee"] doubleValue];
+        self.orderTime = [[orderInfoDic safeObjectForKey:@"orderTime"] doubleValue];
+        self.mobilePhoneNumStr = [orderInfoDic safeObjectForKey:@"phone"];
+        
+        // 乘客信息数组
+        NSArray *orderItemList = [orderInfoDic safeObjectForKey:@"orderItemList"];
+        if ([orderItemList isAbsoluteValid])
+        {
+            NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:orderItemList.count];
+            for (NSDictionary *oneOrderItem in orderItemList)
+            {
+                PassengersEntity *entity = [PassengersEntity new];
+                entity.keyId = [[oneOrderItem safeObjectForKey:@"passengerId"] integerValue];
+                entity.nameStr = [oneOrderItem safeObjectForKey:@"userName"];
+                entity.mobilePhoneStr = [oneOrderItem safeObjectForKey:@"phone"];
+                entity.payStatus = [oneOrderItem safeObjectForKey:@"payStatus"];
+                
+                [tempArray addObject:entity];
+            }
+            self.passengersArray = tempArray;
+        }
     }
     return self;
 }
