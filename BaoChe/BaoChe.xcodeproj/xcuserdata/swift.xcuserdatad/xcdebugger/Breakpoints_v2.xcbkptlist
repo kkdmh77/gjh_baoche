@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BaoChe/Controllers/Bus/OrderWriteVC.m"
-            timestampString = "448274121.866036"
+            timestampString = "448534779.665568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "-setNetworkRequestStatusBlocks"
             landmarkType = "5">
          </BreakpointContent>

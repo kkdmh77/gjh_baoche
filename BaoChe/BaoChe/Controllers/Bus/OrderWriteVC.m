@@ -16,6 +16,7 @@
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "UserInfoModel.h"
 #import "PassengerManagerVC.h"
+#import "PayManager.h"
 
 static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPassenger";
 
@@ -87,7 +88,15 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
         STRONGSELF
         if (NetOrderRequesertType_CreateOrder == request.tag)
         {
+            Product *p = [[Product alloc] init];
+            p.price = 0.01;
+            p.productName = @"测试";
+            p.productDesc = @"测试描述";
+            p.orderId = @"2015";
             
+            [[PayManager sharedInstance] payOrderWithProduct:p completeHandle:^(AlipayResultStatusCode statusCode) {
+                
+            }];
         }
     }];
 }
