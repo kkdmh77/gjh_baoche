@@ -11,6 +11,7 @@
 #import "RegisterVC.h"
 #import "LoginBC.h"
 #import "UserInfoModel.h"
+#import "ForgetPassword_GetVerificationCodeVC.h"
 
 @interface LoginVC ()
 {
@@ -141,7 +142,8 @@
 
 - (void)clickForgetPasswordBtn:(UIButton *)btn
 {
-    
+    ForgetPassword_GetVerificationCodeVC *forgetPassword = [ForgetPassword_GetVerificationCodeVC loadFromNib];
+    [self pushViewController:forgetPassword];
 }
 
 @end

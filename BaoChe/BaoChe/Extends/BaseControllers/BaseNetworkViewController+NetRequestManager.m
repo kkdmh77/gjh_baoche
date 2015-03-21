@@ -31,10 +31,17 @@
                            @"user/verifyCode",
                            
                            @"user",
+                           @"user/changePwd",
+                           @"",
                            
                            @"passengerList",
                            @"passenger",
                            @"passenger/delete",
+                           
+                           // 忘记密码
+                           @"",
+                           @"",
+                           @"",
                            
                            // 订单
                            @"order",

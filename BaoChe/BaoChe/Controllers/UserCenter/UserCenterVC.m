@@ -17,6 +17,8 @@
 #import "LoginBC.h"
 #import "InterfaceHUDManager.h"
 #import "PassengerManagerVC.h"
+#import "ModifyPasswordVC.h"
+#import <objc/runtime.h>
 
 static NSString * const cellIdentifier_userInfoHeader = @"cellIdentifier_userInfoHeader";
 static NSString * const cellIdentifier_userCenterPassengersCell = @"cellIdentifier_userCenterPassengersCell";
@@ -88,8 +90,20 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
             
             [strongSelf reloadData];
         }
+        else if (NetUserCenterRequestType_ModifyUserHeaderImage == request.tag)
+        {
+            NSString *filePath = [request.userInfo safeObjectForKey:@"filePaht"];
+            [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
+        }
     } failedBlock:^(NetRequest *request, NSError *error) {
         
+        [weakSelf showHUDInfoByString:error.localizedDescription];
+        
+        if (NetUserCenterRequestType_ModifyUserHeaderImage == request.tag)
+        {
+            NSString *filePath = [request.userInfo safeObjectForKey:@"filePaht"];
+            [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
+        }
     }];
 }
 
@@ -228,7 +242,31 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
                 }
                 else if (type == UserCenterTabHeaderViewOperationType_UserHeaderImageBtn)
                 {
-                    
+                    [weakSelf pickSinglePhotoFromCameraOrAlbumByIsCropped:YES cancelHandle:nil finishPickingHandle:^(NSArray *pickedImageArray) {
+                        if ([pickedImageArray isAbsoluteValid])
+                        {
+                            UIImage *pickerImage = pickedImageArray[0];
+                            
+                            [view setUserHeaderImage:pickerImage];
+                            
+                            // 发送保存图片的请求
+                            NSData *imageData = UIImageJPEGRepresentation(pickerImage, 0.3);
+                            NSString *fileName = [NSString stringWithFormat:@"%@.png", [NSDate stringFromDate:[NSDate date] withFormatter:DataFormatter_DateAndTime]];
+                            NSString *filePath = GetTmpPathFileName(fileName);
+                            [imageData writeToFile:filePath atomically:NO];
+                            
+                            NSURL *url = [UrlManager getRequestUrlByMethodName:[[weakSelf class] getRequestURLStr:NetUserCenterRequestType_ModifyUserHeaderImage]];
+                            
+                            [[NetRequestManager sharedInstance] sendUploadRequest:url
+                                                                     parameterDic:nil
+                                                                requestMethodType:RequestMethodType_POST
+                                                                       requestTag:NetUserCenterRequestType_ModifyUserHeaderImage
+                                                                         delegate:weakSelf
+                                                                         userInfo:@{@"filePaht": filePath}
+                                                                          fileDic:@{@"file": filePath}];
+                        }
+                    }];
+
                 }
                 else if (type == UserCenterTabHeaderViewOperationType_LoginAndRegister)
                 {
@@ -338,7 +376,12 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
             break;
         case 2:
         {
+            ModifyPasswordVC *modifyPassword = [ModifyPasswordVC loadFromNib];
+            modifyPassword.hidesBottomBarWhenPushed = YES;
             
+            objc_setAssociatedObject(modifyPassword, class_getName([self class]), self, OBJC_ASSOCIATION_ASSIGN);
+            
+            [self pushViewController:modifyPassword];
         }
             break;
         case 3:

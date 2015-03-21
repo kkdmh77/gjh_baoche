@@ -108,6 +108,14 @@
 		431605601ABC135A003A4970 /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 431605511ABC135A003A4970 /* RSADataSigner.m */; };
 		431605611ABC135A003A4970 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 431605531ABC135A003A4970 /* RSADataVerifier.m */; };
 		431605621ABC135A003A4970 /* 海外支付宝集成openssl报错解决方法.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 431605541ABC135A003A4970 /* 海外支付宝集成openssl报错解决方法.rtf */; };
+		43618B831ABD1A270079CEA5 /* ModifyPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43618B811ABD1A270079CEA5 /* ModifyPasswordVC.m */; };
+		43618B841ABD1A270079CEA5 /* ModifyPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43618B821ABD1A270079CEA5 /* ModifyPasswordVC.xib */; };
+		43618B8F1ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43618B871ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.m */; };
+		43618B901ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43618B881ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.xib */; };
+		43618B911ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43618B8A1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.m */; };
+		43618B921ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43618B8B1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.xib */; };
+		43618B931ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43618B8D1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.m */; };
+		43618B941ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43618B8E1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.xib */; };
 		4372D7741A0879FD00CEA66D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4372D7761A0879FD00CEA66D /* InfoPlist.strings */; };
 		43CB6B201A46843C003829E6 /* BaseTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB6B1F1A46843C003829E6 /* BaseTabBarVC.m */; };
 		43D1ED1A19FB37F30049518E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1ED1919FB37F30049518E /* main.m */; };
@@ -693,6 +701,18 @@
 		431605521ABC135A003A4970 /* RSADataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataVerifier.h; sourceTree = "<group>"; };
 		431605531ABC135A003A4970 /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
 		431605541ABC135A003A4970 /* 海外支付宝集成openssl报错解决方法.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "海外支付宝集成openssl报错解决方法.rtf"; sourceTree = "<group>"; };
+		43618B801ABD1A270079CEA5 /* ModifyPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordVC.h; sourceTree = "<group>"; };
+		43618B811ABD1A270079CEA5 /* ModifyPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordVC.m; sourceTree = "<group>"; };
+		43618B821ABD1A270079CEA5 /* ModifyPasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyPasswordVC.xib; sourceTree = "<group>"; };
+		43618B861ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPassword_GetVerificationCodeVC.h; sourceTree = "<group>"; };
+		43618B871ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPassword_GetVerificationCodeVC.m; sourceTree = "<group>"; };
+		43618B881ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPassword_GetVerificationCodeVC.xib; sourceTree = "<group>"; };
+		43618B891ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPassword_InputVerificationCodeVC.h; sourceTree = "<group>"; };
+		43618B8A1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPassword_InputVerificationCodeVC.m; sourceTree = "<group>"; };
+		43618B8B1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPassword_InputVerificationCodeVC.xib; sourceTree = "<group>"; };
+		43618B8C1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPassword_ModifyPasswordVC.h; sourceTree = "<group>"; };
+		43618B8D1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPassword_ModifyPasswordVC.m; sourceTree = "<group>"; };
+		43618B8E1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPassword_ModifyPasswordVC.xib; sourceTree = "<group>"; };
 		4372D7751A0879FD00CEA66D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4372D7771A087A1600CEA66D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		43CB6B1E1A46843C003829E6 /* BaseTabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarVC.h; sourceTree = "<group>"; };
@@ -1625,6 +1645,7 @@
 		2BE0BE821A45336A000B8871 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				43618B851ABD4B560079CEA5 /* ForgetPassword */,
 				43EF72A31AB6BB6E006D1C11 /* AddressManager */,
 				2BDD6E4C1A55A40C00329823 /* Order */,
 				2BDC3E671A4DA4C8007C1130 /* LoginVC.h */,
@@ -1635,6 +1656,9 @@
 				2BDC3E6C1A4DA4C8007C1130 /* RegisterVC.xib */,
 				2BE0BEA41A454CF9000B8871 /* UserCenterVC.h */,
 				2BE0BEA51A454CF9000B8871 /* UserCenterVC.m */,
+				43618B801ABD1A270079CEA5 /* ModifyPasswordVC.h */,
+				43618B811ABD1A270079CEA5 /* ModifyPasswordVC.m */,
+				43618B821ABD1A270079CEA5 /* ModifyPasswordVC.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -1831,6 +1855,22 @@
 				431605531ABC135A003A4970 /* RSADataVerifier.m */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		43618B851ABD4B560079CEA5 /* ForgetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				43618B861ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.h */,
+				43618B871ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.m */,
+				43618B881ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.xib */,
+				43618B891ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.h */,
+				43618B8A1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.m */,
+				43618B8B1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.xib */,
+				43618B8C1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.h */,
+				43618B8D1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.m */,
+				43618B8E1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.xib */,
+			);
+			path = ForgetPassword;
 			sourceTree = "<group>";
 		};
 		43D1ED0B19FB37F30049518E = {
@@ -3405,6 +3445,7 @@
 				43D1F29819FB3AFB0049518E /* sr_refresh@2X.png in Resources */,
 				2BE0BEA31A453C0E000B8871 /* zhankaijiantou@3x.png in Resources */,
 				43D1F57919FB4C1A0049518E /* Icon-Small.png in Resources */,
+				43618B841ABD1A270079CEA5 /* ModifyPasswordVC.xib in Resources */,
 				2BE0BEA21A453C0E000B8871 /* zhankaijiantou@2x.png in Resources */,
 				2BDC3E751A4DAA0F007C1130 /* login_mima@2x.png in Resources */,
 				2BDC3E701A4DA4C8007C1130 /* RegisterVC.xib in Resources */,
@@ -3466,6 +3507,7 @@
 				2BE0BEA01A453C0E000B8871 /* youjiantou@2x.png in Resources */,
 				43D775431A3D4BD900C088CE /* busList_arrow@2x.png in Resources */,
 				2BDC3E781A4DAA0F007C1130 /* login_user@2x.png in Resources */,
+				43618B901ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.xib in Resources */,
 				43D775751A3D88D000C088CE /* chack.png in Resources */,
 				2BDC3EA91A4F0A9C007C1130 /* gerenzhongxin_selected@3x.png in Resources */,
 				43D7754C1A3D678D00C088CE /* Images.xcassets in Resources */,
@@ -3482,8 +3524,10 @@
 				43D1F55C19FB4C1A0049518E /* deps in Resources */,
 				43D1F18B19FB3AFB0049518E /* AQGridSelectionGreen.png in Resources */,
 				2BDC3E761A4DAA0F007C1130 /* login_mima@3x.png in Resources */,
+				43618B921ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.xib in Resources */,
 				43D1F4E119FB4C1A0049518E /* deps in Resources */,
 				2BDC3E811A4DB82C007C1130 /* close@3x.png in Resources */,
+				43618B941ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.xib in Resources */,
 				43D1F58319FB4C1A0049518E /* NimbusWebController.bundle in Resources */,
 				2B6D6CAE1A5660BA00286CE2 /* OrderInfoView.xib in Resources */,
 				2BE0BE921A4536FC000B8871 /* jianhao_lanse@3x.png in Resources */,
@@ -3548,6 +3592,7 @@
 				43D1F30619FB3AFB0049518E /* ColorManager.m in Sources */,
 				43D1F56A19FB4C1A0049518E /* NIPagingScrollViewPage.m in Sources */,
 				43D1F4F519FB4C1A0049518E /* NINonRetainingCollections.m in Sources */,
+				43618B931ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.m in Sources */,
 				43D1F28E19FB3AFB0049518E /* RegexKitLite.m in Sources */,
 				2B521ED81A4858A00083DE33 /* BusInfoView.m in Sources */,
 				2BD7EFFF1A49B8E700905645 /* IQNSArray+Sort.m in Sources */,
@@ -3594,6 +3639,7 @@
 				43D1F56919FB4C1A0049518E /* NIPagingScrollView.m in Sources */,
 				43D1F18319FB3AFB0049518E /* AQGridViewUpdateInfo.m in Sources */,
 				43D1F2B019FB3AFB0049518E /* ATBLibs+UIView.m in Sources */,
+				43618B8F1ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.m in Sources */,
 				2B6D6CB71A56D13900286CE2 /* StartStationChooseVC.m in Sources */,
 				43D1F1A019FB3AFB0049518E /* UIImage+FlatUI.m in Sources */,
 				43D1F1D119FB3AFB0049518E /* MASConstraint.m in Sources */,
@@ -3618,6 +3664,7 @@
 				43D1F19B19FB3AFB0049518E /* FUISwitch.m in Sources */,
 				43D1F4F119FB4C1A0049518E /* NIInMemoryCache.m in Sources */,
 				43D775701A3D88D000C088CE /* CalendarHomeViewController.m in Sources */,
+				43618B831ABD1A270079CEA5 /* ModifyPasswordVC.m in Sources */,
 				43D1F2A719FB3AFB0049518E /* ATBDataBase.m in Sources */,
 				43D1F4EF19FB4C1A0049518E /* NIFoundationMethods.m in Sources */,
 				43D1F1A119FB3AFB0049518E /* UINavigationBar+FlatUI.m in Sources */,
@@ -3654,6 +3701,7 @@
 				43D1F31219FB3AFB0049518E /* NetRequestManager.m in Sources */,
 				43D1F19719FB3AFB0049518E /* FUIButton.m in Sources */,
 				43D1F30F19FB3AFB0049518E /* KeepLoginSessionConnection.m in Sources */,
+				43618B911ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.m in Sources */,
 				43D1F2DD19FB3AFB0049518E /* ATSequenceImageView.m in Sources */,
 				43D1F4FB19FB4C1A0049518E /* NIState.m in Sources */,
 				43D1F53F19FB4C1A0049518E /* NILauncherViewModel.m in Sources */,

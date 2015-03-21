@@ -22,10 +22,17 @@ typedef enum
     NetUserCenterRequestType_GetVerificationCode             , // 获取验证码
     
     NetUserCenterRequestType_GetUserInfo                     , // 获取用户信息
+    NetUserCenterRequestType_ModifyPossword                  , // 修改密码
+    NetUserCenterRequestType_ModifyUserHeaderImage           , // 修改用户头像(POST)
     
     NetUserCenterRequestType_GetAllPassenger                 , // 获取所有乘客信息
     NetUserCenterRequestType_AddPassenger                    , // 添加一个乘客信息
     NetUserCenterRequestType_DeletePassenger                 , // 删除一个乘客信息
+    
+    // 忘记密码
+    NetForgetPasswordRequestType_GetVerificationCode         , // 忘记密码->获取短信验证码(POST)
+    NetForgetPasswordRequestType_CheckVerificationCode       , // 检测验证码是否正确(POST)
+    NetForgetPasswordRequestType_ModifyPassword              , // 忘记密码->用验证码修改密码(POST)
     
     // 订单
     NetOrderRequesertType_CreateOrder                        , // 创建订单
