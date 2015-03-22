@@ -94,6 +94,7 @@
 		2BE0BEB61A459DB2000B8871 /* youjiantou_cell@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE0BEB41A459DB2000B8871 /* youjiantou_cell@3x.png */; };
 		2BF2E0791A3F3B5B00F83491 /* HomePageTodayHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2E0771A3F3B5B00F83491 /* HomePageTodayHotCell.m */; };
 		2BF2E07A1A3F3B5B00F83491 /* HomePageTodayHotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */; };
+		2BFBF2191ABF0507006AE80D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BFBF21B1ABF0507006AE80D /* Localizable.strings */; };
 		431605551ABC135A003A4970 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 431604F01ABC135A003A4970 /* AlipaySDK.bundle */; };
 		431605561ABC135A003A4970 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431604F11ABC135A003A4970 /* AlipaySDK.framework */; };
 		431605571ABC135A003A4970 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431604F21ABC135A003A4970 /* libcrypto.a */; };
@@ -602,6 +603,8 @@
 		2BF2E0761A3F3B5B00F83491 /* HomePageTodayHotCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageTodayHotCell.h; sourceTree = "<group>"; };
 		2BF2E0771A3F3B5B00F83491 /* HomePageTodayHotCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageTodayHotCell.m; sourceTree = "<group>"; };
 		2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageTodayHotCell.xib; sourceTree = "<group>"; };
+		2BFBF21A1ABF0507006AE80D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		2BFBF21C1ABF050B006AE80D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		431604F01ABC135A003A4970 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		431604F11ABC135A003A4970 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		431604F21ABC135A003A4970 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
@@ -1929,6 +1932,7 @@
 				43D1ED1919FB37F30049518E /* main.m */,
 				43D1F37F19FB46050049518E /* BaoChe-Prefix.pch */,
 				4372D7761A0879FD00CEA66D /* InfoPlist.strings */,
+				2BFBF21B1ABF0507006AE80D /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -3405,7 +3409,7 @@
 				TargetAttributes = {
 					43D1ED1319FB37F30049518E = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = MC32WL4XZA;
+						DevelopmentTeam = L8B9HKM574;
 					};
 					43D1ED2F19FB37F30049518E = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -3455,6 +3459,7 @@
 				43D775571A3D712900C088CE /* headerView_leftArrow@2x.png in Resources */,
 				2BDC3EA21A4F0A9C007C1130 /* gengduo_normal@2x.png in Resources */,
 				2BDC3E951A4EFE31007C1130 /* guanggao@3x.png in Resources */,
+				2BFBF2191ABF0507006AE80D /* Localizable.strings in Resources */,
 				43D775521A3D703500C088CE /* AllBusList_HeaderView.xib in Resources */,
 				43D7753E1A3D4BA500C088CE /* qishidian@3x.png in Resources */,
 				43D775581A3D712900C088CE /* headerView_leftArrow@3x.png in Resources */,
@@ -3925,6 +3930,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2BFBF21B1ABF0507006AE80D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2BFBF21A1ABF0507006AE80D /* zh-Hans */,
+				2BFBF21C1ABF050B006AE80D /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		4372D7761A0879FD00CEA66D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -4027,6 +4041,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4050,6 +4065,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -4060,6 +4076,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4083,6 +4100,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

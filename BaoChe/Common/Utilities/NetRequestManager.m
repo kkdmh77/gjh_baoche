@@ -9,6 +9,7 @@
 #import "NetRequestManager.h"
 #import "DownloadCache.h"
 #import "CoreDataManager.h"
+#import "UserInfoModel.h"
 
 static NSString * const CacheKey = @"CacheKey";
 static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
@@ -445,7 +446,7 @@ DEF_SINGLETON(NetRequestManager);
 
 - (void)sendUploadRequest:(NSURL *)url parameterDic:(NSDictionary *)parameterDic requestMethodType:(NSString *)methodType requestTag:(int)tag delegate:(id<NetRequestDelegate>)delegate userInfo:(NSDictionary *)userInfo fileDic:(NSDictionary *)fileDic
 {
-    [self startRequestWithUrl:url parameterDic:parameterDic requestHeaders:nil requestMethodType:methodType requestTag:tag delegate:delegate userInfo:userInfo savePath:nil tempPath:nil fileDic:fileDic netCachePolicy:NetNotCachePolicy cacheSeconds:0.0];
+    [self startRequestWithUrl:url parameterDic:parameterDic requestHeaders:[UserInfoModel getRequestHeader_TokenDic] requestMethodType:methodType requestTag:tag delegate:delegate userInfo:userInfo savePath:nil tempPath:nil fileDic:fileDic netCachePolicy:NetNotCachePolicy cacheSeconds:0.0];
 }
 
 /////////////////////////////////////////////////////////////////////////

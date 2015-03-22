@@ -88,15 +88,50 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
         STRONGSELF
         if (NetOrderRequesertType_CreateOrder == request.tag)
         {
-            Product *p = [[Product alloc] init];
-            p.price = 0.01;
-            p.productName = @"测试";
-            p.productDesc = @"测试描述";
-            p.orderId = @"2015";
+            NSString *orderNo = [successInfoObj safeObjectForKey:@"orderNo"];
             
-            [[PayManager sharedInstance] payOrderWithProduct:p completeHandle:^(AlipayResultStatusCode statusCode) {
+            if ([orderNo isAbsoluteValid])
+            {
+                orderNo = [NSString stringWithFormat:@"BUY_%@", orderNo];
                 
-            }];
+                Product *p = [[Product alloc] init];
+                p.price = 0.01;
+                p.productName = @"测试";
+                p.productDesc = @"测试描述";
+                p.orderId = orderNo;
+                
+                [[PayManager sharedInstance] payOrderWithProduct:p completeHandle:^(AlipayResultStatusCode statusCode) {
+                    
+                    switch (statusCode)
+                    {
+                        case AlipayResultStatusCode_Success:
+                        {
+                            
+                        }
+                            break;
+                        case AlipayResultStatusCode_Failed:
+                        {
+                            
+                        }
+                            break;
+
+                        case AlipayResultStatusCode_UserCancel:
+                        {
+                            
+                        }
+                            break;
+                        case AlipayResultStatusCode_NetworkConnectionError:
+                        {
+                            
+                        }
+                            break;
+
+                        default:
+                            break;
+                    }
+                    
+                }];
+            }
         }
     }];
 }

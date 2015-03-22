@@ -105,6 +105,12 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
     WEAKSELF
     [headerView setOperationType:^(AllBusList_HeaderView *view, AllBusListHeaderViewOperationType type) {
         
+        STRONGSELF
+        // 清空当前数据
+        [strongSelf->_netBusEntityArray removeAllObjects];
+        [strongSelf reloadTabData];
+        
+        // 回调操作
         if (AllBusListHeaderViewOperationType_PreDay == type)
         {
             NSDate *startDate = [NSString dateFromString:_startDateStr withFormatter:DataFormatter_Date];

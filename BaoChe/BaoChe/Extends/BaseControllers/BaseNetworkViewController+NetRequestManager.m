@@ -32,7 +32,7 @@
                            
                            @"user",
                            @"user/changePwd",
-                           @"",
+                           @"user/uploadHeadPic",
                            
                            @"passengerList",
                            @"passenger",

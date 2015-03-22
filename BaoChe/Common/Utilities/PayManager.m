@@ -15,9 +15,9 @@
 
 // 支付宝
 // 合作身份者id，以2088开头的16位纯数字
-#define PartnerID       @"2088111476503055"
+#define PartnerID       @"2088811388607512"
 // 收款支付宝账号
-#define SellerID        @"sephome_tmall@yahoo.com.hk"
+#define SellerID        @"1156348701@qq.com"
 /*
  // 安全校验码（MD5）密钥，以数字和字母组成的32位字符
  #define MD5_KEY         @""
@@ -127,7 +127,7 @@ DEF_SINGLETON(PayManager);
     order.productName = product.productName;                            // 商品名称
     order.productDescription = product.productDesc;                     // 商品描述
     order.amount = [NSString stringWithFormat:@"%.2f",product.price];   // 商品价格
-    order.notifyURL = @"http%3A%2F%2F119.132.74.175:9996/pay/notify";   // 回调URL
+    order.notifyURL = @"http%3A%2F%2F121.42.145.68:8080/home-app/pay/notify";   // 回调URL
     // order.notifyURL = @"http%3A%2F%2F113.76.74.192:9997/pay/notify";    // 回调URL
     
     order.service = @"mobile.securitypay.pay";
@@ -135,9 +135,6 @@ DEF_SINGLETON(PayManager);
     order.inputCharset = @"utf-8";
     order.itBPay = @"30m";
     order.showUrl = @"m.alipay.com";
-    
-    order.forexBiz = @"FP";
-    order.currency = @"HKD";
     
     return [order description];
 }

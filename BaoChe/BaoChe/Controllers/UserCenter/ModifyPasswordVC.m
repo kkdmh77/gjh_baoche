@@ -76,14 +76,7 @@
         STRONGSELF
         if (NetUserCenterRequestType_ModifyPossword == request.tag)
         {
-            // 登出
-            [strongSelf->_loginBC logoutWithSuccessHandle:^(id successInfoObj) {
-                
-                [strongSelf goBack];
-                
-            } failedHandle:^(NSError *error) {
-                
-            }];
+            [strongSelf goBack];
         }
     } failedBlock:^(NetRequest *request, NSError *error) {
         
@@ -115,7 +108,7 @@
         {
             NITextField *textField = (NITextField *)subView;
             
-            [textField addBorderToViewWitBorderColor:placeholderAndLineColor borderWidth:LineWidth];
+            [textField addBorderToViewWitBorderColor:CellSeparatorColor borderWidth:LineWidth];
             
             textField.textInsets = UIEdgeInsetsMake(0, 10, 0, 0);
             textField.font = textFont;
@@ -148,6 +141,7 @@
     _modifyPasswordBtn.titleLabel.font = textFont;
     _modifyPasswordBtn.backgroundColor = HEXCOLOR(0X4BB4BA);
     [_modifyPasswordBtn setTitle:@"修改密码" forState:UIControlStateNormal];
+    [_modifyPasswordBtn setRadius:3];
 }
 
 - (void)initialization
@@ -163,6 +157,7 @@
         [self sendRequest:[[self class] getRequestURLStr:NetUserCenterRequestType_ModifyPossword]
              parameterDic:@{@"oldPassword": _oldPasswordTF.text,
                             @"newPassword": _theNewPasswordTF.text}
+           requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
         requestMethodType:RequestMethodType_POST
                requestTag:NetUserCenterRequestType_ModifyPossword];
     }

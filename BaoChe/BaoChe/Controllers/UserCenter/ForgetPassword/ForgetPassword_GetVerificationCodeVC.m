@@ -82,10 +82,10 @@
         {
             NITextField *textField = (NITextField *)subView;
             
-            [textField addBorderToViewWitBorderColor:placeholderAndLineColor borderWidth:1];
+            [textField addBorderToViewWitBorderColor:[UIColor clearColor] borderWidth:1];
             
             textField.textInsets = UIEdgeInsetsMake(0, 10, 0, 0);
-            textField.backgroundColor = [UIColor clearColor];
+            textField.backgroundColor = [UIColor whiteColor];
             textField.font = textFont;
             textField.placeholderFont = textFont;
             textField.placeholderTextColor = placeholderAndLineColor;
@@ -97,6 +97,7 @@
     [_getVerificationCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     _getVerificationCodeBtn.backgroundColor = themeColor;
     [_getVerificationCodeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_getVerificationCodeBtn setRadius:3];
 }
 
 - (void)initialization

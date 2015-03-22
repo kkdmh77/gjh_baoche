@@ -85,6 +85,13 @@ typedef void (^ExtendVCNetRequestFailedBlock)    (NetRequest *request, NSError *
 /// 默认的失败后执行的代码块实现,可设置失败后是否点击重试的操作
 - (void)setDefaultNetFailedBlockImplementationWithNetRequest:(NetRequest *)request error:(NSError *)error isAddFailedActionView:(BOOL)isAddActionView otherExecuteBlock:(void(^)(void))otherBlock;
 
+/// 默认的失败后执行的代码块实现,可设置失败后是否点击重试的操作、以及是否自动登录
+- (void)setDefaultNetFailedBlockImplementationWithNetRequest:(NetRequest *)request
+                                                       error:(NSError *)error
+                                       isAddFailedActionView:(BOOL)isAddActionView
+                                                 isAutoLogin:(BOOL)isAutoLogin
+                                           otherExecuteBlock:(void(^)(void))otherBlock;
+
 /// 请求网络数据(子类必须实现)
 - (void)getNetworkData;
 

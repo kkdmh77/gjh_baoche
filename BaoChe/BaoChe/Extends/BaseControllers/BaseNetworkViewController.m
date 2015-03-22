@@ -7,6 +7,7 @@
 //
 
 #import "BaseNetworkViewController.h"
+#import "LoginVC.h"
 
 @interface BaseNetworkViewController ()
 {
@@ -171,15 +172,40 @@
 
 - (void)setDefaultNetFailedBlockImplementationWithNetRequest:(NetRequest *)request error:(NSError *)error isAddFailedActionView:(BOOL)isAddActionView otherExecuteBlock:(void (^)(void))otherBlock
 {
+    
+  [self setDefaultNetFailedBlockImplementationWithNetRequest:request error:error isAddFailedActionView:isAddActionView isAutoLogin:YES otherExecuteBlock:otherBlock];
+}
+
+- (void)setDefaultNetFailedBlockImplementationWithNetRequest:(NetRequest *)request error:(NSError *)error isAddFailedActionView:(BOOL)isAddActionView isAutoLogin:(BOOL)isAutoLogin otherExecuteBlock:(void (^)(void))otherBlock
+{
     // 无数据
     if (error.code == MyHTTPCodeType_DataSourceNotFound)
     {
-        [self showHUDInfoByString:[LanguagesManager getStr:All_DataSourceNotFoundKey]];
+         [self showHUDInfoByString:[LanguagesManager getStr:All_DataSourceNotFoundKey]];
     }
     // 未登录或登录过期
     else if (error.code == MyHTTPCodeType_TokenIllegal || error.code == MyHTTPCodeType_TokenIncomplete || error.code == MyHTTPCodeType_TokenOverdue)
     {
-        [self showHUDInfoByString:@"未登录或登录已过期,请重新登录"];
+        if (error.localizedDescription)
+        {
+            [self showHUDInfoByString:error.localizedDescription];
+        }
+        else
+        {
+            [self showHUDInfoByString:NotLogin];
+        }
+        
+        if (isAutoLogin)
+        {
+            // 自动跳入登录页面
+            LoginVC *login = [LoginVC loadFromNib];
+            UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
+            [self presentViewController:loginNav
+                   modalTransitionStyle:UIModalTransitionStyleCoverVertical
+                             completion:^{
+                                 
+             }];
+        }
     }
     else
     {

@@ -81,6 +81,8 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
 
 - (void)setNetworkRequestStatusBlocks
 {
+    self.startedBlock = nil;
+    
     WEAKSELF
     [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
         STRONGSELF
@@ -97,10 +99,10 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
         }
     } failedBlock:^(NetRequest *request, NSError *error) {
         
-        [weakSelf showHUDInfoByString:error.localizedDescription];
-        
         if (NetUserCenterRequestType_ModifyUserHeaderImage == request.tag)
         {
+            [weakSelf showHUDInfoByString:error.localizedDescription];
+
             NSString *filePath = [request.userInfo safeObjectForKey:@"filePaht"];
             [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
         }

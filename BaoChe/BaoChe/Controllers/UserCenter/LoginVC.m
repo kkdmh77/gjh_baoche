@@ -137,7 +137,7 @@
 
 - (IBAction)clickBrowseBtn:(UIButton *)sender
 {
-    
+    [self backViewController];
 }
 
 - (void)clickForgetPasswordBtn:(UIButton *)btn
