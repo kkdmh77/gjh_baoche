@@ -55,7 +55,7 @@
 @property (nonatomic, assign) NSInteger keyId;
 @property (nonatomic, copy) NSString *nameStr;           // 联系人名称
 @property (nonatomic, copy) NSString *mobilePhoneStr;    // 手机号码
-@property (nonatomic, copy) NSString *payStatus;         // 支付状态 PS_UNPAID: 未支付
+@property (nonatomic, copy) NSString *afterSaleStatus;   // 付款后的使用状态
 
 @end
 
@@ -83,6 +83,7 @@
 @property (nonatomic, strong)   NSArray  *passengersArray;                  // 乘客信息数组
 
 @property (nonatomic, copy)     NSString  *orderNo;                         // 订单号
+@property (nonatomic, copy)     NSString  *orderStatus;                     // 订单状态
 @property (nonatomic, assign)   double    orderTotalFee;                    // 订单总价
 @property (nonatomic, assign)   NSTimeInterval orderTime;                   // 下单时间
 @property (nonatomic, copy)     NSString  *mobilePhoneNumStr;               // 手机号码

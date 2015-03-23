@@ -11,6 +11,8 @@
 #import "PassengersCell.h"
 #import "OrderInfoView.h"
 #import "UserCenter_TabHeaderView.h"
+#import "InterfaceHUDManager.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
 
 static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_detailOrderPassenger";
 
@@ -43,6 +45,24 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
 }
 
 - (void)setNetworkRequestStatusBlocks
+{
+    WEAKSELF
+    [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
+        STRONGSELF
+        if (NetOrderRequesertType_ToRefundTicket == request.tag)
+        {
+            PassengersCell *cell = [request.userInfo safeObjectForKey:@"cell"];
+            if (cell)
+            {
+                cell.btnType = OperationButType_DetailOrder_DoingRefundTicket;
+                
+                [strongSelf goBack];
+            }
+        }
+    }];
+}
+
+- (void)goBack
 {
     
 }
@@ -132,7 +152,7 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
         {
             _passengersCellSectionHeader = [UserCenter_TabSectionHeaderView loadFromNib];
             _passengersCellSectionHeader.canOperation = NO;
-            [_passengersCellSectionHeader setTitleString:[NSString stringWithFormat:@"乘客(%i位)",_defaultOrderEntity.passengersArray.count]];
+            [_passengersCellSectionHeader setTitleString:[NSString stringWithFormat:@"乘客(%li位)",_defaultOrderEntity.passengersArray.count]];
             /*
             _passengersCellSectionHeader.tag = section;
             [_passengersCellSectionHeader addTarget:self
@@ -195,26 +215,63 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
         PassengersEntity *entity = _defaultOrderEntity.passengersArray[indexPath.row];
         [cell loadCellShowDataWithItemEntity:entity];
         
-        switch (indexPath.row) {
-            case 0:
+        // 未付款
+        if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_CONFIRMED"])
+        {
+            cell.btnType = OperationButType_NoOperation;
+        }
+        // 已出票
+        else if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_FINISH"])
+        {
+            cell.btnType = OperationButType_DetailOrder_GetTicket;
+        }
+        else
+        {
+            // 可申请退款
+            if ([entity.afterSaleStatus isEqualToString:@"AS_ENABLE"])
             {
                 cell.btnType = OperationButType_DetailOrder_ToRefundTicket;
             }
-                break;
-            case 1:
+            // 退款申请已经提交，等待处理
+            else if ([entity.afterSaleStatus isEqualToString:@"AS_REFUND_APPLY"])
+            {
+                cell.btnType = OperationButType_DetailOrder_DoingRefundTicket;
+            }
+            // 卖家已退款，请注意查收
+            else if ([entity.afterSaleStatus isEqualToString:@"AS_REFUNDED"])
             {
                 cell.btnType = OperationButType_DetailOrder_AlreadyRefundTicket;
             }
-                break;
-            case 2:
-            {
-                cell.btnType = OperationButType_DetailOrder_GetTicket;
-            }
-                break;
-                
-            default:
-                break;
         }
+        
+        // 回调
+        WEAKSELF
+        [cell setOperationHandle:^(PassengersCell *cell, OperationButType type, id sender) {
+            
+            NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+            PassengersEntity *entity = weakSelf.defaultOrderEntity.passengersArray[indexPath.row];
+            
+            // 退票操作
+            if (type == OperationButType_DetailOrder_ToRefundTicket)
+            {
+                [[InterfaceHUDManager sharedInstance] showAlertWithTitle:AlertTitle message:@"亲，真的要申请退票吗？" alertShowType:AlertShowType_warning cancelTitle:Cancel cancelBlock:nil otherTitle:Confirm otherBlock:^(GJHAlertView *alertView, NSInteger index) {
+                    /*
+                     String remark  --退货单备注
+                     String orderNo --订单号
+                     int orderItemId --订单项ID
+                     String reason   ---退单原因
+                     */
+                    [weakSelf sendRequest:[[self class] getRequestURLStr:NetOrderRequesertType_ToRefundTicket]
+                             parameterDic:@{@"orderNo": weakSelf.defaultOrderEntity.orderNo,
+                                            @"orderItemId": @(entity.keyId)}
+                           requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+                        requestMethodType:RequestMethodType_POST
+                               requestTag:NetOrderRequesertType_ToRefundTicket
+                                 delegate:self
+                                 userInfo:@{@"cell": cell}];
+                }];
+            }
+        }];
         
         return cell;
     }

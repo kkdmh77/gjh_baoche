@@ -47,6 +47,8 @@
                            @"order",
                            @"orderListAll",
                            
+                           @"backOrder/apply",
+                           
                            nil];
 
         

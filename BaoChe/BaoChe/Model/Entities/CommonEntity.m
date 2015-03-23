@@ -146,6 +146,7 @@
         self.keyId = [[orderInfoDic safeObjectForKey:@"id"] integerValue];
         self.busInfoEntity = [AllBusListItemEntity initWithDict:busInfoDic];
         self.orderNo = [orderInfoDic safeObjectForKey:@"orderNo"];
+        self.orderStatus = [orderInfoDic safeObjectForKey:@"orderStatus"];
         self.orderTotalFee = [[orderInfoDic safeObjectForKey:@"orderTotalFee"] doubleValue];
         self.orderTime = [[orderInfoDic safeObjectForKey:@"orderTime"] doubleValue] / 1000;
         self.mobilePhoneNumStr = [orderInfoDic safeObjectForKey:@"phone"];
@@ -158,10 +159,10 @@
             for (NSDictionary *oneOrderItem in orderItemList)
             {
                 PassengersEntity *entity = [PassengersEntity new];
-                entity.keyId = [[oneOrderItem safeObjectForKey:@"passengerId"] integerValue];
+                entity.keyId = [[oneOrderItem safeObjectForKey:@"id"] integerValue];
                 entity.nameStr = [oneOrderItem safeObjectForKey:@"userName"];
                 entity.mobilePhoneStr = [oneOrderItem safeObjectForKey:@"phone"];
-                entity.payStatus = [oneOrderItem safeObjectForKey:@"payStatus"];
+                entity.afterSaleStatus = [oneOrderItem safeObjectForKey:@"afterSaleStatus"];
                 
                 [tempArray addObject:entity];
             }

@@ -59,8 +59,16 @@ static CGFloat defaultCellHeight = 0;
     UIColor *titleColor = nil;
     UIImage *image = nil;
     CGFloat width = 0;
-
-    if (btnType == OperationButType_Delete)
+    
+    _operationBtn.hidden = NO;
+    
+    if (btnType == OperationButType_NoOperation)
+    {
+        _operationBtn.hidden = YES;
+        
+        return;
+    }
+    else if (btnType == OperationButType_Delete)
     {
         _operationBtn.userInteractionEnabled = YES;
         
@@ -77,6 +85,16 @@ static CGFloat defaultCellHeight = 0;
         BGColor = Common_LiteBlueColor;
         titleStr = @"退票";
         titleColor = [UIColor whiteColor];
+        image = nil;
+        width = 65;
+    }
+    else if (btnType == OperationButType_DetailOrder_DoingRefundTicket)
+    {
+        _operationBtn.userInteractionEnabled = NO;
+        
+        BGColor = [UIColor lightGrayColor];
+        titleStr = @"退票中";
+        titleColor = [UIColor grayColor];
         image = nil;
         width = 65;
     }

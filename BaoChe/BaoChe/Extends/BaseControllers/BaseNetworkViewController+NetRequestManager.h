@@ -38,6 +38,8 @@ typedef enum
     NetOrderRequesertType_CreateOrder                        , // 创建订单
     NetOrderRequesertType_GetAllOrderList                    , // 查询所有订单
     
+    NetOrderRequesertType_ToRefundTicket                     , // 申请退票
+    
 } NetRequestType;
 
 @interface BaseNetworkViewController (NetRequestManager)

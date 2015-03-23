@@ -26,6 +26,7 @@
 
 static CGFloat defaultViewHeight = 0;
 
+/*
 // 重载方法,解决XIB嵌套使用不能加载的问题
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -40,9 +41,10 @@ static CGFloat defaultViewHeight = 0;
     }
     return self;
 }
+ */
 
 - (void)awakeFromNib
-{
+{    
     [self setup];
 }
 
@@ -88,10 +90,32 @@ static CGFloat defaultViewHeight = 0;
 
 -(void)loadViewShowDataWithItemEntity:(OrderListEntity *)entity
 {
+    /*
+    OrderStatus 说明
+    OS_CONFIRMED  --未付款
+    OS_CANCELED   --已取消
+    OS_VERIFIED   --待使用
+    OS_FINISH   --已使用
+    OS_INVALID  --已错过
+    OS_CLOSED  --交易关闭
+     */
+    if ([entity.orderStatus isEqualToString:@"OS_CONFIRMED"])
+    {
+        _orderStatusLabel.text = @"未付款";
+    }
+    else if ([entity.orderStatus isEqualToString:@"OS_VERIFIED"])
+    {
+        _orderStatusLabel.text = @"待使用";
+    }
+    else if ([entity.orderStatus isEqualToString:@"OS_FINISH"])
+    {
+        _orderStatusLabel.text = @"已出票";
+    }
+    
     _orderNumberLabel.text = entity.orderNo;
     _mobilePhoneNumLabel.text = entity.mobilePhoneNumStr;
     _paymentOrderLabel.text = [NSDate stringFromTimeIntervalSeconds:entity.orderTime withFormatter:DataFormatter_DateAndTime];
-    _buyCountLabel.text = [NSString stringWithFormat:@"%i", entity.passengersArray.count];
+    _buyCountLabel.text = [NSString stringWithFormat:@"%li", entity.passengersArray.count];
     _totalPriceLabel.text = [NSString stringWithFormat:@"￥%.2lf",entity.orderTotalFee];
 }
 

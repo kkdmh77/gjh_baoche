@@ -58,6 +58,34 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 
 - (void)getNetworkData
 {
+    /*
+     OrderStatus 说明
+     OS_CONFIRMED  --未付款
+     OS_CANCELED   --已取消
+     OS_VERIFIED   --待使用
+     OS_FINISH   --已使用
+     OS_INVALID  --已错过
+     OS_CLOSED  --交易关闭
+     
+     PayStatus
+     PS_UNPAID  --未付款
+     PS_PAYING  --支付中
+     PS_PAYED    --已付款
+     
+     订单项 中的退款状态  也就是orderItem里面的AfterSaleStatus状态
+     AS_ENABLE  --退货/退款
+     AS_REFUND_APPLY  --退款申请已经提交，等待处理
+     AS_REFUNDING    --已转交财务处理退款事宜，请耐心等候
+     AS_REFUND_REJECTED   --退款审核不通过
+     AS_REFUNDED   --卖家已退款，请注意查收
+     AS_BACK_APPLY   --退货申请已经提交，等待受理
+     AS_BACK_APPROVED   --退货申请已批准，请完善申请资料
+     AS_BACK_REJECTED  --退货申请被驳回，请重新申请或联系客服
+     AS_BACK_VERIFIED   --审核通过，正在转交财务处理退款事宜
+     AS_CANCEL  --买家已取消退货退款
+     AS_DISABLE --禁用
+     */
+    
     [self sendRequest:[[self class] getRequestURLStr:NetOrderRequesertType_GetAllOrderList]
          parameterDic:@{@"pageNo": @(1), @"pageSize": @(1000)}
        requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
@@ -68,7 +96,7 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 - (void)initialization
 {
     // slider switch
-    GJHSlideSwitchView *sliderSwitch = [[GJHSlideSwitchView alloc] initWithFrame:CGRectMake(0, 0, self.viewBoundsWidth, kDefaultSlideSwitchViewHeight) titlesArray:@[@"待使用", @"未支付", @"已使用", @"已退款"]];
+    GJHSlideSwitchView *sliderSwitch = [[GJHSlideSwitchView alloc] initWithFrame:CGRectMake(0, 0, self.viewBoundsWidth, kDefaultSlideSwitchViewHeight) titlesArray:@[@"待使用", @"未支付", @"已使用"]];
     sliderSwitch.slideSwitchViewDelegate = self;
     sliderSwitch.tabItemNormalColor = Common_BlackColor;
     sliderSwitch.tabItemSelectedColor = Common_ThemeColor;

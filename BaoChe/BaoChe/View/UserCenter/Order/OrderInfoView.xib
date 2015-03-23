@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -167,14 +167,14 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="buyCountLabel" destination="2bT-xn-ITj" id="RQl-we-Fes"/>
-                <outlet property="mobilePhoneNumLabel" destination="eym-XK-yP0" id="tbR-9N-GT6"/>
-                <outlet property="orderNumberLabel" destination="PdJ-21-GoC" id="k4s-2W-MRp"/>
-                <outlet property="orderStatusLabel" destination="eCA-J5-zug" id="UfD-QM-k2t"/>
-                <outlet property="paymentOrderLabel" destination="uMS-QD-ei8" id="LDj-LK-rie"/>
-                <outlet property="titleLabel" destination="Hem-7C-x6v" id="wxe-yd-7Ds"/>
-                <outlet property="topBGView" destination="f4x-53-PnB" id="OvX-KH-f2J"/>
-                <outlet property="totalPriceLabel" destination="220-s5-cUi" id="xXZ-SV-IFx"/>
+                <outlet property="buyCountLabel" destination="2bT-xn-ITj" id="MeJ-X7-41t"/>
+                <outlet property="mobilePhoneNumLabel" destination="eym-XK-yP0" id="eaq-cU-Vf8"/>
+                <outlet property="orderNumberLabel" destination="PdJ-21-GoC" id="ElF-Fd-B7P"/>
+                <outlet property="orderStatusLabel" destination="eCA-J5-zug" id="LdE-Uf-5hF"/>
+                <outlet property="paymentOrderLabel" destination="uMS-QD-ei8" id="9or-4v-tWM"/>
+                <outlet property="titleLabel" destination="Hem-7C-x6v" id="nsg-y6-63Q"/>
+                <outlet property="topBGView" destination="f4x-53-PnB" id="PZ9-YB-a34"/>
+                <outlet property="totalPriceLabel" destination="220-s5-cUi" id="LFr-KJ-W72"/>
             </connections>
             <point key="canvasLocation" x="263" y="218"/>
         </view>
