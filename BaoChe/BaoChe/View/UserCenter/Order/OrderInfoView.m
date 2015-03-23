@@ -26,6 +26,21 @@
 
 static CGFloat defaultViewHeight = 0;
 
+// 重载方法,解决XIB嵌套使用不能加载的问题
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder])
+    {
+        UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class])  bundle:nil];
+        UIView *containerView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+        containerView.backgroundColor = [UIColor clearColor];
+        containerView.frame = self.bounds;
+        
+        [self addSubview:containerView];
+    }
+    return self;
+}
+
 - (void)awakeFromNib
 {
     [self setup];
