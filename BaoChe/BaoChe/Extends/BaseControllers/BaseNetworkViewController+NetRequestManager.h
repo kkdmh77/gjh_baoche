@@ -31,7 +31,6 @@ typedef enum
     
     // 忘记密码
     NetForgetPasswordRequestType_GetVerificationCode         , // 忘记密码->获取短信验证码(POST)
-    NetForgetPasswordRequestType_CheckVerificationCode       , // 检测验证码是否正确(POST)
     NetForgetPasswordRequestType_ModifyPassword              , // 忘记密码->用验证码修改密码(POST)
     
     // 订单

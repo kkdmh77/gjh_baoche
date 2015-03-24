@@ -39,9 +39,8 @@
                            @"passenger/delete",
                            
                            // 忘记密码
-                           @"",
-                           @"",
-                           @"",
+                           @"user/retakeCode",
+                           @"user/passwordRetake",
                            
                            // 订单
                            @"order",
