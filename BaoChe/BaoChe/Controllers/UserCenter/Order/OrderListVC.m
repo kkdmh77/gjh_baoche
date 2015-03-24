@@ -11,6 +11,7 @@
 #import "OrderListCell.h"
 #import "GJHSlideSwitchView.h"
 #import "DetailOrderVC.h"
+#import <objc/runtime.h>
 
 static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 
@@ -29,6 +30,11 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
     
     [self getNetworkData];
     [self initialization];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,7 +102,7 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 - (void)initialization
 {
     // slider switch
-    GJHSlideSwitchView *sliderSwitch = [[GJHSlideSwitchView alloc] initWithFrame:CGRectMake(0, 0, self.viewBoundsWidth, kDefaultSlideSwitchViewHeight) titlesArray:@[@"待使用", @"未支付", @"已使用"]];
+    GJHSlideSwitchView *sliderSwitch = [[GJHSlideSwitchView alloc] initWithFrame:CGRectMake(0, 0, self.viewBoundsWidth, kDefaultSlideSwitchViewHeight) titlesArray:@[@"待使用", @"未支付", @"已取消", @"已使用"]];
     sliderSwitch.slideSwitchViewDelegate = self;
     sliderSwitch.tabItemNormalColor = Common_BlackColor;
     sliderSwitch.tabItemSelectedColor = Common_ThemeColor;
@@ -180,6 +186,9 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
     DetailOrderVC *detailOrder = [[DetailOrderVC alloc] init];
     detailOrder.defaultOrderEntity = [self curIndexTabCellShowData:indexPath.section];
     detailOrder.hidesBottomBarWhenPushed = YES;
+    
+    objc_setAssociatedObject(detailOrder, object_getClassName(self), self, OBJC_ASSOCIATION_ASSIGN);
+    
     [self pushViewController:detailOrder];
 }
 

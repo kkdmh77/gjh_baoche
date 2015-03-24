@@ -48,6 +48,7 @@
                            @"orderListAll",
                            
                            @"backOrder/apply",
+                           @"order/cancel",
                            
                            nil];
 

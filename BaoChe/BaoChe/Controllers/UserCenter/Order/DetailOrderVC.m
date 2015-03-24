@@ -13,12 +13,17 @@
 #import "UserCenter_TabHeaderView.h"
 #import "InterfaceHUDManager.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
+#import <objc/runtime.h>
+#import "OrderListVC.h"
+#import "NoPaySettlementView.h"
+#import "PaymentManager.h"
 
 static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_detailOrderPassenger";
 
 @interface DetailOrderVC ()
 {
     UserCenter_TabSectionHeaderView    *_passengersCellSectionHeader;
+    NoPaySettlementView                *_noPaySettlementView;
 }
 
 @end
@@ -39,6 +44,16 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
 
 #pragma mark - custom methods
 
+// 退票成功后的提示
+- (NSString *)refundTicketSuceessAlertStr
+{
+    NSString *str = @"1.若未出票退票，金额原路返回；\n\
+    2.若已出票（若已取票，需退回票据），出车48h前扣取10%手续费，24h〜48h前扣取30％手续费，退款将原路返回；\n\
+    3.出车0〜24h，或错过班车，将不提供退票服务，敬请见谅！";
+    
+    return str;
+}
+
 - (void)setPageLocalizableText
 {
     [self setNavigationItemTitle:@"订单详情"];
@@ -49,6 +64,7 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
     WEAKSELF
     [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
         STRONGSELF
+        // 退票成功
         if (NetOrderRequesertType_ToRefundTicket == request.tag)
         {
             PassengersCell *cell = [request.userInfo safeObjectForKey:@"cell"];
@@ -56,15 +72,35 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
             {
                 cell.btnType = OperationButType_DetailOrder_DoingRefundTicket;
                 
-                [strongSelf goBack];
+                // 提示退票成功
+                [[InterfaceHUDManager sharedInstance] showAlertWithTitle:@"申请退票说明"
+                                                                 message:[weakSelf refundTicketSuceessAlertStr]
+                                                           alertShowType:AlertShowType_warning
+                                                             cancelTitle:nil
+                                                             cancelBlock:nil
+                                                              otherTitle:@"知道了"
+                                                              otherBlock:^(GJHAlertView *alertView, NSInteger index) {
+                    
+                    [strongSelf goBack];
+                }];
+                
+                
             }
+        }
+        // 取消订单成功
+        else if (NetOrderRequesertType_CancelOrder == request.tag)
+        {
+            strongSelf->_noPaySettlementView.type = ViewType_OrderAlreadyCancel;
         }
     }];
 }
 
 - (void)goBack
 {
+    OrderListVC *orderList = objc_getAssociatedObject(self, class_getName([OrderListVC class]));
+    [orderList getNetworkData];
     
+    [self backViewController];
 }
 
 - (void)getNetworkData
@@ -74,11 +110,75 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
 
 - (void)initialization
 {
-    [self setupTableViewWithFrame:self.view.bounds
+    if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_CONFIRMED"] || [_defaultOrderEntity.orderStatus isEqualToString:@"OS_CANCELED"])
+    {
+        // settlement view
+        _noPaySettlementView = [NoPaySettlementView loadFromNib];
+        _noPaySettlementView.width = self.viewBoundsWidth;
+        _noPaySettlementView.origin = CGPointMake(0, self.view.boundsHeight - _noPaySettlementView.boundsHeight);
+        _noPaySettlementView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+        
+        // 未付款
+        if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_CONFIRMED"])
+        {
+            _noPaySettlementView.type = ViewType_OrderNoPay;
+        }
+        // 已取消
+        else if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_CANCELED"])
+        {
+            _noPaySettlementView.type = ViewType_OrderAlreadyCancel;
+        }
+        
+        WEAKSELF
+        [_noPaySettlementView setOperationHandle:^(NoPaySettlementView *view, NoPaySettlementViewOperationType type, id sender) {
+            
+            // 去支付
+            if (type == NoPaySettlementViewOperationType_Settlement)
+            {
+                NSString *orderNo = [NSString stringWithFormat:@"BUY_%@", weakSelf.defaultOrderEntity.orderNo];
+                
+                [weakSelf toPayWithOrderNo:orderNo];
+            }
+            // 取消订单
+            else if (type == NoPaySettlementViewOperationType_CancelOrder)
+            {
+                [[InterfaceHUDManager sharedInstance] showAlertWithTitle:AlertTitle
+                                                                 message:@"亲，要取消订单吗？"
+                                                           alertShowType:AlertShowType_warning
+                                                             cancelTitle:Cancel
+                                                             cancelBlock:nil
+                                                              otherTitle:Confirm
+                                                              otherBlock:^(GJHAlertView *alertView, NSInteger index) {
+                                                                  
+                      [weakSelf sendRequest:[[weakSelf class] getRequestURLStr:NetOrderRequesertType_CancelOrder]
+                               parameterDic:@{@"orderNo": weakSelf.defaultOrderEntity.orderNo}
+                             requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+                          requestMethodType:RequestMethodType_GET
+                                 requestTag:NetOrderRequesertType_CancelOrder];
+                }];
+            }
+        }];
+        
+        [self.view addSubview:_noPaySettlementView];
+    }
+    
+    [self setupTableViewWithFrame:CGRectDecreaseSize(self.view.bounds, 0, _noPaySettlementView.boundsHeight)
                             style:UITableViewStylePlain
                   registerNibName:NSStringFromClass([PassengersCell class])
                   reuseIdentifier:cellIdentifier_detailOrderPassenger];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+}
+
+// 支付
+- (void)toPayWithOrderNo:(NSString *)orderNo
+{
+    [PaymentManager toPayWithOrderNo:orderNo
+                            totalFee:_defaultOrderEntity.orderTotalFee
+                         productName:_defaultOrderEntity.busInfoEntity.busNameStr
+                         productDesc:_defaultOrderEntity.busInfoEntity.busNameStr
+                       suceessHandle:^{
+                           
+    }];
 }
 
 - (NSString *)curTitleWithIndex:(NSIndexPath *)indexPath
@@ -152,7 +252,7 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
         {
             _passengersCellSectionHeader = [UserCenter_TabSectionHeaderView loadFromNib];
             _passengersCellSectionHeader.canOperation = NO;
-            [_passengersCellSectionHeader setTitleString:[NSString stringWithFormat:@"乘客(%li位)",_defaultOrderEntity.passengersArray.count]];
+            [_passengersCellSectionHeader setTitleString:[NSString stringWithFormat:@"乘客(%ld位)",_defaultOrderEntity.passengersArray.count]];
             /*
             _passengersCellSectionHeader.tag = section;
             [_passengersCellSectionHeader addTarget:self

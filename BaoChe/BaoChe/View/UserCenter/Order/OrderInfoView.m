@@ -103,6 +103,10 @@ static CGFloat defaultViewHeight = 0;
     {
         _orderStatusLabel.text = @"未付款";
     }
+    else if ([entity.orderStatus isEqualToString:@"OS_CANCELED"])
+    {
+        _orderStatusLabel.text = @"已取消";
+    }
     else if ([entity.orderStatus isEqualToString:@"OS_VERIFIED"])
     {
         _orderStatusLabel.text = @"待使用";

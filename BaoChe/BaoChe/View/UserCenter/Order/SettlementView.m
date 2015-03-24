@@ -56,7 +56,7 @@
     _totalPrice = price;
     
     NSString *priceStr = [NSString stringWithFormat:@"总价: ￥%.2f", _totalPrice];
-    NSString *countStr = [NSString stringWithFormat:@"(%d张)", count];
+    NSString *countStr = [NSString stringWithFormat:@"(%ld张)", count];
     NSString *settlementStr = [NSString stringWithFormat:@"%@ %@", priceStr, countStr];
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:settlementStr];
     [attributedStr setTextColor:Common_RedColor range:[settlementStr rangeOfString:priceStr]];

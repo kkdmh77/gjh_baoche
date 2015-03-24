@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NoPaySettlementView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单已取消" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTV-BY-9ig">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMk-x9-m88">
+                    <rect key="frame" x="160" y="0.0" width="160" height="50"/>
+                    <color key="backgroundColor" red="0.54061418920000004" green="0.81628315500000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="去支付">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="clickSettlementBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="GtJ-UI-1Vr"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDM-Pj-cHd">
+                    <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="取消订单">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="clickSettlementBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="AGI-mX-4Qt"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ZTV-BY-9ig" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1UK-BZ-t5I"/>
+                <constraint firstItem="OMk-x9-m88" firstAttribute="leading" secondItem="rDM-Pj-cHd" secondAttribute="trailing" id="3ee-Vl-fnf"/>
+                <constraint firstAttribute="trailing" secondItem="OMk-x9-m88" secondAttribute="trailing" id="4Dp-Ma-DLV"/>
+                <constraint firstItem="OMk-x9-m88" firstAttribute="width" secondItem="rDM-Pj-cHd" secondAttribute="width" id="BXS-xc-f38"/>
+                <constraint firstAttribute="bottom" secondItem="OMk-x9-m88" secondAttribute="bottom" id="EXK-Be-XUj"/>
+                <constraint firstItem="ZTV-BY-9ig" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RXj-MG-2bu"/>
+                <constraint firstItem="rDM-Pj-cHd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XJI-sv-J0Q"/>
+                <constraint firstItem="OMk-x9-m88" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yt0-AC-qbO"/>
+                <constraint firstAttribute="bottom" secondItem="ZTV-BY-9ig" secondAttribute="bottom" id="cXw-9W-gKS"/>
+                <constraint firstAttribute="bottom" secondItem="rDM-Pj-cHd" secondAttribute="bottom" id="eGI-5w-K6Z"/>
+                <constraint firstAttribute="trailing" secondItem="ZTV-BY-9ig" secondAttribute="trailing" id="tpb-mn-ugj"/>
+                <constraint firstItem="rDM-Pj-cHd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xot-FN-Awm"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cancelOrderBtn" destination="rDM-Pj-cHd" id="3jI-PC-9qI"/>
+                <outlet property="orderAlreadyCancelLabel" destination="ZTV-BY-9ig" id="Iig-tX-gfp"/>
+                <outlet property="settlementBtn" destination="OMk-x9-m88" id="NEA-NE-de0"/>
+            </connections>
+            <point key="canvasLocation" x="448" y="371"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

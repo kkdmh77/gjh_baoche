@@ -439,6 +439,9 @@
 		43D1F58219FB4C1A0049518E /* deps in Resources */ = {isa = PBXBuildFile; fileRef = 43D1F4CF19FB4C1A0049518E /* deps */; };
 		43D1F58319FB4C1A0049518E /* NimbusWebController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 43D1F4D119FB4C1A0049518E /* NimbusWebController.bundle */; };
 		43D1F58419FB4C1A0049518E /* NIWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1F4D519FB4C1A0049518E /* NIWebController.m */; };
+		43D402661AC10F1600D59D9D /* NoPaySettlementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D402641AC10F1600D59D9D /* NoPaySettlementView.m */; };
+		43D402671AC10F1600D59D9D /* NoPaySettlementView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D402651AC10F1600D59D9D /* NoPaySettlementView.xib */; };
+		43D4026B1AC1402A00D59D9D /* PaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4026A1AC1402A00D59D9D /* PaymentManager.m */; };
 		43D775361A3D36BB00C088CE /* AllBusListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D775341A3D36BB00C088CE /* AllBusListCell.m */; };
 		43D775371A3D36BB00C088CE /* AllBusListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D775351A3D36BB00C088CE /* AllBusListCell.xib */; };
 		43D7753D1A3D4BA500C088CE /* qishidian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D775391A3D4BA500C088CE /* qishidian@2x.png */; };
@@ -1381,6 +1384,11 @@
 		43D1F4D419FB4C1A0049518E /* NIWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIWebController.h; sourceTree = "<group>"; };
 		43D1F4D519FB4C1A0049518E /* NIWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIWebController.m; sourceTree = "<group>"; };
 		43D1F58719FB4C2B0049518E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		43D402631AC10F1600D59D9D /* NoPaySettlementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoPaySettlementView.h; sourceTree = "<group>"; };
+		43D402641AC10F1600D59D9D /* NoPaySettlementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoPaySettlementView.m; sourceTree = "<group>"; };
+		43D402651AC10F1600D59D9D /* NoPaySettlementView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoPaySettlementView.xib; sourceTree = "<group>"; };
+		43D402691AC1402A00D59D9D /* PaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentManager.h; sourceTree = "<group>"; };
+		43D4026A1AC1402A00D59D9D /* PaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentManager.m; sourceTree = "<group>"; };
 		43D775331A3D36BB00C088CE /* AllBusListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllBusListCell.h; sourceTree = "<group>"; };
 		43D775341A3D36BB00C088CE /* AllBusListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllBusListCell.m; sourceTree = "<group>"; };
 		43D775351A3D36BB00C088CE /* AllBusListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllBusListCell.xib; sourceTree = "<group>"; };
@@ -1611,6 +1619,9 @@
 		2BDD6E461A5597CF00329823 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				43D402631AC10F1600D59D9D /* NoPaySettlementView.h */,
+				43D402641AC10F1600D59D9D /* NoPaySettlementView.m */,
+				43D402651AC10F1600D59D9D /* NoPaySettlementView.xib */,
 				2BDD6E471A5597E700329823 /* OrderListCell.h */,
 				2BDD6E481A5597E700329823 /* OrderListCell.m */,
 				2BDD6E491A5597E700329823 /* OrderListCell.xib */,
@@ -2006,6 +2017,7 @@
 		43D1ED4F19FB3AD40049518E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				43D402681AC1401300D59D9D /* BC */,
 				43D1ED5019FB3AD40049518E /* Entities */,
 				43D1ED5819FB3AD40049518E /* Register&Login */,
 			);
@@ -3284,6 +3296,15 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		43D402681AC1401300D59D9D /* BC */ = {
+			isa = PBXGroup;
+			children = (
+				43D402691AC1402A00D59D9D /* PaymentManager.h */,
+				43D4026A1AC1402A00D59D9D /* PaymentManager.m */,
+			);
+			path = BC;
+			sourceTree = "<group>";
+		};
 		43D775321A3D367300C088CE /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -3455,6 +3476,7 @@
 				2BDC3E901A4EFDE4007C1130 /* qiehuan@2x.png in Resources */,
 				43D7755A1A3D712900C088CE /* headerView_rightArrow@3x.png in Resources */,
 				43D1F29819FB3AFB0049518E /* sr_refresh@2X.png in Resources */,
+				43D402671AC10F1600D59D9D /* NoPaySettlementView.xib in Resources */,
 				2BE0BEA31A453C0E000B8871 /* zhankaijiantou@3x.png in Resources */,
 				43D1F57919FB4C1A0049518E /* Icon-Small.png in Resources */,
 				43618B841ABD1A270079CEA5 /* ModifyPasswordVC.xib in Resources */,
@@ -3610,6 +3632,7 @@
 				43D1F28E19FB3AFB0049518E /* RegexKitLite.m in Sources */,
 				2B521ED81A4858A00083DE33 /* BusInfoView.m in Sources */,
 				2BD7EFFF1A49B8E700905645 /* IQNSArray+Sort.m in Sources */,
+				43D402661AC10F1600D59D9D /* NoPaySettlementView.m in Sources */,
 				43D1F4F919FB4C1A0049518E /* NISDKAvailability.m in Sources */,
 				43D1F29519FB3AFB0049518E /* UIButton+WebCache.m in Sources */,
 				43D1F4ED19FB4C1A0049518E /* NIDeviceOrientation.m in Sources */,
@@ -3665,6 +3688,7 @@
 				43D1F4DA19FB4C1A0049518E /* NIAttributedLabel.m in Sources */,
 				43D7756E1A3D88D000C088CE /* CalendarDayCell.m in Sources */,
 				43D1F2AA19FB3AFB0049518E /* ATBLibs+NSDate.m in Sources */,
+				43D4026B1AC1402A00D59D9D /* PaymentManager.m in Sources */,
 				43D1F31519FB3AFB0049518E /* PopupController.m in Sources */,
 				2BD7F0031A49B8E700905645 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				43D1F29C19FB3AFB0049518E /* AppSoundManager.m in Sources */,

@@ -16,7 +16,8 @@
 #import "BaseNetworkViewController+NetRequestManager.h"
 #import "UserInfoModel.h"
 #import "PassengerManagerVC.h"
-#import "PayManager.h"
+#import "PaymentManager.h"
+#import "InterfaceHUDManager.h"
 
 static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPassenger";
 
@@ -25,6 +26,8 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     UserCenter_TabSectionHeaderView *_passengersCellSectionHeader;
     OrderContactInfoView            *_orderContactInfoView;
     SettlementView                  *_settlementView;
+    
+    NSString                        *_orderNo;
 }
 
 @end
@@ -93,46 +96,24 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
             if ([orderNo isAbsoluteValid])
             {
                 orderNo = [NSString stringWithFormat:@"BUY_%@", orderNo];
+                strongSelf->_orderNo = orderNo;
                 
-                Product *p = [[Product alloc] init];
-                p.price = 0.01;
-                p.productName = @"测试";
-                p.productDesc = @"测试描述";
-                p.orderId = orderNo;
-                
-                [[PayManager sharedInstance] payOrderWithProduct:p completeHandle:^(AlipayResultStatusCode statusCode) {
-                    
-                    switch (statusCode)
-                    {
-                        case AlipayResultStatusCode_Success:
-                        {
-                            
-                        }
-                            break;
-                        case AlipayResultStatusCode_Failed:
-                        {
-                            
-                        }
-                            break;
-
-                        case AlipayResultStatusCode_UserCancel:
-                        {
-                            
-                        }
-                            break;
-                        case AlipayResultStatusCode_NetworkConnectionError:
-                        {
-                            
-                        }
-                            break;
-
-                        default:
-                            break;
-                    }
-                    
-                }];
-            }
+                // 支付
+                [weakSelf toPayWithOrderNo:orderNo];
+              }
         }
+    }];
+}
+
+// 支付
+- (void)toPayWithOrderNo:(NSString *)orderNo
+{
+    [PaymentManager toPayWithOrderNo:orderNo
+                            totalFee:_settlementView.totalPrice
+                         productName:_busEntity.busNameStr
+                         productDesc:_busEntity.busNameStr
+                       suceessHandle:^{
+        
     }];
 }
 
@@ -156,40 +137,48 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
          车次id  int ScheduleId 必填
          */
         STRONGSELF
-        if ([UserInfoModel getRequestHeader_TokenDic])
+        // 已经生成了订单
+        if ([strongSelf->_orderNo isAbsoluteValid])
         {
-            NSInteger buyTicketCount = strongSelf->_passengersItemsArray.count;
-            if (buyTicketCount > 0)
+            [weakSelf toPayWithOrderNo:strongSelf->_orderNo];
+        }
+        // 没有生成订单,提交订单
+        else
+        {
+            if ([UserInfoModel getRequestHeader_TokenDic])
             {
-                // 乘车人的JSON字符串
-                NSString *passengersJsonStr = nil;
-                NSMutableArray *tempArray = [NSMutableArray array];
-                for (PassengersEntity *entity in strongSelf->_passengersItemsArray)
+                NSInteger buyTicketCount = strongSelf->_passengersItemsArray.count;
+                if (buyTicketCount > 0)
                 {
-                    [tempArray addObject:@(entity.keyId)];
+                    // 乘车人的JSON字符串
+                    NSString *passengersJsonStr = nil;
+                    NSMutableArray *tempArray = [NSMutableArray array];
+                    for (PassengersEntity *entity in strongSelf->_passengersItemsArray)
+                    {
+                        [tempArray addObject:@(entity.keyId)];
+                    }
+                    passengersJsonStr = [tempArray componentsJoinedByString:@","];
+                    
+                    NSDictionary *dic = @{@"cartInfoId": @(weakSelf.busEntity.keyId),
+                                          @"passengerIdsStr": passengersJsonStr,
+                                          @"paymentId": @(1)};
+                    
+                    [weakSelf sendRequest:[[weakSelf class] getRequestURLStr:NetOrderRequesertType_CreateOrder]
+                             parameterDic:dic
+                           requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+                        requestMethodType:RequestMethodType_POST
+                               requestTag:NetOrderRequesertType_CreateOrder];
                 }
-                passengersJsonStr = [tempArray componentsJoinedByString:@","];
-                
-                NSDictionary *dic = @{@"cartInfoId": @(weakSelf.busEntity.keyId),
-                                      @"passengerIdsStr": passengersJsonStr,
-                                      @"paymentId": @(1)};
-                
-                [weakSelf sendRequest:[[weakSelf class] getRequestURLStr:NetOrderRequesertType_CreateOrder]
-                         parameterDic:dic
-                       requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
-                    requestMethodType:RequestMethodType_POST
-                           requestTag:NetOrderRequesertType_CreateOrder];
+                else
+                {
+                    [weakSelf showHUDInfoByString:@"还没有添加乘车人哦!"];
+                }
             }
             else
             {
-                [weakSelf showHUDInfoByString:@"还没有添加乘车人哦!"];
+                [weakSelf showHUDInfoByString:NotLogin];
             }
         }
-        else
-        {
-            [weakSelf showHUDInfoByString:NotLogin];
-        }
-        
     }];
     [self.view addSubview:_settlementView];
     
@@ -213,7 +202,7 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 - (void)setPassengersCellSectionHeaderTitleText
 {
-    [_passengersCellSectionHeader setTitleString:[NSString stringWithFormat:@"乘客(%d位)", _passengersItemsArray.count]];
+    [_passengersCellSectionHeader setTitleString:[NSString stringWithFormat:@"乘客(%ld位)", _passengersItemsArray.count]];
 }
 
 // 结算视图显示
@@ -431,7 +420,7 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     [self pushViewController:passengerManager];
 }
 
-- (int)numberOfRowsInSection:(NSInteger)section
+- (NSInteger)numberOfRowsInSection:(NSInteger)section
 {
     if (_passengersCellSectionHeader.selected)
     {

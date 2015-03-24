@@ -39,6 +39,7 @@ typedef enum
     NetOrderRequesertType_GetAllOrderList                    , // 查询所有订单
     
     NetOrderRequesertType_ToRefundTicket                     , // 申请退票
+    NetOrderRequesertType_CancelOrder                        , // 取消订单
     
 } NetRequestType;
 

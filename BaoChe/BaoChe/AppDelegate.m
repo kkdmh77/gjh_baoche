@@ -17,6 +17,7 @@
 #import "BuyTicketVC.h"
 #import "OrderListVC.h"
 #import "UserInfoModel.h"
+#import "PayManager.h"
 
 @interface AppDelegate ()
 
@@ -47,10 +48,10 @@
     MoreVC *more = [[MoreVC alloc] init];
     UINavigationController *moreNav = [[UINavigationController alloc] initWithRootViewController:more];
     
-    BaseTabBarVC *baseTabBarController = [[BaseTabBarVC alloc] init];
-    baseTabBarController.viewControllers = @[buyTicketNav, userCenterNav, moreNav];
+    self.baseTabBarController = [[BaseTabBarVC alloc] init];
+    _baseTabBarController.viewControllers = @[buyTicketNav, userCenterNav, moreNav];
     
-    self.window.rootViewController = baseTabBarController;
+    self.window.rootViewController = _baseTabBarController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -79,6 +80,17 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ([sourceApplication containsString:@"com.alipay.iphoneclient"])
+    {
+        // 验证支付宝支付结果
+        [[PayManager sharedInstance] verifyPayResultWithHandleOpenURL:url];
+    }
+    
+    return YES;
 }
 
 @end
