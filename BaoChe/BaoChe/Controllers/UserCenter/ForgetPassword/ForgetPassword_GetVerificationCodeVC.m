@@ -113,7 +113,7 @@
     {
         [self sendRequest:[[self class] getRequestURLStr:NetForgetPasswordRequestType_GetVerificationCode]
              parameterDic:@{@"phone": _emailOrPhoneNumTF.text}
-        requestMethodType:RequestMethodType_POST
+        requestMethodType:RequestMethodType_GET
                requestTag:NetForgetPasswordRequestType_GetVerificationCode];
     }
     else

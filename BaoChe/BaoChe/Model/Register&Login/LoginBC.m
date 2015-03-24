@@ -115,6 +115,7 @@
         // 清空数据
         [UserInfoModel setUserDefaultLoginToken:nil];
         [UserInfoModel setUserDefaultLoginToken_V:nil];
+        [UserInfoModel setUserDefaultPassword:nil];
     }
     
     if (_success)

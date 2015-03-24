@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet NITextField *theNewsPasswordTF;           // 新密码TF
 @property (weak, nonatomic) IBOutlet NITextField *theNewsPasswordConfirmTF;    // 确认新密码TF
+@property (weak, nonatomic) IBOutlet NITextField *VerificationCodeLabel;       // 验证码
 
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;                     // 确定btn
 
@@ -66,10 +67,10 @@
         {
             NITextField *textField = (NITextField *)subView;
             
-            [textField addBorderToViewWitBorderColor:placeholderAndLineColor borderWidth:1];
+            [textField addBorderToViewWitBorderColor:[UIColor clearColor] borderWidth:1];
             
             textField.textInsets = UIEdgeInsetsMake(0, 10, 0, 0);
-            textField.backgroundColor = [UIColor clearColor];
+            textField.backgroundColor = [UIColor whiteColor];
             textField.font = textFont;
             textField.placeholderFont = textFont;
             textField.placeholderTextColor = placeholderAndLineColor;
@@ -82,6 +83,7 @@
     _confirmBtn.backgroundColor = Common_ThemeColor;
     [_confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_confirmBtn setTitle:@"重置密码" forState:UIControlStateNormal];
+    [_confirmBtn setRadius:3];
 }
 
 - (void)initialization
@@ -98,11 +100,19 @@
         {
             if ([_theNewsPasswordTF.text isEqualToString:_theNewsPasswordConfirmTF.text])
             {
-                [self sendRequest:[[self class] getRequestURLStr:NetForgetPasswordRequestType_ModifyPassword]
-                     parameterDic:@{@"username": _emailOrPhoneNumStr,
-                                    @"newPassword": _theNewsPasswordTF.text}
-                requestMethodType:RequestMethodType_POST
-                       requestTag:NetForgetPasswordRequestType_ModifyPassword];
+                if ([_VerificationCodeLabel hasText])
+                {
+                    [self sendRequest:[[self class] getRequestURLStr:NetForgetPasswordRequestType_ModifyPassword]
+                         parameterDic:@{@"userName": _emailOrPhoneNumStr,
+                                        @"password": _theNewsPasswordTF.text,
+                                        @"checkcode": _VerificationCodeLabel.text}
+                    requestMethodType:RequestMethodType_POST
+                           requestTag:NetForgetPasswordRequestType_ModifyPassword];
+                }
+                else
+                {
+                    [self showHUDInfoByString:@"请输入验证码"];
+                }
             }
             else
             {
