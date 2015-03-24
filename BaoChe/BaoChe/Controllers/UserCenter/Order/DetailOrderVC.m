@@ -172,12 +172,30 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
 // 支付
 - (void)toPayWithOrderNo:(NSString *)orderNo
 {
+    WEAKSELF
     [PaymentManager toPayWithOrderNo:orderNo
                             totalFee:_defaultOrderEntity.orderTotalFee
                          productName:_defaultOrderEntity.busInfoEntity.busNameStr
                          productDesc:_defaultOrderEntity.busInfoEntity.busNameStr
                        suceessHandle:^{
                            
+       [weakSelf showBuyTicketSuccessAlert];
+    }];
+}
+
+// 买票成功后提示
+- (void)showBuyTicketSuccessAlert
+{
+    WEAKSELF
+    [[InterfaceHUDManager sharedInstance] showAlertWithTitle:AlertTitle
+                                                     message:@"恭喜你，购票成功，你可以去我的订单中查看订单详情！"
+                                               alertShowType:AlertShowType_warning
+                                                 cancelTitle:nil
+                                                 cancelBlock:nil
+                                                  otherTitle:@"知道了"
+                                                  otherBlock:^(GJHAlertView *alertView, NSInteger index) {
+        
+        [weakSelf goBack];
     }];
 }
 

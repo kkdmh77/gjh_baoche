@@ -9,7 +9,7 @@
 #import "ForgetPassword_GetVerificationCodeVC.h"
 #import "NITextField.h"
 #import "StringJudgeManager.h"
-#import "ForgetPassword_InputVerificationCodeVC.h"
+#import "ForgetPassword_ModifyPasswordVC.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
 
 @interface ForgetPassword_GetVerificationCodeVC ()
@@ -60,9 +60,9 @@
         STRONGSELF
         if (NetForgetPasswordRequestType_GetVerificationCode == request.tag)
         {
-            ForgetPassword_InputVerificationCodeVC *input = [ForgetPassword_InputVerificationCodeVC loadFromNib];
-            input.emailOrPhoneNumStr = strongSelf->_emailOrPhoneNumTF.text;
-            [weakSelf pushViewController:input];
+            ForgetPassword_ModifyPasswordVC *modify = [ForgetPassword_ModifyPasswordVC loadFromNib];
+            modify.emailOrPhoneNumStr = strongSelf->_emailOrPhoneNumTF.text;
+            [weakSelf pushViewController:modify];
         }
     } failedBlock:^(NetRequest *request, NSError *error) {
         
@@ -112,7 +112,7 @@
     if ([StringJudgeManager isValidateStr:_emailOrPhoneNumTF.text regexStr:MobilePhoneNumRegex])
     {
         [self sendRequest:[[self class] getRequestURLStr:NetForgetPasswordRequestType_GetVerificationCode]
-             parameterDic:@{@"mobile": _emailOrPhoneNumTF.text}
+             parameterDic:@{@"phone": _emailOrPhoneNumTF.text}
         requestMethodType:RequestMethodType_POST
                requestTag:NetForgetPasswordRequestType_GetVerificationCode];
     }

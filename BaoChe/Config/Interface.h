@@ -1,6 +1,6 @@
 
 // appDownload的URL
-#define AppDownloadUrl                              @"https://itunes.apple.com/cn/app/zheng-min-tong/id675486231?mt=8"
+#define AppDownloadUrl                              @"https://itunes.apple.com/cn/app/id978653671"
 
 // Request的nameSpace
 #define Request_NameSpace                           @"http://121.42.145.68:8080/home-app"                    // 调试

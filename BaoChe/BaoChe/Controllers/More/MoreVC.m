@@ -7,6 +7,7 @@
 //
 
 #import "MoreVC.h"
+#import "AboutVC.h"
 
 @interface MoreVC ()
 {
@@ -39,14 +40,13 @@
 
 - (void)getLocalTabShowData
 {
-    NSArray *oneSectionTitleArray = @[@"使用说明", @"检查更新"];
+    // NSArray *oneSectionTitleArray = @[@"使用说明", @"检查更新"];
     
     NSArray *twoSectionTitleArray = @[@"给我们五星好评",
-                                      @"联系我们",
                                       @"关于我们",
                                       @"意见反馈"];
     
-    _tabTitleArray = @[oneSectionTitleArray, twoSectionTitleArray];
+    _tabTitleArray = @[twoSectionTitleArray];
 }
 
 - (void)setPageLocalizableText
@@ -120,6 +120,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:AppDownloadUrl]];
+    }
+    else if (indexPath.row == 1)
+    {
+        AboutVC *about = [[AboutVC alloc] init];
+        about.hidesBottomBarWhenPushed = YES;
+        
+        [self pushViewController:about];
+    }
+    else if (indexPath.row == 1)
+    {
+        
+    }
 }
 
 @end

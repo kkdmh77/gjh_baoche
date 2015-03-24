@@ -95,6 +95,8 @@
 		2BF2E0791A3F3B5B00F83491 /* HomePageTodayHotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2E0771A3F3B5B00F83491 /* HomePageTodayHotCell.m */; };
 		2BF2E07A1A3F3B5B00F83491 /* HomePageTodayHotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */; };
 		2BFBF2191ABF0507006AE80D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BFBF21B1ABF0507006AE80D /* Localizable.strings */; };
+		2BFBF21F1AC19B19006AE80D /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFBF21E1AC19B19006AE80D /* AboutVC.m */; };
+		2BFBF2241AC19F9F006AE80D /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2BFBF2231AC19F9F006AE80D /* About.txt */; };
 		431605551ABC135A003A4970 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 431604F01ABC135A003A4970 /* AlipaySDK.bundle */; };
 		431605561ABC135A003A4970 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431604F11ABC135A003A4970 /* AlipaySDK.framework */; };
 		431605571ABC135A003A4970 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431604F21ABC135A003A4970 /* libcrypto.a */; };
@@ -113,8 +115,6 @@
 		43618B841ABD1A270079CEA5 /* ModifyPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43618B821ABD1A270079CEA5 /* ModifyPasswordVC.xib */; };
 		43618B8F1ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43618B871ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.m */; };
 		43618B901ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43618B881ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.xib */; };
-		43618B911ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43618B8A1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.m */; };
-		43618B921ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43618B8B1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.xib */; };
 		43618B931ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43618B8D1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.m */; };
 		43618B941ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43618B8E1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.xib */; };
 		4372D7741A0879FD00CEA66D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4372D7761A0879FD00CEA66D /* InfoPlist.strings */; };
@@ -610,6 +610,9 @@
 		2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageTodayHotCell.xib; sourceTree = "<group>"; };
 		2BFBF21A1ABF0507006AE80D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2BFBF21C1ABF050B006AE80D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2BFBF21D1AC19B19006AE80D /* AboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
+		2BFBF21E1AC19B19006AE80D /* AboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
+		2BFBF2231AC19F9F006AE80D /* About.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = About.txt; sourceTree = "<group>"; };
 		431604F01ABC135A003A4970 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		431604F11ABC135A003A4970 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		431604F21ABC135A003A4970 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
@@ -715,9 +718,6 @@
 		43618B861ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPassword_GetVerificationCodeVC.h; sourceTree = "<group>"; };
 		43618B871ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPassword_GetVerificationCodeVC.m; sourceTree = "<group>"; };
 		43618B881ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPassword_GetVerificationCodeVC.xib; sourceTree = "<group>"; };
-		43618B891ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPassword_InputVerificationCodeVC.h; sourceTree = "<group>"; };
-		43618B8A1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPassword_InputVerificationCodeVC.m; sourceTree = "<group>"; };
-		43618B8B1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPassword_InputVerificationCodeVC.xib; sourceTree = "<group>"; };
 		43618B8C1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPassword_ModifyPasswordVC.h; sourceTree = "<group>"; };
 		43618B8D1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPassword_ModifyPasswordVC.m; sourceTree = "<group>"; };
 		43618B8E1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPassword_ModifyPasswordVC.xib; sourceTree = "<group>"; };
@@ -1742,6 +1742,8 @@
 		2BE0BEAE1A459AEC000B8871 /* More */ = {
 			isa = PBXGroup;
 			children = (
+				2BFBF21D1AC19B19006AE80D /* AboutVC.h */,
+				2BFBF21E1AC19B19006AE80D /* AboutVC.m */,
 				2BE0BEAF1A459B0F000B8871 /* MoreVC.h */,
 				2BE0BEB01A459B0F000B8871 /* MoreVC.m */,
 			);
@@ -1755,6 +1757,14 @@
 				2BE0BEB41A459DB2000B8871 /* youjiantou_cell@3x.png */,
 			);
 			path = More;
+			sourceTree = "<group>";
+		};
+		2BFBF2201AC19EBC006AE80D /* text */ = {
+			isa = PBXGroup;
+			children = (
+				2BFBF2231AC19F9F006AE80D /* About.txt */,
+			);
+			path = text;
 			sourceTree = "<group>";
 		};
 		431604EF1ABC135A003A4970 /* Alipay */ = {
@@ -1885,9 +1895,6 @@
 				43618B861ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.h */,
 				43618B871ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.m */,
 				43618B881ABD4B560079CEA5 /* ForgetPassword_GetVerificationCodeVC.xib */,
-				43618B891ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.h */,
-				43618B8A1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.m */,
-				43618B8B1ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.xib */,
 				43618B8C1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.h */,
 				43618B8D1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.m */,
 				43618B8E1ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.xib */,
@@ -2804,6 +2811,7 @@
 		43D1F16519FB3AFB0049518E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				2BFBF2201AC19EBC006AE80D /* text */,
 				43D1F16619FB3AFB0049518E /* image */,
 			);
 			path = Resource;
@@ -3560,7 +3568,6 @@
 				43D1F55C19FB4C1A0049518E /* deps in Resources */,
 				43D1F18B19FB3AFB0049518E /* AQGridSelectionGreen.png in Resources */,
 				2BDC3E761A4DAA0F007C1130 /* login_mima@3x.png in Resources */,
-				43618B921ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.xib in Resources */,
 				43D1F4E119FB4C1A0049518E /* deps in Resources */,
 				2BDC3E811A4DB82C007C1130 /* close@3x.png in Resources */,
 				43618B941ABD4B560079CEA5 /* ForgetPassword_ModifyPasswordVC.xib in Resources */,
@@ -3591,6 +3598,7 @@
 				2BDC3E911A4EFDE4007C1130 /* qiehuan@3x.png in Resources */,
 				2BE0BE911A4536FC000B8871 /* jianhao_lanse@2x.png in Resources */,
 				2BDC3EAA1A4F0A9C007C1130 /* maipiao_normal@2x.png in Resources */,
+				2BFBF2241AC19F9F006AE80D /* About.txt in Resources */,
 				2BDC3E801A4DB82C007C1130 /* close@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3739,7 +3747,6 @@
 				43D1F31219FB3AFB0049518E /* NetRequestManager.m in Sources */,
 				43D1F19719FB3AFB0049518E /* FUIButton.m in Sources */,
 				43D1F30F19FB3AFB0049518E /* KeepLoginSessionConnection.m in Sources */,
-				43618B911ABD4B560079CEA5 /* ForgetPassword_InputVerificationCodeVC.m in Sources */,
 				43D1F2DD19FB3AFB0049518E /* ATSequenceImageView.m in Sources */,
 				43D1F4FB19FB4C1A0049518E /* NIState.m in Sources */,
 				43D1F53F19FB4C1A0049518E /* NILauncherViewModel.m in Sources */,
@@ -3772,6 +3779,7 @@
 				43D1F1CF19FB3AFB0049518E /* MagicalRecord.m in Sources */,
 				43D1F53B19FB4C1A0049518E /* NILauncherButtonView.m in Sources */,
 				43D1F55719FB4C1A0049518E /* NIImageProcessing.m in Sources */,
+				2BFBF21F1AC19B19006AE80D /* AboutVC.m in Sources */,
 				43D1F53E19FB4C1A0049518E /* NILauncherViewController.m in Sources */,
 				43D1F1D419FB3AFB0049518E /* MASViewAttribute.m in Sources */,
 				43D1F18619FB3AFB0049518E /* NSIndexSet+AQIsSetContiguous.m in Sources */,

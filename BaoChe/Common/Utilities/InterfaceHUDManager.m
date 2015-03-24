@@ -66,7 +66,7 @@ DEF_SINGLETON(InterfaceHUDManager);
         alert.messageLabel.textColor = Common_OrangeColor;
     }
     
-    if (!cancelBlock && !otherBlock)
+    if (!cancelBlock && !otherBlock && ![cancelTitle isAbsoluteValid] && ![otherTitle isAbsoluteValid])
     {
         alert.delegate = nil;
         

@@ -108,12 +108,30 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 // 支付
 - (void)toPayWithOrderNo:(NSString *)orderNo
 {
+    WEAKSELF
     [PaymentManager toPayWithOrderNo:orderNo
                             totalFee:_settlementView.totalPrice
                          productName:_busEntity.busNameStr
                          productDesc:_busEntity.busNameStr
                        suceessHandle:^{
-        
+                           
+        [weakSelf showBuyTicketSuccessAlert];
+    }];
+}
+
+// 买票成功后提示
+- (void)showBuyTicketSuccessAlert
+{
+    WEAKSELF
+    [[InterfaceHUDManager sharedInstance] showAlertWithTitle:AlertTitle
+                                                     message:@"恭喜你，购票成功，你可以去我的订单中查看订单详情！"
+                                               alertShowType:AlertShowType_warning
+                                                 cancelTitle:nil
+                                                 cancelBlock:nil
+                                                  otherTitle:@"知道了"
+                                                  otherBlock:^(GJHAlertView *alertView, NSInteger index) {
+                                                      
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     }];
 }
 
@@ -145,38 +163,31 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
         // 没有生成订单,提交订单
         else
         {
-            if ([UserInfoModel getRequestHeader_TokenDic])
+            NSInteger buyTicketCount = strongSelf->_passengersItemsArray.count;
+            if (buyTicketCount > 0)
             {
-                NSInteger buyTicketCount = strongSelf->_passengersItemsArray.count;
-                if (buyTicketCount > 0)
+                // 乘车人的JSON字符串
+                NSString *passengersJsonStr = nil;
+                NSMutableArray *tempArray = [NSMutableArray array];
+                for (PassengersEntity *entity in strongSelf->_passengersItemsArray)
                 {
-                    // 乘车人的JSON字符串
-                    NSString *passengersJsonStr = nil;
-                    NSMutableArray *tempArray = [NSMutableArray array];
-                    for (PassengersEntity *entity in strongSelf->_passengersItemsArray)
-                    {
-                        [tempArray addObject:@(entity.keyId)];
-                    }
-                    passengersJsonStr = [tempArray componentsJoinedByString:@","];
-                    
-                    NSDictionary *dic = @{@"cartInfoId": @(weakSelf.busEntity.keyId),
-                                          @"passengerIdsStr": passengersJsonStr,
-                                          @"paymentId": @(1)};
-                    
-                    [weakSelf sendRequest:[[weakSelf class] getRequestURLStr:NetOrderRequesertType_CreateOrder]
-                             parameterDic:dic
-                           requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
-                        requestMethodType:RequestMethodType_POST
-                               requestTag:NetOrderRequesertType_CreateOrder];
+                    [tempArray addObject:@(entity.keyId)];
                 }
-                else
-                {
-                    [weakSelf showHUDInfoByString:@"还没有添加乘车人哦!"];
-                }
+                passengersJsonStr = [tempArray componentsJoinedByString:@","];
+                
+                NSDictionary *dic = @{@"cartInfoId": @(weakSelf.busEntity.keyId),
+                                      @"passengerIdsStr": passengersJsonStr,
+                                      @"paymentId": @(1)};
+                
+                [weakSelf sendRequest:[[weakSelf class] getRequestURLStr:NetOrderRequesertType_CreateOrder]
+                         parameterDic:dic
+                       requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+                    requestMethodType:RequestMethodType_POST
+                           requestTag:NetOrderRequesertType_CreateOrder];
             }
             else
             {
-                [weakSelf showHUDInfoByString:NotLogin];
+                [weakSelf showHUDInfoByString:@"还没有添加乘车人哦!"];
             }
         }
     }];

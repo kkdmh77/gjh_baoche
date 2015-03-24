@@ -15,6 +15,7 @@
 #include <objc/runtime.h>
 #import "AddPassengersVC.h"
 #import "GCDThread.h"
+#import "InterfaceHUDManager.h"
 
 static NSString * const addressRequestUserInfoKey_IndexPath = @"addressRequestUserInfoKey_IndexPath";
 static NSString * const cellReusableIdentifier              = @"cellReusableIdentifier";
@@ -262,8 +263,17 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
         
         switch (type)
         {
+            // 删除联系人
             case OperationButType_Delete:
             {
+                [[InterfaceHUDManager sharedInstance] showAlertWithTitle:AlertTitle
+                                                                 message:@"亲，确定要删除联系人吗？"
+                                                           alertShowType:AlertShowType_warning
+                                                             cancelTitle:Cancel
+                                                             cancelBlock:nil
+                                                              otherTitle:Confirm
+                                                              otherBlock:^(GJHAlertView *alertView, NSInteger index) {
+                                                                  
                   NSString *methodName = [[weakSelf class] getRequestURLStr:NetUserCenterRequestType_DeletePassenger];
                   
                   NSDictionary *userInfo = @{addressRequestUserInfoKey_IndexPath: indexPath};
@@ -275,6 +285,7 @@ static NSString * const cellReusableIdentifier              = @"cellReusableIden
                              requestTag:NetUserCenterRequestType_DeletePassenger
                                delegate:self
                                userInfo:userInfo];
+                 }];
             }
                 break;
                 

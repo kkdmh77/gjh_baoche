@@ -16,6 +16,7 @@
 {
     Product *p = [[Product alloc] init];
     p.price = totalFee;
+    p.price = 0.01;
     p.productName = name;
     p.productDesc = desc;
     p.orderId = orderNo;

@@ -367,11 +367,11 @@ UIWebView *InsertWebView(id superView,CGRect cRect, id<UIWebViewDelegate>delegat
 {
     UIWebView *tempWebView = [[UIWebView alloc] initWithFrame:cRect];
     tempWebView.tag = tag;
-    [tempWebView setOpaque:NO]; //让webView的背景色透明
+    [tempWebView setOpaque:YES]; //让webView的背景色透明
     tempWebView.backgroundColor = [UIColor clearColor];
     tempWebView.delegate = delegate;
     tempWebView.scalesPageToFit = NO;
-    tempWebView.scrollView.scrollEnabled = NO;//不让webview滚动
+    // tempWebView.scrollView.scrollEnabled = NO;//不让webview滚动
     
     if (superView)
         [superView addSubview:tempWebView];
