@@ -8,6 +8,7 @@
 
 #import "MoreVC.h"
 #import "AboutVC.h"
+#import "FeedbackVC.h"
 
 @interface MoreVC ()
 {
@@ -132,9 +133,11 @@
         
         [self pushViewController:about];
     }
-    else if (indexPath.row == 1)
+    else if (indexPath.row == 2)
     {
-        
+        FeedbackVC *feedback = [FeedbackVC loadFromNib];
+        feedback.hidesBottomBarWhenPushed = YES;
+        [self pushViewController:feedback];
     }
 }
 

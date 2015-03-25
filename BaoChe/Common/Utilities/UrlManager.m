@@ -100,6 +100,8 @@
         {
             urlStr = [urlStr stringByAppendingFormat:@"?%@",[NSString urlArgsStringFromDictionary:dic]];
         }
+        urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
         url = [NSURL URLWithString:urlStr];
     }
     return url;

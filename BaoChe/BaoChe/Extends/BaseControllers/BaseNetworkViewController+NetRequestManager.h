@@ -28,6 +28,7 @@ typedef enum
     NetUserCenterRequestType_GetAllPassenger                 , // 获取所有乘客信息
     NetUserCenterRequestType_AddPassenger                    , // 添加一个乘客信息
     NetUserCenterRequestType_DeletePassenger                 , // 删除一个乘客信息
+    NetUserCenterRequestType_ModifyPassenger                 , // 修改一个乘客信息
     
     // 忘记密码
     NetForgetPasswordRequestType_GetVerificationCode         , // 忘记密码->获取短信验证码(POST)

@@ -439,6 +439,9 @@
 		43D1F58219FB4C1A0049518E /* deps in Resources */ = {isa = PBXBuildFile; fileRef = 43D1F4CF19FB4C1A0049518E /* deps */; };
 		43D1F58319FB4C1A0049518E /* NimbusWebController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 43D1F4D119FB4C1A0049518E /* NimbusWebController.bundle */; };
 		43D1F58419FB4C1A0049518E /* NIWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1F4D519FB4C1A0049518E /* NIWebController.m */; };
+		43D26CDE1AC2A03A00FBA705 /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D26CDC1AC2A03A00FBA705 /* FeedbackVC.m */; };
+		43D26CDF1AC2A03A00FBA705 /* FeedbackVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D26CDD1AC2A03A00FBA705 /* FeedbackVC.xib */; };
+		43D26CED1AC2BA6300FBA705 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D26CEC1AC2BA6300FBA705 /* SZTextView.m */; };
 		43D402661AC10F1600D59D9D /* NoPaySettlementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D402641AC10F1600D59D9D /* NoPaySettlementView.m */; };
 		43D402671AC10F1600D59D9D /* NoPaySettlementView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D402651AC10F1600D59D9D /* NoPaySettlementView.xib */; };
 		43D4026B1AC1402A00D59D9D /* PaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4026A1AC1402A00D59D9D /* PaymentManager.m */; };
@@ -1384,6 +1387,11 @@
 		43D1F4D419FB4C1A0049518E /* NIWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIWebController.h; sourceTree = "<group>"; };
 		43D1F4D519FB4C1A0049518E /* NIWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIWebController.m; sourceTree = "<group>"; };
 		43D1F58719FB4C2B0049518E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		43D26CDB1AC2A03A00FBA705 /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
+		43D26CDC1AC2A03A00FBA705 /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
+		43D26CDD1AC2A03A00FBA705 /* FeedbackVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackVC.xib; sourceTree = "<group>"; };
+		43D26CEB1AC2BA6300FBA705 /* SZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTextView.h; sourceTree = "<group>"; };
+		43D26CEC1AC2BA6300FBA705 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
 		43D402631AC10F1600D59D9D /* NoPaySettlementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoPaySettlementView.h; sourceTree = "<group>"; };
 		43D402641AC10F1600D59D9D /* NoPaySettlementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoPaySettlementView.m; sourceTree = "<group>"; };
 		43D402651AC10F1600D59D9D /* NoPaySettlementView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoPaySettlementView.xib; sourceTree = "<group>"; };
@@ -1746,6 +1754,9 @@
 				2BFBF21E1AC19B19006AE80D /* AboutVC.m */,
 				2BE0BEAF1A459B0F000B8871 /* MoreVC.h */,
 				2BE0BEB01A459B0F000B8871 /* MoreVC.m */,
+				43D26CDB1AC2A03A00FBA705 /* FeedbackVC.h */,
+				43D26CDC1AC2A03A00FBA705 /* FeedbackVC.m */,
+				43D26CDD1AC2A03A00FBA705 /* FeedbackVC.xib */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -2056,6 +2067,7 @@
 		43D1ED6819FB3AFA0049518E /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				43D26CEA1AC2BA6300FBA705 /* SZTextView */,
 				431604EF1ABC135A003A4970 /* Alipay */,
 				2BD7EFDE1A49B8E700905645 /* IQKeyBoardManager */,
 				43D7755B1A3D88D000C088CE /* ZFCalendar */,
@@ -3304,6 +3316,15 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		43D26CEA1AC2BA6300FBA705 /* SZTextView */ = {
+			isa = PBXGroup;
+			children = (
+				43D26CEB1AC2BA6300FBA705 /* SZTextView.h */,
+				43D26CEC1AC2BA6300FBA705 /* SZTextView.m */,
+			);
+			path = SZTextView;
+			sourceTree = "<group>";
+		};
 		43D402681AC1401300D59D9D /* BC */ = {
 			isa = PBXGroup;
 			children = (
@@ -3558,6 +3579,7 @@
 				2BE0BEB51A459DB2000B8871 /* youjiantou_cell@2x.png in Resources */,
 				43D1F1D919FB3AFB0049518E /* .gitattributes in Resources */,
 				2BDC3E7E1A4DB82C007C1130 /* clearText@2x.png in Resources */,
+				43D26CDF1AC2A03A00FBA705 /* FeedbackVC.xib in Resources */,
 				43EF72AA1AB6BB6E006D1C11 /* AddPassengersVC.xib in Resources */,
 				43D775371A3D36BB00C088CE /* AllBusListCell.xib in Resources */,
 				43D1F55D19FB4C1A0049518E /* NimbusOverviewer.bundle in Resources */,
@@ -3838,12 +3860,14 @@
 				43D1F2D819FB3AFB0049518E /* ATFlipAnimationView.m in Sources */,
 				2BD74E651A59964100172F95 /* EndStationChooseVC.m in Sources */,
 				43D1F29A19FB3AFB0049518E /* SRSlimeView.m in Sources */,
+				43D26CED1AC2BA6300FBA705 /* SZTextView.m in Sources */,
 				43D1ED1A19FB37F30049518E /* main.m in Sources */,
 				43D1F33219FB3AFB0049518E /* UIRefreshTabView.m in Sources */,
 				43D1F2FB19FB3AFB0049518E /* UIScrollView+SSToolkitAdditions.m in Sources */,
 				43D1F56119FB4C1A0049518E /* NIOverviewLogger.m in Sources */,
 				43D1F19319FB3AFB0049518E /* ASIInputStream.m in Sources */,
 				43D1F2AD19FB3AFB0049518E /* ATBLibs+UIBarItem.m in Sources */,
+				43D26CDE1AC2A03A00FBA705 /* FeedbackVC.m in Sources */,
 				43E8DE481AC015710080BFFF /* BuyTicketSuccessVC.m in Sources */,
 				43D1F2AF19FB3AFB0049518E /* ATBLibs+UIImage.m in Sources */,
 				43D1F31319FB3AFB0049518E /* NetworkStatusManager.m in Sources */,

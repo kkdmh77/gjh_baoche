@@ -44,7 +44,7 @@
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:@"添加联系人"];
+    [self setNavigationItemTitle:_defaultShowEntity ? @"修改联系人信息" : @"添加联系人"];
     
     [self setup];
 }
@@ -104,9 +104,26 @@
     {
         if ([StringJudgeManager isValidateStr:_idCardTF.text regexStr:MobilePhoneNumRegex])
         {
+            NSString *methodNameStr = nil;
+            NSDictionary *dic = nil;
+            
+            if (_defaultShowEntity)
+            {
+                methodNameStr = [[self class] getRequestURLStr:NetUserCenterRequestType_ModifyPassenger];
+                dic = @{@"id": @(_defaultShowEntity.keyId),
+                        @"passengName": _theContactTF.text,
+                        @"phone": _idCardTF.text};
+            }
+            else
+            {
+                methodNameStr = [[self class] getRequestURLStr:NetUserCenterRequestType_AddPassenger];
+                dic = @{@"passengName": _theContactTF.text,
+                        @"phone": _idCardTF.text};
+            }
+            
             // 添加联系人
-            [self sendRequest:[[self class] getRequestURLStr:NetUserCenterRequestType_AddPassenger]
-                 parameterDic:@{@"passengName": _theContactTF.text, @"phone": _idCardTF.text}
+            [self sendRequest:methodNameStr
+                 parameterDic:dic
                requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
             requestMethodType:RequestMethodType_POST
                    requestTag:NetUserCenterRequestType_AddPassenger];
