@@ -8,6 +8,7 @@
 
 #import "FeedbackVC.h"
 #import "SZTextView.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
 
 @interface FeedbackVC ()
 
@@ -32,8 +33,21 @@
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:nil];
+    [self setNavigationItemTitle:@"意见反馈"];
     [self setup];
+}
+
+- (void)setNetworkRequestStatusBlocks
+{
+    WEAKSELF
+    [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
+        STRONGSELF
+        if (NetUserCenterRequestType_SendFeedback == request.tag)
+        {
+            [strongSelf showHUDInfoByString:@"反馈成功！"];
+            [strongSelf backViewController];
+        }
+    }];
 }
 
 - (void)configureViewsProperties
@@ -63,7 +77,18 @@
 
 - (IBAction)clickCommitBtn:(id)sender
 {
-    
+    if ([_inputTextView hasText])
+    {
+        [self sendRequest:[[self class] getRequestURLStr:NetUserCenterRequestType_SendFeedback]
+             parameterDic:@{@"feedbackMessage": _inputTextView.text}
+           requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
+        requestMethodType:RequestMethodType_POST
+               requestTag:NetUserCenterRequestType_SendFeedback];
+    }
+    else
+    {
+        [self showHUDInfoByString:@"说点什么吧！"];
+    }
 }
 
 @end

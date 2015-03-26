@@ -66,10 +66,6 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [_tableView reloadData];
-    [self setSettlementViewText];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -229,9 +225,21 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     
     if ([entity isKindOfClass:[PassengersEntity class]])
     {
-        [_passengersItemsArray addObject:entity];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.keyId == %ld", entity.keyId];
+        NSArray *filterArray = [_passengersItemsArray filteredArrayUsingPredicate:predicate];
         
-        [_tableView reloadData];
+        if ([filterArray isAbsoluteValid])
+        {
+            [self showHUDInfoByString:@"不能添加相同的乘客"];
+        }
+        else
+        {
+            [_passengersItemsArray addObject:entity];
+            
+            // 刷新数据
+            [_tableView reloadData];
+            [self setSettlementViewText];
+        }
     }
 }
 

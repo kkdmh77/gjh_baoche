@@ -30,6 +30,8 @@ typedef enum
     NetUserCenterRequestType_DeletePassenger                 , // 删除一个乘客信息
     NetUserCenterRequestType_ModifyPassenger                 , // 修改一个乘客信息
     
+    NetUserCenterRequestType_SendFeedback                    , // 发送意见反馈
+    
     // 忘记密码
     NetForgetPasswordRequestType_GetVerificationCode         , // 忘记密码->获取短信验证码(POST)
     NetForgetPasswordRequestType_ModifyPassword              , // 忘记密码->用验证码修改密码(POST)

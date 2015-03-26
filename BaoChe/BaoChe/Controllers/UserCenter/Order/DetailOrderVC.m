@@ -333,17 +333,8 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
         PassengersEntity *entity = _defaultOrderEntity.passengersArray[indexPath.row];
         [cell loadCellShowDataWithItemEntity:entity];
         
-        // 未付款
-        if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_CONFIRMED"])
-        {
-            cell.btnType = OperationButType_NoOperation;
-        }
-        // 已出票
-        else if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_FINISH"])
-        {
-            cell.btnType = OperationButType_DetailOrder_GetTicket;
-        }
-        else
+        // 待使用
+        if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_VERIFIED"])
         {
             // 可申请退款
             if ([entity.afterSaleStatus isEqualToString:@"AS_ENABLE"])
@@ -360,6 +351,16 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
             {
                 cell.btnType = OperationButType_DetailOrder_AlreadyRefundTicket;
             }
+        }
+        // 已出票
+        else if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_FINISH"])
+        {
+            cell.btnType = OperationButType_DetailOrder_GetTicket;
+        }
+        // 未付款、订单已取消等其他情况
+        else
+        {
+            cell.btnType = OperationButType_NoOperation;
         }
         
         // 回调

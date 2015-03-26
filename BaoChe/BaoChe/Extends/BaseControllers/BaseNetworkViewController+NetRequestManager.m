@@ -39,6 +39,8 @@
                            @"passenger/delete",
                            @"passenger/update",
                            
+                           @"userFeedback",
+                           
                            // 忘记密码
                            @"user/retakeCode",
                            @"user/passwordRetake",
