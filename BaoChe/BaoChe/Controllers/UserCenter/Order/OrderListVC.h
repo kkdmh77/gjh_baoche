@@ -10,4 +10,6 @@
 
 @interface OrderListVC : BaseNetworkViewController
 
+- (void)clearAndReloadTabData;
+
 @end

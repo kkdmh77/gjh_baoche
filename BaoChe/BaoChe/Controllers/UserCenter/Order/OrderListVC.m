@@ -18,11 +18,24 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 @interface OrderListVC () <GJHSlideSwitchViewDelegate>
 {
     NSMutableArray *_netOrderEntityArray;
+    
+    NSInteger      _queryOrderType;
 }
 
 @end
 
 @implementation OrderListVC
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if (self)
+    {
+        _queryOrderType = 0;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -92,8 +105,12 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
      AS_DISABLE --禁用
      */
     
+    
+    // 订单查询类型 0:全部 1:等待支付 2:等待使用 3:已经使用 4:退款
     [self sendRequest:[[self class] getRequestURLStr:NetOrderRequesertType_GetAllOrderList]
-         parameterDic:@{@"pageNo": @(1), @"pageSize": @(1000)}
+         parameterDic:@{@"type": @(_queryOrderType),
+                        @"pageNo": @(1),
+                        @"pageSize": @(1000)}
        requestHeaders:[UserInfoModel getRequestHeader_TokenDic]
     requestMethodType:RequestMethodType_GET
            requestTag:NetOrderRequesertType_GetAllOrderList];
@@ -102,7 +119,7 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 - (void)initialization
 {
     // slider switch
-    GJHSlideSwitchView *sliderSwitch = [[GJHSlideSwitchView alloc] initWithFrame:CGRectMake(0, 0, self.viewBoundsWidth, kDefaultSlideSwitchViewHeight) titlesArray:@[@"待使用", @"未支付", @"已取消", @"已使用"]];
+    GJHSlideSwitchView *sliderSwitch = [[GJHSlideSwitchView alloc] initWithFrame:CGRectMake(0, 0, self.viewBoundsWidth, kDefaultSlideSwitchViewHeight) titlesArray:@[ @"全部", @"待使用", @"未支付", @"已使用"]];
     sliderSwitch.slideSwitchViewDelegate = self;
     sliderSwitch.tabItemNormalColor = Common_BlackColor;
     sliderSwitch.tabItemSelectedColor = Common_ThemeColor;
@@ -135,6 +152,12 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 - (void)reloadTabData
 {
     [_tableView reloadData];
+}
+
+- (void)clearAndReloadTabData
+{
+    [_netOrderEntityArray removeAllObjects];
+    [self reloadTabData];
 }
 
 - (OrderListEntity *)curIndexTabCellShowData:(NSInteger)index
@@ -196,7 +219,35 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
 
 - (void)slideSwitchView:(GJHSlideSwitchView *)view didselectTab:(NSUInteger)number
 {
+    switch (number)
+    {
+        case 0:
+        {
+            _queryOrderType = 0;
+        }
+            break;
+        case 1:
+        {
+            _queryOrderType = 2;
+        }
+            break;
+        case 2:
+        {
+            _queryOrderType = 1;
+        }
+            break;
+        case 3:
+        {
+            _queryOrderType = 3;
+        }
+            break;
+            
+        default:
+            break;
+    }
     
+    [self clearAndReloadTabData];
+    [self getNetworkData];
 }
 
 @end

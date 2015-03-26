@@ -81,26 +81,26 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
                                                               otherTitle:@"知道了"
                                                               otherBlock:^(GJHAlertView *alertView, NSInteger index) {
                     
-                    [strongSelf goBack];
                 }];
-                
-                
             }
         }
         // 取消订单成功
         else if (NetOrderRequesertType_CancelOrder == request.tag)
         {
             strongSelf->_noPaySettlementView.type = ViewType_OrderAlreadyCancel;
+            
+            [weakSelf showHUDInfoByString:@"订单取消成功！"];
         }
     }];
 }
 
-- (void)goBack
+- (void)backViewController
 {
     OrderListVC *orderList = objc_getAssociatedObject(self, class_getName([OrderListVC class]));
+    [orderList clearAndReloadTabData];
     [orderList getNetworkData];
     
-    [self backViewController];
+    [super backViewController];
 }
 
 - (void)getNetworkData
@@ -195,7 +195,7 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
                                                   otherTitle:@"知道了"
                                                   otherBlock:^(GJHAlertView *alertView, NSInteger index) {
         
-        [weakSelf goBack];
+        [weakSelf backViewController];
     }];
 }
 
