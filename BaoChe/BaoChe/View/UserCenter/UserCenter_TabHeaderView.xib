@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -103,6 +103,45 @@
                         <constraint firstItem="Otl-0o-Wol" firstAttribute="top" secondItem="BrJ-Wj-Jgl" secondAttribute="bottom" constant="5" id="ks2-B6-gex"/>
                         <constraint firstItem="BrJ-Wj-Jgl" firstAttribute="top" secondItem="Eis-8J-Uqe" secondAttribute="bottom" constant="3" id="oKC-uM-TTd"/>
                         <constraint firstItem="BrJ-Wj-Jgl" firstAttribute="leading" secondItem="Otl-0o-Wol" secondAttribute="leading" id="qoX-fo-O1r"/>
+<<<<<<< HEAD
+=======
+                        <constraint firstItem="BrJ-Wj-Jgl" firstAttribute="leading" secondItem="Eis-8J-Uqe" secondAttribute="trailing" constant="26" id="xOi-2r-2eT"/>
+                    </constraints>
+                </view>
+                <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SrN-uv-l0w">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎来到UU" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCd-Kr-Xer">
+                            <rect key="frame" x="119" y="25" width="82" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKC-hg-1Ni">
+                            <rect key="frame" x="110" y="51" width="100" height="35"/>
+                            <color key="backgroundColor" red="0.54061418920000004" green="0.81628315500000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="Wmw-ii-CMB"/>
+                                <constraint firstAttribute="height" constant="35" id="ij2-aR-rUq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="登录/注册">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="clickLoginAndRegisterBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="c2G-2Z-bQu"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="iKC-hg-1Ni" firstAttribute="centerX" secondItem="xCd-Kr-Xer" secondAttribute="centerX" id="9rr-JJ-W4v"/>
+                        <constraint firstAttribute="height" constant="105" id="HeB-gx-raF"/>
+                        <constraint firstItem="iKC-hg-1Ni" firstAttribute="top" secondItem="xCd-Kr-Xer" secondAttribute="bottom" constant="8" id="mtB-1o-xck"/>
+                        <constraint firstItem="xCd-Kr-Xer" firstAttribute="top" secondItem="SrN-uv-l0w" secondAttribute="top" constant="25" id="zCa-xN-E8f"/>
+                        <constraint firstAttribute="centerX" secondItem="xCd-Kr-Xer" secondAttribute="centerX" id="zPZ-UR-1dx"/>
+>>>>>>> e23ac6abd3384f197348cb18f71a36b5ea3cacb4
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCY-Cg-CQQ">
