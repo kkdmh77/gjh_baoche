@@ -130,7 +130,7 @@
         }
         else
         {
-            [self showHUDInfoByString:@"请填写乘客身份证号码"];
+            [self showHUDInfoByString:@"请填写乘客手机号码"];
         }
     }
     else
