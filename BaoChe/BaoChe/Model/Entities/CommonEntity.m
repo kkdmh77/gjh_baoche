@@ -7,6 +7,7 @@
 //
 
 #import "CommonEntity.h"
+#import "UrlManager.h"
 
 @implementation AllBusListItemEntity
 
@@ -16,8 +17,8 @@
     if (self)
     {
         self.keyId = [[dict safeObjectForKey:@"id"] integerValue];
-        self.busNameStr = [dict safeObjectForKey:@"name"];
-        self.busTypeStr = [dict safeObjectForKey:@"type"];
+        self.busNameStr = [NSString stringWithFormat:@"%@次",[dict safeObjectForKey:@"classes"]];
+        self.busTypeStr = [dict safeObjectForKey:@"name"];
         self.startStation = [dict safeObjectForKey:@"origin"];
         self.endStation = [dict safeObjectForKey:@"destination"];
         self.passStation = [dict safeObjectForKey:@"pass"];
@@ -121,6 +122,7 @@
     self = [super init];
     if (self)
     {
+        self.userHeaderImageUrlStr = [UrlManager getImageRequestUrlStrByUrlComponent:[dict safeObjectForKey:@"userHeadUrl"]];
         self.emailStr = [dict safeObjectForKey:@"email"];
         self.userNicknameStr = [dict safeObjectForKey:@"nickname"];
         self.mobilePhoneNumStr = [dict safeObjectForKey:@"phone"];

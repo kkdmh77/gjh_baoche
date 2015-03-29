@@ -54,7 +54,7 @@
     
     NSString *nameSpace = nil;
     
-//    nameSpace = Img_NameSpace;
+    nameSpace = Img_NameSpace;
 //    nameSpace = Img_NameSpace_company_internal;
     
 //    if (0 == serviceSeletedValue.intValue)
@@ -105,6 +105,29 @@
         url = [NSURL URLWithString:urlStr];
     }
     return url;
+}
+
++ (NSString *)getImageRequestUrlStrByUrlComponent:(NSString *)urlComponent
+{
+    NSString *imageNameSpaceStr = [self getImageNameSpace];
+    
+    return [self getImageRequestUrlStrByNameSpace:imageNameSpaceStr  urlComponent:urlComponent];
+}
+
++ (NSString *)getImageRequestUrlStrByNameSpace:(NSString *)nameSpace urlComponent:(NSString *)urlComponent
+{
+    NSString *imageUrlStr = nil;
+    
+    if ([nameSpace isAbsoluteValid] && [urlComponent isAbsoluteValid])
+    {
+        if ([urlComponent hasPrefix:@"/"])
+        {
+            urlComponent = [urlComponent stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+        }
+        
+        imageUrlStr = [nameSpace stringByAppendingFormat:@"/%@",urlComponent];
+    }
+    return imageUrlStr;
 }
 
 @end

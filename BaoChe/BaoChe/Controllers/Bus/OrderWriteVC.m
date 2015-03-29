@@ -75,6 +75,14 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 #pragma mark - custom methods
 
+// 购票说明
+- (NSString *)getBuyTicketInstructions
+{
+    NSString *str = @"1.网络购票施行实名制，暂时不支持自选坐席；\n2.支付后可到指定地点取票或上车取票；\n3.若选取到指定地点取票，票据将在制定地点存放，若出车前一天无人前来取票，视为退票，原路返回并扣取手续费30%；若上车取票，上车时验证订单号；\n4.若未出票退票，金额原路返回；若已出票（若已取票，需退回票据）退票，出车48h前扣取10%手续费，24h〜48h前扣取30％手续费，退款将原路返回；出车0〜24h，或错过班车，将不提供退票服务；";
+    
+    return str;
+}
+
 - (void)setPageLocalizableText
 {
     [self setNavigationItemTitle:@"订单填写"];
@@ -247,7 +255,7 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -277,6 +285,10 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
     {
         return [OrderContactInfoView getViewHeight];
     }
+    else if (4 == indexPath.section)
+    {
+        return [[self getBuyTicketInstructions] sizeWithFont:SP15Font constrainedToWidth:_tableView.boundsWidth - 10 * 2].height;
+    }
     return 0;
 }
 
@@ -291,7 +303,7 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (0 == section || 3 == section)
+    if (0 == section || 4 == section)
     {
         return CellSeparatorSpace;
     }
@@ -411,6 +423,29 @@ static NSString * const cellIdentifier_orderPassenger = @"cellIdentifier_orderPa
             [cell addSubview:_orderContactInfoView];
         }
         
+        return cell;
+    }
+    else if (4 == indexPath.section)
+    {
+        static NSString *cellIdentifier = @"cellIdentifier_buyTicketInstructions";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            cell.backgroundColor = [UIColor clearColor];
+            
+            CGSize cellSize = [tableView rectForRowAtIndexPath:indexPath].size;
+            
+            InsertLabel(cell.contentView,
+                        CGRectMake(10, 0, cellSize.width - 10 * 2, cellSize.height),
+                        NSTextAlignmentLeft,
+                        [self getBuyTicketInstructions],
+                        SP15Font,
+                        Common_GrayColor,
+                        YES).backgroundColor = [UIColor clearColor];
+            
+        }
         return cell;
     }
     return nil;

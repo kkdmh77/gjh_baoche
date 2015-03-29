@@ -52,6 +52,8 @@ static CGFloat defaultViewHeight = 0;
     UIColor *blackColor = Common_BlackColor;
     UIColor *grayColor = Common_GrayColor;
     
+    [_userHeaderImageBtn setRadius:_userHeaderImageBtn.boundsWidth / 2];
+    
     // 分割线
     [self addLineWithPosition:ViewDrawLinePostionType_Bottom
                     lineColor:CellSeparatorColor

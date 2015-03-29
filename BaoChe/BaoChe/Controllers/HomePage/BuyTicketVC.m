@@ -69,6 +69,10 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
     UIColor *blackColor = Common_BlackColor;
     UIColor *grayColor = Common_GrayColor;
     
+    [_advertisingImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(IPHONE_WIDTH * 0.429));
+    }];
+    
     _startStationDescLabel.textColor = grayColor;
     _endStationDescLabel.textColor = grayColor;
     

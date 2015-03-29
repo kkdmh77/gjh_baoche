@@ -128,7 +128,7 @@ DEF_SINGLETON(PayManager);
     order.productDescription = product.productDesc;                     // 商品描述
     order.amount = [NSString stringWithFormat:@"%.2f",product.price];   // 商品价格
     order.notifyURL = @"http%3A%2F%2F121.42.145.68:8080/home-app/pay/notify";   // 回调URL
-    // order.notifyURL = @"http%3A%2F%2F113.76.74.192:9997/pay/notify";    // 回调URL
+//    order.notifyURL = @"http%3A%2F%2F121.42.145.68:8080/pay/notify";    // 回调URL
     
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";
