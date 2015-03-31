@@ -22,7 +22,7 @@
         self.startStation = [dict safeObjectForKey:@"origin"];
         self.endStation = [dict safeObjectForKey:@"destination"];
         self.passStation = [dict safeObjectForKey:@"pass"];
-        self.price = [[dict safeObjectForKey:@"price"] doubleValue];
+        self.price = [[dict safeObjectForKey:@"price"] doubleValue] / 100;
         
         NSTimeInterval startTime = [[dict safeObjectForKey:@"leaveTime"] doubleValue] / 1000;
         NSTimeInterval endTime = [[dict safeObjectForKey:@"arriveTime"] doubleValue] / 1000;
@@ -149,7 +149,7 @@
         self.busInfoEntity = [AllBusListItemEntity initWithDict:busInfoDic];
         self.orderNo = [orderInfoDic safeObjectForKey:@"orderNo"];
         self.orderStatus = [orderInfoDic safeObjectForKey:@"orderStatus"];
-        self.orderTotalFee = [[orderInfoDic safeObjectForKey:@"orderTotalFee"] doubleValue];
+        self.orderTotalFee = [[orderInfoDic safeObjectForKey:@"orderTotalFee"] doubleValue] / 100;
         self.orderTime = [[orderInfoDic safeObjectForKey:@"orderTime"] doubleValue] / 1000;
         self.mobilePhoneNumStr = [orderInfoDic safeObjectForKey:@"phone"];
         

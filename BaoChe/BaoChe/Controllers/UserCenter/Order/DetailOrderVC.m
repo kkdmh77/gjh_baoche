@@ -164,7 +164,7 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
                             style:UITableViewStylePlain
                   registerNibName:NSStringFromClass([PassengersCell class])
                   reuseIdentifier:cellIdentifier_detailOrderPassenger];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 // 支付
