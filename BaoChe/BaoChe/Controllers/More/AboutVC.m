@@ -48,11 +48,18 @@
 {
     NSString *aboutStr = [self aboutStr];
     
-    // webView
-    UIWebView *webView = InsertWebView(self.view, self.view.bounds, nil, 1000);
-    [webView loadHTMLString:aboutStr baseURL:nil];
+    // scroll
+    UIScrollView *scroll = InsertScrollView(self.view, self.view.bounds, 1000, nil);
+    UILabel *label = InsertLabel(scroll,
+                                 CGRectInset(scroll.bounds, 10, 0),
+                                 NSTextAlignmentLeft,
+                                 aboutStr,
+                                 SP14Font,
+                                 Common_BlackColor,
+                                 YES);
+    scroll.contentSize = CGSizeMake(scroll.boundsWidth, label.boundsHeight);
     
-    [self.view addSubview:webView];
+    [self.view addSubview:scroll];
 }
 
 @end
