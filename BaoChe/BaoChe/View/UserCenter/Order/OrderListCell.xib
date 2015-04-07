@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -60,7 +60,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou_cell.png" translatesAutoresizingMaskIntoConstraints="NO" id="z5U-UP-N4H">
-                        <rect key="frame" x="297" y="63" width="13" height="13"/>
+                        <rect key="frame" x="301" y="63" width="13" height="13"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="佛山南海" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzd-cK-jTo">
                         <rect key="frame" x="165" y="60" width="60" height="18"/>
@@ -74,20 +74,37 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="检票码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJB-ic-XL6">
+                        <rect key="frame" x="258" y="87" width="36" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kll-wc-K59">
+                        <rect key="frame" x="256" y="42" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="lZn-8t-0PL"/>
+                            <constraint firstAttribute="height" constant="40" id="pk1-Fe-Ptg"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="z5U-UP-N4H" secondAttribute="bottom" constant="33" id="0qY-S5-Y4y"/>
+                    <constraint firstItem="Kll-wc-K59" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zzd-cK-jTo" secondAttribute="trailing" constant="5" id="1eF-Oq-b8A"/>
                     <constraint firstItem="qdJ-6B-DJD" firstAttribute="leading" secondItem="r3J-Ev-Ijs" secondAttribute="trailing" constant="5" id="5Q1-rq-Pdh"/>
-                    <constraint firstAttribute="trailing" secondItem="z5U-UP-N4H" secondAttribute="trailing" constant="10" id="9Wv-Vw-8Wr"/>
-                    <constraint firstItem="z5U-UP-N4H" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zzd-cK-jTo" secondAttribute="trailing" constant="5" id="DEW-hY-QCA"/>
+                    <constraint firstAttribute="trailing" secondItem="z5U-UP-N4H" secondAttribute="trailing" constant="6" id="9Wv-Vw-8Wr"/>
+                    <constraint firstItem="JJB-ic-XL6" firstAttribute="top" secondItem="Kll-wc-K59" secondAttribute="bottom" constant="5" id="Aej-de-hPH"/>
+                    <constraint firstItem="z5U-UP-N4H" firstAttribute="leading" secondItem="Kll-wc-K59" secondAttribute="trailing" constant="5" id="BW7-K4-evE"/>
                     <constraint firstItem="LaJ-9u-kTT" firstAttribute="top" secondItem="r3J-Ev-Ijs" secondAttribute="bottom" constant="6" id="LgE-Pv-0II"/>
                     <constraint firstItem="r3J-Ev-Ijs" firstAttribute="top" secondItem="O8X-El-tyh" secondAttribute="bottom" constant="5" id="RxJ-hY-Uv5"/>
                     <constraint firstItem="zzd-cK-jTo" firstAttribute="leading" secondItem="qdJ-6B-DJD" secondAttribute="trailing" constant="5" id="VEi-75-tRO"/>
+                    <constraint firstAttribute="centerY" secondItem="Kll-wc-K59" secondAttribute="centerY" constant="-7" id="XVz-2Q-zcK"/>
                     <constraint firstItem="h5B-Gt-yra" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="aFH-eL-n6Y"/>
                     <constraint firstItem="zzd-cK-jTo" firstAttribute="centerY" secondItem="r3J-Ev-Ijs" secondAttribute="centerY" id="b5H-bS-L2x"/>
                     <constraint firstItem="h5B-Gt-yra" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bnt-K9-sQd"/>
                     <constraint firstItem="LaJ-9u-kTT" firstAttribute="leading" secondItem="r3J-Ev-Ijs" secondAttribute="leading" id="fXI-X7-zKg"/>
                     <constraint firstAttribute="trailing" secondItem="h5B-Gt-yra" secondAttribute="trailing" id="gan-iR-DgQ"/>
+                    <constraint firstItem="JJB-ic-XL6" firstAttribute="centerX" secondItem="Kll-wc-K59" secondAttribute="centerX" id="gzg-OP-mzx"/>
                     <constraint firstItem="r3J-Ev-Ijs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="i7r-pv-VYd"/>
                     <constraint firstItem="O8X-El-tyh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="iha-yc-mOm"/>
                     <constraint firstItem="qdJ-6B-DJD" firstAttribute="bottom" secondItem="r3J-Ev-Ijs" secondAttribute="bottom" constant="-5" id="ldb-pi-bzt"/>
@@ -95,6 +112,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="QRCodeDescLabel" destination="JJB-ic-XL6" id="5zh-aw-fFw"/>
+                <outlet property="QRCodeImageView" destination="Kll-wc-K59" id="Icj-sO-pf0"/>
                 <outlet property="busNameLabel" destination="fHu-J8-0NH" id="QNg-mr-mKG"/>
                 <outlet property="busPriceLabel" destination="8gB-8y-p1P" id="PuJ-Yd-rxZ"/>
                 <outlet property="endStationLabel" destination="zzd-cK-jTo" id="vCf-oS-Op5"/>
@@ -103,7 +122,7 @@
                 <outlet property="startStationLabel" destination="r3J-Ev-Ijs" id="t38-aw-8vC"/>
                 <outlet property="topBGView" destination="h5B-Gt-yra" id="qXT-Ao-YI5"/>
             </connections>
-            <point key="canvasLocation" x="227" y="435"/>
+            <point key="canvasLocation" x="227" y="433"/>
         </tableViewCell>
     </objects>
     <resources>

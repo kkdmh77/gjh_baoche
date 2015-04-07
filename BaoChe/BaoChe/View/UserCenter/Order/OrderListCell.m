@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *endStationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *passengersLabel;      // 乘客
 
+@property (weak, nonatomic) IBOutlet UIImageView *QRCodeImageView;  // 检票二维码
+@property (weak, nonatomic) IBOutlet UILabel *QRCodeDescLabel;
+
 @end
 
 @implementation OrderListCell
