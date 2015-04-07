@@ -8,6 +8,8 @@
 
 #import "OrderListCell.h"
 #import "NSMutableAttributedString+NimbusAttributedLabel.h"
+#import "QRCodeGenerator.h"
+#import "ClickImage.h"
 
 @interface OrderListCell ()
 
@@ -20,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *endStationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *passengersLabel;      // 乘客
 
-@property (weak, nonatomic) IBOutlet UIImageView *QRCodeImageView;  // 检票二维码
+@property (weak, nonatomic) IBOutlet ClickImage *QRCodeImageView;   // 检票二维码
 @property (weak, nonatomic) IBOutlet UILabel *QRCodeDescLabel;
 
 @end
@@ -62,6 +64,8 @@ static CGFloat defaultCellHeight = 0;
     _endStationLabel.textColor = blackColor;
     
     _passengersLabel.textColor = grayColor;
+    
+    _QRCodeImageView.canClick = YES;
     
     // 分割线
     [self.contentView addLineWithPosition:ViewDrawLinePostionType_Bottom
@@ -111,7 +115,21 @@ static CGFloat defaultCellHeight = 0;
         [passengersNameArray addObject:passengerEntity.nameStr];
     }
     NSString *passengersStr = [passengersNameArray componentsJoinedByString:@","];
-    _passengersLabel.text = [NSString stringWithFormat:@"%@(%i人)",passengersStr, entity.passengersArray.count];
+    _passengersLabel.text = [NSString stringWithFormat:@"%@(%ld人)",passengersStr, (long)entity.passengersArray.count];
+    
+    // 二维码
+    if ([entity.orderStatus isEqualToString:@"OS_VERIFIED"])
+    {
+        _QRCodeDescLabel.hidden = NO;
+        _QRCodeImageView.hidden = NO;
+        
+        _QRCodeImageView.image = [QRCodeGenerator qrImageForString:entity.orderNo imageSize:IPHONE_WIDTH];
+    }
+    else
+    {
+        _QRCodeDescLabel.hidden = YES;
+        _QRCodeImageView.hidden = YES;
+    }
 }
 
 @end

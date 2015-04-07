@@ -36,6 +36,15 @@
 		2BD868231A3DC70300BC46BF /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868221A3DC70300BC46BF /* HomePageVC.m */; };
 		2BD868261A3DCF0900BC46BF /* HomePageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */; };
 		2BD868281A3DCF1600BC46BF /* HomePageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */; };
+		2BDABAFC1AD4115C007C0096 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BDABAEC1AD4115C007C0096 /* bitstream.c */; };
+		2BDABAFD1AD4115C007C0096 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BDABAEE1AD4115C007C0096 /* mask.c */; };
+		2BDABAFE1AD4115C007C0096 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDABAF11AD4115C007C0096 /* QRCodeGenerator.m */; };
+		2BDABAFF1AD4115C007C0096 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BDABAF21AD4115C007C0096 /* qrencode.c */; };
+		2BDABB001AD4115C007C0096 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BDABAF41AD4115C007C0096 /* qrinput.c */; };
+		2BDABB011AD4115C007C0096 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BDABAF61AD4115C007C0096 /* qrspec.c */; };
+		2BDABB021AD4115C007C0096 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BDABAF81AD4115C007C0096 /* rscode.c */; };
+		2BDABB031AD4115C007C0096 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BDABAFA1AD4115C007C0096 /* split.c */; };
+		2BDABB061AD416C4007C0096 /* ClickImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDABB051AD416C4007C0096 /* ClickImage.m */; };
 		2BDC3E6D1A4DA4C8007C1130 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC3E681A4DA4C8007C1130 /* LoginVC.m */; };
 		2BDC3E6E1A4DA4C8007C1130 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDC3E691A4DA4C8007C1130 /* LoginVC.xib */; };
 		2BDC3E6F1A4DA4C8007C1130 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC3E6B1A4DA4C8007C1130 /* RegisterVC.m */; };
@@ -547,6 +556,24 @@
 		2BD868241A3DCF0900BC46BF /* HomePageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageHeaderView.h; sourceTree = "<group>"; };
 		2BD868251A3DCF0900BC46BF /* HomePageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageHeaderView.m; sourceTree = "<group>"; };
 		2BD868271A3DCF1600BC46BF /* HomePageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageHeaderView.xib; sourceTree = "<group>"; };
+		2BDABAEC1AD4115C007C0096 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
+		2BDABAED1AD4115C007C0096 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
+		2BDABAEE1AD4115C007C0096 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
+		2BDABAEF1AD4115C007C0096 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
+		2BDABAF01AD4115C007C0096 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerator.h; sourceTree = "<group>"; };
+		2BDABAF11AD4115C007C0096 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerator.m; sourceTree = "<group>"; };
+		2BDABAF21AD4115C007C0096 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
+		2BDABAF31AD4115C007C0096 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
+		2BDABAF41AD4115C007C0096 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
+		2BDABAF51AD4115C007C0096 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
+		2BDABAF61AD4115C007C0096 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
+		2BDABAF71AD4115C007C0096 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
+		2BDABAF81AD4115C007C0096 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
+		2BDABAF91AD4115C007C0096 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
+		2BDABAFA1AD4115C007C0096 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
+		2BDABAFB1AD4115C007C0096 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		2BDABB041AD416C4007C0096 /* ClickImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickImage.h; sourceTree = "<group>"; };
+		2BDABB051AD416C4007C0096 /* ClickImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickImage.m; sourceTree = "<group>"; };
 		2BDC3E671A4DA4C8007C1130 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		2BDC3E681A4DA4C8007C1130 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		2BDC3E691A4DA4C8007C1130 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
@@ -1621,6 +1648,29 @@
 				2BF2E0781A3F3B5B00F83491 /* HomePageTodayHotCell.xib */,
 			);
 			path = HomePage;
+			sourceTree = "<group>";
+		};
+		2BDABAEB1AD4115C007C0096 /* libqrencode */ = {
+			isa = PBXGroup;
+			children = (
+				2BDABAEC1AD4115C007C0096 /* bitstream.c */,
+				2BDABAED1AD4115C007C0096 /* bitstream.h */,
+				2BDABAEE1AD4115C007C0096 /* mask.c */,
+				2BDABAEF1AD4115C007C0096 /* mask.h */,
+				2BDABAF01AD4115C007C0096 /* QRCodeGenerator.h */,
+				2BDABAF11AD4115C007C0096 /* QRCodeGenerator.m */,
+				2BDABAF21AD4115C007C0096 /* qrencode.c */,
+				2BDABAF31AD4115C007C0096 /* qrencode.h */,
+				2BDABAF41AD4115C007C0096 /* qrinput.c */,
+				2BDABAF51AD4115C007C0096 /* qrinput.h */,
+				2BDABAF61AD4115C007C0096 /* qrspec.c */,
+				2BDABAF71AD4115C007C0096 /* qrspec.h */,
+				2BDABAF81AD4115C007C0096 /* rscode.c */,
+				2BDABAF91AD4115C007C0096 /* rscode.h */,
+				2BDABAFA1AD4115C007C0096 /* split.c */,
+				2BDABAFB1AD4115C007C0096 /* split.h */,
+			);
+			path = libqrencode;
 			sourceTree = "<group>";
 		};
 		2BDC3E831A4DBB09007C1130 /* AppCommon */ = {
@@ -2838,6 +2888,8 @@
 		43D1F14B19FB3AFB0049518E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2BDABB041AD416C4007C0096 /* ClickImage.h */,
+				2BDABB051AD416C4007C0096 /* ClickImage.m */,
 				43D1F14C19FB3AFB0049518E /* CycleScrollView.h */,
 				43D1F14D19FB3AFB0049518E /* CycleScrollView.m */,
 				43D1F14E19FB3AFB0049518E /* GJHAlertView.h */,
@@ -3441,6 +3493,7 @@
 		43E41B131AD372330037B945 /* ZBarSDK */ = {
 			isa = PBXGroup;
 			children = (
+				2BDABAEB1AD4115C007C0096 /* libqrencode */,
 				43E41B141AD372330037B945 /* Headers */,
 				43E41B2B1AD372330037B945 /* libzbar.a */,
 				43E41B2C1AD372330037B945 /* Resources */,
@@ -3751,6 +3804,7 @@
 				43D1F2F919FB3AFB0049518E /* UIImage+SSToolkitAdditions.m in Sources */,
 				43D775711A3D88D000C088CE /* CalendarLogic.m in Sources */,
 				43D1F2FF19FB3AFB0049518E /* VPImageCropperViewController.m in Sources */,
+				2BDABB031AD4115C007C0096 /* split.c in Sources */,
 				43D1F1A319FB3AFB0049518E /* UIProgressView+FlatUI.m in Sources */,
 				43D1F4EA19FB4C1A0049518E /* NICommonMetrics.m in Sources */,
 				43D1F56219FB4C1A0049518E /* NIOverviewMemoryCacheController.m in Sources */,
@@ -3787,6 +3841,7 @@
 				43D1ED2019FB37F30049518E /* BaoChe.xcdatamodeld in Sources */,
 				43D1F29019FB3AFB0049518E /* SDImageCache.m in Sources */,
 				43D1F16819FB3AFB0049518E /* AFHTTPRequestOperationManager.m in Sources */,
+				2BDABAFD1AD4115C007C0096 /* mask.c in Sources */,
 				43D1F54619FB4C1A0049518E /* NICellCatalog.m in Sources */,
 				43D1F4FD19FB4C1A0049518E /* UIResponder+NimbusCore.m in Sources */,
 				43D1F19D19FB3AFB0049518E /* UIBarButtonItem+FlatUI.m in Sources */,
@@ -3819,6 +3874,7 @@
 				43D7756E1A3D88D000C088CE /* CalendarDayCell.m in Sources */,
 				43D1F2AA19FB3AFB0049518E /* ATBLibs+NSDate.m in Sources */,
 				43D4026B1AC1402A00D59D9D /* PaymentManager.m in Sources */,
+				2BDABB011AD4115C007C0096 /* qrspec.c in Sources */,
 				43D1F31519FB3AFB0049518E /* PopupController.m in Sources */,
 				2BD7F0031A49B8E700905645 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				43D1F29C19FB3AFB0049518E /* AppSoundManager.m in Sources */,
@@ -3918,6 +3974,7 @@
 				43D775501A3D702400C088CE /* AllBusList_HeaderView.m in Sources */,
 				43D1F4F219FB4C1A0049518E /* NINavigationAppearance.m in Sources */,
 				2B6D6CAC1A5660A700286CE2 /* OrderInfoView.m in Sources */,
+				2BDABAFF1AD4115C007C0096 /* qrencode.c in Sources */,
 				43D1F2A219FB3AFB0049518E /* ATB_Math.m in Sources */,
 				43D1F2A919FB3AFB0049518E /* ATBLibs+NSData+Base64.m in Sources */,
 				43D1F2B319FB3AFB0049518E /* ATUtf8.c in Sources */,
@@ -3938,6 +3995,7 @@
 				43D1F1CE19FB3AFB0049518E /* MagicalRecord+ShorthandSupport.m in Sources */,
 				43D1F1D319FB3AFB0049518E /* MASLayoutConstraint.m in Sources */,
 				43D1F4E319FB4C1A0049518E /* NICollectionViewCellFactory.m in Sources */,
+				2BDABAFC1AD4115C007C0096 /* bitstream.c in Sources */,
 				43D1F16A19FB3AFB0049518E /* AFNetworkReachabilityManager.m in Sources */,
 				2BD7F0041A49B8E700905645 /* IQSegmentedNextPrevious.m in Sources */,
 				43D1F4F019FB4C1A0049518E /* NIImageUtilities.m in Sources */,
@@ -3973,6 +4031,7 @@
 				43D1F31319FB3AFB0049518E /* NetworkStatusManager.m in Sources */,
 				43D1F2B219FB3AFB0049518E /* ATColorSpace.c in Sources */,
 				43D1F54819FB4C1A0049518E /* NIFormCellCatalog.m in Sources */,
+				2BDABB001AD4115C007C0096 /* qrinput.c in Sources */,
 				43D1F2D919FB3AFB0049518E /* ATJumpAnimation.m in Sources */,
 				43D1F1C219FB3AFB0049518E /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				43D1F4EB19FB4C1A0049518E /* NIDataStructures.m in Sources */,
@@ -4029,6 +4088,7 @@
 				43D1F57019FB4C1A0049518E /* NIPhotoScrollView.m in Sources */,
 				43D1F29F19FB3AFB0049518E /* ATB_BubbleMessageLabel.m in Sources */,
 				43EF72A91AB6BB6E006D1C11 /* AddPassengersVC.m in Sources */,
+				2BDABB061AD416C4007C0096 /* ClickImage.m in Sources */,
 				4316055D1ABC135A003A4970 /* MD5DataSigner.m in Sources */,
 				43D1F1D519FB3AFB0049518E /* MASViewConstraint.m in Sources */,
 				43D1F30D19FB3AFB0049518E /* InterfaceHUDManager.m in Sources */,
@@ -4048,10 +4108,12 @@
 				43D775761A3D88D000C088CE /* NSDate+WQCalendarLogic.m in Sources */,
 				2BD868231A3DC70300BC46BF /* HomePageVC.m in Sources */,
 				43D1F1BB19FB3AFB0049518E /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				2BDABAFE1AD4115C007C0096 /* QRCodeGenerator.m in Sources */,
 				43D1F2FA19FB3AFB0049518E /* UIScreen+SSToolkitAdditions.m in Sources */,
 				4316055C1ABC135A003A4970 /* DataVerifier.m in Sources */,
 				43D1F1BD19FB3AFB0049518E /* NSManagedObject+MagicalAggregation.m in Sources */,
 				43D1F2B119FB3AFB0049518E /* ATSingleton.m in Sources */,
+				2BDABB021AD4115C007C0096 /* rscode.c in Sources */,
 				43D1ED6219FB3AD40049518E /* CommonEntity.m in Sources */,
 				43D1F1BF19FB3AFB0049518E /* NSManagedObject+MagicalFinders.m in Sources */,
 				43D1F4E419FB4C1A0049518E /* NICollectionViewModel.m in Sources */,

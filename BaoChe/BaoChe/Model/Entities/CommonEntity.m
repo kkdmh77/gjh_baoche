@@ -147,6 +147,7 @@
         
         self.keyId = [[orderInfoDic safeObjectForKey:@"id"] integerValue];
         self.busInfoEntity = [AllBusListItemEntity initWithDict:busInfoDic];
+        self.teamMobilePhone = [[busInfoDic safeObjectForKey:@"team"] safeObjectForKey:@"telephone"];
         self.orderNo = [orderInfoDic safeObjectForKey:@"orderNo"];
         self.orderStatus = [orderInfoDic safeObjectForKey:@"orderStatus"];
         self.orderTotalFee = [[orderInfoDic safeObjectForKey:@"orderTotalFee"] doubleValue] / 100;

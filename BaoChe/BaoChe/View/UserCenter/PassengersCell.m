@@ -118,6 +118,16 @@ static CGFloat defaultCellHeight = 0;
         image = nil;
         width = 65;
     }
+    else if (btnType == OperationButType_DetailOrder_AlreadyMiss)
+    {
+        _operationBtn.userInteractionEnabled = NO;
+        
+        BGColor = [UIColor lightGrayColor];
+        titleStr = @"已错过";
+        titleColor = [UIColor grayColor];
+        image = nil;
+        width = 65;
+    }
     
     [_operationBtn setBackgroundImage:image forState:UIControlStateNormal];
     [_operationBtn setTitleColor:titleColor forState:UIControlStateNormal];

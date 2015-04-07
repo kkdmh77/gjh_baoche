@@ -25,6 +25,8 @@ typedef NS_ENUM(NSInteger, OperationButType)
     OperationButType_DetailOrder_AlreadyRefundTicket,
     /// 订单详情->订单详情订票人->已出票
     OperationButType_DetailOrder_GetTicket,
+    /// 订单详情->订单详情订票人->已错过
+    OperationButType_DetailOrder_AlreadyMiss,
 };
 
 typedef void (^PassengersCellOperationHandle) (PassengersCell *cell, OperationButType type, id sender);

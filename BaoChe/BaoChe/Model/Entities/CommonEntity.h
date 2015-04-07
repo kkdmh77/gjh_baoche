@@ -82,6 +82,7 @@
 @property (nonatomic, strong)   AllBusListItemEntity  *busInfoEntity;       // 班车信息
 @property (nonatomic, strong)   NSArray  *passengersArray;                  // 乘客信息数组
 
+@property (nonatomic, copy)     NSString  *teamMobilePhone;                 // 车队号码
 @property (nonatomic, copy)     NSString  *orderNo;                         // 订单号
 @property (nonatomic, copy)     NSString  *orderStatus;                     // 订单状态
 @property (nonatomic, assign)   double    orderTotalFee;                    // 订单总价

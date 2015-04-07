@@ -17,6 +17,7 @@
 #import "OrderListVC.h"
 #import "NoPaySettlementView.h"
 #import "PaymentManager.h"
+#import "UIFactory.h"
 
 static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_detailOrderPassenger";
 
@@ -218,6 +219,10 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
          */
         return _defaultOrderEntity.passengersArray.count;
     }
+    else if (3 == section)
+    {
+        return 2;
+    }
     return 1;
 }
 
@@ -355,6 +360,11 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
         {
             cell.btnType = OperationButType_DetailOrder_GetTicket;
         }
+        // 已错过
+        else if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_INVALID"])
+        {
+            cell.btnType = OperationButType_DetailOrder_AlreadyMiss;
+        }
         // 未付款、订单已取消等其他情况
         else
         {
@@ -394,33 +404,71 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
     }
     else if (3 == indexPath.section)
     {
-        static NSString *cellIdentifier = @"cellIdentifier_orderInsurance";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (!cell)
+        // 保险
+        if (0 == indexPath.row)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            static NSString *cellIdentifier = @"cellIdentifier_orderInsurance";
             
-            CGSize cellSize = [tableView rectForRowAtIndexPath:indexPath].size;
-            
-            UILabel *descLabel = InsertLabel(cell.contentView,
-                                             CGRectMake(10, 0, 60, cellSize.height),
-                                             NSTextAlignmentRight,
-                                             @"套餐类型",
-                                             SP15Font,
-                                             Common_BlackColor,
-                                             NO);
-            
-            CGFloat insuranceOrginX = CGRectGetMaxX(descLabel.frame) + 20;
-            InsertLabel(cell.contentView,
-                        CGRectMake(insuranceOrginX, 0, cellSize.width - insuranceOrginX - 10, cellSize.height),
-                        NSTextAlignmentLeft,
-                        @"￥2保险(已买)",
-                        SP15Font,
-                        Common_ThemeColor,
-                        NO);
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (!cell)
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                [cell addLineWithPosition:ViewDrawLinePostionType_Bottom
+                                lineColor:CellSeparatorColor
+                                lineWidth:LineWidth];
+                
+                CGSize cellSize = [tableView rectForRowAtIndexPath:indexPath].size;
+                
+                UILabel *descLabel = InsertLabel(cell.contentView,
+                                                 CGRectMake(10, 0, 60, cellSize.height),
+                                                 NSTextAlignmentRight,
+                                                 @"套餐类型",
+                                                 SP15Font,
+                                                 Common_BlackColor,
+                                                 NO);
+                
+                CGFloat insuranceOrginX = CGRectGetMaxX(descLabel.frame) + 20;
+                InsertLabel(cell.contentView,
+                            CGRectMake(insuranceOrginX, 0, cellSize.width - insuranceOrginX - 10, cellSize.height),
+                            NSTextAlignmentLeft,
+                            @"￥2保险(已买)",
+                            SP15Font,
+                            Common_ThemeColor,
+                            NO);
+            }
+            return cell;
         }
-        return cell;
+        // 车队电话
+        else if (1 == indexPath.row)
+        {
+            static NSString *cellIdentifier = @"cellIdentifier_teamMobilePhone";
+            
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if (!cell)
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                
+                CGSize cellSize = [tableView rectForRowAtIndexPath:indexPath].size;
+                
+                UILabel *descLabel = InsertLabel(cell.contentView,
+                                                 CGRectMake(10, 0, 60, cellSize.height),
+                                                 NSTextAlignmentRight,
+                                                 @"车队电话",
+                                                 SP15Font,
+                                                 Common_BlackColor,
+                                                 NO);
+                
+                CGFloat teamMobilePhoneOrginX = CGRectGetMaxX(descLabel.frame) + 20;
+                InsertLabel(cell.contentView,
+                            CGRectMake(teamMobilePhoneOrginX, 0, cellSize.width - teamMobilePhoneOrginX - 10, cellSize.height),
+                            NSTextAlignmentLeft,
+                            _defaultOrderEntity.teamMobilePhone,
+                            SP15Font,
+                            Common_ThemeColor,
+                            NO);
+            }
+            return cell;
+        }
     }
     return nil;
 }
@@ -428,6 +476,12 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // 点击了车队电话
+    if (3 == indexPath.section && 1 == indexPath.row)
+    {
+        [UIFactory call:_defaultOrderEntity.teamMobilePhone];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
