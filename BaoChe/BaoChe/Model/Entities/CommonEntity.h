@@ -23,6 +23,7 @@
 @property (nonatomic, copy) NSString *timeRequired;
 @property (nonatomic, copy) NSString *passStation;
 @property (nonatomic, assign) double price;
+@property (nonatomic, copy) NSString *cartInfoStatusDesc;   // 班车状态描述
 
 @end
 
@@ -56,6 +57,7 @@
 @property (nonatomic, copy) NSString *nameStr;           // 联系人名称
 @property (nonatomic, copy) NSString *mobilePhoneStr;    // 手机号码
 @property (nonatomic, copy) NSString *afterSaleStatus;   // 付款后的使用状态
+@property (nonatomic, copy) NSString *orderStatus;       // 订单状态
 
 @end
 

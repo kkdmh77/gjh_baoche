@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *topBGView;
 @property (weak, nonatomic) IBOutlet UILabel *busNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *busInfoStatusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *busPriceLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *startAndEndTimeLabel;
@@ -54,15 +55,11 @@ static CGFloat defaultCellHeight = 0;
     UIColor *grayColor = Common_GrayColor;
     
     _busNameLabel.textColor = blackColor;
-    
+    _busInfoStatusLabel.textColor = Common_ThemeColor;
     _busPriceLabel.textColor = blackColor;
-    
     _startStationLabel.textColor = blackColor;
-    
     _startAndEndTimeLabel.textColor = grayColor;
-    
     _endStationLabel.textColor = blackColor;
-    
     _passengersLabel.textColor = grayColor;
     
     _QRCodeImageView.canClick = YES;
@@ -103,6 +100,7 @@ static CGFloat defaultCellHeight = 0;
     _busPriceLabel.attributedText = attributedPriceStr;
     
     _busNameLabel.text = [NSString stringWithFormat:@"%@(单程)", entity.busInfoEntity.busNameStr];
+    _busInfoStatusLabel.text = entity.busInfoEntity.cartInfoStatusDesc;
     NSString *startAndEndTimeStr = [NSString stringWithFormat:@"%@ %@开 - %@ %@到",entity.busInfoEntity.startTime_DateStr, entity.busInfoEntity.startTimeStr,entity.busInfoEntity.endTime_DateStr, entity.busInfoEntity.endTimeStr];
     _startAndEndTimeLabel.text = startAndEndTimeStr;
     _startStationLabel.text = entity.busInfoEntity.startStation;

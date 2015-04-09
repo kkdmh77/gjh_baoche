@@ -94,7 +94,7 @@ static CGFloat defaultCellHeight = 0;
         
         BGColor = [UIColor lightGrayColor];
         titleStr = @"退票中";
-        titleColor = [UIColor grayColor];
+        titleColor = [UIColor whiteColor];
         image = nil;
         width = 65;
     }
@@ -104,7 +104,7 @@ static CGFloat defaultCellHeight = 0;
         
         BGColor = [UIColor lightGrayColor];
         titleStr = @"已退票";
-        titleColor = [UIColor grayColor];
+        titleColor = [UIColor whiteColor];
         image = nil;
         width = 65;
     }
@@ -114,7 +114,7 @@ static CGFloat defaultCellHeight = 0;
         
         BGColor = [UIColor lightGrayColor];
         titleStr = @"已出票";
-        titleColor = [UIColor grayColor];
+        titleColor = [UIColor whiteColor];
         image = nil;
         width = 65;
     }
@@ -124,7 +124,7 @@ static CGFloat defaultCellHeight = 0;
         
         BGColor = [UIColor lightGrayColor];
         titleStr = @"已错过";
-        titleColor = [UIColor grayColor];
+        titleColor = [UIColor whiteColor];
         image = nil;
         width = 65;
     }

@@ -99,6 +99,7 @@ static CGFloat defaultViewHeight = 0;
     OS_INVALID  --已错过
     OS_CLOSED  --交易关闭
      */
+    /*
     if ([entity.orderStatus isEqualToString:@"OS_CONFIRMED"])
     {
         _orderStatusLabel.text = @"未付款";
@@ -115,6 +116,8 @@ static CGFloat defaultViewHeight = 0;
     {
         _orderStatusLabel.text = @"已出票";
     }
+     */
+    _orderStatusLabel.text = nil;
     
     _orderNumberLabel.text = entity.orderNo;
     _mobilePhoneNumLabel.text = entity.mobilePhoneNumStr;

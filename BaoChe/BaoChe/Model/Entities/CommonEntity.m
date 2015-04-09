@@ -23,6 +23,7 @@
         self.endStation = [dict safeObjectForKey:@"destination"];
         self.passStation = [dict safeObjectForKey:@"pass"];
         self.price = [[dict safeObjectForKey:@"price"] doubleValue] / 100;
+        self.cartInfoStatusDesc = [dict safeObjectForKey:@"cartInfoStatusDesc"];
         
         NSTimeInterval startTime = [[dict safeObjectForKey:@"leaveTime"] doubleValue] / 1000;
         NSTimeInterval endTime = [[dict safeObjectForKey:@"arriveTime"] doubleValue] / 1000;
@@ -108,6 +109,8 @@
         self.keyId = [[dict safeObjectForKey:@"id"] integerValue];
         self.nameStr = [dict safeObjectForKey:@"passengName"];
         self.mobilePhoneStr = [dict safeObjectForKey:@"phone"];
+        self.afterSaleStatus = nil;
+        self.orderStatus = nil;
     }
     return self;
 }
@@ -166,6 +169,7 @@
                 entity.nameStr = [oneOrderItem safeObjectForKey:@"userName"];
                 entity.mobilePhoneStr = [oneOrderItem safeObjectForKey:@"phone"];
                 entity.afterSaleStatus = [oneOrderItem safeObjectForKey:@"afterSaleStatus"];
+                entity.orderStatus = [oneOrderItem safeObjectForKey:@"orderStatus"];
                 
                 [tempArray addObject:entity];
             }

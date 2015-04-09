@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -29,13 +29,22 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待发车" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InC-qb-9xj">
+                                <rect key="frame" x="94" y="0.0" width="36" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.54061418920000004" green="0.81628315500000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="InC-qb-9xj" firstAttribute="leading" secondItem="fHu-J8-0NH" secondAttribute="trailing" constant="10" id="2cE-Z3-8WP"/>
+                            <constraint firstItem="InC-qb-9xj" firstAttribute="top" secondItem="fHu-J8-0NH" secondAttribute="top" id="6v1-3D-oOi"/>
                             <constraint firstItem="8gB-8y-p1P" firstAttribute="bottom" secondItem="fHu-J8-0NH" secondAttribute="bottom" id="HgQ-lN-QZ5"/>
                             <constraint firstAttribute="height" constant="30" id="MZf-yQ-gL5"/>
                             <constraint firstAttribute="bottom" secondItem="fHu-J8-0NH" secondAttribute="bottom" id="d1l-FH-vew"/>
                             <constraint firstItem="8gB-8y-p1P" firstAttribute="top" secondItem="fHu-J8-0NH" secondAttribute="top" id="ntW-da-chu"/>
+                            <constraint firstItem="InC-qb-9xj" firstAttribute="bottom" secondItem="fHu-J8-0NH" secondAttribute="bottom" id="oAZ-H6-GyL"/>
                             <constraint firstItem="fHu-J8-0NH" firstAttribute="top" secondItem="h5B-Gt-yra" secondAttribute="top" id="pVQ-Lb-gGW"/>
                             <constraint firstItem="fHu-J8-0NH" firstAttribute="leading" secondItem="h5B-Gt-yra" secondAttribute="leading" constant="10" id="qPP-u9-AIe"/>
                             <constraint firstAttribute="trailing" secondItem="8gB-8y-p1P" secondAttribute="trailing" constant="10" id="ubB-m5-jqN"/>
@@ -47,7 +56,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="order_arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="qdJ-6B-DJD">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="order_arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="qdJ-6B-DJD">
                         <rect key="frame" x="120" y="67" width="40" height="6"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="IXB-Ac-nYU"/>
@@ -114,6 +123,7 @@
             <connections>
                 <outlet property="QRCodeDescLabel" destination="JJB-ic-XL6" id="5zh-aw-fFw"/>
                 <outlet property="QRCodeImageView" destination="Kll-wc-K59" id="Icj-sO-pf0"/>
+                <outlet property="busInfoStatusLabel" destination="InC-qb-9xj" id="XXR-Bj-Zxi"/>
                 <outlet property="busNameLabel" destination="fHu-J8-0NH" id="QNg-mr-mKG"/>
                 <outlet property="busPriceLabel" destination="8gB-8y-p1P" id="PuJ-Yd-rxZ"/>
                 <outlet property="endStationLabel" destination="zzd-cK-jTo" id="vCf-oS-Op5"/>
@@ -122,7 +132,7 @@
                 <outlet property="startStationLabel" destination="r3J-Ev-Ijs" id="t38-aw-8vC"/>
                 <outlet property="topBGView" destination="h5B-Gt-yra" id="qXT-Ao-YI5"/>
             </connections>
-            <point key="canvasLocation" x="227" y="433"/>
+            <point key="canvasLocation" x="184" y="318"/>
         </tableViewCell>
     </objects>
     <resources>
