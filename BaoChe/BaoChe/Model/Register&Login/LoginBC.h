@@ -19,6 +19,7 @@ typedef void (^failedHandle)  (NSError *error);
 - (void)loginWithUserName:(NSString *)userName
                  password:(NSString *)password
                 autoLogin:(BOOL)autoLogin
+                  showHUD:(BOOL)show
             successHandle:(successHandle)success
              failedHandle:(failedHandle)failed;
 

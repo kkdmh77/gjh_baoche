@@ -117,6 +117,7 @@
     [_loginBC loginWithUserName:_userNameLabel.text
                        password:_passwordLabel.text
                       autoLogin:YES
+                        showHUD:YES
                   successHandle:^(id successInfoObj) {
                       
                       [UserInfoModel setUserDefaultLoginName:_userNameLabel.text];

@@ -23,7 +23,7 @@
       "idiom" : "iphone",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "welcome-1.png",
+      "filename" : "welcome960-1.png",
       "scale" : "2x"
     },
     {
@@ -45,7 +45,7 @@
       "orientation" : "portrait",
       "idiom" : "iphone",
       "extent" : "full-screen",
-      "filename" : "welcome.png",
+      "filename" : "welcome960.png",
       "scale" : "2x"
     },
     {

@@ -85,6 +85,7 @@ static NSString * const cellIdentifer_orderList = @"cellIdentifer_orderList";
      OS_FINISH   --已使用
      OS_INVALID  --已错过
      OS_CLOSED  --交易关闭
+     OS_PAY_OVERDUE --已过期
      
      PayStatus
      PS_UNPAID  --未付款

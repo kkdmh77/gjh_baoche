@@ -109,7 +109,9 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
 
 - (void)initialization
 {
-    if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_CONFIRMED"] || [_defaultOrderEntity.orderStatus isEqualToString:@"OS_CANCELED"])
+    if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_CONFIRMED"] ||
+        [_defaultOrderEntity.orderStatus isEqualToString:@"OS_CANCELED"] ||
+        [_defaultOrderEntity.orderStatus isEqualToString:@"OS_PAY_OVERDUE"])
     {
         // settlement view
         _noPaySettlementView = [NoPaySettlementView loadFromNib];
@@ -126,6 +128,11 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
         else if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_CANCELED"])
         {
             _noPaySettlementView.type = ViewType_OrderAlreadyCancel;
+        }
+        // 已过期
+        else if ([_defaultOrderEntity.orderStatus isEqualToString:@"OS_PAY_OVERDUE"])
+        {
+            _noPaySettlementView.type = ViewType_OrderAlreadyOverdue;
         }
         
         WEAKSELF
@@ -336,23 +343,23 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
         PassengersEntity *entity = _defaultOrderEntity.passengersArray[indexPath.row];
         [cell loadCellShowDataWithItemEntity:entity];
         
+        // 退款申请已经提交，等待处理
+        if ([entity.afterSaleStatus isEqualToString:@"AS_REFUND_APPLY"])
+        {
+            cell.btnType = OperationButType_DetailOrder_DoingRefundTicket;
+        }
+        // 卖家已退款，请注意查收
+        else if ([entity.afterSaleStatus isEqualToString:@"AS_REFUNDED"])
+        {
+            cell.btnType = OperationButType_DetailOrder_AlreadyRefundTicket;
+        }
         // 待使用
-        if ([entity.orderStatus isEqualToString:@"OS_VERIFIED"])
+        else if ([entity.orderStatus isEqualToString:@"OS_VERIFIED"])
         {
             // 可申请退款
             if ([entity.afterSaleStatus isEqualToString:@"AS_ENABLE"])
             {
                 cell.btnType = OperationButType_DetailOrder_ToRefundTicket;
-            }
-            // 退款申请已经提交，等待处理
-            else if ([entity.afterSaleStatus isEqualToString:@"AS_REFUND_APPLY"])
-            {
-                cell.btnType = OperationButType_DetailOrder_DoingRefundTicket;
-            }
-            // 卖家已退款，请注意查收
-            else if ([entity.afterSaleStatus isEqualToString:@"AS_REFUNDED"])
-            {
-                cell.btnType = OperationButType_DetailOrder_AlreadyRefundTicket;
             }
         }
         // 已出票
@@ -365,7 +372,7 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
         {
             cell.btnType = OperationButType_DetailOrder_AlreadyMiss;
         }
-        // 未付款、订单已取消等其他情况
+        // 未付款、订单已取消、订单已过期,等其他情况
         else
         {
             cell.btnType = OperationButType_NoOperation;

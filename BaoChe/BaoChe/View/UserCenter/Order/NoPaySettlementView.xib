@@ -11,12 +11,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单已取消" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTV-BY-9ig">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMk-x9-m88">
                     <rect key="frame" x="160" y="0.0" width="160" height="50"/>
                     <color key="backgroundColor" red="0.54061418920000004" green="0.81628315500000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,19 +33,37 @@
                         <action selector="clickSettlementBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="AGI-mX-4Qt"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单已取消" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTV-BY-9ig">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单已过期" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EI0-Hk-udO">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <color key="backgroundColor" red="0.54061418920000004" green="0.81628315500000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="ZTV-BY-9ig" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1UK-BZ-t5I"/>
                 <constraint firstItem="OMk-x9-m88" firstAttribute="leading" secondItem="rDM-Pj-cHd" secondAttribute="trailing" id="3ee-Vl-fnf"/>
                 <constraint firstAttribute="trailing" secondItem="OMk-x9-m88" secondAttribute="trailing" id="4Dp-Ma-DLV"/>
+                <constraint firstAttribute="bottom" secondItem="EI0-Hk-udO" secondAttribute="bottom" id="5Ae-V0-qoa"/>
                 <constraint firstItem="OMk-x9-m88" firstAttribute="width" secondItem="rDM-Pj-cHd" secondAttribute="width" id="BXS-xc-f38"/>
                 <constraint firstAttribute="bottom" secondItem="OMk-x9-m88" secondAttribute="bottom" id="EXK-Be-XUj"/>
+                <constraint firstAttribute="trailing" secondItem="EI0-Hk-udO" secondAttribute="trailing" id="QIB-5D-srt"/>
                 <constraint firstItem="ZTV-BY-9ig" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RXj-MG-2bu"/>
                 <constraint firstItem="rDM-Pj-cHd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XJI-sv-J0Q"/>
                 <constraint firstItem="OMk-x9-m88" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yt0-AC-qbO"/>
                 <constraint firstAttribute="bottom" secondItem="ZTV-BY-9ig" secondAttribute="bottom" id="cXw-9W-gKS"/>
                 <constraint firstAttribute="bottom" secondItem="rDM-Pj-cHd" secondAttribute="bottom" id="eGI-5w-K6Z"/>
+                <constraint firstItem="EI0-Hk-udO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jA1-tO-PjQ"/>
+                <constraint firstItem="EI0-Hk-udO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pgu-LH-82Y"/>
                 <constraint firstAttribute="trailing" secondItem="ZTV-BY-9ig" secondAttribute="trailing" id="tpb-mn-ugj"/>
                 <constraint firstItem="rDM-Pj-cHd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xot-FN-Awm"/>
             </constraints>
@@ -62,6 +74,7 @@
             <connections>
                 <outlet property="cancelOrderBtn" destination="rDM-Pj-cHd" id="3jI-PC-9qI"/>
                 <outlet property="orderAlreadyCancelLabel" destination="ZTV-BY-9ig" id="Iig-tX-gfp"/>
+                <outlet property="orderAlreadyOverdueLabel" destination="EI0-Hk-udO" id="19D-a5-XOA"/>
                 <outlet property="settlementBtn" destination="OMk-x9-m88" id="NEA-NE-de0"/>
             </connections>
             <point key="canvasLocation" x="448" y="371"/>

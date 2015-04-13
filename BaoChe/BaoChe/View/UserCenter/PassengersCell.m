@@ -113,7 +113,7 @@ static CGFloat defaultCellHeight = 0;
         _operationBtn.userInteractionEnabled = NO;
         
         BGColor = [UIColor lightGrayColor];
-        titleStr = @"已出票";
+        titleStr = @"已使用";
         titleColor = [UIColor whiteColor];
         image = nil;
         width = 65;

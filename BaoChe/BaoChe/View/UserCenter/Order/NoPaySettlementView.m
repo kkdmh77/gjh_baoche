@@ -17,7 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelOrderBtn;
 @property (weak, nonatomic) IBOutlet UIButton *settlementBtn;
 
-@property (weak, nonatomic) IBOutlet UILabel *orderAlreadyCancelLabel;
+@property (weak, nonatomic) IBOutlet UILabel *orderAlreadyCancelLabel;  // 订单已取消
+@property (weak, nonatomic) IBOutlet UILabel *orderAlreadyOverdueLabel; // 订单已过期
 
 @end
 
@@ -40,6 +41,7 @@
     _settlementBtn.backgroundColor = Common_ThemeColor;
     
     _orderAlreadyCancelLabel.backgroundColor = Common_GrayColor;
+    _orderAlreadyOverdueLabel.backgroundColor = Common_GrayColor;
 }
 
 - (void)setup
@@ -73,13 +75,26 @@
         _settlementBtn.hidden = NO;
         
         _orderAlreadyCancelLabel.hidden = YES;
+        
+        _orderAlreadyOverdueLabel.hidden = YES;
+    }
+    else if (type == ViewType_OrderAlreadyCancel)
+    {
+        _cancelOrderBtn.hidden = YES;
+        _settlementBtn.hidden = YES;
+        
+        _orderAlreadyCancelLabel.hidden = NO;
+        
+        _orderAlreadyOverdueLabel.hidden = YES;
     }
     else
     {
         _cancelOrderBtn.hidden = YES;
         _settlementBtn.hidden = YES;
         
-        _orderAlreadyCancelLabel.hidden = NO;
+        _orderAlreadyCancelLabel.hidden = YES;
+        
+        _orderAlreadyOverdueLabel.hidden = NO;
     }
 }
 

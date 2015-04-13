@@ -24,6 +24,8 @@ typedef NS_ENUM(NSInteger, ViewType)
     ViewType_OrderNoPay = 0,
     /// 已取消
     ViewType_OrderAlreadyCancel,
+    /// 已过期
+    ViewType_OrderAlreadyOverdue,
 };
 
 typedef void (^NoPaySettlementViewOperationHandle) (NoPaySettlementView *view,

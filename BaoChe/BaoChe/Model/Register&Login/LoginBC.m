@@ -22,7 +22,7 @@
 
 @implementation LoginBC
 
-- (void)loginWithUserName:(NSString *)userName password:(NSString *)password autoLogin:(BOOL)autoLogin successHandle:(successHandle)success failedHandle:(failedHandle)failed
+- (void)loginWithUserName:(NSString *)userName password:(NSString *)password autoLogin:(BOOL)autoLogin showHUD:(BOOL)show successHandle:(successHandle)success failedHandle:(failedHandle)failed
 {
     if ([userName isAbsoluteValid])
     {
@@ -31,11 +31,14 @@
             _success = success;
             _failed = failed;
             
-            [HUDManager showHUDWithToShowStr:LocalizedStr(Login_LoadingShowInfoKey)
-                                     HUDMode:MBProgressHUDModeIndeterminate
-                                    autoHide:NO
-                                  afterDelay:0
-                      userInteractionEnabled:NO];
+            if (show)
+            {
+                [HUDManager showHUDWithToShowStr:LocalizedStr(Login_LoadingShowInfoKey)
+                                         HUDMode:MBProgressHUDModeIndeterminate
+                                        autoHide:NO
+                                      afterDelay:0
+                          userInteractionEnabled:NO];
+            }
             
             // 登录操作
             NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_Login];

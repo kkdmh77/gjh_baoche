@@ -13,6 +13,7 @@
 #import "StartStationChooseVC.h"
 #import "EndStationChooseVC.h"
 #include <objc/runtime.h>
+#import "LoginBC.h"
 
 static NSString * const StartStationInputPlaceholderStr = @"请选择出发地";
 static NSString * const EndStationInputPlaceholderStr   = @"请选择目的地";
@@ -20,6 +21,8 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
 
 @interface BuyTicketVC ()
 {
+    LoginBC                   *_loginBC;
+    
     NSString *_startDateStr; // 出发日期
     NSString *_startWeekStr; // 周几
     
@@ -49,6 +52,7 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
                             highlightedImg:nil
                                     action:NULL];
     
+    [self autoLogin];
     [self initialization];
 }
 
@@ -62,6 +66,21 @@ static NSString * const DateInputPlaceholderStr         = @"请选择日期";
 - (void)setPageLocalizableText
 {
     [self setNavigationItemTitle:@"买票"];
+}
+
+- (void)autoLogin
+{
+    if ([UserInfoModel getUserDefaultLoginName] && [UserInfoModel getUserDefaultPassword])
+    {
+        _loginBC = [[LoginBC alloc] init];
+        [_loginBC loginWithUserName:[UserInfoModel getUserDefaultLoginName]
+                           password:[UserInfoModel getUserDefaultPassword]
+                          autoLogin:YES
+                            showHUD:NO
+                      successHandle:^(id successInfoObj) {
+                          
+                      } failedHandle:nil];
+    }
 }
 
 - (void)configureViewsProperties
