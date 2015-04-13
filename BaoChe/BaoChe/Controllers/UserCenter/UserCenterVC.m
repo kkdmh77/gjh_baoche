@@ -199,7 +199,7 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
     }
     else if (3 == indexPath.section)
     {
-        return 40;
+        return 45;
     }
     return 0;
 }

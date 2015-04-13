@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B4975E71ADC1EC700F496E4 /* orderInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B4975E51ADC1EC700F496E4 /* orderInfo@2x.png */; };
+		2B4975E81ADC1EC700F496E4 /* orderInfo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B4975E61ADC1EC700F496E4 /* orderInfo@3x.png */; };
 		2B521ED51A4856410083DE33 /* OrderWriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B521ED41A4856410083DE33 /* OrderWriteVC.m */; };
 		2B521ED81A4858A00083DE33 /* BusInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B521ED71A4858A00083DE33 /* BusInfoView.m */; };
 		2B521EDA1A4858AC0083DE33 /* BusInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B521ED91A4858AC0083DE33 /* BusInfoView.xib */; };
@@ -503,6 +505,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B4975E51ADC1EC700F496E4 /* orderInfo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orderInfo@2x.png"; sourceTree = "<group>"; };
+		2B4975E61ADC1EC700F496E4 /* orderInfo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orderInfo@3x.png"; sourceTree = "<group>"; };
 		2B521ED31A4856410083DE33 /* OrderWriteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderWriteVC.h; sourceTree = "<group>"; };
 		2B521ED41A4856410083DE33 /* OrderWriteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderWriteVC.m; sourceTree = "<group>"; };
 		2B521ED61A4858A00083DE33 /* BusInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusInfoView.h; sourceTree = "<group>"; };
@@ -1542,6 +1546,15 @@
 				2BD8681F1A3DC6EA00BC46BF /* HomePage */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2B4975E41ADC1EC700F496E4 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				2B4975E51ADC1EC700F496E4 /* orderInfo@2x.png */,
+				2B4975E61ADC1EC700F496E4 /* orderInfo@3x.png */,
+			);
+			path = Order;
 			sourceTree = "<group>";
 		};
 		2BD7EFDE1A49B8E700905645 /* IQKeyBoardManager */ = {
@@ -2916,6 +2929,7 @@
 		43D1F16619FB3AFB0049518E /* image */ = {
 			isa = PBXGroup;
 			children = (
+				2B4975E41ADC1EC700F496E4 /* Order */,
 				2BDC3E8D1A4EFDE4007C1130 /* BuyTicket */,
 				2BDC3E831A4DBB09007C1130 /* AppCommon */,
 				2BE0BEB21A459DB2000B8871 /* More */,
@@ -3671,6 +3685,7 @@
 				2BDC3E951A4EFE31007C1130 /* guanggao@3x.png in Resources */,
 				2BFBF2191ABF0507006AE80D /* Localizable.strings in Resources */,
 				43D775521A3D703500C088CE /* AllBusList_HeaderView.xib in Resources */,
+				2B4975E81ADC1EC700F496E4 /* orderInfo@3x.png in Resources */,
 				43D7753E1A3D4BA500C088CE /* qishidian@3x.png in Resources */,
 				43D775581A3D712900C088CE /* headerView_leftArrow@3x.png in Resources */,
 				2BDC3E861A4DBB09007C1130 /* navBack@2x.png in Resources */,
@@ -3681,6 +3696,7 @@
 				2BDC3E941A4EFE31007C1130 /* guanggao@2x.png in Resources */,
 				43D7753D1A3D4BA500C088CE /* qishidian@2x.png in Resources */,
 				43D1F56819FB4C1A0049518E /* deps in Resources */,
+				2B4975E71ADC1EC700F496E4 /* orderInfo@2x.png in Resources */,
 				43E8DE491AC015710080BFFF /* BuyTicketSuccessVC.xib in Resources */,
 				43D1ED4219FB3AAF0049518E /* CHANGELOG in Resources */,
 				2BDC3EAB1A4F0A9C007C1130 /* maipiao_normal@3x.png in Resources */,

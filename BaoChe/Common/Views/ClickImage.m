@@ -50,6 +50,7 @@ UIViewController* goBackViewController;
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:defaultRect];
     imageView.image = image;
     imageView.tag = 1;
+    imageView.backgroundColor = [UIColor greenColor];
     UIImageView *fakeImageView = [[UIImageView alloc]initWithFrame:defaultRect];
     [goBackgroundView addSubview:fakeImageView];
     [goBackgroundView addSubview:imageView];

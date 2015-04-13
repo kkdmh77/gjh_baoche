@@ -121,7 +121,8 @@ static CGFloat defaultCellHeight = 0;
         _QRCodeDescLabel.hidden = NO;
         _QRCodeImageView.hidden = NO;
         
-        _QRCodeImageView.image = [QRCodeGenerator qrImageForString:entity.orderNo imageSize:IPHONE_WIDTH];
+        _QRCodeImageView.image = [QRCodeGenerator qrImageForString:entity.orderNo imageSize:300];
+        _QRCodeImageView.backgroundColor = [UIColor redColor];
     }
     else
     {

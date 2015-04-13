@@ -82,7 +82,7 @@ static CGFloat defaultCellHeight = 0;
     {
         _operationBtn.userInteractionEnabled = YES;
         
-        BGColor = Common_LiteBlueColor;
+        BGColor = HEXCOLOR(0XE86C46);
         titleStr = @"退票";
         titleColor = [UIColor whiteColor];
         image = nil;
@@ -92,7 +92,7 @@ static CGFloat defaultCellHeight = 0;
     {
         _operationBtn.userInteractionEnabled = NO;
         
-        BGColor = [UIColor lightGrayColor];
+        BGColor = HEXCOLOR(0XA7948E);
         titleStr = @"退票中";
         titleColor = [UIColor whiteColor];
         image = nil;
@@ -102,7 +102,7 @@ static CGFloat defaultCellHeight = 0;
     {
         _operationBtn.userInteractionEnabled = NO;
         
-        BGColor = [UIColor lightGrayColor];
+        BGColor = HEXCOLOR(0XD673C0);
         titleStr = @"已退票";
         titleColor = [UIColor whiteColor];
         image = nil;
@@ -112,7 +112,7 @@ static CGFloat defaultCellHeight = 0;
     {
         _operationBtn.userInteractionEnabled = NO;
         
-        BGColor = [UIColor lightGrayColor];
+        BGColor = HEXCOLOR(0X00BECF);
         titleStr = @"已使用";
         titleColor = [UIColor whiteColor];
         image = nil;
@@ -122,7 +122,7 @@ static CGFloat defaultCellHeight = 0;
     {
         _operationBtn.userInteractionEnabled = NO;
         
-        BGColor = [UIColor lightGrayColor];
+        BGColor = HEXCOLOR(0X5E5C63);
         titleStr = @"已错过";
         titleColor = [UIColor whiteColor];
         image = nil;
