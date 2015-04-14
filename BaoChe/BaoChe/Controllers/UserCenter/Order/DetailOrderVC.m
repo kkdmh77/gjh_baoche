@@ -48,7 +48,7 @@ static NSString * const cellIdentifier_detailOrderPassenger = @"cellIdentifier_d
 // 退票成功后的提示
 - (NSString *)refundTicketSuceessAlertStr
 {
-    NSString *str = @"1.若未出票退票，金额原路返回；\n2.若已出票（若已取票，需退回票据），出车48h前扣取10%手续费，24h〜48h前扣取30％手续费，退款将原路返回；\n3.出车0〜24h，或错过班车，将不提供退票服务，敬请见谅！";
+    NSString *str = @"1.若发车24小时前退票，经审核后退款将原路返回；\n2.出车前0〜24小时内，或错过班车，将不提供退票服务，敬请见谅！";
     
     return str;
 }
