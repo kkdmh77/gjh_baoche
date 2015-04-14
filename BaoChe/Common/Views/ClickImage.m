@@ -50,7 +50,6 @@ UIViewController* goBackViewController;
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:defaultRect];
     imageView.image = image;
     imageView.tag = 1;
-    imageView.backgroundColor = [UIColor greenColor];
     UIImageView *fakeImageView = [[UIImageView alloc]initWithFrame:defaultRect];
     [goBackgroundView addSubview:fakeImageView];
     [goBackgroundView addSubview:imageView];
@@ -99,7 +98,7 @@ UIViewController* goBackViewController;
         [goBackgroundView addGestureRecognizer:tap];
         defaultImageView.alpha = 0;
         [UIView animateWithDuration:_duration animations:^{
-            imageView.frame=CGRectMake(0,([UIScreen mainScreen].bounds.size.height-image.size.height*[UIScreen mainScreen].bounds.size.width/image.size.width)/2, [UIScreen mainScreen].bounds.size.width, image.size.height*[UIScreen mainScreen].bounds.size.width/image.size.width);
+            imageView.frame=CGRectMake(([UIScreen mainScreen].bounds.size.width - image.size.width) / 2,([UIScreen mainScreen].bounds.size.height-image.size.height)/2, image.size.width, image.size.height);
             goBackgroundView.backgroundColor=[UIColor colorWithWhite:1 alpha:1];
             
         } completion:^(BOOL finished) {

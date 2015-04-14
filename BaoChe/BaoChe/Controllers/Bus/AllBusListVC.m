@@ -12,6 +12,7 @@
 #import "AllBusList_HeaderView.h"
 #import "CalendarHomeViewController.h"
 #import "OrderWriteVC.h"
+#import "NSDate+WQCalendarLogic.h"
 
 static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList";
 
@@ -118,6 +119,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
             NSString *preDateStr = [NSDate stringFromDate:preDate withFormatter:DataFormatter_Date];
             
             weakSelf.startDateStr = preDateStr;
+            weakSelf.startWeekStr = [preDate compareIfTodayWithDate];
             
             NSString *curDateAndWeekStr = [NSString stringWithFormat:@"%@ %@",weakSelf.startDateStr, weakSelf.startWeekStr];
             [headerView setCurShowDateBtnTitle:curDateAndWeekStr];
@@ -150,6 +152,7 @@ static NSString * const cellIdentifier_allBusList = @"cellIdentifier_allBusList"
             NSString *nextDateStr = [NSDate stringFromDate:nextDate withFormatter:DataFormatter_Date];
             
             weakSelf.startDateStr = nextDateStr;
+            weakSelf.startWeekStr = [nextDate compareIfTodayWithDate];
             
             NSString *curDateAndWeekStr = [NSString stringWithFormat:@"%@ %@",weakSelf.startDateStr, weakSelf.startWeekStr];
             [headerView setCurShowDateBtnTitle:curDateAndWeekStr];
