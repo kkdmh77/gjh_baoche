@@ -96,6 +96,8 @@ static NSString * const cellIdentifier_userCenterAddressCell = @"cellIdentifier_
         {
             NSString *filePath = [request.userInfo safeObjectForKey:@"filePaht"];
             [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
+            
+            [weakSelf getNetworkData];
         }
     } failedBlock:^(NetRequest *request, NSError *error) {
         

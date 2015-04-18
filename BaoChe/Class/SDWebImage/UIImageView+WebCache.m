@@ -7,152 +7,126 @@
  */
 
 #import "UIImageView+WebCache.h"
-#import "UIImage+SSToolkitAdditions.h"
+#import "objc/runtime.h"
+#import "UIView+WebCacheOperation.h"
+
+static char imageURLKey;
 
 @implementation UIImageView (WebCache)
 
-- (void)setImageWithURL:(NSURL *)url
-{
-    [self setImageWithURL:url placeholderImage:nil];
+- (void)sd_setImageWithURL:(NSURL *)url {
+    [self sd_setImageWithURL:url placeholderImage:nil options:0 progress:nil completed:nil];
 }
 
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder
-{
-    [self setImageWithURL:url placeholderImage:placeholder options:0];
+- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder {
+    [self sd_setImageWithURL:url placeholderImage:placeholder options:0 progress:nil completed:nil];
 }
 
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options
-{
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options {
+    [self sd_setImageWithURL:url placeholderImage:placeholder options:options progress:nil completed:nil];
+}
 
-    // Remove in progress downloader from queue
-    [manager cancelForDelegate:self];
+- (void)sd_setImageWithURL:(NSURL *)url completed:(SDWebImageCompletionBlock)completedBlock {
+    [self sd_setImageWithURL:url placeholderImage:nil options:0 progress:nil completed:completedBlock];
+}
 
-    self.image = placeholder;
+- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder completed:(SDWebImageCompletionBlock)completedBlock {
+    [self sd_setImageWithURL:url placeholderImage:placeholder options:0 progress:nil completed:completedBlock];
+}
 
-    if (url)
-    {
-        [manager downloadWithURL:url delegate:self options:options];
+- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options completed:(SDWebImageCompletionBlock)completedBlock {
+    [self sd_setImageWithURL:url placeholderImage:placeholder options:options progress:nil completed:completedBlock];
+}
+
+- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletionBlock)completedBlock {
+    [self sd_cancelCurrentImageLoad];
+    objc_setAssociatedObject(self, &imageURLKey, url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+    if (!(options & SDWebImageDelayPlaceholder)) {
+        dispatch_main_async_safe(^{
+            self.image = placeholder;
+        });
+    }
+    
+    if (url) {
+        __weak UIImageView *wself = self;
+        id <SDWebImageOperation> operation = [SDWebImageManager.sharedManager downloadImageWithURL:url options:options progress:progressBlock completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            if (!wself) return;
+            dispatch_main_sync_safe(^{
+                if (!wself) return;
+                if (image) {
+                    wself.image = image;
+                    [wself setNeedsLayout];
+                } else {
+                    if ((options & SDWebImageDelayPlaceholder)) {
+                        wself.image = placeholder;
+                        [wself setNeedsLayout];
+                    }
+                }
+                if (completedBlock && finished) {
+                    completedBlock(image, error, cacheType, url);
+                }
+            });
+        }];
+        [self sd_setImageLoadOperation:operation forKey:@"UIImageViewImageLoad"];
+    } else {
+        dispatch_main_async_safe(^{
+            NSError *error = [NSError errorWithDomain:@"SDWebImageErrorDomain" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"Trying to load a nil url"}];
+            if (completedBlock) {
+                completedBlock(nil, error, SDImageCacheTypeNone, url);
+            }
+        });
     }
 }
 
-#if NS_BLOCKS_AVAILABLE
-- (void)setImageWithURL:(NSURL *)url success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
-{
-    [self setImageWithURL:url placeholderImage:nil success:success failure:failure];
+- (void)sd_setImageWithPreviousCachedImageWithURL:(NSURL *)url andPlaceholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageCompletionBlock)completedBlock {
+    NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:url];
+    UIImage *lastPreviousCachedImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:key];
+    
+    [self sd_setImageWithURL:url placeholderImage:lastPreviousCachedImage ?: placeholder options:options progress:progressBlock completed:completedBlock];    
 }
 
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
-{
-    [self setImageWithURL:url placeholderImage:placeholder options:0 success:success failure:failure];
+- (NSURL *)sd_imageURL {
+    return objc_getAssociatedObject(self, &imageURLKey);
 }
 
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
-{
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+- (void)sd_setAnimationImagesWithURLs:(NSArray *)arrayOfURLs {
+    [self sd_cancelCurrentAnimationImagesLoad];
+    __weak UIImageView *wself = self;
 
-    // Remove in progress downloader from queue
-    [manager cancelForDelegate:self];
+    NSMutableArray *operationsArray = [[NSMutableArray alloc] init];
 
-    self.image = placeholder;
+    for (NSURL *logoImageURL in arrayOfURLs) {
+        id <SDWebImageOperation> operation = [SDWebImageManager.sharedManager downloadImageWithURL:logoImageURL options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            if (!wself) return;
+            dispatch_main_sync_safe(^{
+                __strong UIImageView *sself = wself;
+                [sself stopAnimating];
+                if (sself && image) {
+                    NSMutableArray *currentImages = [[sself animationImages] mutableCopy];
+                    if (!currentImages) {
+                        currentImages = [[NSMutableArray alloc] init];
+                    }
+                    [currentImages addObject:image];
 
-    if (url)
-    {
-        [manager downloadWithURL:url delegate:self options:options success:success failure:failure];
+                    sself.animationImages = currentImages;
+                    [sself setNeedsLayout];
+                }
+                [sself startAnimating];
+            });
+        }];
+        [operationsArray addObject:operation];
     }
+
+    [self sd_setImageLoadOperation:[NSArray arrayWithArray:operationsArray] forKey:@"UIImageViewAnimationImages"];
 }
 
-// 新增方法
-- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder imageShowStyle:(int)style options:(SDWebImageOptions)options success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure
-{
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    
-    // Remove in progress downloader from queue
-    [manager cancelForDelegate:self];
-    
-    self.image = placeholder;
-    
-    if (url)
-    {
-        NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:style], @"imageShowStyle", nil];
-        [manager downloadWithURL:url delegate:self options:options userInfo:info success:success failure:failure];
-    }
-}
-#endif
-
-- (void)cancelCurrentImageLoad
-{
-    [[SDWebImageManager sharedManager] cancelForDelegate:self];
+- (void)sd_cancelCurrentImageLoad {
+    [self sd_cancelImageLoadOperationWithKey:@"UIImageViewImageLoad"];
 }
 
-- (void)webImageManager:(SDWebImageManager *)imageManager didProgressWithPartialImage:(UIImage *)image forURL:(NSURL *)url userInfo:(NSDictionary *)info
-{
-    if ([info objectForKey:@"imageShowStyle"])
-    {
-        int styleValue = [[info objectForKey:@"imageShowStyle"] intValue];
-        
-        switch (styleValue)
-        {
-            case 0:
-            {
-                self.contentMode = UIViewContentModeScaleAspectFit;
-            }
-                break;
-            case 1:
-            {
-                self.contentMode = UIViewContentModeScaleToFill;
-                image = [image squareImage];
-            }
-                break;
-            case 2:
-            {
-                // do nothing
-                self.contentMode = UIViewContentModeScaleToFill;
-            }
-                break;
-                
-            default:
-                break;
-        }
-    }
-    
-    self.image = image;
-    [self setNeedsLayout];
-}
-
-- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image forURL:(NSURL *)url userInfo:(NSDictionary *)info
-{
-    if ([info objectForKey:@"imageShowStyle"])
-    {
-        int styleValue = [[info objectForKey:@"imageShowStyle"] intValue];
-        
-        switch (styleValue)
-        {
-            case 0:
-            {
-                self.contentMode = UIViewContentModeScaleAspectFit;
-            }
-                break;
-            case 1:
-            {
-                self.contentMode = UIViewContentModeScaleToFill;
-                image = [image squareImage];
-            }
-                break;
-            case 2:
-            {
-                // do nothing
-                self.contentMode = UIViewContentModeScaleToFill;
-            }
-                break;
-                
-            default:
-                break;
-        }
-    }
-    
-    self.image = image;
-    [self setNeedsLayout];
+- (void)sd_cancelCurrentAnimationImagesLoad {
+    [self sd_cancelImageLoadOperationWithKey:@"UIImageViewAnimationImages"];
 }
 
 @end

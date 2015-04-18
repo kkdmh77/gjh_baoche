@@ -30,13 +30,87 @@
 {
     self.contentMode = UIViewContentModeCenter;
     
-    [self setImageWithURL:url placeholderImage:placeholder imageShowStyle:style options:options success:success failure:failure];
+    // [self setImageWithURL:url placeholderImage:placeholder imageShowStyle:style options:options success:success failure:failure];
+    
+    WEAKSELF
+    [self sd_setImageWithPreviousCachedImageWithURL:url andPlaceholderImage:placeholder options:options progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        if (image && !error)
+        {
+            switch (style)
+            {
+                case ImageShowStyle_AutoResizing:
+                {
+                    weakSelf.contentMode = UIViewContentModeScaleAspectFit;
+                }
+                    break;
+                case ImageShowStyle_Square:
+                {
+                    weakSelf.contentMode = UIViewContentModeScaleToFill;
+                    image = [image squareImage];
+                }
+                    break;
+                case ImageShowStyle_None:
+                {
+                    // do nothing
+                    weakSelf.contentMode = UIViewContentModeScaleToFill;
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            weakSelf.image = image;
+            [weakSelf setNeedsLayout];
+            
+            // 回调
+            if (success) success(image);
+        }
+        else
+        {
+            if (failure) failure(error);
+        }
+    }];
 }
+
+- (void)loadImageSuccessImage:(UIImage*)image imageShowStyle:(ImageShowStyle)style
+{
+    switch (style)
+    {
+        case ImageShowStyle_AutoResizing:
+        {
+            self.contentMode = UIViewContentModeScaleAspectFit;
+        }
+            break;
+        case ImageShowStyle_Square:
+        {
+            self.contentMode = UIViewContentModeScaleToFill;
+            image = [image squareImage];
+        }
+            break;
+        case ImageShowStyle_None:
+        {
+            // do nothing
+            self.contentMode = UIViewContentModeScaleToFill;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    self.image = image;
+    [self setNeedsLayout];
+}
+
 #endif
 
 - (void)gjh_cancelCurrentImageLoad
 {
-    [self cancelCurrentImageLoad];
+    [self sd_cancelCurrentImageLoad];
 }
 
 @end

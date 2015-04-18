@@ -38,13 +38,25 @@
 
 - (void)gjh_setBackgroundImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options success:(void (^)(UIImage *))success failure:(void (^)(NSError *))failure
 {
-    [self setBackgroundImageWithURL:url placeholderImage:placeholder options:options success:success failure:failure];
+    // [self setBackgroundImageWithURL:url placeholderImage:placeholder options:options success:success failure:failure];
+    
+    [self sd_setBackgroundImageWithURL:url forState:UIControlStateNormal placeholderImage:placeholder options:options completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        if (image && !error)
+        {
+            if (success) success(image);
+        }
+        else
+        {
+            if (failure) failure(error);
+        }
+    }];
 }
 #endif
 
 - (void)gjh_cancelCurrentImageLoad
 {
-    [self cancelCurrentImageLoad];
+    [self sd_cancelBackgroundImageLoadForState:UIControlStateNormal];
 }
 
 @end

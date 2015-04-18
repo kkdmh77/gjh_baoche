@@ -50,7 +50,14 @@
         
         if (WebImageNotCache != options)
         {
-            cacheImg = [[SDImageCache sharedImageCache] imageFromKey:cacheKeyStr fromDisk:options == WebImageDownload ? YES : NO];
+            if (options == WebImageDownload)
+            {
+                cacheImg = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:cacheKeyStr];
+            }
+            else
+            {
+                cacheImg = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:cacheKeyStr];
+            }
         }
         
         if (cacheImg)
@@ -187,7 +194,16 @@
         UIImage *cacheImg = nil;
         
         if (WebImageNotCache != options)
-            cacheImg = [[SDImageCache sharedImageCache] imageFromKey:cacheKeyStr fromDisk:options == WebImageDownload ? YES : NO];
+        {
+            if (options == WebImageDownload)
+            {
+                cacheImg = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:cacheKeyStr];
+            }
+            else
+            {
+                cacheImg = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:cacheKeyStr];
+            }
+        }
         
         if (cacheImg)
         {
