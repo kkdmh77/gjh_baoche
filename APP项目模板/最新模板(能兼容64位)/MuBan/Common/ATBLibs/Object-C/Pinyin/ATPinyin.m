@@ -69,7 +69,7 @@ static ATPinyin* s_sharedPinyin = nil;
 - (void) dealloc
 {
     [self closeDatabase];
-    [super dealloc];
+//    [super dealloc];
 }
 
 
@@ -84,9 +84,9 @@ static ATPinyin* s_sharedPinyin = nil;
         }
         
         [self closeDatabase];
-        [_dbPath release];
+//        [_dbPath release];
         
-        [_dbPath release];
+//        [_dbPath release];
         _dbPath = [dbPath copy];
         
         int err = sqlite3_open([_dbPath UTF8String], &_db);
@@ -107,7 +107,7 @@ static ATPinyin* s_sharedPinyin = nil;
 
 
 
-static int bindTextsAndStep(sqlite3_stmt* stmt, NSString** texts, int count, int _numberOfRetries)
+static int bindTextsAndStep(sqlite3_stmt* stmt, NSString*__strong* texts, int count, int _numberOfRetries)
 {
     int queryCount = sqlite3_bind_parameter_count(stmt);
     count = MIN(queryCount, count);
@@ -199,7 +199,7 @@ static int bindTextsAndStep(sqlite3_stmt* stmt, NSString** texts, int count, int
         sqlite3_finalize(_selectStmt);
         _selectStmt = NULL;
         
-        [_dbPath release];
+//        [_dbPath release];
         _dbPath = nil;
         
         bool triedFinalizingOpenStatements = false;

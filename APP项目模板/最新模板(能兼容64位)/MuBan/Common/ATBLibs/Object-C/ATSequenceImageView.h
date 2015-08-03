@@ -28,14 +28,14 @@
     NSInteger                       _seqRepeatCount;
     NSInteger                       _seqRestCount;
     BOOL                            _isSeqAnimating;
-    id<ATSequenceImageViewDelegate> _delegate;
+//    id<ATSequenceImageViewDelegate> _delegate;
     struct
     {
         unsigned char*  bytes;
         unsigned int    length;
     } _indices;
 }
-@property (nonatomic, retain)   NSArray*    seqImages;      // 多张图片
+@property (nonatomic, strong)   NSArray*    seqImages;      // 多张图片
 @property (nonatomic, assign)   CGFloat     seqInterval;    // 每一桢的间隔
 @property (nonatomic, assign)   NSInteger   seqRepeatCount; // 动画重复的次数, 为负数表示总是重复
 @property (nonatomic, assign)   id          delegate;       // 代理

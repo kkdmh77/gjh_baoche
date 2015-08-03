@@ -25,8 +25,8 @@
 typedef struct ATLayoutInfo
 {
     UIEdgeInsets    edge;
-    NSString*       location;
-    NSString*       spaces;
+    __unsafe_unretained NSString*       location;
+    __unsafe_unretained NSString*       spaces;
     BOOL            isVertical;
     BOOL            isGrid;
 } ATLayoutInfo;

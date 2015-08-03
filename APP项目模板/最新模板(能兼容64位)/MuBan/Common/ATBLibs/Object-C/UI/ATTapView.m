@@ -17,7 +17,7 @@
 - (void) dealloc
 {
 //    SafelyRelease(&_touchEvent);
-    [super dealloc];
+//    [super dealloc];
 }
 
 - (id) initWithFrame:(CGRect)frame
@@ -61,8 +61,9 @@
     {
         if ([_delegate respondsToSelector:@selector(ATTapViewDidTap:)])
         {
-            [_touchEvent release];
-            _touchEvent = [event retain];
+//            [_touchEvent release];
+//            _touchEvent = [event retain];
+            _touchEvent = event;
             [_delegate ATTapViewDidTap:self];
             hasAction = YES;
         }
@@ -72,8 +73,9 @@
     {
         if ([_delegate respondsToSelector:@selector(ATTapViewDidTouchEnded:)])
         {
-            [_touchEvent release];
-            _touchEvent = [event retain];
+//            [_touchEvent release];
+//            _touchEvent = [event retain];
+            _touchEvent = event;
             [_delegate ATTapViewDidTouchEnded:self];
         }
     }

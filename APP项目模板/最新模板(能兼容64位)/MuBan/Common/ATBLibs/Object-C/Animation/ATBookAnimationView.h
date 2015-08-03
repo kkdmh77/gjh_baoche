@@ -56,7 +56,7 @@ extern CGAffineTransform ATBookTransformMake(CGPoint transition, CGFloat scale, 
     CATransform3D       _transform3D;
     
     BOOL                _enableTransform;
-    id<ATBookAnimationViewDelegate> _delegate;
+//    id<ATBookAnimationViewDelegate> _delegate;
 }
 @property (nonatomic, assign)   BookAnimationType   animationType;
 @property (nonatomic, assign)   CGFloat             duration;

@@ -17,31 +17,31 @@
 }
 
 
-- (id)retain 
-{
-    return self;
-}
+//- (id)retain 
+//{
+//    return self;
+//}
 
 
-- (NSUInteger)retainCount 
-{
-    return UINT_MAX;  // denotes an object that cannot be released
-}
+//- (NSUInteger)retainCount 
+//{
+//    return UINT_MAX;  // denotes an object that cannot be released
+//}
 
 
-- (void)release 
-{
-    //do nothing
-}
+//- (void)release 
+//{
+//    //do nothing
+//}
 
 
-- (id)autorelease 
-{
-    return self;
-}
+//- (id)autorelease 
+//{
+//    return self;
+//}
 
 
-+ (void)  generateInstanceIfNeed:(NSObject**)sharedInstance
++ (void)  generateInstanceIfNeed:(NSObject*__strong *)sharedInstance
 {
     if (*sharedInstance == nil)
     {

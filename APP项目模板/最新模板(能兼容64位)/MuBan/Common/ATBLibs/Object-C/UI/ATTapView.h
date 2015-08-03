@@ -22,7 +22,7 @@
 @interface ATTapView : UIView 
 {
 @private
-    id<ATTapViewDelegate>   _delegate;
+//    id<ATTapViewDelegate>   _delegate;
     BOOL                    _ignoreTap;
     UIEvent*                _touchEvent;
 }

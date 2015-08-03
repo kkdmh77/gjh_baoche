@@ -26,7 +26,7 @@
 @interface NSArray(ATBLibsAddtions)
 
 // 从数组中取出数据
-- (void) unpack:(id*)obj, ... NS_REQUIRES_NIL_TERMINATION;
+- (void) unpack:(id __strong *)obj, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end
 

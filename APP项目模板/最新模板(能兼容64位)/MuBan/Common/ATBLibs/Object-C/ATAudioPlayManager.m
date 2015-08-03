@@ -15,7 +15,7 @@
 @private
     AVAudioPlayer*                  _player;
     NSInteger                       _tag;
-    id<ATAudioPlayManagerDelegate>  _delegate;
+//    id<ATAudioPlayManagerDelegate>  _delegate;
 }
 @property (nonatomic, retain)   AVAudioPlayer*                  player;
 @property (nonatomic, assign)   NSInteger                       tag;
@@ -30,8 +30,8 @@
 
 - (void) dealloc
 {
-    [_player release];
-    [super dealloc];
+//    [_player release];
+//    [super dealloc];
 }
 
 @end
@@ -52,8 +52,8 @@ static ATAudioPlayManager* s_audioPlayManager = nil;
 
 - (void) dealloc
 {
-    [_audioPlaying release];
-    [super dealloc];
+//    [_audioPlaying release];
+//    [super dealloc];
 }
 
 
@@ -68,7 +68,7 @@ static ATAudioPlayManager* s_audioPlayManager = nil;
     }
     
     NSURL *soundURL = [NSURL fileURLWithPath:audioPath];
-    AVAudioPlayer* audioPlayer = [[[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:nil] autorelease];
+    AVAudioPlayer* audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:nil];
     if (audioPlayer == nil)
     {
         return nil;
@@ -82,7 +82,7 @@ static ATAudioPlayManager* s_audioPlayManager = nil;
         _audioPlaying = [[NSMutableDictionary alloc] initWithCapacity:1];
     }
     
-    audioInfo = [[[_ATAudioPlayerInfo alloc] init] autorelease];
+    audioInfo = [[_ATAudioPlayerInfo alloc] init];
     audioInfo.player = audioPlayer;
     audioInfo.tag = tag;
     audioInfo.delegate = delegate;

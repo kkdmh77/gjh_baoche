@@ -22,9 +22,9 @@
     {
         [aView removeFromSuperview];
     }
-    [_image release];
-    [_smallImageViews release];
-    [super dealloc];
+//    [_image release];
+//    [_smallImageViews release];
+//    [super dealloc];
 }
 
 
@@ -34,7 +34,7 @@
     self = [super init];
     if (self)
     {
-        _image = [image retain];
+        _image = image;
         _smallImageViews = [[NSMutableArray alloc] initWithCapacity:20];
         self.imageCount = 20;
     }
@@ -136,7 +136,7 @@ static CAAnimationGroup* _ExplosionAnimation(CGPoint center, CGFloat degree, CGF
         NSInteger tmp = count - [_smallImageViews count];
         for (NSInteger idx = 0; idx < tmp; idx++)
         {
-            UIImageView *imageView = [[[UIImageView alloc] initWithImage:_image] autorelease];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:_image];
             imageView.frame = CGRectMake(0, 0, 10, 10);
             [_smallImageViews addObject:imageView];
         }

@@ -36,15 +36,15 @@ static NSArray* ParseStyledText(NSString* styledText, _StyledAttribute* initAttr
 
 - (void) dealloc
 {
-    [_color release];
-    [_font release];
-    [super dealloc];
+//    [_color release];
+//    [_font release];
+//    [super dealloc];
 }
 
 
 - (id) copyMe
 {
-    _StyledAttribute* obj = [[[_StyledAttribute alloc] init] autorelease];
+    _StyledAttribute* obj = [[_StyledAttribute alloc] init];
     obj.font = _font;
     obj.color = _color;
     return obj;
@@ -79,10 +79,10 @@ static NSArray* ParseStyledText(NSString* styledText, _StyledAttribute* initAttr
 
 - (void) dealloc
 {
-    [_text release];
-    [_font release];
-    [_color release];
-    [super dealloc];
+//    [_text release];
+//    [_font release];
+//    [_color release];
+//    [super dealloc];
 }
 
 
@@ -114,11 +114,11 @@ static NSArray* ParseStyledText(NSString* styledText, _StyledAttribute* initAttr
 
 - (void) dealloc
 {
-    [_textColor release];
-    [_font release];
-    [_styledText release];
-    [_framents release];
-    [super dealloc];
+//    [_textColor release];
+//    [_font release];
+//    [_styledText release];
+//    [_framents release];
+//    [super dealloc];
 }
 
 
@@ -170,9 +170,10 @@ static NSArray* ParseStyledText(NSString* styledText, _StyledAttribute* initAttr
 {
     if (_font != font)
     {
-        [_font release];
-        _font = [font retain];
-        [_framents release];
+//        [_font release];
+//        _font = [font retain];
+        _font = font;
+//        [_framents release];
         _framents = nil;
         [self setNeedsDisplay];
     }
@@ -183,9 +184,10 @@ static NSArray* ParseStyledText(NSString* styledText, _StyledAttribute* initAttr
 {
     if (_textColor != textColor)
     {
-        [_textColor release];
-        _textColor = [textColor retain];
-        [_framents release];
+//        [_textColor release];
+//        _textColor = [textColor retain];
+        _textColor = textColor;
+//        [_framents release];
         _framents = nil;
         [self setNeedsDisplay];
     }
@@ -196,9 +198,10 @@ static NSArray* ParseStyledText(NSString* styledText, _StyledAttribute* initAttr
 {
     if (_styledText != styledText)
     {
-        [_styledText release];
-        _styledText = [styledText retain];
-        [_framents release];
+//        [_styledText release];
+//        _styledText = [styledText retain];
+        _styledText = styledText;
+//        [_framents release];
         _framents = nil;
         [self setNeedsDisplay];
     }
@@ -218,13 +221,14 @@ static NSArray* ParseStyledText(NSString* styledText, _StyledAttribute* initAttr
 
 - (void) _parseStyledText
 {
-    _StyledAttribute* initAtt = [[[_StyledAttribute alloc] init] autorelease];
+    _StyledAttribute* initAtt = [[_StyledAttribute alloc] init];
     initAtt.font = _font ? _font : [UIFont boldSystemFontOfSize:16];
     initAtt.color = self.textColor;
     
     NSArray* framents = ParseStyledText(self.styledText, initAtt);
-    [_framents release];
-    _framents = [framents retain];
+//    [_framents release];
+//    _framents = [framents retain];
+    _framents = framents;
     
     _suiableSize.width = 0;
     _suiableSize.height = 0;
@@ -278,7 +282,7 @@ static NSArray* ParseStyledText(NSString* styledText, _StyledAttribute* initAttr
 typedef NSMutableArray  _AttributeStack;
 inline static _AttributeStack*  New_Stack()
 {
-    return [[[NSMutableArray alloc] initWithCapacity:1] autorelease];
+    return [[NSMutableArray alloc] initWithCapacity:1];
 }
 
 inline static _StyledAttribute* Stack_Top(_AttributeStack* stack)
@@ -307,7 +311,7 @@ static inline _StyledFrament* parseFrament(_AttributeStack* stack, NSString* tex
 	}
     
     _StyledAttribute* attribute = Stack_Top(stack);
-	_StyledFrament* frament = [[[_StyledFrament alloc] init] autorelease];
+	_StyledFrament* frament = [[_StyledFrament alloc] init];
     frament.text = text;
     frament.font = attribute.font;
     frament.color = attribute.color;

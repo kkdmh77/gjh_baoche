@@ -34,6 +34,6 @@
 - (NSUInteger)retainCount;
 
 // 如果实例为空，就需要生成实例
-+ (void)  generateInstanceIfNeed:(NSObject**)sharedInstance;
++ (void)  generateInstanceIfNeed:(NSObject*__strong*)sharedInstance;
 
 @end

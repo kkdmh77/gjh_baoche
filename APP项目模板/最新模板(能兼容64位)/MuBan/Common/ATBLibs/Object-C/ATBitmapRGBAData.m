@@ -39,20 +39,20 @@ static CGContextRef _NewBitmapRGBA8Context(void* bytes, size_t width, size_t hei
 - (void) dealloc
 {
     free(_pixels);
-    [super dealloc];
+//    [super dealloc];
 }
 
 
 
 + (id) dataWithCGImage:(CGImageRef)imageRef
 {
-    return [[[self alloc] initWithCGImage:imageRef] autorelease];
+    return [[self alloc] initWithCGImage:imageRef];
 }
 
 
 + (id) dataWithBitmapData:(ATBitmapRGBAData*)data
 {
-    return [[[self alloc] initWithBitmapData:data] autorelease];
+    return [[self alloc] initWithBitmapData:data];
 }
 
 
@@ -358,7 +358,7 @@ static unsigned int _changeHue(unsigned int color, CGFloat newHue)
     CGImageRef imageRef = [self createImageRefCopyData:NO];
     CGImageRef otherRef = CGImageCreateWithImageInRect(imageRef, rect);
     
-    ATBitmapRGBAData* data = [[[ATBitmapRGBAData alloc] initWithCGImage:otherRef] autorelease];
+    ATBitmapRGBAData* data = [[ATBitmapRGBAData alloc] initWithCGImage:otherRef];
     
     CGImageRelease(imageRef);
     CGImageRelease(otherRef);

@@ -29,7 +29,7 @@ UIScrollView *InsertScrollViewCanWebImagesByUrls(UIView *superView, CGRect rect,
     
     for (int i = 0; i < netImageUrlArray.count; i++)
     {
-        MyScaleScrollView *scaleScroll = [[[MyScaleScrollView alloc] initWithFrame:scrollView.bounds] autorelease];
+        MyScaleScrollView *scaleScroll = [[MyScaleScrollView alloc] initWithFrame:scrollView.bounds];
         scaleScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         scaleScroll.tag = 1000 + i;
         [scrollView addSubview:scaleScroll];
@@ -40,7 +40,7 @@ UIScrollView *InsertScrollViewCanWebImagesByUrls(UIView *superView, CGRect rect,
         
         NSString *imgUrlStr = [netImageUrlArray objectAtIndex:i];
         
-        [tempBtn setBackgroundImageWithURL:[NSURL URLWithString:imgUrlStr] placeholderImage:placeholderImg options:SDWebImageCacheMemoryOnly resize:resize];
+//        [tempBtn setBackgroundImageWithURL:[NSURL URLWithString:imgUrlStr] placeholderImage:placeholderImg options:SDWebImageCacheMemoryOnly resize:resize];
     }
     
     //设置主scroll里view的frame
@@ -92,7 +92,7 @@ UIScrollView *InsertScrollViewByLocalImages(UIView *superView, CGRect rect, int 
         UIView *imgBtnBackView = nil;
         
         if (canZoom)
-            imgBtnBackView = [[[MyScaleScrollView alloc] initWithFrame:scrollView.bounds] autorelease];
+            imgBtnBackView = [[MyScaleScrollView alloc] initWithFrame:scrollView.bounds];
         else
             imgBtnBackView = InsertView(nil, scrollView.bounds);
         
@@ -153,7 +153,7 @@ UIScrollView *InsertScrollViewCanScrollSubViews(UIView *superView, CGRect rect, 
     
     for (int i = 0; i < scrollCount; i++)
     {
-        MyScaleScrollView *scaleScroll = [[[MyScaleScrollView alloc] initWithFrame:scrollView.bounds] autorelease];
+        MyScaleScrollView *scaleScroll = [[MyScaleScrollView alloc] initWithFrame:scrollView.bounds];
         scaleScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         scaleScroll.tag = 1000 + i;
         [scrollView addSubview:scaleScroll];
@@ -202,7 +202,7 @@ UIScrollView *InsertScrollViewCanScrollSubViews(UIView *superView, CGRect rect, 
 
 UIScrollView *InsertScrollView(UIView *superView, CGRect rect, int tag,id<UIScrollViewDelegate> delegate)
 {
-    UIScrollView *scrollView = [[[UIScrollView alloc] initWithFrame:rect] autorelease];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:rect];
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     scrollView.tag = tag;
     scrollView.backgroundColor = [UIColor whiteColor];
@@ -307,7 +307,7 @@ UILabel *InsertBubbleMessageLabel(id superView, CGRect cRect, BubbleMessageStyle
     if (superView)
         [superView addSubview:tempLabel];
     
-	return [tempLabel autorelease];
+	return tempLabel;
 }
 
 UILabel *InsertLabel(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize)
@@ -360,7 +360,7 @@ UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect
     if (superView)
         [superView addSubview:tempLabel];
     
-	return [tempLabel autorelease];
+	return tempLabel;
 }
 
 UIWebView *InsertWebView(id superView,CGRect cRect, id<UIWebViewDelegate>delegate, int tag)
@@ -378,7 +378,7 @@ UIWebView *InsertWebView(id superView,CGRect cRect, id<UIWebViewDelegate>delegat
     if (superView)
         [superView addSubview:tempWebView];
     
-    return [tempWebView autorelease];
+    return tempWebView;
 }
 
 UIButton *InsertButton(id view, CGRect rc, int tag, NSString *title, id target, SEL action){
@@ -496,7 +496,7 @@ UITableView *InsertTableView(id superView, CGRect rect, id<UITableViewDataSource
     if (superView)
         [superView addSubview:tabView];
     
-    return [tabView autorelease];
+    return tabView;
 }
 
 UITextField *InsertTextField(id view, id delegate, CGRect rc, NSString *placeholder, UIFont *font, NSTextAlignment textAlignment, UIControlContentVerticalAlignment contentVerticalAlignment){
@@ -512,7 +512,7 @@ UITextField *InsertTextField(id view, id delegate, CGRect rc, NSString *placehol
     if (view)
         [view addSubview:myTextField];
     
-	return [myTextField autorelease];
+	return myTextField;
 }
 
 FUITextField *InsertFUITextField(id view, id delegate, CGRect rc, NSString *placeholder, UIFont *font, NSTextAlignment textAlignment, UIControlContentVerticalAlignment contentVerticalAlignment, UIColor *textFieldColor, UIEdgeInsets edgeInsets)
@@ -543,7 +543,7 @@ FUITextField *InsertFUITextFieldWithBorder(id view, id delegate, CGRect rc, NSSt
     if (view)
         [view addSubview:myTextField];
     
-	return [myTextField autorelease];
+	return myTextField;
 }
 
 UISwitch *InsertSwitch(id view, CGRect rc){
@@ -552,7 +552,7 @@ UISwitch *InsertSwitch(id view, CGRect rc){
     if (view)
         [view addSubview:sw];
     
-	return [sw autorelease];
+	return sw;
 }
 
 UISegmentedControl *InsertSegment(id view, CGRect rc){
@@ -562,7 +562,7 @@ UISegmentedControl *InsertSegment(id view, CGRect rc){
     if (view)
         [view addSubview:seg];
     
-	return [seg autorelease];
+	return seg;
 }
 
 UIImageView *InsertImageView(id view, CGRect rect, UIImage *image, NSURL *imageUrl){
@@ -574,7 +574,12 @@ UIImageView *InsertImageView(id view, CGRect rect, UIImage *image, NSURL *imageU
     }
     else
     {
-        [imageView setImageWithURL:imageUrl placeholderImage:image options:SDWebImageCacheMemoryOnly];
+//        [imageView setImageWithURL:imageUrl placeholderImage:image options:SDWebImageCacheMemoryOnly];
+        [imageView gjh_setImageWithURL:imageUrl placeholderImage:image imageShowStyle:ImageShowStyle_None options:SDWebImageCacheMemoryOnly success:^(UIImage *image) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
     }
     
     imageView.userInteractionEnabled = YES;
@@ -582,7 +587,7 @@ UIImageView *InsertImageView(id view, CGRect rect, UIImage *image, NSURL *imageU
     if (view)
         [view addSubview:imageView];
     
-    return [imageView autorelease];
+    return imageView;
 }
 
 UIView *InsertView(id view, CGRect rect){
@@ -592,7 +597,7 @@ UIView *InsertView(id view, CGRect rect){
     if (view)
         [view addSubview:_view];
     
-    return [_view autorelease];
+    return _view;
 }
 
 UIPickerView *InsertPickerView(id view, CGRect rect){
@@ -602,7 +607,7 @@ UIPickerView *InsertPickerView(id view, CGRect rect){
     if (view)
         [view addSubview:_view];
     
-    return [_view autorelease];
+    return _view;
 }
 
 void SetAnimationFrame(UIView *view, CGRect frame){
@@ -631,13 +636,13 @@ void WebSimpleLoadWithLocalFile(UIWebView *web, NSString *filename){
 }
 
 void WebSimpleLoadRequest(UIWebView *web, NSString *strURL){
-    NSURLRequest *request = [[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:strURL]] autorelease];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:strURL]];
     
     [web loadRequest:request];
 }
 
 void WebSimpleLoadRequestWithCookie(UIWebView *web, NSString *strURL, NSString *cookies){
-    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:strURL]] autorelease];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:strURL]];
     [request addValue:cookies forHTTPHeaderField:@"Cookie"];
     [web loadRequest:request];
 }

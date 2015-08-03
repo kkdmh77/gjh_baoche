@@ -23,10 +23,10 @@
 {
 @private
     UIImage*                        _image;
-    UIView*                         _attachedView;
+    __unsafe_unretained UIView*                         _attachedView;
     CGPoint                         _explosionPoint;
     NSMutableArray*                 _smallImageViews;
-    id<ATExplosionAnimationDelegate>_delegate;
+    __unsafe_unretained id<ATExplosionAnimationDelegate>_delegate;
 }
 @property (nonatomic, assign)   UIView*     attachedView;
 @property (nonatomic, assign)   CGPoint     explosionPoint;
