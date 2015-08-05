@@ -312,22 +312,27 @@ UILabel *InsertBubbleMessageLabel(id superView, CGRect cRect, BubbleMessageStyle
 
 UILabel *InsertLabel(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize)
 {
-    return InsertLabelWithContentOffset(superView, cRect, align, contentStr, textFont, textColor, resize, CGSizeMake(0, 0));
+    return InsertLabelWithCustomResize(superView, cRect, align, contentStr, textFont, textColor, resize, resize);
 }
 
-UILabel *InsertLabelWithContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize, CGSize contentOffset)
+UILabel *InsertLabelWithCustomResize(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight)
 {
-    return InsertLabelWithShadowAndContentOffset(superView, cRect, align, contentStr, textFont, textColor, resize, NO, nil, CGSizeMake(0, 0), contentOffset);
+    return InsertLabelWithContentOffset(superView, cRect, align, contentStr, textFont, textColor, resizeWidth, resizeHeight, CGSizeZero);
 }
 
-UILabel *InsertLabelWithShadowAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, CGSize contentOffset)
+UILabel *InsertLabelWithContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight, CGSize contentOffset)
 {
-    return InsertLabelWithShadowAndLineAndContentOffset(superView, cRect, align, contentStr, textFont, textColor, resize, shadow, shadowColor, shadowOffset, NO, TopLine, 0.0, nil, contentOffset);
+    return InsertLabelWithShadowAndContentOffset(superView, cRect, align, contentStr, textFont, textColor, resizeWidth, resizeHeight, NO, nil, CGSizeZero, contentOffset);
 }
 
-UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, BOOL isLine, LinePositionType positionType, float lineWidth, UIColor *lineColor, CGSize contentOffset)
+UILabel *InsertLabelWithShadowAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, CGSize contentOffset)
 {
-    //初始化label
+    return InsertLabelWithShadowAndLineAndContentOffset(superView, cRect, align, contentStr, textFont, textColor, resizeWidth, resizeHeight, shadow, shadowColor, shadowOffset, NO, TopLine, 0.0, nil, contentOffset);
+}
+
+UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, BOOL isLine, LinePositionType positionType, float lineWidth, UIColor *lineColor, CGSize contentOffset)
+{
+    // 初始化label
     UILabel *tempLabel = [[ATB_StrikeThroughLabel alloc] initWithFrame:cRect strikeThroughEnabled:isLine linePositionType:positionType lineWidth:lineWidth lineColor:lineColor contentOffset:contentOffset];
     tempLabel.textAlignment = align;
     tempLabel.textColor = textColor;
@@ -336,18 +341,21 @@ UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect
     tempLabel.text = contentStr;
     [tempLabel setNumberOfLines:1];
     
-    if (resize && nil != contentStr)
+    if ((resizeWidth || resizeHeight) && nil != contentStr)
     {
         [tempLabel setNumberOfLines:0];
         
-        //设置自动行数与字符换行
+        // 设置自动行数与字符换行
         tempLabel.lineBreakMode = NSLineBreakByWordWrapping;
         
-        //设置一个行的宽度和高度上限
-        CGSize size = CGSizeMake(cRect.size.width - contentOffset.width * 2, 80000.0);
-        //计算实际frame大小，并将label的frame变成实际大小
+        // 设置一个行的宽度和高度上限
+        CGSize size = CGSizeMake(cRect.size.width - contentOffset.width * 2, FLT_MAX);
+        // 计算实际frame大小，并将label的frame变成实际大小
         CGSize labelsize = [contentStr sizeWithFont:textFont constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
-        tempLabel.frame = CGRectMake(cRect.origin.x, cRect.origin.y, cRect.size.width, labelsize.height + contentOffset.height * 2);
+        
+        CGFloat width = resizeWidth ? (labelsize.width + contentOffset.width * 2) : cRect.size.width;
+        CGFloat height = resizeHeight ? (labelsize.height + contentOffset.height * 2) : cRect.size.height;
+        tempLabel.frame = CGRectMake(cRect.origin.x, cRect.origin.y, width, height);
     }
     
     if (shadow)
@@ -356,11 +364,11 @@ UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect
             tempLabel.shadowColor = shadowColor;
         tempLabel.shadowOffset = shadowOffset;
     }
-	
+    
     if (superView)
         [superView addSubview:tempLabel];
     
-	return tempLabel;
+    return tempLabel;
 }
 
 UIWebView *InsertWebView(id superView,CGRect cRect, id<UIWebViewDelegate>delegate, int tag)

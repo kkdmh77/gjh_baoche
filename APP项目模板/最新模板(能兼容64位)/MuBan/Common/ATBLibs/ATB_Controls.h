@@ -25,10 +25,11 @@ void RemoveAllSubviews(UIView *view);
 // UILabel(下级接口包含上级接口内容)
 UILabel *InsertBubbleMessageLabel(id superView, CGRect cRect, BubbleMessageStyle style, NSString *contentStr, UIFont *textFont, UIColor *texCcolor, BOOL resize); // 气泡式
 
-UILabel *InsertLabel(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize); // 带自适应高度
-UILabel *InsertLabelWithContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize, CGSize contentOffset); // 带内容偏移量(此接口一定要自适应高度)
-UILabel *InsertLabelWithShadowAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, CGSize contentOffset); // 带文字阴影
-UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, BOOL isLine, LinePositionType positionType, float lineWidth, UIColor *lineColor, CGSize contentOffset); // 带划线
+UILabel *InsertLabel(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize); // 带自适应高度和宽度
+UILabel *InsertLabelWithCustomResize(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight);
+UILabel *InsertLabelWithContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight, CGSize contentOffset); // 带内容偏移量(此接口一定要自适应高度)
+UILabel *InsertLabelWithShadowAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, CGSize contentOffset); // 带文字阴影
+UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, BOOL isLine, LinePositionType positionType, float lineWidth, UIColor *lineColor, CGSize contentOffset); // 带划线
 
 // UIWebView
 UIWebView *InsertWebView(id superView,CGRect cRect, id<UIWebViewDelegate>delegate, int tag);
