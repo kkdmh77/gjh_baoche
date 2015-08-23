@@ -39,7 +39,7 @@ typedef enum
     
 	CGFloat                         _animationDuration;
     ATFlipAnimationType             _animationType;
-    id<ATFlipAnimationViewDelegate> _delegate;
+//    id<ATFlipAnimationViewDelegate> _delegate;
 }
 
 @property (nonatomic, assign)   ATFlipAnimationType animationType;

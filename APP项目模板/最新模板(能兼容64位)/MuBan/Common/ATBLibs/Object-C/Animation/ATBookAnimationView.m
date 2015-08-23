@@ -28,14 +28,14 @@ extern CGAffineTransform  ATBookTransformMake(CGPoint transition, CGFloat scale,
 
 - (void) dealloc
 {
-    [_leftPageLayer release];
-    [_rightPageLayer release];
-    [_frontCoverLayer release];
-    [_backCoverLayer release];
-    [_sideLayer release];
-    [_flipBookLayer release];
-    [_coverShadowLayer release];
-    [super dealloc];
+//    [_leftPageLayer release];
+//    [_rightPageLayer release];
+//    [_frontCoverLayer release];
+//    [_backCoverLayer release];
+//    [_sideLayer release];
+//    [_flipBookLayer release];
+//    [_coverShadowLayer release];
+//    [super dealloc];
 }
 
 
@@ -450,7 +450,7 @@ extern CGAffineTransform  ATBookTransformMake(CGPoint transition, CGFloat scale,
 
 
 
-static void _configureLayer(CALayer** player, UIImage* image, CGSize size)
+static void _configureLayer(CALayer* __strong* player, UIImage* image, CGSize size)
 {
     if (*player == nil)
     {

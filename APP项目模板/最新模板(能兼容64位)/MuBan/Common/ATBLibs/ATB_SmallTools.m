@@ -13,7 +13,7 @@ void SafelyRelease(NSObject* p)
 {
     if (p)
     {
-        [p release];
+//        [p release];
         p = nil;
     }
 }
@@ -23,8 +23,9 @@ void SafelyRetain(NSObject** p, NSObject* rhs)
 {
     if (*p != rhs)
     {
-        [*p release];
-        *p = [rhs retain];
+//        [*p release];
+        *p = rhs;
+//        *p = [rhs retain];
     }
 }
 
@@ -33,7 +34,7 @@ void SafelyCopy(NSObject** p, NSObject* rhs)
 {
     if (*p != rhs)
     {
-        [*p release];
+//        [*p release];
         *p = [rhs copy];
     }
 }

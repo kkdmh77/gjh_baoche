@@ -25,7 +25,7 @@
 {
     if (!date || !formatter || 0 == formatter.length) return nil;
     
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
     [dateFormatter setDateFormat:formatter];
     NSString *destDateString = [dateFormatter stringFromDate:date];

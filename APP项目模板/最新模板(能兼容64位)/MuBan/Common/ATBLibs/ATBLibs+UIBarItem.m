@@ -56,9 +56,9 @@ static NSDictionary* dictFromString(NSString* string)
         {
             sysItem = UIBarButtonSystemItemFlexibleSpace;
         }
-        return [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:sysItem
+        return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:sysItem
                                                               target:target
-                                                              action:action] autorelease];
+                                                              action:action];
     }
     else
     {
@@ -82,10 +82,10 @@ static NSDictionary* dictFromString(NSString* string)
         }
         
         
-        return [[[UIBarButtonItem alloc] initWithTitle:title
+        return [[UIBarButtonItem alloc] initWithTitle:title
                                                  style:itemStyle
                                                 target:target
-                                                action:action] autorelease];
+                                                action:action];
         
     }
     return nil;
@@ -136,7 +136,7 @@ static NSDictionary* dictFromString(NSString* string)
 //    backView.bounds = CGRectOffset(backView.bounds, -5, 0);
     [backView addSubview:btn];
     
-    UIBarButtonItem *barButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:backView] autorelease];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backView];
 
     return barButtonItem;
 }

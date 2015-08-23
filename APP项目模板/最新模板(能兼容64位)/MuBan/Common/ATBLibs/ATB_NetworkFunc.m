@@ -54,12 +54,12 @@ NSString *GetMIMEType(NSString *pExt){
 }
 
 NSURLConnection *ConnectToURLAndGetData(NSString* path, id delegate){
-    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
     [request setURL:[NSURL URLWithString:path]];
     [request setHTTPMethod:@"GET"];
     
-    return [[[NSURLConnection alloc] initWithRequest:request delegate:delegate] autorelease];
+    return [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
 }
 
 

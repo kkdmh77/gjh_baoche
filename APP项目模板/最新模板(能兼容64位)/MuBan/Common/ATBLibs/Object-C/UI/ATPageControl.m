@@ -18,9 +18,9 @@
 
 - (void) dealloc
 {
-    [_normalPointImage release];
-    [_currentPointImage release];
-    [super dealloc];
+//    [_normalPointImage release];
+//    [_currentPointImage release];
+//    [super dealloc];
 }
 
 

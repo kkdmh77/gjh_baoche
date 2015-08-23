@@ -18,13 +18,13 @@
 - (void) dealloc
 {
     [_contentView removeFromSuperview];
-    [_contentView release];
+//    [_contentView release];
     _contentView = nil;
     
     [_tapView removeFromSuperview];
-    [_tapView release];
+//    [_tapView release];
     _contentView = nil;
-    [super dealloc];
+//    [super dealloc];
 }
 
 
@@ -35,7 +35,8 @@
     if (self)
     {
         _animated = YES;
-        _contentView = [aView retain];
+//        _contentView = [aView retain];
+        _contentView = aView;
         //将模式设置为手动隐藏
         _behaviorType = ATPopupBehavior_AutoHidden;
     }

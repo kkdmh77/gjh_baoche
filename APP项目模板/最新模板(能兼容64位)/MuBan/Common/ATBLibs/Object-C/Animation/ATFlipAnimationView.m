@@ -26,17 +26,17 @@
 
 - (void) dealloc
 {
-	[_leftFromLayer release];
-	[_rightFromLayer release];
-    
-	[_leftToLayer release];
-	[_rightToLayer release];
-    
-    [_fromBlackLayer release];
-    [_toBlackLayer release]; 
-    [_flipLayer release];
-    
-    [super dealloc];
+//	[_leftFromLayer release];
+//	[_rightFromLayer release];
+//    
+//	[_leftToLayer release];
+//	[_rightToLayer release];
+//    
+//    [_fromBlackLayer release];
+//    [_toBlackLayer release]; 
+//    [_flipLayer release];
+//    
+//    [super dealloc];
 }
 
 
@@ -267,7 +267,7 @@
 
 
 
-static void _configureLayer(CALayer** player, UIImage* image, CGSize size)
+static void _configureLayer(CALayer*__strong* player, UIImage* image, CGSize size)
 {
     if (*player == nil)
     {

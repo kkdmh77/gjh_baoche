@@ -60,7 +60,7 @@
 	CFUUIDRef theUUID = CFUUIDCreate(NULL);
 	CFStringRef uuidString = CFUUIDCreateString(NULL, theUUID);
 	
-	NSString* string = [NSString stringWithString:(NSString*)uuidString];
+	NSString* string = [NSString stringWithString:(__bridge NSString*)uuidString];
 	
 	CFRelease(theUUID);
 	CFRelease(uuidString);
@@ -96,24 +96,36 @@
 
 - (NSString *)URLEncodedString 
 {
-    NSString *result = (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//    NSString *result = (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//                                                                           (CFStringRef)self,
+//                                                                           NULL,
+//																		   CFSTR("!*'();:@&=+$,/?%#[]"),
+//                                                                           kCFStringEncodingUTF8);
+    
+    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                                            (CFStringRef)self,
                                                                            NULL,
-																		   CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                           kCFStringEncodingUTF8);
-    [result autorelease];
+                                                                           CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                           kCFStringEncodingUTF8));
+    
+//    [result autorelease];
 	return result;
 }
 
 
 - (NSString*)URLDecodedString
 {
-	NSString *result = (NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
-																						   (CFStringRef)self,
-																						   CFSTR(""),
-																						   kCFStringEncodingUTF8);
-    [result autorelease];
-	return result;	
+//	NSString *result = (NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
+//																						   (CFStringRef)self,
+//																						   CFSTR(""),
+//																						   kCFStringEncodingUTF8);
+    
+    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault,
+                                                                                           (CFStringRef)self,
+                                                                                           CFSTR(""),
+                                                                                           kCFStringEncodingUTF8));
+//    [result autorelease];
+	return result;
 }
 
 
@@ -153,7 +165,8 @@
 {
     if (!string || 0 == string.length || !formatter || 0 == formatter.length) return nil;
     
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+//    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
     [dateFormatter setDateFormat:formatter];
     NSDate *date = [dateFormatter dateFromString:string];
@@ -163,23 +176,23 @@
 
 - (NSString *)replaceHtmlTagsWithString:(NSString *)replacement
 {
-    self = [self stringByReplacingOccurrencesOfRegex:@"<[^>]+>" withString:replacement options:RKLNoOptions range:NSMakeRange(0, self.length) error:NULL];
-    return [self stringByReplacingOccurrencesOfRegex:@"<[^>]+" withString:replacement options:RKLNoOptions range:NSMakeRange(0, self.length) error:NULL];
+    NSString *tempStr = [self stringByReplacingOccurrencesOfRegex:@"<[^>]+>" withString:replacement options:RKLNoOptions range:NSMakeRange(0, self.length) error:NULL];
+    return [tempStr stringByReplacingOccurrencesOfRegex:@"<[^>]+" withString:replacement options:RKLNoOptions range:NSMakeRange(0, self.length) error:NULL];
 }
 
 - (NSString *)replaceJavaScriptTagsWithString:(NSString *)replacement
 {
-    self = [self stringByReplacingOccurrencesOfRegex:@"<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>" withString:replacement options:RKLNoOptions range:NSMakeRange(0, self.length) error:NULL];
-    return [self stringByReplacingOccurrencesOfRegex:@"<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>" withString:replacement options:RKLNoOptions range:NSMakeRange(0, self.length) error:NULL];
+    NSString *tempStr = [self stringByReplacingOccurrencesOfRegex:@"<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>" withString:replacement options:RKLNoOptions range:NSMakeRange(0, self.length) error:NULL];
+    return [tempStr stringByReplacingOccurrencesOfRegex:@"<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>" withString:replacement options:RKLNoOptions range:NSMakeRange(0, self.length) error:NULL];
 }
 
 - (NSString *)replaceJsonTypeSpecialSymbolsWithString:(NSString *)replacement
 {
-    self = [self stringByReplacingOccurrencesOfString:@"\n" withString:replacement options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
-    self = [self stringByReplacingOccurrencesOfString:@"\b" withString:replacement options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
-    self = [self stringByReplacingOccurrencesOfString:@"\f" withString:replacement options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
-    self = [self stringByReplacingOccurrencesOfString:@"\r" withString:replacement options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
-    return [self stringByReplacingOccurrencesOfString:@"\t" withString:replacement options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
+    NSString *tempStr = [self stringByReplacingOccurrencesOfString:@"\n" withString:replacement options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
+    tempStr = [tempStr stringByReplacingOccurrencesOfString:@"\b" withString:replacement options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
+    tempStr = [tempStr stringByReplacingOccurrencesOfString:@"\f" withString:replacement options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
+    tempStr = [tempStr stringByReplacingOccurrencesOfString:@"\r" withString:replacement options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
+    return [tempStr stringByReplacingOccurrencesOfString:@"\t" withString:replacement options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
 }
 
 - (CGSize)sizeWithFont:(UIFont *)font constrainedToWidth:(CGFloat)width
@@ -244,14 +257,15 @@
 
 - (void) dealloc
 {
-    [_str release];
-    [super dealloc];
+//    [_str release];
+//    [super dealloc];
 }
 
 
 + (ExpStackItem*) itemWithStr:(NSString*)str priority:(NSInteger)priority
 {
-    ExpStackItem* item = [[[ExpStackItem alloc] init] autorelease];
+//    ExpStackItem* item = [[[ExpStackItem alloc] init] autorelease];
+    ExpStackItem* item = [[ExpStackItem alloc] init];
     item.priority = priority;
     item.str = str;
     return item;

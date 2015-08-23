@@ -21,9 +21,9 @@
 
 - (void) dealloc
 {
-    [_shadowImageView release];
-    [_shadowColor release];
-    [super dealloc];
+//    [_shadowImageView release];
+//    [_shadowColor release];
+//    [super dealloc];
 }
 
 
@@ -139,7 +139,7 @@
 -(void) _animationFinishJumpDown
 {    
     [_shadowImageView removeFromSuperview];
-    [_shadowImageView release];
+//    [_shadowImageView release];
 	_shadowImageView = nil;
     
     BOOL isAnimation = _isAnimating;
@@ -165,7 +165,7 @@
         _attachedView.transform = CGAffineTransformIdentity;
         
         [_shadowImageView removeFromSuperview];
-        [_shadowImageView release];
+//        [_shadowImageView release];
         _shadowImageView = nil;
     }
 }

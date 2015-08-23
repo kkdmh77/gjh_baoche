@@ -65,7 +65,7 @@
     self.incomingBackground = nil;
     self.outgoingBackground = nil;
     
-    [super dealloc];
+//    [super dealloc];
 }
 
 - (void)drawTextInRect:(CGRect)rect

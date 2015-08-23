@@ -19,12 +19,12 @@
 - (void) dealloc
 {
     [[ATTimerManager shardManager] stopTimerDelegate:self];
-    [_seqImages release];
+//    [_seqImages release];
     if (_indices.bytes)
     {
         free(_indices.bytes);
     }
-    [super dealloc];
+//    [super dealloc];
 }
 
 

@@ -14,13 +14,13 @@ UIAlertView *SimpleAlert(UIAlertViewStyle style, NSString *title, NSString *mess
     alert.alertViewStyle = style;
     alert.tag = tag;
 	[alert show];
-    return [alert autorelease];
+    return alert;
 }
 
 UIAlertView *ActivityIndicatiorAlert(NSString *message, NSInteger tag, id delegate)
 {
 	//output a login msg
-	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:message message:nil delegate:delegate cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message message:nil delegate:delegate cancelButtonTitle:nil otherButtonTitles:nil];
     
     alert.tag = tag;
     
@@ -32,17 +32,17 @@ UIAlertView *ActivityIndicatiorAlert(NSString *message, NSInteger tag, id delega
 	
     if (x == 0 || y == -50) return nil;
 	
-    __autoreleasing	UIActivityIndicatorView *indicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
+    __autoreleasing	UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	
 	indicator.center = CGPointMake(x, y);
 	[indicator startAnimating];
 	[alert addSubview:indicator];
     
-	return [alert autorelease];
+	return alert;
 }
 
 UIAlertView *AlertSetString(NSString *title, NSString *cancel, NSString *ok, NSString *set, NSInteger tag, id delegate, SEL selector){
-	__strong UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:title message:@"\r\r" delegate:delegate cancelButtonTitle:cancel otherButtonTitles:ok, nil] autorelease];
+	__strong UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:@"\r\r" delegate:delegate cancelButtonTitle:cancel otherButtonTitles:ok, nil];
     
     alert.tag = tag;
     
@@ -56,7 +56,7 @@ UIAlertView *AlertSetString(NSString *title, NSString *cancel, NSString *ok, NSS
         return nil;
     }
     
-	UITextField *myTextField = [[[UITextField alloc] initWithFrame:CGRectMake(x*0.04, y-110, x*0.91, 25)] autorelease];
+	UITextField *myTextField = [[UITextField alloc] initWithFrame:CGRectMake(x*0.04, y-110, x*0.91, 25)];
 	myTextField.text = set;
     
 	[myTextField addTarget:delegate action:selector forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -71,16 +71,16 @@ UIDatePicker *SetDate(UIView *view, NSInteger tag, id delegate, UIInterfaceOrien
 {
 	NSString *title = UIDeviceOrientationIsLandscape(orientation)?@"\n\n\n\n\n\n\n\n\n":@"\n\n\n\n\n\n\n\n\n\n\n";
 	
-	UIActionSheet *sheet = [[[UIActionSheet alloc] initWithTitle:title
+	UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:title
                                                         delegate:delegate
                                                cancelButtonTitle:nil
                                           destructiveButtonTitle:nil
-                                               otherButtonTitles:nil] autorelease];
+                                               otherButtonTitles:nil];
     sheet.tag = tag;
 	
 	[sheet showInView:view];
 	
-    __autoreleasing	UIDatePicker *datePicker = [[[UIDatePicker alloc] initWithFrame:sheet.bounds] autorelease];
+    __autoreleasing	UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:sheet.bounds];
 	datePicker.tag = 101;
 	[sheet addSubview:datePicker];
 	

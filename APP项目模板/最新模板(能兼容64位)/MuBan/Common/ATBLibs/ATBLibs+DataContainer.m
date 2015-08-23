@@ -15,12 +15,12 @@
 - (void) moveObjectAtIndex:(NSInteger)atIndex toIndex:(NSInteger)toIndex
 {
     NSObject* object = [self objectAtIndex:atIndex];
-    [object retain];
+    object;
     
     [self removeObjectAtIndex:atIndex];
     [self insertObject:object atIndex:toIndex];
     
-    [object release];
+//    [object release];
 }
 
 
@@ -43,7 +43,7 @@
 
 @implementation NSArray(ATBLibsAddtions)
 
-- (void) unpack:(id*)obj, ... NS_REQUIRES_NIL_TERMINATION
+- (void) unpack:(id __strong *)obj, ... NS_REQUIRES_NIL_TERMINATION
 {
     va_list vlist;
     va_start(vlist, obj);
@@ -60,7 +60,7 @@
         {
             *obj = nil;
         }
-        obj = va_arg(vlist, id*);
+        obj = va_arg(vlist, id __strong *);
         idx++;
     }
     

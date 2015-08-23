@@ -298,14 +298,14 @@
 
 + (id) loadFromNibNamed:(NSString*)name
 {
-    return [[[self alloc] initWithNibName:name bundle:nil] autorelease];
+    return [[self alloc] initWithNibName:name bundle:nil];
 }
 
 
 + (id) loadFromNib
 {
     NSString* clsName = NSStringFromClass(self);
-    return [[[self alloc] initWithNibName:clsName bundle:nil] autorelease];
+    return [[self alloc] initWithNibName:clsName bundle:nil];
 }
 
 @end
@@ -346,7 +346,7 @@
     }
     va_end(list);
     
-    UISegmentedControl* segment = [[[UISegmentedControl alloc] initWithItems:array] autorelease];
+    UISegmentedControl* segment = [[UISegmentedControl alloc] initWithItems:array];
     segment.selectedSegmentIndex = 0;
     segment.segmentedControlStyle = UISegmentedControlStyleBar;
     return segment;

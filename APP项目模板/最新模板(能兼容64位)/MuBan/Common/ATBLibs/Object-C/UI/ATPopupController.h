@@ -36,7 +36,7 @@ typedef enum
     UIView*                         _contentView;
     ATTapView*                      _tapView;
     ATPopupBehaviorType             _behaviorType;
-    id<ATPopupControllerDelegate>   _delegate;
+//    id<ATPopupControllerDelegate>   _delegate;
     BOOL                            _animated;
 }
 @property (nonatomic, readonly) ATTapView*          tapView;

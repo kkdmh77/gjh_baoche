@@ -18,7 +18,7 @@
     NSTimeInterval              _lastTime;          //  上一次触发定时器的时间点
     NSTimeInterval              _remainNextTime;    //  下一次触发定时器剩下的时间
     NSTimeInterval              _theoryInterval;    //  定时器理论上的间隔
-    id<ATTimerManagerDelegate>  _delegate;          //  代理
+//    id<ATTimerManagerDelegate>  _delegate;          //  代理
     BOOL                        _fireEachStep;      //  是否最快的定时器，也就是每次都触发
 }
 @property (nonatomic, assign)   id<ATTimerManagerDelegate>  delegate;
@@ -74,10 +74,10 @@ static ATTimerManager* s_timerManager = nil;
 
 - (void) dealloc
 {
-    [_timerInfos release];
+//    [_timerInfos release];
     [_timer invalidate];
-    [_timer release];
-    [super dealloc];
+//    [_timer release];
+//    [super dealloc];
 }
 
 
@@ -91,7 +91,7 @@ static ATTimerManager* s_timerManager = nil;
         timerId = lastInfo.timerId + 1;
     }
     
-    _ATTimerInfo* timerInfo = [[[_ATTimerInfo alloc] init] autorelease];
+    _ATTimerInfo* timerInfo = [[_ATTimerInfo alloc] init];
     timerInfo.timerId = timerId;
     timerInfo.delegate = delegate;
     timerInfo.tag = tag;
@@ -108,11 +108,11 @@ static ATTimerManager* s_timerManager = nil;
 {
     if (_timer == nil)
     {
-        _timer = [[NSTimer timerWithTimeInterval:1.0 / 60.0
+        _timer = [NSTimer timerWithTimeInterval:1.0 / 60.0
                                           target:self
                                         selector:@selector(_timerStep)
                                         userInfo:nil
-                                         repeats:YES] retain];
+                                         repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     }
 }
@@ -223,7 +223,7 @@ static ATTimerManager* s_timerManager = nil;
     if ([_timerInfos count] == 0)
     {
         [_timer invalidate];
-        [_timer release];
+//        [_timer release];
         _timer = nil;
     }
 }
@@ -249,7 +249,7 @@ static ATTimerManager* s_timerManager = nil;
     if ([_timerInfos count] == 0)
     {
         [_timer invalidate];
-        [_timer release];
+//        [_timer release];
         _timer = nil;
     }
 }
@@ -275,7 +275,7 @@ static ATTimerManager* s_timerManager = nil;
     if ([_timerInfos count] == 0)
     {
         [_timer invalidate];
-        [_timer release];
+//        [_timer release];
         _timer = nil;
     }
 }
@@ -328,7 +328,7 @@ static ATTimerManager* s_timerManager = nil;
     if (_timer)
     {
         [_timer invalidate];
-        [_timer release];
+//        [_timer release];
         _timer = nil;
     }
 }

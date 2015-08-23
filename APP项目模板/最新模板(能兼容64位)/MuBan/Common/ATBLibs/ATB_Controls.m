@@ -29,7 +29,7 @@ UIScrollView *InsertScrollViewCanWebImagesByUrls(UIView *superView, CGRect rect,
     
     for (int i = 0; i < netImageUrlArray.count; i++)
     {
-        MyScaleScrollView *scaleScroll = [[[MyScaleScrollView alloc] initWithFrame:scrollView.bounds] autorelease];
+        MyScaleScrollView *scaleScroll = [[MyScaleScrollView alloc] initWithFrame:scrollView.bounds];
         scaleScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         scaleScroll.tag = 1000 + i;
         [scrollView addSubview:scaleScroll];
@@ -40,7 +40,7 @@ UIScrollView *InsertScrollViewCanWebImagesByUrls(UIView *superView, CGRect rect,
         
         NSString *imgUrlStr = [netImageUrlArray objectAtIndex:i];
         
-        [tempBtn setBackgroundImageWithURL:[NSURL URLWithString:imgUrlStr] placeholderImage:placeholderImg options:SDWebImageCacheMemoryOnly resize:resize];
+//        [tempBtn setBackgroundImageWithURL:[NSURL URLWithString:imgUrlStr] placeholderImage:placeholderImg options:SDWebImageCacheMemoryOnly resize:resize];
     }
     
     //设置主scroll里view的frame
@@ -92,7 +92,7 @@ UIScrollView *InsertScrollViewByLocalImages(UIView *superView, CGRect rect, int 
         UIView *imgBtnBackView = nil;
         
         if (canZoom)
-            imgBtnBackView = [[[MyScaleScrollView alloc] initWithFrame:scrollView.bounds] autorelease];
+            imgBtnBackView = [[MyScaleScrollView alloc] initWithFrame:scrollView.bounds];
         else
             imgBtnBackView = InsertView(nil, scrollView.bounds);
         
@@ -153,7 +153,7 @@ UIScrollView *InsertScrollViewCanScrollSubViews(UIView *superView, CGRect rect, 
     
     for (int i = 0; i < scrollCount; i++)
     {
-        MyScaleScrollView *scaleScroll = [[[MyScaleScrollView alloc] initWithFrame:scrollView.bounds] autorelease];
+        MyScaleScrollView *scaleScroll = [[MyScaleScrollView alloc] initWithFrame:scrollView.bounds];
         scaleScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         scaleScroll.tag = 1000 + i;
         [scrollView addSubview:scaleScroll];
@@ -202,7 +202,7 @@ UIScrollView *InsertScrollViewCanScrollSubViews(UIView *superView, CGRect rect, 
 
 UIScrollView *InsertScrollView(UIView *superView, CGRect rect, int tag,id<UIScrollViewDelegate> delegate)
 {
-    UIScrollView *scrollView = [[[UIScrollView alloc] initWithFrame:rect] autorelease];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:rect];
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     scrollView.tag = tag;
     scrollView.backgroundColor = [UIColor whiteColor];
@@ -307,27 +307,32 @@ UILabel *InsertBubbleMessageLabel(id superView, CGRect cRect, BubbleMessageStyle
     if (superView)
         [superView addSubview:tempLabel];
     
-	return [tempLabel autorelease];
+	return tempLabel;
 }
 
 UILabel *InsertLabel(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize)
 {
-    return InsertLabelWithContentOffset(superView, cRect, align, contentStr, textFont, textColor, resize, CGSizeMake(0, 0));
+    return InsertLabelWithCustomResize(superView, cRect, align, contentStr, textFont, textColor, resize, resize);
 }
 
-UILabel *InsertLabelWithContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize, CGSize contentOffset)
+UILabel *InsertLabelWithCustomResize(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight)
 {
-    return InsertLabelWithShadowAndContentOffset(superView, cRect, align, contentStr, textFont, textColor, resize, NO, nil, CGSizeMake(0, 0), contentOffset);
+    return InsertLabelWithContentOffset(superView, cRect, align, contentStr, textFont, textColor, resizeWidth, resizeHeight, CGSizeZero);
 }
 
-UILabel *InsertLabelWithShadowAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, CGSize contentOffset)
+UILabel *InsertLabelWithContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight, CGSize contentOffset)
 {
-    return InsertLabelWithShadowAndLineAndContentOffset(superView, cRect, align, contentStr, textFont, textColor, resize, shadow, shadowColor, shadowOffset, NO, TopLine, 0.0, nil, contentOffset);
+    return InsertLabelWithShadowAndContentOffset(superView, cRect, align, contentStr, textFont, textColor, resizeWidth, resizeHeight, NO, nil, CGSizeZero, contentOffset);
 }
 
-UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resize, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, BOOL isLine, LinePositionType positionType, float lineWidth, UIColor *lineColor, CGSize contentOffset)
+UILabel *InsertLabelWithShadowAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, CGSize contentOffset)
 {
-    //初始化label
+    return InsertLabelWithShadowAndLineAndContentOffset(superView, cRect, align, contentStr, textFont, textColor, resizeWidth, resizeHeight, shadow, shadowColor, shadowOffset, NO, TopLine, 0.0, nil, contentOffset);
+}
+
+UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect, NSTextAlignment align, NSString *contentStr, UIFont *textFont, UIColor *textColor, BOOL resizeWidth, BOOL resizeHeight, BOOL shadow, UIColor *shadowColor, CGSize shadowOffset, BOOL isLine, LinePositionType positionType, float lineWidth, UIColor *lineColor, CGSize contentOffset)
+{
+    // 初始化label
     UILabel *tempLabel = [[ATB_StrikeThroughLabel alloc] initWithFrame:cRect strikeThroughEnabled:isLine linePositionType:positionType lineWidth:lineWidth lineColor:lineColor contentOffset:contentOffset];
     tempLabel.textAlignment = align;
     tempLabel.textColor = textColor;
@@ -336,18 +341,21 @@ UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect
     tempLabel.text = contentStr;
     [tempLabel setNumberOfLines:1];
     
-    if (resize && nil != contentStr)
+    if ((resizeWidth || resizeHeight) && nil != contentStr)
     {
         [tempLabel setNumberOfLines:0];
         
-        //设置自动行数与字符换行
+        // 设置自动行数与字符换行
         tempLabel.lineBreakMode = NSLineBreakByWordWrapping;
         
-        //设置一个行的宽度和高度上限
-        CGSize size = CGSizeMake(cRect.size.width - contentOffset.width * 2, 80000.0);
-        //计算实际frame大小，并将label的frame变成实际大小
+        // 设置一个行的宽度和高度上限
+        CGSize size = CGSizeMake(cRect.size.width - contentOffset.width * 2, FLT_MAX);
+        // 计算实际frame大小，并将label的frame变成实际大小
         CGSize labelsize = [contentStr sizeWithFont:textFont constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
-        tempLabel.frame = CGRectMake(cRect.origin.x, cRect.origin.y, cRect.size.width, labelsize.height + contentOffset.height * 2);
+        
+        CGFloat width = resizeWidth ? (labelsize.width + contentOffset.width * 2) : cRect.size.width;
+        CGFloat height = resizeHeight ? (labelsize.height + contentOffset.height * 2) : cRect.size.height;
+        tempLabel.frame = CGRectMake(cRect.origin.x, cRect.origin.y, width, height);
     }
     
     if (shadow)
@@ -356,11 +364,11 @@ UILabel *InsertLabelWithShadowAndLineAndContentOffset(id superView, CGRect cRect
             tempLabel.shadowColor = shadowColor;
         tempLabel.shadowOffset = shadowOffset;
     }
-	
+    
     if (superView)
         [superView addSubview:tempLabel];
     
-	return [tempLabel autorelease];
+    return tempLabel;
 }
 
 UIWebView *InsertWebView(id superView,CGRect cRect, id<UIWebViewDelegate>delegate, int tag)
@@ -378,7 +386,7 @@ UIWebView *InsertWebView(id superView,CGRect cRect, id<UIWebViewDelegate>delegat
     if (superView)
         [superView addSubview:tempWebView];
     
-    return [tempWebView autorelease];
+    return tempWebView;
 }
 
 UIButton *InsertButton(id view, CGRect rc, int tag, NSString *title, id target, SEL action){
@@ -496,7 +504,7 @@ UITableView *InsertTableView(id superView, CGRect rect, id<UITableViewDataSource
     if (superView)
         [superView addSubview:tabView];
     
-    return [tabView autorelease];
+    return tabView;
 }
 
 UITextField *InsertTextField(id view, id delegate, CGRect rc, NSString *placeholder, UIFont *font, NSTextAlignment textAlignment, UIControlContentVerticalAlignment contentVerticalAlignment){
@@ -512,7 +520,7 @@ UITextField *InsertTextField(id view, id delegate, CGRect rc, NSString *placehol
     if (view)
         [view addSubview:myTextField];
     
-	return [myTextField autorelease];
+	return myTextField;
 }
 
 FUITextField *InsertFUITextField(id view, id delegate, CGRect rc, NSString *placeholder, UIFont *font, NSTextAlignment textAlignment, UIControlContentVerticalAlignment contentVerticalAlignment, UIColor *textFieldColor, UIEdgeInsets edgeInsets)
@@ -543,7 +551,7 @@ FUITextField *InsertFUITextFieldWithBorder(id view, id delegate, CGRect rc, NSSt
     if (view)
         [view addSubview:myTextField];
     
-	return [myTextField autorelease];
+	return myTextField;
 }
 
 UISwitch *InsertSwitch(id view, CGRect rc){
@@ -552,7 +560,7 @@ UISwitch *InsertSwitch(id view, CGRect rc){
     if (view)
         [view addSubview:sw];
     
-	return [sw autorelease];
+	return sw;
 }
 
 UISegmentedControl *InsertSegment(id view, CGRect rc){
@@ -562,7 +570,7 @@ UISegmentedControl *InsertSegment(id view, CGRect rc){
     if (view)
         [view addSubview:seg];
     
-	return [seg autorelease];
+	return seg;
 }
 
 UIImageView *InsertImageView(id view, CGRect rect, UIImage *image, NSURL *imageUrl){
@@ -574,7 +582,12 @@ UIImageView *InsertImageView(id view, CGRect rect, UIImage *image, NSURL *imageU
     }
     else
     {
-        [imageView setImageWithURL:imageUrl placeholderImage:image options:SDWebImageCacheMemoryOnly];
+//        [imageView setImageWithURL:imageUrl placeholderImage:image options:SDWebImageCacheMemoryOnly];
+        [imageView gjh_setImageWithURL:imageUrl placeholderImage:image imageShowStyle:ImageShowStyle_None options:SDWebImageCacheMemoryOnly success:^(UIImage *image) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
     }
     
     imageView.userInteractionEnabled = YES;
@@ -582,7 +595,7 @@ UIImageView *InsertImageView(id view, CGRect rect, UIImage *image, NSURL *imageU
     if (view)
         [view addSubview:imageView];
     
-    return [imageView autorelease];
+    return imageView;
 }
 
 UIView *InsertView(id view, CGRect rect){
@@ -592,7 +605,7 @@ UIView *InsertView(id view, CGRect rect){
     if (view)
         [view addSubview:_view];
     
-    return [_view autorelease];
+    return _view;
 }
 
 UIPickerView *InsertPickerView(id view, CGRect rect){
@@ -602,7 +615,7 @@ UIPickerView *InsertPickerView(id view, CGRect rect){
     if (view)
         [view addSubview:_view];
     
-    return [_view autorelease];
+    return _view;
 }
 
 void SetAnimationFrame(UIView *view, CGRect frame){
@@ -631,13 +644,13 @@ void WebSimpleLoadWithLocalFile(UIWebView *web, NSString *filename){
 }
 
 void WebSimpleLoadRequest(UIWebView *web, NSString *strURL){
-    NSURLRequest *request = [[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:strURL]] autorelease];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:strURL]];
     
     [web loadRequest:request];
 }
 
 void WebSimpleLoadRequestWithCookie(UIWebView *web, NSString *strURL, NSString *cookies){
-    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:strURL]] autorelease];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:strURL]];
     [request addValue:cookies forHTTPHeaderField:@"Cookie"];
     [web loadRequest:request];
 }

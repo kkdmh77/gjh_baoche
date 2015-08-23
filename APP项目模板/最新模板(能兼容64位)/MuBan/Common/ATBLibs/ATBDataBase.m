@@ -32,9 +32,9 @@
 - (void) dealloc  
 {  
     _sql = nil;  
-    SafelyRelease(&_dbName);  
-    [super dealloc];  
-}  
+//    SafelyRelease(&_dbName);  
+//    [super dealloc];
+}
 
 //创建数据库  
 -(BOOL)openOrCreateDatabase:(NSString*)dbName  
@@ -147,14 +147,14 @@
                     NSString*    value = [[NSString alloc] initWithUTF8String:dbResult[index]];  
                     NSString*    key = [[NSString alloc] initWithUTF8String:dbResult[j]];  
                     [dic setObject:value forKey:key];  
-                    [value release];  
-                    [key release];  
-                }  
+//                    [value release];  
+//                    [key release];  
+                }
                 index ++;  
             }   
             [array addObject:dic];  
-            [dic release];  
-        }  
+//            [dic release];  
+        }
     }
     else 
     {  
@@ -162,7 +162,8 @@
         [self closeDatabase];  
         return nil;  
     }  
-    [self closeDatabase];  
-    return [array autorelease];  
-}  
+    [self closeDatabase];
+    return array;
+//    return [array autorelease];
+}
 @end
