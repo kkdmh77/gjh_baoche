@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "Annotation.h"
 #import "AppDelegate.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
 
 @interface PositioningVC () <MKMapViewDelegate>
 {
@@ -41,6 +42,25 @@
 - (void)setPageLocalizableText
 {
     [self setNavigationItemTitle:self.title];
+}
+
+- (void)setNetworkRequestStatusBlocks
+{
+    WEAKSELF
+    [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
+        STRONGSELF
+        if (NetWaterPressureRequestType_GetMonitoringStationsList == request.tag)
+        {
+           
+        }
+    }];
+}
+
+- (void)getNetworkData
+{
+    [self sendRequest:nil
+         parameterDic:nil
+           requestTag:NetWaterPressureRequestType_GetMonitoringStationsList];
 }
 
 - (void)initialization

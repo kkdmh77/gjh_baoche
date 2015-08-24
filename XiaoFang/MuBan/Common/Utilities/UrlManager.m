@@ -95,6 +95,7 @@
     {
         // 不用stringByAppendingPathComponent:,这个会自动把http://中的一个/去掉
         NSString *urlStr = [nameSpaceStr stringByAppendingFormat:@"/%@",methodName];
+        urlStr = nameSpaceStr;
         
         if (dic && 0 != dic.count)
         {

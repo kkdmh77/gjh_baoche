@@ -426,6 +426,10 @@
 		43D1CCA51A760F8C004564C2 /* ExamineVersionBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CC9D1A760F8C004564C2 /* ExamineVersionBC.m */; };
 		43D1CCA61A760F8C004564C2 /* LoginBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CC9F1A760F8C004564C2 /* LoginBC.m */; };
 		43D1CCA71A760F8C004564C2 /* RegisterBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CCA11A760F8C004564C2 /* RegisterBC.m */; };
+		FAFDE3AF1B8B3920005F8651 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFDE3AA1B8B3920005F8651 /* LoginVC.m */; };
+		FAFDE3B01B8B3920005F8651 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFDE3AB1B8B3920005F8651 /* LoginVC.xib */; };
+		FAFDE3B11B8B3920005F8651 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFDE3AD1B8B3920005F8651 /* RegisterVC.m */; };
+		FAFDE3B21B8B3920005F8651 /* RegisterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFDE3AE1B8B3920005F8651 /* RegisterVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1336,6 +1340,12 @@
 		43D1CC9F1A760F8C004564C2 /* LoginBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginBC.m; sourceTree = "<group>"; };
 		43D1CCA01A760F8C004564C2 /* RegisterBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterBC.h; sourceTree = "<group>"; };
 		43D1CCA11A760F8C004564C2 /* RegisterBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterBC.m; sourceTree = "<group>"; };
+		FAFDE3A91B8B3920005F8651 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		FAFDE3AA1B8B3920005F8651 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		FAFDE3AB1B8B3920005F8651 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
+		FAFDE3AC1B8B3920005F8651 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
+		FAFDE3AD1B8B3920005F8651 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
+		FAFDE3AE1B8B3920005F8651 /* RegisterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1426,6 +1436,7 @@
 		2BA49B491B6074710097AF67 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FAFDE3A81B8B3920005F8651 /* UserCenter */,
 				2BEBC7601B67BFDA00EAACF5 /* CityChoose */,
 				2B118EB91B624D6F00F95260 /* WaterPressure */,
 				2BA49B511B6082810097AF67 /* PositioningVC.h */,
@@ -1577,10 +1588,10 @@
 		432C318A1A7243840094A27E /* MuBan */ = {
 			isa = PBXGroup;
 			children = (
-				2BA49B491B6074710097AF67 /* Controllers */,
-				2BA49B4A1B6074710097AF67 /* Views */,
 				43D1CC6C1A760D67004564C2 /* Extends */,
 				43D1CC911A760F8C004564C2 /* Model */,
+				2BA49B491B6074710097AF67 /* Controllers */,
+				2BA49B4A1B6074710097AF67 /* Views */,
 				432C318F1A7243840094A27E /* AppDelegate.h */,
 				432C31901A7243840094A27E /* AppDelegate.m */,
 				432C31981A7243840094A27E /* Main.storyboard */,
@@ -3206,6 +3217,19 @@
 			path = "Register&Login";
 			sourceTree = "<group>";
 		};
+		FAFDE3A81B8B3920005F8651 /* UserCenter */ = {
+			isa = PBXGroup;
+			children = (
+				FAFDE3A91B8B3920005F8651 /* LoginVC.h */,
+				FAFDE3AA1B8B3920005F8651 /* LoginVC.m */,
+				FAFDE3AB1B8B3920005F8651 /* LoginVC.xib */,
+				FAFDE3AC1B8B3920005F8651 /* RegisterVC.h */,
+				FAFDE3AD1B8B3920005F8651 /* RegisterVC.m */,
+				FAFDE3AE1B8B3920005F8651 /* RegisterVC.xib */,
+			);
+			path = UserCenter;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3306,6 +3330,7 @@
 				43D1CA891A75E778004564C2 /* deps in Resources */,
 				43D1CB061A75EBA5004564C2 /* Address.json in Resources */,
 				2B118EA81B6238E700F95260 /* GraphVC.xib in Resources */,
+				FAFDE3B21B8B3920005F8651 /* RegisterVC.xib in Resources */,
 				2BA49B771B6093CC0097AF67 /* shuiya_highlight@2x.png in Resources */,
 				43D1CC241A75EBFA004564C2 /* pinyin.sqlite in Resources */,
 				432C319F1A7243840094A27E /* LaunchScreen.xib in Resources */,
@@ -3322,6 +3347,7 @@
 				2BEBC7681B67C21E00EAACF5 /* CityDetailVC.xib in Resources */,
 				43D1CA351A75E778004564C2 /* deps in Resources */,
 				2B118EB21B62452400F95260 /* ShuiYaCell.xib in Resources */,
+				FAFDE3B01B8B3920005F8651 /* LoginVC.xib in Resources */,
 				2BEBC7731B69286100EAACF5 /* annotation@2x.png in Resources */,
 				43D1CAAE1A75E779004564C2 /* deps in Resources */,
 				43D1C6F91A75E692004564C2 /* AlipaySDK.bundle in Resources */,
@@ -3515,6 +3541,7 @@
 				43D1C9DA1A75E778004564C2 /* ASIFormDataRequest.m in Sources */,
 				43D1CC3A1A75EBFA004564C2 /* UIDevice+SSToolkitAdditions.m in Sources */,
 				43D1CC151A75EBFA004564C2 /* ATColorSpace.c in Sources */,
+				FAFDE3AF1B8B3920005F8651 /* LoginVC.m in Sources */,
 				43D1CA131A75E778004564C2 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				432C31911A7243840094A27E /* AppDelegate.m in Sources */,
 				43D1CA9E1A75E779004564C2 /* NITableViewActions.m in Sources */,
@@ -3708,6 +3735,7 @@
 				43D1CC611A75EBFA004564C2 /* GJHAlertView.m in Sources */,
 				43D1CA991A75E779004564C2 /* NICellFactory.m in Sources */,
 				2B118EA21B62388300F95260 /* PressureValueDetailVC.m in Sources */,
+				FAFDE3B11B8B3920005F8651 /* RegisterVC.m in Sources */,
 				43D1CC0B1A75EBFA004564C2 /* ATBLibs+DataContainer.m in Sources */,
 				43D1CAEC1A75E779004564C2 /* SRRefreshView.m in Sources */,
 			);
