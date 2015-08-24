@@ -16,8 +16,6 @@
 		<string>svn://192.168.0.100/o2o_ios/trunk/o2o/Class/Nimbus/src/photos/resources/NimbusPhotos.bundle</string>
 		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++4580</key>
 		<string>svn://192.168.0.100/o2o_ios/trunk/o2o/Class/Nimbus/src/overview/resources/NimbusOverviewer.bundle</string>
-		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++9572</key>
-		<string>svn://192.168.0.100/o2o_ios/trunk/o2o/Class/IQKeyBoardManager/IQKeyboardManager.bundle</string>
 		<key>6F0AFF7670DF53B01B9750C1B70D3F65B81DAC33</key>
 		<string>https://github.com/alexkung/gjh_baoche.git</string>
 	</dict>
@@ -31,8 +29,6 @@
 		<string>../../..BaoChe/Class/Nimbus/src/photos/resources/NimbusPhotos.bundle</string>
 		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++4580</key>
 		<string>../../..BaoChe/Class/Nimbus/src/overview/resources/NimbusOverviewer.bundle</string>
-		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++9572</key>
-		<string>../../..BaoChe/Class/IQKeyBoardManager/IQKeyboardManager.bundle</string>
 		<key>6F0AFF7670DF53B01B9750C1B70D3F65B81DAC33</key>
 		<string>../../..</string>
 	</dict>
@@ -43,8 +39,6 @@
 		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++422</key>
 		<string>svn://192.168.0.100/o2o_ios</string>
 		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++4580</key>
-		<string>svn://192.168.0.100/o2o_ios</string>
-		<key>43ad27df-ac1c-4d72-822e-fa1f3520b629++9572</key>
 		<string>svn://192.168.0.100/o2o_ios</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -62,14 +56,6 @@
 			<string>6F0AFF7670DF53B01B9750C1B70D3F65B81DAC33</string>
 			<key>IDESourceControlWCCName</key>
 			<string>BaoChe</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.subversion</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>43ad27df-ac1c-4d72-822e-fa1f3520b629++9572</string>
-			<key>IDESourceControlWCCName</key>
-			<string>IQKeyboardManager.bundle</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
