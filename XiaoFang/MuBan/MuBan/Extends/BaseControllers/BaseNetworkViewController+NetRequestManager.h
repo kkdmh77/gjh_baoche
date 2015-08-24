@@ -20,6 +20,9 @@ typedef enum
     
     NetWaterPressureRequestType_GetMonitoringStationsList          , // 获取监测点列表(POST)
     
+    // 通知
+    NetUploadDeviceTokenRequestType_UploadDeviceToken              ,
+    
 } NetRequestType;
 
 @interface BaseNetworkViewController (NetRequestManager)

@@ -26,7 +26,7 @@
 {
     if ([userName isAbsoluteValid])
     {
-        if ([password isAbsoluteValid] && password.length >= 6 && password.length <= 16)
+        if ([password isAbsoluteValid])
         {
             _success = success;
             _failed = failed;
@@ -45,7 +45,7 @@
             NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
             NSDictionary *dic = @{@"username": userName,
                                   @"password": password,
-                                  @"rememberMe": (autoLogin ? @"on" : @"")};
+                                  @"trancode": @"BC0000"};
             
             [[NetRequestManager sharedInstance] sendRequest:url
                                                parameterDic:dic

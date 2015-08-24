@@ -374,7 +374,7 @@ DEF_SINGLETON(NetRequestManager);
     else
     {
         [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/json; charset=%@",charset]];
-        
+        /*
         // 以对象方式设置请求消息体
         if ([parameterDic isAbsoluteValid])
         {
@@ -383,6 +383,7 @@ DEF_SINGLETON(NetRequestManager);
             
             [netRequest.asiFormRequest setPostBody:[NSMutableData dataWithData:postBodyData]];
         }
+         */
     }
     // 修改结束
     
@@ -416,15 +417,16 @@ DEF_SINGLETON(NetRequestManager);
      @ 修改开始
      */
     // 修改开始
-    /*
+    
     if ([parameterDic isAbsoluteValid])
     {
         for (NSString *key in parameterDic.allKeys)
         {
             [netRequest.asiFormRequest setPostValue:[parameterDic objectForKey:key] forKey:key];
         }
+        [netRequest.asiFormRequest setPostValue:@"MB" forKey:@"channal"];
     }
-     */
+    
     // 修改结束
     
     // 判断是否要作数据缓存
