@@ -12,6 +12,7 @@ NSString *getPreferredLanguage();
 
 NSString *GetDocumentPathFileName(NSString *lpFileName);
 NSString *GetApplicationPath();
+NSString *GetDocumentPath();
 NSString *GetLibraryPath();
 NSString *GetTmpPath();
 NSString *GetApplicationPathFileName(NSString *lpFileName, NSString *lpExt);

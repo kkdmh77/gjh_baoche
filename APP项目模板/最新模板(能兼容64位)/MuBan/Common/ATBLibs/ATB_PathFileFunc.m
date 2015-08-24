@@ -35,6 +35,13 @@ NSString *GetApplicationPath(){
     return [paths objectAtIndex:0];
 }
 
+NSString *GetDocumentPath(){
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    if (paths == nil) return nil;
+    
+    return [paths objectAtIndex:0];
+}
+
 NSString *GetLibraryPath(){
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     if (nil == paths) return nil;
