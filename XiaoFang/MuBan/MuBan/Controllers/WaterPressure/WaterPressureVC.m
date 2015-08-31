@@ -12,12 +12,16 @@
 #import "DetailListVC.h"
 #import "CityChooseListVC.h"
 #import "AppDelegate.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
+#import "CommonEntity.h"
 
 static NSString * const WaterPressureCellIdentifier = @"WaterPressureCellIdentifier";
 
 @interface WaterPressureVC ()
 {
     NSArray *_tabDataArray;
+    
+    NSArray *_netEntityArray;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *numberBtn;
@@ -40,15 +44,10 @@ static NSString * const WaterPressureCellIdentifier = @"WaterPressureCellIdentif
                             highlightedImg:nil
                                     action:NULL];
     
-    [self configureLocalData];
+    // [self configureLocalData];
     [self setup];
     
-    // 进入城市选择页面
-    CityChooseListVC *cityChoose = [[CityChooseListVC alloc] init];
-    UINavigationController *cityChooseNav = [[UINavigationController alloc] initWithRootViewController:cityChoose];
-    [self presentViewController:cityChooseNav modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:^{
-        
-    }];
+    [self getNetworkData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,9 +55,52 @@ static NSString * const WaterPressureCellIdentifier = @"WaterPressureCellIdentif
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - custom methods
+
 - (void)setPageLocalizableText
 {
     [self setNavigationItemTitle:self.title];
+}
+
+- (void)setNetworkRequestStatusBlocks
+{
+    WEAKSELF
+    [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
+        STRONGSELF
+        if (NetWaterPressureRequestType_GetWaterPressureList == request.tag)
+        {
+            strongSelf->_netEntityArray = [weakSelf parseNetwordDataWithInfoObj:successInfoObj];
+            
+            [weakSelf.tab reloadData];
+        }
+    } failedBlock:^(NetRequest *request, NSError *error) {
+        
+    }];
+}
+
+- (void)getNetworkData
+{
+    [self sendRequest:nil
+         parameterDic:@{@"userId": [UserInfoModel getUserDefaultUserId],
+                        @"trancode": @"BC0001",
+                        @"page": @(1),
+                        @"pageSize": @(100)}
+    requestMethodType:RequestMethodType_POST
+           requestTag:NetWaterPressureRequestType_GetWaterPressureList];
+}
+
+- (NSArray *)parseNetwordDataWithInfoObj:(NSDictionary *)obj
+{
+    NSArray *netDataArray = [obj safeObjectForKey:@"list"];
+    NSMutableArray *entityArray = [NSMutableArray arrayWithCapacity:netDataArray.count];
+    
+    for (NSDictionary *dic in netDataArray)
+    {
+        WaterPressureEntity *entity = [WaterPressureEntity initWithDict:dic];
+        [entityArray addObject:entity];
+    }
+    
+    return entityArray;
 }
 
 - (void)configureViewsProperties
@@ -133,7 +175,7 @@ static NSString * const WaterPressureCellIdentifier = @"WaterPressureCellIdentif
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _tabDataArray.count;
+    return _netEntityArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,7 +187,7 @@ static NSString * const WaterPressureCellIdentifier = @"WaterPressureCellIdentif
 {
     WaterPressureCell *cell = [tableView dequeueReusableCellWithIdentifier:WaterPressureCellIdentifier];
     
-    DataEntity *entity = _tabDataArray[indexPath.row];
+    WaterPressureEntity *entity = _netEntityArray[indexPath.row];
     [cell loadDataWithShowEntity:entity];
     
     return cell;
@@ -155,8 +197,10 @@ static NSString * const WaterPressureCellIdentifier = @"WaterPressureCellIdentif
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    WaterPressureEntity *entity = _netEntityArray[indexPath.row];
+    
     DetailListVC *detailList = [DetailListVC loadFromNib];
-    detailList.entity = _tabDataArray[indexPath.row];
+    detailList.sid = entity.number;
     detailList.hidesBottomBarWhenPushed = YES;
     
     [self pushViewController:detailList];

@@ -74,7 +74,7 @@
     _baseTabBarController.viewControllers = @[waterPressureNav, positioningNav, monitoringStationsNav, settingNav];
     
     // self.window.rootViewController = baseTabBarController;
-    self.window.rootViewController = [LoginVC loadFromNib];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginVC loadFromNib]];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

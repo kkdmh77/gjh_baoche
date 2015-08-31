@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DataListVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MonitoringDataListVC">
             <connections>
                 <outlet property="nameLabel" destination="Ecs-x1-hPD" id="lTQ-U1-JE6"/>
                 <outlet property="numberLabel" destination="4wt-f8-eU4" id="hSH-9u-9VC"/>

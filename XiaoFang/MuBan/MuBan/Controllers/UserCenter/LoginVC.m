@@ -12,6 +12,7 @@
 #import "LoginBC.h"
 #import "UserInfoModel.h"
 #import "AppDelegate.h"
+#import "CityChooseListVC.h"
 
 @interface LoginVC ()
 {
@@ -52,6 +53,7 @@
     [super viewWillAppear:animated];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,9 +119,10 @@
                       [UserInfoModel setUserDefaultLoginName:_userNameLabel.text];
                       [UserInfoModel setUserDefaultPassword:_passwordLabel.text];
                       
-                      [self presentViewController:SharedAppDelegate.baseTabBarController modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:^{
-                          
-                      }];
+                      // 进入城市选择页面
+                      CityChooseListVC *cityChoose = [[CityChooseListVC alloc] init];
+                      [weakSelf pushViewController:cityChoose];
+                      
                       
                   } failedHandle:^(NSError *error) {
                       

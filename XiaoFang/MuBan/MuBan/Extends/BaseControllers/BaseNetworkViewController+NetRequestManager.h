@@ -18,7 +18,13 @@ typedef enum
     NetWaterPressureRequestType_GetWaterPressureList               , // 获取实时水压列表(POST)
     NetWaterPressureRequestType_GetWaterPressureDetail             , // 获取实时水压详情(POST)
     
-    NetWaterPressureRequestType_GetMonitoringStationsList          , // 获取监测点列表(POST)
+    NetWaterPressureRequestType_GetMapPositionList                 , // 获取地图点列表(POST)
+    
+    NetWaterPressureRequestType_GetMonitoringDataList              , // 获取最新监测数据列表(POST)
+    NetWaterPressureRequestType_GetMonitoringValueDetail           , // 获取最新监测数据详情(POST)
+    
+    NetWaterPressureRequestType_GetWarningDataList                 , // 获取最新报警数据列表(POST)
+    NetWaterPressureRequestType_GetWarningValueDetail              , // 获取最新报警数据详情(POST)
     
     // 通知
     NetUploadDeviceTokenRequestType_UploadDeviceToken              ,

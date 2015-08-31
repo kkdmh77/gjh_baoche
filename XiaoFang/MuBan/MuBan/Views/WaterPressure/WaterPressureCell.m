@@ -44,13 +44,13 @@
     return 30;
 }
 
-- (void)loadDataWithShowEntity:(DataEntity *)entity
+- (void)loadDataWithShowEntity:(WaterPressureEntity *)entity
 {
     [_numberBtn setTitle:entity.number forState:UIControlStateNormal];
-    [_nameBtn setTitle:[NSString stringWithFormat:@"  %@", entity.nameStr] forState:UIControlStateNormal];
-    [_valueBtn setTitle:[NSString stringWithFormat:@"%.2f", entity.value] forState:UIControlStateNormal];
-    [_phoneBtn setTitle:@"  13957887266" forState:UIControlStateNormal];
-    [_positionBtn setTitle:[NSString stringWithFormat:@"  %@", entity.positionStr] forState:UIControlStateNormal];
+    [_nameBtn setTitle:[NSString stringWithFormat:@"  %@", entity.name] forState:UIControlStateNormal];
+    [_valueBtn setTitle:[NSString stringWithFormat:@"%.2f", entity.value.floatValue] forState:UIControlStateNormal];
+    [_phoneBtn setTitle:[NSString stringWithFormat:@"  %@", entity.phone]forState:UIControlStateNormal];
+    [_positionBtn setTitle:[NSString stringWithFormat:@"  %@", entity.position] forState:UIControlStateNormal];
 }
 
 @end

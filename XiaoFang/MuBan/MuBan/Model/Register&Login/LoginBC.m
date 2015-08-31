@@ -113,6 +113,18 @@
     [[NetRequestManager sharedInstance] clearDelegate:self];
 }
 
+- (void)executeLoginSuccessActionWithInfoObj:(NSDictionary *)infoObj
+{
+    if ([infoObj isAbsoluteValid])
+    {
+        NSNumber *userId = [infoObj safeObjectForKey:@"userId"];
+        [UserInfoModel setUserDefaultUserId:userId];
+    }
+    
+    // 发送通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginSuccessNotificationKey object:nil];
+}
+
 #pragma mark - NetRequestDelegate methods
 
 - (void)netRequest:(NetRequest *)request failedWithError:(NSError *)error
@@ -130,8 +142,7 @@
 {
     [HUDManager hideHUD];
     
-    // 发送通知
-    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginSuccessNotificationKey object:nil];
+    [self executeLoginSuccessActionWithInfoObj:[infoObj safeObjectForKey:@"infor"]];
     
     if (_success)
     {

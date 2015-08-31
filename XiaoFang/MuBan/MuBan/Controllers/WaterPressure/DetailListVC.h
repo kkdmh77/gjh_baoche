@@ -11,6 +11,6 @@
 
 @interface DetailListVC : BaseNetworkViewController
 
-@property (nonatomic, strong) DataEntity *entity;
+@property (nonatomic, copy) NSString *sid;
 
 @end

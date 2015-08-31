@@ -8,10 +8,15 @@
 
 #import "DetailListVC.h"
 #import "DetailInfoListCell.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
+#import "CommonEntity.h"
 
 static NSString * const detailInfoListCellIdentifier = @"detailInfoListCellIdentifier";
 
 @interface DetailListVC ()
+{
+    WaterPressureDetailEntity *_waterPressureDetailEntity;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *monitoringStationsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *monitoringTypeLabel;
@@ -35,6 +40,7 @@ static NSString * const detailInfoListCellIdentifier = @"detailInfoListCellIdent
     [super viewDidLoad];
     
     [self setup];
+    [self getNetworkData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,20 +55,42 @@ static NSString * const detailInfoListCellIdentifier = @"detailInfoListCellIdent
     [self setNavigationItemTitle:@"水压详情列表"];
 }
 
+- (void)setNetworkRequestStatusBlocks
+{
+    WEAKSELF
+    [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
+        STRONGSELF
+        if (NetWaterPressureRequestType_GetWaterPressureDetail == request.tag)
+        {
+            strongSelf->_waterPressureDetailEntity = [weakSelf parseNetwordDataWithInfoObj:successInfoObj];
+            
+            [weakSelf loadWaterPressureDetailData];
+            [weakSelf.tab reloadData];
+        }
+    } failedBlock:^(NetRequest *request, NSError *error) {
+        
+    }];
+}
+
+- (void)getNetworkData
+{
+    [self sendRequest:nil
+         parameterDic:@{@"userId": [UserInfoModel getUserDefaultUserId],
+                        @"trancode": @"BC0002",
+                        @"sid": _sid,
+                        @"page": @(1),
+                        @"pageSize": @(100)}
+    requestMethodType:RequestMethodType_POST
+           requestTag:NetWaterPressureRequestType_GetWaterPressureDetail];
+}
+
+- (WaterPressureDetailEntity *)parseNetwordDataWithInfoObj:(NSDictionary *)obj
+{
+    return [WaterPressureDetailEntity initWithDict:obj];
+}
+
 - (void)configureViewsProperties
 {
-    // 赋值
-    if (_entity)
-    {
-        _monitoringStationsLabel.text = [NSString stringWithFormat:@"监测点：0%ld", _entity.number];
-        _monitoringTypeLabel.text = @"监测点类型：室外消防栓";
-        _leaderNameLabel.text = [NSString stringWithFormat:@"负责人：%@", _entity.leaderNameStr];
-        _leaderPhoneLabel.text = [NSString stringWithFormat:@"负责人电话：%@", _entity.mobilePhoneStr];
-        _companyLabel.text = [NSString stringWithFormat:@"消防负责单位：%@", _entity.companyStr];
-        _companyPhoneLabel.text = @"消防负责单位电话：0574-88689806";
-        _positionLabel.text = [NSString stringWithFormat:@"地址：%@", _entity.companyPositionStr];
-    }
-    
     // 设置属性
     CGFloat width = (IPHONE_WIDTH - 80) / 2;
     UIColor *BGColor = HEXCOLOR(0XF0F0F0);
@@ -96,6 +124,18 @@ static NSString * const detailInfoListCellIdentifier = @"detailInfoListCellIdent
     [self configureViewsProperties];
 }
 
+- (void)loadWaterPressureDetailData
+{
+    // 赋值
+    _monitoringStationsLabel.text = [NSString stringWithFormat:@"监测点：%@", _waterPressureDetailEntity.monitoringStations];
+    _monitoringTypeLabel.text = [NSString stringWithFormat:@"监测点类型：%@", _waterPressureDetailEntity.monitoringType];
+    _leaderNameLabel.text = [NSString stringWithFormat:@"负责人：%@", _waterPressureDetailEntity.leaderName];
+    _leaderPhoneLabel.text = [NSString stringWithFormat:@"负责人电话：%@", _waterPressureDetailEntity.leaderPhone];
+    _companyLabel.text = [NSString stringWithFormat:@"消防负责单位：%@", _waterPressureDetailEntity.company];
+    _companyPhoneLabel.text = [NSString stringWithFormat:@"消防负责单位电话：%@", _waterPressureDetailEntity.companyPhone];
+    _positionLabel.text = [NSString stringWithFormat:@"地址：%@", _waterPressureDetailEntity.position];
+}
+
 #pragma mark - UITableViewDelegate&UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -105,7 +145,7 @@ static NSString * const detailInfoListCellIdentifier = @"detailInfoListCellIdent
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return _waterPressureDetailEntity.collectListEntityArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -117,7 +157,9 @@ static NSString * const detailInfoListCellIdentifier = @"detailInfoListCellIdent
 {
     DetailInfoListCell *cell = [tableView dequeueReusableCellWithIdentifier:detailInfoListCellIdentifier];
     
-    [cell loadData];
+    WaterPressureDetail_CollectListEntity *entity = _waterPressureDetailEntity.collectListEntityArray[indexPath.row];
+    
+    [cell loadDataWithShowEntity:entity];
     
     return cell;
 }

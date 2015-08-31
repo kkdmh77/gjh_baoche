@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WarningDataListCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5c-5g-h9E">
+                        <rect key="frame" x="235" y="0.0" width="85" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="85" id="zpB-6U-CwE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="报警时间">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhc-hC-MlR">
+                        <rect key="frame" x="0.0" y="0.0" width="45" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="45" id="TCN-33-g4l"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="编号">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="报警日期" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pay-Dk-cWG">
+                        <rect key="frame" x="135" y="0.0" width="100" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="HjE-Ik-lv4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="报警类型" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWv-uS-N4f">
+                        <rect key="frame" x="45" y="0.0" width="90" height="29"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vhc-hC-MlR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="3mq-vF-cNN"/>
+                    <constraint firstAttribute="bottom" secondItem="vhc-hC-MlR" secondAttribute="bottom" id="7OM-M7-uWn"/>
+                    <constraint firstItem="e5c-5g-h9E" firstAttribute="leading" secondItem="Pay-Dk-cWG" secondAttribute="trailing" id="9bj-iL-f4H"/>
+                    <constraint firstAttribute="trailing" secondItem="e5c-5g-h9E" secondAttribute="trailing" id="AFJ-hq-F6e"/>
+                    <constraint firstItem="vhc-hC-MlR" firstAttribute="top" secondItem="AWv-uS-N4f" secondAttribute="top" id="G2M-xf-sJ6"/>
+                    <constraint firstItem="e5c-5g-h9E" firstAttribute="height" secondItem="vhc-hC-MlR" secondAttribute="height" id="ILE-YV-CLd"/>
+                    <constraint firstItem="e5c-5g-h9E" firstAttribute="top" secondItem="vhc-hC-MlR" secondAttribute="top" id="Ni3-Ti-kDE"/>
+                    <constraint firstItem="Pay-Dk-cWG" firstAttribute="leading" secondItem="AWv-uS-N4f" secondAttribute="trailing" id="Pzv-rD-M9v"/>
+                    <constraint firstItem="AWv-uS-N4f" firstAttribute="leading" secondItem="vhc-hC-MlR" secondAttribute="trailing" id="TRk-gy-aVl"/>
+                    <constraint firstItem="vhc-hC-MlR" firstAttribute="height" secondItem="AWv-uS-N4f" secondAttribute="height" id="a7c-p6-KJJ"/>
+                    <constraint firstItem="vhc-hC-MlR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bhm-Iv-d4d"/>
+                    <constraint firstItem="Pay-Dk-cWG" firstAttribute="height" secondItem="vhc-hC-MlR" secondAttribute="height" id="jGq-ly-ZYR"/>
+                    <constraint firstItem="Pay-Dk-cWG" firstAttribute="top" secondItem="vhc-hC-MlR" secondAttribute="top" id="yCK-RL-b2z"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="numberBtn" destination="vhc-hC-MlR" id="9OV-TQ-zEg"/>
+                <outlet property="warningDateLabel" destination="Pay-Dk-cWG" id="KXl-rr-nXO"/>
+                <outlet property="warningTimeBtn" destination="e5c-5g-h9E" id="Tgs-jf-Vrl"/>
+                <outlet property="warningTypeLabel" destination="AWv-uS-N4f" id="ICw-Mg-tWS"/>
+            </connections>
+            <point key="canvasLocation" x="256" y="332"/>
+        </tableViewCell>
+    </objects>
+</document>
