@@ -7,7 +7,8 @@
 //
 
 #import "MonitoringStationsVC.h"
-#import "DataListVC.h"
+#import "MonitoringDataListVC.h"
+#import "WarningDataListVC.h"
 
 @interface MonitoringStationsVC ()
 {
@@ -138,9 +139,20 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    DataListVC *dataList = [DataListVC loadFromNib];
-    dataList.hidesBottomBarWhenPushed = YES;
-    [self pushViewController:dataList];
+    // 最新监测数据
+    if (0 == indexPath.row)
+    {
+        MonitoringDataListVC *monitoringDataList = [MonitoringDataListVC loadFromNib];
+        monitoringDataList.hidesBottomBarWhenPushed = YES;
+        [self pushViewController:monitoringDataList];
+    }
+    // 最新报警数据
+    else if (1 == indexPath.row)
+    {
+        WarningDataListVC *warningDataList = [WarningDataListVC loadFromNib];
+        warningDataList.hidesBottomBarWhenPushed = YES;
+        [self pushViewController:warningDataList];
+    }
 }
 
 @end

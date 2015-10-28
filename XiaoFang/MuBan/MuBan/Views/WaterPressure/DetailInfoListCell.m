@@ -56,11 +56,11 @@
     return 30;
 }
 
-- (void)loadData
+- (void)loadDataWithShowEntity:(WaterPressureDetail_CollectListEntity *)entity
 {
-    [_valueBtn setTitle:[NSString stringWithFormat:@"%.2f", 0.33] forState:UIControlStateNormal];
-    [_collectTimeBtn setTitle:@"2015-07-25 10:22:19" forState:UIControlStateNormal];
-    [_noteBtn setTitle:@"一切正常" forState:UIControlStateNormal];
+    [_valueBtn setTitle:[NSString stringWithFormat:@"%.2f", entity.value.floatValue] forState:UIControlStateNormal];
+    [_collectTimeBtn setTitle:entity.collectTime forState:UIControlStateNormal];
+    [_noteBtn setTitle:entity.note forState:UIControlStateNormal];
 }
 
 @end

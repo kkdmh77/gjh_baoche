@@ -17,6 +17,7 @@
 #import "MonitoringStationsVC.h"
 #import "SettingVC.h"
 #import "CommonEntity.h"
+#import "LoginVC.h"
 
 @interface AppDelegate () <NetRequestDelegate>
 {
@@ -69,10 +70,11 @@
     setting.title = @"基本设置";
     UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController:setting];
     
-    BaseTabBarVC *baseTabBarController = [[BaseTabBarVC alloc] init];
-    baseTabBarController.viewControllers = @[waterPressureNav, positioningNav, monitoringStationsNav, settingNav];
+    self.baseTabBarController = [[BaseTabBarVC alloc] init];
+    _baseTabBarController.viewControllers = @[waterPressureNav, positioningNav, monitoringStationsNav, settingNav];
     
-    self.window.rootViewController = baseTabBarController;
+    // self.window.rootViewController = baseTabBarController;
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginVC loadFromNib]];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

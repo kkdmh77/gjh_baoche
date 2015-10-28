@@ -11,18 +11,18 @@
 #import "RegisterVC.h"
 #import "LoginBC.h"
 #import "UserInfoModel.h"
-#import "ForgetPassword_GetVerificationCodeVC.h"
+#import "AppDelegate.h"
+#import "CityChooseListVC.h"
 
 @interface LoginVC ()
 {
     LoginBC     *_loginBC;
 }
 
+@property (weak, nonatomic) IBOutlet UIView *inputBgView;
 @property (weak, nonatomic) IBOutlet FUITextField *userNameLabel;
 @property (weak, nonatomic) IBOutlet FUITextField *passwordLabel;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
-@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
-@property (weak, nonatomic) IBOutlet UIButton *browseBtn;
 
 @end
 
@@ -46,9 +46,14 @@
                                  normalImg:[UIImage imageNamed:@"close"]
                             highlightedImg:nil
                                     action:@selector(backViewController)];
-    [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Right
-                            barButtonTitle:@"忘记密码"
-                                    action:@selector(clickForgetPasswordBtn:)];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,39 +71,30 @@
 
 - (void)configureViewsProperties
 {
-    [_userNameLabel addLineWithPosition:ViewDrawLinePostionType_Top
-                              lineColor:CellSeparatorColor
-                              lineWidth:LineWidth];
+    [_inputBgView setRadius:5];
+    [_inputBgView addBorderToViewWitBorderColor:CellSeparatorColor borderWidth:1];
+   
     [_userNameLabel addLineWithPosition:ViewDrawLinePostionType_Bottom
-                       startPointOffset:10
+                       startPointOffset:0
                          endPointOffset:0
                               lineColor:CellSeparatorColor
                               lineWidth:LineWidth];
-    [_passwordLabel addLineWithPosition:ViewDrawLinePostionType_Bottom
-                              lineColor:CellSeparatorColor
-                              lineWidth:LineWidth];
     
+    _userNameLabel.edgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     _userNameLabel.leftViewMode = UITextFieldViewModeAlways;
-    _userNameLabel.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login_user"]];
-    _userNameLabel.backgroundColor = [UIColor whiteColor];
+    _userNameLabel.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"userName"]];
+    _userNameLabel.backgroundColor = [UIColor clearColor];
     _userNameLabel.text = [UserInfoModel getUserDefaultLoginName];
     
+    _passwordLabel.edgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     _passwordLabel.leftViewMode = UITextFieldViewModeAlways;
-    _passwordLabel.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login_mima"]];
-    _passwordLabel.backgroundColor = [UIColor whiteColor];
+    _passwordLabel.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"password"]];
+    _passwordLabel.backgroundColor = [UIColor clearColor];
     _passwordLabel.text = [UserInfoModel getUserDefaultPassword];
     
     _loginBtn.backgroundColor = Common_ThemeColor;
     [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_loginBtn setRadius:5];
-    
-    _registerBtn.backgroundColor = [UIColor whiteColor];
-    [_registerBtn setTitleColor:Common_GrayColor forState:UIControlStateNormal];
-    [_registerBtn setRadius:5];
-    
-    _browseBtn.backgroundColor = [UIColor whiteColor];
-    [_browseBtn setTitleColor:Common_GrayColor forState:UIControlStateNormal];
-    [_browseBtn setRadius:5];
+    [_loginBtn setRadius:3];
 }
 
 - (void)setup
@@ -123,28 +119,14 @@
                       [UserInfoModel setUserDefaultLoginName:_userNameLabel.text];
                       [UserInfoModel setUserDefaultPassword:_passwordLabel.text];
                       
-                      [weakSelf backViewController];
+                      // 进入城市选择页面
+                      CityChooseListVC *cityChoose = [[CityChooseListVC alloc] init];
+                      [weakSelf pushViewController:cityChoose];
+                      
                       
                   } failedHandle:^(NSError *error) {
                       
-                  }];
-}
-
-- (IBAction)clickRegisterBtn:(UIButton *)sender
-{
-    RegisterVC *registerVC = [RegisterVC loadFromNib];
-    [self pushViewController:registerVC];
-}
-
-- (IBAction)clickBrowseBtn:(UIButton *)sender
-{
-    [self backViewController];
-}
-
-- (void)clickForgetPasswordBtn:(UIButton *)btn
-{
-    ForgetPassword_GetVerificationCodeVC *forgetPassword = [ForgetPassword_GetVerificationCodeVC loadFromNib];
-    [self pushViewController:forgetPassword];
+    }];
 }
 
 @end

@@ -45,7 +45,7 @@
     
     if (_entity)
     {
-        NSString *numberStr = [NSString stringWithFormat:@"0%ld", _entity.number];
+        NSString *numberStr = [NSString stringWithFormat:@"%@", _entity.position];
         
         _titleLabel.text = [NSString stringWithFormat:@"监测点%@水压曲线图", numberStr];
         [_titleLabel setTextColor:Common_LiteBlueColor range:[_titleLabel.text rangeOfString:numberStr]];

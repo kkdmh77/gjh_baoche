@@ -7,6 +7,7 @@
 //
 
 #import "CityDetailVC.h"
+#import "AppDelegate.h"
 
 @interface CityDetailVC ()
 
@@ -75,7 +76,7 @@
 {
     if (_cityType == 1)
     {
-        [self dismissViewControllerAnimated:YES completion:^{
+        [self presentViewController:SharedAppDelegate.baseTabBarController modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:^{
             
         }];
     }

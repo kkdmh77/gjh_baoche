@@ -17,7 +17,7 @@
 
 - (NSString *)title
 {
-    return _entity.positionStr;
+    return _entity.position;
 }
 
 @end

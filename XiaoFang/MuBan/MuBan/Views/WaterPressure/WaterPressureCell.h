@@ -18,6 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *positionBtn;
 
 + (CGFloat)getCellHeight;
-- (void)loadDataWithShowEntity:(DataEntity *)entity;
+- (void)loadDataWithShowEntity:(WaterPressureEntity *)entity;
 
 @end

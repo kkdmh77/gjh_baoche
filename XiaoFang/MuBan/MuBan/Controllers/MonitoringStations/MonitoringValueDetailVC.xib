@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PressureValueDetailVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MonitoringValueDetailVC">
             <connections>
                 <outlet property="MonitoringStationsLabel" destination="sPc-Fz-QTK" id="ddE-dV-Nel"/>
                 <outlet property="companyLabel" destination="cfU-J9-Ylx" id="3Rj-4M-3dC"/>

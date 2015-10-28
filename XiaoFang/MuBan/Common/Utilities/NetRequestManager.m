@@ -88,18 +88,18 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
 //    NSLog(@"resultDic = %@",*result);
     
     // 做服务器返回的业务code判断,因为如果服务器方法报错或者业务逻辑出错HTTP码还是返回的200,但是加了自己定义的一套code码(详情可参考WIKI上面的约定)
-    NSNumber *myCodeNum = [*result objectForKey:@"code"];
-    NSString *myMsgStr = [*result objectForKey:@"msg"];
+    NSString *myCode = [[*result objectForKey:@"common"] objectForKey:@"respCode"];
+    NSString *myMsgStr = [[*result objectForKey:@"common"] objectForKey:@"respMsg"];
     
-    if (!myCodeNum || MyHTTPCodeType_Success != myCodeNum.integerValue)
+    if (![myCode isEqualToString:@"00000"])
     {
-        err = [[NSError alloc] initWithDomain:@"MYSERVER_ERROR_DOMAIN" code:myCodeNum.integerValue userInfo:[NSDictionary dictionaryWithObjectsAndKeys:myMsgStr, NSLocalizedDescriptionKey, nil]];
+        err = [[NSError alloc] initWithDomain:@"MYSERVER_ERROR_DOMAIN" code:myCode.integerValue userInfo:[NSDictionary dictionaryWithObjectsAndKeys:myMsgStr, NSLocalizedDescriptionKey, nil]];
         
         *result = err;
        
         return NO;
     }
-    *result = [*result objectForKey:@"data"];
+    *result = [*result objectForKey:@"content"];
     
     return YES;
 }
@@ -190,7 +190,7 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     }
     else
     {
-        networkDataIsJsonType = NO;
+        networkDataIsJsonType = YES;
     }
 }
 
@@ -367,14 +367,16 @@ DEF_SINGLETON(NetRequestManager);
     // 修改开始
     NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding([netRequest.asiFormRequest stringEncoding]));
     
+    [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@",charset]];
+    
     if ([methodType isEqualToString:RequestMethodType_GET])
     {
         [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@",charset]];
     }
     else
     {
+        /*
         [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/json; charset=%@",charset]];
-        
         // 以对象方式设置请求消息体
         if ([parameterDic isAbsoluteValid])
         {
@@ -383,6 +385,7 @@ DEF_SINGLETON(NetRequestManager);
             
             [netRequest.asiFormRequest setPostBody:[NSMutableData dataWithData:postBodyData]];
         }
+         */
     }
     // 修改结束
     
@@ -416,15 +419,16 @@ DEF_SINGLETON(NetRequestManager);
      @ 修改开始
      */
     // 修改开始
-    /*
+    
     if ([parameterDic isAbsoluteValid])
     {
         for (NSString *key in parameterDic.allKeys)
         {
             [netRequest.asiFormRequest setPostValue:[parameterDic objectForKey:key] forKey:key];
         }
+        [netRequest.asiFormRequest setPostValue:@"MB" forKey:@"channal"];
     }
-     */
+    
     // 修改结束
     
     // 判断是否要作数据缓存

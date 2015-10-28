@@ -14,6 +14,8 @@
 
 @interface PositioningVC () <MKMapViewDelegate>
 {
+    NSArray *_netEntityArray;
+
     MKMapView *_mapView;
 }
 
@@ -30,6 +32,7 @@
                                     action:NULL];
     
     [self initialization];
+    [self getNetworkData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,9 +52,11 @@
     WEAKSELF
     [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
         STRONGSELF
-        if (NetWaterPressureRequestType_GetMonitoringStationsList == request.tag)
+        if (NetWaterPressureRequestType_GetMapPositionList == request.tag)
         {
-           
+           strongSelf->_netEntityArray = [weakSelf parseNetwordDataWithInfoObj:successInfoObj];
+            
+            [weakSelf loadMapAnnotations];
         }
     }];
 }
@@ -59,8 +64,26 @@
 - (void)getNetworkData
 {
     [self sendRequest:nil
-         parameterDic:nil
-           requestTag:NetWaterPressureRequestType_GetMonitoringStationsList];
+         parameterDic:@{@"userId": [UserInfoModel getUserDefaultUserId],
+                        @"trancode": @"BC0003",
+                        @"page": @(1),
+                        @"pageSize": @(100)}
+    requestMethodType:RequestMethodType_POST
+           requestTag:NetWaterPressureRequestType_GetMapPositionList];
+}
+
+- (NSArray *)parseNetwordDataWithInfoObj:(NSDictionary *)obj
+{
+    NSArray *netDataArray = [obj safeObjectForKey:@"list"];
+    NSMutableArray *entityArray = [NSMutableArray arrayWithCapacity:netDataArray.count];
+    
+    for (NSDictionary *dic in netDataArray)
+    {
+        MapPositionEntity *entity = [MapPositionEntity initWithDict:dic];
+        [entityArray addObject:entity];
+    }
+    
+    return entityArray;
 }
 
 - (void)initialization
@@ -71,13 +94,16 @@
     [_mapView keepAutoresizingInFull];
     
     [self.view addSubview:_mapView];
-    
+}
+
+- (void)loadMapAnnotations
+{
     // 添加annotation点
-    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:SharedAppDelegate.tabDataArray.count];
-    for (DataEntity *entity in SharedAppDelegate.tabDataArray)
+    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:_netEntityArray.count];
+    for (MapPositionEntity *entity in _netEntityArray)
     {
-//        29.705878, 121.397455
-        entity.coordinate = CLLocationCoordinate2DMake(29.705878 + arc4random_uniform(100) / 5000.0, 121.397455 + arc4random_uniform(100) / 5000.0);
+        // 29.705878, 121.397455
+        // entity.coordinate = CLLocationCoordinate2DMake(29.705878 + arc4random_uniform(100) / 5000.0, 121.397455 + arc4random_uniform(100) / 5000.0);
         Annotation *annotation = [[Annotation alloc] init];
         annotation.entity = entity;
         
@@ -86,8 +112,8 @@
     
     [_mapView addAnnotations:annotations];
     
-//    [_mapView setCenterCoordinate:CLLocationCoordinate2DMake(29.705878, 121.397455)];
-    [_mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(29.715878, 121.407455), MKCoordinateSpanMake(0.05, 0.05)) animated:YES];
+    // [_mapView setCenterCoordinate:CLLocationCoordinate2DMake(29.705878, 121.397455)];
+    [_mapView setRegion:MKCoordinateRegionMake(((MapPositionEntity *)[_netEntityArray firstObject]).coordinate, MKCoordinateSpanMake(0.05, 0.05)) animated:YES];
 }
 
 - (void)mapViewWillStartLocatingUser:(MKMapView *)mapView

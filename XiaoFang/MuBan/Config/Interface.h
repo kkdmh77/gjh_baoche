@@ -3,7 +3,7 @@
 #define AppDownloadUrl                              @"https://itunes.apple.com/cn/app/id675486231"
 
 // Request的nameSpace
-#define Request_NameSpace                           @"http://119.28.4.82:8089/safe/json"                      // 调试
+#define Request_NameSpace                           @"http://115.47.2.47:8089/safe/json"                      // 调试
 
 #define Request_NameSpace_company_internal          @"http://192.168.0.105:9999"                              // 内网 测试
 #define Request_NameSpace_company_external          @""                                                       // 外网 测试

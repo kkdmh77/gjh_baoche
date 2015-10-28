@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonEntity.h"
 
 @interface DetailInfoListCell : UITableViewCell
 
 + (CGFloat)getCellHeight;
-- (void)loadData;
+- (void)loadDataWithShowEntity:(WaterPressureDetail_CollectListEntity *)entity;
 
 @end

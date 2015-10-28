@@ -23,6 +23,6 @@ typedef void (^ShuiYaCellOperationHandle) (ShuiYaCell *cell, id sender);
 @property (nonatomic, copy) ShuiYaCellOperationHandle handle;
 
 + (CGFloat)getCellHeight;
-- (void)loadDataWithShowEntity:(DataEntity *)entity;
+- (void)loadDataWithShowEntity:(MonitoringDataListEntity *)entity;
 
 @end

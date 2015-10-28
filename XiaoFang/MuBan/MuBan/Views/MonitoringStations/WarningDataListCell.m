@@ -6,14 +6,14 @@
 //  Copyright (c) 2015年 com.gjh. All rights reserved.
 //
 
-#import "ShuiYaCell.h"
+#import "WarningDataListCell.h"
 #import "DXPopover.h"
 
-@interface ShuiYaCell ()
+@interface WarningDataListCell ()
 
 @end
 
-@implementation ShuiYaCell
+@implementation WarningDataListCell
 
 - (void)awakeFromNib {
     [self setup];
@@ -30,16 +30,7 @@
 - (void)configureViewsProperties
 {
     [_numberBtn setTitleColor:Common_LiteBlueColor forState:UIControlStateNormal];
-    [_valueBtn setTitleColor:Common_LiteBlueColor forState:UIControlStateNormal];
-    
-    CGFloat width = (IPHONE_WIDTH - 45 - 95) / 2;
-    
-    [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(width);
-    }];
-    [_positionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(width);
-    }];
+    [_warningTimeBtn setTitleColor:Common_LiteBlueColor forState:UIControlStateNormal];
 }
 
 - (void)setup
@@ -47,9 +38,10 @@
     // 设置属性
     [self configureViewsProperties];
     // 添加手势
-    [self addLongPressGesture];
+    // [self addLongPressGesture];
 }
 
+/*
 - (IBAction)clickPressureValueBtn:(id)sender
 {
     if (_handle) _handle(self, sender);
@@ -87,18 +79,19 @@
         [popover showAtPoint:CGPointMake(view.frameOriginX + textWidth / 2, self.frameOriginY + 44 + 45 + 30 + 20) popoverPostion:DXPopoverPositionDown withContentView:textLabel inView:[UIApplication sharedApplication].keyWindow];
     }
 }
+ */
 
 + (CGFloat)getCellHeight
 {
     return 30;
 }
 
-- (void)loadDataWithShowEntity:(MonitoringDataListEntity *)entity
+- (void)loadDataWithShowEntity:(WarningDataListEntity *)entity
 {
     [_numberBtn setTitle:entity.number forState:UIControlStateNormal];
-    _nameLabel.text = [NSString stringWithFormat:@"  %@", entity.name];
-    _positionLabel.text = [NSString stringWithFormat:@"  %@", entity.position];
-    [_valueBtn setTitle:[NSString stringWithFormat:@"%.2f", entity.value.doubleValue] forState:UIControlStateNormal];
+    _warningTypeLabel.text = [NSString stringWithFormat:@"  %@", entity.warningType];
+    _warningDateLabel.text = [NSString stringWithFormat:@"%@", entity.warningDate];
+    [_warningTimeBtn setTitle:[NSString stringWithFormat:@"%@", entity.warningTime] forState:UIControlStateNormal];
 }
 
 @end

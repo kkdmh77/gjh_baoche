@@ -8,6 +8,6 @@
 
 #import "BaseNetworkViewController.h"
 
-@interface DataListVC : BaseNetworkViewController
+@interface WarningDataListVC : BaseNetworkViewController
 
 @end

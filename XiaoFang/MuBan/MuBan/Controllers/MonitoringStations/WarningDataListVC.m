@@ -6,18 +6,21 @@
 //  Copyright (c) 2015年 com.gjh. All rights reserved.
 //
 
-#import "DataListVC.h"
+#import "WarningDataListVC.h"
 #import "CommonEntity.h"
-#import "ShuiYaCell.h"
-#import "PressureValueDetailVC.h"
+#import "WarningDataListCell.h"
+#import "MonitoringValueDetailVC.h"
 #import "GraphVC.h"
 #import "AppDelegate.h"
+#import "BaseNetworkViewController+NetRequestManager.h"
 
-static NSString * const shuiYaCellIdentifier = @"shuiYaCellIdentifier";
+static NSString * const warningDataListCellIdentifier = @"warningDataListCellIdentifier";
 
-@interface DataListVC ()
+@interface WarningDataListVC ()
 {
-    NSArray *_tabDataArray;
+    // NSArray *_tabDataArray;
+    
+    NSArray *_netEntityArray;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *numberLabel;
@@ -29,7 +32,7 @@ static NSString * const shuiYaCellIdentifier = @"shuiYaCellIdentifier";
 
 @end
 
-@implementation DataListVC
+@implementation WarningDataListVC
 
 - (void)dealloc
 {
@@ -39,7 +42,8 @@ static NSString * const shuiYaCellIdentifier = @"shuiYaCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self configureLocalData];
+    [self getNetworkData];
+    // [self configureLocalData];
     [self setup];
 }
 
@@ -50,7 +54,48 @@ static NSString * const shuiYaCellIdentifier = @"shuiYaCellIdentifier";
 
 - (void)setPageLocalizableText
 {
-    [self setNavigationItemTitle:@"消防栓压力最新监测数据"];
+    [self setNavigationItemTitle:@"消防栓压力最新报警数据"];
+}
+
+- (void)setNetworkRequestStatusBlocks
+{
+    WEAKSELF
+    [self setNetSuccessBlock:^(NetRequest *request, id successInfoObj) {
+        STRONGSELF
+        if (NetWaterPressureRequestType_GetWarningDataList == request.tag)
+        {
+            strongSelf->_netEntityArray = [weakSelf parseNetwordDataWithInfoObj:successInfoObj];
+            
+            [weakSelf.tab reloadData];
+        }
+    } failedBlock:^(NetRequest *request, NSError *error) {
+        
+    }];
+}
+
+- (void)getNetworkData
+{
+    [self sendRequest:nil
+         parameterDic:@{@"userId": [UserInfoModel getUserDefaultUserId],
+                        @"trancode": @"BC0005",
+                        @"page": @(1),
+                        @"pageSize": @(100)}
+    requestMethodType:RequestMethodType_POST
+           requestTag:NetWaterPressureRequestType_GetWarningDataList];
+}
+
+- (NSArray *)parseNetwordDataWithInfoObj:(NSDictionary *)obj
+{
+    NSArray *netDataArray = [obj safeObjectForKey:@"list"];
+    NSMutableArray *entityArray = [NSMutableArray arrayWithCapacity:netDataArray.count];
+    
+    for (NSDictionary *dic in netDataArray)
+    {
+        WarningDataListEntity *entity = [WarningDataListEntity initWithDict:dic];
+        [entityArray addObject:entity];
+    }
+    
+    return entityArray;
 }
 
 - (void)configureViewsProperties
@@ -81,7 +126,7 @@ static NSString * const shuiYaCellIdentifier = @"shuiYaCellIdentifier";
     _valueLabel.backgroundColor = BGColor;
     
     // tab
-    [_tab registerNib:[UINib nibWithNibName:NSStringFromClass([ShuiYaCell class]) bundle:nil] forCellReuseIdentifier:shuiYaCellIdentifier];
+    [_tab registerNib:[UINib nibWithNibName:NSStringFromClass([WarningDataListCell class]) bundle:nil] forCellReuseIdentifier:warningDataListCellIdentifier];
     _tab.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
@@ -103,7 +148,7 @@ static NSString * const shuiYaCellIdentifier = @"shuiYaCellIdentifier";
     _tabDataArray = [NSArray arrayWithObjects:entityOne, entityTwo, entityThird, entityFour, entityFive, nil];
      */
     
-    _tabDataArray = SharedAppDelegate.tabDataArray;
+    // _tabDataArray = SharedAppDelegate.tabDataArray;
 }
 
 #pragma mark - UITableViewDelegate&UITableViewDataSource methods
@@ -115,30 +160,19 @@ static NSString * const shuiYaCellIdentifier = @"shuiYaCellIdentifier";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _tabDataArray.count;
+    return _netEntityArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [ShuiYaCell getCellHeight];
+    return [WarningDataListCell getCellHeight];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ShuiYaCell *cell = [tableView dequeueReusableCellWithIdentifier:shuiYaCellIdentifier];
+    WarningDataListCell *cell = [tableView dequeueReusableCellWithIdentifier:warningDataListCellIdentifier];
     
-    WEAKSELF
-    cell.handle = ^(ShuiYaCell *cell, id sender) {
-        STRONGSELF
-        NSIndexPath *path = [tableView indexPathForCell:cell];
-        DataEntity *data = strongSelf->_tabDataArray[path.row];
-        
-        GraphVC *graph = [GraphVC loadFromNib];
-        graph.entity = data;
-        [weakSelf pushViewController:graph];
-    };
-    
-    DataEntity *entity = _tabDataArray[indexPath.row];
+    WarningDataListEntity *entity = _netEntityArray[indexPath.row];
     [cell loadDataWithShowEntity:entity];
     
     return cell;
@@ -148,10 +182,10 @@ static NSString * const shuiYaCellIdentifier = @"shuiYaCellIdentifier";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    PressureValueDetailVC *pressureValue = [PressureValueDetailVC loadFromNib];
-    pressureValue.entity = _tabDataArray[indexPath.row];
-    
-    [self pushViewController:pressureValue];
+//    MonitoringValueDetailVC *monitoringValueDetail = [MonitoringValueDetailVC loadFromNib];
+//    monitoringValueDetail.entity = _netEntityArray[indexPath.row];
+//    
+//    [self pushViewController:monitoringValueDetail];
 }
 
 @end

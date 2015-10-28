@@ -12,6 +12,6 @@
 
 @interface Annotation : NSObject <MKAnnotation>
 
-@property (nonatomic, strong) DataEntity *entity;
+@property (nonatomic, strong) MapPositionEntity *entity;
 
 @end

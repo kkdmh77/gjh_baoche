@@ -9,7 +9,7 @@
 #import "BaseNetworkViewController.h"
 #import "CommonEntity.h"
 
-@interface PressureValueDetailVC : BaseNetworkViewController
+@interface WarningValueDetailVC : BaseNetworkViewController
 
 @property (nonatomic, strong) DataEntity *entity;
 
