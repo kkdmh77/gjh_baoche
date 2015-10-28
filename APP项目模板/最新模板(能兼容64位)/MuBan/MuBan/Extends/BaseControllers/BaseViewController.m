@@ -344,13 +344,23 @@
 
 - (void)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg action:(SEL)action
 {
+    [self configureBarbuttonItemByPosition:position normalImg:normalImg highlightedImg:highlightedImg selectedImg:nil isSelected:NO action:action];
+}
+
+- (void)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg selectedImg:(UIImage *)selectedImg isSelected:(BOOL)isSelected action:(SEL)action
+{
+    UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 40, 40) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
+    UIButton *btn = (UIButton *)[barItem.customView viewWithTag:8888];
+    [btn setImage:selectedImg forState:UIControlStateSelected];
+    btn.selected = isSelected;
+    
     if (BarbuttonItemPosition_Left == position)
     {
-        self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 30, 30) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
+        self.navigationItem.leftBarButtonItem = barItem;
     }
     else
     {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 30, 30) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
+        self.navigationItem.rightBarButtonItem = barItem;
     }
 }
 
@@ -457,6 +467,7 @@
      self.navigationItem.titleView = navTitleLabel;
      */
     
+    self.title = title;
     self.navigationItem.title = title;
     
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : color, UITextAttributeFont : font};

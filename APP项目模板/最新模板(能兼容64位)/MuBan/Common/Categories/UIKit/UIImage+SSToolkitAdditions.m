@@ -35,9 +35,12 @@
 
 
 - (UIImage *)squareImage {
-	CGSize imageSize = self.size;
-	CGFloat shortestSide = fminf(imageSize.width, imageSize.height);
-	return [self imageCroppedToRect:CGRectMake(0.0f, 0.0f, shortestSide, shortestSide)];
+    CGSize imageSize = self.size;
+    CGFloat shortestSide = fminf(imageSize.width, imageSize.height);
+    CGFloat originX = imageSize.width <= imageSize.height ? 0 : ((imageSize.width - shortestSide) / 2);
+    CGFloat originY = imageSize.height <= imageSize.width ? 0 : ((imageSize.height - shortestSide) / 2);
+    
+    return [self imageCroppedToRect:CGRectMake(originX, originY, shortestSide, shortestSide)];
 }
 
 

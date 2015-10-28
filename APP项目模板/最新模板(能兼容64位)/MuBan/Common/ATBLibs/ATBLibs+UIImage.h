@@ -29,7 +29,8 @@
 
 
 // 生成一副单色的图片
-+ (UIImage*) imageWithColor:(UIColor*)color size:(CGSize)size;
++ (UIImage *)imageWithColor:(UIColor *)color;
++ (UIImage *)imageWithColor:(UIColor*)color size:(CGSize)size;
 
 
 - (UIImage*) imageInRect:(CGRect)rect;

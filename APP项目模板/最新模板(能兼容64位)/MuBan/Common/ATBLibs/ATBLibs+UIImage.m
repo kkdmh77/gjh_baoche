@@ -204,7 +204,10 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
     return [UIImage imageWithContentsOfFile:path];
 }
 
-
++ (UIImage *)imageWithColor:(UIColor *)color
+{
+    return [self imageWithColor:color size:CGSizeMake(1, 1)];
+}
 
 + (UIImage*) imageWithColor:(UIColor*)color size:(CGSize)size
 {
