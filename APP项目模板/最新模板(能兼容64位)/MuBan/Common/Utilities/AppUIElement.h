@@ -22,6 +22,13 @@
 
 @end
 
+@interface ActivityIndicatorViewManager : NSObject
+
++ (void)showActivityIndicatorViewInView:(UIView *)containerView;
++ (void)hide;
+
+@end
+
 
 #pragma mark- LineSpacingTextView
 @interface LineSpacingTextView : UITextView

@@ -36,6 +36,9 @@
 // 安全的对象
 #define SafetyObject(obj)           ([obj isSafeObject] ? obj : nil)
 
+// 以iPhone6为换算基数获得比例值
+#define kGetScaleValueBaseIP6(__A)  (__A * IPHONE_WIDTH / 375)
+
 /**
  * A helper macro to keep the interfaces compatiable with pre ARC compilers.
  * Useful when you put nimbus in a library and link it to a GCC LLVM compiler.
@@ -74,10 +77,3 @@ static __class * __singleton__ = nil; \
 dispatch_once( &once, ^{ __singleton__ = [[__class alloc] init]; } ); \
 return __singleton__; \
 }
-
-// NSlog
-#ifndef __OPTIMIZE__
-#define NSLog(...) NSLog(__VA_ARGS__)
-#else
-#define NSLog(...) {}
-#endif

@@ -12,6 +12,8 @@
 #import "LanguagesManager.h"
 #import "CoreData+MagicalRecord.h"
 #import "UIFactory.h"
+#import "FontManager.h"
+#import "UserInfoModel.h"
 
 @interface AppPropertiesInitialize : NSObject
 

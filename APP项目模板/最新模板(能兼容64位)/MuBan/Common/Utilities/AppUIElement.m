@@ -22,23 +22,36 @@
 
 - (void) _setLoadingImage
 {
-    UIImage* loadingImage = [UIImage imageNamed:@"common_loading.png"];
-    loadingImage = [loadingImage changeImageWithColor:_color];
+    UIImage* loadingImage = [UIImage imageNamed:@"circle_progress"];
+    // loadingImage = [loadingImage changeImageWithColor:_color];
     
     _rotationLayer.contents = (id)loadingImage.CGImage;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        [self setup];
+    }
+    return self;
+}
 
 - (void) awakeFromNib
 {
-    self.backgroundColor = [UIColor clearColor];
+    [self setup];
+}
+
+- (void)setup
+{
+    // self.backgroundColor = [UIColor clearColor];
     
     _rotationLayer = [[CALayer alloc] init];
     _rotationLayer.frame = self.bounds;
     [self _setLoadingImage];
     [self.layer addSublayer:_rotationLayer];
 }
-
 
 - (void) setColor:(UIColor *)color
 {
@@ -84,7 +97,37 @@
 
 @end
 
+////////////////////////////////////////////////////////////////////////////////
 
+static UIView *staticContainerView = nil;
+
+@implementation ActivityIndicatorViewManager
+
++ (void)showActivityIndicatorViewInView:(UIView *)containerView
+{
+    staticContainerView = containerView;
+    [self hide];
+    
+    ActivityIndicatorView *indicatorView = [[ActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    indicatorView.tag = 1000;
+    indicatorView.center = CGPointMake(containerView.frameWidth / 2, containerView.frameHeight / 2);
+    [indicatorView keepAutoresizingInMiddle];
+    [indicatorView startAnimating];
+    [containerView addSubview:indicatorView];
+}
+
++ (void)hide
+{
+    for (UIView *view in staticContainerView.subviews)
+    {
+        if ([view isKindOfClass:[ActivityIndicatorView class]])
+        {
+            [view removeFromSuperview];
+        }
+    }
+}
+
+@end
 
 
 #pragma mark- LineSpacingTextView

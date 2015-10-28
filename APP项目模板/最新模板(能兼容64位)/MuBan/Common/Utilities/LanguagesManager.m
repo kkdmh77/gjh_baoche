@@ -7,6 +7,9 @@
 //
 
 #import "LanguagesManager.h"
+#import "UserInfoModel.h"
+
+#define CurrentLanguageTypeKey @"CurrentLanguageTypeKey"
 
 @implementation LanguagesManager
 
@@ -21,12 +24,22 @@ static NSString *currentLanguageType = nil;
     NSString *current = [languages objectAtIndex:0];
     */
     
-    NSArray *languages = [self getAppLanguagesTypeArray];
-    NSString *current = languages[0];
+    // 取出预设值
+    if ([UserInfoModel objectForKey:CurrentLanguageTypeKey])
+    {
+        currentLanguageType = [UserInfoModel objectForKey:CurrentLanguageTypeKey];
+    }
+    else
+    {
+        // 默认为简体中文
+        NSArray *languages = [self getAppLanguagesTypeArray];
+        NSString *current = languages[0];
+        currentLanguageType = current;
+        
+        [UserInfoModel setObject:currentLanguageType forKey:CurrentLanguageTypeKey];
+    }
     
-    currentLanguageType = current;
-    
-    [self setLanguage:current];
+    [self configureBundleWithLanguage:currentLanguageType];
 }
 
 + (NSArray *)getAppLanguagesTypeArray
@@ -36,34 +49,70 @@ static NSString *currentLanguageType = nil;
     
     dispatch_once(&onceToken, ^{
         
-        staticAppLanguagesArray = @[@"zh-Hans", @"zh-Hant", @"en"];
+        staticAppLanguagesArray = @[SimpleChinese, TradictionalChinese];
     });
     return staticAppLanguagesArray;
 }
 
-/*
- example calls:
- [Language setLanguage:@"it"];
- [Language setLanguage:@"de"];
- */
-
-+ (void)setLanguage:(NSString *)languageType
++ (void)changeLanguageTypeAndPostNotificationWithType:(NSString *)languageType
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:languageType ofType:@"lproj"];
-    bundle = [NSBundle bundleWithPath:path];
-    
-    if (!bundle)
-    {
-        bundle = [NSBundle mainBundle];
-    }
-    
     if (![currentLanguageType isEqualToString:languageType])
     {
         currentLanguageType = languageType;
         
+        [UserInfoModel setObject:currentLanguageType forKey:CurrentLanguageTypeKey];
         // 发送通知
         [[NSNotificationCenter defaultCenter] postNotificationName:LanguageTypeDidChangedNotificationKey object:nil];
     }
+}
+
++ (void)configureBundleWithLanguage:(NSString *)languageType
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:languageType ofType:@"lproj"];
+    NSBundle *tempBundle = [NSBundle bundleWithPath:path];
+    
+    // 有本地化语言文件
+    if (tempBundle)
+    {
+        bundle = tempBundle;
+        
+        [self changeLanguageTypeAndPostNotificationWithType:languageType];
+    }
+    // 如果是简繁之间的切换就算没有本地化文件也可以通过代码来做转换
+    else if ([currentLanguageType isEqualToString:SimpleChinese] ||
+             [currentLanguageType isEqualToString:TradictionalChinese])
+    {
+        [self changeLanguageTypeAndPostNotificationWithType:languageType];
+    }
+    
+    if (!bundle)
+    {
+        NSString *defaultPath = [[NSBundle mainBundle] pathForResource:SimpleChinese ofType:@"lproj"];
+        bundle = [NSBundle bundleWithPath:defaultPath];
+        
+        if (!bundle)
+        {
+            bundle = [NSBundle mainBundle];
+        }
+    }
+}
+
++ (void)setLanguage:(NSString *)languageType
+{
+    /*
+    NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+    NSArray *languages = [defs objectForKey:@"AppleLanguages"];
+     */
+    NSArray *languages = [self getAppLanguagesTypeArray];
+    
+    if (![languages containsObject:languageType]) return;
+    
+    [self configureBundleWithLanguage:languageType];
+}
+
++ (NSString *)curLanguagesType
+{
+    return currentLanguageType;
 }
 
 + (NSString *)getStr:(NSString *)key
@@ -73,6 +122,29 @@ static NSString *currentLanguageType = nil;
 
 + (NSString *)getStr:(NSString *)key alter:(NSString *)alternate
 {
-    return [bundle localizedStringForKey:key value:alternate table:nil];
-}  
+    NSString *str = [bundle localizedStringForKey:key value:alternate table:nil];
+    
+    return [self getCurLanguagesTypeStrWithStr:str];
+}
+
++ (NSString *)getCurLanguagesTypeStrWithStr:(NSString *)str
+{
+    if (![str isAbsoluteValid]) return str;
+    
+    // 繁体->简体
+    if ([currentLanguageType isEqualToString:SimpleChinese])
+    {
+        return [[OBCConvertor getInstance] t2s:str];
+    }
+    // 简体->繁体
+    else if ([currentLanguageType isEqualToString:TradictionalChinese])
+    {
+        return [[OBCConvertor getInstance] s2t:str];
+    }
+    else
+    {
+        return str;
+    }
+}
+
 @end
