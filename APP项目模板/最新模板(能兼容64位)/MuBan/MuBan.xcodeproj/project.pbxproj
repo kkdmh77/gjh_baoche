@@ -388,6 +388,13 @@
 		FAF92F091B6F10A400DD06BC /* UIFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF92F001B6F10A400DD06BC /* UIFactory.m */; };
 		FAF92F0A1B6F10A400DD06BC /* UINavigationItem+margin.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF92F021B6F10A400DD06BC /* UINavigationItem+margin.m */; };
 		FAF92F0B1B6F10A400DD06BC /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF92F041B6F10A400DD06BC /* UserInfoModel.m */; };
+		FAFD22C31BE0D5480004DD6F /* FreeLayoutTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22BE1BE0D5480004DD6F /* FreeLayoutTileView.m */; settings = {ASSET_TAGS = (); }; };
+		FAFD22C41BE0D5480004DD6F /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22C01BE0D5480004DD6F /* GridView.m */; settings = {ASSET_TAGS = (); }; };
+		FAFD22C51BE0D5490004DD6F /* StyleSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22C21BE0D5480004DD6F /* StyleSelectorView.m */; settings = {ASSET_TAGS = (); }; };
+		FAFD22C81BE0D7140004DD6F /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22C71BE0D7140004DD6F /* ThemeManager.m */; settings = {ASSET_TAGS = (); }; };
+		FAFD22CD1BE0DBFB0004DD6F /* OBCConvertor.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22CB1BE0DBFB0004DD6F /* OBCConvertor.m */; settings = {ASSET_TAGS = (); }; };
+		FAFD22CE1BE0DBFB0004DD6F /* ts.tab in Resources */ = {isa = PBXBuildFile; fileRef = FAFD22CC1BE0DBFB0004DD6F /* ts.tab */; settings = {ASSET_TAGS = (); }; };
+		FAFD22D11BE0DC5A0004DD6F /* FontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22D01BE0DC5A0004DD6F /* FontManager.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1244,6 +1251,19 @@
 		FAF92F021B6F10A400DD06BC /* UINavigationItem+margin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+margin.m"; sourceTree = "<group>"; };
 		FAF92F031B6F10A400DD06BC /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		FAF92F041B6F10A400DD06BC /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		FAFD22BD1BE0D5480004DD6F /* FreeLayoutTileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeLayoutTileView.h; sourceTree = "<group>"; };
+		FAFD22BE1BE0D5480004DD6F /* FreeLayoutTileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeLayoutTileView.m; sourceTree = "<group>"; };
+		FAFD22BF1BE0D5480004DD6F /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
+		FAFD22C01BE0D5480004DD6F /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
+		FAFD22C11BE0D5480004DD6F /* StyleSelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleSelectorView.h; sourceTree = "<group>"; };
+		FAFD22C21BE0D5480004DD6F /* StyleSelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleSelectorView.m; sourceTree = "<group>"; };
+		FAFD22C61BE0D7140004DD6F /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeManager.h; sourceTree = "<group>"; };
+		FAFD22C71BE0D7140004DD6F /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeManager.m; sourceTree = "<group>"; };
+		FAFD22CA1BE0DBFB0004DD6F /* OBCConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBCConvertor.h; sourceTree = "<group>"; };
+		FAFD22CB1BE0DBFB0004DD6F /* OBCConvertor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBCConvertor.m; sourceTree = "<group>"; };
+		FAFD22CC1BE0DBFB0004DD6F /* ts.tab */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ts.tab; sourceTree = "<group>"; };
+		FAFD22CF1BE0DC5A0004DD6F /* FontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontManager.h; sourceTree = "<group>"; };
+		FAFD22D01BE0DC5A0004DD6F /* FontManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1392,6 +1412,7 @@
 		43D1C68B1A75E692004564C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				FAFD22C91BE0DBFB0004DD6F /* OBCConvertor */,
 				431F137A1A7762E9008C4544 /* PinYin4Objc */,
 				43D1C70B1A75E777004564C2 /* AFNetworking */,
 				43D1C73C1A75E777004564C2 /* AQGridView */,
@@ -2811,6 +2832,10 @@
 			children = (
 				FAF92EF71B6F10A400DD06BC /* AppSmallUtils.h */,
 				FAF92EF81B6F10A400DD06BC /* AppSmallUtils.m */,
+				FAFD22C61BE0D7140004DD6F /* ThemeManager.h */,
+				FAFD22C71BE0D7140004DD6F /* ThemeManager.m */,
+				FAFD22CF1BE0DC5A0004DD6F /* FontManager.h */,
+				FAFD22D01BE0DC5A0004DD6F /* FontManager.m */,
 				FAF92EF91B6F10A400DD06BC /* AppSoundManager.h */,
 				FAF92EFA1B6F10A400DD06BC /* AppSoundManager.m */,
 				FAF92EFB1B6F10A400DD06BC /* AppUIElement.h */,
@@ -2900,6 +2925,12 @@
 				43D1CBFB1A75EBFA004564C2 /* UIRefreshTabView.m */,
 				43D1CBFC1A75EBFA004564C2 /* YGButtonBox.h */,
 				43D1CBFD1A75EBFA004564C2 /* YGButtonBox.m */,
+				FAFD22BD1BE0D5480004DD6F /* FreeLayoutTileView.h */,
+				FAFD22BE1BE0D5480004DD6F /* FreeLayoutTileView.m */,
+				FAFD22BF1BE0D5480004DD6F /* GridView.h */,
+				FAFD22C01BE0D5480004DD6F /* GridView.m */,
+				FAFD22C11BE0D5480004DD6F /* StyleSelectorView.h */,
+				FAFD22C21BE0D5480004DD6F /* StyleSelectorView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2978,6 +3009,16 @@
 				43D1CCA11A760F8C004564C2 /* RegisterBC.m */,
 			);
 			path = "Register&Login";
+			sourceTree = "<group>";
+		};
+		FAFD22C91BE0DBFB0004DD6F /* OBCConvertor */ = {
+			isa = PBXGroup;
+			children = (
+				FAFD22CA1BE0DBFB0004DD6F /* OBCConvertor.h */,
+				FAFD22CB1BE0DBFB0004DD6F /* OBCConvertor.m */,
+				FAFD22CC1BE0DBFB0004DD6F /* ts.tab */,
+			);
+			path = OBCConvertor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3093,6 +3134,7 @@
 				43D1CC8C1A760EB1004564C2 /* InfoPlist.strings in Resources */,
 				43D1CAD01A75E779004564C2 /* nimbus64x64.png in Resources */,
 				43D1CABF1A75E779004564C2 /* deps in Resources */,
+				FAFD22CE1BE0DBFB0004DD6F /* ts.tab in Resources */,
 				43D1CAEE1A75E779004564C2 /* WebViewJavascriptBridge.js.txt in Resources */,
 				43D1CAAF1A75E779004564C2 /* NimbusOverviewer.bundle in Resources */,
 				43D1C9D41A75E778004564C2 /* AQGridSelectionGreen.png in Resources */,
@@ -3136,6 +3178,7 @@
 				43D1C9F71A75E778004564C2 /* IQNSArray+Sort.m in Sources */,
 				43D1C9FF1A75E778004564C2 /* IQTitleBarButtonItem.m in Sources */,
 				43D1CC1B1A75EBFA004564C2 /* ATJumpAnimation.m in Sources */,
+				FAFD22C51BE0D5490004DD6F /* StyleSelectorView.m in Sources */,
 				43D1CAC11A75E779004564C2 /* NIPhotoAlbumScrollView.m in Sources */,
 				43D1C9B81A75E778004564C2 /* AFURLSessionManager.m in Sources */,
 				43D1C9B51A75E778004564C2 /* AFURLConnectionOperation.m in Sources */,
@@ -3297,6 +3340,7 @@
 				43D1CC1C1A75EBFA004564C2 /* ATAudioPlayManager.m in Sources */,
 				43D1CC281A75EBFA004564C2 /* ATStyledLabel.m in Sources */,
 				43D1CC101A75EBFA004564C2 /* ATBLibs+UIBarItem.m in Sources */,
+				FAFD22C41BE0D5480004DD6F /* GridView.m in Sources */,
 				43D1C9F61A75E778004564C2 /* HPTextViewInternal.m in Sources */,
 				43D1CC2F1A75EBFA004564C2 /* NSMutableArray+SSToolkitAdditions.m in Sources */,
 				43D1CC501A75EBFA004564C2 /* InterfaceHUDManager.m in Sources */,
@@ -3315,6 +3359,7 @@
 				43D1CC7E1A760D67004564C2 /* BaseNetworkViewController+NetRequestManager.m in Sources */,
 				43D1CC011A75EBFA004564C2 /* ATB_AlertFunc.m in Sources */,
 				43D1C7001A75E692004564C2 /* DataVerifier.m in Sources */,
+				FAFD22D11BE0DC5A0004DD6F /* FontManager.m in Sources */,
 				43D1C9EE1A75E778004564C2 /* UIPopoverController+FlatUI.m in Sources */,
 				43D1CA441A75E778004564C2 /* NIInMemoryCache.m in Sources */,
 				43D1C9C91A75E778004564C2 /* AQGridViewCell.m in Sources */,
@@ -3357,6 +3402,7 @@
 				43D1C6FF1A75E692004564C2 /* DataSigner.m in Sources */,
 				43D1C9CE1A75E778004564C2 /* NSIndexSet+AQIndexesOutsideSet.m in Sources */,
 				FAF92F0B1B6F10A400DD06BC /* UserInfoModel.m in Sources */,
+				FAFD22C31BE0D5480004DD6F /* FreeLayoutTileView.m in Sources */,
 				43D1CC421A75EBFA004564C2 /* ImagePreviewController.m in Sources */,
 				43D1CA0E1A75E778004564C2 /* NSManagedObject+MagicalRequests.m in Sources */,
 				43D1CA0B1A75E778004564C2 /* NSManagedObject+MagicalDataImport.m in Sources */,
@@ -3413,6 +3459,7 @@
 				43D1C9E41A75E778004564C2 /* FUICellBackgroundView.m in Sources */,
 				43D1C9D81A75E778004564C2 /* ASIDataDecompressor.m in Sources */,
 				43D1CA171A75E778004564C2 /* MagicalRecord+ErrorHandling.m in Sources */,
+				FAFD22CD1BE0DBFB0004DD6F /* OBCConvertor.m in Sources */,
 				43D1C9F81A75E778004564C2 /* IQUIView+Hierarchy.m in Sources */,
 				43D1CC051A75EBFA004564C2 /* ATB_Math.m in Sources */,
 				43D1C9C81A75E778004564C2 /* AQGridViewAnimatorItem.m in Sources */,
@@ -3445,6 +3492,7 @@
 				43D1CA991A75E779004564C2 /* NICellFactory.m in Sources */,
 				43D1CC0B1A75EBFA004564C2 /* ATBLibs+DataContainer.m in Sources */,
 				43D1CAEC1A75E779004564C2 /* SRRefreshView.m in Sources */,
+				FAFD22C81BE0D7140004DD6F /* ThemeManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

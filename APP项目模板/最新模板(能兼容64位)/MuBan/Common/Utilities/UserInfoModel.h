@@ -10,6 +10,13 @@
 
 @interface UserInfoModel : NSObject
 
+AS_SINGLETON(UserInfoModel);
+
++ (void)setObject:(id)value forKey:(NSString *)key;
++ (id)objectForKey:(NSString *)key;
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
 + (void)setUserDefaultEmail:(NSString *)email;
 + (NSString *)getUserDefaultEmail;
 
@@ -45,6 +52,14 @@
 
 + (void)setUserDefaultIdCard:(NSString *)idCard;
 + (NSString *)getUserDefaultIdCard;
+
++ (void)setUserDefaultBrightness_Device:(CGFloat)brightness;
++ (CGFloat)getUserDefaultBrightness_Device;
+
++ (void)setUserDefaultAppBrightness_App:(CGFloat)brightness;
++ (CGFloat)getUserDefaultBrightness_App;
+
+@property (nonatomic, assign) BOOL isLoadedThemeChoosePage; // 是否已经点击过换肤按钮
 
 //////////////////////////////////////////////////////////////////////////////////////////
 

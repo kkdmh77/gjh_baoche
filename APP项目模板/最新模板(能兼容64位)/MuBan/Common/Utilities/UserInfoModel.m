@@ -9,19 +9,22 @@
 #import "UserInfoModel.h"
 
 // 设置信息key值
-#define UserDefault_EmailKey                @"userDefault_EmailKey"             // 用户邮箱
-#define UserDefault_SessionKey              @"userDefault_SessionKey"           // 登录的会话
-#define UserDefault_UserIdKey               @"userDefault_UserIdKey"            // 用户ID
-#define UserDefault_LoginNameKey            @"userDefault_LoginNameKey"         // 用户登录名
-#define UserDefault_UserNameKey             @"userDefault_UserNameKey"          // 用户名
-#define UserDefault_PasswordKey             @"userDefault_PasswordKey"          // 登录密码
-#define UserDefault_UserHeaderImgIdKey      @"userDefault_UserHeaderImgIdKey"   // 用户图像ID
-#define UserDefault_UserHeaderImgDataKey    @"userDefault_UserHeaderImgDataKey" // 用户图像
-#define UserDefault_LastLoginDateKey        @"userDefault_LastLoginDateKey"     // 用户最近登录时间
-#define UserDefault_AreaCommunityKey        @"userDefault_AreaCommunityKey"     // 用户所在小区
-#define UserDefault_IsBindGovWebKey         @"userDefault_IsBindGovWebKey"      // 用户是否实名认证
-#define UserDefault_IdCardKey               @"userDefault_IdCardKey"            // 用户实名认证后的身份证号
-#define UserDefault_UserObjKey              @"userDefault_UserObjKey"           // 用户对象
+#define UserDefault_EmailKey             @"userDefault_EmailKey"            // 用户邮箱
+#define UserDefault_SessionKey           @"userDefault_SessionKey"          // 登录的会话
+#define UserDefault_UserIdKey            @"userDefault_UserIdKey"           // 用户ID
+#define UserDefault_LoginNameKey         @"userDefault_LoginNameKey"        // 用户登录名
+#define UserDefault_UserNameKey          @"userDefault_UserNameKey"         // 用户名
+#define UserDefault_PasswordKey          @"userDefault_PasswordKey"         // 登录密码
+#define UserDefault_UserHeaderImgIdKey   @"userDefault_UserHeaderImgIdKey"  // 用户图像ID
+#define UserDefault_UserHeaderImgDataKey @"userDefault_UserHeaderImgDataKey"// 用户图像
+#define UserDefault_LastLoginDateKey     @"userDefault_LastLoginDateKey"    // 用户最近登录时间
+#define UserDefault_AreaCommunityKey     @"userDefault_AreaCommunityKey"    // 用户所在小区
+#define UserDefault_IsBindGovWebKey      @"userDefault_IsBindGovWebKey"     // 用户是否实名认证
+#define UserDefault_IdCardKey            @"userDefault_IdCardKey"           // 用户实名认证后的身份证号
+#define UserDefault_UserObjKey           @"userDefault_UserObjKey"          // 用户对象
+
+#define UserDefault_Brightness_Device    @"userDefault_Brightness_Device"   // 设备屏幕亮度
+#define UserDefault_Brightness_App       @"userDefault_Brightness_App"      // 设备屏幕亮度
 
 // o2o
 #define UserDefault_UserLoginTokenKey       @"userDefault_UserLoginTokenKey"    // 用户登陆成功后服务器返回的token
@@ -32,10 +35,25 @@
 
 @implementation UserInfoModel
 
+DEF_SINGLETON(UserInfoModel);
+
 + (void)saveUserDefaultInfo
 {
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
++ (void)setObject:(id)value forKey:(NSString *)key
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:key];
+    [self saveUserDefaultInfo];
+}
+
++ (id)objectForKey:(NSString *)key
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+}
+
+#pragma mark - ///////////////////////////////////////////////////////
 
 + (void)setUserDefaultEmail:(NSString *)email
 {
@@ -178,6 +196,28 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_IdCardKey];
 }
 
++ (void)setUserDefaultBrightness_Device:(CGFloat)brightness
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:brightness] forKey:UserDefault_Brightness_Device];
+    [self saveUserDefaultInfo];
+}
+
++ (CGFloat)getUserDefaultBrightness_Device
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_Brightness_Device] floatValue];
+}
+
++ (void)setUserDefaultAppBrightness_App:(CGFloat)brightness;
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:brightness] forKey:UserDefault_Brightness_App];
+    [self saveUserDefaultInfo];
+}
+
++ (CGFloat)getUserDefaultBrightness_App
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_Brightness_App] floatValue];
+}
+
 + (void)setUserObj:(NSDictionary *)userObj
 {
     [[NSUserDefaults standardUserDefaults] setObject:userObj forKey:UserDefault_UserObjKey];
@@ -194,7 +234,18 @@
     [self setUserDefaultIsBindGovWeb:[userObj objectForKey:@"hasBindGovWeb"]];
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////
+- (void)setIsLoadedThemeChoosePage:(BOOL)isLoadedThemeChoosePage
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(isLoadedThemeChoosePage) forKey:@"isLoadedThemeChoosePage"];
+    [[self class] saveUserDefaultInfo];
+}
+
+- (BOOL)isLoadedThemeChoosePage
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"isLoadedThemeChoosePage"] boolValue];
+}
+
+#pragma mark - ///////////////////////////////////////////////////////
 
 + (void)setUserDefaultLoginToken:(NSString *)token
 {

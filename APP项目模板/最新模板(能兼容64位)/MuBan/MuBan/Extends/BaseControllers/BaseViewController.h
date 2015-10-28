@@ -150,6 +150,13 @@ typedef void (^PickPhotoCancelHandle) (void);
  */
 - (void)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg action:(SEL)action;
 
+- (void)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position
+                               normalImg:(UIImage *)normalImg
+                          highlightedImg:(UIImage *)highlightedImg
+                             selectedImg:(UIImage *)selectedImg
+                              isSelected:(BOOL)isSelected
+                                  action:(SEL)action;
+
 /**
  @ 方法描述    配置导航栏按钮
  @ 输入参数    BarbuttonItemPosition: 位置

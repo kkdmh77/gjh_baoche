@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OBCConvertor.h"
 
 #define LocalizedStr(key) [LanguagesManager getStr:key]
+
+static NSString * const SimpleChinese       = @"zh-Hans";
+static NSString * const TradictionalChinese = @"zh-Hant";
+static NSString * const English             = @"en";
 
 static NSString * const LanguageTypeDidChangedNotificationKey = @"LanguageTypeDidChangedNotificationKey";
 
@@ -17,69 +22,60 @@ static NSString * const LanguageTypeDidChangedNotificationKey = @"LanguageTypeDi
 + (void)initialize;
 + (NSArray *)getAppLanguagesTypeArray;
 + (void)setLanguage:(NSString *)languageType;
++ (NSString *)curLanguagesType;
 
 + (NSString *)getStr:(NSString *)key;
 + (NSString *)getStr:(NSString *)key alter:(NSString *)alternate;
 
+////////////////////////////////////////////////////////////////////////////////
+
+/// 把str转换为当前语言类型的字符串(只支持简体<->繁体)
++ (NSString *)getCurLanguagesTypeStrWithStr:(NSString *)str;
+
 @end
 
 // 所有模块
-static NSString * const All_DataSourceNotFoundKey              = @"All_DataSourceNotFound";
-static NSString * const All_Confirm                            = @"All_Confirm";
-static NSString * const All_Cancel                             = @"All_Cancel";
-static NSString * const All_PickFromCamera                     = @"All_PickFromCamera";
-static NSString * const All_PickFromAlbum                      = @"All_PickFromAlbum";
-static NSString * const All_SaveToAlbum                        = @"All_SaveToAlbum";
-static NSString * const All_SaveSuccess                        = @"All_SaveSuccess";
-static NSString * const All_OperationFailure                   = @"All_OperationFailure";
+static NSString * const All_DataSourceNotFoundKey  = @"All_DataSourceNotFound";
+static NSString * const All_Delete                 = @"All_Delete";
+static NSString * const All_Check                  = @"All_Check";
+static NSString * const All_Confirm                = @"All_Confirm";
+static NSString * const All_Cancel                 = @"All_Cancel";
+static NSString * const All_PickFromCamera         = @"All_PickFromCamera";
+static NSString * const All_PickFromAlbum          = @"All_PickFromAlbum";
+static NSString * const All_SaveToAlbum            = @"All_SaveToAlbum";
+static NSString * const All_SaveSuccess            = @"All_SaveSuccess";
+static NSString * const All_OperationFailure       = @"All_OperationFailure";
+static NSString * const All_Notification           = @"All_Notification";
 
-// 登陆&注册
-static NSString * const Login_NoUserShowInfoKey                = @"Login_NoUserShowInfo";
-static NSString * const Login_NoPasswordShowInfoKey            = @"Login_NoPasswordShowInfo";
-static NSString * const Login_NoPasswordConfirmShowInfoKey     = @"Login_NoPasswordConfirmShowInfo";
-static NSString * const Login_PasswordNotEqualShowInfoKey      = @"Login_PasswordNotEqualShowInfo";
-static NSString * const Login_NoAgreeProtocolShowInfoKey       = @"Login_NoAgreeProtocolShowInfo";
-static NSString * const Login_LoadingShowInfoKey               = @"Login_LoadingShowInfo";
-static NSString * const Login_LoginFailShowInfoKey             = @"Login_LoginFailShowInfo";
+// 字体
+static NSString * const Font_Size                  = @"Font_Size";
+static NSString * const Font_Select                = @"Font_Select";
+static NSString * const Font_More                  = @"Font_More";
 
-//修改密码
-static NSString * const Password_PasswordErrorKey              = @"Password_PasswordError";
-static NSString * const Password_PasswordLessThanSixKey        = @"Password_PasswordLessThanSix";
-static NSString * const Password_PasswordDifferentKey          = @"Password_PasswordDifferent";
-static NSString * const Password_PasswordModifyFailKey         = @"Password_PasswordModifyFail";
-static NSString * const Password_PasswordModifySuccessKey      = @"Password_PasswordModifySuccess";
+// 设置
+static NSString * const Setting_My_Collect         = @"Setting_My_Collect";
+static NSString * const Setting_Package_Download   = @"Setting_Package_Download";
+static NSString * const Setting_Invite_Friend      = @"Setting_Invite_Friend";
+static NSString * const Setting_Set                = @"Setting_Set";
 
-//版本检测
-static NSString * const Version_NowNewVersionKey               = @"Version_NowNewVersion";
-static NSString * const Version_LoadingShowKey                 = @"Version_LoadingShowKey";
+// 其他
 
-// 产品
-static NSString * const Product_AddCartSucceedShowInfoKey      = @"Product_AddCartSucceedShowInfo";
-static NSString * const Product_AddCartFailShowInfoKey         = @"Product_AddCartFailShowInfo";
-static NSString * const Product_AddFavoriteSucceedShowInfoKey  = @"Product_AddFavoriteSucceedShowInfo";
-static NSString * const Product_AddFavoriteFailShowInfoKey     = @"Product_AddFavoriteFailShowInfo";
-static NSString * const Product_NoSearchHistoryShowInfoKey     = @"Product_NoSearchHistoryShowInfo";
-static NSString * const Product_ClearSearchHistoryShowInfoKey  = @"Product_ClearSearchHistoryShowInfo";
+// 搜索页
 
-// 购物车
-static NSString * const ShoppingCart_DeleteProductItemKey      = @"ShoppingCart_DeleteProductItem";
-static NSString * const ShoppingCart_NoSelectedProductItemKey  = @"ShoppingCart_NoSelectedProductItem";
-
-// 个人
-static NSString * const Mine_OrderQueryKey                     = @"Mine_OrderQuery";
-static NSString * const Mine_MyCollectKey                      = @"Mine_MyCollect";
-static NSString * const Mine_MyKitchenKey                      = @"Mine_MyKitchen";
-static NSString * const Mine_AccountManagerKey                 = @"Mine_AccountManager";
-static NSString * const Mine_FAQKey                            = @"Mine_FAQ";
-static NSString * const Mine_DeleteThisAddressKey              = @"Mine_DeleteThisAddress";
-static NSString * const Mine_PhoneNumberErrorKey               = @"Mine_PhoneNumberError";
-static NSString * const Mine_EmailErrorKey                     = @"Mine_EmailError";
+// 版本检测
+static NSString * const Version_NowNewVersion      = @"Version_NowNewVersion";
+static NSString * const Version_LoadingShow        = @"Version_LoadingShow";
 
 // 各控制器导航栏标题
-static NSString * const NavTitle_ShoppingCarKey                = @"NavTitle_ShoppingCar";
-static NSString * const NavTitle_MineKey                       = @"NavTitle_Mine";
-static NSString * const NavTitle_AddressManagerKey             = @"NavTitle_AddressManager";
-static NSString * const NavTitle_AddAddressKey                 = @"NavTitle_AddAddress";
-static NSString * const NavTitle_PreferentialKey               = @"NavTitle_Preferential";
-static NSString * const NavTitle_FAQKey                        = @"NavTitle_FAQ";
+static NSString * const NavTitle_HomePage          = @"NavTitle_HomePage";
+static NSString * const NavTitle_MyCollection      = @"NavTitle_MyCollection";
+static NSString * const NavTitle_RandomRecommended = @"NavTitle_RandomRecommended";
+static NSString * const NavTitle_ReadingHistory    = @"NavTitle_ReadingHistory";
+static NSString * const NavTitle_Setting           = @"NavTitle_Setting";
+static NSString * const NavTitle_FontSelect        = @"NavTitle_FontSelect";
+static NSString * const NavTitle_PackageDownload   = @"NavTitle_PackageDownload";
+static NSString * const NavTitle_Feedback          = @"NavTitle_Feedback";
+static NSString * const NavTitle_About             = @"NavTitle_About";
+
+
 

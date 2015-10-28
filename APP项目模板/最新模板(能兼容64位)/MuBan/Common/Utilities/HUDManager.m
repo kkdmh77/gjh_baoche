@@ -7,9 +7,6 @@
 //
 
 #import "HUDManager.h"
-#import "AppDelegate.h"
-
-static MBProgressHUD *HUD;
 
 @implementation HUDManager
 
@@ -34,15 +31,14 @@ static MBProgressHUD *HUD;
     [self hideHUD];
     
     // 创建hud
-    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    HUD = [[MBProgressHUD alloc] initWithWindow:delegate.window];
-    [delegate.window addSubview:HUD];
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithWindow:window];
     
     HUD.userInteractionEnabled = !yesOrNo; // 加上这个属性才能在HUD还没隐藏的时候点击到别的view
     HUD.removeFromSuperViewOnHide = YES;
     HUD.mode = mode;
-    
+    [window addSubview:HUD];
+
     if (mode == MBProgressHUDModeCustomView)
     {
         UIImageView *customImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -60,10 +56,10 @@ static MBProgressHUD *HUD;
     }
    
     HUD.labelText = showStr;
-//    HUD.color = [UIColor blackColor];
+    HUD.opacity = 0.7;
     
-//    HUD.taskInProgress = YES;
-    HUD.animationType = MBProgressHUDAnimationZoomOut;
+    // HUD.taskInProgress = YES;
+    HUD.animationType = MBProgressHUDAnimationFade;
     
     [HUD show:YES];
     
@@ -85,9 +81,13 @@ static MBProgressHUD *HUD;
 
 + (void)hideHUD
 {
-    [HUD hide:YES];
-    [HUD removeFromSuperview];
-    HUD = nil;
+    NSArray *HUDArray = [MBProgressHUD allHUDsForView:[UIApplication sharedApplication].keyWindow];
+    
+    for (MBProgressHUD *HUD in HUDArray)
+    {
+        [HUD hide:YES];
+        [HUD removeFromSuperview];
+    }
 }
 
 

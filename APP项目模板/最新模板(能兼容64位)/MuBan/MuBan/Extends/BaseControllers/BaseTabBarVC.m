@@ -101,6 +101,17 @@
         }
         
         aItem.title = title;
+        
+        UIViewController *viewController = [self.viewControllers objectAtIndex:i];
+        if ([viewController isKindOfClass:[UINavigationController class]])
+        {
+            ((UINavigationController *)viewController).topViewController.title = title;
+        }
+        else
+        {
+            viewController.title = title;
+        }
+        
         if (IOS7)
         {
             normalImage = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

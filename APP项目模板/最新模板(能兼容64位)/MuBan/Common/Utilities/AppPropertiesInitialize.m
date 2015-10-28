@@ -36,6 +36,7 @@ static UIView *statusBarCoverView = nil;
     [LanguagesManager initialize];
     
     // 初始化coreData库
+    // [self copyDefaultStoreIfNecessary];
     [MagicalRecord setupCoreDataStackWithStoreNamed:kRecipesStoreName];
     
     // 清空通知数字显示
@@ -98,6 +99,55 @@ static UIView *statusBarCoverView = nil;
         [[UIApplication sharedApplication].keyWindow addSubview:statusBarCoverView];
     }
     statusBarCoverView.backgroundColor = color;
+}
+
++ (void) copyDefaultStoreIfNecessary;
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSURL *storeURL = [NSPersistentStore MR_urlForStoreName:kRecipesStoreName];
+    
+    // 判断沙盒里储存数据库文件的文件夹是否存在
+    NSString *storeFolder = [[storeURL path] stringByDeletingLastPathComponent];
+    if (!IsFileExists(storeFolder))
+    {
+        CreateFolder(storeFolder);
+    }
+    
+    // 项目中是否添加了数据库文件
+    NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:[kRecipesStoreName stringByDeletingPathExtension] ofType:[kRecipesStoreName pathExtension]];
+    
+    if (defaultStorePath)
+    {
+        // 如果沙盒里面有数据库文件且和项目中的数据库文件不一样就删除旧的
+        if ([fileManager fileExistsAtPath:[storeURL path]])
+        {
+            NSDictionary *attributesOfStoreFile = [fileManager attributesOfItemAtPath:[storeURL path] error:nil];
+            NSDictionary *attributesOfDefaultFile = [fileManager attributesOfItemAtPath:defaultStorePath error:nil];
+            
+            if (!(attributesOfStoreFile.fileSize == attributesOfDefaultFile.fileSize && [attributesOfStoreFile.fileModificationDate compare:attributesOfDefaultFile.fileModificationDate] == NSOrderedSame) &&
+                DeleteFiles([storeURL path]))
+            {
+                // 把项目中的数据库文件再复制到沙盒里
+                NSError *error;
+                BOOL success = [fileManager copyItemAtPath:defaultStorePath toPath:[storeURL path] error:&error];
+                if (!success)
+                {
+                    NSLog(@"Failed to install default recipe store");
+                }
+            }
+        }
+        else
+        {
+            // 直接把项目中的数据库文件复制到沙盒里
+            NSError *error;
+            BOOL success = [fileManager copyItemAtPath:defaultStorePath toPath:[storeURL path] error:&error];
+            if (!success)
+            {
+                NSLog(@"Failed to install default recipe store");
+            }
+        }
+    }
 }
 
 @end
