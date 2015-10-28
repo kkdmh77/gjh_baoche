@@ -11,6 +11,6 @@
 
 @interface WarningValueDetailVC : BaseNetworkViewController
 
-@property (nonatomic, strong) DataEntity *entity;
+@property (nonatomic, strong) WarningDataListEntity *entity;
 
 @end

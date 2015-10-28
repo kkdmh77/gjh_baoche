@@ -84,13 +84,45 @@
 
 @end
 
+//-----------------------------------------------------------
+
+@interface MonitoringValueDetailEntity : NetItem
+
+@property (copy, nonatomic) NSString *monitoringStations;
+@property (copy, nonatomic) NSString *monitoringType;
+@property (copy, nonatomic) NSString *leaderName;
+@property (copy, nonatomic) NSString *leaderPhone;
+@property (copy, nonatomic) NSString *company;
+@property (copy, nonatomic) NSString *companyPhone;
+@property (copy, nonatomic) NSString *position;
+
+@end
+
 ///////////////////////////////////////////////////////////////
 
 @interface WarningDataListEntity : NetItem
 
 @property (copy, nonatomic) NSString *number;
+@property (copy, nonatomic) NSString *fId;
 @property (copy, nonatomic) NSString *warningType;
 @property (copy, nonatomic) NSString *warningDate;
 @property (copy, nonatomic) NSString *warningTime;
 
 @end
+
+//-----------------------------------------------------------
+
+@interface WarningValueDetailEntity : NetItem
+
+// @property (copy, nonatomic) UILabel *number;
+// @property (copy, nonatomic) UILabel *warningType;
+// @property (copy, nonatomic) UILabel *warningDate;
+// @property (copy, nonatomic) UILabel *warningTime;
+@property (copy, nonatomic) NSString *warningReason;
+@property (copy, nonatomic) NSString *solveDate;
+@property (copy, nonatomic) NSString *solveTime;
+@property (copy, nonatomic) NSString *solveResult;
+
+@end
+
+

@@ -8,6 +8,11 @@
 
 #import "SettingVC.h"
 #import "AboutVC.h"
+#import "RegisterVC.h"
+#import "PRPAlertView.h"
+#import "AppDelegate.h"
+#import "LoginVC.h"
+#import "CityChooseListVC.h"
 
 @interface SettingVC ()
 {
@@ -35,7 +40,7 @@
     [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left
                                  normalImg:[UIImage imageNamed:@"nav_menu"]
                             highlightedImg:nil
-                                    action:NULL];
+                                    action:@selector(gotoCityChoose)];
     
     [self setTabShowData];
     [self initialization];
@@ -54,6 +59,15 @@
     [self setNavigationItemTitle:self.title];
 }
 
+// 进入城市选择页面
+- (void)gotoCityChoose
+{
+    CityChooseListVC *cityChoose = [[CityChooseListVC alloc] init];
+    cityChoose.isLoadTabBarController = YES;
+    UINavigationController *cityChooseNav = [[UINavigationController alloc] initWithRootViewController:cityChoose];
+    [self presentViewController:cityChooseNav animated:YES completion:nil];
+}
+
 - (void)setTabShowData
 {
 //    NSArray *section_OneTitleArray = [NSArray arrayWithObjects:@"扫码二维码,下载律寻APP", nil];
@@ -62,7 +76,7 @@
 //    NSArray *section_TwoTitleArray = [NSArray arrayWithObjects:@"喜欢律寻?打分鼓励下吧", nil];
 //    NSArray *section_TwoImageArray = [NSArray arrayWithObjects:@"xihuan", nil];
     
-    _tabShowDataCellTitleArray = [NSArray arrayWithObjects:@"程序注册", @"关于我们", @"退出系统", @"软件更新", nil];
+    _tabShowDataCellTitleArray = [NSArray arrayWithObjects:@"程序注册", @"关于我们", @"退出登录", @"软件更新", nil];
 //    _tabShowDataCellImageArray = [NSArray arrayWithObjects:section_OneImageArray, section_TwoImageArray, nil];
 }
 
@@ -138,12 +152,27 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 1)
+    if (indexPath.row == 0)
+    {
+        RegisterVC *registerVC = [[RegisterVC alloc] init];
+        registerVC.hidesBottomBarWhenPushed = YES;
+        
+        [self pushViewController:registerVC];
+    }
+    else if (indexPath.row == 1)
     {
         AboutVC *about = [[AboutVC alloc] init];
         about.hidesBottomBarWhenPushed = YES;
         
         [self pushViewController:about];
+    }
+    else if (indexPath.row == 2)
+    {
+        [PRPAlertView showWithTitle:AlertTitle message:@"确定要退出登录吗？" cancelTitle:Cancel cancelBlock:^{
+            
+        } otherTitle:Confirm otherBlock:^{
+            SharedAppDelegate.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginVC loadFromNib]];
+        }];
     }
 }
 

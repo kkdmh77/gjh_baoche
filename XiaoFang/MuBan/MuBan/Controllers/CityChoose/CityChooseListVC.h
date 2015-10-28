@@ -10,4 +10,6 @@
 
 @interface CityChooseListVC : BaseNetworkViewController
 
+@property (nonatomic, assign) BOOL isLoadTabBarController;
+
 @end

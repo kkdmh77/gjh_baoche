@@ -64,6 +64,7 @@ static NSString * const detailInfoListCellIdentifier = @"detailInfoListCellIdent
         {
             strongSelf->_waterPressureDetailEntity = [weakSelf parseNetwordDataWithInfoObj:successInfoObj];
             
+            [weakSelf makeSimulationData];
             [weakSelf loadWaterPressureDetailData];
             [weakSelf.tab reloadData];
         }
@@ -87,6 +88,31 @@ static NSString * const detailInfoListCellIdentifier = @"detailInfoListCellIdent
 - (WaterPressureDetailEntity *)parseNetwordDataWithInfoObj:(NSDictionary *)obj
 {
     return [WaterPressureDetailEntity initWithDict:obj];
+}
+
+// 制造一个假数据
+- (void)makeSimulationData
+{
+    if ([_waterPressureDetailEntity.collectListEntityArray isAbsoluteValid])
+    {
+        NSArray *tempArray = @[@"0.20",
+                               @"0.21",
+                               @"0.22",
+                               @"0.23",
+                               @"0.24",
+                               @"0.25"];
+        NSInteger randomIndex = arc4random_uniform((unsigned int)tempArray.count);
+        NSString *valueStr = tempArray[randomIndex];
+        
+        WaterPressureDetail_CollectListEntity *entity = [[WaterPressureDetail_CollectListEntity alloc] init];
+        entity.value = valueStr;
+        entity.collectTime = [NSDate stringFromDate:[NSDate date] withFormatter:DataFormatter_DateAndTime];
+        
+        NSMutableArray *newArray = [NSMutableArray arrayWithObject:entity];
+        [newArray addObjectsFromArray:_waterPressureDetailEntity.collectListEntityArray];
+        
+        _waterPressureDetailEntity.collectListEntityArray = newArray;
+    }
 }
 
 - (void)configureViewsProperties

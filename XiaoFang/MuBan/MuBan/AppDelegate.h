@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (nonatomic, strong) BaseTabBarVC   *baseTabBarController;
+@property (nonatomic, strong, readonly) BaseTabBarVC   *baseTabBarController;
 @property (nonatomic, strong) NSMutableArray *tabDataArray;
 
 @end

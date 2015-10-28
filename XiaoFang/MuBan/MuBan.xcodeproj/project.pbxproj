@@ -42,6 +42,7 @@
 		2BDB7CB91B6114C2002EF073 /* DXPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDB7CB81B6114C2002EF073 /* DXPopover.m */; };
 		2BDEB7E11B94986C0065BDCA /* WarningDataListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDEB7DF1B94986C0065BDCA /* WarningDataListCell.m */; };
 		2BDEB7E21B94986C0065BDCA /* WarningDataListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDEB7E01B94986C0065BDCA /* WarningDataListCell.xib */; };
+		2BE56EA81B95FA110069E4F3 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE56EA71B95FA110069E4F3 /* RegisterVC.m */; };
 		2BE64C681B8B560100029131 /* login_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE64C671B8B560100029131 /* login_icon@2x.png */; };
 		2BE64C6B1B8B5BF700029131 /* password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE64C691B8B5BF700029131 /* password@2x.png */; };
 		2BE64C6C1B8B5BF700029131 /* userName@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE64C6A1B8B5BF700029131 /* userName@2x.png */; };
@@ -54,6 +55,8 @@
 		2BEBC7701B690B4F00EAACF5 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC76D1B690B4F00EAACF5 /* AboutVC.m */; };
 		2BEBC7711B690B4F00EAACF5 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC76F1B690B4F00EAACF5 /* SettingVC.m */; };
 		2BEBC7731B69286100EAACF5 /* annotation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BEBC7721B69286100EAACF5 /* annotation@2x.png */; };
+		2BF6C5FD1B9CA33200A37353 /* PNLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6C5FA1B9CA33200A37353 /* PNLineChartView.m */; };
+		2BF6C5FE1B9CA33200A37353 /* PNPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6C5FC1B9CA33200A37353 /* PNPlot.m */; };
 		431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */; };
 		431F138A1A7762E9008C4544 /* HanyuPinyinOutputFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137F1A7762E9008C4544 /* HanyuPinyinOutputFormat.m */; };
 		431F138B1A7762E9008C4544 /* NSString+PinYin4Cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F13811A7762E9008C4544 /* NSString+PinYin4Cocoa.m */; };
@@ -437,8 +440,6 @@
 		43D1CCA71A760F8C004564C2 /* RegisterBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CCA11A760F8C004564C2 /* RegisterBC.m */; };
 		FAFDE3AF1B8B3920005F8651 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFDE3AA1B8B3920005F8651 /* LoginVC.m */; };
 		FAFDE3B01B8B3920005F8651 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFDE3AB1B8B3920005F8651 /* LoginVC.xib */; };
-		FAFDE3B11B8B3920005F8651 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFDE3AD1B8B3920005F8651 /* RegisterVC.m */; };
-		FAFDE3B21B8B3920005F8651 /* RegisterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAFDE3AE1B8B3920005F8651 /* RegisterVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -500,6 +501,8 @@
 		2BDEB7DE1B94986C0065BDCA /* WarningDataListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningDataListCell.h; sourceTree = "<group>"; };
 		2BDEB7DF1B94986C0065BDCA /* WarningDataListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningDataListCell.m; sourceTree = "<group>"; };
 		2BDEB7E01B94986C0065BDCA /* WarningDataListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningDataListCell.xib; sourceTree = "<group>"; };
+		2BE56EA61B95FA110069E4F3 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
+		2BE56EA71B95FA110069E4F3 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
 		2BE64C671B8B560100029131 /* login_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon@2x.png"; sourceTree = "<group>"; };
 		2BE64C691B8B5BF700029131 /* password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password@2x.png"; sourceTree = "<group>"; };
 		2BE64C6A1B8B5BF700029131 /* userName@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userName@2x.png"; sourceTree = "<group>"; };
@@ -518,6 +521,10 @@
 		2BEBC76E1B690B4F00EAACF5 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		2BEBC76F1B690B4F00EAACF5 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		2BEBC7721B69286100EAACF5 /* annotation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation@2x.png"; sourceTree = "<group>"; };
+		2BF6C5F91B9CA33200A37353 /* PNLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartView.h; sourceTree = "<group>"; };
+		2BF6C5FA1B9CA33200A37353 /* PNLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartView.m; sourceTree = "<group>"; };
+		2BF6C5FB1B9CA33200A37353 /* PNPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPlot.h; sourceTree = "<group>"; };
+		2BF6C5FC1B9CA33200A37353 /* PNPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPlot.m; sourceTree = "<group>"; };
 		431F137C1A7762E9008C4544 /* ChineseToPinyinResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyinResource.h; sourceTree = "<group>"; };
 		431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyinResource.m; sourceTree = "<group>"; };
 		431F137E1A7762E9008C4544 /* HanyuPinyinOutputFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HanyuPinyinOutputFormat.h; sourceTree = "<group>"; };
@@ -1364,9 +1371,6 @@
 		FAFDE3A91B8B3920005F8651 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		FAFDE3AA1B8B3920005F8651 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		FAFDE3AB1B8B3920005F8651 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
-		FAFDE3AC1B8B3920005F8651 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
-		FAFDE3AD1B8B3920005F8651 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
-		FAFDE3AE1B8B3920005F8651 /* RegisterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1559,12 +1563,25 @@
 		2BEBC76B1B690B4F00EAACF5 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				2BE56EA61B95FA110069E4F3 /* RegisterVC.h */,
+				2BE56EA71B95FA110069E4F3 /* RegisterVC.m */,
 				2BEBC76C1B690B4F00EAACF5 /* AboutVC.h */,
 				2BEBC76D1B690B4F00EAACF5 /* AboutVC.m */,
 				2BEBC76E1B690B4F00EAACF5 /* SettingVC.h */,
 				2BEBC76F1B690B4F00EAACF5 /* SettingVC.m */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		2BF6C5F81B9CA33200A37353 /* PNLineChart */ = {
+			isa = PBXGroup;
+			children = (
+				2BF6C5F91B9CA33200A37353 /* PNLineChartView.h */,
+				2BF6C5FA1B9CA33200A37353 /* PNLineChartView.m */,
+				2BF6C5FB1B9CA33200A37353 /* PNPlot.h */,
+				2BF6C5FC1B9CA33200A37353 /* PNPlot.m */,
+			);
+			path = PNLineChart;
 			sourceTree = "<group>";
 		};
 		431F137A1A7762E9008C4544 /* PinYin4Objc */ = {
@@ -1684,6 +1701,7 @@
 		43D1C68B1A75E692004564C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				2BF6C5F81B9CA33200A37353 /* PNLineChart */,
 				2BDB7CB61B6114C2002EF073 /* DXPopover */,
 				431F137A1A7762E9008C4544 /* PinYin4Objc */,
 				43D1C70B1A75E777004564C2 /* AFNetworking */,
@@ -3272,9 +3290,6 @@
 				FAFDE3A91B8B3920005F8651 /* LoginVC.h */,
 				FAFDE3AA1B8B3920005F8651 /* LoginVC.m */,
 				FAFDE3AB1B8B3920005F8651 /* LoginVC.xib */,
-				FAFDE3AC1B8B3920005F8651 /* RegisterVC.h */,
-				FAFDE3AD1B8B3920005F8651 /* RegisterVC.m */,
-				FAFDE3AE1B8B3920005F8651 /* RegisterVC.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -3381,7 +3396,6 @@
 				43D1CA891A75E778004564C2 /* deps in Resources */,
 				43D1CB061A75EBA5004564C2 /* Address.json in Resources */,
 				2B118EA81B6238E700F95260 /* GraphVC.xib in Resources */,
-				FAFDE3B21B8B3920005F8651 /* RegisterVC.xib in Resources */,
 				2BA49B771B6093CC0097AF67 /* shuiya_highlight@2x.png in Resources */,
 				43D1CC241A75EBFA004564C2 /* pinyin.sqlite in Resources */,
 				432C319F1A7243840094A27E /* LaunchScreen.xib in Resources */,
@@ -3668,6 +3682,7 @@
 				43D1CADD1A75E779004564C2 /* SDWebImageCompat.m in Sources */,
 				43D1CAB11A75E779004564C2 /* NIOverview.m in Sources */,
 				2BEBC7711B690B4F00EAACF5 /* SettingVC.m in Sources */,
+				2BF6C5FD1B9CA33200A37353 /* PNLineChartView.m in Sources */,
 				43D1CA101A75E778004564C2 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				43D1C9F11A75E778004564C2 /* UIStepper+FlatUI.m in Sources */,
 				43D1CC411A75EBFA004564C2 /* CommentSendController.m in Sources */,
@@ -3710,6 +3725,7 @@
 				2B118EBD1B624D6F00F95260 /* WaterPressureVC.m in Sources */,
 				43D1CADC1A75E779004564C2 /* SDImageCache.m in Sources */,
 				43D1CC2A1A75EBFA004564C2 /* NSArray+SSToolkitAdditions.m in Sources */,
+				2BF6C5FE1B9CA33200A37353 /* PNPlot.m in Sources */,
 				43D1CC561A75EBFA004564C2 /* NetworkStatusManager.m in Sources */,
 				43D1CAA91A75E779004564C2 /* NIImageProcessing.m in Sources */,
 				2B118EB11B62452400F95260 /* ShuiYaCell.m in Sources */,
@@ -3775,6 +3791,7 @@
 				43D1CA8F1A75E778004564C2 /* NILauncherPageView.m in Sources */,
 				43D1CC4C1A75EBFA004564C2 /* DownloadCache.m in Sources */,
 				43D1C9EA1A75E778004564C2 /* UIColor+FlatUI.m in Sources */,
+				2BE56EA81B95FA110069E4F3 /* RegisterVC.m in Sources */,
 				43D1CA001A75E778004564C2 /* IQToolbar.m in Sources */,
 				43D1CC581A75EBFA004564C2 /* PopupController.m in Sources */,
 				43D1CC201A75EBFA004564C2 /* ATTimerManager.m in Sources */,
@@ -3793,7 +3810,6 @@
 				43D1CC611A75EBFA004564C2 /* GJHAlertView.m in Sources */,
 				43D1CA991A75E779004564C2 /* NICellFactory.m in Sources */,
 				2B118EA21B62388300F95260 /* MonitoringValueDetailVC.m in Sources */,
-				FAFDE3B11B8B3920005F8651 /* RegisterVC.m in Sources */,
 				43D1CC0B1A75EBFA004564C2 /* ATBLibs+DataContainer.m in Sources */,
 				43D1CAEC1A75E779004564C2 /* SRRefreshView.m in Sources */,
 			);

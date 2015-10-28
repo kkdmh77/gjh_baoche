@@ -9,6 +9,7 @@
 #import "MonitoringStationsVC.h"
 #import "MonitoringDataListVC.h"
 #import "WarningDataListVC.h"
+#import "CityChooseListVC.h"
 
 @interface MonitoringStationsVC ()
 {
@@ -36,7 +37,7 @@
     [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left
                                  normalImg:[UIImage imageNamed:@"nav_menu"]
                             highlightedImg:nil
-                                    action:NULL];
+                                    action:@selector(gotoCityChoose)];
     
     [self setTabShowData];
     [self initialization];
@@ -53,6 +54,15 @@
 - (void)setPageLocalizableText
 {
     [self setNavigationItemTitle:self.title];
+}
+
+// 进入城市选择页面
+- (void)gotoCityChoose
+{
+    CityChooseListVC *cityChoose = [[CityChooseListVC alloc] init];
+    cityChoose.isLoadTabBarController = YES;
+    UINavigationController *cityChooseNav = [[UINavigationController alloc] initWithRootViewController:cityChoose];
+    [self presentViewController:cityChooseNav animated:YES completion:nil];
 }
 
 - (void)setTabShowData

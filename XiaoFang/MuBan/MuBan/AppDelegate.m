@@ -45,15 +45,8 @@
     _tabDataArray = [NSMutableArray arrayWithArray:[NSArray arrayWithObjects:entityOne, entityTwo, entityThird, entityFour, entityFive, entitySix, entitySeven, entityEight, entityNice, entityTen, entityEleven, nil]];
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    // 进行应用程序一系列属性的初始化设置
-    [AppPropertiesInitialize startAppPropertiesInitialize];
-    
-    [self configureLocalData];
-    
+- (BaseTabBarVC *)baseTabBarController
+{
     WaterPressureVC *waterPressure = [WaterPressureVC loadFromNib];
     waterPressure.title = @"实时水压";
     UINavigationController *waterPressureNav = [[UINavigationController alloc] initWithRootViewController:waterPressure];
@@ -70,8 +63,20 @@
     setting.title = @"基本设置";
     UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController:setting];
     
-    self.baseTabBarController = [[BaseTabBarVC alloc] init];
-    _baseTabBarController.viewControllers = @[waterPressureNav, positioningNav, monitoringStationsNav, settingNav];
+    BaseTabBarVC *baseTabBarController = [[BaseTabBarVC alloc] init];
+    baseTabBarController.viewControllers = @[waterPressureNav, positioningNav, monitoringStationsNav, settingNav];
+    
+    return baseTabBarController;
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // 进行应用程序一系列属性的初始化设置
+    [AppPropertiesInitialize startAppPropertiesInitialize];
+    
+    [self configureLocalData];
     
     // self.window.rootViewController = baseTabBarController;
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[LoginVC loadFromNib]];

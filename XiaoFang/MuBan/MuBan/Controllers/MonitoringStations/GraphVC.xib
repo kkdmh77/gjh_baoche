@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GraphVC">
             <connections>
                 <outlet property="graphImageView" destination="yWK-uo-lLv" id="yqK-MO-DXA"/>
+                <outlet property="lineChartView" destination="xdQ-Gn-2P5" id="92G-ss-RLT"/>
                 <outlet property="titleLabel" destination="fOI-0x-Qhl" id="C1N-Py-vx2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -27,18 +28,45 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yWK-uo-lLv">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yWK-uo-lLv">
                     <rect key="frame" x="0.0" y="45" width="320" height="128"/>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdQ-Gn-2P5" customClass="PNLineChartView">
+                    <rect key="frame" x="35" y="60" width="285" height="458"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="监测时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDe-hg-coP">
+                    <rect key="frame" x="132" y="533" width="56" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="水压压力值" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khw-3N-OZA">
+                    <rect key="frame" x="10" y="242" width="15" height="84"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="15" id="0il-BU-B9p"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="yWK-uo-lLv" firstAttribute="trailing" secondItem="fOI-0x-Qhl" secondAttribute="trailing" id="67y-KC-b7Q"/>
+                <constraint firstItem="cDe-hg-coP" firstAttribute="top" secondItem="xdQ-Gn-2P5" secondAttribute="bottom" constant="15" id="9tG-FE-1KK"/>
+                <constraint firstAttribute="bottom" secondItem="xdQ-Gn-2P5" secondAttribute="bottom" constant="50" id="AqZ-15-Q4Z"/>
                 <constraint firstItem="yWK-uo-lLv" firstAttribute="top" secondItem="fOI-0x-Qhl" secondAttribute="bottom" id="DSD-O8-drt"/>
+                <constraint firstAttribute="centerX" secondItem="cDe-hg-coP" secondAttribute="centerX" id="Ehs-jI-tdH"/>
+                <constraint firstItem="xdQ-Gn-2P5" firstAttribute="top" secondItem="fOI-0x-Qhl" secondAttribute="bottom" constant="15" id="EtK-Ij-sYC"/>
                 <constraint firstItem="yWK-uo-lLv" firstAttribute="leading" secondItem="fOI-0x-Qhl" secondAttribute="leading" id="Hpm-fq-Nrl"/>
+                <constraint firstItem="Khw-3N-OZA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="P52-UW-Ly4"/>
                 <constraint firstItem="fOI-0x-Qhl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Wa2-Cf-zdL"/>
                 <constraint firstAttribute="trailing" secondItem="fOI-0x-Qhl" secondAttribute="trailing" id="h2U-vg-YK0"/>
+                <constraint firstAttribute="centerY" secondItem="Khw-3N-OZA" secondAttribute="centerY" id="iao-eb-OTu"/>
+                <constraint firstAttribute="trailing" secondItem="xdQ-Gn-2P5" secondAttribute="trailing" id="kRn-EP-BOl"/>
                 <constraint firstItem="fOI-0x-Qhl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o2m-ex-lUk"/>
+                <constraint firstItem="xdQ-Gn-2P5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="weS-ZS-86r"/>
             </constraints>
             <point key="canvasLocation" x="265" y="342"/>
         </view>

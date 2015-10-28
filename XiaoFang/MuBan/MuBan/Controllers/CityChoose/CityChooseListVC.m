@@ -123,6 +123,7 @@
     
     CityDetailVC *cityDetail = [CityDetailVC loadFromNib];
     cityDetail.cityType = indexPath.row + 1;
+    cityDetail.isLoadTabBarController = _isLoadTabBarController;
     
     [self pushViewController:cityDetail];
 }

@@ -181,6 +181,37 @@
 
 @end
 
+//-----------------------------------------------------------
+
+@implementation MonitoringValueDetailEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        /*
+         "sid": "01",
+         "type": "室内试验功能板",
+         "responsibility": "赵永军",
+         "resPhone": "13957887266",
+         "resOrg": "奉化消防大队",
+         "resOrgPhone": "0574-88689806",
+         "address": "奉化市江口民营科技园聚金路8号",
+         */
+        self.monitoringStations = [dict safeObjectForKey:@"sid"];
+        self.monitoringType = [dict safeObjectForKey:@"type"];
+        self.leaderName = [dict safeObjectForKey:@"responsibility"];
+        self.leaderPhone = [dict safeObjectForKey:@"resPhone"];
+        self.company = [dict safeObjectForKey:@"resOrg"];
+        self.companyPhone = [dict safeObjectForKey:@"resOrgPhone"];
+        self.position = [dict safeObjectForKey:@"address"];
+    }
+    return self;
+}
+
+@end
+
 ///////////////////////////////////////////////////////////////
 
 @implementation WarningDataListEntity
@@ -199,9 +230,35 @@
          "time": "12:53:40"
          */
         self.number = [dict safeObjectForKey:@"sid"];
+        self.fId = [dict safeObjectForKey:@"fid"];
         self.warningType = [dict safeObjectForKey:@"type"];
         self.warningDate = [dict safeObjectForKey:@"date"];
         self.warningTime = [dict safeObjectForKey:@"time"];
+    }
+    return self;
+}
+
+@end
+
+//-----------------------------------------------------------
+
+@implementation WarningValueDetailEntity
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self)
+    {
+        /*
+         "state": "0",
+         "reason": "水压过大",
+         "date": "2015-08-31",
+         "time": "00:00:00"
+         */
+        self.warningReason = [dict safeObjectForKey:@"reason"];
+        self.solveDate = [dict safeObjectForKey:@"date"];
+        self.solveTime = [dict safeObjectForKey:@"time"];
+        self.solveResult = [dict safeObjectForKey:@"state"];
     }
     return self;
 }

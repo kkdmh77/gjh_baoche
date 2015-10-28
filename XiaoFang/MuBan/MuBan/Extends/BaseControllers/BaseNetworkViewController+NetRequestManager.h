@@ -26,6 +26,8 @@ typedef enum
     NetWaterPressureRequestType_GetWarningDataList                 , // 获取最新报警数据列表(POST)
     NetWaterPressureRequestType_GetWarningValueDetail              , // 获取最新报警数据详情(POST)
     
+    NetWaterPressureRequestType_GetCurveValueDataList              , // 获取曲线指列表(POST)
+    
     // 通知
     NetUploadDeviceTokenRequestType_UploadDeviceToken              ,
     

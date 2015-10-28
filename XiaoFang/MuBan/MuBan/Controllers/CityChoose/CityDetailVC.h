@@ -12,5 +12,6 @@
 
 /// 0:宁波 1:湖州
 @property (nonatomic, assign) NSInteger cityType;
+@property (nonatomic, assign) BOOL isLoadTabBarController;
 
 @end

@@ -9,7 +9,7 @@
 #import "WarningDataListVC.h"
 #import "CommonEntity.h"
 #import "WarningDataListCell.h"
-#import "MonitoringValueDetailVC.h"
+#import "WarningValueDetailVC.h"
 #import "GraphVC.h"
 #import "AppDelegate.h"
 #import "BaseNetworkViewController+NetRequestManager.h"
@@ -182,10 +182,10 @@ static NSString * const warningDataListCellIdentifier = @"warningDataListCellIde
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    MonitoringValueDetailVC *monitoringValueDetail = [MonitoringValueDetailVC loadFromNib];
-//    monitoringValueDetail.entity = _netEntityArray[indexPath.row];
-//    
-//    [self pushViewController:monitoringValueDetail];
+    WarningValueDetailVC *warningValueDetail = [WarningValueDetailVC loadFromNib];
+    warningValueDetail.entity = _netEntityArray[indexPath.row];
+
+    [self pushViewController:warningValueDetail];
 }
 
 @end

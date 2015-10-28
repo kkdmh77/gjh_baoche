@@ -76,9 +76,16 @@
 {
     if (_cityType == 1)
     {
-        [self presentViewController:SharedAppDelegate.baseTabBarController modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:^{
-            
-        }];
+        if (_isLoadTabBarController)
+        {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        else
+        {
+            [self presentViewController:SharedAppDelegate.baseTabBarController modalTransitionStyle:UIModalTransitionStyleCoverVertical completion:^{
+                
+            }];
+        }
     }
     else
     {
