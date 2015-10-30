@@ -29,9 +29,21 @@
     return self;
 }
 
+/*
 - (void)awakeFromNib
 {
     [self setup];
+}
+ */
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self setup];
+    }
+    return self;
 }
 
 - (void)setup

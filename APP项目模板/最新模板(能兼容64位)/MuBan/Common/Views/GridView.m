@@ -41,6 +41,16 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
 }
  */
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self initialization];
+    }
+    return self;
+}
+
 - (void)initialization
 {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -49,6 +59,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
     _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
     _collectionView.pagingEnabled = NO;
     _collectionView.backgroundColor = [UIColor clearColor];
+    _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.dataSource = self;
     _collectionView.delegate = self;

@@ -31,11 +31,23 @@ static NSString * const StyleSelectorViewCollectionCellIdentifier = @"StyleSelec
     return self;
 }
 
+/*
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     
     [self initialization];
+}
+ */
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self initialization];
+    }
+    return self;
 }
 
 - (void)initialization
