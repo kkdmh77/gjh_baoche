@@ -46,7 +46,8 @@
 #define Common_ThemeColor                   HEXCOLOR(0X76823B)                  // 换了LOGO后的主题颜色
 #define Common_LiteBrownColor               HEXCOLOR(0X8E8F87)                  // 浅棕色，底部按钮文字未点中颜色
 
-#define LineWidth                           0.5                 // 全局线宽值  适用范围:cell的分割线、视图边框线宽
+#define ThinLineWidth                       0.5                 // 细的线宽值
+#define LineWidth                           1.0                 // 全局线宽值  适用范围:cell的分割线、视图边框线宽
 #define CellSeparatorSpace                  10                  // 全局       tab中cell之间的分割距离
 
 /// 登陆状态的错误码
