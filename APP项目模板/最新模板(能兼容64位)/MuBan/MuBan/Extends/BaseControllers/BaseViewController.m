@@ -311,12 +311,17 @@
 
 - (void)showHUDInfoByType:(HUDInfoType)type
 {
+    [self showHUDInfoByType:type userInteractionEnabled:YES];
+}
+
+- (void)showHUDInfoByType:(HUDInfoType)type userInteractionEnabled:(BOOL)enabled
+{
     switch (type)
     {
         case HUDInfoType_Success:
         {
             /*
-            [HUDManager showAutoHideHUDOfCustomViewWithToShowStr:OperationSuccess showType:HUDOperationSuccess];
+             [HUDManager showAutoHideHUDOfCustomViewWithToShowStr:OperationSuccess showType:HUDOperationSuccess];
              */
             [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:OperationSuccess];
         }
@@ -324,20 +329,23 @@
         case HUDInfoType_Failed:
         {
             /*
-            [HUDManager showAutoHideHUDOfCustomViewWithToShowStr:OperationFailure showType:HUDOperationFailed];
+             [HUDManager showAutoHideHUDOfCustomViewWithToShowStr:OperationFailure showType:HUDOperationFailed];
              */
             [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:OperationFailure];
         }
             break;
         case HUDInfoType_Loading:
         {
-            [HUDManager showHUDWithToShowStr:nil HUDMode:MBProgressHUDModeIndeterminate autoHide:NO afterDelay:0.0 userInteractionEnabled:YES];
+            [HUDManager showHUDWithToShowStr:nil
+                                     HUDMode:MBProgressHUDModeIndeterminate
+                                    autoHide:NO
+                      userInteractionEnabled:enabled];
         }
             break;
-            case HUDInfoType_NoConnectionNetwork:
+        case HUDInfoType_NoConnectionNetwork:
         {
             /*
-            [HUDManager showAutoHideHUDOfCustomViewWithToShowStr:NoConnectionNetwork showType:HUDOperationFailed];
+             [HUDManager showAutoHideHUDOfCustomViewWithToShowStr:NoConnectionNetwork showType:HUDOperationFailed];
              */
             [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:NoConnectionNetwork];
         }

@@ -129,14 +129,15 @@ DEF_SINGLETON(InterfaceHUDManager);
     {
         NSString *addressFileStr = GetApplicationPathFileName(@"Address", @"json");
         NSData *addressFileData = [NSData dataWithContentsOfFile:addressFileStr];
-        
-        NSDictionary *addressDic = [NSJSONSerialization JSONObjectWithData:addressFileData options:NSJSONReadingMutableContainers error:NULL];
-        
-        if ([addressDic isAbsoluteValid])
+        if (addressFileData)
         {
-            _allCountiesDataArray = [[addressDic safeObjectForKey:@"data"] safeObjectForKey:@"countrieAddressInfo"];   // 全世界国家的地址
+            NSDictionary *addressDic = [NSJSONSerialization JSONObjectWithData:addressFileData options:NSJSONReadingMutableContainers error:NULL];
+            
+            if ([addressDic isAbsoluteValid])
+            {
+                _allCountiesDataArray = [[addressDic safeObjectForKey:@"data"] safeObjectForKey:@"countrieAddressInfo"];   // 全世界国家的地址
+            }
         }
-//        DLog(@"%@",addressDic);
     }
 }
 

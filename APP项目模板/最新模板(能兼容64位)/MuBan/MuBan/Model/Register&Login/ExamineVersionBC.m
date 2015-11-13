@@ -33,7 +33,7 @@
     _failed = failed;
     _showHUD = show;
     
-    [HUDManager showHUDWithToShowStr:@"正在检测更新" HUDMode:MBProgressHUDModeIndeterminate autoHide:NO afterDelay:0.1 userInteractionEnabled:NO];
+    [HUDManager showHUDWithToShowStr:@"正在检测更新" HUDMode:MBProgressHUDModeIndeterminate autoHide:NO userInteractionEnabled:NO];
     NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/lookup?id=com.ejushang.o2o"];
     [[NetRequestManager sharedInstance] sendRequest:url parameterDic:nil requestMethodType:RequestMethodType_GET requestTag:1000 delegate:self userInfo:nil];
 }

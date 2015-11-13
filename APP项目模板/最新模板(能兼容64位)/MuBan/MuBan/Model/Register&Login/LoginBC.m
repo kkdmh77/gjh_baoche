@@ -36,7 +36,6 @@
                 [HUDManager showHUDWithToShowStr:LocalizedStr(Login_Loading)
                                          HUDMode:MBProgressHUDModeIndeterminate
                                         autoHide:NO
-                                      afterDelay:0
                           userInteractionEnabled:NO];
             }
             
@@ -79,7 +78,6 @@
                 [HUDManager showHUDWithToShowStr:LocalizedStr(Login_Loading)
                                          HUDMode:MBProgressHUDModeIndeterminate
                                         autoHide:NO
-                                      afterDelay:0
                           userInteractionEnabled:NO];
             }
             
