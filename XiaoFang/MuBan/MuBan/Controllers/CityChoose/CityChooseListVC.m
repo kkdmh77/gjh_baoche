@@ -62,7 +62,7 @@
 
 - (void)setTabShowData
 {
-    _tabShowDataCellTitleArray = [NSArray arrayWithObjects:@"宁波消防", @"湖州消防", nil];
+    _tabShowDataCellTitleArray = [NSArray arrayWithObjects:@"湖州消防", nil];
 }
 
 - (void)initialization
@@ -122,7 +122,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     CityDetailVC *cityDetail = [CityDetailVC loadFromNib];
-    cityDetail.cityType = indexPath.row + 1;
+    cityDetail.cityType = indexPath.row;
     cityDetail.isLoadTabBarController = _isLoadTabBarController;
     
     [self pushViewController:cityDetail];

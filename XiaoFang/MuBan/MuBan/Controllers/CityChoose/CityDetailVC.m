@@ -61,7 +61,7 @@
 - (void)configureViewsProperties
 {
     _titleLabel.textColor = [UIColor whiteColor];
-    _titleLabel.text = _cityType == 1 ? @"宁波消防栓水压监测系统" : @"湖州消防栓水压监测系统";
+    _titleLabel.text = _cityType == 0 ? @"湖州消防栓水压监测系统" : @"宁波消防栓水压监测系统";
     
     [_enterBtn setRadius:4];
 }
@@ -74,7 +74,7 @@
 
 - (IBAction)clickEnterBtn:(id)sender
 {
-    if (_cityType == 1)
+    if (_cityType == 0)
     {
         if (_isLoadTabBarController)
         {

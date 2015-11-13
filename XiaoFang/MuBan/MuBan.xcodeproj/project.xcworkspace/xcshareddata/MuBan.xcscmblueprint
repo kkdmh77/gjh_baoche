@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6F0AFF7670DF53B01B9750C1B70D3F65B81DAC33",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "43ad27df-ac1c-4d72-822e-fa1f3520b629++3947" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6F0AFF7670DF53B01B9750C1B70D3F65B81DAC33" : 0,
+    "43ad27df-ac1c-4d72-822e-fa1f3520b629++3947" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CE663B86-29E4-481C-8C3E-5CAAECA1E1F7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6F0AFF7670DF53B01B9750C1B70D3F65B81DAC33" : "BaoChe\/",
+    "43ad27df-ac1c-4d72-822e-fa1f3520b629++3947" : "BaoChe\/XiaoFang\/MuBan\/Class\/Nimbus\/src\/webcontroller\/resources\/NimbusWebController.bundle\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MuBan",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "XiaoFang\/MuBan\/MuBan.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.0.100\/o2o_ios",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "43ad27df-ac1c-4d72-822e-fa1f3520b629++3947"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/alexkung\/gjh_baoche.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6F0AFF7670DF53B01B9750C1B70D3F65B81DAC33"
+    }
+  ]
+}

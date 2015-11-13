@@ -388,13 +388,13 @@
 		FAF92F091B6F10A400DD06BC /* UIFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF92F001B6F10A400DD06BC /* UIFactory.m */; };
 		FAF92F0A1B6F10A400DD06BC /* UINavigationItem+margin.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF92F021B6F10A400DD06BC /* UINavigationItem+margin.m */; };
 		FAF92F0B1B6F10A400DD06BC /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF92F041B6F10A400DD06BC /* UserInfoModel.m */; };
-		FAFD22C31BE0D5480004DD6F /* FreeLayoutTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22BE1BE0D5480004DD6F /* FreeLayoutTileView.m */; settings = {ASSET_TAGS = (); }; };
-		FAFD22C41BE0D5480004DD6F /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22C01BE0D5480004DD6F /* GridView.m */; settings = {ASSET_TAGS = (); }; };
-		FAFD22C51BE0D5490004DD6F /* StyleSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22C21BE0D5480004DD6F /* StyleSelectorView.m */; settings = {ASSET_TAGS = (); }; };
-		FAFD22C81BE0D7140004DD6F /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22C71BE0D7140004DD6F /* ThemeManager.m */; settings = {ASSET_TAGS = (); }; };
-		FAFD22CD1BE0DBFB0004DD6F /* OBCConvertor.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22CB1BE0DBFB0004DD6F /* OBCConvertor.m */; settings = {ASSET_TAGS = (); }; };
-		FAFD22CE1BE0DBFB0004DD6F /* ts.tab in Resources */ = {isa = PBXBuildFile; fileRef = FAFD22CC1BE0DBFB0004DD6F /* ts.tab */; settings = {ASSET_TAGS = (); }; };
-		FAFD22D11BE0DC5A0004DD6F /* FontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22D01BE0DC5A0004DD6F /* FontManager.m */; settings = {ASSET_TAGS = (); }; };
+		FAFD22C31BE0D5480004DD6F /* FreeLayoutTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22BE1BE0D5480004DD6F /* FreeLayoutTileView.m */; };
+		FAFD22C41BE0D5480004DD6F /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22C01BE0D5480004DD6F /* GridView.m */; };
+		FAFD22C51BE0D5490004DD6F /* StyleSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22C21BE0D5480004DD6F /* StyleSelectorView.m */; };
+		FAFD22C81BE0D7140004DD6F /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22C71BE0D7140004DD6F /* ThemeManager.m */; };
+		FAFD22CD1BE0DBFB0004DD6F /* OBCConvertor.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22CB1BE0DBFB0004DD6F /* OBCConvertor.m */; };
+		FAFD22CE1BE0DBFB0004DD6F /* ts.tab in Resources */ = {isa = PBXBuildFile; fileRef = FAFD22CC1BE0DBFB0004DD6F /* ts.tab */; };
+		FAFD22D11BE0DC5A0004DD6F /* FontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD22D01BE0DC5A0004DD6F /* FontManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3633,6 +3633,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3669,6 +3670,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -33,7 +33,7 @@
             
             if (show)
             {
-                [HUDManager showHUDWithToShowStr:LocalizedStr(Login_LoadingShowInfoKey)
+                [HUDManager showHUDWithToShowStr:LocalizedStr(Login_Loading)
                                          HUDMode:MBProgressHUDModeIndeterminate
                                         autoHide:NO
                                       afterDelay:0
@@ -76,7 +76,7 @@
             
             if (show)
             {
-                [HUDManager showHUDWithToShowStr:LocalizedStr(Login_LoadingShowInfoKey)
+                [HUDManager showHUDWithToShowStr:LocalizedStr(Login_Loading)
                                          HUDMode:MBProgressHUDModeIndeterminate
                                         autoHide:NO
                                       afterDelay:0

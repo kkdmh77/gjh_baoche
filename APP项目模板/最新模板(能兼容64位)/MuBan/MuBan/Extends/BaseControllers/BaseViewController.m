@@ -11,8 +11,9 @@
 #import "InterfaceHUDManager.h"
 #import "LanguagesManager.h"
 #import "CTAssetsPickerController.h"
+#import <StoreKit/StoreKit.h>
 
-@interface BaseViewController () <UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIScrollViewDelegate>
+@interface BaseViewController () <UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, SKStoreProductViewControllerDelegate>
 {
     PickPhotoFinishHandle _pickPhotoFinishHandle;
     PickPhotoCancelHandle _pickPhotoCancelHandle;
@@ -136,6 +137,23 @@
      */
     
     [super viewWillDisappear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([self.navigationController.viewControllers isAbsoluteValid]) {
+        UIViewController *root = self.navigationController.viewControllers[0];
+        BOOL isRootViewController = (self == root);
+        
+        if (isRootViewController) {
+            self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+        } else {
+            self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+        }
+    } else {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -504,6 +522,20 @@
     }
 }
 
+// app内部打开appStore详情页
+- (void)openAppStoreInsideWithIdentifier:(NSString *)appId
+{
+    SKStoreProductViewController *storeProductVC = [[SKStoreProductViewController alloc] init];
+    storeProductVC.delegate = self;
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:appId forKey:SKStoreProductParameterITunesItemIdentifier];
+    [storeProductVC loadProductWithParameters:dict completionBlock:^(BOOL result, NSError *error) {
+        
+    }];
+    
+    [self presentViewController:storeProductVC animated:YES completion:nil];
+}
+
 #pragma mark - UITableViewDataSource & UITableViewDelegate methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -613,6 +645,15 @@
             if (_tabScrollToBottomOperationHandle) _tabScrollToBottomOperationHandle(scrollView);
         }
     }
+}
+
+#pragma mark - SKStoreProductViewControllerDelegate methods
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
+{
+    [viewController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 @end

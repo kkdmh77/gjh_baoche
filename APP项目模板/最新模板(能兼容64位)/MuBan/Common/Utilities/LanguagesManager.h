@@ -58,6 +58,33 @@ static NSString * const Setting_Package_Download   = @"Setting_Package_Download"
 static NSString * const Setting_Invite_Friend      = @"Setting_Invite_Friend";
 static NSString * const Setting_Set                = @"Setting_Set";
 
+// 注册&登陆
+static NSString * const Login_Login                        = @"Login_Login";
+static NSString * const Login_UserName                     = @"Login_UserName";
+static NSString * const Login_Password                     = @"Login_Password";
+static NSString * const Login_AutoLogin                    = @"Login_AutoLogin";
+static NSString * const Login_ForgetPassword               = @"Login_ForgetPassword";
+static NSString * const Login_LoginNow                     = @"Login_LoginNow";
+
+static NSString * const Register_Register                  = @"Register_Register";
+static NSString * const Register_MobileNumber              = @"Register_MobileNumber";
+static NSString * const Register_Email                     = @"Register_Email";
+static NSString * const Register_PleaseInputPassword       = @"Register_PleaseInputPassword";
+static NSString * const Register_PleaseInputPasswordAgain  = @"Register_PleaseInputPasswordAgain";
+static NSString * const Register_VerificationCode          = @"Register_VerificationCode";
+static NSString * const Register_GetVerificationCode       = @"Register_GetVerificationCode";
+static NSString * const Register_RegisterNow               = @"Register_RegisterNow";
+static NSString * const Register_UseMobileNumberToRegister = @"Register_UseMobileNumberToRegister";
+static NSString * const Register_UseEmailToRegister        = @"Register_UseEmailToRegister";
+
+static NSString * const Login_NoUser                       = @"Login_NoUser";
+static NSString * const Login_NoPassword                   = @"Login_NoPassword";
+static NSString * const Login_NoPasswordConfirm            = @"Login_NoPasswordConfirm";
+static NSString * const Login_PasswordNotEqual             = @"Login_PasswordNotEqual";
+static NSString * const Login_NoAgreeProtocol              = @"Login_NoAgreeProtocol";
+static NSString * const Login_LoginFail                    = @"Login_LoginFail";
+static NSString * const Login_Loading                      = @"Login_Loading";
+
 // 其他
 
 // 搜索页

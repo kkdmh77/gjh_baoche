@@ -206,6 +206,14 @@ typedef void (^PickPhotoCancelHandle) (void);
 - (void)addBackSwipeGesture;
 
 /**
+ @ 方法描述    app内部打开appStore详情页
+ @ 输入参数    appId: APP在AppStore的ID
+ @ 创建人      龚俊慧
+ @ 创建时间    2015-11-13
+ */
+- (void)openAppStoreInsideWithIdentifier:(NSString *)appId;
+
+/**
  @ 方法描述    从相机或者相册选取单张照片
  @ 输入参数    isCropped: 是否裁剪
  @ 创建人      龚俊慧
