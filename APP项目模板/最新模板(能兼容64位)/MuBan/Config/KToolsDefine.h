@@ -1,3 +1,13 @@
+//
+//  KToolsDefine.h
+//  MuBan
+//
+//  Created by 龚 俊慧 on 15/11/13.
+//  Copyright © 2015年 com.gjh. All rights reserved.
+//
+
+#ifndef KToolsDefine_h
+#define KToolsDefine_h
 
 // 设备相关
 #define isIPad                      (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -77,3 +87,5 @@ static __class * __singleton__ = nil; \
 dispatch_once( &once, ^{ __singleton__ = [[__class alloc] init]; } ); \
 return __singleton__; \
 }
+
+#endif /* KToolsDefine_h */

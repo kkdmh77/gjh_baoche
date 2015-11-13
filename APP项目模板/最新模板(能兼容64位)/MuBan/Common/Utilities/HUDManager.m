@@ -41,10 +41,12 @@
     
     HUD.userInteractionEnabled = !yesOrNo; // 加上这个属性才能在HUD还没隐藏的时候点击到别的view
     HUD.mode = mode;
-    HUD.labelText = showStr;
-    HUD.opacity = 0.7;
+    HUD.detailsLabelText = showStr;
+    HUD.detailsLabelFont = [UIFont systemFontOfSize:15];
+    HUD.opacity = 0.8;
     HUD.dimBackground = NO;
     HUD.animationType = MBProgressHUDAnimationFade;
+    HUD.cornerRadius = 0;
     
     // HUD.taskInProgress = YES;
     

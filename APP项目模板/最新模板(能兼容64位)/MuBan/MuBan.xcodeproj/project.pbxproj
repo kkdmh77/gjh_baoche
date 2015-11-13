@@ -408,6 +408,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B76DFDF1BF5CBC800886D83 /* KColorDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KColorDefine.h; sourceTree = "<group>"; };
+		2B76DFE01BF5CC8E00886D83 /* KURLDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KURLDefine.h; sourceTree = "<group>"; };
+		2B76DFE11BF5CCA300886D83 /* KUIStringDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KUIStringDefine.h; sourceTree = "<group>"; };
+		2B76DFE21BF5CCB500886D83 /* KToolsDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KToolsDefine.h; sourceTree = "<group>"; };
+		2B76DFE31BF5CCD300886D83 /* KKeyDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKeyDefine.h; sourceTree = "<group>"; };
+		2B76DFE41BF5CCE900886D83 /* KDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KDefine.h; sourceTree = "<group>"; };
+		2B76DFE51BF5D01900886D83 /* KFontDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFontDefine.h; sourceTree = "<group>"; };
 		431F137C1A7762E9008C4544 /* ChineseToPinyinResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyinResource.h; sourceTree = "<group>"; };
 		431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyinResource.m; sourceTree = "<group>"; };
 		431F137E1A7762E9008C4544 /* HanyuPinyinOutputFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HanyuPinyinOutputFormat.h; sourceTree = "<group>"; };
@@ -1012,9 +1019,6 @@
 		43D1CAF21A75E7F0004564C2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		43D1CAF41A75E7F8004564C2 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		43D1CAF61A75E805004564C2 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		43D1CAFC1A75EBA5004564C2 /* CommonConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonConfig.h; sourceTree = "<group>"; };
-		43D1CAFD1A75EBA5004564C2 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
-		43D1CAFE1A75EBA5004564C2 /* PublicDocuments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicDocuments.h; sourceTree = "<group>"; };
 		43D1CB001A75EBA5004564C2 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
 		43D1CB031A75EBA5004564C2 /* Address.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Address.json; sourceTree = "<group>"; };
 		43D1CB0F1A75EBF9004564C2 /* ATB_AlertFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATB_AlertFunc.h; sourceTree = "<group>"; };
@@ -2535,9 +2539,13 @@
 		43D1CAFB1A75EBA5004564C2 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				43D1CAFC1A75EBA5004564C2 /* CommonConfig.h */,
-				43D1CAFD1A75EBA5004564C2 /* Interface.h */,
-				43D1CAFE1A75EBA5004564C2 /* PublicDocuments.h */,
+				2B76DFDF1BF5CBC800886D83 /* KColorDefine.h */,
+				2B76DFE01BF5CC8E00886D83 /* KURLDefine.h */,
+				2B76DFE11BF5CCA300886D83 /* KUIStringDefine.h */,
+				2B76DFE21BF5CCB500886D83 /* KToolsDefine.h */,
+				2B76DFE31BF5CCD300886D83 /* KKeyDefine.h */,
+				2B76DFE51BF5D01900886D83 /* KFontDefine.h */,
+				2B76DFE41BF5CCE900886D83 /* KDefine.h */,
 			);
 			path = Config;
 			sourceTree = "<group>";

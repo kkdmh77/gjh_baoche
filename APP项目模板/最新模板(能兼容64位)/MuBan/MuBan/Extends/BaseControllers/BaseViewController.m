@@ -320,18 +320,18 @@
     {
         case HUDInfoType_Success:
         {
-            /*
              [HUDManager showAutoHideHUDOfCustomViewWithToShowStr:OperationSuccess showType:HUDOperationSuccess];
-             */
+            /*
             [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:OperationSuccess];
+             */
         }
             break;
         case HUDInfoType_Failed:
         {
-            /*
              [HUDManager showAutoHideHUDOfCustomViewWithToShowStr:OperationFailure showType:HUDOperationFailed];
-             */
+            /*
             [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:OperationFailure];
+             */
         }
             break;
         case HUDInfoType_Loading:
@@ -344,10 +344,10 @@
             break;
         case HUDInfoType_NoConnectionNetwork:
         {
-            /*
              [HUDManager showAutoHideHUDOfCustomViewWithToShowStr:NoConnectionNetwork showType:HUDOperationFailed];
-             */
+            /*
             [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:NoConnectionNetwork];
+             */
         }
             break;
         default:
@@ -357,10 +357,10 @@
 
 - (void)showHUDInfoByString:(NSString *)str
 {
-    /*
     [HUDManager showAutoHideHUDWithToShowStr:str HUDMode:MBProgressHUDModeText];
-     */
+    /*
     [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:str];
+     */
 }
 
 - (void)hideHUD

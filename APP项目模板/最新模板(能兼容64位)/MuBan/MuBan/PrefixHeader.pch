@@ -16,9 +16,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
-    #import "CommonConfig.h"
-    #import "PublicDocuments.h"
-    #import "Interface.h"
+    #import "KDefine.h"
     #import "ATBLibs.h"
     #import "CommonCategories.h"
     #import "LanguagesManager.h"
