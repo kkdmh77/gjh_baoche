@@ -46,6 +46,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    [[UserInfoModel sharedInstance] saveGlobalUserInfoModel];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -59,6 +61,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
+    
+    [[UserInfoModel sharedInstance] saveGlobalUserInfoModel];
 }
 
 #pragma mark - /***************************推送相关***************************/
@@ -77,7 +81,7 @@
     // DLog(@"token = %@", deviceTokenStr);
     
     // 保存token值
-    [UserInfoModel setUserDefaultDeviceToken:deviceTokenStr];
+    [UserInfoModel sharedInstance].deviceToken = deviceTokenStr;
     [self sendDeviceToken:deviceTokenStr];
 }
 
@@ -100,9 +104,9 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:deviceToken forKey:@"deviceToken"];
     [dic setObject:@"ios" forKey:@"deviceType"];
-    if ([UserInfoModel getUserDefaultUserId])
+    if ([UserInfoModel sharedInstance].userId)
     {
-        [dic setObject:[UserInfoModel getUserDefaultUserId] forKey:@"userId"];
+        [dic setObject:[UserInfoModel sharedInstance].userId forKey:@"userId"];
     }
     
     [[NetRequestManager sharedInstance] sendRequest:url

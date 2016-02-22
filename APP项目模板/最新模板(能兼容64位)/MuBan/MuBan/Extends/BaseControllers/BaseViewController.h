@@ -156,14 +156,17 @@ typedef void (^PickPhotoCancelHandle) (void);
  @ 创建人      龚俊慧
  @ 创建时间    2014-07-18
  */
-- (void)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg action:(SEL)action;
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position
+                                            normalImg:(UIImage *)normalImg
+                                       highlightedImg:(UIImage *)highlightedImg
+                                               action:(SEL)action;
 
-- (void)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position
-                               normalImg:(UIImage *)normalImg
-                          highlightedImg:(UIImage *)highlightedImg
-                             selectedImg:(UIImage *)selectedImg
-                              isSelected:(BOOL)isSelected
-                                  action:(SEL)action;
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position
+                                            normalImg:(UIImage *)normalImg
+                                       highlightedImg:(UIImage *)highlightedImg
+                                          selectedImg:(UIImage *)selectedImg
+                                           isSelected:(BOOL)isSelected
+                                               action:(SEL)action;
 
 /**
  @ 方法描述    配置导航栏按钮
@@ -171,7 +174,9 @@ typedef void (^PickPhotoCancelHandle) (void);
  @ 创建人      龚俊慧
  @ 创建时间    2014-07-18
  */
-- (void)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position barButtonTitle:(NSString *)title action:(SEL)action;
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position
+                                       barButtonTitle:(NSString *)title
+                                               action:(SEL)action;
 
 /**
  @ 方法描述    设置界面本地的所有文字显示(例如:导航栏标题、设置页文字等,涉及多语言),子类实现

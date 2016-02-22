@@ -92,10 +92,11 @@
  */
 @property (nonatomic, assign, readonly) NSInteger bottomCapHeight;
 
+/// 设置图片模糊度 {blurLevel | 0 ≤ t ≤ 1}
+- (UIImage*)gaussBlur:(CGFloat)blurLevel;
 
-
-
-
+/// 改变图片颜色
+- (UIImage *) imageWithTintColor:(UIColor *)tintColor;
 
 /**
  *  抓取屏幕。
@@ -145,7 +146,7 @@
  */
 +(UIImage *)colorizeImage:(UIImage *)image withColor:(UIColor *)color;
 
-//按frame裁减图片
+// 按frame裁减图片
 + (UIImage *)captureView:(UIView *)view frame:(CGRect)frame;
 
 

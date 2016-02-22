@@ -120,11 +120,12 @@ static ATAudioPlayManager* s_audioPlayManager = nil;
 		_ATAudioPlayerInfo *info = [_audioPlaying objectForKey:key];
 		if(player == info.player)
 		{
+            [_audioPlaying removeObjectForKey:key];
+            
             if ([info.delegate respondsToSelector:@selector(audioPlayerManager:finishPlayTag:error:)])
             {
                 [info.delegate audioPlayerManager:self finishPlayTag:info.tag error:error];
             }
-			[_audioPlaying removeObjectForKey:key];
 			break;
 		}
 	}

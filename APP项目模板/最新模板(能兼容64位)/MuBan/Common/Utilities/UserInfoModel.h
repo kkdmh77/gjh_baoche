@@ -7,77 +7,33 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Jastor.h"
 
-@interface UserInfoModel : NSObject
+@interface UserInfoModel : Jastor
 
 AS_SINGLETON(UserInfoModel);
 
-+ (void)setObject:(id)value forKey:(NSString *)key;
-+ (id)objectForKey:(NSString *)key;
+/// 保存用户信息到磁盘
+- (void)saveGlobalUserInfoModel;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-+ (void)setUserDefaultEmail:(NSString *)email;
-+ (NSString *)getUserDefaultEmail;
+@property (nonatomic, copy  ) NSString *email;
+@property (nonatomic, copy  ) NSString *session;
+@property (nonatomic, strong) NSNumber *userId;
+@property (nonatomic, copy  ) NSString *loginName;
+@property (nonatomic, copy  ) NSString *userName;
+@property (nonatomic, copy  ) NSString *password;
+@property (nonatomic, strong) NSNumber *userHeaderImgId;
+@property (nonatomic, strong) NSData   *userHeaderImgData;
+@property (nonatomic, copy  ) NSString *idCard;
+@property (nonatomic, copy  ) NSString *deviceToken;
+@property (nonatomic, assign) CGFloat  brightness_Device;
+@property (nonatomic, assign) CGFloat  brightness_App;
 
-+ (void)setUserDefaultSession:(NSString *)session;
-+ (NSString *)getUserDefaultSession;
-
-+ (void)setUserDefaultUserId:(NSNumber *)userId;
-+ (NSNumber *)getUserDefaultUserId;
-
-+ (void)setUserDefaultLoginName:(NSString *)loginName;
-+ (NSString *)getUserDefaultLoginName;
-
-+ (void)setUserDefaultUserName:(NSString *)userName;
-+ (NSString *)getUserDefaultUserName;
-
-+ (void)setUserDefaultPassword:(NSString *)password;
-+ (NSString *)getUserDefaultPassword;
-
-+ (void)setUserDefaultUserHeaderImgId:(NSNumber *)userHeaderImgId;
-+ (NSNumber *)getUserDefaultUserHeaderImgId;
-
-+ (void)setUserDefaultUserHeaderImgData:(NSData *)userHeaderImgData;
-+ (NSData *)getUserDefaultUserHeaderImgData;
-
-+ (void)setUserDefaultLastLoginDate:(NSDate *)lastLoginDate;
-+ (NSDate *)getUserDefaultLastLoginDate;
-
-+ (void)setUserDefaultAreaCommunity:(NSString *)areaCommunity;
-+ (NSString *)getUserDefaultAreaCommunity;
-
-+ (void)setUserDefaultIsBindGovWeb:(NSNumber *)isBindGovWeb;
-+ (NSNumber *)getUserDefaultIsBindGovWeb;
-
-+ (void)setUserDefaultIdCard:(NSString *)idCard;
-+ (NSString *)getUserDefaultIdCard;
-
-+ (void)setUserDefaultBrightness_Device:(CGFloat)brightness;
-+ (CGFloat)getUserDefaultBrightness_Device;
-
-+ (void)setUserDefaultAppBrightness_App:(CGFloat)brightness;
-+ (CGFloat)getUserDefaultBrightness_App;
+/****************************************用户向导相关**************************************/
 
 @property (nonatomic, assign) BOOL isLoadedThemeChoosePage; // 是否已经点击过换肤按钮
-
-//////////////////////////////////////////////////////////////////////////////////////////
-
-+ (void)setUserDefaultLoginToken:(NSString *)token;
-+ (NSString *)getUserDefaultLoginToken;
-
-+ (void)setUserDefaultLoginToken_V:(NSString *)token_V;
-+ (NSString *)getUserDefaultLoginToken_V;
-
-+ (NSDictionary *)getRequestHeader_TokenDic;
-
-+ (void)setUserDefaultSearchHistoryArray:(NSArray*)historyArray;
-+ (NSArray*)getUserDefaultSearchHistoryArray;
-
-+ (void)setUserDefaultCookiesArray:(NSArray *)cookies;
-+ (NSArray *)getUserDefaultCookiesArray;
-
-+ (void)setUserDefaultDeviceToken:(NSString *)token;
-+ (NSString *)getUserDefaultDeviceToken;
+@property (nonatomic, assign) BOOL hasShowUerGuide_StudyPlanLearn; // 是否已经显示学习计划学习页的指引
 
 @end

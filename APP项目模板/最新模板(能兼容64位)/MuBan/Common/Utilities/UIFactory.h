@@ -60,4 +60,7 @@ AS_SINGLETON(UIFactory);
 + (NSString *)useAES256Decrypt:(NSData *)cipherData;            //解密
  */
 
+/// 获取APP当前显示的控制器
++ (UIViewController *)currentActiveViewController;
+
 @end

@@ -33,294 +33,65 @@
 #define UserDefault_CookiesArrayKey         @"userDefault_CookiesArrayKey"      // HTTP响应cookies
 #define UserDefault_DeviceTokenKey          @"userDefault_DeviceTokenKey"       // 用户注册通知成功后返回的token
 
+
+
+#define kUserInfoModelPlistFileName @"userInfo.plist"
+
 @implementation UserInfoModel
 
-DEF_SINGLETON(UserInfoModel);
-
-+ (void)saveUserDefaultInfo
++ (UserInfoModel *)sharedInstance
 {
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    static dispatch_once_t once;
+    static UserInfoModel * singleton = nil;
+    WEAKSELF
+    dispatch_once( &once, ^{
+        NSString *path = GetDocumentPathFileName(kUserInfoModelPlistFileName);
+        if (IsFileExists(path)) {
+            singleton = [weakSelf getUserInfoModelFromPath:path];
+        } else {
+            singleton = [[UserInfoModel alloc] init];
+        }
+    } );
+    return singleton;
 }
 
-+ (void)setObject:(id)value forKey:(NSString *)key
+- (id)init
 {
-    [[NSUserDefaults standardUserDefaults] setObject:value forKey:key];
-    [self saveUserDefaultInfo];
-}
-
-+ (id)objectForKey:(NSString *)key
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
-}
-
-#pragma mark - ///////////////////////////////////////////////////////
-
-+ (void)setUserDefaultEmail:(NSString *)email
-{
-    [[NSUserDefaults standardUserDefaults] setObject:email forKey:UserDefault_EmailKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSString *)getUserDefaultEmail
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_EmailKey];
-}
-
-
-+ (void)setUserDefaultSession:(NSString *)session
-{
-    [[NSUserDefaults standardUserDefaults] setObject:session forKey:UserDefault_SessionKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSString *)getUserDefaultSession
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_SessionKey];
-}
-
-
-+ (void)setUserDefaultUserId:(NSNumber *)userId
-{
-    [[NSUserDefaults standardUserDefaults] setObject:userId forKey:UserDefault_UserIdKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSNumber *)getUserDefaultUserId
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_UserIdKey];
-}
-
-
-+ (void)setUserDefaultLoginName:(NSString *)loginName
-{
-    [[NSUserDefaults standardUserDefaults] setObject:loginName forKey:UserDefault_LoginNameKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSString *)getUserDefaultLoginName
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_LoginNameKey];
-}
-
-
-+ (void)setUserDefaultUserName:(NSString *)userName
-{
-    [[NSUserDefaults standardUserDefaults] setObject:userName forKey:UserDefault_UserNameKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSString *)getUserDefaultUserName
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_UserNameKey];
-}
-
-
-+ (void)setUserDefaultPassword:(NSString *)password
-{
-    [[NSUserDefaults standardUserDefaults] setObject:password forKey:UserDefault_PasswordKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSString *)getUserDefaultPassword
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_PasswordKey];
-}
-
-
-+ (void)setUserDefaultUserHeaderImgId:(NSNumber *)userHeaderImgId
-{
-    [[NSUserDefaults standardUserDefaults] setObject:userHeaderImgId forKey:UserDefault_UserHeaderImgIdKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSNumber *)getUserDefaultUserHeaderImgId
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_UserHeaderImgIdKey];
-}
-
-
-+ (void)setUserDefaultUserHeaderImgData:(NSData *)userHeaderImgData
-{
-    [[NSUserDefaults standardUserDefaults] setObject:userHeaderImgData forKey:UserDefault_UserHeaderImgDataKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSData *)getUserDefaultUserHeaderImgData
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_UserHeaderImgDataKey];
-}
-
-
-+ (void)setUserDefaultLastLoginDate:(NSDate *)lastLoginDate
-{
-    [[NSUserDefaults standardUserDefaults] setObject:lastLoginDate forKey:UserDefault_LastLoginDateKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSDate *)getUserDefaultLastLoginDate
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_LastLoginDateKey];
-}
-
-
-+ (void)setUserDefaultAreaCommunity:(NSString *)areaCommunity
-{
-    [[NSUserDefaults standardUserDefaults] setObject:areaCommunity forKey:UserDefault_AreaCommunityKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSString *)getUserDefaultAreaCommunity
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_AreaCommunityKey];
-}
-
-+ (void)setUserDefaultIsBindGovWeb:(NSNumber *)isBindGovWeb
-{
-    [[NSUserDefaults standardUserDefaults] setObject:isBindGovWeb forKey:UserDefault_IsBindGovWebKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSNumber *)getUserDefaultIsBindGovWeb
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_IsBindGovWebKey];
-}
-
-+ (void)setUserDefaultIdCard:(NSString *)idCard
-{
-    [[NSUserDefaults standardUserDefaults] setObject:idCard forKey:UserDefault_IdCardKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSString *)getUserDefaultIdCard
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_IdCardKey];
-}
-
-+ (void)setUserDefaultBrightness_Device:(CGFloat)brightness
-{
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:brightness] forKey:UserDefault_Brightness_Device];
-    [self saveUserDefaultInfo];
-}
-
-+ (CGFloat)getUserDefaultBrightness_Device
-{
-    return [[[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_Brightness_Device] floatValue];
-}
-
-+ (void)setUserDefaultAppBrightness_App:(CGFloat)brightness;
-{
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:brightness] forKey:UserDefault_Brightness_App];
-    [self saveUserDefaultInfo];
-}
-
-+ (CGFloat)getUserDefaultBrightness_App
-{
-    return [[[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_Brightness_App] floatValue];
-}
-
-+ (void)setUserObj:(NSDictionary *)userObj
-{
-    [[NSUserDefaults standardUserDefaults] setObject:userObj forKey:UserDefault_UserObjKey];
-    
-    [self setUserDefaultLoginName:[userObj objectForKey:@"loginName"]];
-    [self setUserDefaultUserId:[userObj objectForKey:@"userId"]];
-    [self setUserDefaultUserName:[userObj objectForKey:@"userName"]];
-    [self setUserDefaultPassword:[userObj objectForKey:@"loginPswd"]];
-    [self setUserDefaultEmail:[userObj objectForKey:@"email"]];
-    [self setUserDefaultAreaCommunity:[userObj objectForKey:@"areaName"]];
-    [self setUserDefaultLastLoginDate:[NSDate date]];
-    [self setUserDefaultUserHeaderImgId:[userObj objectForKey:@"picId"]];
-    [self setUserDefaultEmail:[userObj objectForKey:@"email"]];
-    [self setUserDefaultIsBindGovWeb:[userObj objectForKey:@"hasBindGovWeb"]];
-}
-
-- (void)setIsLoadedThemeChoosePage:(BOOL)isLoadedThemeChoosePage
-{
-    [[NSUserDefaults standardUserDefaults] setObject:@(isLoadedThemeChoosePage) forKey:@"isLoadedThemeChoosePage"];
-    [[self class] saveUserDefaultInfo];
-}
-
-- (BOOL)isLoadedThemeChoosePage
-{
-    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"isLoadedThemeChoosePage"] boolValue];
-}
-
-#pragma mark - ///////////////////////////////////////////////////////
-
-+ (void)setUserDefaultLoginToken:(NSString *)token
-{
-    [[NSUserDefaults standardUserDefaults] setObject:token forKey:UserDefault_UserLoginTokenKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSString *)getUserDefaultLoginToken
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_UserLoginTokenKey];
-}
-
-+ (void)setUserDefaultLoginToken_V:(NSString *)token_V
-{
-    [[NSUserDefaults standardUserDefaults] setObject:token_V forKey:UserDefault_UserLoginToken_VKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSString *)getUserDefaultLoginToken_V
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_UserLoginToken_VKey];
-}
-
-+ (NSDictionary *)getRequestHeader_TokenDic
-{
-    if ([[UserInfoModel getUserDefaultLoginToken] isAbsoluteValid] && [[UserInfoModel getUserDefaultLoginToken_V] isAbsoluteValid])
+    self = [super init];
+    if (self)
     {
-        return @{@"Token": [UserInfoModel getUserDefaultLoginToken], @"TokenV": [UserInfoModel getUserDefaultLoginToken_V]};
+        [self configureDefaultValues];
     }
-    else
-    {
-        return nil;
+    return self;
+}
+
+// 设置每个属性的默认值
+- (void)configureDefaultValues
+{
+   
+}
+
+- (void)saveGlobalUserInfoModel
+{
+    NSString *path = GetDocumentPathFileName(kUserInfoModelPlistFileName);
+    if (IsFileExists(path)) {
+        if (DeleteFiles(path)) {
+            NSDictionary *dictionary = [self toDictionary];
+            [dictionary writeToFile:path atomically:YES];
+        }
     }
 }
 
-+ (void)setUserDefaultSearchHistoryArray:(NSArray *)historyArray
++ (UserInfoModel *)getUserInfoModelFromPath:(NSString *)path
 {
-    [[NSUserDefaults standardUserDefaults] setObject:historyArray forKey:UserDefault_UserSearchHistroyKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSArray*)getUserDefaultSearchHistoryArray
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_UserSearchHistroyKey];
-}
-
-+ (void)setUserDefaultCookiesArray:(NSArray *)cookies
-{
-    NSData *cookiesEncodedData = [NSKeyedArchiver archivedDataWithRootObject:cookies];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:cookiesEncodedData forKey:UserDefault_CookiesArrayKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSArray *)getUserDefaultCookiesArray
-{
-    NSData *unarchiverData = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_CookiesArrayKey];
-    NSArray *cookiesArray = nil;
-    if (unarchiverData)
+    if (IsFileExists(path))
     {
-        cookiesArray = [NSKeyedUnarchiver unarchiveObjectWithData:unarchiverData];
-    }
+        NSMutableDictionary *userInfoPlistDic = [NSMutableDictionary dictionaryWithContentsOfFile:path];
     
-    return cookiesArray;
-}
-
-+ (void)setUserDefaultDeviceToken:(NSString *)token
-{
-    [[NSUserDefaults standardUserDefaults] setObject:token forKey:UserDefault_DeviceTokenKey];
-    [self saveUserDefaultInfo];
-}
-
-+ (NSString *)getUserDefaultDeviceToken
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_DeviceTokenKey];
+        UserInfoModel *model = [[UserInfoModel alloc] initWithDictionary:userInfoPlistDic];
+        return model;
+    }
+    return [[UserInfoModel alloc] init];
 }
 
 @end

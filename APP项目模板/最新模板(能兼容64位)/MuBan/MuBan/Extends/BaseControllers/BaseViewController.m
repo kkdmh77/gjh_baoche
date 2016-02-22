@@ -368,12 +368,12 @@
     [HUDManager hideHUD];
 }
 
-- (void)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg action:(SEL)action
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg action:(SEL)action
 {
-    [self configureBarbuttonItemByPosition:position normalImg:normalImg highlightedImg:highlightedImg selectedImg:nil isSelected:NO action:action];
+    return [self configureBarbuttonItemByPosition:position normalImg:normalImg highlightedImg:highlightedImg selectedImg:nil isSelected:NO action:action];
 }
 
-- (void)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg selectedImg:(UIImage *)selectedImg isSelected:(BOOL)isSelected action:(SEL)action
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg selectedImg:(UIImage *)selectedImg isSelected:(BOOL)isSelected action:(SEL)action
 {
     UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 40, 40) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
     UIButton *btn = (UIButton *)[barItem.customView viewWithTag:8888];
@@ -388,18 +388,22 @@
     {
         self.navigationItem.rightBarButtonItem = barItem;
     }
+    return barItem;
 }
 
-- (void)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position barButtonTitle:(NSString *)title action:(SEL)action
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position barButtonTitle:(NSString *)title action:(SEL)action
 {
+    UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, [title stringSizeWithFont:SP15Font].width + 20, 40) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
+    
     if (BarbuttonItemPosition_Left == position)
     {
-        self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, [title stringSizeWithFont:SP15Font].width + 20, 30) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
+        self.navigationItem.leftBarButtonItem = barItem;
     }
     else
     {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, [title stringSizeWithFont:SP15Font].width + 20, 30) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
+        self.navigationItem.rightBarButtonItem = barItem;
     }
+    return barItem;
 }
 
 - (void)pickSinglePhotoFromCameraOrAlbumByIsCropped:(BOOL)isCropped cancelHandle:(PickPhotoCancelHandle)cancelHandle finishPickingHandle:(PickPhotoFinishHandle)finishHandle

@@ -105,8 +105,8 @@ static UIView *staticContainerView = nil;
 
 + (void)showActivityIndicatorViewInView:(UIView *)containerView
 {
-    staticContainerView = containerView;
     [self hide];
+    staticContainerView = containerView;
     
     ActivityIndicatorView *indicatorView = [[ActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     indicatorView.tag = 1000;

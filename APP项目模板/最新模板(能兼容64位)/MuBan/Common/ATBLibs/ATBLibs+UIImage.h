@@ -10,14 +10,14 @@
 
 @interface UIImage(ATBLibsAddtions)
 
-//给图片加圆角
+// 给图片加圆角
 + (id)createRoundedRectImage:(UIImage*)image roundedRectSize:(CGSize)roundedRectSize;
 
 // 将图片转称位图模式
 - (UIImage*) transToBitmapImage;
 - (UIImage*) transToBitmapImageWithSize:(CGSize)size;
 
-//改变图片大小
+// 改变图片大小
 - (UIImage *)resize:(CGSize)newSize;
 
 // 将图片转称灰度图

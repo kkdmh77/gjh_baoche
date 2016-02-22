@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BCC7C341C7AB81E00B7E7D5 /* Jastor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C311C7AB81E00B7E7D5 /* Jastor.m */; };
+		2BCC7C351C7AB81E00B7E7D5 /* JastorRuntimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */; };
 		431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */; };
 		431F138A1A7762E9008C4544 /* HanyuPinyinOutputFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137F1A7762E9008C4544 /* HanyuPinyinOutputFormat.m */; };
 		431F138B1A7762E9008C4544 /* NSString+PinYin4Cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F13811A7762E9008C4544 /* NSString+PinYin4Cocoa.m */; };
@@ -415,6 +417,10 @@
 		2B76DFE31BF5CCD300886D83 /* KKeyDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKeyDefine.h; sourceTree = "<group>"; };
 		2B76DFE41BF5CCE900886D83 /* KDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KDefine.h; sourceTree = "<group>"; };
 		2B76DFE51BF5D01900886D83 /* KFontDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFontDefine.h; sourceTree = "<group>"; };
+		2BCC7C301C7AB81E00B7E7D5 /* Jastor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jastor.h; sourceTree = "<group>"; };
+		2BCC7C311C7AB81E00B7E7D5 /* Jastor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jastor.m; sourceTree = "<group>"; };
+		2BCC7C321C7AB81E00B7E7D5 /* JastorRuntimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JastorRuntimeHelper.h; sourceTree = "<group>"; };
+		2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JastorRuntimeHelper.m; sourceTree = "<group>"; };
 		431F137C1A7762E9008C4544 /* ChineseToPinyinResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyinResource.h; sourceTree = "<group>"; };
 		431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyinResource.m; sourceTree = "<group>"; };
 		431F137E1A7762E9008C4544 /* HanyuPinyinOutputFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HanyuPinyinOutputFormat.h; sourceTree = "<group>"; };
@@ -1301,6 +1307,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2BCC7C2F1C7AB81E00B7E7D5 /* Jastor */ = {
+			isa = PBXGroup;
+			children = (
+				2BCC7C301C7AB81E00B7E7D5 /* Jastor.h */,
+				2BCC7C311C7AB81E00B7E7D5 /* Jastor.m */,
+				2BCC7C321C7AB81E00B7E7D5 /* JastorRuntimeHelper.h */,
+				2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */,
+			);
+			path = Jastor;
+			sourceTree = "<group>";
+		};
 		431F137A1A7762E9008C4544 /* PinYin4Objc */ = {
 			isa = PBXGroup;
 			children = (
@@ -1416,6 +1433,7 @@
 		43D1C68B1A75E692004564C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				2BCC7C2F1C7AB81E00B7E7D5 /* Jastor */,
 				FAFD22C91BE0DBFB0004DD6F /* OBCConvertor */,
 				431F137A1A7762E9008C4544 /* PinYin4Objc */,
 				43D1C70B1A75E777004564C2 /* AFNetworking */,
@@ -3202,6 +3220,7 @@
 				43D1CA921A75E778004564C2 /* NILauncherViewModel.m in Sources */,
 				FAF92F061B6F10A400DD06BC /* AppSoundManager.m in Sources */,
 				43D1CC251A75EBFA004564C2 /* ATSeedFill.mm in Sources */,
+				2BCC7C351C7AB81E00B7E7D5 /* JastorRuntimeHelper.m in Sources */,
 				43D1CAC41A75E779004564C2 /* NIToolbarPhotoViewController.m in Sources */,
 				43D1CC311A75EBFA004564C2 /* NSObject+SSToolkitAdditions.m in Sources */,
 				43D1CC3B1A75EBFA004564C2 /* UIImage+SSToolkitAdditions.m in Sources */,
@@ -3414,6 +3433,7 @@
 				43D1CC421A75EBFA004564C2 /* ImagePreviewController.m in Sources */,
 				43D1CA0E1A75E778004564C2 /* NSManagedObject+MagicalRequests.m in Sources */,
 				43D1CA0B1A75E778004564C2 /* NSManagedObject+MagicalDataImport.m in Sources */,
+				2BCC7C341C7AB81E00B7E7D5 /* Jastor.m in Sources */,
 				43D1C9D01A75E778004564C2 /* UIColor+AQGridView.m in Sources */,
 				43D1CA1D1A75E778004564C2 /* MASCompositeConstraint.m in Sources */,
 				43D1CAC31A75E779004564C2 /* NIPhotoScrubberView.m in Sources */,
@@ -3656,7 +3676,7 @@
 					"\"$(SRCROOT)/Class/CrossBorderAlipay\"",
 				);
 				INFOPLIST_FILE = MuBan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3693,7 +3713,7 @@
 					"\"$(SRCROOT)/Class/CrossBorderAlipay\"",
 				);
 				INFOPLIST_FILE = MuBan/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
