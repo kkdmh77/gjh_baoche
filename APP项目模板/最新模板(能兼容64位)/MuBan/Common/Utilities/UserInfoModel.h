@@ -18,6 +18,11 @@ AS_SINGLETON(UserInfoModel);
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
++ (void)setObject:(id)value forKey:(NSString *)key;
++ (id)objectForKey:(NSString *)key;
+
+@property (nonatomic, strong) NSMutableDictionary *parameterDic;
+
 @property (nonatomic, copy  ) NSString *email;
 @property (nonatomic, copy  ) NSString *session;
 @property (nonatomic, strong) NSNumber *userId;
