@@ -378,6 +378,7 @@
     UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 40, 40) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
     UIButton *btn = (UIButton *)[barItem.customView viewWithTag:8888];
     [btn setImage:selectedImg forState:UIControlStateSelected];
+    [btn setImage:selectedImg forState:UIControlStateSelected | UIControlStateHighlighted];
     btn.selected = isSelected;
     
     if (BarbuttonItemPosition_Left == position)
