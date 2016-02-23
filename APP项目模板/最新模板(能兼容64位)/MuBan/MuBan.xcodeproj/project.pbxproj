@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B5A9DA11C7C1CD5004573C0 /* CommonEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DA01C7C1CD5004573C0 /* CommonEntity.m */; };
+		2B5A9DAF1C7C1CE7004573C0 /* CommonBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DA41C7C1CE7004573C0 /* CommonBC.m */; };
+		2B5A9DB01C7C1CE7004573C0 /* 168BC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DA71C7C1CE7004573C0 /* 168BC.m */; };
+		2B5A9DB11C7C1CE7004573C0 /* ExamineVersionBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DAA1C7C1CE7004573C0 /* ExamineVersionBC.m */; };
+		2B5A9DB21C7C1CE7004573C0 /* LoginBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DAC1C7C1CE7004573C0 /* LoginBC.m */; };
+		2B5A9DB31C7C1CE7004573C0 /* RegisterBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DAE1C7C1CE7004573C0 /* RegisterBC.m */; };
 		2BCC7C341C7AB81E00B7E7D5 /* Jastor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C311C7AB81E00B7E7D5 /* Jastor.m */; };
 		2BCC7C351C7AB81E00B7E7D5 /* JastorRuntimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */; };
 		431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */; };
@@ -376,12 +382,6 @@
 		43D1CC841A760D67004564C2 /* BaseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CC7D1A760D67004564C2 /* BaseWebViewController.m */; };
 		43D1CC891A760EAB004564C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D1CC8B1A760EAB004564C2 /* Localizable.strings */; };
 		43D1CC8C1A760EB1004564C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D1CC8E1A760EB1004564C2 /* InfoPlist.strings */; };
-		43D1CCA21A760F8C004564C2 /* CommonBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CC941A760F8C004564C2 /* CommonBC.m */; };
-		43D1CCA31A760F8C004564C2 /* CommonEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CC971A760F8C004564C2 /* CommonEntity.m */; };
-		43D1CCA41A760F8C004564C2 /* 168BC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CC9A1A760F8C004564C2 /* 168BC.m */; };
-		43D1CCA51A760F8C004564C2 /* ExamineVersionBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CC9D1A760F8C004564C2 /* ExamineVersionBC.m */; };
-		43D1CCA61A760F8C004564C2 /* LoginBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CC9F1A760F8C004564C2 /* LoginBC.m */; };
-		43D1CCA71A760F8C004564C2 /* RegisterBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CCA11A760F8C004564C2 /* RegisterBC.m */; };
 		FAF92EF61B6F103900DD06BC /* PRPAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF92EF51B6F103900DD06BC /* PRPAlertView.m */; };
 		FAF92F051B6F10A400DD06BC /* AppSmallUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF92EF81B6F10A400DD06BC /* AppSmallUtils.m */; };
 		FAF92F061B6F10A400DD06BC /* AppSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF92EFA1B6F10A400DD06BC /* AppSoundManager.m */; };
@@ -410,6 +410,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B5A9D9F1C7C1CD5004573C0 /* CommonEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonEntity.h; sourceTree = "<group>"; };
+		2B5A9DA01C7C1CD5004573C0 /* CommonEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonEntity.m; sourceTree = "<group>"; };
+		2B5A9DA31C7C1CE7004573C0 /* CommonBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonBC.h; sourceTree = "<group>"; };
+		2B5A9DA41C7C1CE7004573C0 /* CommonBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonBC.m; sourceTree = "<group>"; };
+		2B5A9DA61C7C1CE7004573C0 /* 168BC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 168BC.h; sourceTree = "<group>"; };
+		2B5A9DA71C7C1CE7004573C0 /* 168BC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 168BC.m; sourceTree = "<group>"; };
+		2B5A9DA91C7C1CE7004573C0 /* ExamineVersionBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamineVersionBC.h; sourceTree = "<group>"; };
+		2B5A9DAA1C7C1CE7004573C0 /* ExamineVersionBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamineVersionBC.m; sourceTree = "<group>"; };
+		2B5A9DAB1C7C1CE7004573C0 /* LoginBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginBC.h; sourceTree = "<group>"; };
+		2B5A9DAC1C7C1CE7004573C0 /* LoginBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginBC.m; sourceTree = "<group>"; };
+		2B5A9DAD1C7C1CE7004573C0 /* RegisterBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterBC.h; sourceTree = "<group>"; };
+		2B5A9DAE1C7C1CE7004573C0 /* RegisterBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterBC.m; sourceTree = "<group>"; };
 		2B76DFDF1BF5CBC800886D83 /* KColorDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KColorDefine.h; sourceTree = "<group>"; };
 		2B76DFE01BF5CC8E00886D83 /* KURLDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KURLDefine.h; sourceTree = "<group>"; };
 		2B76DFE11BF5CCA300886D83 /* KUIStringDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KUIStringDefine.h; sourceTree = "<group>"; };
@@ -1233,18 +1245,6 @@
 		43D1CC8D1A760EB1004564C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		43D1CC8F1A760ED7004564C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		43D1CC901A760ED7004564C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		43D1CC931A760F8C004564C2 /* CommonBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonBC.h; sourceTree = "<group>"; };
-		43D1CC941A760F8C004564C2 /* CommonBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonBC.m; sourceTree = "<group>"; };
-		43D1CC961A760F8C004564C2 /* CommonEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonEntity.h; sourceTree = "<group>"; };
-		43D1CC971A760F8C004564C2 /* CommonEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonEntity.m; sourceTree = "<group>"; };
-		43D1CC991A760F8C004564C2 /* 168BC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 168BC.h; sourceTree = "<group>"; };
-		43D1CC9A1A760F8C004564C2 /* 168BC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 168BC.m; sourceTree = "<group>"; };
-		43D1CC9C1A760F8C004564C2 /* ExamineVersionBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamineVersionBC.h; sourceTree = "<group>"; };
-		43D1CC9D1A760F8C004564C2 /* ExamineVersionBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamineVersionBC.m; sourceTree = "<group>"; };
-		43D1CC9E1A760F8C004564C2 /* LoginBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginBC.h; sourceTree = "<group>"; };
-		43D1CC9F1A760F8C004564C2 /* LoginBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginBC.m; sourceTree = "<group>"; };
-		43D1CCA01A760F8C004564C2 /* RegisterBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterBC.h; sourceTree = "<group>"; };
-		43D1CCA11A760F8C004564C2 /* RegisterBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterBC.m; sourceTree = "<group>"; };
 		FAF92EF41B6F103900DD06BC /* PRPAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPAlertView.h; sourceTree = "<group>"; };
 		FAF92EF51B6F103900DD06BC /* PRPAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPAlertView.m; sourceTree = "<group>"; };
 		FAF92EF71B6F10A400DD06BC /* AppSmallUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSmallUtils.h; sourceTree = "<group>"; };
@@ -1307,6 +1307,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B5A9DA21C7C1CE7004573C0 /* BC */ = {
+			isa = PBXGroup;
+			children = (
+				2B5A9DA31C7C1CE7004573C0 /* CommonBC.h */,
+				2B5A9DA41C7C1CE7004573C0 /* CommonBC.m */,
+				2B5A9DA51C7C1CE7004573C0 /* Product */,
+				2B5A9DA81C7C1CE7004573C0 /* Register&Login */,
+			);
+			path = BC;
+			sourceTree = "<group>";
+		};
+		2B5A9DA51C7C1CE7004573C0 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				2B5A9DA61C7C1CE7004573C0 /* 168BC.h */,
+				2B5A9DA71C7C1CE7004573C0 /* 168BC.m */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
+		2B5A9DA81C7C1CE7004573C0 /* Register&Login */ = {
+			isa = PBXGroup;
+			children = (
+				2B5A9DA91C7C1CE7004573C0 /* ExamineVersionBC.h */,
+				2B5A9DAA1C7C1CE7004573C0 /* ExamineVersionBC.m */,
+				2B5A9DAB1C7C1CE7004573C0 /* LoginBC.h */,
+				2B5A9DAC1C7C1CE7004573C0 /* LoginBC.m */,
+				2B5A9DAD1C7C1CE7004573C0 /* RegisterBC.h */,
+				2B5A9DAE1C7C1CE7004573C0 /* RegisterBC.m */,
+			);
+			path = "Register&Login";
+			sourceTree = "<group>";
+		};
 		2BCC7C2F1C7AB81E00B7E7D5 /* Jastor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1389,6 +1422,7 @@
 			isa = PBXGroup;
 			children = (
 				43D1CC6C1A760D67004564C2 /* Extends */,
+				2B5A9DA21C7C1CE7004573C0 /* BC */,
 				43D1CC911A760F8C004564C2 /* Model */,
 				432C318F1A7243840094A27E /* AppDelegate.h */,
 				432C31901A7243840094A27E /* AppDelegate.m */,
@@ -2989,52 +3023,10 @@
 		43D1CC911A760F8C004564C2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				43D1CC921A760F8C004564C2 /* BC */,
-				43D1CC951A760F8C004564C2 /* Entities */,
-				43D1CC981A760F8C004564C2 /* Product */,
-				43D1CC9B1A760F8C004564C2 /* Register&Login */,
+				2B5A9D9F1C7C1CD5004573C0 /* CommonEntity.h */,
+				2B5A9DA01C7C1CD5004573C0 /* CommonEntity.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		43D1CC921A760F8C004564C2 /* BC */ = {
-			isa = PBXGroup;
-			children = (
-				43D1CC931A760F8C004564C2 /* CommonBC.h */,
-				43D1CC941A760F8C004564C2 /* CommonBC.m */,
-			);
-			path = BC;
-			sourceTree = "<group>";
-		};
-		43D1CC951A760F8C004564C2 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				43D1CC961A760F8C004564C2 /* CommonEntity.h */,
-				43D1CC971A760F8C004564C2 /* CommonEntity.m */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		43D1CC981A760F8C004564C2 /* Product */ = {
-			isa = PBXGroup;
-			children = (
-				43D1CC991A760F8C004564C2 /* 168BC.h */,
-				43D1CC9A1A760F8C004564C2 /* 168BC.m */,
-			);
-			path = Product;
-			sourceTree = "<group>";
-		};
-		43D1CC9B1A760F8C004564C2 /* Register&Login */ = {
-			isa = PBXGroup;
-			children = (
-				43D1CC9C1A760F8C004564C2 /* ExamineVersionBC.h */,
-				43D1CC9D1A760F8C004564C2 /* ExamineVersionBC.m */,
-				43D1CC9E1A760F8C004564C2 /* LoginBC.h */,
-				43D1CC9F1A760F8C004564C2 /* LoginBC.m */,
-				43D1CCA01A760F8C004564C2 /* RegisterBC.h */,
-				43D1CCA11A760F8C004564C2 /* RegisterBC.m */,
-			);
-			path = "Register&Login";
 			sourceTree = "<group>";
 		};
 		FAFD22C91BE0DBFB0004DD6F /* OBCConvertor */ = {
@@ -3239,7 +3231,6 @@
 				43D1CC351A75EBFA004564C2 /* UIButton+Cache.m in Sources */,
 				43D1CA331A75E778004564C2 /* NIBadgeView.m in Sources */,
 				43D1CA031A75E778004564C2 /* MagicalImportFunctions.m in Sources */,
-				43D1CCA21A760F8C004564C2 /* CommonBC.m in Sources */,
 				43D1CC3D1A75EBFA004564C2 /* UIScrollView+SSToolkitAdditions.m in Sources */,
 				43D1CA051A75E778004564C2 /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				43D1C9F01A75E778004564C2 /* UISlider+FlatUI.m in Sources */,
@@ -3252,7 +3243,6 @@
 				43D1C9F31A75E778004564C2 /* UITableViewCell+FlatUI.m in Sources */,
 				43D1CA431A75E778004564C2 /* NIImageUtilities.m in Sources */,
 				43D1CA4A1A75E778004564C2 /* NIPaths.m in Sources */,
-				43D1CCA41A760F8C004564C2 /* 168BC.m in Sources */,
 				43D1C9E91A75E778004564C2 /* UIBarButtonItem+FlatUI.m in Sources */,
 				43D1C9F91A75E778004564C2 /* IQUIWindow+Hierarchy.m in Sources */,
 				43D1CA191A75E778004564C2 /* MagicalRecord+Options.m in Sources */,
@@ -3271,8 +3261,8 @@
 				43D1CC541A75EBFA004564C2 /* NetItemList.m in Sources */,
 				431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */,
 				43D1C9B41A75E778004564C2 /* AFSecurityPolicy.m in Sources */,
-				43D1CCA61A760F8C004564C2 /* LoginBC.m in Sources */,
 				43D1CABB1A75E779004564C2 /* NIPagingScrollView.m in Sources */,
+				2B5A9DB21C7C1CE7004573C0 /* LoginBC.m in Sources */,
 				43D1CC491A75EBFA004564C2 /* AppPropertiesInitialize.m in Sources */,
 				43D1CAE41A75E779004564C2 /* UIImage+GIF.m in Sources */,
 				43D1CA141A75E778004564C2 /* NSPersistentStore+MagicalRecord.m in Sources */,
@@ -3289,6 +3279,7 @@
 				43D1CC0F1A75EBFA004564C2 /* ATBLibs+NSString.m in Sources */,
 				43D1CC121A75EBFA004564C2 /* ATBLibs+UIImage.m in Sources */,
 				43D1CAB71A75E779004564C2 /* NIOverviewView.m in Sources */,
+				2B5A9DAF1C7C1CE7004573C0 /* CommonBC.m in Sources */,
 				43D1C9DF1A75E778004564C2 /* CTAssetsPickerController.m in Sources */,
 				43D1CA981A75E779004564C2 /* NICellCatalog.m in Sources */,
 				43D1CC131A75EBFA004564C2 /* ATBLibs+UIView.m in Sources */,
@@ -3305,10 +3296,10 @@
 				43D1CAC21A75E779004564C2 /* NIPhotoScrollView.m in Sources */,
 				43D1CA3D1A75E778004564C2 /* NICommonMetrics.m in Sources */,
 				FAF92EF61B6F103900DD06BC /* PRPAlertView.m in Sources */,
+				2B5A9DB31C7C1CE7004573C0 /* RegisterBC.m in Sources */,
 				43D1CA1E1A75E778004564C2 /* MASConstraint.m in Sources */,
 				43D1CA4D1A75E778004564C2 /* NISnapshotRotation.m in Sources */,
 				43D1CA201A75E778004564C2 /* MASLayoutConstraint.m in Sources */,
-				43D1CCA31A760F8C004564C2 /* CommonEntity.m in Sources */,
 				43D1CADE1A75E779004564C2 /* SDWebImageDecoder.m in Sources */,
 				43D1CA1C1A75E778004564C2 /* MagicalRecord.m in Sources */,
 				43D1CAD61A75E779004564C2 /* NIWebController.m in Sources */,
@@ -3332,6 +3323,7 @@
 				43D1CA131A75E778004564C2 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				432C31911A7243840094A27E /* AppDelegate.m in Sources */,
 				43D1CA9E1A75E779004564C2 /* NITableViewActions.m in Sources */,
+				2B5A9DA11C7C1CD5004573C0 /* CommonEntity.m in Sources */,
 				43D1CA401A75E778004564C2 /* NIDeviceOrientation.m in Sources */,
 				43D1CA0C1A75E778004564C2 /* NSManagedObject+MagicalFinders.m in Sources */,
 				43D1CA2B1A75E778004564C2 /* MYIntroductionPanel.m in Sources */,
@@ -3391,10 +3383,8 @@
 				43D1CA441A75E778004564C2 /* NIInMemoryCache.m in Sources */,
 				43D1C9C91A75E778004564C2 /* AQGridViewCell.m in Sources */,
 				43D1CAE71A75E779004564C2 /* UIImageView+HighlightedWebCache.m in Sources */,
-				43D1CCA71A760F8C004564C2 /* RegisterBC.m in Sources */,
 				43D1CC1D1A75EBFA004564C2 /* ATBitmapRGBAData.m in Sources */,
 				43D1C9EF1A75E778004564C2 /* UIProgressView+FlatUI.m in Sources */,
-				43D1CCA51A760F8C004564C2 /* ExamineVersionBC.m in Sources */,
 				43D1CA3B1A75E778004564C2 /* NIActions.m in Sources */,
 				43D1C9CB1A75E778004564C2 /* AQGridViewData.m in Sources */,
 				43D1CADD1A75E779004564C2 /* SDWebImageCompat.m in Sources */,
@@ -3411,6 +3401,7 @@
 				43D1CC4A1A75EBFA004564C2 /* ColorManager.m in Sources */,
 				43D1CC6B1A75EBFA004564C2 /* YGButtonBox.m in Sources */,
 				43D1CC0C1A75EBFA004564C2 /* ATBLibs+NSData+Base64.m in Sources */,
+				2B5A9DB01C7C1CE7004573C0 /* 168BC.m in Sources */,
 				43D1CA2F1A75E778004564C2 /* NSMutableAttributedString+NimbusAttributedLabel.m in Sources */,
 				43D1CA471A75E778004564C2 /* NINonEmptyCollectionTesting.m in Sources */,
 				43D1CC4E1A75EBFA004564C2 /* DrawLineUIBtn.m in Sources */,
@@ -3489,6 +3480,7 @@
 				43D1CA171A75E778004564C2 /* MagicalRecord+ErrorHandling.m in Sources */,
 				FAFD22CD1BE0DBFB0004DD6F /* OBCConvertor.m in Sources */,
 				43D1C9F81A75E778004564C2 /* IQUIView+Hierarchy.m in Sources */,
+				2B5A9DB11C7C1CE7004573C0 /* ExamineVersionBC.m in Sources */,
 				43D1CC051A75EBFA004564C2 /* ATB_Math.m in Sources */,
 				43D1C9C81A75E778004564C2 /* AQGridViewAnimatorItem.m in Sources */,
 				431F138B1A7762E9008C4544 /* NSString+PinYin4Cocoa.m in Sources */,
