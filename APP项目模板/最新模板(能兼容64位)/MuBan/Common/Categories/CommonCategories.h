@@ -29,7 +29,7 @@
 
 // Foundation
 #import "NSArray+SSToolkitAdditions.h"
-//#import "NSData+SSToolkitAdditions.h"
+#import "NSData+SSToolkitAdditions.h"
 #import "NSDate+SSToolkitAdditions.h"
 #import "NSDictionary+SSToolkitAdditions.h"
 #import "NSMutableArray+SSToolkitAdditions.h"

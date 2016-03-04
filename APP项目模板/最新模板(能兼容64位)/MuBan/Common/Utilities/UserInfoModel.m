@@ -48,11 +48,10 @@
 {
     NSString *path = GetDocumentPathFileName(kUserInfoModelPlistFileName);
     if (IsFileExists(path)) {
-        if (DeleteFiles(path)) {
-            NSDictionary *dictionary = [self toDictionary];
-            [dictionary writeToFile:path atomically:YES];
-        }
+        DeleteFiles(path);
     }
+    NSDictionary *dictionary = [self toDictionary];
+    [dictionary writeToFile:path atomically:YES];
 }
 
 + (UserInfoModel *)getUserInfoModelFromPath:(NSString *)path

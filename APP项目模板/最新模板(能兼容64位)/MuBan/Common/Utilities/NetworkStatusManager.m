@@ -49,6 +49,9 @@ static Reachability *hostReachbility;            // 检测网络实例需要强�
     Reachability *curReach = [note object];
     NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
     [self updateInterfaceWithReachability: curReach];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNetworkReachabilityDidChangeNotification
+                                                        object:nil];
 }
 
 + (NetworkStatus)getNetworkStatus

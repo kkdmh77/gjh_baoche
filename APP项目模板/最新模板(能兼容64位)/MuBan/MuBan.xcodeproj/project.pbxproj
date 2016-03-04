@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B5404171C7D6F350073C266 /* NSData+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5404161C7D6F350073C266 /* NSData+SSToolkitAdditions.m */; };
+		2B577A091C7EA4B5006B4032 /* NSString+UncommonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B577A081C7EA4B5006B4032 /* NSString+UncommonTools.m */; };
+		2B577A0D1C7EA4EA006B4032 /* SystemConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B577A0C1C7EA4EA006B4032 /* SystemConvert.m */; };
 		2B5A9DA11C7C1CD5004573C0 /* CommonEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DA01C7C1CD5004573C0 /* CommonEntity.m */; };
 		2B5A9DAF1C7C1CE7004573C0 /* CommonBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DA41C7C1CE7004573C0 /* CommonBC.m */; };
 		2B5A9DB01C7C1CE7004573C0 /* 168BC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DA71C7C1CE7004573C0 /* 168BC.m */; };
@@ -410,6 +413,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B5404151C7D6F350073C266 /* NSData+SSToolkitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SSToolkitAdditions.h"; sourceTree = "<group>"; };
+		2B5404161C7D6F350073C266 /* NSData+SSToolkitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SSToolkitAdditions.m"; sourceTree = "<group>"; };
+		2B577A071C7EA4B5006B4032 /* NSString+UncommonTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UncommonTools.h"; sourceTree = "<group>"; };
+		2B577A081C7EA4B5006B4032 /* NSString+UncommonTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UncommonTools.m"; sourceTree = "<group>"; };
+		2B577A0B1C7EA4EA006B4032 /* SystemConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemConvert.h; sourceTree = "<group>"; };
+		2B577A0C1C7EA4EA006B4032 /* SystemConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemConvert.m; sourceTree = "<group>"; };
 		2B5A9D9F1C7C1CD5004573C0 /* CommonEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonEntity.h; sourceTree = "<group>"; };
 		2B5A9DA01C7C1CD5004573C0 /* CommonEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonEntity.m; sourceTree = "<group>"; };
 		2B5A9DA31C7C1CE7004573C0 /* CommonBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonBC.h; sourceTree = "<group>"; };
@@ -1307,6 +1316,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B577A0A1C7EA4EA006B4032 /* SystemConvert */ = {
+			isa = PBXGroup;
+			children = (
+				2B577A0B1C7EA4EA006B4032 /* SystemConvert.h */,
+				2B577A0C1C7EA4EA006B4032 /* SystemConvert.m */,
+			);
+			path = SystemConvert;
+			sourceTree = "<group>";
+		};
 		2B5A9DA21C7C1CE7004573C0 /* BC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1467,6 +1485,7 @@
 		43D1C68B1A75E692004564C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				2B577A0A1C7EA4EA006B4032 /* SystemConvert */,
 				2BCC7C2F1C7AB81E00B7E7D5 /* Jastor */,
 				FAFD22C91BE0DBFB0004DD6F /* OBCConvertor */,
 				431F137A1A7762E9008C4544 /* PinYin4Objc */,
@@ -2825,6 +2844,8 @@
 		43D1CB721A75EBF9004564C2 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				2B5404151C7D6F350073C266 /* NSData+SSToolkitAdditions.h */,
+				2B5404161C7D6F350073C266 /* NSData+SSToolkitAdditions.m */,
 				43D1CB731A75EBF9004564C2 /* NSArray+SSToolkitAdditions.h */,
 				43D1CB741A75EBF9004564C2 /* NSArray+SSToolkitAdditions.m */,
 				43D1CB771A75EBF9004564C2 /* NSDate+SSToolkitAdditions.h */,
@@ -2890,6 +2911,8 @@
 		43D1CBB31A75EBF9004564C2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2B577A071C7EA4B5006B4032 /* NSString+UncommonTools.h */,
+				2B577A081C7EA4B5006B4032 /* NSString+UncommonTools.m */,
 				FAF92EF71B6F10A400DD06BC /* AppSmallUtils.h */,
 				FAF92EF81B6F10A400DD06BC /* AppSmallUtils.m */,
 				FAFD22C61BE0D7140004DD6F /* ThemeManager.h */,
@@ -3207,6 +3230,7 @@
 				43D1CC5E1A75EBFA004564C2 /* UpdataAppModel.m in Sources */,
 				43D1C9B21A75E778004564C2 /* AFHTTPSessionManager.m in Sources */,
 				43D1CA421A75E778004564C2 /* NIFoundationMethods.m in Sources */,
+				2B577A0D1C7EA4EA006B4032 /* SystemConvert.m in Sources */,
 				43D1C9B31A75E778004564C2 /* AFNetworkReachabilityManager.m in Sources */,
 				43D1CAAB1A75E779004564C2 /* NINetworkImageView.m in Sources */,
 				43D1CA921A75E778004564C2 /* NILauncherViewModel.m in Sources */,
@@ -3358,6 +3382,7 @@
 				43D1CADA1A75E779004564C2 /* MKAnnotationView+WebCache.m in Sources */,
 				43D1CC1C1A75EBFA004564C2 /* ATAudioPlayManager.m in Sources */,
 				43D1CC281A75EBFA004564C2 /* ATStyledLabel.m in Sources */,
+				2B577A091C7EA4B5006B4032 /* NSString+UncommonTools.m in Sources */,
 				43D1CC101A75EBFA004564C2 /* ATBLibs+UIBarItem.m in Sources */,
 				FAFD22C41BE0D5480004DD6F /* GridView.m in Sources */,
 				43D1C9F61A75E778004564C2 /* HPTextViewInternal.m in Sources */,
@@ -3432,6 +3457,7 @@
 				43D1CC221A75EBFA004564C2 /* ATPinyin.m in Sources */,
 				43D1CA911A75E778004564C2 /* NILauncherViewController.m in Sources */,
 				43D1CADC1A75E779004564C2 /* SDImageCache.m in Sources */,
+				2B5404171C7D6F350073C266 /* NSData+SSToolkitAdditions.m in Sources */,
 				43D1CC2A1A75EBFA004564C2 /* NSArray+SSToolkitAdditions.m in Sources */,
 				43D1CC561A75EBFA004564C2 /* NetworkStatusManager.m in Sources */,
 				43D1CAA91A75E779004564C2 /* NIImageProcessing.m in Sources */,

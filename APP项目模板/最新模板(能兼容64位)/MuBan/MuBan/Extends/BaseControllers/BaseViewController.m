@@ -647,13 +647,13 @@
 
 #pragma mark - UIScrollViewDelegate methods
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView == _tableView)
     {
         // 滚动到了最底部
         float value = fabsf(scrollView.contentOffset.y - (scrollView.contentSize.height - _tableView.boundsHeight));
-        if (value < 0.5)
+        if (value < 50)
         {
             if (_tabScrollToBottomOperationHandle) _tabScrollToBottomOperationHandle(scrollView);
         }

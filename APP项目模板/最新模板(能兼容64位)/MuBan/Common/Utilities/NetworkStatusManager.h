@@ -22,6 +22,8 @@ typedef enum
 }NetworkStatus;
 */
 
+static NSString * const kNetworkReachabilityDidChangeNotification = @"kNetworkReachabilityDidChangeNotification";
+
 @interface NetworkStatusManager : NSObject
 
 /**

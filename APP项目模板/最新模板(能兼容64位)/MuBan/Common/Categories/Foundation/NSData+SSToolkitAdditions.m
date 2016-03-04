@@ -147,25 +147,27 @@ static const short _base64DecodingTable[256] = {
     
     
     
-    NSData *decodeBuffer = nil;
-    // Must be 7-bit clean!
-    NSData *tmpData = [base64String dataUsingEncoding:NSASCIIStringEncoding];
+//    NSData *decodeBuffer = nil;
+//    // Must be 7-bit clean!
+//    NSData *tmpData = [base64String dataUsingEncoding:NSASCIIStringEncoding];
+//    
+//    size_t estSize = EstimateBas64DecodedDataSize([tmpData length]);
+//    uint8_t* outBuffer = (uint8_t*)calloc(estSize, sizeof(uint8_t));
+//    
+//    size_t outBufferLength = estSize;
+//    if (Base64DecodeData([tmpData bytes], [tmpData length], outBuffer, &outBufferLength))
+//    {
+//        decodeBuffer = [NSData dataWithBytesNoCopy:outBuffer length:outBufferLength freeWhenDone:YES];
+//    }
+//    else
+//    {
+//        free(outBuffer);
+//        [NSException raise:@"NSData+Base64AdditionsException" format:@"Unable to decode data!"];
+//    }
+//    
+//    return decodeBuffer;
     
-    size_t estSize = EstimateBas64DecodedDataSize([tmpData length]);
-    uint8_t* outBuffer = (uint8_t*)calloc(estSize, sizeof(uint8_t));
-    
-    size_t outBufferLength = estSize;
-    if (Base64DecodeData([tmpData bytes], [tmpData length], outBuffer, &outBufferLength))
-    {
-        decodeBuffer = [NSData dataWithBytesNoCopy:outBuffer length:outBufferLength freeWhenDone:YES];
-    }
-    else
-    {
-        free(outBuffer);
-        [NSException raise:@"NSData+Base64AdditionsException" format:@"Unable to decode data!"];
-    }
-    
-    return decodeBuffer;
+    return [NSData dataFromBase64String:base64String];
 }
 
 
