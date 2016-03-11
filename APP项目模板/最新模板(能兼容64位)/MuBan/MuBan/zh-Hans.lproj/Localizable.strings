@@ -11,9 +11,16 @@
 "All_Confirm"                                   = "确定";
 "All_Cancel"                                    = "取消";
 "All_Delete"                                    = "删除";
+"All_Check"                                     = "查看";
 "All_Edit"                                      = "编辑";
 "All_PickFromCamera"                            = "拍照";
 "All_PickFromAlbum"                             = "从相册选择";
+"All_SaveToAlbum"                               = "保存到相册";
+"All_SaveSuccess"                               = "保存成功";
+"All_OperationFailure"                          = "操作失败，请重试！";
+"All_Notification"                              = "消息推送";
+"All_No"                                        = "否";
+"All_Yes"                                       = "是";
 
 // 地址管理
 "AddressManager_AddNewAddress"                  = "+添加地址";

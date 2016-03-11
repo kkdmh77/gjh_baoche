@@ -38,6 +38,7 @@ static NSString * const LanguageTypeDidChangedNotificationKey = @"LanguageTypeDi
 static NSString * const All_DataSourceNotFoundKey  = @"All_DataSourceNotFound";
 static NSString * const All_Delete                 = @"All_Delete";
 static NSString * const All_Check                  = @"All_Check";
+static NSString * const All_Edit                   = @"All_Edit";
 static NSString * const All_Confirm                = @"All_Confirm";
 static NSString * const All_Cancel                 = @"All_Cancel";
 static NSString * const All_PickFromCamera         = @"All_PickFromCamera";
@@ -46,6 +47,8 @@ static NSString * const All_SaveToAlbum            = @"All_SaveToAlbum";
 static NSString * const All_SaveSuccess            = @"All_SaveSuccess";
 static NSString * const All_OperationFailure       = @"All_OperationFailure";
 static NSString * const All_Notification           = @"All_Notification";
+static NSString * const All_No                     = @"All_No";
+static NSString * const All_Yes                    = @"All_Yes";
 
 // 字体
 static NSString * const Font_Size                  = @"Font_Size";
