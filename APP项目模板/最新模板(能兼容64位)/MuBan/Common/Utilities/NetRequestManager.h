@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "ASIFormDataRequest.h"
 
+static NSString * const kCookiesKey = @"kCookiesKey";
+
 // GET / POST / PUT / DELETE (default is GET)
 # define RequestMethodType_GET      @"GET"
 # define RequestMethodType_POST     @"POST"

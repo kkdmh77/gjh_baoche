@@ -33,6 +33,7 @@ typedef enum
     // 用户中心
     NetUserCenterRequestType_Register                              , // 注册(POST)
     NetUserCenterRequestType_Login                                 , // 登录
+    NetUserCenterRequestType_Logout                                , // 退出登录(POST)
     NetUserCenterRequestType_ModifyPossword                        , // 修改密码(POST)
     
     NetUserCenterRequestType_GetAccountInfo                        , // 个人信息获取(GET)

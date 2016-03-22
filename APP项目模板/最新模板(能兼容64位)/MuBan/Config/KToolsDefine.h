@@ -49,6 +49,9 @@
 // 以iPhone6为换算基数获得比例值
 #define kGetScaleValueBaseIP6(__A)  (__A * IPHONE_WIDTH / 375)
 
+// 系统版本号
+#define APP_VERSION                 ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
+
 /**
  * A helper macro to keep the interfaces compatiable with pre ARC compilers.
  * Useful when you put nimbus in a library and link it to a GCC LLVM compiler.

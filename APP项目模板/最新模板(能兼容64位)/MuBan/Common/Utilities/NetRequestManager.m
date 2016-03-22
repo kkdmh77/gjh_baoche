@@ -51,8 +51,8 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
 
     NSMutableString *resultStr = [NSMutableString stringWithString:networkDataStr];
     
-//[s replaceOccurrencesOfString:@"\"" withString:@"\\\"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-//[s replaceOccurrencesOfString:@"/" withString:@"\\/" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+    // [s replaceOccurrencesOfString:@"\"" withString:@"\\\"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+    // [s replaceOccurrencesOfString:@"/" withString:@"\\/" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
     [resultStr replaceOccurrencesOfString:@"\n" withString:@"\\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
     [resultStr replaceOccurrencesOfString:@"\b" withString:@"\\b" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
     [resultStr replaceOccurrencesOfString:@"\f" withString:@"\\f" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
@@ -76,7 +76,7 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     
     NSError *err = nil;
     
-//    NSLog(@"result = %@",resultStr);
+    // NSLog(@"result = %@",resultStr);
     
     *result = [NSJSONSerialization JSONObjectWithData:[self JSONData:data] options:NSJSONReadingMutableContainers error:&err];
     if (err)
@@ -85,7 +85,7 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
         
         return NO;
     }
-//    NSLog(@"resultDic = %@",*result);
+    // NSLog(@"resultDic = %@",*result);
     
     // 做服务器返回的业务code判断,因为如果服务器方法报错或者业务逻辑出错HTTP码还是返回的200,但是加了自己定义的一套code码(详情可参考WIKI上面的约定)
     NSNumber *myCodeNum = [*result objectForKey:@"code"];
@@ -93,7 +93,9 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     
     if (!myCodeNum || MyHTTPCodeType_Success != myCodeNum.integerValue)
     {
-        err = [[NSError alloc] initWithDomain:@"MYSERVER_ERROR_DOMAIN" code:myCodeNum.integerValue userInfo:[NSDictionary dictionaryWithObjectsAndKeys:myMsgStr, NSLocalizedDescriptionKey, nil]];
+        err = [[NSError alloc] initWithDomain:@"MYSERVER_ERROR_DOMAIN"
+                                         code:myCodeNum.integerValue
+                                     userInfo:[NSDictionary dictionaryWithObjectsAndKeys:myMsgStr, NSLocalizedDescriptionKey, nil]];
         
         *result = err;
        
@@ -151,7 +153,7 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     NSArray *cookies = [self cookiesArrayByResponseHeaders:responseHeaders url:request.url];
     if ([cookies isAbsoluteValid])
     {
-        [UserInfoModel setUserDefaultCookiesArray:cookies];
+        [UserInfoModel setObject:cookies forKey:kCookiesKey];
     }
     
     // 登陆的状态.10000:已登录,正常状态, -10001:未登陆或者登陆session已过期
@@ -330,15 +332,15 @@ DEF_SINGLETON(NetRequestManager);
     [netRequest.asiFormRequest setRequestMethod:methodType];
     netRequest.asiFormRequest.timeOutSeconds = 30;
     
-    /*
     // 设置session cookie
-    if ([UserInfoModel getUserDefaultCookiesArray])
+    /*
+    if ([UserInfoModel objectForKey:kCookiesKey])
     {
-        [netRequest.asiFormRequest setRequestCookies:[NSMutableArray arrayWithArray:[UserInfoModel getUserDefaultCookiesArray]]];
+        [netRequest.asiFormRequest setRequestCookies:[NSMutableArray arrayWithArray:[UserInfoModel objectForKey:kCookiesKey]]];
     }
-     */
+    */
     
-    //设置session
+    // 设置session
     /*
     NSString *sessionValue = SessionDefaultValue;
     if (0 != sessionValue.length)
@@ -353,7 +355,7 @@ DEF_SINGLETON(NetRequestManager);
     netRequest.asiFormRequest.uploadProgressDelegate = netRequest;              // 设置上传的代理
 	netRequest.asiFormRequest.allowResumeForFileDownloads = YES;                // 设置是是否支持断点下载
     netRequest.asiFormRequest.showAccurateProgress = YES;                       // 设置是否精确进度条
-    netRequest.asiFormRequest.validatesSecureCertificate = NO;                  // 如果值为NO则支持HTTPS
+    netRequest.asiFormRequest.validatesSecureCertificate = NO;                  // 如果值为NO则支持HTTPS自建证书
     
     netRequest.asiFormRequest.downloadDestinationPath = savePath;               // 下载文件的保持路径
     netRequest.asiFormRequest.temporaryFileDownloadPath = tempPath;             // 下载文件的临时路径
@@ -362,11 +364,29 @@ DEF_SINGLETON(NetRequestManager);
      @ 修改描述     修改HTTP的Content-Type(类库默认设置不符合自己的业务需求,改为通过addRequestHeaders方式设置)
      @ 修改人       龚俊慧
      @ 修改时间     2014-08-11
-     @ 修改开始
      */
-    // 修改开始
     NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding([netRequest.asiFormRequest stringEncoding]));
     
+    /**
+     @ 修改描述     配合修改HTTP的Content-Type,修改post传参方式
+     @ 修改人       龚俊慧
+     @ 修改时间     2014-08-11
+     */
+    // 修改开始
+    
+    [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@",charset]];
+    
+    if ([parameterDic isAbsoluteValid])
+    {
+        for (NSString *key in parameterDic.allKeys)
+        {
+            [netRequest.asiFormRequest setPostValue:[parameterDic objectForKey:key] forKey:key];
+        }
+    }
+    
+    /****************************第二种传参方式********************************/
+    
+    /*
     if ([methodType isEqualToString:RequestMethodType_GET])
     {
         [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@",charset]];
@@ -384,6 +404,7 @@ DEF_SINGLETON(NetRequestManager);
             [netRequest.asiFormRequest setPostBody:[NSMutableData dataWithData:postBodyData]];
         }
     }
+    */
     // 修改结束
     
     if ([fileDic isAbsoluteValid])
@@ -408,24 +429,6 @@ DEF_SINGLETON(NetRequestManager);
             [netRequest.asiFormRequest addRequestHeader:headerKey value:[headers objectForKey:headerKey]];
         }
     }
-    
-    /**
-     @ 修改描述     配合修改HTTP的Content-Type,修改post传参方式
-     @ 修改人       龚俊慧
-     @ 修改时间     2014-08-11
-     @ 修改开始
-     */
-    // 修改开始
-    /*
-    if ([parameterDic isAbsoluteValid])
-    {
-        for (NSString *key in parameterDic.allKeys)
-        {
-            [netRequest.asiFormRequest setPostValue:[parameterDic objectForKey:key] forKey:key];
-        }
-    }
-     */
-    // 修改结束
     
     // 判断是否要作数据缓存
     if (NetNotCachePolicy != cachePolicy)

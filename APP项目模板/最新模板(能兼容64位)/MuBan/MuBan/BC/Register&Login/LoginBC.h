@@ -16,6 +16,8 @@ typedef void (^failedHandle)  (NSError *error);
 
 @interface LoginBC : NSObject<NetRequestDelegate>
 
+AS_SINGLETON(LoginBC);
+
 // 账号密码登录
 - (void)loginWithUserName:(NSString *)userName
                  password:(NSString *)password
@@ -31,5 +33,9 @@ typedef void (^failedHandle)  (NSError *error);
                          showHUD:(BOOL)show
                    successHandle:(successHandle)success
                     failedHandle:(failedHandle)failed;
+
+/// 退出登录
+- (void)logoutWithSuccessHandle:(successHandle)success
+                   failedHandle:(failedHandle)failed;
 
 @end

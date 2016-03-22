@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *registerNibName;  // 必须设置(需为UICollectionViewCell及其子类)
 @property (nonatomic, weak) id<StyleSelectorViewDelegate> delegate;
 @property (nonatomic, assign) NSInteger currentItemIndex;
+@property (nonatomic, readonly) UICollectionView *collectionView;
 
 @property (nonatomic, assign) UIEdgeInsets sectionInset;
 @property (nonatomic, assign) CGFloat minimumLineSpacing;
@@ -44,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)styleSelectorView:(StyleSelectorView *)selectorView itemAtIndex:(NSInteger)index reusingView:(UIView *)view;
 
 @optional
+- (void)styleSelectorView:(StyleSelectorView *)selectorView didScrollItemAtIndex:(NSInteger)index; // 只有当collectionView的pagingEnabled为YES时才调用
 - (void)styleSelectorView:(StyleSelectorView *)selectorView didSelectItemAtIndex:(NSInteger)index;
 
 @end

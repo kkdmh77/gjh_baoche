@@ -42,6 +42,7 @@
                            // 用户中心
                            @"user/register",
                            @"user/login",
+                           @"",
                            @"user/changePwd",
                            
                            @"account/my/info",
@@ -52,7 +53,7 @@
                            @"address/my",
                            @"address/my",
                            
-                           //订单
+                           // 订单
                            @"orders",
                            @"orders",// 单个订单详情请求，还要自己组装订单ID
                            @"orders/ready",

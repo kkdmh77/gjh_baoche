@@ -22,6 +22,8 @@
 
 @implementation LoginBC
 
+DEF_SINGLETON(LoginBC);
+
 - (void)loginWithUserName:(NSString *)userName password:(NSString *)password autoLogin:(BOOL)autoLogin showHUD:(BOOL)show successHandle:(successHandle)success failedHandle:(failedHandle)failed
 {
     if ([userName isAbsoluteValid])
@@ -106,9 +108,40 @@
     }
 }
 
+- (void)logoutWithSuccessHandle:(successHandle)success failedHandle:(failedHandle)failed
+{
+    _success = success;
+    _failed = failed;
+    
+    NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_Logout];
+    NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
+    
+    [[NetRequestManager sharedInstance] sendRequest:url
+                                       parameterDic:nil
+                                  requestMethodType:RequestMethodType_POST
+                                         requestTag:NetUserCenterRequestType_Logout
+                                           delegate:self
+                                           userInfo:nil];
+}
+
 - (void)dealloc
 {
     [[NetRequestManager sharedInstance] clearDelegate:self];
+}
+
+- (void)executeLoginSuccessActionWithInfoObj:(NSDictionary *)infoObj
+{
+    if ([infoObj isAbsoluteValid])
+    {
+        NSNumber *userId = [infoObj safeObjectForKey:@"userId"];
+        [UserInfoModel sharedInstance].userId = userId;
+    }
+    
+    // 发送通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginSuccessNotificationKey object:nil];
+    
+    // 注册push通知(让服务器把deviceToken和userId关联)
+    // [UIFactory registerRemoteNotification];
 }
 
 #pragma mark - NetRequestDelegate methods
@@ -128,8 +161,18 @@
 {
     [HUDManager hideHUD];
     
-    // 发送通知
-    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginSuccessNotificationKey object:nil];
+    // 登录成功后执行相关操作
+    if (request.tag == NetUserCenterRequestType_Login)
+    {
+        [self executeLoginSuccessActionWithInfoObj:infoObj];
+    }
+    // 退出登录成功
+    else if (request.tag == NetUserCenterRequestType_Logout)
+    {
+        // 清空数据
+        [UserInfoModel sharedInstance].userId = nil;
+        [UserInfoModel setObject:nil forKey:kCookiesKey];
+    }
     
     if (_success)
     {

@@ -211,7 +211,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:GridViewCollectionCellIdentifier forIndexPath:indexPath];
     
-    if (_itemStyleHandle) _itemStyleHandle(cell);
+    if (_itemStyleHandle) _itemStyleHandle(cell, indexPath.item);
     
     if ([_delegate respondsToSelector:@selector(girdView:itemAtIndex:itemView:)])
     {

@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *verticalSeparatorColor;
 @property (nonatomic, assign) UIEdgeInsets verticalSeparatorInset;
 
-@property (nonatomic, copy) void (^itemStyleHandle) (UICollectionViewCell *item);
+@property (nonatomic, copy) void (^itemStyleHandle) (UICollectionViewCell *item, NSInteger index);
 
 /// 重置高度&刷新界面
 - (void)resizeSelfFrameHeightAndReloadData;

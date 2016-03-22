@@ -192,4 +192,19 @@ static NSString * const StyleSelectorViewCollectionCellIdentifier = @"StyleSelec
     }
 }
 
+#pragma mark - UIScrollViewDelegate methods
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView == _collectionView && _collectionView.pagingEnabled)
+    {
+        NSInteger index = floorf((scrollView.contentOffset.x + scrollView.frameWidth / 2) / scrollView.frameWidth);
+        
+        if ([_delegate respondsToSelector:@selector(styleSelectorView:didScrollItemAtIndex:)])
+        {
+            [_delegate styleSelectorView:self didScrollItemAtIndex:index];
+        }
+    }
+}
+
 @end
