@@ -93,6 +93,8 @@ static const CGFloat kDefaultSlideSwitchViewHeight = 38.0f; // 纯文字时候�
  */
 - (void)scrollToIndex:(int)index;
 
+- (void)scrollToIndex:(int)index animated:(BOOL)animated;
+
 @end
 
 @protocol GJHSlideSwitchViewDelegate <NSObject>

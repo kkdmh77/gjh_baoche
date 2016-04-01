@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString * const DataFormatter_DateAndTime   = @"yyyy-MM-dd HH:mm:ss";
-static NSString * const DataFormatter_Date          = @"yyyy-MM-dd";
-static NSString * const DataFormatter_DateNoYear    = @"MM-dd";
-static NSString * const DataFormatter_Time          = @"HH:mm:ss";
-static NSString * const DataFormatter_TimeNoSecond  = @"HH:mm";
+static NSString * const DateFormatter_DateAndTime   = @"yyyy-MM-dd HH:mm:ss";
+static NSString * const DateFormatter_Date          = @"yyyy-MM-dd";
+static NSString * const DateFormatter_DateNoYear    = @"MM-dd";
+static NSString * const DateFormatter_Time          = @"HH:mm:ss";
+static NSString * const DateFormatter_TimeNoSecond  = @"HH:mm";
 
 @interface NSDate(ATBLibsAddtions)
 

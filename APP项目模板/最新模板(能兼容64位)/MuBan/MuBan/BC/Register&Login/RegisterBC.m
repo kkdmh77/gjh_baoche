@@ -205,7 +205,8 @@
 
 - (void)netRequest:(NetRequest *)request failedWithError:(NSError *)error
 {
-    [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:error.localizedDescription];
+    NSString *errorMessage = SafetyObject(error.localizedDescription) ? error.localizedDescription : OperationFailure;
+    [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:errorMessage];
     
     if (_failed)
     {

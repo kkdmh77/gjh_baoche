@@ -107,7 +107,7 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
         
         //调整顶部滚动视图选中按钮位置
         UIButton *button = (UIButton *)[_topScrollView viewWithTag:_userSelectedChannelID];
-        [self adjustScrollViewContentX:button];
+        [self adjustScrollViewContentX:button animated:YES];
         
         // 重新调整shadowImage的尺寸
         self.shadowImage = [_shadowImage stretchableImageWithLeftCapWidth:_shadowImage.size.width / 2 topCapHeight:_shadowImage.size.height / 2];
@@ -266,10 +266,15 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
 
 - (void)scrollToIndex:(int)index
 {
+    [self scrollToIndex:index animated:YES];
+}
+
+- (void)scrollToIndex:(int)index animated:(BOOL)animated
+{
     if (index < 0 || index >= _topScrollBtnsArray.count) return;
     
     UIButton *button = (UIButton *)[_topScrollView viewWithTag:index + 100];
-    [self selectNameButton:button];
+    [self selectNameButton:button animated:animated];
 }
 
 #pragma mark - 顶部滚动视图逻辑方法
@@ -283,8 +288,13 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
  */
 - (void)selectNameButton:(UIButton *)sender
 {
+    [self selectNameButton:sender animated:YES];
+}
+
+- (void)selectNameButton:(UIButton *)sender animated:(BOOL)animated
+{
     //如果点击的tab文字显示不全，调整滚动视图x坐标使用使tab文字显示全
-    [self adjustScrollViewContentX:sender];
+    [self adjustScrollViewContentX:sender animated:animated];
     
     //如果更换按钮
     if (sender.tag != _userSelectedChannelID) {
@@ -302,7 +312,7 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
         sender.selected = YES;
         ((UILabel *)[sender viewWithTag:8888]).highlighted = YES;
         
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:animated ? 0.2 : 0.0 animations:^{
             
             [_shadowImageView setFrame:CGRectMake(sender.frame.origin.x, _shadowImageView.frameOriginY, sender.frame.size.width, kHeightOfShadowImageView)];
             
@@ -314,7 +324,7 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
         } completion:^(BOOL finished) {
             if (finished) {
                 //设置新页出现
-
+                
                 if (self.slideSwitchViewDelegate && [self.slideSwitchViewDelegate respondsToSelector:@selector(slideSwitchView:didselectTab:)]) {
                     [self.slideSwitchViewDelegate slideSwitchView:self didselectTab:_userSelectedChannelID - 100];
                 }
@@ -335,7 +345,7 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
  * @param
  * @result
  */
-- (void)adjustScrollViewContentX:(UIButton *)sender
+- (void)adjustScrollViewContentX:(UIButton *)sender animated:(BOOL)animated
 {
     /*
     //如果 当前显示的最后一个tab文字超出右边界
@@ -358,21 +368,21 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
         {
             if ((_topScrollView.contentSize.width - (sender.frame.origin.x + sender.frame.size.width / 2)) >= _topScrollView.frame.size.width / 2)
             {
-                [_topScrollView setContentOffset:CGPointMake((sender.frame.origin.x + sender.frame.size.width / 2) - _topScrollView.frame.size.width / 2, 0) animated:YES];
+                [_topScrollView setContentOffset:CGPointMake((sender.frame.origin.x + sender.frame.size.width / 2) - _topScrollView.frame.size.width / 2, 0) animated:animated];
             }
             else
             {
-                [_topScrollView setContentOffset:CGPointMake(_topScrollView.contentSize.width - _topScrollView.frame.size.width, 0) animated:YES];
+                [_topScrollView setContentOffset:CGPointMake(_topScrollView.contentSize.width - _topScrollView.frame.size.width, 0) animated:animated];
             }
         }
         else
         {
-            [_topScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+            [_topScrollView setContentOffset:CGPointMake(0, 0) animated:animated];
         }
     }
     else
     {
-        [_topScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        [_topScrollView setContentOffset:CGPointMake(0, 0) animated:animated];
     }
 }
 

@@ -149,7 +149,9 @@ DEF_SINGLETON(LoginBC);
 - (void)netRequest:(NetRequest *)request failedWithError:(NSError *)error
 {
     [HUDManager hideHUD];
-    [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:error.localizedDescription];
+    
+    NSString *errorMessage = SafetyObject(error.localizedDescription) ? error.localizedDescription : OperationFailure;
+    [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:errorMessage];
     
     if (_failed)
     {

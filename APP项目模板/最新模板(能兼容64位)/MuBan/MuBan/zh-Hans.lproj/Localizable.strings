@@ -51,13 +51,13 @@
 "Register_UseEmailToRegister"                   = "使用邮箱注册";
 
 // 注册&登录预留
-"Login_NoUserShowInfo"                          = "请输入有效的用户名";
-"Login_NoPasswordShowInfo"                      = "请输入有效的密码";
-"Login_NoPasswordConfirmShowInfo"               = "请再次输入密码";
-"Login_PasswordNotEqualShowInfo"                = "密码输入不一致";
-"Login_NoAgreeProtocolShowInfo"                 = "请同意寰居服务协议";
-"Login_LoginFailShowInfo"                       = "登录失败";
-"Login_LoadingShowInfo"                         = "正在登录...";
+"Login_NoUser"                                  = "请输入有效的用户名";
+"Login_NoPassword"                              = "请输入有效的密码";
+"Login_NoPasswordConfirm"                       = "请再次输入密码";
+"Login_PasswordNotEqual"                        = "密码输入不一致";
+"Login_NoAgreeProtocol"                         = "请同意寰居服务协议";
+"Login_LoginFail"                               = "登录失败";
+"Login_Loading"                                 = "正在登录...";
 
 // 个人
 "Mine_VIPLevel"                                 = "会员等级";

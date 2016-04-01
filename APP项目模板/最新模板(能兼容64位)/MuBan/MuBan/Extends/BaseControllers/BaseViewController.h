@@ -43,6 +43,8 @@ typedef void (^PickPhotoCancelHandle) (void);
     UITableView *_tableView;              // default is nil
 }
 
+@property (nonatomic, strong) UITableView *tableView;
+
 /// 布局子视图的Y坐标的起点(IOS7为20,IOS7以下为0)
 @property (nonatomic, assign, readonly) float subViewsOriginY;
 

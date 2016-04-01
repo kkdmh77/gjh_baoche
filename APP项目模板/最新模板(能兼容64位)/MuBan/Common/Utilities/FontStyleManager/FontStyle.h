@@ -13,5 +13,7 @@
 #import "FontManager.h"
 
 #import "UILabel+FontStyle.h"
+#import "UITextField+FontStyle.h"
+#import "UITextView+FontStyle.h"
 
 #endif /* FontStyle_h */
