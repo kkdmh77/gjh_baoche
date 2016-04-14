@@ -11,6 +11,7 @@
 
 #import "FileManager.h"
 #import "AutoSearchWordModel.h"
+#import "WordDetailModel.h"
 #import "TextbookBookModel.h"
 #import "TextbookUnitModel.h"
 #import "TextbookPageModel.h"
@@ -28,12 +29,17 @@ AS_SINGLETON(DBManager);
 
 /// 切换到对应的数据库
 - (BOOL)changeToDefaultDatabase;
+- (BOOL)changeToCurTextbookDatabase; // 切换到当前课本数据库
 - (BOOL)changeToDatabaseWithFileType:(DBFileType)fileType;
 
 - (BOOL)changeToDatabaseWithName:(NSString *)databaseName;
 - (BOOL)changeToDatabaseWithPath:(NSString *)databasePath;
 
+- (FMDatabaseQueue *)getCurDatabaseQueue;
+
 - (NSInteger)getDBVersion;
+- (BOOL)creatTableWithSql:(NSString *)sql;
+- (void)configureProperties; // 配置属性
 
 /****************************dictionary包的方法********************************/
 
@@ -56,7 +62,6 @@ AS_SINGLETON(DBManager);
 - (NSArray<AutoSearchWordModel *> *)autoSearchWordsByCharacters:(NSString *)characters
                                                       pageCount:(NSInteger)pageCount
                                                        pageSize:(NSInteger)pageSize;
-
 
 /****************************bookyingyu包的方法********************************/
 
@@ -100,6 +105,7 @@ AS_SINGLETON(DBManager);
  */
 - (NSArray<TextbookPageModel *> *)selectPageModelsWithBookId:(NSInteger)bookId
                                                       unitId:(NSInteger)unitId;
+
 
 /**
  * @method 根据BookID和UnitID以及SectionID查询所有的区块列表（不带音频、句子内容）

@@ -308,7 +308,7 @@ DEF_SINGLETON(InterfaceHUDManager);
     // picker
     if (PickerShowType_Date == type)
     {
-        _pickerView = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 44, IPHONE_WIDTH, 70)];
+        _pickerView = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 44, IPHONE_WIDTH, 170)];
         [(UIDatePicker *)_pickerView setDatePickerMode:UIDatePickerModeDate];
         
         // 默认被选中的位置
@@ -319,7 +319,7 @@ DEF_SINGLETON(InterfaceHUDManager);
     }
     else
     {
-        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, IPHONE_WIDTH, 70)];
+        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, IPHONE_WIDTH, 170)];
         [(UIPickerView *)_pickerView setShowsSelectionIndicator:YES];
         [(UIPickerView *)_pickerView setDataSource:self];
         [(UIPickerView *)_pickerView setDelegate:self];

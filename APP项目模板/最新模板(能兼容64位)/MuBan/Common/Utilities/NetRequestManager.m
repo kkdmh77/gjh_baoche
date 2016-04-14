@@ -124,8 +124,39 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
         }
         if (isNeedToRequestSetCookies)
         {
-            return cookies;
+            // return cookies;
+            return [[self class] cookiesToDic:cookies];
         }
+    }
+    return nil;
+}
+
++ (NSArray<NSDictionary *> *)cookiesToDic:(NSArray<NSHTTPCookie *> *)cookies
+{
+    if ([cookies isAbsoluteValid]) {
+        NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:cookies.count];
+        
+        for (NSHTTPCookie *cookie in cookies) {
+            NSDictionary *dic = cookie.properties;
+            
+            [tempArray addObject:dic];
+        }
+        return tempArray;
+    }
+    return nil;
+}
+
++ (NSArray<NSHTTPCookie *> *)dicToCookies:(NSArray<NSDictionary *> *)dics
+{
+    if ([dics isAbsoluteValid]) {
+        NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:dics.count];
+        
+        for (NSDictionary *dic in dics) {
+            NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:dic];
+            
+            [tempArray addObject:cookie];
+        }
+        return tempArray;
     }
     return nil;
 }
@@ -336,7 +367,7 @@ DEF_SINGLETON(NetRequestManager);
     /*
     if ([UserInfoModel objectForKey:kCookiesKey])
     {
-        [netRequest.asiFormRequest setRequestCookies:[NSMutableArray arrayWithArray:[UserInfoModel objectForKey:kCookiesKey]]];
+        [netRequest.asiFormRequest setRequestCookies:[NSMutableArray arrayWithArray:[NetRequest dicToCookies:[UserInfoModel objectForKey:kCookiesKey]]]];
     }
     */
     

@@ -7,6 +7,7 @@
 //
 
 #import "DBManager.h"
+#import "UserInfoModel.h"
 
 /*
 NSString *mixUpString() {
@@ -39,14 +40,15 @@ void xorString(unsigned char *str, unsigned char key)
 
 @interface DBManager ()
 
-// @property (nonatomic, strong) FMDatabase *dbManager;
-
 @property (nonatomic, copy  ) NSString            *curDatabaseFilePath; // 当前的数据库路径
 @property (nonatomic, strong) NSMutableDictionary *databaseQueuesDic;
 
 @end
 
 @implementation DBManager
+
+@synthesize curDatabaseFilePath = curDatabaseFilePath;
+@synthesize databaseQueuesDic = databaseQueuesDic;
 
 DEF_SINGLETON(DBManager);
 
@@ -56,6 +58,8 @@ DEF_SINGLETON(DBManager);
     if (self)
     {
         self.databaseQueuesDic = [NSMutableDictionary dictionary];
+        
+        [self configureProperties];
     }
     return self;
 }
@@ -104,6 +108,19 @@ DEF_SINGLETON(DBManager);
     return [self changeToDatabaseWithName:@"bookyingyu.db"];
 }
 
+- (BOOL)changeToCurTextbookDatabase
+{
+    DBFileType fileType = [UserInfoModel sharedInstance].curTextbookDBFileType;
+    
+    if ([FileManager isAbsoluteValidDBFile:fileType])
+    {
+        return [self changeToDatabaseWithFileType:fileType];
+    }
+    [self changeToDefaultDatabase];
+    
+    return NO;
+}
+
 - (BOOL)changeToDatabaseWithFileType:(DBFileType)fileType
 {
     NSString *fileName = [FileManager getFileNameByFileType:fileType];
@@ -113,15 +130,15 @@ DEF_SINGLETON(DBManager);
 
 - (FMDatabaseQueue *)getCurDatabaseQueue
 {
-    if ([_curDatabaseFilePath isAbsoluteValid]) {
-        FMDatabaseQueue *queue = [_databaseQueuesDic safeObjectForKey:_curDatabaseFilePath];
+    if ([self.curDatabaseFilePath isAbsoluteValid]) {
+        FMDatabaseQueue *queue = [self.databaseQueuesDic safeObjectForKey:self.curDatabaseFilePath];
         
         if (queue) {
             return queue;
         } else {
-            queue = [FMDatabaseQueue databaseQueueWithPath:_curDatabaseFilePath];
+            queue = [FMDatabaseQueue databaseQueueWithPath:self.curDatabaseFilePath];
             
-            [_databaseQueuesDic setObject:queue forKey:_curDatabaseFilePath];
+            [self.databaseQueuesDic setObject:queue forKey:self.curDatabaseFilePath];
             return queue;
         }
     }
@@ -176,18 +193,38 @@ DEF_SINGLETON(DBManager);
     return version;
 }
 
+- (BOOL)creatTableWithSql:(NSString *)sql
+{
+    __block BOOL flag = NO;
+    FMDatabaseQueue *queue = [self getCurDatabaseQueue];
+    
+    if (queue && [sql isAbsoluteValid]) {
+        [queue inDatabase:^(FMDatabase *db) {
+            flag = [db executeUpdate:sql];
+        }];
+        
+        return flag;
+    }
+    return flag;
+}
+
+- (void)configureProperties
+{
+    // 子类实现...
+}
+
 #pragma mark - //////////////////////////////////////////////////////////////////
 
 - (NSArray<AutoSearchWordModel *> *)autoSearchWordsByCharacters:(NSString *)characters
 {
-    NSString *sql = [NSString stringWithFormat:@"SELECT _id AS theId, word, a AS americanVoice, e AS englishVoice, ext FROM word WHERE word LIKE '%@%%'", characters];
+    NSString *sql = [NSString stringWithFormat:@"SELECT _id, word, a AS americanVoice, e AS englishVoice, ext, detail FROM word WHERE word LIKE '%@%%'", characters];
     
     return [self autoSearchWordsBySql:sql];
 }
 
 - (NSArray<AutoSearchWordModel *> *)autoSearchWordsByCharacters:(NSString *)characters pageCount:(NSInteger)pageCount pageSize:(NSInteger)pageSize
 {
-    NSString *sql = [NSString stringWithFormat:@"SELECT _id AS theId, word, a AS americanVoice, e AS englishVoice, ext FROM word WHERE word LIKE '%@%%' LIMIT %ld,%ld", characters, (pageCount - 1) * pageSize, pageSize];
+    NSString *sql = [NSString stringWithFormat:@"SELECT _id, word, a AS americanVoice, e AS englishVoice, ext, detail FROM word WHERE word LIKE '%@%%' LIMIT %ld,%ld", characters, (pageCount - 1) * pageSize, pageSize];
     
     return [self autoSearchWordsBySql:sql];
 }
@@ -348,13 +385,17 @@ DEF_SINGLETON(DBManager);
     if (queue)
     {
         __block NSMutableArray *resultArray = [NSMutableArray array];
-        
+        NSArray<TextbookVocabularyModel *> *allVocabularysInBook = [self selectVocabularyModelsWithBookId:bookId];
+
         [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT _id AS theId, book_id AS bookId, name AS unitNameStr, page_start AS pageStartNumber, sections FROM unit WHERE book_id = %ld ORDER BY sequence ASC", bookId];
+            NSString *sql = [NSString stringWithFormat:@"SELECT _id AS theId, book_id AS bookId, name AS unitNameStr, page_start AS pageStartNumber, display_mode AS displayMode, sections FROM unit WHERE book_id = %ld ORDER BY sequence ASC", bookId];
             
             FMResultSet *set = [db executeQuery:sql];
             while ([set next]) {
                 TextbookUnitModel *model = [[TextbookUnitModel alloc] initWithDictionary:set.resultDictionary];
+                // 单元里的单词
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.unitId == %ld", model.theId];
+                model.vocabularyModelsArray = [allVocabularysInBook filteredArrayUsingPredicate:predicate];
                 
                 // 解析章节内容
                 NSString *sectionsStr = [set.resultDictionary safeObjectForKey:@"sections"];
@@ -395,7 +436,7 @@ DEF_SINGLETON(DBManager);
         __block NSMutableArray *resultArray = [NSMutableArray array];
         
         [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT _id AS theId, book_id AS bookId, unit_id AS unitId, img, page_no AS inPageNumber, anchors FROM page WHERE book_id = %ld AND unit_id = %ld ORDER BY sequence ASC", bookId, unitId];
+            NSString *sql = [NSString stringWithFormat:@"SELECT _id AS theId, book_id AS bookId, unit_id AS unitId, img, img_uri AS pageImageUrlStr, page_no AS inPageNumber, anchors FROM page WHERE book_id = %ld AND unit_id = %ld ORDER BY sequence ASC", bookId, unitId];
             
             FMResultSet *set = [db executeQuery:sql];
             while ([set next]) {
@@ -419,6 +460,8 @@ DEF_SINGLETON(DBManager);
                         for (NSDictionary *modelDic in anchorsDicArray) {
                             AnchorModel *anchor = [[AnchorModel alloc] init];
                             anchor.blockId = [[modelDic safeObjectForKey:@"bid"] integerValue];
+                            anchor.x1 = [[modelDic safeObjectForKey:@"x1"] floatValue];
+                            anchor.x2 = [[modelDic safeObjectForKey:@"x2"] floatValue];
                             anchor.y1 = [[modelDic safeObjectForKey:@"y1"] floatValue];
                             anchor.y2 = [[modelDic safeObjectForKey:@"y2"] floatValue];
                             
@@ -447,7 +490,7 @@ DEF_SINGLETON(DBManager);
         __block NSMutableArray *resultArray = [NSMutableArray array];
         
         [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT _id AS theId, name AS blockNameStr, book_id AS bookId, book_name AS bookNameStr, unit_id AS unitId, unit_name AS unitNameStr, page_start AS pageStartNumber, section_id AS sectionId, section_name AS sectionNameStr, type AS contentType FROM block WHERE book_id = %ld AND unit_id = %ld AND section_id = %ld ORDER BY sequence ASC", bookId, unitId, sectionId];
+            NSString *sql = [NSString stringWithFormat:@"SELECT _id AS theId, name AS blockNameStr, book_id AS bookId, book_name AS bookNameStr, unit_id AS unitId, unit_name AS unitNameStr, page_start AS pageStartNumber, section_id AS sectionId, section_name AS sectionNameStr, group_name AS groupNameStr, type AS contentType FROM block WHERE book_id = %ld AND unit_id = %ld AND section_id = %ld ORDER BY sequence ASC", bookId, unitId, sectionId];
             
             FMResultSet *set = [db executeQuery:sql];
             while ([set next]) {
@@ -471,7 +514,7 @@ DEF_SINGLETON(DBManager);
         __block TextbookBlockModel *resultModel = nil;
 
         [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT _id AS theId, name AS blockNameStr, book_id AS bookId, book_name AS bookNameStr, unit_id AS unitId, unit_name AS unitNameStr, page_start AS pageStartNumber, section_id AS sectionId, section_name AS sectionNameStr, type AS contentType, audio AS audioData, sentences FROM block WHERE _id = %ld", blockId];
+            NSString *sql = [NSString stringWithFormat:@"SELECT _id AS theId, name AS blockNameStr, book_id AS bookId, book_name AS bookNameStr, unit_id AS unitId, unit_name AS unitNameStr, page_start AS pageStartNumber, section_id AS sectionId, section_name AS sectionNameStr, group_name AS groupNameStr, type AS contentType, audio AS audioData, audio_uri AS audioUrlStr, sentences FROM block WHERE _id = %ld", blockId];
             
             
             FMResultSet *set = [db executeQuery:sql];

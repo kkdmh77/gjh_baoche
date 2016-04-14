@@ -36,8 +36,6 @@
 {
     [super loadView];
     
-    self.view.backgroundColor = PageBackgroundColor;
-    
     /*
      // 更改状态栏颜色
      #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
@@ -52,7 +50,7 @@
 {
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:HEXCOLOR(0XFF3366) size:CGSizeMake(1, 1)] forBarMetrics:UIBarMetricsDefault];
+    [self updateThemeStyle];
     
     if (IOS7)
     {
@@ -88,6 +86,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setPageLocalizableText)
                                                  name:LanguageTypeDidChangedNotificationKey
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateThemeStyle)
+                                                 name:DKNightVersionNightFallingNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateThemeStyle)
+                                                 name:DKNightVersionDawnComingNotification
+                                               object:nil];
     
     // 设置界面本地的所有文字显示(涉及多语言)
     [self setPageLocalizableText];
@@ -115,7 +121,8 @@
     if (IOS7)
     {
         [self setNeedsStatusBarAppearanceUpdate];
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        
+        // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
 }
 
@@ -204,6 +211,36 @@
 }
 
 #pragma mark - 工具类方法    ////////////////////////////////////////////////////////////////////////////
+
+- (void)updateThemeStyle
+{
+    UIColor *backColor = nil;
+    UIColor *navTextColor = nil;
+    UIColor *navBgColor = nil;
+    UIStatusBarStyle statusBarStyle = UIStatusBarStyleDefault;
+    
+    if (DKNightVersionManager.currentThemeVersion == DKThemeVersionNight)
+    {
+        backColor = PageBackgroundColor;
+        navTextColor = [UIColor blackColor];
+        navBgColor = Common_ThemeColor;
+        statusBarStyle = UIStatusBarStyleLightContent;
+    }
+    else
+    {
+        backColor = PageBackgroundColor;
+        navTextColor = [UIColor blackColor];
+        navBgColor = Common_ThemeColor;
+    }
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle animated:YES];
+    
+    self.view.backgroundColor = backColor;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:navBgColor]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : navTextColor,
+                                                                    NSFontAttributeName : [UIFont boldSystemFontOfSize:NavTitleFontSize]};
+}
 
 - (void)pushViewController:(UIViewController *)viewController
 {
@@ -484,7 +521,7 @@
 
 - (void)setNavigationItemTitle:(NSString *)titleStr
 {
-    [self setNavigationItemTitle:titleStr titleFont:[UIFont boldSystemFontOfSize:NavTitleFontSize] titleColor:[UIColor blackColor]];
+    [self setNavigationItemTitle:titleStr titleFont:nil titleColor:nil];
 }
 
 - (void)setNavigationItemTitle:(NSString *)title titleFont:(UIFont *)font titleColor:(UIColor *)color
@@ -499,7 +536,10 @@
     self.title = title;
     self.navigationItem.title = title;
     
-    self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor : color, UITextAttributeFont : font};
+    if (font && color)
+    {
+        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : color, NSFontAttributeName : font};
+    }
 }
 
 - (void)addBackSwipeGesture
