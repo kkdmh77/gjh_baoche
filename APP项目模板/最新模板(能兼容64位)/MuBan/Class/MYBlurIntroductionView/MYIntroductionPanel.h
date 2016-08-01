@@ -24,21 +24,12 @@ static UIColor *kSeparatorLineColor = nil;
 
 @interface MYIntroductionPanel : UIView
 
-@property (nonatomic, retain) MYBlurIntroductionView *parentIntroductionView;
+@property (weak) MYBlurIntroductionView *parentIntroductionView;
 
-@property (nonatomic, retain) UIView *PanelHeaderView;
-@property (nonatomic, retain) NSString *PanelTitle;
-@property (nonatomic, retain) NSString *PanelDescription;
-@property (nonatomic, retain) UILabel *PanelTitleLabel;
-@property (nonatomic, retain) UILabel *PanelDescriptionLabel;
-@property (nonatomic, retain) UIView *PanelSeparatorLine;
-@property (nonatomic, retain) UIImageView *PanelImageView;
-@property (nonatomic, assign) BOOL isCustomPanel;
-@property (nonatomic, assign) BOOL hasCustomAnimation;
+// 全屏图片
+- (id)initWithFrame:(CGRect)frame fullImage:(UIImage *)image;
 
 //Init Methods
--(id)initWithFrame:(CGRect)frame image:(UIImage *)image; // 全屏化纯图片
-
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description;
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description header:(UIView *)headerView;
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title description:(NSString *)description image:(UIImage *)image;
@@ -48,9 +39,11 @@ static UIColor *kSeparatorLineColor = nil;
 //Support Methods
 +(BOOL)runningiOS7;
 
+- (void) hideContent;
+- (void) showContent;
+
 //Interaction Methods
 -(void)panelDidAppear;
 -(void)panelDidDisappear;
 
--(void)buildPanelWithFrame:(CGRect)frame;
 @end

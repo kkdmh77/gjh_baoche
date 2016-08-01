@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "AMBlurView.h"
 #import "MYIntroductionPanel.h"
 
-static UIColor *kBlurTintColor = nil;
 static const CGFloat kPageControlWidth = 148;
 static const CGFloat kLeftRightSkipPadding = 10;
 static UIFont *kSkipButtonFont = nil;
@@ -55,7 +53,7 @@ typedef enum {
 //Delegate
 @property (weak) id <MYIntroductionDelegate> delegate;
 
-@property (nonatomic, retain) AMBlurView *BlurView;
+@property (nonatomic, retain) UIView *BlurView;
 @property (nonatomic, retain) UIView *BackgroundColorView;
 @property (retain, nonatomic) UIImageView *BackgroundImageView;
 @property (retain, nonatomic) UIScrollView *MasterScrollView;
@@ -64,17 +62,38 @@ typedef enum {
 @property (retain, nonatomic) UIButton *LeftSkipButton;
 @property (nonatomic, assign) NSInteger CurrentPanelIndex;
 @property (nonatomic, assign) MYLanguageDirection LanguageDirection;
+@property (nonatomic, retain) UIColor *UserBackgroundColor;
 
-//Construction Methods
+/**
+ *  Public method used to build panels
+ *
+ *  @param panels @b Array of MYIntroductionPanel objects
+ */
 -(void)buildIntroductionWithPanels:(NSArray *)panels;
 
-//Interaction Methods
+/**
+ *  Handles the event that the skip button was tapped.
+ */
 - (IBAction)didPressSkipButton;
+
+/**
+ *  Changes the panel to a desired index. The index is relative to the array of panels passed in to the @em buildIntroductionWithPanels
+ *
+ *  @param index @b NSInteger The desired panel number to be changed to
+ */
 -(void)changeToPanelAtIndex:(NSInteger)index;
 
-//Enables or disables use of the introductionView. Use this if you want to hold someone on a panel until they have completed some task
+/**
+ *  Enables or disables use of the introductionView. Use this if you want to hold someone on a panel until they have completed some task
+ *
+ *  @param enabled @b BOOL The desired enabled status of the introduction view
+ */
 -(void)setEnabled:(BOOL)enabled;
 
-//Customization Methods
--(void)setBlurTintColor:(UIColor *)blurTintColor;
+/**
+ *  Changes the background color of the introduction view. This background color sits a layer above the background image layer.
+ *
+ *  @param backgroundColor  @b UIColor The desired background color
+ */
+-(void)setBackgroundColor:(UIColor *)backgroundColor;
 @end

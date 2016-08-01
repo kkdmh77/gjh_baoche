@@ -61,13 +61,19 @@
         
         if (showType == HUDOperationSuccess)
         {
-            customView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-            ((UIImageView *)customView).image = [UIImage imageNamed:@"Login_btn_Right"];
+            UIImage *image = [UIImage imageNamed:@"Login_btn_Right"];
+            if (image) {
+                customView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+                ((UIImageView *)customView).image = image;
+            }
         }
         else if (showType == HUDOperationFailed)
         {
-            customView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-            ((UIImageView *)customView).image = [UIImage imageNamed:@"Unify_Image_w7"];
+            UIImage *image = [UIImage imageNamed:@"Login_btn_Right"];
+            if (image) {
+                customView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+                ((UIImageView *)customView).image = image;
+            }
         }
         else if (HUDOperationLoading == showType)
         {

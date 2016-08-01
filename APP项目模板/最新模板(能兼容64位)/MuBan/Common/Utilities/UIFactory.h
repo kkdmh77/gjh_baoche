@@ -15,7 +15,9 @@ AS_SINGLETON(UIFactory);
 
 #pragma mark - Common Function
 
+/*
 + (BOOL)isValidIPAddress:(NSString *)address;                   //校验IP
+ */
 + (BOOL)isValidPortAddress:(NSString *)address;                 //校验Port
 + (BOOL)isRetina;                                               //是否Retina屏
 + (float)getSystemVersion;                                      //获得系统版本

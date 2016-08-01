@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define kBarButtonItemViewTag 8888
+
 typedef NS_ENUM(NSInteger, HUDInfoType)
 {
     HUDInfoType_Success = 0,
@@ -178,6 +180,12 @@ typedef void (^PickPhotoCancelHandle) (void);
  */
 - (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position
                                        barButtonTitle:(NSString *)title
+                                               action:(SEL)action;
+
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position
+                                       barButtonTitle:(NSString *)title
+                                        selectedTitle:(NSString *)selectedTitle
+                                           isSelected:(BOOL)isSelected
                                                action:(SEL)action;
 
 /**

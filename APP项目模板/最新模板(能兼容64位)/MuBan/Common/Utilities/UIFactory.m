@@ -18,6 +18,7 @@ DEF_SINGLETON(UIFactory);
 
 #pragma mark - Check IP/Port
 
+/*
 + (BOOL)isValidIPAddress:(NSString *)address
 {
     if ([address length] < 1)
@@ -26,6 +27,7 @@ DEF_SINGLETON(UIFactory);
     struct in_addr addr;
     return (inet_aton([address UTF8String], &addr) == 1);
 }
+*/
 
 + (BOOL)isValidPortAddress:(NSString *)address
 {

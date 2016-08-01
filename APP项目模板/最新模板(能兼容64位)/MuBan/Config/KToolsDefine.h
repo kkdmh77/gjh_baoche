@@ -52,6 +52,9 @@
 // 系统版本号
 #define APP_VERSION                 ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"])
 
+// 应用名称
+#define APP_NAME                    ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"])
+
 /**
  * A helper macro to keep the interfaces compatiable with pre ARC compilers.
  * Useful when you put nimbus in a library and link it to a GCC LLVM compiler.

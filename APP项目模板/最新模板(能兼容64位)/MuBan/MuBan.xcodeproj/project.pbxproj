@@ -51,6 +51,7 @@
 		2B5A9DB11C7C1CE7004573C0 /* ExamineVersionBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DAA1C7C1CE7004573C0 /* ExamineVersionBC.m */; };
 		2B5A9DB21C7C1CE7004573C0 /* LoginBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DAC1C7C1CE7004573C0 /* LoginBC.m */; };
 		2B5A9DB31C7C1CE7004573C0 /* RegisterBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DAE1C7C1CE7004573C0 /* RegisterBC.m */; };
+		2B705AB21D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B705AB11D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		2BCC7C341C7AB81E00B7E7D5 /* Jastor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C311C7AB81E00B7E7D5 /* Jastor.m */; };
 		2BCC7C351C7AB81E00B7E7D5 /* JastorRuntimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */; };
 		431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */; };
@@ -194,7 +195,6 @@
 		43D1CA261A75E778004564C2 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C81C1A75E778004564C2 /* .gitattributes */; };
 		43D1CA271A75E778004564C2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C81D1A75E778004564C2 /* .gitignore */; };
 		43D1CA281A75E778004564C2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1C81F1A75E778004564C2 /* MBProgressHUD.m */; };
-		43D1CA291A75E778004564C2 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1C8221A75E778004564C2 /* AMBlurView.m */; };
 		43D1CA2A1A75E778004564C2 /* MYBlurIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1C8241A75E778004564C2 /* MYBlurIntroductionView.m */; };
 		43D1CA2B1A75E778004564C2 /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1C8261A75E778004564C2 /* MYIntroductionPanel.m */; };
 		43D1CA2C1A75E778004564C2 /* MyScaleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1C8291A75E778004564C2 /* MyScaleScrollView.m */; };
@@ -537,6 +537,8 @@
 		2B5A9DAC1C7C1CE7004573C0 /* LoginBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginBC.m; sourceTree = "<group>"; };
 		2B5A9DAD1C7C1CE7004573C0 /* RegisterBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterBC.h; sourceTree = "<group>"; };
 		2B5A9DAE1C7C1CE7004573C0 /* RegisterBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterBC.m; sourceTree = "<group>"; };
+		2B705AB01D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		2B705AB11D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		2B76DFDF1BF5CBC800886D83 /* KColorDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KColorDefine.h; sourceTree = "<group>"; };
 		2B76DFE01BF5CC8E00886D83 /* KURLDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KURLDefine.h; sourceTree = "<group>"; };
 		2B76DFE11BF5CCA300886D83 /* KUIStringDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KUIStringDefine.h; sourceTree = "<group>"; };
@@ -907,8 +909,6 @@
 		43D1C81D1A75E778004564C2 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		43D1C81E1A75E778004564C2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		43D1C81F1A75E778004564C2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		43D1C8211A75E778004564C2 /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlurView.h; sourceTree = "<group>"; };
-		43D1C8221A75E778004564C2 /* AMBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlurView.m; sourceTree = "<group>"; };
 		43D1C8231A75E778004564C2 /* MYBlurIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYBlurIntroductionView.h; sourceTree = "<group>"; };
 		43D1C8241A75E778004564C2 /* MYBlurIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYBlurIntroductionView.m; sourceTree = "<group>"; };
 		43D1C8251A75E778004564C2 /* MYIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionPanel.h; sourceTree = "<group>"; };
@@ -1611,6 +1611,15 @@
 			path = "Register&Login";
 			sourceTree = "<group>";
 		};
+		2B705AAF1D34D65B0083A287 /* FDFullscreenPopGesture */ = {
+			isa = PBXGroup;
+			children = (
+				2B705AB01D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.h */,
+				2B705AB11D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.m */,
+			);
+			path = FDFullscreenPopGesture;
+			sourceTree = "<group>";
+		};
 		2BCC7C2F1C7AB81E00B7E7D5 /* Jastor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1738,6 +1747,7 @@
 		43D1C68B1A75E692004564C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				2B705AAF1D34D65B0083A287 /* FDFullscreenPopGesture */,
 				2B1D3F5F1C92E0CA00C3AFC8 /* AutoCellHeight */,
 				2B577A0A1C7EA4EA006B4032 /* SystemConvert */,
 				2BCC7C2F1C7AB81E00B7E7D5 /* Jastor */,
@@ -2310,8 +2320,6 @@
 		43D1C8201A75E778004564C2 /* MYBlurIntroductionView */ = {
 			isa = PBXGroup;
 			children = (
-				43D1C8211A75E778004564C2 /* AMBlurView.h */,
-				43D1C8221A75E778004564C2 /* AMBlurView.m */,
 				43D1C8231A75E778004564C2 /* MYBlurIntroductionView.h */,
 				43D1C8241A75E778004564C2 /* MYBlurIntroductionView.m */,
 				43D1C8251A75E778004564C2 /* MYIntroductionPanel.h */,
@@ -3726,6 +3734,7 @@
 				43D1C9CE1A75E778004564C2 /* NSIndexSet+AQIndexesOutsideSet.m in Sources */,
 				FAF92F0B1B6F10A400DD06BC /* UserInfoModel.m in Sources */,
 				FAFD22C31BE0D5480004DD6F /* FreeLayoutTileView.m in Sources */,
+				2B705AB21D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				2B1D3FCE1C92E1E000C3AFC8 /* UIView+Night.m in Sources */,
 				43D1CC421A75EBFA004564C2 /* ImagePreviewController.m in Sources */,
 				43D1CA0E1A75E778004564C2 /* NSManagedObject+MagicalRequests.m in Sources */,
@@ -3756,7 +3765,6 @@
 				43D1CC081A75EBFA004564C2 /* ATB_SmallTools.m in Sources */,
 				43D1C6FD1A75E692004564C2 /* Order.m in Sources */,
 				43D1CC1A1A75EBFA004564C2 /* ATFlipAnimationView.m in Sources */,
-				43D1CA291A75E778004564C2 /* AMBlurView.m in Sources */,
 				43D1C9CD1A75E778004564C2 /* AQGridViewUpdateItem.m in Sources */,
 				43D1CC2E1A75EBFA004564C2 /* NSFileManager+SSToolkitAdditions.m in Sources */,
 				43D1C7041A75E692004564C2 /* RSADataSigner.m in Sources */,

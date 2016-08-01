@@ -11,8 +11,14 @@
 @implementation MYBlurIntroductionView
 @synthesize delegate;
 
+/**
+ *  Initializes a new MYBlurIntroductionView.
+ *
+ *  @param frame CGRect - The desired frame size for the introduction view
+ *
+ *  @return MYBlurIntroductionView : UIView
+ */
 -(id)initWithFrame:(CGRect)frame{
-    //self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil][0];
     if (self = [super initWithFrame:frame]) {
         self.MasterScrollView.delegate = self;
         self.frame = frame;
@@ -21,6 +27,9 @@
     return self;
 }
 
+/**
+ *  Initializes the high level view components for the introduction view.
+ */
 -(void)initializeViewComponents{
     //Background Image View
     self.BackgroundImageView = [[UIImageView alloc] initWithFrame:self.frame];
@@ -30,7 +39,7 @@
     
     //Master Scroll View
     self.MasterScrollView = [[UIScrollView alloc] initWithFrame:self.frame];
-    self.MasterScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleHeight;
+    self.MasterScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.MasterScrollView.pagingEnabled = YES;
     self.MasterScrollView.delegate = self;
     self.MasterScrollView.showsHorizontalScrollIndicator = NO;
@@ -40,6 +49,7 @@
     //Page Control
     self.PageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((self.frame.size.width - kPageControlWidth)/2, self.frame.size.height - 48, kPageControlWidth, 37)];
     self.PageControl.currentPage = 0;
+    self.PageControl.enabled = NO;
     [self addSubview:self.PageControl];
     
     //Get skipString dimensions
@@ -48,7 +58,6 @@
     kSkipButtonFont = [UIFont systemFontOfSize:16];
     
     if ([MYIntroductionPanel runningiOS7]) {
-        //Calculate Title Height
         NSDictionary *titleAttributes = [NSDictionary dictionaryWithObject:kSkipButtonFont forKey: NSFontAttributeName];
         skipStringWidth = [skipString boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:titleAttributes context:nil].size.width;
         skipStringWidth = ceilf(skipStringWidth);
@@ -74,41 +83,29 @@
     [self addSubview:self.RightSkipButton];
 }
 
-//Public method used to build panels
 -(void)buildIntroductionWithPanels:(NSArray *)panels{
     Panels = panels;
     for (MYIntroductionPanel *panel in Panels) {
         panel.parentIntroductionView = self;
     }
-    
-    //Initialize Constants
-    [self initializeConstants];
-    
-    //Add the blur view to the background
-    [self addBlurViewwithFrame:self.frame];
+
+    //Add the overlay view to the background
+    [self addOverlayViewWithFrame:self.frame];
     
     //Construct panels
     [self addPanelsToScrollView];
 }
 
--(void)initializeConstants{
-    kBlurTintColor = [UIColor colorWithRed:90.0f/255.0f green:175.0f/255.0f blue:113.0f/255.0f alpha:1];
-}
-
-//Adds the blur view just below the master scroll view for a blurred background look
--(void)addBlurViewwithFrame:(CGRect)frame{
-    if ([MYIntroductionPanel runningiOS7]) {
-        self.BlurView = [AMBlurView new];
-        self.BlurView.alpha = 1;
-        self.BlurView.blurTintColor = kBlurTintColor;
-        [self.BlurView setFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
-        [self insertSubview:self.BlurView belowSubview:self.MasterScrollView];
-    }
-    else {
-        self.BackgroundColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
-        self.BackgroundColorView.backgroundColor = kBlurTintColor;
-        [self insertSubview:self.BackgroundColorView belowSubview:self.MasterScrollView];
-    }
+/**
+ *  Adds the overlay view just below the master scroll view for an overlay background look.
+ *
+ *  @param frame @b CGRect - Specifies the desired size of the overlayed view.
+ *
+ */
+-(void)addOverlayViewWithFrame:(CGRect)frame{
+    self.BackgroundColorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f,0.0f,frame.size.width,frame.size.height)];
+    self.BackgroundColorView.backgroundColor = self.UserBackgroundColor;
+    [self insertSubview:self.BackgroundColorView belowSubview:self.MasterScrollView];
 }
 
 -(void)addPanelsToScrollView{
@@ -152,6 +149,11 @@
     
     //Show the information at the first panel with animations
     [self animatePanelAtIndex:0];
+    
+    //Call first panel view did appear
+    if ([Panels[0] respondsToSelector:@selector(panelDidAppear)]) {
+        [Panels[0] panelDidAppear];
+    }
 }
 
 -(void)buildScrollViewRightToLeft{
@@ -177,15 +179,6 @@
     [self animatePanelAtIndex:0];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 #pragma mark - UIScrollView Delegate
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
@@ -205,14 +198,17 @@
             if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
                 [delegate introduction:self didFinishWithType:MYFinishTypeSwipeOut];
             }
+            [self removeFromSuperview];
         }
         else {
             //Assign the last page to be the previous current page
             LastPanelIndex = self.PageControl.currentPage;
             
-            //Trigger the panel did appear method in the
-            if ([Panels[LastPanelIndex] respondsToSelector:@selector(panelDidDisappear)]) {
-                [Panels[LastPanelIndex] panelDidDisappear];
+            //Trigger the panel did appear method, but skip on a bounce
+            if (self.PageControl.currentPage != self.CurrentPanelIndex) {
+                if ([Panels[LastPanelIndex] respondsToSelector:@selector(panelDidDisappear)]) {
+                    [Panels[LastPanelIndex] panelDidDisappear];
+                }
             }
             
             //Update Page Control
@@ -234,7 +230,7 @@
             }
         }
     }
-    else if (self.LanguageDirection == MYLanguageDirectionRightToLeft){
+    else if(self.LanguageDirection == MYLanguageDirectionRightToLeft){
         self.CurrentPanelIndex = (scrollView.contentOffset.x-self.frame.size.width)/self.MasterScrollView.frame.size.width;
         
         //remove self if you are at the end of the introduction
@@ -242,6 +238,7 @@
             if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
                 [delegate introduction:self didFinishWithType:MYFinishTypeSwipeOut];
             }
+            [self removeFromSuperview];
         }
         else {
             //Update Page Control
@@ -267,6 +264,7 @@
 
 //This will handle our changing opacity at the end of the introduction
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    self.CurrentPanelIndex = scrollView.contentOffset.x/self.MasterScrollView.frame.size.width;
     if (self.LanguageDirection == MYLanguageDirectionLeftToRight) {
         if (self.CurrentPanelIndex == (Panels.count - 1)) {
             self.alpha = ((self.MasterScrollView.frame.size.width*(float)Panels.count)-self.MasterScrollView.contentOffset.x)/self.MasterScrollView.frame.size.width;
@@ -286,56 +284,11 @@
     
     //Hide all labels
     for (MYIntroductionPanel *panelView in Panels) {
-        panelView.PanelTitleLabel.alpha = 0;
-        panelView.PanelDescriptionLabel.alpha = 0;
-        panelView.PanelSeparatorLine.alpha = 0;
-        if (panelView.PanelHeaderView) {
-            panelView.PanelHeaderView.alpha = 0;
-        }
-        panelView.PanelImageView.alpha = 0;
-    }
-    
-    if ([Panels[index] isCustomPanel] && ![Panels[index] hasCustomAnimation]) {
-        return;
+        [panelView hideContent];
     }
     
     //Animate
-    if (Panels.count > index) {
-        //Get initial frames
-        CGRect initialHeaderFrame = CGRectZero;
-        if ([Panels[index] PanelHeaderView]) {
-            initialHeaderFrame = [Panels[index] PanelHeaderView].frame;
-        }
-        CGRect initialTitleFrame = [Panels[index] PanelTitleLabel].frame;
-        CGRect initialDescriptionFrame = [Panels[index] PanelDescriptionLabel].frame;
-        CGRect initialImageFrame = [Panels[index] PanelImageView].frame;
-        
-        //Offset frames
-        [[Panels[index] PanelTitleLabel] setFrame:CGRectMake(initialTitleFrame.origin.x + 10, initialTitleFrame.origin.y, initialTitleFrame.size.width, initialTitleFrame.size.height)];
-        [[Panels[index] PanelDescriptionLabel] setFrame:CGRectMake(initialDescriptionFrame.origin.x + 10, initialDescriptionFrame.origin.y, initialDescriptionFrame.size.width, initialDescriptionFrame.size.height)];
-        [[Panels[index] PanelHeaderView] setFrame:CGRectMake(initialHeaderFrame.origin.x, initialHeaderFrame.origin.y - 10, initialHeaderFrame.size.width, initialHeaderFrame.size.height)];
-        [[Panels[index] PanelImageView] setFrame:CGRectMake(initialImageFrame.origin.x, initialImageFrame.origin.y + 10, initialImageFrame.size.width, initialImageFrame.size.height)];
-        
-        //Animate title and header
-        [UIView animateWithDuration:0.3 animations:^{
-            [[Panels[index] PanelTitleLabel] setAlpha:1];
-            [[Panels[index] PanelTitleLabel] setFrame:initialTitleFrame];
-            [[Panels[index] PanelSeparatorLine] setAlpha:1];
-            
-            if ([Panels[index] PanelHeaderView]) {
-                [[Panels[index] PanelHeaderView] setAlpha:1];
-                [[Panels[index] PanelHeaderView] setFrame:initialHeaderFrame];
-            }
-        } completion:^(BOOL finished) {
-            //Animate description
-            [UIView animateWithDuration:0.3 animations:^{
-                [[Panels[index] PanelDescriptionLabel] setAlpha:1];
-                [[Panels[index] PanelDescriptionLabel] setFrame:initialDescriptionFrame];
-                [[Panels[index] PanelImageView] setAlpha:1];
-                [[Panels[index] PanelImageView] setFrame:initialImageFrame];
-            }];
-        }];
-    }
+    [Panels[index] showContent];
 }
 
 -(void)appendCloseViewAtXIndex:(CGFloat*)xIndex{
@@ -353,10 +306,6 @@
 }
 
 -(void)skipIntroduction{
-    if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
-        [delegate introduction:self didFinishWithType:MYFinishTypeSkipButton];
-    }
-    
     [self hideWithFadeOutDuration:0.3];
 }
 
@@ -364,11 +313,53 @@
     //Fade out
     [UIView animateWithDuration:duration animations:^{
         self.alpha = 0;
-    } completion:nil];
+    } completion:^(BOOL finished){
+        if (finished) {
+            if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
+                [delegate introduction:self didFinishWithType:MYFinishTypeSkipButton];
+            }
+            
+            [self removeFromSuperview];
+        }
+        
+    }];
 }
 
 -(void)changeToPanelAtIndex:(NSInteger)index{
+    NSInteger currentIndex = self.CurrentPanelIndex;
+    if (self.LanguageDirection == MYLanguageDirectionRightToLeft)
+        currentIndex = (Panels.count-1)-self.CurrentPanelIndex;
     
+    if (Panels && index < Panels.count && currentIndex != index)
+    {
+        // For right-to-left, PageControl index is the inverse of the panel indicies.
+        if ([Panels[currentIndex] respondsToSelector:@selector(panelDidDisappear)]) {
+            [Panels[currentIndex] panelDidDisappear];
+        }
+        
+        CGRect panelRect = [Panels[index] frame];
+        [self.MasterScrollView scrollRectToVisible:panelRect animated:YES];
+        self.CurrentPanelIndex = index;
+        [self animatePanelAtIndex:index];
+        
+        if (self.LanguageDirection == MYLanguageDirectionLeftToRight)
+            self.PageControl.currentPage = index;
+        else if (self.LanguageDirection == MYLanguageDirectionRightToLeft)
+            self.PageControl.currentPage = (Panels.count-1)-index;
+        
+        
+        if ([Panels[index] respondsToSelector:@selector(panelDidAppear)]) {
+            [Panels[index] panelDidAppear];
+        }
+        
+        //Callback to VC delegate, if appropriate
+        if([(id)delegate respondsToSelector:@selector(introduction:didChangeToPanel:withIndex:)]){
+            [(id)delegate introduction:self didChangeToPanel:Panels[index] withIndex:index];
+        }
+    }
+    else {
+        NSLog(@"The index: %ld is out of range for Panels array[0...%lu]", (long)index, (long)(Panels.count-1));
+    }
 }
 
 -(void)setEnabled:(BOOL)enabled{
@@ -396,11 +387,12 @@
 #pragma mark - Customization Methods
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor{
+    //Save the background color for building
+    self.UserBackgroundColor = backgroundColor;
+    
+    //Immediately apply the color
     if (self.BackgroundColorView) {
         self.BackgroundColorView.backgroundColor = backgroundColor;
-    }
-    else if (self.BlurView){
-        self.BlurView.blurTintColor = backgroundColor;
     }
 }
 

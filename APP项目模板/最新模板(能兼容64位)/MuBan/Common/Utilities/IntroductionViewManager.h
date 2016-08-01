@@ -11,6 +11,8 @@
 
 @interface IntroductionViewManager : NSObject <MYIntroductionDelegate>
 
+AS_SINGLETON(IntroductionViewManager);
+
 /**
  * 方法描述: 显示欢迎页
  * 输入参数: localImgsSourceArray : 被展示图片名数组, superView : 承载欢迎页的视图
@@ -18,6 +20,6 @@
  * 创建人: 龚俊慧
  * 创建时间: 2013-12-04
  */
-+ (void)showIntroductionViewWithImgSource:(NSArray *)localImgsSourceArray superView:(UIView *)superView;
+- (void)showIntroductionViewWithImgSource:(NSArray *)localImgsSourceArray superView:(UIView *)superView;
 
 @end

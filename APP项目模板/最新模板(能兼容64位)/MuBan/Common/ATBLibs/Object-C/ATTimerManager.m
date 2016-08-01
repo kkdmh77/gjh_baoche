@@ -113,7 +113,7 @@ static ATTimerManager* s_timerManager = nil;
                                         selector:@selector(_timerStep)
                                         userInfo:nil
                                          repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     }
 }
 

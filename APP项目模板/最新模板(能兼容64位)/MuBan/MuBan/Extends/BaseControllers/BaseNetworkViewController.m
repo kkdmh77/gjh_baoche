@@ -10,8 +10,8 @@
 
 @interface BaseNetworkViewController ()
 {
-    UIImageView *netBackgroundStatusImgView;
-    UILabel     *netStatusRemindLabel;
+    __weak UIImageView *netBackgroundStatusImgView;
+    __weak UILabel     *netStatusRemindLabel;
 }
 
 @end
@@ -104,7 +104,8 @@
     if (!netBackgroundStatusImgView)
     {
         netBackgroundStatusImgView = InsertImageView(self.view, frame, nil, nil);
-        netBackgroundStatusImgView.contentMode = UIViewContentModeScaleAspectFit;
+        netBackgroundStatusImgView.contentMode = UIViewContentModeCenter;
+        netBackgroundStatusImgView.backgroundColor = self.view.backgroundColor;
         [netBackgroundStatusImgView keepAutoresizingInFull];
         
         [self.view addSubview:netBackgroundStatusImgView];
@@ -116,7 +117,7 @@
                                            NSTextAlignmentCenter,
                                            text,
                                            SP15Font,
-                                           [UIColor blackColor],
+                                           [UIColor grayColor],
                                            YES);
     }
     
@@ -124,7 +125,10 @@
     
     netStatusRemindLabel.text = text;
     [netStatusRemindLabel sizeToFit];
-    netStatusRemindLabel.frameOrigin = CGPointMake((netBackgroundStatusImgView.boundsWidth - netStatusRemindLabel.boundsWidth) / 2, netBackgroundStatusImgView.boundsHeight / 2 + 40);
+    // netStatusRemindLabel.center = CGPointMake(netBackgroundStatusImgView.center.x, netBackgroundStatusImgView.center.y + (image.size.height / 2) + 10);
+    [netStatusRemindLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(netBackgroundStatusImgView).centerOffset(CGPointMake(0, (image.size.height / 2) + 10));
+    }];
     
     [netBackgroundStatusImgView removeGestureWithTarget:self andAction:@selector(getNetworkData)];
     
@@ -397,7 +401,7 @@
 
 - (NetRequest *)sendRequest:(NSString *)urlMethodName parameterDic:(NSDictionary *)parameterDic requestHeaders:(NSDictionary *)headers requestMethodType:(NSString *)methodType requestTag:(int)tag delegate:(id<NetRequestDelegate>)delegate userInfo:(NSDictionary *)userInfo netCachePolicy:(NetCachePolicy)cachePolicy cacheSeconds:(NSTimeInterval)cacheSeconds
 {
-    if (![NetworkStatusManager isConnectNetwork])
+    if (![NetworkStatusManager isConnectNetwork] && NetNotCachePolicy == cachePolicy)
     {
         // 执行没有网络连接的代码块
         if (self.noNetworkBlock)
@@ -479,30 +483,5 @@
     // do nothing
 }
  */
-
-#if defined(__IPHONE_7_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0)
-- (BOOL)prefersStatusBarHidden
-{
-    /*
-    NSArray *viewControllers = [self.navigationController viewControllers];
-    
-    // 根据viewControllers的个数来判断此控制器是被present的还是被push的
-    if (1 <= viewControllers.count && 0 < [viewControllers indexOfObject:self])
-    {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
-     */
-    return NO;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-#endif
 
 @end

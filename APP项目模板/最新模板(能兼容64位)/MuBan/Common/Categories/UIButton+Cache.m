@@ -63,7 +63,7 @@
         if (cacheImg)
         {
             if (isRoundedRect)
-                cacheImg = [UIImage createRoundedRectImage:cacheImg roundedRectSize:roundedRectSize];
+                cacheImg = [cacheImg createCornerRadius:roundedRectSize.height];
             
             if (resize)
                 [self setNewImgBtn:cacheImg oldImgBtn:self];
@@ -209,7 +209,7 @@
         {
             if (isRoundedRect)
             {
-                cacheImg = [UIImage createRoundedRectImage:cacheImg roundedRectSize:roundedRectSize];
+                cacheImg = [cacheImg createCornerRadius:roundedRectSize.height];
             }
             if (resize)
             {
@@ -370,7 +370,7 @@
         [[SDImageCache sharedImageCache] storeImage:image forKey:cacheKeyStr toDisk:options == WebImageDownload ? YES : NO];
     
     if (isRoundedRect)
-        image = [UIImage createRoundedRectImage:image roundedRectSize:roundedRectSize];
+        image = [image createCornerRadius:roundedRectSize.height];
     
     /**
      * 方法描述: 区分是方形显示请求还是其他方式请求

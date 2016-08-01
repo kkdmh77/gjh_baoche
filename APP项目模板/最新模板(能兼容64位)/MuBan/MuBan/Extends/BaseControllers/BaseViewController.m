@@ -12,6 +12,7 @@
 #import "LanguagesManager.h"
 #import "CTAssetsPickerController.h"
 #import <StoreKit/StoreKit.h>
+#import "UINavigationController+FDFullscreenPopGesture.h"
 
 @interface BaseViewController () <UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, SKStoreProductViewControllerDelegate>
 {
@@ -28,6 +29,8 @@
 
 - (void)dealloc
 {
+    [self hideHUD];
+    
     // 注销通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -128,7 +131,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self hideHUD];
+    // [self hideHUD];
     
     /*
      * @捕捉设置给leftBarButtonItem的回调方法
@@ -147,17 +150,22 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    
     if ([self.navigationController.viewControllers isAbsoluteValid]) {
         UIViewController *root = self.navigationController.viewControllers[0];
         BOOL isRootViewController = (self == root);
         
         if (isRootViewController) {
-            self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+            // self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+            self.fd_interactivePopDisabled = YES;
         } else {
-            self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+            // self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+            self.fd_interactivePopDisabled = NO;
         }
     } else {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+        // self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+        self.fd_interactivePopDisabled = YES;
     }
 }
 
@@ -429,7 +437,21 @@
 
 - (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position barButtonTitle:(NSString *)title action:(SEL)action
 {
-    UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, [title stringSizeWithFont:SP15Font].width + 20, 40) tag:8888 normalImg:nil highlightedImg:nil title:title target:self action:action];
+    return [self configureBarbuttonItemByPosition:position barButtonTitle:title selectedTitle:nil isSelected:NO action:action];
+}
+
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position barButtonTitle:(NSString *)title selectedTitle:(NSString *)selectedTitle isSelected:(BOOL)isSelected action:(SEL)action
+{
+    UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, [title stringSizeWithFont:SP15Font].width + 20, 40) tag:kBarButtonItemViewTag normalImg:nil highlightedImg:nil title:title target:self action:action];
+    
+    UIButton *btn = (UIButton *)[barItem.customView viewWithTag:kBarButtonItemViewTag];
+    [btn setTitle:title forState:UIControlStateNormal | UIControlStateHighlighted];
+    if ([selectedTitle isAbsoluteValid])
+    {
+        [btn setTitle:selectedTitle forState:UIControlStateSelected];
+        [btn setTitle:selectedTitle forState:UIControlStateSelected | UIControlStateHighlighted];
+    }
+    btn.selected = isSelected;
     
     if (BarbuttonItemPosition_Left == position)
     {
@@ -716,5 +738,22 @@
         
     }];
 }
+
+#if defined(__IPHONE_7_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0)
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return UIStatusBarAnimationSlide;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+#endif
 
 @end

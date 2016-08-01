@@ -36,12 +36,28 @@
     self = [super init];
     if (self)
     {
-        _animated = YES;
+        [self setup];
+        
         _contentView = aView;
-        // 将模式设置为自动隐藏
-        _behaviorType = PopupBehavior_AutoHidden;
     }
     return self;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup
+{
+    _animated = YES;
+    // 将模式设置为自动隐藏
+    _behaviorType = PopupBehavior_AutoHidden;
 }
 
 - (void)clearViews
@@ -64,11 +80,13 @@
     if (_tapView.superview)
     {
         [_tapView removeFromSuperview];
+        _tapView = nil;
     }
     
     if (_contentView.superview)
     {
         [_contentView removeFromSuperview];
+        self.contentView = nil;
     }
     
     [[NSNotificationCenter defaultCenter] removeObserver:self

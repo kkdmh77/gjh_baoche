@@ -11,7 +11,7 @@
 @interface UIImage(ATBLibsAddtions)
 
 // 给图片加圆角
-+ (id)createRoundedRectImage:(UIImage*)image roundedRectSize:(CGSize)roundedRectSize;
+- (UIImage *)createCornerRadius:(CGFloat)cornerRadius;
 
 // 将图片转称位图模式
 - (UIImage*) transToBitmapImage;

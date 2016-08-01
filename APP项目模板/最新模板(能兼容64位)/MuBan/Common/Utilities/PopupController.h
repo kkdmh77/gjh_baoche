@@ -56,7 +56,7 @@ typedef enum
     
 }
 @property (nonatomic, readonly) ATTapView*          tapView;
-@property (nonatomic, readonly) UIView*             contentView;
+@property (nonatomic, strong  ) UIView*             contentView;
 @property (nonatomic, weak)     id                  delegate;
 @property (nonatomic, assign)   PopupBehaviorType   behavior;   // default is PopupBehavior_AutoHidden
 @property (nonatomic, assign)   BOOL                animated;   // default is YES

@@ -11,6 +11,7 @@
 #import "InterfaceHUDManager.h"
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApiInterface.h>
+#import "WeiboSDK.h"
 
 @interface ShareManager ()
 
@@ -36,11 +37,14 @@ DEF_SINGLETON(ShareManager);
     self.insetImage = insetImage;
     self.contentImage = contentImage;
     
-    NSMutableArray *platformNames = [NSMutableArray arrayWithObjects:UMShareToSina, nil];
+    NSMutableArray *platformNames = [NSMutableArray arrayWithObjects:UMShareToEmail, nil];
+    if ([WeiboSDK isWeiboAppInstalled])
+    {
+        [platformNames addObject:UMShareToSina];
+    }
     if ([WXApi isWXAppInstalled])
     {
-        [platformNames insertObject:UMShareToWechatSession atIndex:0];
-        [platformNames insertObject:UMShareToWechatTimeline atIndex:1];
+        [platformNames addObjectsFromArray:@[UMShareToWechatSession, UMShareToWechatTimeline]];
     }
     if ([QQApiInterface isQQInstalled])
     {
@@ -50,7 +54,7 @@ DEF_SINGLETON(ShareManager);
     [UMSocialSnsService presentSnsIconSheetView:presentedController
                                          appKey:kUMengAppKey
                                       shareText:SHARE_TEXT
-                                     shareImage:[UIImage imageNamed:@"share_image"]
+                                     shareImage:[UIImage imageNamed:@"ios_180"]
                                 shareToSnsNames:platformNames
                                        delegate:self];
     
@@ -76,44 +80,44 @@ DEF_SINGLETON(ShareManager);
 {
     NSString *title = _title;
     if (![title isAbsoluteValid]) {
-        title = @"快快查字典";
+        title = APP_NAME;
     }
     NSString *content = _content;
-    if (![content isAbsoluteValid]){
+    if (![content isAbsoluteValid]) {
         content = SHARE_TEXT;
     }
     UIImage *insetImage = _insetImage;
     if (!insetImage) {
-        insetImage = [UIImage imageNamed:@"share_image"];
+        insetImage = [UIImage imageNamed:@"ios_180"];
     }
     UIImage *contentImage = _contentImage;
     NSString *targetUrlStr = _urlStr;
     
     if (platformName == UMShareToSina) {
         socialData.title = title;
-        socialData.shareText = content;
-        socialData.shareImage = insetImage;
+        // socialData.shareText = content;
+        // socialData.shareImage = insetImage;
         
         socialData.extConfig.sinaData.shareText = [content stringByAppendingString:targetUrlStr];
-        socialData.extConfig.sinaData.shareImage = contentImage;
+        socialData.extConfig.sinaData.shareImage = contentImage ? contentImage : insetImage;
     }
     else if (platformName == UMShareToTencent) {
-        socialData.title = title;
-        socialData.shareText = content;
-        socialData.shareImage = insetImage;
+        // socialData.title = title;
+        // socialData.shareText = content;
+        // socialData.shareImage = insetImage;
         
         socialData.extConfig.tencentData.title = title;
         socialData.extConfig.tencentData.shareText = [content stringByAppendingString:targetUrlStr];
-        socialData.extConfig.tencentData.shareImage = contentImage;
+        socialData.extConfig.tencentData.shareImage = contentImage ? contentImage : insetImage;
     }
     else if (platformName == UMShareToQQ) {
-        socialData.title = title;
-        socialData.shareText = content;
-        socialData.shareImage = insetImage;
+        // socialData.title = title;
+        // socialData.shareText = content;
+        // socialData.shareImage = insetImage;
         
         socialData.extConfig.qqData.title = title;
         socialData.extConfig.qqData.shareText = content;
-        socialData.extConfig.qqData.shareImage = contentImage;
+        socialData.extConfig.qqData.shareImage = contentImage ? contentImage : insetImage;
         if (contentImage) {
             socialData.extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
         }
@@ -121,13 +125,13 @@ DEF_SINGLETON(ShareManager);
         socialData.extConfig.qqData.url = targetUrlStr;
     }
     else if (platformName == UMShareToWechatSession) {
-        socialData.title = title;
-        socialData.shareText = content;
-        socialData.shareImage = insetImage;
+        // socialData.title = title;
+        // socialData.shareText = content;
+        // socialData.shareImage = insetImage;
 
         socialData.extConfig.wechatSessionData.title = title;
         socialData.extConfig.wechatSessionData.shareText = content;
-        socialData.extConfig.wechatSessionData.shareImage = contentImage;
+        socialData.extConfig.wechatSessionData.shareImage = contentImage ? contentImage : insetImage;
         if (contentImage) {
             socialData.extConfig.wechatSessionData.wxMessageType = UMSocialWXMessageTypeImage;
         }
@@ -135,13 +139,13 @@ DEF_SINGLETON(ShareManager);
         socialData.extConfig.wechatSessionData.url = targetUrlStr;
     }
     else if (platformName == UMShareToWechatTimeline) {
-        socialData.title = title;
-        socialData.shareText = content;
-        socialData.shareImage = insetImage;
+        // socialData.title = title;
+        // socialData.shareText = content;
+        // socialData.shareImage = insetImage;
         
         socialData.extConfig.wechatTimelineData.title = title;
         socialData.extConfig.wechatTimelineData.shareText = content;
-        socialData.extConfig.wechatTimelineData.shareImage = contentImage;
+        socialData.extConfig.wechatTimelineData.shareImage = contentImage ? contentImage : insetImage;
         if (contentImage) {
             socialData.extConfig.wechatTimelineData.wxMessageType = UMSocialWXMessageTypeImage;
         }
@@ -149,15 +153,24 @@ DEF_SINGLETON(ShareManager);
         socialData.extConfig.wechatTimelineData.url = targetUrlStr;
     }
     else if (platformName == UMShareToQzone) {
-        socialData.title = title;
-        socialData.shareText = content;
-        socialData.shareImage = insetImage;
+        // socialData.title = title;
+        // socialData.shareText = content;
+        // socialData.shareImage = insetImage;
         
         socialData.extConfig.qzoneData.title = title;
         socialData.extConfig.qzoneData.shareText = content;
-        socialData.extConfig.qzoneData.shareImage = contentImage;
+        socialData.extConfig.qzoneData.shareImage = contentImage ? contentImage : insetImage;
         
         socialData.extConfig.qzoneData.url = targetUrlStr;
+    }
+    else if (platformName == UMShareToEmail) {
+        // socialData.title = title;
+        // socialData.shareText = content;
+        // socialData.shareImage = insetImage;
+        
+        socialData.extConfig.emailData.title = title;
+        socialData.extConfig.emailData.shareText = [content stringByAppendingString:targetUrlStr];
+        socialData.extConfig.emailData.shareImage = contentImage ? contentImage : insetImage;
     }
 }
 
