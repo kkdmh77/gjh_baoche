@@ -94,4 +94,13 @@ dispatch_once( &once, ^{ __singleton__ = [[__class alloc] init]; } ); \
 return __singleton__; \
 }
 
+// int转字符串
+#if __LP64__ || (TARGET_OS_EMBEDDED && !TARGET_OS_IPHONE) || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
+#define KKD_NSINETGER_2_NSSTRING(__value) [NSString stringWithFormat:@"%ld",__value]
+#define KKD_INT(__value) ((NSInteger)__value)
+#else
+#define KKD_NSINETGER_2_NSSTRING(__value) [NSString stringWithFormat:@"%d",__value]
+#define KKD_INT(__value) (__value)
+#endif
+
 #endif /* KToolsDefine_h */

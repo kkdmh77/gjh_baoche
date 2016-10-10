@@ -245,7 +245,9 @@ DEF_SINGLETON(FontManager);
     NSString *fontName = (NSString *)CFBridgingRelease(CGFontCopyPostScriptName(newFont));
     if (![fontName isAbsoluteValid])
     {
-        CFRelease(newFont);
+        if (newFont) {
+            CFRelease(newFont);
+        }
         DLog(@"字体注册失败,路径 path = %@",fontPath);
         return nil;
         

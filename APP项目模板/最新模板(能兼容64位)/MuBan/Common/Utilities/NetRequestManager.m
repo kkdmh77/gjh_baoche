@@ -9,7 +9,7 @@
 #import "NetRequestManager.h"
 #import "DownloadCache.h"
 #import "CoreDataManager.h"
-#import "CoreData+MagicalRecord.h"
+#import <MagicalRecord/MagicalRecord.h>
 #import "UserInfoModel.h"
 
 static NSString * const CacheKey = @"CacheKey";

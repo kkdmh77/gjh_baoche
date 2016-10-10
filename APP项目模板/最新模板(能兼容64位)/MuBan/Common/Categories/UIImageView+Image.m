@@ -28,7 +28,7 @@
 
 - (void)gjh_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder imageShowStyle:(ImageShowStyle)style options:(SDWebImageOptions)options success:(void (^)(UIImage *))success failure:(void (^)(NSError *))failure
 {
-    self.contentMode = UIViewContentModeCenter;
+    // self.contentMode = UIViewContentModeCenter;
     
     // [self setImageWithURL:url placeholderImage:placeholder imageShowStyle:style options:options success:success failure:failure];
     

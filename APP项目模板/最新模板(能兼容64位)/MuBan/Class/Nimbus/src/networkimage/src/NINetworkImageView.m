@@ -184,10 +184,10 @@
     return;
   }
   [self _didFinishLoadingWithImage:operation.imageCroppedAndSizedForDisplay
-                   cacheIdentifier:operation.cacheIdentifier
+                   cacheIdentifier:operation.NI_cacheIdentifier
                        displaySize:operation.imageDisplaySize
                           cropRect:operation.imageCropRect
-                       contentMode:operation.imageContentMode
+                       contentMode:operation.NI_imageContentMode
                       scaleOptions:operation.scaleOptions
                     expirationDate:nil];
 }
@@ -386,7 +386,7 @@
 
     // Attempt to load the image from memory first.
     if (nil != self.imageMemoryCache) {
-      NSString* cacheKey = [self cacheKeyForCacheIdentifier:operation.cacheIdentifier
+      NSString* cacheKey = [self cacheKeyForCacheIdentifier:operation.NI_cacheIdentifier
                                                   imageSize:displaySize
                                                    cropRect:cropRect
                                                 contentMode:contentMode
@@ -413,7 +413,7 @@
       operation.interpolationQuality = self.interpolationQuality;
       if (self.sizeForDisplay) {
         operation.imageDisplaySize = displaySize;
-        operation.imageContentMode = contentMode;
+        operation.NI_imageContentMode = contentMode;
       }
 
       self.operation = operation;

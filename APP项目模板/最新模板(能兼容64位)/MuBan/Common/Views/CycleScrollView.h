@@ -28,7 +28,7 @@ typedef enum
 @property (nonatomic, readonly)  UIPageControl       *pageControl;              // default is show
 @property (nonatomic, assign)    NSInteger           currentPage;               // default is 0
 @property (nonatomic, assign)    BOOL                canBeLongPressToSaveImage; // 是否允许长按保存图片 default is YES
-@property (nonatomic, assign, setter = setDelegate:) id<CycleScrollViewDelegate> delegate;
+@property (nonatomic, weak, setter = setDelegate:)   id<CycleScrollViewDelegate> delegate;
 
 /**
  @ 方法描述    创建加载本地图片组的循环滚动ScrollView

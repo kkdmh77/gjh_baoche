@@ -27,6 +27,8 @@
     ViewShowStyle _viewContentMode;
     
     UIImage *_curShowImage;
+    
+    NSThread *_thread;
 }
 
 @end
@@ -81,6 +83,8 @@
 {
     if([_imageDataSourceArray isAbsoluteValid])
     {
+        [self stopAutoScroll];
+        
         _isShouldAutoScroll = _isAutoScroll;
         
         [self setup];
@@ -116,6 +120,7 @@
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
     _scrollView.pagingEnabled = YES;
+    _scrollView.scrollsToTop = NO;
     [self addSubview:_scrollView];
     
     // pageControl
@@ -227,22 +232,46 @@
     return nil;
 }
 
+- (void)stopAutoScroll
+{
+    [_thread cancel];
+}
+
 - (void)setAutoScroll
 {
     if (_isAutoScroll)
     {
+        _thread = [[NSThread alloc] initWithTarget:self selector:@selector(autoScroll) object:nil];
+        [_thread start];
+        
+        /*
         [GCDThread enqueueBackground:^{
             while (_isShouldAutoScroll)
             {
                 [NSThread sleepForTimeInterval:AutoScrollIntervalTime];
 
                 [GCDThread enqueueForeground:^{
-                    /*
-                    DLog(@" %d == %@",_currentPage,NSStringFromCGPoint(_scrollView.contentOffset));
-                    */
                     [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width * 2, 0) animated:YES];
                 }];
             }
+        }];
+         */
+    }
+}
+
+- (void)autoScroll
+{
+    while (_isShouldAutoScroll)
+    {
+        [NSThread sleepForTimeInterval:AutoScrollIntervalTime];
+        
+        if ([[NSThread currentThread] isCancelled]) return;
+
+        [GCDThread enqueueForeground:^{
+            /*
+             DLog(@" %d == %@",_currentPage,NSStringFromCGPoint(_scrollView.contentOffset));
+             */
+            [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width * 2, 0) animated:YES];
         }];
     }
 }

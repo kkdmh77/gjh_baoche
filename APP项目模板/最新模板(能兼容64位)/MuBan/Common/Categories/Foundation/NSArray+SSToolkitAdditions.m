@@ -84,6 +84,10 @@
     return (self && [self isKindOfClass:[NSArray class]] && self.count != 0);
 }
 
+- (BOOL)isValidArray {
+    return self.count != 0;
+}
+
 @end
 
 

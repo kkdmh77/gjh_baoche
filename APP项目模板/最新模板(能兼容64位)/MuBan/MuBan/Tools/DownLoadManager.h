@@ -1,35 +1,61 @@
 //
 //  DownLoadManager.h
-//  KKDictionary
+//  kkpoem
 //
-//  Created by KungJack on 12/8/14.
-//  Copyright (c) 2014 YY. All rights reserved.
+//  Created by 龚 俊慧 on 16/9/21.
+//  Copyright © 2016年 com.gjh. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "AFDownloadRequestOperation.h"
 
-#define DOWN_LOAD_FILEING       @"DOWN_LOAD_FILEING"
-#define DOWN_LOAD_PAUSE         @"DOWN_LOAD_PAUSE"
-#define DOWN_LOAD_SUCCESS       @"DOWN_LOAD_SUCCESS"
-#define DOWN_LOAD_ERROR         @"DOWN_LOAD_ERROR"
+typedef void (^DownloadStartBlock)      (AFDownloadRequestOperation *operation);
+typedef void (^DownloadProgressBlock)   (AFDownloadRequestOperation *operation, CGFloat progress); // progress: 0 ~ 1
+typedef void (^DownloadPauseBlock)      (AFDownloadRequestOperation *operation);
+typedef void (^DownloadCompletionBlock) (AFDownloadRequestOperation *operation, NSError *error);
 
-#define DOWN_LOAD_SUCCESS_HAVE_NEXT  @"DOWN_LOAD_SUCCESS_HAVE_NEXT"
-#define DOWN_LOAD_ERROR_HAVE_NEXT    @"DOWN_LOAD_ERROR_HAVE_NEXT"
+@interface DownloadManager : NSObject
 
-@interface DownLoadManager : NSObject
+AS_SINGLETON(DownloadManager);
 
-AS_SINGLETON(DownLoadManager);
+@property (nonatomic, strong, readonly) NSOperationQueue *dbZipOperationQueue; // zip包的下载队列
 
-@property (nonatomic, strong) NSMutableDictionary<NSString *, AFDownloadRequestOperation *> *currentDownLoad;
+- (AFDownloadRequestOperation *)dbZipDownloadingOperationWithUrlStr:(NSString *)urlString; // 正在下载或者暂停中的任务
 
-- (void)startDownLoadFileWithURLString:(NSString *)urlString;
+/// 数据库zip包的下载(如果是WIFI环境开始的下载-从WIFI切换到移动数据后会自动暂停)
+- (AFDownloadRequestOperation *)downloadFileWithURLString:(NSString *)urlString
+                                               completion:(DownloadCompletionBlock)completion;
 
-- (void)startDownLoadFileWithURLString:(NSString *)urlString
-                                isNext:(BOOL)isNext;
+- (AFDownloadRequestOperation *)downloadFileWithURLString:(NSString *)urlString
+                                                 progress:(DownloadProgressBlock)progress
+                                               completion:(DownloadCompletionBlock)completion;
 
-- (void)startDownLoadFileWithURLString:(NSString *)urlString
-                                isNext:(BOOL)isNext
-                               isPatch:(BOOL)isPatch;
+- (AFDownloadRequestOperation *)downloadFileWithURLString:(NSString *)urlString
+                                                  isPatch:(BOOL)isPatch
+                                                 progress:(DownloadProgressBlock)progress
+                                                    pause:(DownloadPauseBlock)pause
+                                               completion:(DownloadCompletionBlock)completion;
+
+- (AFDownloadRequestOperation *)downloadFileWithURLString:(NSString *)urlString
+                                                  isPatch:(BOOL)isPatch
+                                                    start:(DownloadStartBlock)start
+                                                 progress:(DownloadProgressBlock)progress
+                                                    pause:(DownloadPauseBlock)pause
+                                               completion:(DownloadCompletionBlock)completion;
+
+////////////////////////////////////////////////////////////////////////////////
+
+/// 普通非zip包的下载(允许移动数据下载-从WIFI切换到移动数据不自动暂停)
+- (AFDownloadRequestOperation *)downloadFileWithUrlStr:(NSString *)urlStr
+                                            targetPath:(NSString *)targetPath
+                            completionBlockWithSuccess:(void (^) (AFDownloadRequestOperation *operation))success
+                                               failure:(void (^) (AFDownloadRequestOperation *operation, NSError *error))failure;
+
+- (AFDownloadRequestOperation *)downloadFileWithUrlStr:(NSString *)urlStr
+                                            targetPath:(NSString *)targetPath
+                                        blockWithStart:(void (^) (AFDownloadRequestOperation *operation))start
+                                              progress:(void (^) (AFDownloadRequestOperation *operation, CGFloat percentDone))progress
+                                               success:(void (^) (AFDownloadRequestOperation *operation))success
+                                               failure:(void (^) (AFDownloadRequestOperation *operation, NSError *error))failure;
 
 @end

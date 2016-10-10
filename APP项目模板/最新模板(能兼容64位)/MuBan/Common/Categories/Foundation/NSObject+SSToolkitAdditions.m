@@ -15,4 +15,25 @@
     return ![self isKindOfClass:[NSNull class]];
 }
 
+- (BOOL)isValidString {
+    return NO;
+}
+
+- (BOOL)isValidNumber {
+    return NO;
+}
+
+- (BOOL)isValidArray {
+    return NO;
+}
+
+- (BOOL)isValidDictionary {
+    return NO;
+}
+
+- (BOOL)isValidData {
+    return NO;
+}
+
+
 @end

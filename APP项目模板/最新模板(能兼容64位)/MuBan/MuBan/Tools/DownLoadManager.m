@@ -1,10 +1,10 @@
 
 //
 //  DownLoadManager.m
-//  KKDictionary
+//  kkpoem
 //
-//  Created by KungJack on 12/8/14.
-//  Copyright (c) 2014 YY. All rights reserved.
+//  Created by 龚 俊慧 on 16/9/21.
+//  Copyright © 2016年 com.gjh. All rights reserved.
 //
 
 #import "DownLoadManager.h"
@@ -12,35 +12,37 @@
 #import "DataPackageInfoModel.h"
 #import "AFNetworking.h"
 #import "NSData+bsdiff.h"
-#import "DBManager.h"
 #import "GCDThread.h"
 #import "HUDManager.h"
 #import "NetworkStatusManager.h"
+#include <objc/runtime.h>
 
-@interface DownLoadManager () {
-    
-    NSMutableDictionary *currentDownLoad;
-    NSMutableDictionary *failUrl;
-}
+static const void * const kCompletionBlockKey = &kCompletionBlockKey;
+static const void * const kPauseBlockKey = &kPauseBlockKey;
+static const void * const kProgressBlockKey = &kProgressBlockKey;
+static const void * const kStartBlockKey = &kStartBlockKey;
 
-@property (nonatomic, strong) NSMutableDictionary *failUrl;
-@property (nonatomic, strong) NSMutableDictionary *downloadTypeDic; // 是全包下载还是增量包下载
+@interface DownloadManager ()
+
+@property (nonatomic, strong) NSOperationQueue *dbZipOperationQueue; // zip包的下载队列
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *failDownloadContainer; // 下载失败的的任务 key:url, value:isPatch
+
+@property (nonatomic, strong) NSOperationQueue *operationQueue; // 普通包的下载队列
 
 @end
 
-@implementation DownLoadManager
+@implementation DownloadManager
 
-@synthesize currentDownLoad;
-@synthesize failUrl;
+DEF_SINGLETON(DownloadManager);
 
-DEF_SINGLETON(DownLoadManager);
-
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        self.currentDownLoad = [NSMutableDictionary dictionary];
-        self.failUrl = [NSMutableDictionary dictionary];
-        self.downloadTypeDic = [NSMutableDictionary dictionary];
+        self.dbZipOperationQueue = [[NSOperationQueue alloc] init];
+        self.failDownloadContainer = [NSMutableDictionary dictionary];
+        // _downloadOperationQueue.maxConcurrentOperationCount = 1;
+        
+        self.operationQueue = [[NSOperationQueue alloc] init];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(netWorkChange:)
@@ -57,78 +59,179 @@ DEF_SINGLETON(DownLoadManager);
                                                   object:nil];
 }
 
-- (void)startDownLoadFileWithURLString:(NSString *)urlString
+/****************************普通数据包下载********************************/
+
+- (AFDownloadRequestOperation *)downloadFileWithUrlStr:(NSString *)urlStr targetPath:(NSString *)targetPath completionBlockWithSuccess:(void (^)(AFDownloadRequestOperation *))success failure:(void (^)(AFDownloadRequestOperation *, NSError *))failure
 {
-    [self startDownLoadFileWithURLString:urlString isNext:NO];
+    return [self downloadFileWithUrlStr:urlStr
+                             targetPath:targetPath
+                         blockWithStart:nil
+                               progress:nil
+                                success:success
+                                failure:failure];
 }
 
-- (void)startDownLoadFileWithURLString:(NSString *)urlString isNext:(BOOL)isNext
+- (AFDownloadRequestOperation *)downloadFileWithUrlStr:(NSString *)urlStr targetPath:(NSString *)targetPath blockWithStart:(void (^)(AFDownloadRequestOperation *))start progress:(void (^)(AFDownloadRequestOperation *, CGFloat))progress success:(void (^)(AFDownloadRequestOperation *))success failure:(void (^)(AFDownloadRequestOperation *, NSError *))failure
 {
-    [self startDownLoadFileWithURLString:urlString isNext:isNext isPatch:NO];
+    AFDownloadRequestOperation *downloadOperation = nil;
+    NSArray *operations = [_operationQueue.operations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.request.URL.absoluteString = %@", urlStr]];
+    if ([operations isValidArray]) {
+        downloadOperation = operations[0];
+    }
+    
+    // 没有正在下载的任务
+    if (!downloadOperation) {
+        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
+                                                                                     URLString:urlStr
+                                                                                    parameters:nil
+                                                                                         error:NULL];
+        
+        downloadOperation = [[AFDownloadRequestOperation alloc] initWithRequest:request
+                                                                     targetPath:targetPath
+                                                                   shouldResume:YES];
+        downloadOperation.shouldOverwrite = YES;
+        
+        // 成功 & 失败的block
+        [downloadOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            AFDownloadRequestOperation *operation1 = (AFDownloadRequestOperation *)operation;
+            [operation1 deleteTempFileWithError:NULL];
+            
+            // SHA1校验
+            /*
+            NSDictionary *headerDic = operation.response.allHeaderFields;
+            NSString *toCheckSha1Str = [[headerDic safeObjectForKey:@"Etag"] lowercaseString];
+            toCheckSha1Str = [toCheckSha1Str stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            NSString *sha1Str = [[[NSData dataWithContentsOfFile:targetPath] SHA1Sum] lowercaseString];
+             */
+            
+            if (success) {
+                success(operation1);
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            AFDownloadRequestOperation *operation2 = (AFDownloadRequestOperation *)operation;
+            
+            if (failure) {
+                failure(operation2, error);
+            }
+        }];
+        
+        // 下载进度block
+        [downloadOperation setProgressiveDownloadProgressBlock:^(AFDownloadRequestOperation *operation, NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpected, long long totalBytesReadForFile, long long totalBytesExpectedToReadForFile) {
+            CGFloat percentDone = totalBytesReadForFile / (CGFloat)totalBytesExpectedToReadForFile;
+            
+            if (progress) {
+                progress(operation, percentDone);
+            }
+        }];
+        
+        [_operationQueue addOperation:downloadOperation];
+        
+        if (start) {
+            start(downloadOperation);
+        }
+    } else {
+        // 正在下载
+        if (downloadOperation.isExecuting && failure) {
+            NSError *error = [self makeErrorWithDescription:@"数据包正在下载..."
+                                                       code:1505
+                                                     domain:nil];
+            
+            failure(downloadOperation, error);
+        } else if (downloadOperation.isPaused) {
+            [downloadOperation resume];
+        }
+    }
+    
+    return downloadOperation;
 }
 
-- (void)startDownLoadFileWithURLString:(NSString *)urlString isNext:(BOOL)isNext isPatch:(BOOL)isPatch
+#pragma mark - ////////////////////////////////////////////////////////////////////////////////
+
+- (AFDownloadRequestOperation *)dbZipDownloadingOperationWithUrlStr:(NSString *)urlString
 {
-    AFDownloadRequestOperation *currentOperation = [self.currentDownLoad objectForKey:urlString];
-    // AFHTTPRequestOperation *currentOperation = [self.currentDownLoad objectForKey:urlString];
+    AFDownloadRequestOperation *operation = nil;
+    NSArray *operations = [_dbZipOperationQueue.operations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.request.URL.absoluteString = %@", urlString]];
+    
+    if ([operations isValidArray]) {
+        operation = operations[0];
+    }
+    
+    return operation;
+}
+
+/****************************压缩功能包下载********************************/
+
+- (AFDownloadRequestOperation *)downloadFileWithURLString:(NSString *)urlString completion:(DownloadCompletionBlock)completion
+{
+    return [self downloadFileWithURLString:urlString
+                                  progress:nil
+                                completion:completion];
+}
+
+- (AFDownloadRequestOperation *)downloadFileWithURLString:(NSString *)urlString progress:(DownloadProgressBlock)progress completion:(DownloadCompletionBlock)completion
+{
+    return [self downloadFileWithURLString:urlString
+                                   isPatch:NO
+                                  progress:progress
+                                     pause:nil
+                                completion:completion];
+}
+
+- (AFDownloadRequestOperation *)downloadFileWithURLString:(NSString *)urlString isPatch:(BOOL)isPatch progress:(DownloadProgressBlock)progress pause:(DownloadPauseBlock)pause completion:(DownloadCompletionBlock)completion
+{
+    return  [self downloadFileWithURLString:urlString
+                                    isPatch:isPatch
+                                      start:nil
+                                   progress:progress
+                                      pause:pause
+                                 completion:completion];
+}
+
+- (AFDownloadRequestOperation *)downloadFileWithURLString:(NSString *)urlString isPatch:(BOOL)isPatch start:(DownloadStartBlock)start progress:(DownloadProgressBlock)progress pause:(DownloadPauseBlock)pause completion:(DownloadCompletionBlock)completion
+{
+    AFDownloadRequestOperation *currentOperation = [self dbZipDownloadingOperationWithUrlStr:urlString];
     
     if (!currentOperation) {
-        
         NSURL *url = [NSURL URLWithString:urlString];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                           timeoutInterval:3600];
-        /*
-         AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-         [requestSerializer willChangeValueForKey:@"timeoutInterval"];
-         requestSerializer.timeoutInterval = 60.f;
-         [requestSerializer didChangeValueForKey:@"timeoutInterval"];
-         NSURLRequest *request = [requestSerializer requestWithMethod:@"GET"
-         URLString:urlString
-         parameters:nil
-         error:NULL];
-         */
+                                                               cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                           timeoutInterval:60];
         
-        NSString *fileName = [urlString lastPathComponent];
-        NSString *targetPath = [[FileManager getTempPath] stringByAppendingPathComponent:fileName];
-        if (IsFileExists(targetPath))
-        {
-            DeleteFiles(targetPath);
+        NSString *targetPath = [FileManager getFileDownladTargetPathWithDownloadUrl:urlString];
+        currentOperation = [[AFDownloadRequestOperation alloc] initWithRequest:request
+                                                                    targetPath:targetPath
+                                                                  shouldResume:YES];
+        currentOperation.shouldOverwrite = YES;
+        [currentOperation addObserver:[DownloadManager sharedInstance]
+                           forKeyPath:@"state"
+                              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                              context:NULL];
+        if (pause) {
+            objc_setAssociatedObject(currentOperation, kPauseBlockKey, pause, OBJC_ASSOCIATION_COPY_NONATOMIC);
+        }
+        if (completion) {
+            objc_setAssociatedObject(currentOperation, kCompletionBlockKey, completion, OBJC_ASSOCIATION_COPY_NONATOMIC);
+        }
+        if (progress) {
+            objc_setAssociatedObject(currentOperation, kProgressBlockKey, progress, OBJC_ASSOCIATION_COPY_NONATOMIC);
+        }
+        if (start) {
+            objc_setAssociatedObject(currentOperation, kStartBlockKey, start, OBJC_ASSOCIATION_COPY_NONATOMIC);
         }
         
-        AFDownloadRequestOperation *operation = [[AFDownloadRequestOperation alloc] initWithRequest:request
-                                                                                         targetPath:targetPath
-                                                                                       shouldResume:YES];
-        
-        /*
-         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-         operation.outputStream = [NSOutputStream outputStreamToFileAtPath:targetPath append:NO];
-         */
-        
-        [self.currentDownLoad setValue:operation forKey:urlString];
-        
-        DBFileType fileType = [[FileManager sharedInstance] getFileIdByUrl:urlString];
-        __weak AFDownloadRequestOperation *_operation = operation;
+        DBFileType fileType = [[FileManager sharedInstance] getFileTypeByUrl:urlString];
         
         // 成功&失败的block
-        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation1, id responseObject) {
-            
+        WEAKSELF
+        [currentOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            AFDownloadRequestOperation *operation1 = (AFDownloadRequestOperation *)operation;
+            [operation1 removeObserver:weakSelf forKeyPath:@"state" context:NULL];
+            [operation1 deleteTempFileWithError:nil];
+
             DataPackageInfoModel *model = [[FileManager sharedInstance].dataPackageInfoDic objectForKey:KKD_NSINETGER_2_NSSTRING(fileType)];
-            model.isDownLoading = NO;
+            model.isDownloading = NO;
             
-            [self.currentDownLoad removeObjectForKey:urlString];
-            [failUrl removeObjectForKey:urlString];
-            [_downloadTypeDic removeObjectForKey:urlString];
-            
-            if (isNext) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:DOWN_LOAD_SUCCESS_HAVE_NEXT
-                                                                    object:@{@"fileType": @(fileType)}];
-            } else {
-                [[NSNotificationCenter defaultCenter] postNotificationName:DOWN_LOAD_SUCCESS
-                                                                    object:@{@"fileType":@(fileType)}];
-            }
-            
-            [_operation deleteTempFileWithError:nil];
+            [weakSelf.failDownloadContainer removeObjectForKey:urlString];
             
             // MD5校验
             NSString *md5String = [[[NSData dataWithContentsOfFile:targetPath] MD5Sum] lowercaseString];
@@ -161,28 +264,28 @@ DEF_SINGLETON(DownLoadManager);
                                 [GCDThread enqueueForeground:^{
                                     model.hasNewVersion = NO;
                                     model.dbMergeFailedVersionColde = nil;
-                                    model.isUpPackageing = NO;
                                     
-                                    [[NSNotificationCenter defaultCenter] postNotificationName:UN_PARKAGE_FILE_SUCCESS
-                                                                                        object:@{@"fileType": @(fileType)}];
+                                    if (completion) {
+                                        completion(operation1, nil);
+                                    }
                                     
                                     // 下载完且解压成功后做功能包下载完成的提示
-                                    [HUDManager showAutoHideHUDWithToShowStr:[DOWNLOAD_SUCCESS_MSGS objectAtIndex:fileType]
+                                    [HUDManager showAutoHideHUDWithToShowStr:@"离线包已下载完成！" // DOWNLOAD_SUCCESS_MSG(type)
                                                                      HUDMode:MBProgressHUDModeText];
                                 }];
                             }
                             // 移动包失败
                             else
                             {
-                                [self postUnPackageFailedNotificationWithPackageInfoModel:model
-                                                                              fileType:fileType];
+                                [weakSelf patchDownloadFailedWithOperation:operation1
+                                                          packageInfoModel:model];
                             }
                         }
                         // 合并增量包失败
                         else
                         {
-                            [self postUnPackageFailedNotificationWithPackageInfoModel:model
-                                                                          fileType:fileType];
+                            [weakSelf patchDownloadFailedWithOperation:operation1
+                                                      packageInfoModel:model];
                         }
                     }];
                 }
@@ -190,68 +293,105 @@ DEF_SINGLETON(DownLoadManager);
                 // 发送失败通知，给这个版本的数据库打上合并失败的tag
                 else
                 {
-                    [self postUnPackageFailedNotificationWithPackageInfoModel:model
-                                                                  fileType:fileType];
+                    [weakSelf patchDownloadFailedWithOperation:operation1
+                                              packageInfoModel:model];
                 }
             } else {
                 toCheckMD5Str = [model.md5 lowercaseString];
                 
-                if ([md5String isEqualToString:toCheckMD5Str])
-                {
-                    // 解压
-                    [FileManager unPackageFileWithToUnPackageFilePath:targetPath fileType:fileType];
+                // 解压
+                if ([md5String isEqualToString:toCheckMD5Str] && [FileManager unPackageFileWithToUnPackageFilePath:targetPath fileType:fileType]) {
+                    [GCDThread enqueueForeground:^{
+                        model.hasNewVersion = NO;
+                        model.dbMergeFailedVersionColde = nil;
+                        
+                        if (completion) {
+                            completion(operation1, nil);
+                        }
+                        
+                        // 下载完且解压成功后做功能包下载完成的提示
+                        [HUDManager showAutoHideHUDWithToShowStr:@"离线包已下载完成！" // DOWNLOAD_SUCCESS_MSG(type)
+                                                         HUDMode:MBProgressHUDModeText];
+                    }];
+                } else {
+                    [GCDThread enqueueForeground:^{
+                        if (completion) {
+                            NSError *error = [weakSelf makeErrorWithDescription:@"数据库MD5校验失败或者zip解压失败!"
+                                                                           code:1504
+                                                                         domain:nil];
+                            
+                            completion(operation1, error);
+                        }
+                    }];
                 }
             }
-        } failure:^(AFHTTPRequestOperation *operation2, NSError *error) {
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            AFDownloadRequestOperation *operation2 = (AFDownloadRequestOperation *)operation;
+            [operation2 removeObserver:weakSelf forKeyPath:@"state" context:NULL];
+            
             DataPackageInfoModel *model = [[FileManager sharedInstance].dataPackageInfoDic objectForKey:KKD_NSINETGER_2_NSSTRING(fileType)];
-            model.isDownLoading = NO;
+            model.isDownloading = NO;
             
-            [self.currentDownLoad removeObjectForKey:urlString];
-            [failUrl setValue:[NSNumber numberWithBool:isNext] forKey:urlString];
-            [_downloadTypeDic setObject:@(isPatch) forKey:urlString];
+            [weakSelf.failDownloadContainer setObject:@(isPatch) forKey:urlString];
             
-            if (isNext) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:DOWN_LOAD_ERROR_HAVE_NEXT
-                                                                    object:@{@"fileType": @(fileType)}];
-            } else {
-                [[NSNotificationCenter defaultCenter] postNotificationName:DOWN_LOAD_ERROR
-                                                                    object:@{@"fileType": @(fileType)}];
-            }
+            [GCDThread enqueueForeground:^{
+                if (completion) {
+                    completion(operation2, error);
+                }
+            }];
         }];
-        
-        float timePercent = [FileManager getUnpackageTimePercent:fileType];
         
         // 下载进度block
-        [operation setProgressiveDownloadProgressBlock:^(AFDownloadRequestOperation *operation, NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpected, long long totalBytesReadForFile, long long totalBytesExpectedToReadForFile) {
+        [currentOperation setProgressiveDownloadProgressBlock:^(AFDownloadRequestOperation *operation, NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpected, long long totalBytesReadForFile, long long totalBytesExpectedToReadForFile) {
             
-            float percentDone = totalBytesReadForFile / (float)totalBytesExpectedToReadForFile * timePercent;
+            float percentDone = totalBytesReadForFile / (float)totalBytesExpectedToReadForFile;
             
-            NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [NSNumber numberWithDouble:percentDone], @"percentDone",
-                                        [NSNumber numberWithLongLong:totalBytesRead], @"totalBytesRead",
-                                        [NSNumber numberWithLongLong:totalBytesRead], @"totalBytesExpected",
-                                        [NSNumber numberWithLongLong:totalBytesRead], @"totalBytesReadForFile",
-                                        [NSNumber numberWithLongLong:totalBytesRead], @"totalBytesExpectedToReadForFile",
-                                        @(fileType), @"fileType",
-                                        nil];
             DataPackageInfoModel *model = [[FileManager sharedInstance].dataPackageInfoDic objectForKey:KKD_NSINETGER_2_NSSTRING(fileType)];
-            model.isDownLoading = YES;
+            model.isDownloading = YES;
             model.percentDone = percentDone;
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:DOWN_LOAD_FILEING
-                                                                object:dictionary];
+            [GCDThread enqueueForeground:^{
+                if (progress) {
+                    progress(operation, percentDone);
+                }
+            }];
         }];
         
-        [operation start];
+        // [operation start];
+        currentOperation.queuePriority = NSOperationQueuePriorityVeryHigh;
+        [_dbZipOperationQueue addOperation:currentOperation];
         
+        [GCDThread enqueueForeground:^{
+            if (start) {
+                start(currentOperation);
+            }
+        }];
     } else {
-        if (currentOperation.isPaused) {
+        // 正在下载
+        if (currentOperation.isExecuting && completion) {
+            NSError *error = [self makeErrorWithDescription:@"数据包正在下载..."
+                                                       code:1505
+                                                     domain:nil];
+            
+            completion(currentOperation, error);
+        } else if (currentOperation.isPaused) {
             [currentOperation resume];
         }
     }
+    
+    return currentOperation;
 }
 
-- (void)postUnPackageFailedNotificationWithPackageInfoModel:(DataPackageInfoModel *)model fileType:(DBFileType)type
+- (NSError *)makeErrorWithDescription:(NSString *)description code:(NSInteger)code domain:(NSString *)domain
+{
+    NSError *error = [NSError errorWithDomain:[domain isValidString] ? domain : @"DOWNLOAD_ERROR_DOMAIN"
+                                         code:code
+                                     userInfo:@{NSLocalizedDescriptionKey: [description isValidString] ? description : @"数据库下载失败!"}];
+    return error;
+}
+
+// 增量升级失败
+- (void)patchDownloadFailedWithOperation:(AFDownloadRequestOperation *)operation packageInfoModel:(DataPackageInfoModel *)model
 {
     // 合并失败
     // 发送失败通知，给这个版本的数据库打上合并失败的tag
@@ -260,37 +400,58 @@ DEF_SINGLETON(DownLoadManager);
         model.dbMergeFailedVersionColde = model.versionCode;
         model.isUpPackageing = NO;
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:UN_PARKAGE_FILE_ERROR
-                                                            object:@{@"fileType": @(type)}];
+        DownloadCompletionBlock completion = objc_getAssociatedObject(operation, kCompletionBlockKey);
+        if (completion) {
+            NSError *error = [self makeErrorWithDescription:@"数据库增量升级失败！"
+                                                       code:1503
+                                                     domain:nil];
+            
+            completion(operation, error);
+        }
     }];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    if ([object isKindOfClass:[AFDownloadRequestOperation class]]) {
+        DownloadPauseBlock pause = objc_getAssociatedObject(object, kPauseBlockKey);
+        
+        if (pause && [keyPath isEqualToString:@"state"] && -1 == [[change safeObjectForKey:@"new"] integerValue]) {
+            pause((AFDownloadRequestOperation *)object);
+        }
+    }
 }
 
 - (void)netWorkChange:(NSNotification *)notification
 {
     NetworkStatus status = [NetworkStatusManager getNetworkStatus];
     switch (status) {
-        case kReachableViaWiFi:
+        case ReachableViaWiFi:
         {
-            for (NSString *key in [failUrl allKeys]) {
-                [self startDownLoadFileWithURLString:key
-                                              isNext:[[failUrl objectForKey:key] boolValue]
-                                             isPatch:[_downloadTypeDic[key] boolValue]];
+            for (NSString *key in [_failDownloadContainer allKeys]) {
+                BOOL isPatch = [[_failDownloadContainer objectForKey:key] boolValue];
+                
+                [self downloadFileWithURLString:key
+                                        isPatch:isPatch
+                                       progress:nil
+                                          pause:nil
+                                     completion:nil];
             }
             
             // 切换到WIFI后开始所有暂停的下载任务
-            for (AFHTTPRequestOperation *operation in self.currentDownLoad.allValues)
+            for (AFHTTPRequestOperation *operation in _dbZipOperationQueue.operations)
             {
                 [operation resume];
             }
         }
             break;
-        case kReachableViaWWAN:
+        case ReachableViaWWAN:
         {
             // 切换到3G后停止所有正在进行的下载任务
             [self pauseAllDownloadTask];
         }
             break;
-        case kNotReachable:
+        case NotReachable:
         {
             // 没有网络后停止所有正在进行的下载任务
             [self pauseAllDownloadTask];
@@ -304,13 +465,9 @@ DEF_SINGLETON(DownLoadManager);
 
 - (void)pauseAllDownloadTask
 {
-    for (AFHTTPRequestOperation *operation in self.currentDownLoad.allValues)
+    for (AFHTTPRequestOperation *operation in _dbZipOperationQueue.operations)
     {
         [operation pause];
-        
-        DBFileType fileType = [[FileManager sharedInstance] getFileIdByUrl:operation.request.URL.absoluteString];
-        [[NSNotificationCenter defaultCenter] postNotificationName:DOWN_LOAD_PAUSE
-                                                            object:@{@"fileType": @(fileType)}];
     }
 }
 

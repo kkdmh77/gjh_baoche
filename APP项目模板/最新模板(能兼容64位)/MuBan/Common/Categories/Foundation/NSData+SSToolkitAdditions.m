@@ -240,7 +240,8 @@ static const short _base64DecodingTable[256] = {
     return  nil;
 }
 
-
-
+- (BOOL)isValidData {
+    return self.length != 0;
+}
 
 @end

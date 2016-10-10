@@ -42,7 +42,26 @@ static UIView *statusBarCoverView = nil;
     // 清空通知数字显示
     [UIFactory clearApplicationBadgeNumber];
     
+    // 设置Document文件夹里的所有文件不自动备份到iCloud
+    [self addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:GetDocumentPath()]];
+    
     // ...
+}
+
+// 设置Document文件夹里的所有文件不自动备份到iCloud
++ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+{
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[URL path]]) {
+        NSError *error = nil;
+        BOOL success = [URL setResourceValue:@(YES)
+                                      forKey:NSURLIsExcludedFromBackupKey
+                                       error: &error];
+        if (!success) {
+            NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+        }
+        return success;
+    }
+    return NO;
 }
 
 // 用来取得Settings.Bundle各控件的预设值

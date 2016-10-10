@@ -296,4 +296,8 @@
     return (self && [self isKindOfClass:[NSString class]] && self.length != 0);
 }
 
+- (BOOL)isValidString {
+    return self.length != 0 && ![self isEqualToString:@"(null)"];
+}
+
 @end

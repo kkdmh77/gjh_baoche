@@ -10,7 +10,7 @@
 #import "NetworkStatusManager.h"
 #import "IQKeyboardManager.h"
 #import "LanguagesManager.h"
-#import "CoreData+MagicalRecord.h"
+#import <MagicalRecord/MagicalRecord.h>
 #import "UIFactory.h"
 #import "FontManager.h"
 #import "UserInfoModel.h"

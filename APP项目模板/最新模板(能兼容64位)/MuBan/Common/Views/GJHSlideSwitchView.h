@@ -39,7 +39,7 @@ static const CGFloat kDefaultSlideSwitchViewHeight = 38.0f; // 纯文字时候�
 @property (nonatomic, strong) UIScrollView *topScrollView;
 @property (nonatomic, strong) UIColor *topScrollViewBackgroundColor;    // 顶部页签视图背景颜色
 @property (nonatomic, assign) NSInteger userSelectedChannelID;
-@property (nonatomic, assign) id<GJHSlideSwitchViewDelegate> slideSwitchViewDelegate;
+@property (nonatomic, weak  ) id<GJHSlideSwitchViewDelegate> slideSwitchViewDelegate;
 
 @property (nonatomic, strong) UIColor *tabItemNormalColor;              // btn正常时的字体颜色
 @property (nonatomic, strong) NSArray *tabItemNormalColorArray;         // btn正常时的字体颜色数组(如果有数组会用数组里的颜色赋值给对应的btn,如果没有就统一用tabItemNormalColor)

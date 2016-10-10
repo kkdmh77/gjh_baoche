@@ -19,4 +19,8 @@
 	return [NSDate dateWithTimeIntervalSince1970:timestamp];
 }
 
+- (BOOL)isValidNumber {
+    return YES;
+}
+
 @end

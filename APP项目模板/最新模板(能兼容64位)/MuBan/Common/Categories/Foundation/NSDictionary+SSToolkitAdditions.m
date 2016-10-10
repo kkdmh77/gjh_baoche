@@ -91,6 +91,10 @@
     return (self && [self isKindOfClass:[NSDictionary class]] && self.count != 0);
 }
 
+- (BOOL)isValidDictionary {
+    return self.count != 0;
+}
+
 @end
 
 
