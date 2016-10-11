@@ -36,7 +36,7 @@
         {
             for (NSDictionary *dic in prePromotionList)
             {
-                _168Entity *preEntity = [_168Entity initWithDict:dic];
+                _168Entity *preEntity = [_168Entity objectFromDictionary:dic];
                 
                 [*preContainer addObject:preEntity];
             }
@@ -52,7 +52,7 @@
         {
             for (NSDictionary *dic in curPromotionList)
             {
-                _168Entity *curEntity = [_168Entity initWithDict:dic];
+                _168Entity *curEntity = [_168Entity objectFromDictionary:dic];
                 
                 [*curContainer addObject:curEntity];
             }
@@ -68,7 +68,7 @@
         {
             for (NSDictionary *dic in nextPromotionList)
             {
-                _168Entity *nextEntity = [_168Entity initWithDict:dic];
+                _168Entity *nextEntity = [_168Entity objectFromDictionary:dic];
                 
                 [*nextContainer addObject:nextEntity];
             }

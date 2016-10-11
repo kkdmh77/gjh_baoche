@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 com.ejushang. All rights reserved.
 //
 
-#import "NetItemList.h"
+#import "Jastor.h"
 
-@interface FAQEntity : NetItem
+@interface FAQEntity : Jastor
 
 @property (nonatomic, strong) NSString *questionStr;
 @property (nonatomic, strong) NSString *answerStr;
@@ -17,7 +17,7 @@
 
 ///////////////////////////////////////////////////////////////
 
-@interface _168Entity : NetItem
+@interface _168Entity : Jastor
 
 /*
 "id": 8,
