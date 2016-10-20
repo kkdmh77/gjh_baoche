@@ -33,10 +33,18 @@ typedef NS_ENUM(NSInteger, DBFileType)
     /// 赏析
     SHANGXI,
     
+    /// 作者
+    ZUOZHE,
+    
     /// 全部诗词
     FULL_POEM,
     
 };
+
+typedef void (^DBFileDownloadStartBlock)      (DBFileType type);
+typedef void (^DBFileDownloadProgressBlock)   (DBFileType type, CGFloat progress); // progress: 0 ~ 1
+typedef void (^DBFileDownloadPauseBlock)      (DBFileType type);
+typedef void (^DBFileDownloadCompletionBlock) (DBFileType type, NSError *error);
 
 // index0: 文件名
 // index1: 文件下载参数
@@ -48,8 +56,9 @@ typedef NS_ENUM(NSInteger, DBFileType)
 
 AS_SINGLETON(FileManager);
 
-@property (nonatomic, strong) NSMutableDictionary<NSString *, DataPackageInfoModel *> *dataPackageInfoDic;
-@property (nonatomic, strong) NSArray<NSDictionary *> *packageVersionInfoArray; // 功能包版本更新信息
+@property (nonatomic, strong) NSMutableDictionary<NSString *, DataPackageInfoModel *> *dataPackageInfoDic; //!< 功能包相关信息
+@property (nonatomic, strong) NSArray<NSDictionary *> *packageVersionInfoArray; //!< 功能包版本更新信息
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, NSMutableDictionary *> *downloadBlockDic; //!< 下载的回调block
 
 + (void)creatCacheFolder;
 
@@ -141,10 +150,25 @@ AS_SINGLETON(FileManager);
 - (DBFileType)getFileTypeByUrl:(NSString *)urlString;
 
 /// 下载数据包
+/// 直接进行下载
 - (void)downloadPackageWithFileType:(DBFileType)type;
+- (void)downloadPackageWithFileType:(DBFileType)type
+                              start:(DBFileDownloadStartBlock)start
+                           progress:(DBFileDownloadProgressBlock)progress
+                              pause:(DBFileDownloadPauseBlock)pause
+                         completion:(DBFileDownloadCompletionBlock)completion;
+
+/// 显示是否要下载功能包的弹窗
 - (void)downloadPackageWithFileTypeAndShowNoticeString:(DBFileType)type;
+
 - (void)downloadPackageWithFileType:(DBFileType)type
                           noticeStr:(NSString *)notice;
+- (void)downloadPackageWithFileType:(DBFileType)type
+                          noticeStr:(NSString *)notice
+                              start:(DBFileDownloadStartBlock)start
+                           progress:(DBFileDownloadProgressBlock)progress
+                              pause:(DBFileDownloadPauseBlock)pause
+                         completion:(DBFileDownloadCompletionBlock)completion;
 
 ////////////////////////////////////////////////////////////////////////////////
 

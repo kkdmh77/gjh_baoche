@@ -38,7 +38,7 @@
     NSDictionary *idsDic = [AnalyticsIDManager idsDic];
     NSString *idStr = [idsDic safeObjectForKey:NSStringFromSelector(action)];
     
-    if ([idStr isAbsoluteValid])
+    if ([idStr isValidString])
     {
         [[KKDAnalytics sharedInstance] event:idStr];
     }

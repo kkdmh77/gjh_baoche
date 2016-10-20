@@ -172,6 +172,19 @@ typedef void (^PickPhotoCancelHandle) (void);
                                            isSelected:(BOOL)isSelected
                                                action:(SEL)action;
 
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position
+                                         normalPicker:(DKImagePicker)normalPicker
+                              normalHighlightedPicker:(DKImagePicker)normalHighlightedPicker
+                                               action:(SEL)action;
+
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position
+                                         normalPicker:(DKImagePicker)normalPicker
+                              normalHighlightedPicker:(DKImagePicker)normalHighlightedPicker
+                                       selectedPicker:(DKImagePicker)selectedPicker
+                            selectedHighlightedPicker:(DKImagePicker)selectedHighlightedPicker
+                                           isSelected:(BOOL)isSelected
+                                               action:(SEL)action;
+
 /**
  @ 方法描述    配置导航栏按钮
  @ 输入参数    BarbuttonItemPosition: 位置

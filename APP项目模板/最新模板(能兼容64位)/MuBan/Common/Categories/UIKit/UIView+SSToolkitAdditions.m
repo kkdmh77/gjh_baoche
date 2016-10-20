@@ -598,12 +598,12 @@ NSMutableDictionary *staticDrawLineViewAttributesDic = nil;
     return view;
 }
 
-- (void)addLineWithPosition:(ViewDrawLinePostionType)position lineColor:(UIColor *)lineColor lineWidth:(float)lineWidth
+- (UIView *)addLineWithPosition:(ViewDrawLinePostionType)position lineColor:(UIColor *)lineColor lineWidth:(float)lineWidth
 {
-    [self addLineWithPosition:position startPointOffset:0 endPointOffset:0 lineColor:lineColor lineWidth:lineWidth];
+    return [self addLineWithPosition:position startPointOffset:0 endPointOffset:0 lineColor:lineColor lineWidth:lineWidth];
 }
 
-- (void)addLineWithPosition:(ViewDrawLinePostionType)position startPointOffset:(CGFloat)startOffset endPointOffset:(CGFloat)endOffset lineColor:(UIColor *)lineColor lineWidth:(float)lineWidth
+- (UIView *)addLineWithPosition:(ViewDrawLinePostionType)position startPointOffset:(CGFloat)startOffset endPointOffset:(CGFloat)endOffset lineColor:(UIColor *)lineColor lineWidth:(float)lineWidth
 {
     if (!staticDrawLineViewAttributesDic)
     {
@@ -628,7 +628,7 @@ NSMutableDictionary *staticDrawLineViewAttributesDic = nil;
     {
         NSInteger linePosition = [[attributeDic objectForKey:PositionKey] integerValue];
         
-        if (position == linePosition) return;
+        if (position == linePosition) return nil;
     }
     
     // 存入属性
@@ -638,7 +638,7 @@ NSMutableDictionary *staticDrawLineViewAttributesDic = nil;
                                      [NSNumber numberWithFloat:lineWidth],WidthKey, nil];
     [attributeArray addObject:newAttributeDic];
     [staticDrawLineViewAttributesDic setObject:attributeArray forKey:attributeKeyStr];
-
+    
     // 开始划线
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = lineColor;
@@ -674,6 +674,7 @@ NSMutableDictionary *staticDrawLineViewAttributesDic = nil;
         default:
             break;
     }
+    return lineView;
 }
 
 @end

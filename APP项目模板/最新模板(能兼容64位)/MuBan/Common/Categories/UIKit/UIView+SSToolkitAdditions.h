@@ -166,7 +166,7 @@ typedef enum
 + (UIView *)reflectImage:(UIImage *)image withFrame:(CGRect)frame opacity:(CGFloat)opacity atView:(UIView *)view;
 
 /// 划线
-- (void)addLineWithPosition:(ViewDrawLinePostionType)position lineColor:(UIColor *)lineColor lineWidth:(float)lineWidth;
-- (void)addLineWithPosition:(ViewDrawLinePostionType)position startPointOffset:(CGFloat)startOffset endPointOffset:(CGFloat)endOffset lineColor:(UIColor *)lineColor lineWidth:(float)lineWidth;
+- (UIView *)addLineWithPosition:(ViewDrawLinePostionType)position lineColor:(UIColor *)lineColor lineWidth:(float)lineWidth;
+- (UIView *)addLineWithPosition:(ViewDrawLinePostionType)position startPointOffset:(CGFloat)startOffset endPointOffset:(CGFloat)endOffset lineColor:(UIColor *)lineColor lineWidth:(float)lineWidth;
 
 @end

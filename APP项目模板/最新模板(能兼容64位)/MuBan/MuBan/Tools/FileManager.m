@@ -31,6 +31,19 @@
 extern NSString * const kHasDownloadPictureListModelKey;
 extern NSString * const kUserInfoModelPlistFileName;
 
+NSString * const kDeleteDBFileNotificationKey = @"kDeleteDBFileNotificationKey";
+
+NSString * const kStartBlockKey = @"kStartBlockKey";
+NSString * const kProgressBlockKey = @"kProgressBlockKey";
+NSString * const kPauseBlockKey = @"kPauseBlockKey";
+NSString * const kCompletionBlockKey = @"kCompletionBlockKey";
+
+@interface FileManager ()
+
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableDictionary *> *downloadBlockDic; //!< 下载的回调block
+
+@end
+
 @implementation FileManager
 
 DEF_SINGLETON(FileManager);
@@ -39,6 +52,7 @@ DEF_SINGLETON(FileManager);
     self = [super init];
     if (self) {
         self.dataPackageInfoDic = [[self class] getDataPackageInfoModels];
+        self.downloadBlockDic = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -99,6 +113,7 @@ DEF_SINGLETON(FileManager);
                      @{@(ZHUJIE).stringValue:    @[@"poem_zhujie.db",  @"poem_zhujie_ios",  @"2", @"2"],
                        @(YIWEN).stringValue:     @[@"poem_yiwen.db",   @"poem_yiwen_ios",   @"2", @"2"],
                        @(SHANGXI).stringValue:   @[@"poem_shangxi.db", @"poem_shangxi_ios", @"2", @"4"],
+                       @(ZUOZHE).stringValue:    @[@"poem_zuozhe.db",  @"poem_zuozhe_ios",  @"1", @"1"],
                        @(FULL_POEM).stringValue: @[@"poem_full.db",    @"poem_full_ios",    @"1", @"1"]}];
     });
     
@@ -225,6 +240,10 @@ DEF_SINGLETON(FileManager);
          if (DeleteFiles(filePath))
          {
              [HUDManager showAutoHideHUDWithToShowStr:@"删除成功" HUDMode:MBProgressHUDModeText];
+             
+             [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteDBFileNotificationKey
+                                                                 object:nil
+                                                               userInfo:@{@"deletedFilePath": filePath}];
              
              if (completeHandle)
              {
@@ -502,18 +521,17 @@ DEF_SINGLETON(FileManager);
                           
                           // 下载完成后继续检测是否有下一个下载任务
                           if ([model.patchUrl isAbsoluteValid] && ![model.dbMergeFailedVersionColde isEqualToString:model.versionCode] && (memory / 4) >= fileSize) {
-                              [[DownloadManager sharedInstance] downloadFileWithURLString:model.patchUrl
-                                                                                  isPatch:YES
-                                                                                 progress:nil
-                                                                                    pause:nil
-                                                                               completion:^(AFDownloadRequestOperation *operation, NSError *error) {
-                                   [weakSelf dbFileUpdateAndNextWithDBFileType:nextFileType autoDownload:autoDownload];
-                              }];
+                              [weakSelf toDownloadWithUrl:model.patchUrl
+                                                 fileType:type
+                                                  isPatch:YES
+                                             autoDownload:autoDownload
+                                             nextFileType:nextFileType];
                           } else {
-                              [[DownloadManager sharedInstance] downloadFileWithURLString:model.downloadUrl
-                                                                               completion:^(AFDownloadRequestOperation *operation, NSError *error) {
-                                  [weakSelf dbFileUpdateAndNextWithDBFileType:nextFileType autoDownload:autoDownload];
-                              }];
+                              [weakSelf toDownloadWithUrl:model.downloadUrl
+                                                 fileType:type
+                                                  isPatch:NO
+                                             autoDownload:autoDownload
+                                             nextFileType:nextFileType];
                           }
                       } else {
                           // 检测更新
@@ -527,18 +545,21 @@ DEF_SINGLETON(FileManager);
                               
                               // 移动网络下，不进行检测是否有下一个下载任务
                               if ([model.patchUrl isAbsoluteValid] && ![model.dbMergeFailedVersionColde isEqualToString:model.versionCode]  && (memory / 4) >= fileSize) {
-                                  [[DownloadManager sharedInstance] downloadFileWithURLString:model.patchUrl
-                                                                                      isPatch:YES
-                                                                                     progress:nil
-                                                                                        pause:nil
-                                                                                   completion:nil];
+                                  [weakSelf toDownloadWithUrl:model.patchUrl
+                                                     fileType:type
+                                                      isPatch:YES
+                                                 autoDownload:autoDownload
+                                                 nextFileType:nextFileType];
                               } else {
-                                  [[DownloadManager sharedInstance] downloadFileWithURLString:model.downloadUrl
-                                                                                   completion:nil];
+                                  [weakSelf toDownloadWithUrl:model.downloadUrl
+                                                     fileType:type
+                                                      isPatch:NO
+                                                 autoDownload:autoDownload
+                                                 nextFileType:nextFileType];
                               }
                           }
                       } else {
-                          // 检测跟新
+                          // 检测更新
                           [weakSelf dbFileUpdateAndNextWithDBFileType:nextFileType autoDownload:autoDownload];
                       }
                   }
@@ -554,6 +575,75 @@ DEF_SINGLETON(FileManager);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error, NSInteger tag) {
         
     }];
+}
+
+- (void)toDownloadWithUrl:(NSString *)urlStr fileType:(DBFileType)type isPatch:(BOOL)isPatch autoDownload:(BOOL)autoDownload nextFileType:(DBFileType)nextFileType
+{
+    WEAKSELF
+    [[DownloadManager sharedInstance] downloadFileWithURLString:urlStr
+                                                        isPatch:isPatch
+                                                          start:^(AFDownloadRequestOperation *operation) {
+                                                              [weakSelf executeDownloadStartBlockWithType:type];
+                                                          }
+                                                       progress:^(AFDownloadRequestOperation *operation, CGFloat progress) {
+                                                           [weakSelf executeDownloadProgressBlockWithType:type progress:progress];
+                                                       }
+                                                          pause:^(AFDownloadRequestOperation *operation) {
+                                                              [weakSelf executeDownloadPauseBlockWithType:type];
+                                                          }
+                                                     completion:^(AFDownloadRequestOperation *operation, NSError *error) {
+                                                         [weakSelf executeDownloadCompletionBlockWithType:type error:error];
+                                                         
+                                                         // 检测下一个下载
+                                                         if ([NetworkStatusManager isEnableWIFI]) {
+                                                             [weakSelf dbFileUpdateAndNextWithDBFileType:nextFileType autoDownload:autoDownload];
+                                                         }
+                                                     }];
+}
+
+// 执行下载回调
+- (void)executeDownloadStartBlockWithType:(DBFileType)type
+{
+    NSString *key = @(type).stringValue;
+    NSMutableDictionary *blocksDic = [self.downloadBlockDic safeObjectForKey:key];
+    DBFileDownloadStartBlock start = [blocksDic safeObjectForKey:kStartBlockKey];
+    
+    if (start) {
+        start(type);
+    }
+}
+
+- (void)executeDownloadProgressBlockWithType:(DBFileType)type progress:(CGFloat)progress
+{
+    NSString *key = @(type).stringValue;
+    NSMutableDictionary *blocksDic = [self.downloadBlockDic safeObjectForKey:key];
+    DBFileDownloadProgressBlock progressBlock = [blocksDic safeObjectForKey:kProgressBlockKey];
+    
+    if (progressBlock) {
+        progressBlock(type, progress);
+    }
+}
+
+- (void)executeDownloadPauseBlockWithType:(DBFileType)type
+{
+    NSString *key = @(type).stringValue;
+    NSMutableDictionary *blocksDic = [self.downloadBlockDic safeObjectForKey:key];
+    DBFileDownloadPauseBlock pause = [blocksDic safeObjectForKey:kPauseBlockKey];
+    
+    if (pause) {
+        pause(type);
+    }
+}
+
+- (void)executeDownloadCompletionBlockWithType:(DBFileType)type error:(NSError *)error
+{
+    NSString *key = @(type).stringValue;
+    NSMutableDictionary *blocksDic = [self.downloadBlockDic safeObjectForKey:key];
+    DBFileDownloadCompletionBlock completion = [blocksDic safeObjectForKey:kCompletionBlockKey];
+    
+    if (completion) {
+        completion(type, error);
+    }
 }
 
 #pragma mark - 获取资源版本号相关的方法
@@ -619,10 +709,33 @@ DEF_SINGLETON(FileManager);
 
 - (void)downloadPackageWithFileType:(DBFileType)type noticeStr:(NSString *)notice
 {
+    [self downloadPackageWithFileType:type
+                            noticeStr:notice
+                                start:nil
+                             progress:nil
+                                pause:nil
+                           completion:nil];
+}
+
+- (void)downloadPackageWithFileType:(DBFileType)type noticeStr:(NSString *)notice start:(DBFileDownloadStartBlock)start progress:(DBFileDownloadProgressBlock)progress pause:(DBFileDownloadPauseBlock)pause completion:(DBFileDownloadCompletionBlock)completion
+{
     DataPackageInfoModel *model = [[FileManager sharedInstance].dataPackageInfoDic objectForKey:KKD_NSINETGER_2_NSSTRING(type)];
     AFHTTPRequestOperation *downloadOperation = [self curDownloadOperationByPackageInfoModel:model];
     
+    // 保存回调
+    NSString *key = @(type).stringValue;
+    NSMutableDictionary *blocksDic = [self.downloadBlockDic safeObjectForKey:key];
+    if (!blocksDic) {
+        blocksDic = [[NSMutableDictionary alloc] init];
+    }
+    [blocksDic setValue:start forKey:kStartBlockKey];
+    [blocksDic setValue:progress forKey:kProgressBlockKey];
+    [blocksDic setValue:pause forKey:kPauseBlockKey];
+    [blocksDic setValue:completion forKey:kCompletionBlockKey];
+    [self.downloadBlockDic setValue:blocksDic forKey:key];
+    
     if (!downloadOperation) {
+        // 下载
         BOOL flag = [NetworkStatusManager isEnableWIFI];
         if (flag) {
             if ([notice isAbsoluteValid]) {
@@ -655,7 +768,7 @@ DEF_SINGLETON(FileManager);
                      model.allowCellular = @"1";
                      
                      [weakSelf dbFileUpdateWithDBFileType:type autoDownload:YES];
-                }];
+                 }];
             } else {
                 [HUDManager showAutoHideHUDWithToShowStr:NoConnectionNetwork
                                                  HUDMode:MBProgressHUDModeText];
@@ -676,10 +789,32 @@ DEF_SINGLETON(FileManager);
 
 - (void)downloadPackageWithFileType:(DBFileType)type
 {
+    [self downloadPackageWithFileType:type
+                                start:nil
+                             progress:nil
+                                pause:nil
+                           completion:nil];
+}
+
+- (void)downloadPackageWithFileType:(DBFileType)type start:(DBFileDownloadStartBlock)start progress:(DBFileDownloadProgressBlock)progress pause:(DBFileDownloadPauseBlock)pause completion:(DBFileDownloadCompletionBlock)completion
+{
     DataPackageInfoModel *model = [[FileManager sharedInstance].dataPackageInfoDic objectForKey:KKD_NSINETGER_2_NSSTRING(type)];
     AFHTTPRequestOperation *downloadOperation = [self curDownloadOperationByPackageInfoModel:model];
     
+    // 保存回调
+    NSString *key = @(type).stringValue;
+    NSMutableDictionary *blocksDic = [self.downloadBlockDic safeObjectForKey:key];
+    if (!blocksDic) {
+        blocksDic = [[NSMutableDictionary alloc] init];
+    }
+    [blocksDic setValue:start forKey:kStartBlockKey];
+    [blocksDic setValue:progress forKey:kProgressBlockKey];
+    [blocksDic setValue:pause forKey:kPauseBlockKey];
+    [blocksDic setValue:completion forKey:kCompletionBlockKey];
+    [self.downloadBlockDic setValue:blocksDic forKey:key];
+    
     if (!downloadOperation) {
+        // 下载
         BOOL flag = [NetworkStatusManager isEnableWIFI];
         if (flag) {
             [HUDManager showAutoHideHUDWithToShowStr:@"开始下载离线包..."
@@ -746,5 +881,9 @@ DEF_SINGLETON(FileManager);
      */
     return @"";
 }
+
+/////
+
+
 
 @end

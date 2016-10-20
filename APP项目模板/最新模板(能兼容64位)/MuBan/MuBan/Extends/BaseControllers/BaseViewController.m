@@ -419,9 +419,43 @@
 - (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg selectedImg:(UIImage *)selectedImg isSelected:(BOOL)isSelected action:(SEL)action
 {
     UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 40, 40) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
-    UIButton *btn = (UIButton *)[barItem.customView viewWithTag:8888];
+    UIButton *btn = (UIButton *)[barItem.customView viewWithTag:kBarButtonItemViewTag];
     [btn setImage:selectedImg forState:UIControlStateSelected];
     [btn setImage:selectedImg forState:UIControlStateSelected | UIControlStateHighlighted];
+    btn.selected = isSelected;
+    
+    if (BarbuttonItemPosition_Left == position)
+    {
+        self.navigationItem.leftBarButtonItem = barItem;
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = barItem;
+    }
+    return barItem;
+}
+
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalPicker:(DKImagePicker)normalPicker normalHighlightedPicker:(DKImagePicker)normalHighlightedPicker action:(SEL)action
+{
+    return [self configureBarbuttonItemByPosition:position normalPicker:normalPicker normalHighlightedPicker:normalHighlightedPicker selectedPicker:nil selectedHighlightedPicker:nil isSelected:NO action:action];
+}
+
+- (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalPicker:(DKImagePicker)normalPicker normalHighlightedPicker:(DKImagePicker)normalHighlightedPicker selectedPicker:(DKImagePicker)selectedPicker selectedHighlightedPicker:(DKImagePicker)selectedHighlightedPicker isSelected:(BOOL)isSelected action:(SEL)action
+{
+    UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 40, 40) normalImg:nil highlightedImg:nil target:self action:action];
+    UIButton *btn = (UIButton *)[barItem.customView viewWithTag:kBarButtonItemViewTag];
+    if (normalPicker) {
+        [btn dk_setImage:normalPicker forState:UIControlStateNormal];
+    }
+    if (normalHighlightedPicker) {
+        [btn dk_setImage:normalHighlightedPicker forState:UIControlStateNormal | UIControlStateHighlighted];
+    }
+    if (selectedPicker) {
+        [btn dk_setImage:selectedPicker forState:UIControlStateSelected];
+    }
+    if (selectedHighlightedPicker) {
+        [btn dk_setImage:selectedHighlightedPicker forState:UIControlStateSelected | UIControlStateHighlighted];
+    }
     btn.selected = isSelected;
     
     if (BarbuttonItemPosition_Left == position)

@@ -65,29 +65,56 @@
         sel = @selector(POST:parameters:success:failure:);
     }
     
+    id (*response)(id, SEL, id, id, id, id) = (id (*)(id, SEL, id, id, id, id)) objc_msgSend;
+    task = response(manager, sel, URLString, parameters, ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 解析数据
+        if ([responseObject isValidDictionary] && 200 == [[responseObject objectForKey:@"status"] integerValue]) {
+            NSDictionary *dataDic = [responseObject objectForKey:@"data"];
+            if (success) {
+                success(task, dataDic, tag);
+            }
+        } else {
+            if (failure) {
+                NSString *message = [responseObject safeObjectForKey:@"message"];
+                NSString *errorMessage = [message isValidString] ? message : @"AFNetworkingTool 请求失败！";
+                NSError *error = [[NSError alloc] initWithDomain:@"KKPOEM_REQUEST_ERROR_DOMAIN"
+                                                            code:1500
+                                                        userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+                
+                failure(task, error, tag);
+            }
+        }
+    }, ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(task, error, tag);
+        }
+    });
+    
+    /*
     task = objc_msgSend(manager, sel, URLString, parameters, ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                // 解析数据
-                if ([responseObject isValidDictionary] && 200 == [[responseObject objectForKey:@"status"] integerValue]) {
-                    NSDictionary *dataDic = [responseObject objectForKey:@"data"];
-                    if (success) {
-                        success(task, dataDic, tag);
-                    }
-                } else {
-                    if (failure) {
-                        NSString *message = [responseObject safeObjectForKey:@"message"];
-                        NSString *errorMessage = [message isValidString] ? message : @"AFNetworkingTool 请求失败！";
-                        NSError *error = [[NSError alloc] initWithDomain:@"KKPOEM_REQUEST_ERROR_DOMAIN"
-                                                                    code:1500
-                                                                userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
-                        
-                        failure(task, error, tag);
-                    }
-                }
-            }, ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                if (failure) {
-                    failure(task, error, tag);
-                }
-            });
+        // 解析数据
+        if ([responseObject isValidDictionary] && 200 == [[responseObject objectForKey:@"status"] integerValue]) {
+            NSDictionary *dataDic = [responseObject objectForKey:@"data"];
+            if (success) {
+                success(task, dataDic, tag);
+            }
+        } else {
+            if (failure) {
+                NSString *message = [responseObject safeObjectForKey:@"message"];
+                NSString *errorMessage = [message isValidString] ? message : @"AFNetworkingTool 请求失败！";
+                NSError *error = [[NSError alloc] initWithDomain:@"KKPOEM_REQUEST_ERROR_DOMAIN"
+                                                            code:1500
+                                                        userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+                
+                failure(task, error, tag);
+            }
+        }
+    }, ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(task, error, tag);
+        }
+    });
+     */
     
     return task;
 }

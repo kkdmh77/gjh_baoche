@@ -29,6 +29,8 @@ static const BOOL kAutoTransaction = YES;
 
 static const double kTransactionTimeInterval = 1;
 
+extern NSString * const kDeleteDBFileNotificationKey; // 监测数据库删除的操作
+
 @interface GYDatabaseInfo : NSObject
 @property (nonatomic, strong) FMDatabaseQueue *databaseQueue;
 @property (nonatomic, strong) NSMutableSet *updatedTables;
@@ -36,7 +38,7 @@ static const double kTransactionTimeInterval = 1;
 @property (nonatomic, assign) BOOL needCommitTransaction;
 @property (nonatomic, assign) NSInteger writeCount;
 
-@property (nonatomic, copy  ) NSString *fileCreatDateStr; // db文件的创建时间
+@property (nonatomic, copy  ) NSString *fileLastModifyDateStr; // db文件的最后修改时间
 @end
 
 @implementation GYDatabaseInfo
@@ -88,6 +90,14 @@ static const double kTransactionTimeInterval = 1;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(synchronizeAllDBs)
                                                      name:UIApplicationDidEnterBackgroundNotification
+                                                   object:nil];
+        /* @监测数据库删除的操作
+         * @龚俊慧
+         * @2016-09-26
+         */
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(databaseHasBeenDelete:)
+                                                     name:kDeleteDBFileNotificationKey
                                                    object:nil];
     }
     return self;
@@ -1032,19 +1042,33 @@ static const double kTransactionTimeInterval = 1;
         NSString *dbFilePath = [self pathForDbName:dbName];
         
         // 判断同一个路径下的当前数据包是否跟上一个为同一个(当前包有可能为同名更新替换包)
-        NSDictionary *newDBInfo = [[NSFileManager defaultManager] attributesOfItemAtPath:dbFilePath error:NULL];
-        NSString *newCreatDateStr = [NSDate stringFromDate:[NSDate date] withFormatter:DateFormatter_DateAndTime];
-        if ([newDBInfo isValidDictionary])
+        // 删除一个路径下的数据包再在同路径下添加相同的数据包，虽然路径和包都相同，但上次存储的databaseInfo.databaseQueue就不能用了，所以在DB库里面加入标示符来解决
+        NSDictionary *curDBInfo = [[NSFileManager defaultManager] attributesOfItemAtPath:dbFilePath error:NULL];
+        NSString *lastModifyDateStr = @"";
+        if ([curDBInfo isValidDictionary])
         {
-            newCreatDateStr = [NSDate stringFromDate:[newDBInfo fileCreationDate] withFormatter:DateFormatter_DateAndTime];
+            lastModifyDateStr = [NSDate stringFromDate:[curDBInfo fileModificationDate] withFormatter:DateFormatter_DateAndTime];
         }
         
-        if (!databaseInfo || ![databaseInfo.fileCreatDateStr isEqualToString:newCreatDateStr]) {
+        // 判断是不是沙盒里面的路径，如果是才做在程序使用期间是否在同一路径下数据包被同名包替换的检测，如果不是沙盒路径则直接判断_databaseInfos有没有保存的databaseInfo即可
+        if (!databaseInfo || ([dbFilePath containsString:[FileManager getDBPath]] && ![lastModifyDateStr isEqualToString:databaseInfo.fileLastModifyDateStr])) {
+            [databaseInfo.databaseQueue close];
+            [_databaseInfos removeObjectForKey:dbName];
+            
             databaseInfo = [[GYDatabaseInfo alloc] init];
             databaseInfo.writeCount = [[self.writeCounts objectForKey:dbName] integerValue];
             databaseInfo.databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
             [databaseInfo.databaseQueue setDatabaseQueueSpecific];
-            databaseInfo.fileCreatDateStr = newCreatDateStr;
+            databaseInfo.fileLastModifyDateStr = lastModifyDateStr;
+            
+            /*
+             * 往数据库里加唯一标示符的方式不行，因为增量升级合并包的时候要校验旧包的唯一性
+            if ([dbFilePath containsString:[FileManager getDBPath]]) {
+                [databaseInfo.databaseQueue syncInDatabase:^(FMDatabase *db) {
+                    [db setApplicationID:1];
+                }];
+            }
+             */
             if (kAutoTransaction) {
                 [self autoTransactionForDatabaseInfo:databaseInfo];
             }
@@ -1053,6 +1077,35 @@ static const double kTransactionTimeInterval = 1;
         return databaseInfo;
     }
 }
+
+/* @监测数据库删除的操作
+ * @龚俊慧
+ * @2016-09-26
+ */
+- (void)databaseHasBeenDelete:(NSNotification *)notification {
+    if ([notification.userInfo isValidDictionary] &&
+        [[notification.userInfo objectForKey:@"deletedFilePath"] isValidString]) {
+        NSString *deletedFilePath = [notification.userInfo objectForKey:@"deletedFilePath"];
+        NSString *deletedDBName = deletedFilePath.lastPathComponent;
+        
+        [_databaseInfos removeObjectForKey:deletedDBName];
+    }
+}
+
+/* @1代表DB路径已经被FMDatabaseQueue初始化且存入_databaseInfos
+ * @龚俊慧
+ * @2016-09-26
+ */
+/*
+- (uint32_t)databaseQueueIdentifier:(GYDatabaseInfo *)databaseInfo {
+    __block uint32_t hasDatabaseQueueIdentifier = 0;
+    [databaseInfo.databaseQueue syncInDatabase:^(FMDatabase *db) {
+        hasDatabaseQueueIdentifier = db.applicationID;
+    }];
+    
+    return hasDatabaseQueueIdentifier;
+}
+*/
 
 - (NSString *)pathForDbName:(NSString *)dbName {
     /* @原代码
