@@ -143,6 +143,7 @@
 		2B88A84A1D86AF0C0091186B /* RTComponentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B88A8421D86AF0C0091186B /* RTComponentController.m */; };
 		2BCC7C341C7AB81E00B7E7D5 /* Jastor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C311C7AB81E00B7E7D5 /* Jastor.m */; };
 		2BCC7C351C7AB81E00B7E7D5 /* JastorRuntimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */; };
+		2BE05AC51DC73C9B00E2FDBE /* DownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE05AC41DC73C9B00E2FDBE /* DownloadCache.m */; };
 		431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */; };
 		431F138A1A7762E9008C4544 /* HanyuPinyinOutputFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137F1A7762E9008C4544 /* HanyuPinyinOutputFormat.m */; };
 		431F138B1A7762E9008C4544 /* NSString+PinYin4Cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F13811A7762E9008C4544 /* NSString+PinYin4Cocoa.m */; };
@@ -419,7 +420,6 @@
 		43D1CC431A75EBFA004564C2 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CBA81A75EBF9004564C2 /* VPImageCropperViewController.m */; };
 		43D1CC491A75EBFA004564C2 /* AppPropertiesInitialize.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CBB51A75EBF9004564C2 /* AppPropertiesInitialize.m */; };
 		43D1CC4A1A75EBFA004564C2 /* ColorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CBB71A75EBF9004564C2 /* ColorManager.m */; };
-		43D1CC4C1A75EBFA004564C2 /* DownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CBBD1A75EBF9004564C2 /* DownloadCache.m */; };
 		43D1CC4D1A75EBFA004564C2 /* CrossBorderAlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CBBF1A75EBF9004564C2 /* CrossBorderAlipayManager.m */; };
 		43D1CC4F1A75EBFA004564C2 /* HUDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CBC31A75EBF9004564C2 /* HUDManager.m */; };
 		43D1CC501A75EBFA004564C2 /* InterfaceHUDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1CBC51A75EBF9004564C2 /* InterfaceHUDManager.m */; };
@@ -740,6 +740,8 @@
 		2BCC7C311C7AB81E00B7E7D5 /* Jastor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jastor.m; sourceTree = "<group>"; };
 		2BCC7C321C7AB81E00B7E7D5 /* JastorRuntimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JastorRuntimeHelper.h; sourceTree = "<group>"; };
 		2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JastorRuntimeHelper.m; sourceTree = "<group>"; };
+		2BE05AC31DC73C9B00E2FDBE /* DownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadCache.h; sourceTree = "<group>"; };
+		2BE05AC41DC73C9B00E2FDBE /* DownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadCache.m; sourceTree = "<group>"; };
 		3B0932FDE6DFEC04C243938A /* libPods-MuBan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MuBan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		431F137C1A7762E9008C4544 /* ChineseToPinyinResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyinResource.h; sourceTree = "<group>"; };
 		431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyinResource.m; sourceTree = "<group>"; };
@@ -1379,8 +1381,6 @@
 		43D1CBB51A75EBF9004564C2 /* AppPropertiesInitialize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPropertiesInitialize.m; sourceTree = "<group>"; };
 		43D1CBB61A75EBF9004564C2 /* ColorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorManager.h; sourceTree = "<group>"; };
 		43D1CBB71A75EBF9004564C2 /* ColorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorManager.m; sourceTree = "<group>"; };
-		43D1CBBC1A75EBF9004564C2 /* DownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadCache.h; sourceTree = "<group>"; };
-		43D1CBBD1A75EBF9004564C2 /* DownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadCache.m; sourceTree = "<group>"; };
 		43D1CBBE1A75EBF9004564C2 /* CrossBorderAlipayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossBorderAlipayManager.h; sourceTree = "<group>"; };
 		43D1CBBF1A75EBF9004564C2 /* CrossBorderAlipayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossBorderAlipayManager.m; sourceTree = "<group>"; };
 		43D1CBC21A75EBF9004564C2 /* HUDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDManager.h; sourceTree = "<group>"; };
@@ -2082,6 +2082,15 @@
 				2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */,
 			);
 			path = Jastor;
+			sourceTree = "<group>";
+		};
+		2BE05AC21DC73C9B00E2FDBE /* CoreDataCache */ = {
+			isa = PBXGroup;
+			children = (
+				2BE05AC31DC73C9B00E2FDBE /* DownloadCache.h */,
+				2BE05AC41DC73C9B00E2FDBE /* DownloadCache.m */,
+			);
+			path = CoreDataCache;
 			sourceTree = "<group>";
 		};
 		431F137A1A7762E9008C4544 /* PinYin4Objc */ = {
@@ -3462,7 +3471,6 @@
 				43D1CBB51A75EBF9004564C2 /* AppPropertiesInitialize.m */,
 				43D1CBB61A75EBF9004564C2 /* ColorManager.h */,
 				43D1CBB71A75EBF9004564C2 /* ColorManager.m */,
-				43D1CBB81A75EBF9004564C2 /* CoreDataManager */,
 				43D1CBBE1A75EBF9004564C2 /* CrossBorderAlipayManager.h */,
 				43D1CBBF1A75EBF9004564C2 /* CrossBorderAlipayManager.m */,
 				43D1CBC21A75EBF9004564C2 /* HUDManager.h */,
@@ -3491,23 +3499,6 @@
 				43D1CBE31A75EBFA004564C2 /* UrlManager.m */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		43D1CBB81A75EBF9004564C2 /* CoreDataManager */ = {
-			isa = PBXGroup;
-			children = (
-				43D1CBBB1A75EBF9004564C2 /* Entities */,
-			);
-			path = CoreDataManager;
-			sourceTree = "<group>";
-		};
-		43D1CBBB1A75EBF9004564C2 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				43D1CBBC1A75EBF9004564C2 /* DownloadCache.h */,
-				43D1CBBD1A75EBF9004564C2 /* DownloadCache.m */,
-			);
-			path = Entities;
 			sourceTree = "<group>";
 		};
 		43D1CBE41A75EBFA004564C2 /* Views */ = {
@@ -3563,6 +3554,7 @@
 		43D1CC911A760F8C004564C2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2BE05AC21DC73C9B00E2FDBE /* CoreDataCache */,
 				2B3E20111DAB395A003E3BB4 /* DataPackageInfoModel.h */,
 				2B3E20121DAB395A003E3BB4 /* DataPackageInfoModel.m */,
 			);
@@ -3835,6 +3827,7 @@
 				2B4A90741D9A5FCA00ED09C9 /* GYDBRunner.m in Sources */,
 				2B3E20821DAB3A8F003E3BB4 /* JPStructPointer.m in Sources */,
 				43D1CAAB1A75E779004564C2 /* NINetworkImageView.m in Sources */,
+				2BE05AC51DC73C9B00E2FDBE /* DownloadCache.m in Sources */,
 				43D1CA921A75E778004564C2 /* NILauncherViewModel.m in Sources */,
 				FAF92F061B6F10A400DD06BC /* AppSoundManager.m in Sources */,
 				43D1CC251A75EBFA004564C2 /* ATSeedFill.mm in Sources */,
@@ -4168,7 +4161,6 @@
 				43D1C9E81A75E778004564C2 /* FUITextField.m in Sources */,
 				2B3E209B1DAB3A8F003E3BB4 /* JPUIKit.m in Sources */,
 				43D1CA8F1A75E778004564C2 /* NILauncherPageView.m in Sources */,
-				43D1CC4C1A75EBFA004564C2 /* DownloadCache.m in Sources */,
 				FAF92F071B6F10A400DD06BC /* AppUIElement.m in Sources */,
 				43D1C9EA1A75E778004564C2 /* UIColor+FlatUI.m in Sources */,
 				43D1CA001A75E778004564C2 /* IQToolbar.m in Sources */,
