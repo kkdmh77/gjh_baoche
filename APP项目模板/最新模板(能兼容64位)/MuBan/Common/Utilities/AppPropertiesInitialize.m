@@ -33,7 +33,7 @@ static UIView *statusBarCoverView = nil;
     [self setKeyboardManagerEnable:YES];
     
     // 本地化语言
-    [LanguagesManager initialize];
+    [LanguagesManager initialization];
     
     // 初始化coreData库
     // [self copyDefaultStoreIfNecessary];

@@ -8,7 +8,6 @@
 
 #import "NetRequestManager.h"
 #import "DownloadCache.h"
-#import "CoreDataManager.h"
 #import <MagicalRecord/MagicalRecord.h>
 #import "UserInfoModel.h"
 

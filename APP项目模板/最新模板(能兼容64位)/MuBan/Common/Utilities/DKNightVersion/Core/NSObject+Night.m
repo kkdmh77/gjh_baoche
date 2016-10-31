@@ -44,25 +44,26 @@ static void *DKViewDeallocHelperKey;
         // 字体通知
         [[NSNotificationCenter defaultCenter] removeObserver:self name:kFontTypeDidChangedNotificationKey object:nil];
         
+        WEAKSELF
         if ([[UIDevice currentDevice].systemVersion floatValue] < 9.0) {
             [[NSNotificationCenter defaultCenter] addObserverForName:DKNightVersionNightFallingNotification
                                                               object:nil
                                                                queue:nil
                                                           usingBlock:^(NSNotification * _Nonnull note) {
-                                                              [self night_updateColor];
+                                                              [weakSelf night_updateColor];
                                                           }];
             [[NSNotificationCenter defaultCenter] addObserverForName:DKNightVersionDawnComingNotification
                                                               object:nil
                                                                queue:nil
                                                           usingBlock:^(NSNotification * _Nonnull note) {
-                                                              [self night_updateColor];
+                                                              [weakSelf night_updateColor];
                                                           }];
             // 字体
             [[NSNotificationCenter defaultCenter] addObserverForName:kFontTypeDidChangedNotificationKey
                                                               object:nil
                                                                queue:nil
                                                           usingBlock:^(NSNotification * _Nonnull note) {
-                                                              [self style_updateFont];
+                                                              [weakSelf style_updateFont];
                                                           }];
         } else {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(night_updateColor) name:DKNightVersionNightFallingNotification object:nil];

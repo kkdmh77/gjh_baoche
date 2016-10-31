@@ -592,10 +592,17 @@
     self.title = title;
     self.navigationItem.title = title;
     
-    if (font && color)
-    {
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : color, NSFontAttributeName : font};
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:self.navigationController.navigationBar.titleTextAttributes];
+    
+    if (font) {
+        [params setObject:font forKey:NSFontAttributeName];
     }
+    
+    if (color) {
+        [params setObject:color forKey:NSForegroundColorAttributeName];
+    }
+    
+    self.navigationController.navigationBar.titleTextAttributes = params;
 }
 
 - (void)addBackSwipeGesture

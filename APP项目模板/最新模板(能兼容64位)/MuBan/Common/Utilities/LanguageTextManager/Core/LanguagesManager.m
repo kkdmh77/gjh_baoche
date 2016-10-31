@@ -16,7 +16,7 @@
 static NSBundle *bundle = nil;
 static NSString *currentLanguageType = nil;
 
-+ (void)initialize
++ (void)initialization
 {
     /*
     NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];

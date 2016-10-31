@@ -18,18 +18,3 @@
 
 @end
 
-@implementation BalanceBC
-
-+ (NSMutableArray *)parseDataFromSourceDic:(NSDictionary *)dic
-{
-    NSArray *entityList = [dic objectForKey:@"balanceRecords"];
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:entityList.count];
-    
-    for (NSDictionary *dataDic in entityList)
-    {
-        
-    }
-    return array;
-}
-
-@end

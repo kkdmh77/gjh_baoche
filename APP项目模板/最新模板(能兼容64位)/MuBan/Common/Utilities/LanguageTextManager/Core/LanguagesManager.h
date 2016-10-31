@@ -19,7 +19,7 @@ static NSString * const LanguageTypeDidChangedNotificationKey = @"LanguageTypeDi
 
 @interface LanguagesManager : NSObject
 
-+ (void)initialize;
++ (void)initialization;
 + (NSArray *)getAppLanguagesTypeArray;
 + (void)setLanguage:(NSString *)languageType;
 + (NSString *)curLanguagesType;
