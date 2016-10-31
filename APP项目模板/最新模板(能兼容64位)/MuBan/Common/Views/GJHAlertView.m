@@ -282,7 +282,7 @@
     CGRect lineFrame = CGRectZero;
     
     CGFloat lineWidth = .5;
-    UIColor *lineColor = Common_InkGreenColor;
+    UIColor *lineColor = [UIColor greenColor];
     
     switch (positino)
     {
