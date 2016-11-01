@@ -7,11 +7,12 @@
 //
 
 #import "ShareManager.h"
-#import "CoreData+MagicalRecord.h"
+#import <MagicalRecord/MagicalRecord.h>
 #import "InterfaceHUDManager.h"
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WeiboSDK.h"
+#import "UMSocialUIManager.h"
 
 @interface ShareManager ()
 
@@ -29,7 +30,18 @@ DEF_SINGLETON(ShareManager);
 
 #pragma mark - custom methods
 
-- (void)shareWithContent:(NSString *)content title:(NSString *)title url:(NSString *)urlStr insetImage:(UIImage *)insetImage contentImage:(UIImage *)contentImage presentedController:(UIViewController *)presentedController
+- (void)shareWithContent:(NSString *)content presentedController:(UIViewController *)presentedController completion:(void (^)(UMSocialShareResponse *, NSError *))completion
+{
+    [self shareWithContent:content
+                     title:nil
+                       url:nil
+                insetImage:nil
+              contentImage:nil
+       presentedController:presentedController
+                completion:completion];
+}
+
+- (void)shareWithContent:(NSString *)content title:(NSString *)title url:(NSString *)urlStr insetImage:(UIImage *)insetImage contentImage:(UIImage *)contentImage presentedController:(UIViewController *)presentedController completion:(void (^) (UMSocialShareResponse *result, NSError *error))completion
 {
     self.title = title;
     self.content = content;
@@ -37,141 +49,87 @@ DEF_SINGLETON(ShareManager);
     self.insetImage = insetImage;
     self.contentImage = contentImage;
     
-    NSMutableArray *platformNames = [NSMutableArray arrayWithObjects:UMShareToEmail, nil];
-    if ([WeiboSDK isWeiboAppInstalled])
-    {
-        [platformNames addObject:UMShareToSina];
-    }
-    if ([WXApi isWXAppInstalled])
-    {
-        [platformNames addObjectsFromArray:@[UMShareToWechatSession, UMShareToWechatTimeline]];
-    }
-    if ([QQApiInterface isQQInstalled])
-    {
-        [platformNames addObjectsFromArray:@[UMShareToQQ, UMShareToQzone]];
-    }
-    
-    [UMSocialSnsService presentSnsIconSheetView:presentedController
-                                         appKey:kUMengAppKey
-                                      shareText:SHARE_TEXT
-                                     shareImage:[UIImage imageNamed:@"ios_180"]
-                                shareToSnsNames:platformNames
-                                       delegate:self];
-    
+    WEAKSELF
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMShareMenuSelectionView *shareSelectionView, UMSocialPlatformType platformType) {
+        [weakSelf shareWithPlatformType:platformType
+                    presentedController:presentedController
+                             completion:completion];
+    }];
 }
 
-- (void)thirdPartyLoginWithSnsName:(NSString *)snsName presentingController:(UIViewController *)presentingController loginSuccessedHandler:(void (^)(UMSocialAccountEntity *))loginSuccessedHandler
-{
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:snsName];
-    
-    snsPlatform.loginClickHandler(presentingController, [UMSocialControllerService defaultControllerService], YES, ^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsName];
-            
-            NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
-            if (loginSuccessedHandler) {
-                loginSuccessedHandler(snsAccount);
-            }
-        }
-    });
-}
-
--(void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData
+- (void)shareWithPlatformType:(UMSocialPlatformType)platformType presentedController:(UIViewController *)presentedController completion:(void (^) (UMSocialShareResponse *result, NSError *error))completion
 {
     NSString *title = _title;
-    if (![title isAbsoluteValid]) {
+    if (![title isValidString]) {
         title = APP_NAME;
     }
-    NSString *content = _content;
-    if (![content isAbsoluteValid]) {
-        content = SHARE_TEXT;
+    NSString *contentText = _content;
+    if (![contentText isValidString]) {
+        contentText = @"测试分享内容"; // SHARE_TEXT;
     }
     UIImage *insetImage = _insetImage;
     if (!insetImage) {
         insetImage = [UIImage imageNamed:@"ios_180"];
     }
     UIImage *contentImage = _contentImage;
-    NSString *targetUrlStr = _urlStr;
+    NSString *targetUrlStr = [_urlStr isValidString] ? _urlStr : @"";
     
-    if (platformName == UMShareToSina) {
-        socialData.title = title;
-        // socialData.shareText = content;
-        // socialData.shareImage = insetImage;
-        
-        socialData.extConfig.sinaData.shareText = [content stringByAppendingString:targetUrlStr];
-        socialData.extConfig.sinaData.shareImage = contentImage ? contentImage : insetImage;
+    // 配置分享内容
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    UMShareObject *shareObject = nil;
+    
+    if (contentImage) {
+        messageObject.text = [contentText stringByAppendingString:targetUrlStr];
+        UMShareImageObject *imageObject = [UMShareImageObject shareObjectWithTitle:title
+                                                                             descr:nil
+                                                                         thumImage:insetImage];
+        imageObject.shareImage = contentImage;
+        shareObject = imageObject;
+    } else if ([targetUrlStr isValidString]) {
+        messageObject.text = contentText;
+        UMShareWebpageObject *webpageObject = [UMShareWebpageObject shareObjectWithTitle:title
+                                                                                   descr:nil
+                                                                               thumImage:insetImage];
+        webpageObject.webpageUrl = targetUrlStr;
+        shareObject = webpageObject;
+    } else {
+        messageObject.text = contentText;
     }
-    else if (platformName == UMShareToTencent) {
-        // socialData.title = title;
-        // socialData.shareText = content;
-        // socialData.shareImage = insetImage;
-        
-        socialData.extConfig.tencentData.title = title;
-        socialData.extConfig.tencentData.shareText = [content stringByAppendingString:targetUrlStr];
-        socialData.extConfig.tencentData.shareImage = contentImage ? contentImage : insetImage;
-    }
-    else if (platformName == UMShareToQQ) {
-        // socialData.title = title;
-        // socialData.shareText = content;
-        // socialData.shareImage = insetImage;
-        
-        socialData.extConfig.qqData.title = title;
-        socialData.extConfig.qqData.shareText = content;
-        socialData.extConfig.qqData.shareImage = contentImage ? contentImage : insetImage;
-        if (contentImage) {
-            socialData.extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
+    messageObject.shareObject = shareObject;
+    
+    [[UMSocialManager defaultManager] shareToPlatform:platformType
+                                        messageObject:messageObject
+                                currentViewController:presentedController
+                                           completion:^(id result, NSError *error) {
+        if (completion) {
+           if (!error && [result isKindOfClass:[UMSocialShareResponse class]]) {
+               completion(result, nil);
+           } else {
+               NSError *err = error ? error : [NSError errorWithDomain:@"UM_Share_Error_Domain"
+                                                                  code:1400
+                                                              userInfo:@{NSLocalizedDescriptionKey: @"友盟分享错误"}];
+               completion(nil, err);
+           }
         }
-        
-        socialData.extConfig.qqData.url = targetUrlStr;
-    }
-    else if (platformName == UMShareToWechatSession) {
-        // socialData.title = title;
-        // socialData.shareText = content;
-        // socialData.shareImage = insetImage;
+    }];
+}
 
-        socialData.extConfig.wechatSessionData.title = title;
-        socialData.extConfig.wechatSessionData.shareText = content;
-        socialData.extConfig.wechatSessionData.shareImage = contentImage ? contentImage : insetImage;
-        if (contentImage) {
-            socialData.extConfig.wechatSessionData.wxMessageType = UMSocialWXMessageTypeImage;
-        }
-        
-        socialData.extConfig.wechatSessionData.url = targetUrlStr;
-    }
-    else if (platformName == UMShareToWechatTimeline) {
-        // socialData.title = title;
-        // socialData.shareText = content;
-        // socialData.shareImage = insetImage;
-        
-        socialData.extConfig.wechatTimelineData.title = title;
-        socialData.extConfig.wechatTimelineData.shareText = content;
-        socialData.extConfig.wechatTimelineData.shareImage = contentImage ? contentImage : insetImage;
-        if (contentImage) {
-            socialData.extConfig.wechatTimelineData.wxMessageType = UMSocialWXMessageTypeImage;
-        }
-        
-        socialData.extConfig.wechatTimelineData.url = targetUrlStr;
-    }
-    else if (platformName == UMShareToQzone) {
-        // socialData.title = title;
-        // socialData.shareText = content;
-        // socialData.shareImage = insetImage;
-        
-        socialData.extConfig.qzoneData.title = title;
-        socialData.extConfig.qzoneData.shareText = content;
-        socialData.extConfig.qzoneData.shareImage = contentImage ? contentImage : insetImage;
-        
-        socialData.extConfig.qzoneData.url = targetUrlStr;
-    }
-    else if (platformName == UMShareToEmail) {
-        // socialData.title = title;
-        // socialData.shareText = content;
-        // socialData.shareImage = insetImage;
-        
-        socialData.extConfig.emailData.title = title;
-        socialData.extConfig.emailData.shareText = [content stringByAppendingString:targetUrlStr];
-        socialData.extConfig.emailData.shareImage = contentImage ? contentImage : insetImage;
-    }
+- (void)thirdPartyLoginWithSnsName:(UMSocialPlatformType)platformType presentingController:(UIViewController *)presentingController completion:(void (^)(UMSocialUserInfoResponse *, NSError *))completion
+{
+    [[UMSocialManager defaultManager] cancelAuthWithPlatform:platformType completion:^(id result, NSError *error) {
+        [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:presentingController completion:^(id result, NSError *error) {
+            if (completion) {
+                if (!error && [result isKindOfClass:[UMSocialUserInfoResponse class]]) {
+                    completion(result, nil);
+                } else {
+                    NSError *err = error ? error : [NSError errorWithDomain:@"UM_Auth_Error_Domain"
+                                                                       code:1401
+                                                                   userInfo:@{NSLocalizedDescriptionKey: @"友盟获取第三方平台信息错误"}];
+                    completion(nil, err);
+                }
+            }
+        }];
+    }];
 }
 
 @end
