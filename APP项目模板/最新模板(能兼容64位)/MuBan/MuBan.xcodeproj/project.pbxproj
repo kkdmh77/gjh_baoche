@@ -144,6 +144,7 @@
 		2BCC7C341C7AB81E00B7E7D5 /* Jastor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C311C7AB81E00B7E7D5 /* Jastor.m */; };
 		2BCC7C351C7AB81E00B7E7D5 /* JastorRuntimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */; };
 		2BE05AC51DC73C9B00E2FDBE /* DownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE05AC41DC73C9B00E2FDBE /* DownloadCache.m */; };
+		2BE68B761DCB2AD800A1B99B /* UserInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE68B751DCB2AD800A1B99B /* UserInfoEntity.m */; };
 		431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */; };
 		431F138A1A7762E9008C4544 /* HanyuPinyinOutputFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137F1A7762E9008C4544 /* HanyuPinyinOutputFormat.m */; };
 		431F138B1A7762E9008C4544 /* NSString+PinYin4Cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F13811A7762E9008C4544 /* NSString+PinYin4Cocoa.m */; };
@@ -742,6 +743,8 @@
 		2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JastorRuntimeHelper.m; sourceTree = "<group>"; };
 		2BE05AC31DC73C9B00E2FDBE /* DownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadCache.h; sourceTree = "<group>"; };
 		2BE05AC41DC73C9B00E2FDBE /* DownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadCache.m; sourceTree = "<group>"; };
+		2BE68B741DCB2AD800A1B99B /* UserInfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoEntity.h; sourceTree = "<group>"; };
+		2BE68B751DCB2AD800A1B99B /* UserInfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoEntity.m; sourceTree = "<group>"; };
 		3B0932FDE6DFEC04C243938A /* libPods-MuBan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MuBan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		431F137C1A7762E9008C4544 /* ChineseToPinyinResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyinResource.h; sourceTree = "<group>"; };
 		431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyinResource.m; sourceTree = "<group>"; };
@@ -3554,6 +3557,8 @@
 		43D1CC911A760F8C004564C2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2BE68B741DCB2AD800A1B99B /* UserInfoEntity.h */,
+				2BE68B751DCB2AD800A1B99B /* UserInfoEntity.m */,
 				2BE05AC21DC73C9B00E2FDBE /* CoreDataCache */,
 				2B3E20111DAB395A003E3BB4 /* DataPackageInfoModel.h */,
 				2B3E20121DAB395A003E3BB4 /* DataPackageInfoModel.m */,
@@ -3885,6 +3890,7 @@
 				43D1C9F51A75E778004564C2 /* HPGrowingTextView.m in Sources */,
 				43D1CA241A75E778004564C2 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */,
+				2BE68B761DCB2AD800A1B99B /* UserInfoEntity.m in Sources */,
 				43D1CABB1A75E779004564C2 /* NIPagingScrollView.m in Sources */,
 				2B5A9DB21C7C1CE7004573C0 /* LoginBC.m in Sources */,
 				43D1CC491A75EBFA004564C2 /* AppPropertiesInitialize.m in Sources */,

@@ -133,8 +133,9 @@ DEF_SINGLETON(LoginBC);
 {
     if ([infoObj isAbsoluteValid])
     {
-        NSNumber *userId = [infoObj safeObjectForKey:@"userId"];
-        [UserInfoModel sharedInstance].userId = userId;
+        UserInfoEntity *userInfo = [UserInfoEntity new];
+        
+        [UserInfoModel sharedInstance].userInfo = userInfo;
     }
     
     // 发送通知
@@ -172,7 +173,7 @@ DEF_SINGLETON(LoginBC);
     else if (request.tag == NetUserCenterRequestType_Logout)
     {
         // 清空数据
-        [UserInfoModel sharedInstance].userId = nil;
+        [UserInfoModel sharedInstance].userInfo = nil;
         [UserInfoModel setObject:nil forKey:kCookiesKey];
     }
     

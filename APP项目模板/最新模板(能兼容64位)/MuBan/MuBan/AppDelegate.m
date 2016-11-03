@@ -104,9 +104,9 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:deviceToken forKey:@"deviceToken"];
     [dic setObject:@"ios" forKey:@"deviceType"];
-    if ([UserInfoModel sharedInstance].userId)
+    if ([UserInfoModel sharedInstance].userInfo.userId)
     {
-        [dic setObject:[UserInfoModel sharedInstance].userId forKey:@"userId"];
+        [dic setObject:[UserInfoModel sharedInstance].userInfo.userId forKey:@"userId"];
     }
     
     [[NetRequestManager sharedInstance] sendRequest:url

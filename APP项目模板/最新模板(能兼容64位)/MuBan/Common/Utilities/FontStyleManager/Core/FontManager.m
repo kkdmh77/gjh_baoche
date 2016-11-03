@@ -237,6 +237,9 @@ DEF_SINGLETON(FontManager);
     
     NSURL *url = [NSURL fileURLWithPath:fontPath];
     
+    // 在调用CGFontCreateWithDataProvider之前必须要先调用这个方法，不然会无故卡死
+    [UIFont familyNames];
+    
     CGDataProviderRef fontDataProvider = CGDataProviderCreateWithURL((CFURLRef)url);
     CGFontRef newFont = CGFontCreateWithDataProvider(fontDataProvider);
     
