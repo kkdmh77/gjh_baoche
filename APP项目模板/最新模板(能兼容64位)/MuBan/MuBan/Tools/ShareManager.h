@@ -39,6 +39,15 @@ AS_SINGLETON(ShareManager);
      presentedController:(UIViewController *)presentedController
               completion:(void (^) (UMSocialShareResponse *result, NSError *error))completion;
 
+- (void)shareWithPlatformType:(UMSocialPlatformType)platformType
+                      Content:(NSString *)content
+                        title:(NSString *)title
+                          url:(NSString *)urlStr
+                   insetImage:(UIImage *)insetImage
+                 contentImage:(UIImage *)contentImage
+          presentedController:(UIViewController *)presentedController
+                   completion:(void (^) (UMSocialShareResponse *result, NSError *error))completion;
+
 /**
  @ 方法描述    第三方平台登录
  @ 输入参数    UMSocialPlatformType 你要分享到的sns平台类型

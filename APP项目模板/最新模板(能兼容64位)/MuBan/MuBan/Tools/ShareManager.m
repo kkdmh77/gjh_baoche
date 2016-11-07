@@ -57,6 +57,19 @@ DEF_SINGLETON(ShareManager);
     }];
 }
 
+- (void)shareWithPlatformType:(UMSocialPlatformType)platformType Content:(NSString *)content title:(NSString *)title url:(NSString *)urlStr insetImage:(UIImage *)insetImage contentImage:(UIImage *)contentImage presentedController:(UIViewController *)presentedController completion:(void (^)(UMSocialShareResponse *, NSError *))completion
+{
+    self.title = title;
+    self.content = content;
+    self.urlStr = urlStr;
+    self.insetImage = insetImage;
+    self.contentImage = contentImage;
+    
+    [self shareWithPlatformType:platformType
+            presentedController:presentedController
+                     completion:completion];
+}
+
 - (void)shareWithPlatformType:(UMSocialPlatformType)platformType presentedController:(UIViewController *)presentedController completion:(void (^) (UMSocialShareResponse *result, NSError *error))completion
 {
     NSString *title = _title;
@@ -65,11 +78,11 @@ DEF_SINGLETON(ShareManager);
     }
     NSString *contentText = _content;
     if (![contentText isValidString]) {
-        contentText = @"测试分享内容"; // SHARE_TEXT;
+        contentText = SHARE_TEXT; // SHARE_TEXT;
     }
     UIImage *insetImage = _insetImage;
     if (!insetImage) {
-        insetImage = [UIImage imageNamed:@"ios_180"];
+        insetImage = [UIImage imageNamed:@"ios_120"];
     }
     UIImage *contentImage = _contentImage;
     NSString *targetUrlStr = [_urlStr isValidString] ? _urlStr : @"";
@@ -88,7 +101,7 @@ DEF_SINGLETON(ShareManager);
     } else if ([targetUrlStr isValidString]) {
         messageObject.text = contentText;
         UMShareWebpageObject *webpageObject = [UMShareWebpageObject shareObjectWithTitle:title
-                                                                                   descr:nil
+                                                                                   descr:contentText
                                                                                thumImage:insetImage];
         webpageObject.webpageUrl = targetUrlStr;
         shareObject = webpageObject;
