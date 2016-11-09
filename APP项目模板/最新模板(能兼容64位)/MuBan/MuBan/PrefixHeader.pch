@@ -22,6 +22,7 @@
     #import "LanguageTextStyle.h"
     #import "FontStyle.h"
     #import "DKNightVersion.h"
+    #import "UserInfoModel.h"
 
     // define this constant if you want to use Masonry without the 'mas_' prefix
     // #define MAS_SHORTHAND

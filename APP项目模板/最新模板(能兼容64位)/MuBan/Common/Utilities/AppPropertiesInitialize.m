@@ -45,6 +45,19 @@ static UIView *statusBarCoverView = nil;
     // 设置Document文件夹里的所有文件不自动备份到iCloud
     [self addSkipBackupAttributeToItemAtURL:[NSURL fileURLWithPath:GetDocumentPath()]];
     
+    // 创建文件夹
+    [FileManager creatCacheFolder];
+    
+    // 夜间-日间模式
+    if ([UserInfoModel sharedInstance].isNightThemeStyle)
+    {
+        [DKNightVersionManager nightFalling];
+    }
+    else
+    {
+        [DKNightVersionManager dawnComing];
+    }
+    
     // ...
 }
 

@@ -312,14 +312,6 @@
 		43D1CAC21A75E779004564C2 /* NIPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1C9591A75E778004564C2 /* NIPhotoScrollView.m */; };
 		43D1CAC31A75E779004564C2 /* NIPhotoScrubberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1C95D1A75E778004564C2 /* NIPhotoScrubberView.m */; };
 		43D1CAC41A75E779004564C2 /* NIToolbarPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D1C95F1A75E778004564C2 /* NIToolbarPhotoViewController.m */; };
-		43D1CAC71A75E779004564C2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C9641A75E778004564C2 /* Default.png */; };
-		43D1CAC81A75E779004564C2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C9651A75E778004564C2 /* Default@2x.png */; };
-		43D1CAC91A75E779004564C2 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C9661A75E778004564C2 /* Icon-72.png */; };
-		43D1CACA1A75E779004564C2 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C9671A75E778004564C2 /* Icon-Small-50.png */; };
-		43D1CACB1A75E779004564C2 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C9681A75E778004564C2 /* Icon-Small.png */; };
-		43D1CACC1A75E779004564C2 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C9691A75E778004564C2 /* Icon-Small@2x.png */; };
-		43D1CACD1A75E779004564C2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C96A1A75E778004564C2 /* Icon.png */; };
-		43D1CACE1A75E779004564C2 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C96B1A75E778004564C2 /* Icon@2x.png */; };
 		43D1CACF1A75E779004564C2 /* lib.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C96C1A75E778004564C2 /* lib.xcconfig */; };
 		43D1CAD01A75E779004564C2 /* nimbus64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C96D1A75E778004564C2 /* nimbus64x64.png */; };
 		43D1CAD11A75E779004564C2 /* unittest.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 43D1C96E1A75E778004564C2 /* unittest.xcconfig */; };
@@ -1174,14 +1166,6 @@
 		43D1C95D1A75E778004564C2 /* NIPhotoScrubberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIPhotoScrubberView.m; sourceTree = "<group>"; };
 		43D1C95E1A75E778004564C2 /* NIToolbarPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIToolbarPhotoViewController.h; sourceTree = "<group>"; };
 		43D1C95F1A75E778004564C2 /* NIToolbarPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIToolbarPhotoViewController.m; sourceTree = "<group>"; };
-		43D1C9641A75E778004564C2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		43D1C9651A75E778004564C2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		43D1C9661A75E778004564C2 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		43D1C9671A75E778004564C2 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
-		43D1C9681A75E778004564C2 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
-		43D1C9691A75E778004564C2 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
-		43D1C96A1A75E778004564C2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		43D1C96B1A75E778004564C2 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		43D1C96C1A75E778004564C2 /* lib.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = lib.xcconfig; sourceTree = "<group>"; };
 		43D1C96D1A75E778004564C2 /* nimbus64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nimbus64x64.png; sourceTree = "<group>"; };
 		43D1C96E1A75E778004564C2 /* unittest.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = unittest.xcconfig; sourceTree = "<group>"; };
@@ -3018,14 +3002,6 @@
 		43D1C9631A75E778004564C2 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				43D1C9641A75E778004564C2 /* Default.png */,
-				43D1C9651A75E778004564C2 /* Default@2x.png */,
-				43D1C9661A75E778004564C2 /* Icon-72.png */,
-				43D1C9671A75E778004564C2 /* Icon-Small-50.png */,
-				43D1C9681A75E778004564C2 /* Icon-Small.png */,
-				43D1C9691A75E778004564C2 /* Icon-Small@2x.png */,
-				43D1C96A1A75E778004564C2 /* Icon.png */,
-				43D1C96B1A75E778004564C2 /* Icon@2x.png */,
 				43D1C96C1A75E778004564C2 /* lib.xcconfig */,
 				43D1C96D1A75E778004564C2 /* nimbus64x64.png */,
 				43D1C96E1A75E778004564C2 /* unittest.xcconfig */,
@@ -3697,7 +3673,6 @@
 				43D1CAA81A75E779004564C2 /* deps in Resources */,
 				43D1CC231A75EBFA004564C2 /* pinyin.correct in Resources */,
 				43D1CAEB1A75E779004564C2 /* sr_refresh@2X.png in Resources */,
-				43D1CAC81A75E779004564C2 /* Default@2x.png in Resources */,
 				432C319A1A7243840094A27E /* Main.storyboard in Resources */,
 				43D1CB051A75EBA5004564C2 /* CHANGELOG in Resources */,
 				43D1CA891A75E778004564C2 /* deps in Resources */,
@@ -3706,19 +3681,14 @@
 				432C319F1A7243840094A27E /* LaunchScreen.xib in Resources */,
 				2B3E20B21DAB3B5E003E3BB4 /* demo.js in Resources */,
 				43D1CACF1A75E779004564C2 /* lib.xcconfig in Resources */,
-				43D1CACE1A75E779004564C2 /* Icon@2x.png in Resources */,
 				43D1C9E01A75E778004564C2 /* Images.xcassets in Resources */,
 				43D1CA021A75E778004564C2 /* IQKeyboardManager.bundle in Resources */,
-				43D1CACC1A75E779004564C2 /* Icon-Small@2x.png in Resources */,
-				43D1CAC91A75E779004564C2 /* Icon-72.png in Resources */,
 				43D1C7061A75E692004564C2 /* 海外支付宝集成openssl报错解决方法.rtf in Resources */,
-				43D1CAC71A75E779004564C2 /* Default.png in Resources */,
 				43D1CA351A75E778004564C2 /* deps in Resources */,
 				2B30CD581D9DFABE007EA611 /* LICENCE in Resources */,
 				43D1CAAE1A75E779004564C2 /* deps in Resources */,
 				43D1C6F91A75E692004564C2 /* AlipaySDK.bundle in Resources */,
 				43D1CAD41A75E779004564C2 /* deps in Resources */,
-				43D1CACD1A75E779004564C2 /* Icon.png in Resources */,
 				2B3E201B1DAB39C1003E3BB4 /* .gitignore in Resources */,
 				43D1CA321A75E778004564C2 /* deps in Resources */,
 				43D1CC8C1A760EB1004564C2 /* InfoPlist.strings in Resources */,
@@ -3736,12 +3706,10 @@
 				43D1CA261A75E778004564C2 /* .gitattributes in Resources */,
 				43D1CAA41A75E779004564C2 /* deps in Resources */,
 				43D1CA961A75E779004564C2 /* deps in Resources */,
-				43D1CACB1A75E779004564C2 /* Icon-Small.png in Resources */,
 				43D1CAC01A75E779004564C2 /* NimbusPhotos.bundle in Resources */,
 				43D1CA8D1A75E778004564C2 /* deps in Resources */,
 				43D1C7091A75E692004564C2 /* read_me.txt in Resources */,
 				43D1CAEA1A75E779004564C2 /* sr_refresh.png in Resources */,
-				43D1CACA1A75E779004564C2 /* Icon-Small-50.png in Resources */,
 				432C319C1A7243840094A27E /* Images.xcassets in Resources */,
 				43D1CAD21A75E779004564C2 /* deps in Resources */,
 				2B88A8451D86AF0C0091186B /* .gitkeep in Resources */,

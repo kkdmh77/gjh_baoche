@@ -14,6 +14,7 @@
 #import "UIFactory.h"
 #import "FontManager.h"
 #import "UserInfoModel.h"
+#import "FileManager.h"
 
 @interface AppPropertiesInitialize : NSObject
 
