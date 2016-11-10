@@ -22,8 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *registerNibName;    // 必须设置(需为UICollectionViewCell及其子类)
 @property (nonatomic, weak) id<GridViewDelegate> delegate;
 
-@property (nonatomic, assign) UIEdgeInsets sectionInset;
-@property (nonatomic, assign) CGFloat minimumLineSpacing;
+@property (nonatomic, assign) UIEdgeInsets sectionInset; // default is {20,20,20,20}
+@property (nonatomic, assign) CGFloat minimumLineSpacing; // default is 20
+@property (nonatomic, assign) CGFloat minimumInteritemSpacing; // default is 20
 
 @property (nonatomic, strong) UIColor *horizontalSeparatorColor;
 @property (nonatomic, assign) UIEdgeInsets horizontalSeparatorInset;
@@ -47,7 +48,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 - (NSInteger)numberOfItemsInGridView:(GridView *)gridView;      // 总个数
-- (NSInteger)columnCountOfRowInGridView:(GridView *)gridView;   // 一行的列数
 - (CGSize)sizeForItemInGridView:(GridView *)gridView;
 - (void)girdView:(GridView *)gridView itemAtIndex:(NSInteger)index itemView:(UIView *)view;
 

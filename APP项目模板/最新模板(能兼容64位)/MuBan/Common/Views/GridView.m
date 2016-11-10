@@ -72,6 +72,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
     
     self.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);
     self.minimumLineSpacing = 20;
+    self.minimumInteritemSpacing = 20;
     
     [self addSubview:_collectionView];
 }
@@ -92,7 +93,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
 {
     CGSize itemSize = [_delegate sizeForItemInGridView:self];
     NSInteger numberOfItem = [_delegate numberOfItemsInGridView:self];
-    NSInteger columnCountOfRow = [_delegate columnCountOfRowInGridView:self];
+    NSInteger columnCountOfRow = [self getColumnCountOfRow];
     
     NSInteger rowCount = (numberOfItem / columnCountOfRow) + (numberOfItem % columnCountOfRow == 0 ? 0 : 1);
     
@@ -116,7 +117,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
     }
     
     NSInteger itemCount = [_delegate numberOfItemsInGridView:self];
-    NSInteger columnCount = [_delegate columnCountOfRowInGridView:self];
+    NSInteger columnCount = [self getColumnCountOfRow];
     NSInteger rowCount = itemCount / columnCount + ((itemCount % columnCount == 0) ? 0 : 1);
     
     CGSize itemSize = [_delegate sizeForItemInGridView:self];
@@ -133,7 +134,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
         }
     }
     // 纵向
-    CGFloat minimumInteritemSpacing = [self getMinimumInteritemSpacing];
+    CGFloat realInteritemSpacing = [self getRealInteritemSpacing];
     if (_verticalSeparatorColor) {
         for (int i = 0; i < rowCount; ++i) {
             for (int j = 1; j < columnCount; ++j) {
@@ -141,7 +142,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
                 
                 if (index <= itemCount - 1)
                 {
-                    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(_sectionInset.left + minimumInteritemSpacing / 2 + itemSize.width * j + minimumInteritemSpacing * (j - 1), _verticalSeparatorInset.top + _sectionInset.top + (itemSize.height + _minimumLineSpacing) * i, lineWidth, itemSize.height - _verticalSeparatorInset.top - _verticalSeparatorInset.bottom)];
+                    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(_sectionInset.left + realInteritemSpacing / 2 + itemSize.width * j + realInteritemSpacing * (j - 1), _verticalSeparatorInset.top + _sectionInset.top + (itemSize.height + _minimumLineSpacing) * i, lineWidth, itemSize.height - _verticalSeparatorInset.top - _verticalSeparatorInset.bottom)];
                     lineView.backgroundColor = _verticalSeparatorColor;
                     lineView.tag = 8888 + i * columnCount + j;
                     
@@ -168,6 +169,14 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
     layout.minimumLineSpacing = _minimumLineSpacing;
 }
 
+- (void)setMinimumInteritemSpacing:(CGFloat)minimumInteritemSpacing {
+    
+    _minimumInteritemSpacing = minimumInteritemSpacing;
+    
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)_collectionView.collectionViewLayout;
+    layout.minimumInteritemSpacing = _minimumInteritemSpacing;
+}
+
 - (UIView *)itemViewAtIndex:(NSInteger)index
 {
     return [_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
@@ -185,10 +194,32 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
 
 - (CGFloat)getMinimumInteritemSpacing
 {
+    /*
     NSInteger columnCount = [_delegate columnCountOfRowInGridView:self];
     CGSize itemSize = [_delegate sizeForItemInGridView:self];
     
     return floorf((_collectionView.frameWidth - _sectionInset.left - _sectionInset.right - itemSize.width * columnCount) / (columnCount - 1));
+     */
+    
+    return _minimumInteritemSpacing;
+}
+
+- (CGFloat)getRealInteritemSpacing {
+    
+     NSInteger columnCount = [self getColumnCountOfRow];
+     CGSize itemSize = [_delegate sizeForItemInGridView:self];
+     
+     return floorf((_collectionView.frameWidth - _sectionInset.left - _sectionInset.right - itemSize.width * columnCount) / (columnCount - 1));
+}
+
+- (NSInteger)getColumnCountOfRow {
+    
+    CGSize itemSize = [_delegate sizeForItemInGridView:self];
+    
+    CGFloat contentWidth = _collectionView.frameWidth - _sectionInset.left - _sectionInset.right;
+    NSInteger columnCount = floorf((contentWidth + _minimumInteritemSpacing) / (_minimumInteritemSpacing + itemSize.width));
+    
+    return columnCount;
 }
 
 #pragma mark - UICollectionViewDataSource & UICollectionViewDelegate methods
