@@ -97,7 +97,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
     
     NSInteger rowCount = (numberOfItem / columnCountOfRow) + (numberOfItem % columnCountOfRow == 0 ? 0 : 1);
     
-    CGFloat height = _sectionInset.top + _sectionInset.bottom + itemSize.height * rowCount + _minimumLineSpacing * (rowCount - 1);
+    CGFloat height = ceilf(_sectionInset.top + _sectionInset.bottom + itemSize.height * rowCount + _minimumLineSpacing * (rowCount - 1));
     
     self.frameHeight = height;
     _collectionView.frameHeight = height;
