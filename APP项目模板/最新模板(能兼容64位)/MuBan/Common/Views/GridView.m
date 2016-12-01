@@ -63,6 +63,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
     _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
+    _collectionView.scrollsToTop = NO;
     if ([_registerNibName isAbsoluteValid])
     {
         [_collectionView registerNib:[UINib nibWithNibName:_registerNibName bundle:nil]

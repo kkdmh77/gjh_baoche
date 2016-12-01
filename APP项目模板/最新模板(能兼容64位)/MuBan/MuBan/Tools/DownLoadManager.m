@@ -220,7 +220,8 @@ DEF_SINGLETON(DownloadManager);
         }
         
         DBFileType fileType = [[FileManager sharedInstance] getFileTypeByUrl:urlString];
-        
+        DataPackageInfoModel *model = [[FileManager sharedInstance].dataPackageInfoDic objectForKey:KKD_NSINETGER_2_NSSTRING(fileType)];
+
         // 成功&失败的block
         WEAKSELF
         [currentOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -228,8 +229,8 @@ DEF_SINGLETON(DownloadManager);
             [operation1 removeObserver:weakSelf forKeyPath:@"state" context:NULL];
             [operation1 deleteTempFileWithError:nil];
 
-            DataPackageInfoModel *model = [[FileManager sharedInstance].dataPackageInfoDic objectForKey:KKD_NSINETGER_2_NSSTRING(fileType)];
             model.isDownloading = NO;
+            model.percentDone = 0;
             
             [weakSelf.failDownloadContainer removeObjectForKey:urlString];
             
@@ -329,7 +330,6 @@ DEF_SINGLETON(DownloadManager);
             AFDownloadRequestOperation *operation2 = (AFDownloadRequestOperation *)operation;
             [operation2 removeObserver:weakSelf forKeyPath:@"state" context:NULL];
             
-            DataPackageInfoModel *model = [[FileManager sharedInstance].dataPackageInfoDic objectForKey:KKD_NSINETGER_2_NSSTRING(fileType)];
             model.isDownloading = NO;
             
             [weakSelf.failDownloadContainer setObject:@(isPatch) forKey:urlString];
@@ -346,7 +346,6 @@ DEF_SINGLETON(DownloadManager);
             
             float percentDone = totalBytesReadForFile / (float)totalBytesExpectedToReadForFile;
             
-            DataPackageInfoModel *model = [[FileManager sharedInstance].dataPackageInfoDic objectForKey:KKD_NSINETGER_2_NSSTRING(fileType)];
             model.isDownloading = YES;
             model.percentDone = percentDone;
             
@@ -360,6 +359,8 @@ DEF_SINGLETON(DownloadManager);
         // [operation start];
         currentOperation.queuePriority = NSOperationQueuePriorityVeryHigh;
         [_dbZipOperationQueue addOperation:currentOperation];
+        
+        model.isDownloading = YES;
         
         [GCDThread enqueueForeground:^{
             if (start) {

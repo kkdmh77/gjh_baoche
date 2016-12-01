@@ -517,8 +517,6 @@ DEF_SINGLETON(FileManager);
                   if ([NetworkStatusManager isEnableWIFI]) {
                       if (autoDownload) {
                           // 下载库
-                          model.isDownloading = YES;
-                          
                           // 下载完成后继续检测是否有下一个下载任务
                           if ([model.patchUrl isAbsoluteValid] && ![model.dbMergeFailedVersionColde isEqualToString:model.versionCode] && (memory / 4) >= fileSize) {
                               [weakSelf toDownloadWithUrl:model.patchUrl
@@ -541,7 +539,6 @@ DEF_SINGLETON(FileManager);
                       if (autoDownload) {
                           // 下载库
                           if ([model.allowCellular isEqualToString:@"1"]) {
-                              model.isDownloading = YES;
                               
                               // 移动网络下，不进行检测是否有下一个下载任务
                               if ([model.patchUrl isAbsoluteValid] && ![model.dbMergeFailedVersionColde isEqualToString:model.versionCode]  && (memory / 4) >= fileSize) {

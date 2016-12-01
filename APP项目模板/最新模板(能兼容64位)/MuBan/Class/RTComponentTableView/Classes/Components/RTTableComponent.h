@@ -26,7 +26,12 @@
 - (NSString *)headerIdentifier;
 
 - (NSInteger)numberOfItems;
+
+- (CGFloat)estimatedHeightForComponentHeader;
 - (CGFloat)heightForComponentHeader;
+
+- (CGFloat)estimatedHeightForComponentItemWithTableView:(UITableView *)tableView
+                                            atIndexPath:(NSIndexPath *)indexPath;
 /* @用下面这个方法替代此方法
  * @龚俊慧
  * @2016-8-24

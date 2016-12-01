@@ -59,8 +59,18 @@
     return 0;
 }
 
+- (CGFloat)estimatedHeightForComponentHeader {
+    
+    return 0.f;
+}
+
 - (CGFloat)heightForComponentHeader
 {
+    return 0.f;
+}
+
+- (CGFloat)estimatedHeightForComponentItemWithTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
+    
     return 0.f;
 }
 

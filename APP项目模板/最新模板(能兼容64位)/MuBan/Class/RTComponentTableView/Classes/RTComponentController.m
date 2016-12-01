@@ -41,6 +41,16 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.dk_backgroundColorPicker = DKColorWithColors(PageBackgroundColor, PageBackgroundColor_Night);
+        
+        /* @龚俊慧
+         * @用self sizing cell方式时不能实现heightForRowAtIndexPath方法
+        if (IOS8) {
+            
+            _tableView.estimatedRowHeight = 70;
+            _tableView.rowHeight = UITableViewAutomaticDimension;
+        }
+         */
     }
     return _tableView;
 }
@@ -58,6 +68,14 @@
 - (CGRect)tableViewRectForBounds:(CGRect)bounds
 {
     return bounds;
+}
+
+- (void)setNetworkRequestStatusBlocks {
+    
+}
+
+- (void)getNetworkData {
+    
 }
 
 #pragma mark - UITableView Datasource & Delegate
@@ -79,7 +97,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
 {
-    return self.components[section].heightForComponentHeader;
+    return self.components[section].estimatedHeightForComponentHeader;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,7 +107,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.components[indexPath.section] heightForComponentItemWithTableView:tableView atIndexPath:indexPath];
+    return [self.components[indexPath.section] estimatedHeightForComponentItemWithTableView:tableView atIndexPath:indexPath];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

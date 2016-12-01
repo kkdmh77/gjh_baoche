@@ -48,25 +48,29 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
 {
     NSString *networkDataStr = [[[NSString alloc] initWithData:aData encoding:NSUTF8StringEncoding] autorelease];
 
-    NSMutableString *resultStr = [NSMutableString stringWithString:networkDataStr];
-    
-    // [s replaceOccurrencesOfString:@"\"" withString:@"\\\"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-    // [s replaceOccurrencesOfString:@"/" withString:@"\\/" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
-    [resultStr replaceOccurrencesOfString:@"\n" withString:@"\\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
-    [resultStr replaceOccurrencesOfString:@"\b" withString:@"\\b" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
-    [resultStr replaceOccurrencesOfString:@"\f" withString:@"\\f" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
-    [resultStr replaceOccurrencesOfString:@"\r" withString:@"\\r" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
-    [resultStr replaceOccurrencesOfString:@"\t" withString:@"\\t" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
-    
-    NSData *resultData = [resultStr dataUsingEncoding:NSUTF8StringEncoding];
+    if ([networkDataStr isValidString]) {
+        
+        NSMutableString *resultStr = [NSMutableString stringWithString:networkDataStr];
+        
+        // [s replaceOccurrencesOfString:@"\"" withString:@"\\\"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+        // [s replaceOccurrencesOfString:@"/" withString:@"\\/" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+        [resultStr replaceOccurrencesOfString:@"\n" withString:@"\\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
+        [resultStr replaceOccurrencesOfString:@"\b" withString:@"\\b" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
+        [resultStr replaceOccurrencesOfString:@"\f" withString:@"\\f" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
+        [resultStr replaceOccurrencesOfString:@"\r" withString:@"\\r" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
+        [resultStr replaceOccurrencesOfString:@"\t" withString:@"\\t" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [resultStr length])];
+        
+        NSData *resultData = [resultStr dataUsingEncoding:NSUTF8StringEncoding];
 
-    return resultData;
+        return resultData;
+    }
+    return aData;
 }
 
 //数据解析
 - (BOOL)isParseSuccessWithResponseData:(NSData *)data result:(id *)result
 {
-    if (!networkDataIsJsonType)
+    if (!networkDataIsJsonType || ![data isValidData])
     {
         *result = data;
         
