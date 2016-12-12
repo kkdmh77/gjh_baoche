@@ -26,7 +26,7 @@ AS_SINGLETON(ShareManager);
 
 /**
  @ 方法描述    分享(就算全参数传入，在不同平台的展示效果会不一样)
- @ 输入参数    content: 分享正文 url: 分享的URL, insetImage: 分享对话框的缩略图, contentImage: 内容大图, presentedController: 触发方法的控制器
+ @ 输入参数    content: 分享正文, url: 分享的URL, insetImage: 缩略图（UIImage或者NSData类型，或者image_url）, contentImage: 图片内容（可以是UIImage类对象，也可以是NSdata类对象，也可以是图片链接imageUrl NSString类对象）, presentedController: 触发方法的控制器
  @ 返回值      void
  @ 创建人      龚俊慧
  @ 创建时间    2015-01-28
@@ -34,19 +34,10 @@ AS_SINGLETON(ShareManager);
 - (void)shareWithContent:(NSString *)content
                    title:(NSString *)title
                      url:(NSString *)urlStr
-              insetImage:(UIImage *)insetImage
-            contentImage:(UIImage *)contentImage
+              insetImage:(id)insetImage
+            contentImage:(id)contentImage
      presentedController:(UIViewController *)presentedController
               completion:(void (^) (UMSocialShareResponse *result, NSError *error))completion;
-
-- (void)shareWithPlatformType:(UMSocialPlatformType)platformType
-                      Content:(NSString *)content
-                        title:(NSString *)title
-                          url:(NSString *)urlStr
-                   insetImage:(UIImage *)insetImage
-                 contentImage:(UIImage *)contentImage
-          presentedController:(UIViewController *)presentedController
-                   completion:(void (^) (UMSocialShareResponse *result, NSError *error))completion;
 
 /**
  @ 方法描述    第三方平台登录

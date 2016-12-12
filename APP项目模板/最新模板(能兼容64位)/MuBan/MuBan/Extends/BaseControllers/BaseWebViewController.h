@@ -11,8 +11,9 @@
 @interface BaseWebViewController : BaseNetworkViewController <UIWebViewDelegate>
 
 @property (nonatomic, copy)             NSString *navTitleStr;
-@property (nonatomic, assign) BOOL      isSelfRequest;           // default is NO(如果为NO则是webView直接加载URL,否则请求自己服务器的接口返回HTML的富文本然后再用webView加载)
+@property (nonatomic, assign) BOOL      isSelfRequest; // default is NO(如果为NO则是webView直接加载URL,否则请求自己服务器的接口返回HTML的富文本然后再用webView加载)
 @property (nonatomic, readonly, strong) UIWebView *webView;
+@property (nonatomic, readonly, strong) NSURL *url;
 
 - (id)initWithUrl:(NSURL *)url;
 

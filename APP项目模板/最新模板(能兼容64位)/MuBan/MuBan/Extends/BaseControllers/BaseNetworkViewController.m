@@ -127,7 +127,7 @@
     [netStatusRemindLabel sizeToFit];
     // netStatusRemindLabel.center = CGPointMake(netBackgroundStatusImgView.center.x, netBackgroundStatusImgView.center.y + (image.size.height / 2) + 10);
     [netStatusRemindLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(netBackgroundStatusImgView).centerOffset(CGPointMake(0, (image.size.height / 2) + 10));
+        make.center.equalTo(netBackgroundStatusImgView).centerOffset(CGPointMake(0, 30));
     }];
     
     [netBackgroundStatusImgView removeGestureWithTarget:self andAction:@selector(getNetworkData)];

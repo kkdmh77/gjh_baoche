@@ -53,13 +53,43 @@
     [self setNavigationItemTitle:_navTitleStr];
 }
 
+- (void)setNetworkRequestStatusBlocks {
+    
+    WEAKSELF
+    if (_isSelfRequest) {
+        
+        self.startedBlock = ^(NetRequest *request) {
+            
+            [weakSelf showHUDInfoByType:HUDInfoType_Loading];
+        };
+    }
+}
+
 - (void)getNetworkData
 {
-    [[NetRequestManager sharedInstance] sendRequest:_url
-                                       parameterDic:nil
-                                         requestTag:1000
-                                           delegate:self
-                                           userInfo:nil];
+    if ([NetworkStatusManager isConnectNetwork]) {
+        
+        if (_isSelfRequest) {
+            
+            [[NetRequestManager sharedInstance] sendRequest:_url
+                                               parameterDic:nil
+                                                 requestTag:1000
+                                                   delegate:self
+                                                   userInfo:nil];
+        } else {
+            
+            // 清空加载网络数据的背景图
+            UIView *netBackgroundStatusImgView = [self valueForKey:@"netBackgroundStatusImgView"];
+            if (netBackgroundStatusImgView) {
+                
+                [netBackgroundStatusImgView removeFromSuperview];
+            }
+            [_webView loadRequest:[NSURLRequest requestWithURL:_url]];
+        }
+    } else {
+        
+        [self setNoNetworkConnectionStatusView];
+    }
 }
 
 - (void)initialization
@@ -69,14 +99,7 @@
         _webView = InsertWebView(self.view, self.view.bounds, self, 1000);
         [_webView keepAutoresizingInFull];
         
-        if (!_isSelfRequest)
-        {
-            [_webView loadRequest:[NSURLRequest requestWithURL:_url]];
-        }
-        else
-        {
-            [self getNetworkData];
-        }
+        [self getNetworkData];
         
         [WebViewJavascriptBridge enableLogging];
         
@@ -138,15 +161,12 @@
 {
     NSLog(@"webViewDidFinishLoad");
     
-    if (self.navigationItem.rightBarButtonItem == _activityItem)
-    {
-        [self.navigationItem setRightBarButtonItem:nil animated:YES];
-    }
+    [self webViewLoadFinish];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [self webViewDidFinishLoad:webView];
+    [self webViewLoadFinish];
 }
 
 #pragma mark - NetRequestDelegate methods
@@ -170,7 +190,7 @@
     {
         NSString *htmlStr = [infoObj safeObjectForKey:@"detail"];
         
-        [_webView loadHTMLString:htmlStr baseURL:NO];
+        [_webView loadHTMLString:htmlStr baseURL:nil];
     }
 }
 
@@ -179,6 +199,16 @@
     DLog(@"error = %@", error);
     
     [super netRequest:request failedWithError:error];
+    
+    if (self.navigationItem.rightBarButtonItem == _activityItem)
+    {
+        [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    }
+}
+
+#pragma mark - tool methods
+
+- (void)webViewLoadFinish {
     
     if (self.navigationItem.rightBarButtonItem == _activityItem)
     {

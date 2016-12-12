@@ -12,15 +12,15 @@
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WeiboSDK.h"
-#import "UMSocialUIManager.h"
+#import <UShareUI/UShareUI.h>
 
 @interface ShareManager ()
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *urlStr;
-@property (nonatomic, strong) UIImage *insetImage;
-@property (nonatomic, strong) UIImage *contentImage;
+@property (nonatomic, strong) id insetImage;
+@property (nonatomic, strong) id contentImage;
 
 @end
 
@@ -41,7 +41,7 @@ DEF_SINGLETON(ShareManager);
                 completion:completion];
 }
 
-- (void)shareWithContent:(NSString *)content title:(NSString *)title url:(NSString *)urlStr insetImage:(UIImage *)insetImage contentImage:(UIImage *)contentImage presentedController:(UIViewController *)presentedController completion:(void (^) (UMSocialShareResponse *result, NSError *error))completion
+- (void)shareWithContent:(NSString *)content title:(NSString *)title url:(NSString *)urlStr insetImage:(id)insetImage contentImage:(id)contentImage presentedController:(UIViewController *)presentedController completion:(void (^) (UMSocialShareResponse *result, NSError *error))completion
 {
     self.title = title;
     self.content = content;
@@ -49,25 +49,29 @@ DEF_SINGLETON(ShareManager);
     self.insetImage = insetImage;
     self.contentImage = contentImage;
     
+    NSMutableArray *types = [NSMutableArray arrayWithObject:@(UMSocialPlatformType_Email)];
+    if ([WeiboSDK isWeiboAppInstalled]) {
+        [types insertObject:@(UMSocialPlatformType_Sina) atIndex:0];
+    }
+    if ([QQApiInterface isQQInstalled]) {
+        [types insertObject:@(UMSocialPlatformType_Qzone) atIndex:0];
+        [types insertObject:@(UMSocialPlatformType_QQ) atIndex:0];
+    }
+    if ([WXApi isWXAppInstalled]) {
+        [types insertObject:@(UMSocialPlatformType_WechatTimeLine) atIndex:0];
+        [types insertObject:@(UMSocialPlatformType_WechatSession) atIndex:0];
+    }
+    [UMSocialUIManager setPreDefinePlatforms:types];
+    
+    [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_None;
+    
     WEAKSELF
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMShareMenuSelectionView *shareSelectionView, UMSocialPlatformType platformType) {
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         [weakSelf shareWithPlatformType:platformType
                     presentedController:presentedController
                              completion:completion];
     }];
-}
-
-- (void)shareWithPlatformType:(UMSocialPlatformType)platformType Content:(NSString *)content title:(NSString *)title url:(NSString *)urlStr insetImage:(UIImage *)insetImage contentImage:(UIImage *)contentImage presentedController:(UIViewController *)presentedController completion:(void (^)(UMSocialShareResponse *, NSError *))completion
-{
-    self.title = title;
-    self.content = content;
-    self.urlStr = urlStr;
-    self.insetImage = insetImage;
-    self.contentImage = contentImage;
-    
-    [self shareWithPlatformType:platformType
-            presentedController:presentedController
-                     completion:completion];
 }
 
 - (void)shareWithPlatformType:(UMSocialPlatformType)platformType presentedController:(UIViewController *)presentedController completion:(void (^) (UMSocialShareResponse *result, NSError *error))completion
@@ -78,13 +82,13 @@ DEF_SINGLETON(ShareManager);
     }
     NSString *contentText = _content;
     if (![contentText isValidString]) {
-        contentText = SHARE_TEXT; // SHARE_TEXT;
+        contentText = LocalizedStr(Share_App_Content); // SHARE_TEXT;
     }
-    UIImage *insetImage = _insetImage;
+    id insetImage = _insetImage;
     if (!insetImage) {
-        insetImage = [UIImage imageNamed:@"ios_120"];
+        insetImage = [UIImage imageNamed:@"home_page_book_delete"];
     }
-    UIImage *contentImage = _contentImage;
+    id contentImage = _contentImage;
     NSString *targetUrlStr = [_urlStr isValidString] ? _urlStr : @"";
     
     // 配置分享内容
@@ -101,7 +105,7 @@ DEF_SINGLETON(ShareManager);
     } else if ([targetUrlStr isValidString]) {
         messageObject.text = contentText;
         UMShareWebpageObject *webpageObject = [UMShareWebpageObject shareObjectWithTitle:title
-                                                                                   descr:contentText
+                                                                                   descr:nil
                                                                                thumImage:insetImage];
         webpageObject.webpageUrl = targetUrlStr;
         shareObject = webpageObject;

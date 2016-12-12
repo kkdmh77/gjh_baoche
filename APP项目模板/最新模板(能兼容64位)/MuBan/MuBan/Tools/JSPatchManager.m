@@ -43,6 +43,10 @@ static NSString * const kJSPatchVersionKey = @"kJSPatchVersionKey";
      有补丁：{"status":200,"message":"","data":{"patchUrl":"http://xyz","appVersion":"1.0.2","patchText":"base64Str","patchVersion":"2"}}
      无补丁：{"status":200,"message":"","data":null}
      */
+    NSString *openUDID = [OpenUDID value];
+    if (![openUDID isValidString]) {
+        return;
+    }
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:parameters];
     if (![dic isValidDictionary]) {
@@ -60,7 +64,7 @@ static NSString * const kJSPatchVersionKey = @"kJSPatchVersionKey";
         dic = [NSMutableDictionary dictionaryWithObjects:values forKeys:keys];
         NSString *token = [[NSString stringWithFormat:@"%@%@", [values componentsJoinedByString:@""], @"123456789#$(&*>kl"] MD5Sum];
         [dic setObject:token forKey:@"md5"];
-        [dic setObject:[OpenUDID value] forKey:@"uuid"];
+        [dic setObject:openUDID forKey:@"uuid"];
     }
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -179,7 +183,7 @@ static NSString * const kJSPatchVersionKey = @"kJSPatchVersionKey";
     
     /**************************** 本地补丁调试代码(测试完请注释掉) ********************************/
     /*
-    NSString *testPatchPath = GetApplicationPathFileName(@"demo", @"js");
+    NSString *testPatchPath = GetApplicationPathFileName(@"Demo", @"js");
     NSString *testScriptStr = [NSString stringWithContentsOfFile:testPatchPath
                                                         encoding:NSUTF8StringEncoding
                                                            error:NULL];

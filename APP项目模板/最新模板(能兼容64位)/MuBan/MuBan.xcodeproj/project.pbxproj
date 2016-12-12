@@ -102,7 +102,6 @@
 		2B3E20AC1DAB3B3B003E3BB4 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E20AA1DAB3B3B003E3BB4 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2B3E20AD1DAB3B3B003E3BB4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E20AB1DAB3B3B003E3BB4 /* README.md */; };
 		2B3E20B11DAB3B5E003E3BB4 /* CommonDefine.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B3E20AF1DAB3B5E003E3BB4 /* CommonDefine.js */; };
-		2B3E20B21DAB3B5E003E3BB4 /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = 2B3E20B01DAB3B5E003E3BB4 /* demo.js */; };
 		2B3E20B41DAB3C1F003E3BB4 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3E20B31DAB3C1F003E3BB4 /* libsqlite3.0.tbd */; };
 		2B3E20B61DAB3C31003E3BB4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3E20B51DAB3C31003E3BB4 /* CoreTelephony.framework */; };
 		2B3E20B81DAB3C3E003E3BB4 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3E20B71DAB3C3E003E3BB4 /* libxml2.tbd */; };
@@ -143,6 +142,7 @@
 		2B88A84A1D86AF0C0091186B /* RTComponentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B88A8421D86AF0C0091186B /* RTComponentController.m */; };
 		2BCC7C341C7AB81E00B7E7D5 /* Jastor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C311C7AB81E00B7E7D5 /* Jastor.m */; };
 		2BCC7C351C7AB81E00B7E7D5 /* JastorRuntimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */; };
+		2BD047601DFE85EE00698FB4 /* Demo.js in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0475F1DFE85EE00698FB4 /* Demo.js */; };
 		2BE05AC51DC73C9B00E2FDBE /* DownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE05AC41DC73C9B00E2FDBE /* DownloadCache.m */; };
 		2BE68B761DCB2AD800A1B99B /* UserInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE68B751DCB2AD800A1B99B /* UserInfoEntity.m */; };
 		431F13891A7762E9008C4544 /* ChineseToPinyinResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431F137D1A7762E9008C4544 /* ChineseToPinyinResource.m */; };
@@ -655,7 +655,6 @@
 		2B3E20AA1DAB3B3B003E3BB4 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		2B3E20AB1DAB3B3B003E3BB4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2B3E20AF1DAB3B5E003E3BB4 /* CommonDefine.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = CommonDefine.js; sourceTree = "<group>"; };
-		2B3E20B01DAB3B5E003E3BB4 /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
 		2B3E20B31DAB3C1F003E3BB4 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		2B3E20B51DAB3C31003E3BB4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		2B3E20B71DAB3C3E003E3BB4 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
@@ -733,6 +732,7 @@
 		2BCC7C311C7AB81E00B7E7D5 /* Jastor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jastor.m; sourceTree = "<group>"; };
 		2BCC7C321C7AB81E00B7E7D5 /* JastorRuntimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JastorRuntimeHelper.h; sourceTree = "<group>"; };
 		2BCC7C331C7AB81E00B7E7D5 /* JastorRuntimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JastorRuntimeHelper.m; sourceTree = "<group>"; };
+		2BD0475F1DFE85EE00698FB4 /* Demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Demo.js; sourceTree = "<group>"; };
 		2BE05AC31DC73C9B00E2FDBE /* DownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadCache.h; sourceTree = "<group>"; };
 		2BE05AC41DC73C9B00E2FDBE /* DownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadCache.m; sourceTree = "<group>"; };
 		2BE68B741DCB2AD800A1B99B /* UserInfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoEntity.h; sourceTree = "<group>"; };
@@ -1910,7 +1910,7 @@
 			isa = PBXGroup;
 			children = (
 				2B3E20AF1DAB3B5E003E3BB4 /* CommonDefine.js */,
-				2B3E20B01DAB3B5E003E3BB4 /* demo.js */,
+				2BD0475F1DFE85EE00698FB4 /* Demo.js */,
 			);
 			path = JSResource;
 			sourceTree = "<group>";
@@ -3674,12 +3674,12 @@
 				43D1CC231A75EBFA004564C2 /* pinyin.correct in Resources */,
 				43D1CAEB1A75E779004564C2 /* sr_refresh@2X.png in Resources */,
 				432C319A1A7243840094A27E /* Main.storyboard in Resources */,
+				2BD047601DFE85EE00698FB4 /* Demo.js in Resources */,
 				43D1CB051A75EBA5004564C2 /* CHANGELOG in Resources */,
 				43D1CA891A75E778004564C2 /* deps in Resources */,
 				43D1CB061A75EBA5004564C2 /* Address.json in Resources */,
 				43D1CC241A75EBFA004564C2 /* pinyin.sqlite in Resources */,
 				432C319F1A7243840094A27E /* LaunchScreen.xib in Resources */,
-				2B3E20B21DAB3B5E003E3BB4 /* demo.js in Resources */,
 				43D1CACF1A75E779004564C2 /* lib.xcconfig in Resources */,
 				43D1C9E01A75E778004564C2 /* Images.xcassets in Resources */,
 				43D1CA021A75E778004564C2 /* IQKeyboardManager.bundle in Resources */,
