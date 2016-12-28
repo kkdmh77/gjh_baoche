@@ -84,9 +84,17 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     *result = [NSJSONSerialization JSONObjectWithData:[self JSONData:data] options:NSJSONReadingMutableContainers error:&err];
     if (err)
     {
-        *result = err;
-        
-        return NO;
+        // 不是JSON格式的数据
+        if (3840 == err.code)
+        {
+            *result = data;
+            return YES;
+        }
+        else
+        {
+            *result = err;
+            return NO;
+        }
     }
     // NSLog(@"resultDic = %@",*result);
     

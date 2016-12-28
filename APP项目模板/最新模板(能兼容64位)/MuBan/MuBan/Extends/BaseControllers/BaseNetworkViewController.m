@@ -309,7 +309,7 @@
         }
         else
         {
-            [self showHUDInfoByString:NotLogin];
+            [self showHUDInfoByString:@""];
         }
         
         if (isAutoLogin)
@@ -450,6 +450,7 @@
 - (void)netRequest:(NetRequest *)request successWithInfoObj:(id)infoObj
 {
     [self hideHUD];
+    [self hideHUDInView:self.view];
     
     // 清空加载网络数据的背景图
     if (netBackgroundStatusImgView.superview)
@@ -462,12 +463,13 @@
         self.successBlock(request, infoObj);
     }
     
-//    [self parserNetworkData:infoObj request:request];
+    // [self parserNetworkData:infoObj request:request];
 }
 
 - (void)netRequest:(NetRequest *)request failedWithError:(NSError *)error
 {
     [self hideHUD];
+    [self hideHUDInView:self.view];
     
     if (self.failedBlock)
     {

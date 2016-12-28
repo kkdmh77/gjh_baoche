@@ -411,6 +411,11 @@
     [HUDManager hideHUD];
 }
 
+- (void)hideHUDInView:(UIView *)inView {
+    
+    [HUDManager hideHUDInView:inView];
+}
+
 - (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg action:(SEL)action
 {
     return [self configureBarbuttonItemByPosition:position normalImg:normalImg highlightedImg:highlightedImg selectedImg:nil isSelected:NO action:action];

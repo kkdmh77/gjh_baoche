@@ -98,14 +98,14 @@ DEF_SINGLETON(ShareManager);
     if (contentImage) {
         messageObject.text = [contentText stringByAppendingString:targetUrlStr];
         UMShareImageObject *imageObject = [UMShareImageObject shareObjectWithTitle:title
-                                                                             descr:nil
+                                                                             descr:contentText
                                                                          thumImage:insetImage];
         imageObject.shareImage = contentImage;
         shareObject = imageObject;
     } else if ([targetUrlStr isValidString]) {
         messageObject.text = contentText;
         UMShareWebpageObject *webpageObject = [UMShareWebpageObject shareObjectWithTitle:title
-                                                                                   descr:nil
+                                                                                   descr:contentText
                                                                                thumImage:insetImage];
         webpageObject.webpageUrl = targetUrlStr;
         shareObject = webpageObject;

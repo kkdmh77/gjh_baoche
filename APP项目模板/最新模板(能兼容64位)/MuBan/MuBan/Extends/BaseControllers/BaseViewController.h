@@ -155,6 +155,14 @@ typedef void (^PickPhotoCancelHandle) (void);
 - (void)hideHUD;
 
 /**
+@ 方法描述    隐藏HUD显示
+@ 输入参数    无
+@ 创建人      龚俊慧
+@ 创建时间    2014-07-18
+*/
+- (void)hideHUDInView:(UIView *)inView;
+
+/**
  @ 方法描述    配置导航栏按钮
  @ 输入参数    BarbuttonItemPosition: 位置
  @ 创建人      龚俊慧
