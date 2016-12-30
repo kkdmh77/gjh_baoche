@@ -20,16 +20,25 @@
         
         urlForTypeDic = @{
                           // 用户中心
-                          @(NetUserCenterRequestType_Register): @"user/register",
-                          @(NetUserCenterRequestType_Login): @"user/login",
+                          @(NetUserCenterRequestType_Register): @"",
+                          @(NetUserCenterRequestType_Login): @"",
                           @(NetUserCenterRequestType_Logout): @"",
-                          @(NetUserCenterRequestType_ModifyPossword): @"user/changePwd",
+                          @(NetUserCenterRequestType_ModifyPossword): @"",
                           
-                          @(NetUserCenterRequestType_GetAccountInfo): @"account/my/info",
-                          @(NetUserCenterRequestType_ChangeAccountInfo): @"user/changeInfo",
+                          @(NetUserCenterRequestType_GetVerificationCode): @"",
+                          @(NetUserCenterRequestType_VerificationCodeCheck): @"",
+                          @(NetUserCenterRequestType_GetAccountInfo): @"",
+                          @(NetUserCenterRequestType_ChangeAccountInfo): @"",
+                          @(NetUserCenterRequestType_UploadUserHeaderImage): @"",
                           
                           // 上传deviceToken
                           @(NetUploadDeviceTokenRequestType_UploadDeviceToken): @"",
+                          
+                          // 上传IDFA
+                          @(NetUploadIDFARequestType_UploadIDFA): @"",
+                          
+                          // 热修复
+                          @(NetJSPatchRequestType_GetPatch): @""
                           };
     });
     

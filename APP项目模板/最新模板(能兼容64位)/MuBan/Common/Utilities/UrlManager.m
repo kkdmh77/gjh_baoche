@@ -107,6 +107,30 @@
     return url;
 }
 
++ (NSURL *)getRequestUrlByNameSpace:(NSString *)nameSpace methodName:(NSString *)methodName {
+    
+    return [self getRequestUrlByNameSpace:nameSpace methodName:methodName andArgsDic:nil];
+}
+
++ (NSURL *)getRequestUrlByNameSpace:(NSString *)nameSpace methodName:(NSString *)methodName andArgsDic:(NSDictionary *)dic {
+    
+    NSURL *url = nil;
+    
+    if ([nameSpace isValidString] && [methodName isValidString])
+    {
+        NSString *urlStr = [nameSpace stringByAppendingFormat:@"/%@",methodName];
+        
+        if ([dic isValidDictionary])
+        {
+            urlStr = [urlStr stringByAppendingFormat:@"?%@",[NSString urlArgsStringFromDictionary:dic]];
+        }
+        urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        url = [NSURL URLWithString:urlStr];
+    }
+    return url;
+}
+
 + (NSString *)getImageRequestUrlStrByUrlComponent:(NSString *)urlComponent
 {
     NSString *imageNameSpaceStr = [self getImageNameSpace];

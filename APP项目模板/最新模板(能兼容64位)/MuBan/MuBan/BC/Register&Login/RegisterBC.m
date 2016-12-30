@@ -13,6 +13,8 @@
 #import "StringJudgeManager.h"
 #import "InterfaceHUDManager.h"
 
+extern NSString * const kMobilePhoneErrorMessage;
+
 @interface RegisterBC ()
 {
     successHandle   _success;
@@ -23,16 +25,20 @@
 
 @implementation RegisterBC
 
-- (void)getVerificationCodeWithMobilePhoneNumber:(NSString *)phoneNumber successHandle:(successHandle)success failedHandle:(failedHandle)failed
+DEF_SINGLETON(RegisterBC);
+
+- (void)getVerificationCodeWithMobilePhoneNumber:(NSString *)phoneNumber isModifyPassword:(BOOL)isModifyPassword successHandle:(successHandle)success failedHandle:(failedHandle)failed
 {
     if ([StringJudgeManager isValidateStr:phoneNumber regexStr:MobilePhoneNumRegex])
     {
         _success = success;
         _failed = failed;
         
-        NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:0];
+        NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_GetVerificationCode];
         NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
-        NSDictionary *dic = @{@"username": phoneNumber};
+        
+        NSDictionary *dic = @{@"phone": phoneNumber,
+                              @"type": (isModifyPassword ? @(1) : @(0))};
         
         [[NetRequestManager sharedInstance] sendRequest:url
                                            parameterDic:dic
@@ -43,7 +49,40 @@
     }
     else
     {
-        [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入手机号码"];
+        [HUDManager showAutoHideHUDWithToShowStr:kMobilePhoneErrorMessage HUDMode:MBProgressHUDModeText];
+    }
+}
+
+- (void)verificationCodeCheckWithMobilePhoneNumber:(NSString *)phoneNumber verificationCode:(NSString *)verificationCode successHandle:(successHandle)success failedHandle:(failedHandle)failed
+{
+    if ([StringJudgeManager isValidateStr:phoneNumber regexStr:MobilePhoneNumRegex])
+    {
+        if ([verificationCode isAbsoluteValid])
+        {
+            _success = success;
+            _failed = failed;
+            
+            NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_VerificationCodeCheck];
+            NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
+            
+            NSDictionary *dic = @{@"phone": phoneNumber,
+                                  @"auth": verificationCode};
+            
+            [[NetRequestManager sharedInstance] sendRequest:url
+                                               parameterDic:dic
+                                          requestMethodType:RequestMethodType_POST
+                                                 requestTag:0
+                                                   delegate:self
+                                                   userInfo:nil];
+        }
+        else
+        {
+            [HUDManager showAutoHideHUDWithToShowStr:@"请输入验证码" HUDMode:MBProgressHUDModeText];
+        }
+    }
+    else
+    {
+        [HUDManager showAutoHideHUDWithToShowStr:kMobilePhoneErrorMessage HUDMode:MBProgressHUDModeText];
     }
 }
 
@@ -51,9 +90,9 @@
 {
     if ([StringJudgeManager isValidateStr:userName regexStr:MobilePhoneNumRegex])
     {
-        if ([password isAbsoluteValid] && password.length >= 6 && password.length <= 16)
+        if ([[self class] passwordIsAbsoluteValid:password])
         {
-            if ([passwordConfirm isAbsoluteValid] && passwordConfirm.length >= 6 && passwordConfirm.length <= 16)
+            if ([[self class] passwordIsAbsoluteValid:passwordConfirm])
             {
                 if ([password isEqualToString:passwordConfirm])
                 {
@@ -65,7 +104,10 @@
                         // 进行注册操作
                         NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_Register];
                         NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
-                        NSDictionary *dic = @{@"username": userName, @"password": password, @"checkCode": verificationCode};
+                        
+                        NSDictionary *dic = @{@"phone": userName,
+                                              @"passwd": password,
+                                              @"auth": verificationCode};
                         
                         [[NetRequestManager sharedInstance] sendRequest:url
                                                            parameterDic:dic
@@ -76,27 +118,27 @@
                     }
                     else
                     {
-                        [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入验证码"];
+                        [HUDManager showAutoHideHUDWithToShowStr:@"请输入验证码" HUDMode:MBProgressHUDModeText];
                     }
                 }
                 else
                 {
-                    [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"2次密码输入不一致"];
+                    [HUDManager showAutoHideHUDWithToShowStr:@"2次密码输入不一致" HUDMode:MBProgressHUDModeText];
                 }
             }
             else
             {
-                [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请再次输入密码"];
+                [HUDManager showAutoHideHUDWithToShowStr:@"请再次输入密码" HUDMode:MBProgressHUDModeText];
             }
         }
         else
         {
-            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入密码"];
+            [HUDManager showAutoHideHUDWithToShowStr:LocalizedStr(Register_PleaseInputPassword) HUDMode:MBProgressHUDModeText];
         }
     }
     else
     {
-        [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入手机号码"];
+        [HUDManager showAutoHideHUDWithToShowStr:kMobilePhoneErrorMessage HUDMode:MBProgressHUDModeText];
     }
 }
 
@@ -104,9 +146,9 @@
 {
     if ([StringJudgeManager isValidateStr:userName regexStr:EmailRegex])
     {
-        if ([password isAbsoluteValid] && password.length >= 6 && password.length <= 16)
+        if ([[self class] passwordIsAbsoluteValid:password])
         {
-            if ([passwordConfirm isAbsoluteValid] && passwordConfirm.length >= 6 && passwordConfirm.length <= 16)
+            if ([[self class] passwordIsAbsoluteValid:passwordConfirm])
             {
                 if ([password isEqualToString:passwordConfirm])
                 {
@@ -139,12 +181,12 @@
         }
         else
         {
-            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入密码"];
+            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:LocalizedStr(Register_PleaseInputPassword)];
         }
     }
     else
     {
-        [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入邮箱"];
+        [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入正确的邮箱"];
     }
 }
 
@@ -152,9 +194,9 @@
 {
     if ([userName isAbsoluteValid])
     {
-        if ([password isAbsoluteValid] && password.length >= 6 && password.length <= 16)
+        if ([[self class] passwordIsAbsoluteValid:password])
         {
-            if ([passwordConfirm isAbsoluteValid] && passwordConfirm.length >= 6 && passwordConfirm.length <= 16)
+            if ([[self class] passwordIsAbsoluteValid:passwordConfirm])
             {
                 if ([password isEqualToString:passwordConfirm])
                 {
@@ -187,13 +229,74 @@
         }
         else
         {
-            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入密码"];
+            [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:LocalizedStr(Register_PleaseInputPassword)];
         }
     }
     else
     {
         [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:@"请输入用户名"];
     }
+}
+
+- (void)modifyPasswordWithMobilePhoneNum:(NSString *)phoneNum newPassword:(NSString *)password passwordConfirm:(NSString *)passwordConfirm verificationCode:(NSString *)verificationCode successHandle:(successHandle)success failedHandle:(failedHandle)failed
+{
+    if ([StringJudgeManager isValidateStr:phoneNum regexStr:MobilePhoneNumRegex])
+    {
+        if ([[self class] passwordIsAbsoluteValid:password])
+        {
+            if ([[self class] passwordIsAbsoluteValid:passwordConfirm])
+            {
+                if ([password isEqualToString:passwordConfirm])
+                {
+                    if ([verificationCode isAbsoluteValid])
+                    {
+                        _success = success;
+                        _failed = failed;
+                        
+                        // 进行修改密码操作
+                        NSString *methodNameStr = [BaseNetworkViewController getRequestURLStr:NetUserCenterRequestType_ModifyPossword];
+                        NSURL *url = [UrlManager getRequestUrlByMethodName:methodNameStr];
+                        
+                        NSDictionary *dic = @{@"phone": phoneNum,
+                                              @"passwd": password,
+                                              @"auth": verificationCode};
+                        
+                        [[NetRequestManager sharedInstance] sendRequest:url
+                                                           parameterDic:dic
+                                                      requestMethodType:RequestMethodType_POST
+                                                             requestTag:NetUserCenterRequestType_Register
+                                                               delegate:self
+                                                               userInfo:nil];
+                    }
+                    else
+                    {
+                        [HUDManager showAutoHideHUDWithToShowStr:@"请输入验证码" HUDMode:MBProgressHUDModeText];
+                    }
+                }
+                else
+                {
+                    [HUDManager showAutoHideHUDWithToShowStr:@"2次密码输入不一致" HUDMode:MBProgressHUDModeText];
+                }
+            }
+            else
+            {
+                [HUDManager showAutoHideHUDWithToShowStr:@"请再次输入密码" HUDMode:MBProgressHUDModeText];
+            }
+        }
+        else
+        {
+            [HUDManager showAutoHideHUDWithToShowStr:LocalizedStr(Register_PleaseInputPassword) HUDMode:MBProgressHUDModeText];
+        }
+    }
+    else
+    {
+        [HUDManager showAutoHideHUDWithToShowStr:kMobilePhoneErrorMessage HUDMode:MBProgressHUDModeText];
+    }
+}
+
++ (BOOL)passwordIsAbsoluteValid:(NSString *)password {
+    
+    return [password isValidString] && password.length >= 6 && password.length <= 18;
 }
 
 - (void)dealloc
@@ -206,7 +309,7 @@
 - (void)netRequest:(NetRequest *)request failedWithError:(NSError *)error
 {
     NSString *errorMessage = SafetyObject(error.localizedDescription) ? error.localizedDescription : OperationFailure;
-    [[InterfaceHUDManager sharedInstance] showAutoHideAlertWithMessage:errorMessage];
+    [HUDManager showAutoHideHUDWithToShowStr:errorMessage HUDMode:MBProgressHUDModeText];
     
     if (_failed)
     {
