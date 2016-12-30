@@ -132,6 +132,9 @@
 		2B5A9DB21C7C1CE7004573C0 /* LoginBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DAC1C7C1CE7004573C0 /* LoginBC.m */; };
 		2B5A9DB31C7C1CE7004573C0 /* RegisterBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A9DAE1C7C1CE7004573C0 /* RegisterBC.m */; };
 		2B705AB21D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B705AB11D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.m */; };
+		2B72D2E51E163D1A006309B0 /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B72D2E01E163D1A006309B0 /* BlockActionSheet.m */; };
+		2B72D2E61E163D1A006309B0 /* UITableViewCell+BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B72D2E21E163D1A006309B0 /* UITableViewCell+BackgroundColor.m */; };
+		2B72D2E71E163D1A006309B0 /* UITableViewCell+SeparatorLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B72D2E41E163D1A006309B0 /* UITableViewCell+SeparatorLine.m */; };
 		2B86B7A31DC05C0200BA465D /* UIButton+FontStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86B7A21DC05C0200BA465D /* UIButton+FontStyle.m */; };
 		2B88A8441D86AF0C0091186B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 2B88A8341D86AF0C0091186B /* .gitkeep */; };
 		2B88A8451D86AF0C0091186B /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 2B88A8361D86AF0C0091186B /* .gitkeep */; };
@@ -705,6 +708,12 @@
 		2B5A9DAE1C7C1CE7004573C0 /* RegisterBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterBC.m; sourceTree = "<group>"; };
 		2B705AB01D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		2B705AB11D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		2B72D2DF1E163D1A006309B0 /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
+		2B72D2E01E163D1A006309B0 /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
+		2B72D2E11E163D1A006309B0 /* UITableViewCell+BackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+BackgroundColor.h"; sourceTree = "<group>"; };
+		2B72D2E21E163D1A006309B0 /* UITableViewCell+BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+BackgroundColor.m"; sourceTree = "<group>"; };
+		2B72D2E31E163D1A006309B0 /* UITableViewCell+SeparatorLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+SeparatorLine.h"; sourceTree = "<group>"; };
+		2B72D2E41E163D1A006309B0 /* UITableViewCell+SeparatorLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+SeparatorLine.m"; sourceTree = "<group>"; };
 		2B76DFDF1BF5CBC800886D83 /* KColorDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KColorDefine.h; sourceTree = "<group>"; };
 		2B76DFE01BF5CC8E00886D83 /* KURLDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KURLDefine.h; sourceTree = "<group>"; };
 		2B76DFE11BF5CCA300886D83 /* KUIStringDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KUIStringDefine.h; sourceTree = "<group>"; };
@@ -1918,6 +1927,7 @@
 		2B4A902C1D9A5FCA00ED09C9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				2B72D2DE1E163D1A006309B0 /* UI */,
 				2B3E20081DAB3947003E3BB4 /* JSPatchManager.h */,
 				2B3E20091DAB3947003E3BB4 /* JSPatchManager.m */,
 				2B3E200A1DAB3947003E3BB4 /* FileManager.h */,
@@ -2013,6 +2023,19 @@
 				2B705AB11D34D65B0083A287 /* UINavigationController+FDFullscreenPopGesture.m */,
 			);
 			path = FDFullscreenPopGesture;
+			sourceTree = "<group>";
+		};
+		2B72D2DE1E163D1A006309B0 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2B72D2DF1E163D1A006309B0 /* BlockActionSheet.h */,
+				2B72D2E01E163D1A006309B0 /* BlockActionSheet.m */,
+				2B72D2E11E163D1A006309B0 /* UITableViewCell+BackgroundColor.h */,
+				2B72D2E21E163D1A006309B0 /* UITableViewCell+BackgroundColor.m */,
+				2B72D2E31E163D1A006309B0 /* UITableViewCell+SeparatorLine.h */,
+				2B72D2E41E163D1A006309B0 /* UITableViewCell+SeparatorLine.m */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		2B88A8321D86AF0C0091186B /* RTComponentTableView */ = {
@@ -3841,6 +3864,7 @@
 				2B1D3FBF1C92E1E000C3AFC8 /* UINavigationBar+Animation.m in Sources */,
 				43D1CA431A75E778004564C2 /* NIImageUtilities.m in Sources */,
 				2B4A90721D9A5FCA00ED09C9 /* FMDatabaseQueue+Async.m in Sources */,
+				2B72D2E71E163D1A006309B0 /* UITableViewCell+SeparatorLine.m in Sources */,
 				43D1CA4A1A75E778004564C2 /* NIPaths.m in Sources */,
 				43D1C9E91A75E778004564C2 /* UIBarButtonItem+FlatUI.m in Sources */,
 				2B3E20951DAB3A8F003E3BB4 /* JPCGPath.m in Sources */,
@@ -4018,6 +4042,7 @@
 				43D1C9F11A75E778004564C2 /* UIStepper+FlatUI.m in Sources */,
 				43D1CC411A75EBFA004564C2 /* CommentSendController.m in Sources */,
 				2B1D3FB61C92E1E000C3AFC8 /* DKColorTable.m in Sources */,
+				2B72D2E61E163D1A006309B0 /* UITableViewCell+BackgroundColor.m in Sources */,
 				43D1CA211A75E778004564C2 /* MASViewAttribute.m in Sources */,
 				432C318E1A7243840094A27E /* main.m in Sources */,
 				2B3E20A31DAB3A8F003E3BB4 /* JPDevErrorView.m in Sources */,
@@ -4129,6 +4154,7 @@
 				2B88A8471D86AF0C0091186B /* RTBaseComponent.m in Sources */,
 				2B3E20A61DAB3A8F003E3BB4 /* README.md in Sources */,
 				431F138B1A7762E9008C4544 /* NSString+PinYin4Cocoa.m in Sources */,
+				2B72D2E51E163D1A006309B0 /* BlockActionSheet.m in Sources */,
 				43D1C9FC1A75E778004564C2 /* IQSegmentedNextPrevious.m in Sources */,
 				43D1CAB61A75E779004564C2 /* NIOverviewSwizzling.m in Sources */,
 				43D1CA381A75E778004564C2 /* NICollectionViewModel.m in Sources */,
