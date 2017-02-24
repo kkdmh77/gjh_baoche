@@ -152,7 +152,7 @@
     
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
-    if ([self.navigationController.viewControllers isAbsoluteValid]) {
+    if ([self.navigationController.viewControllers isValidArray]) {
         UIViewController *root = self.navigationController.viewControllers[0];
         BOOL isRootViewController = (self == root);
         
@@ -283,7 +283,7 @@
     _tableView = InsertTableView(nil, frame, self, self, style);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor clearColor];
-    if ([nibName isAbsoluteValid] && [identifier isAbsoluteValid])
+    if ([nibName isValidString] && [identifier isValidString])
     {
         [_tableView registerNib:[UINib nibWithNibName:nibName bundle:nil] forCellReuseIdentifier:identifier];
     }
@@ -485,7 +485,7 @@
     
     UIButton *btn = (UIButton *)[barItem.customView viewWithTag:kBarButtonItemViewTag];
     [btn setTitle:title forState:UIControlStateNormal | UIControlStateHighlighted];
-    if ([selectedTitle isAbsoluteValid])
+    if ([selectedTitle isValidString])
     {
         [btn setTitle:selectedTitle forState:UIControlStateSelected];
         [btn setTitle:selectedTitle forState:UIControlStateSelected | UIControlStateHighlighted];

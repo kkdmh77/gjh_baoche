@@ -171,7 +171,7 @@ DEF_SINGLETON(FontManager);
         NSString *fontPath = [Font_Folder_Path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.ttf", fontName]];
         
         NSString *registerName = [self registerCustomFontWitPath:fontPath];
-        if([registerName isAbsoluteValid])
+        if([registerName isValidString])
         {
             return [UIFont fontWithName:registerName size:fontSize];
         }
@@ -185,7 +185,7 @@ DEF_SINGLETON(FontManager);
 
 - (UIFont *)customFontByPath:(NSString *)fontPath size:(CGFloat)fontSize
 {
-    if (![fontPath isAbsoluteValid] || !IsFileExists(fontPath)) return nil;
+    if (![fontPath isValidString] || !IsFileExists(fontPath)) return nil;
     
     NSURL *url = [NSURL fileURLWithPath:fontPath];
     
@@ -219,7 +219,7 @@ DEF_SINGLETON(FontManager);
 
 - (BOOL)isRegisterCustomFont:(NSString *)fontName
 {
-    if (![fontName isAbsoluteValid]) return NO;
+    if (![fontName isValidString]) return NO;
     
     UIFont *aFont = [UIFont fontWithName:fontName size:12.0];
     
@@ -229,7 +229,7 @@ DEF_SINGLETON(FontManager);
 
 - (NSString *)registerCustomFontWitPath:(NSString *)fontPath
 {
-    if (![fontPath isAbsoluteValid] || !IsFileExists(fontPath))
+    if (![fontPath isValidString] || !IsFileExists(fontPath))
     {
         DLog(@"字体注册失败,找不到路径 path = %@",fontPath);
         return nil;
@@ -246,7 +246,7 @@ DEF_SINGLETON(FontManager);
     CGDataProviderRelease(fontDataProvider);
     
     NSString *fontName = (NSString *)CFBridgingRelease(CGFontCopyPostScriptName(newFont));
-    if (![fontName isAbsoluteValid])
+    if (![fontName isValidString])
     {
         if (newFont) {
             CFRelease(newFont);
@@ -290,7 +290,7 @@ DEF_SINGLETON(FontManager);
 
 - (void)unregisterCustomFont:(NSString *)fontName
 {
-    if (![fontName isAbsoluteValid]) return;
+    if (![fontName isValidString]) return;
         
     NSValue *val = [_customFonts objectForKey:fontName];
     if (!val) {

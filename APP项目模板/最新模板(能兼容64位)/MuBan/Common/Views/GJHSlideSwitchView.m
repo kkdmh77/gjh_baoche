@@ -117,11 +117,11 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
 // 调整视图高度
 - (void)resizeHeight
 {
-    if ([_titlesArray isAbsoluteValid] && ![_imageNamesArray isAbsoluteValid])
+    if ([_titlesArray isValidArray] && ![_imageNamesArray isValidArray])
     {
         self.frameHeight = MAX(self.frameHeight, kDefaultSlideSwitchViewHeight);
     }
-    else if ([_titlesArray isAbsoluteValid] && [_imageNamesArray isAbsoluteValid])
+    else if ([_titlesArray isValidArray] && [_imageNamesArray isValidArray])
     {
         UIImage *image = [UIImage imageNamed:_imageNamesArray[0]];
         self.frameHeight = MAX(self.frameHeight, kDefaultSlideSwitchViewHeight + image.size.height);
@@ -166,7 +166,7 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
  */
 - (void)createNameButtons
 {
-    UIImage *shadowImage = [_shadowImageArray isAbsoluteValid] ? _shadowImageArray[0] : _shadowImage;
+    UIImage *shadowImage = [_shadowImageArray isValidArray] ? _shadowImageArray[0] : _shadowImage;
     
     _shadowImageView = [[UIImageView alloc] init];
     [_shadowImageView setImage:shadowImage];

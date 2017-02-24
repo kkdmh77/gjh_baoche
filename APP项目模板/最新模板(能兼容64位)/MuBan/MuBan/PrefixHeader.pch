@@ -18,11 +18,12 @@
     #import <CoreData/CoreData.h>
     #import "KDefine.h"
     #import "ATBLibs.h"
-    #import "CommonCategories.h"
     #import "LanguageTextStyle.h"
     #import "FontStyle.h"
     #import "DKNightVersion.h"
     #import "UserInfoModel.h"
+    #import "YYKit.h"
+    #import "CommonCategories.h"
 
     // define this constant if you want to use Masonry without the 'mas_' prefix
     // #define MAS_SHORTHAND

@@ -403,7 +403,7 @@
     float messageSpace = (messageHeight <= 0 || !self.inputContentView) ? 0 : 10;
     
     CGFloat contentHeight = titleHeight + titleSpace + messageHeight + messageSpace + buttonHeight + [self inputContentHeight];
-    contentWidth = (![_buttons isAbsoluteValid]) ? MIN(contentWidth, MAX(titleSize.width, messageSize.width)) : contentWidth;
+    contentWidth = (![_buttons isValidArray]) ? MIN(contentWidth, MAX(titleSize.width, messageSize.width)) : contentWidth;
     
     if(self.maxHeight && contentHeight>self.maxHeight) {
         return CGSizeMake(contentWidth, MAX(titleHeight + titleSpace + buttonHeight + [self inputContentHeight], self.maxHeight));

@@ -179,7 +179,7 @@ NSArray<NSString *> * toChars(int codePoint) {
 + (NSString *)unicodeToCharacter:(NSInteger)unicode
 {
     NSArray *charsArray = toChars((int)unicode);
-    if ([charsArray isAbsoluteValid])
+    if ([charsArray isValidArray])
     {
         if (2 == charsArray.count)
         {

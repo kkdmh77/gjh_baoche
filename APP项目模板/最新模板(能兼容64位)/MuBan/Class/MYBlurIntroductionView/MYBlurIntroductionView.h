@@ -41,7 +41,7 @@ typedef enum {
 //MYBlurIntroductionView
 /******************************/
 @interface MYBlurIntroductionView : UIView <UIScrollViewDelegate>{
-    NSArray *Panels;
+    NSArray<MYIntroductionPanel *> *Panels;
     
     NSInteger LastPanelIndex;
 }

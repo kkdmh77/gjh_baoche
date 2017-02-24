@@ -142,7 +142,7 @@
 {
     NSString *imageUrlStr = nil;
     
-    if ([nameSpace isAbsoluteValid] && [urlComponent isAbsoluteValid])
+    if ([nameSpace isValidString] && [urlComponent isValidString])
     {
         if ([urlComponent hasPrefix:@"/"])
         {

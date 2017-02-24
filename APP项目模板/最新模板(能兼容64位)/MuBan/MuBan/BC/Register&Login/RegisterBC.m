@@ -57,7 +57,7 @@ DEF_SINGLETON(RegisterBC);
 {
     if ([StringJudgeManager isValidateStr:phoneNumber regexStr:MobilePhoneNumRegex])
     {
-        if ([verificationCode isAbsoluteValid])
+        if ([verificationCode isValidString])
         {
             _success = success;
             _failed = failed;
@@ -96,7 +96,7 @@ DEF_SINGLETON(RegisterBC);
             {
                 if ([password isEqualToString:passwordConfirm])
                 {
-                    if ([verificationCode isAbsoluteValid])
+                    if ([verificationCode isValidString])
                     {
                         _success = success;
                         _failed = failed;
@@ -192,7 +192,7 @@ DEF_SINGLETON(RegisterBC);
 
 - (void)registerWithNormalUserName:(NSString *)userName password:(NSString *)password passwordConfirm:(NSString *)passwordConfirm successHandle:(successHandle)success failedHandle:(failedHandle)failed
 {
-    if ([userName isAbsoluteValid])
+    if ([userName isValidString])
     {
         if ([[self class] passwordIsAbsoluteValid:password])
         {
@@ -248,7 +248,7 @@ DEF_SINGLETON(RegisterBC);
             {
                 if ([password isEqualToString:passwordConfirm])
                 {
-                    if ([verificationCode isAbsoluteValid])
+                    if ([verificationCode isValidString])
                     {
                         _success = success;
                         _failed = failed;

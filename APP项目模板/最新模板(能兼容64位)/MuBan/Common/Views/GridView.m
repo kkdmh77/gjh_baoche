@@ -64,7 +64,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     _collectionView.scrollsToTop = NO;
-    if ([_registerNibName isAbsoluteValid])
+    if ([_registerNibName isValidString])
     {
         [_collectionView registerNib:[UINib nibWithNibName:_registerNibName bundle:nil]
           forCellWithReuseIdentifier:GridViewCollectionCellIdentifier];
@@ -82,7 +82,7 @@ static NSString * const GridViewCollectionCellIdentifier = @"GridViewCollectionC
 {
     _registerNibName = registerNibName;
     
-    if ([_registerNibName isAbsoluteValid])
+    if ([_registerNibName isValidString])
     {
         [_collectionView registerNib:[UINib nibWithNibName:_registerNibName bundle:nil]
           forCellWithReuseIdentifier:GridViewCollectionCellIdentifier];

@@ -133,7 +133,7 @@ DEF_SINGLETON(InterfaceHUDManager);
         {
             NSDictionary *addressDic = [NSJSONSerialization JSONObjectWithData:addressFileData options:NSJSONReadingMutableContainers error:NULL];
             
-            if ([addressDic isAbsoluteValid])
+            if ([addressDic isValidDictionary])
             {
                 _allCountiesDataArray = [[addressDic safeObjectForKey:@"data"] safeObjectForKey:@"countrieAddressInfo"];   // 全世界国家的地址
             }
@@ -312,7 +312,7 @@ DEF_SINGLETON(InterfaceHUDManager);
         [(UIDatePicker *)_pickerView setDatePickerMode:UIDatePickerModeDate];
         
         // 默认被选中的位置
-        if ([selectedStr isAbsoluteValid])
+        if ([selectedStr isValidString])
         {
             [(UIDatePicker *)_pickerView setDate:[NSString dateFromString:selectedStr withFormatter:@"yyyy-MM-dd"]];
         }
@@ -329,7 +329,7 @@ DEF_SINGLETON(InterfaceHUDManager);
                                               cityIndex:0];
         
         // 默认被选中的位置
-        if ([selectedStr isAbsoluteValid])
+        if ([selectedStr isValidString])
         {
             NSInteger countryIndex;
             NSInteger provinceIndex;
@@ -395,16 +395,16 @@ DEF_SINGLETON(InterfaceHUDManager);
             NSInteger cityIndex = [picker selectedRowInComponent:2];
             NSInteger areaIndex = [picker selectedRowInComponent:3];
             
-            NSString *countryStr = [_curCountiesArray isAbsoluteValid] ? _curCountiesArray[countryIndex] : @"";
+            NSString *countryStr = [_curCountiesArray isValidArray] ? _curCountiesArray[countryIndex] : @"";
             NSNumber *countryId = countryIndex < _curCountiesIdArray.count ? _curCountiesIdArray[countryIndex] : @(NSNotFound);
             
-            NSString *provinceStr = [_curProvincesArray isAbsoluteValid] ? _curProvincesArray[provinceIndex] : @"";
+            NSString *provinceStr = [_curProvincesArray isValidArray] ? _curProvincesArray[provinceIndex] : @"";
             NSNumber *provinceId = provinceIndex < _curProvincesIdArray.count ? _curProvincesIdArray[provinceIndex] : @(NSNotFound);
             
-            NSString *cityStr = [_curCitiesArray isAbsoluteValid] ? _curCitiesArray[cityIndex] : @"";
+            NSString *cityStr = [_curCitiesArray isValidArray] ? _curCitiesArray[cityIndex] : @"";
             NSNumber *cityId = cityIndex < _curCitiesIdArray.count ? _curCitiesIdArray[cityIndex] : @(NSNotFound);
             
-            NSString *areaStr = [_curAreasArray isAbsoluteValid] ? _curAreasArray[areaIndex] : @"";
+            NSString *areaStr = [_curAreasArray isValidArray] ? _curAreasArray[areaIndex] : @"";
             NSNumber *areaId = areaIndex < _curAreasIdArray.count ? _curAreasIdArray[areaIndex] : @(NSNotFound);
             
             pickedContentStr = [NSString stringWithFormat:@"%@%@%@%@",countryStr, provinceStr, cityStr, areaStr];

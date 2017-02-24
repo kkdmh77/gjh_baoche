@@ -81,7 +81,7 @@
 
 - (void)configureUI
 {
-    if([_imageDataSourceArray isAbsoluteValid])
+    if([_imageDataSourceArray isValidArray])
     {
         [self stopAutoScroll];
         

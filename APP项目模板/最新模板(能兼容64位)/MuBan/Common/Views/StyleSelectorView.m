@@ -66,7 +66,7 @@ static NSString * const StyleSelectorViewCollectionCellIdentifier = @"StyleSelec
     _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
-    if ([_registerNibName isAbsoluteValid])
+    if ([_registerNibName isValidString])
     {
         [_collectionView registerNib:[UINib nibWithNibName:_registerNibName bundle:nil]
           forCellWithReuseIdentifier:StyleSelectorViewCollectionCellIdentifier];
@@ -81,7 +81,7 @@ static NSString * const StyleSelectorViewCollectionCellIdentifier = @"StyleSelec
 {
     _registerNibName = registerNibName;
     
-    if ([_registerNibName isAbsoluteValid])
+    if ([_registerNibName isValidString])
     {
         [_collectionView registerNib:[UINib nibWithNibName:_registerNibName bundle:nil]
           forCellWithReuseIdentifier:StyleSelectorViewCollectionCellIdentifier];

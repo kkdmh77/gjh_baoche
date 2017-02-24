@@ -225,7 +225,7 @@ DEF_SINGLETON(UIFactory);
 
 + (void)toHanyuPinyinStringWithCNStringArray:(NSArray *)CNStringArray sortedFirstLetterArray:(NSMutableArray *__strong *)firstLetterArray sortedSectionCNStringDic:(NSMutableDictionary *__strong *)sectionCNStringDic
 {
-    if (![CNStringArray isAbsoluteValid]) return;
+    if (![CNStringArray isValidArray]) return;
     
     if (!*firstLetterArray) *firstLetterArray = [NSMutableArray arrayWithCapacity:CNStringArray.count];
     if (!*sectionCNStringDic) *sectionCNStringDic = [NSMutableDictionary dictionaryWithCapacity:CNStringArray.count];
@@ -247,7 +247,7 @@ DEF_SINGLETON(UIFactory);
         NSString *outputPinyin = [[PinyinHelper toHanyuPinyinStringWithNSString:str withHanyuPinyinOutputFormat:outputFormat withNSString:@""] uppercaseString];
         NSString *firstLetterStr = [outputPinyin substringToIndex:1];
         
-        if ([firstLetterStr isAbsoluteValid] && ![*firstLetterArray containsObject:firstLetterStr])
+        if ([firstLetterStr isValidString] && ![*firstLetterArray containsObject:firstLetterStr])
         {
             [*firstLetterArray addObject:firstLetterStr];
         }

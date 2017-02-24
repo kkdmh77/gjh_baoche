@@ -158,7 +158,7 @@ DEF_SINGLETON(FileManager);
 {
     NSString *fileName = [self getFileNameByFileType:type];
     
-    if ([fileName isAbsoluteValid])
+    if ([fileName isValidString])
     {
         return [[self getDBPath] stringByAppendingPathComponent:fileName];
     }
@@ -168,7 +168,7 @@ DEF_SINGLETON(FileManager);
 + (NSString *)getFileDownladTargetPathWithDownloadUrl:(NSString *)url
 {
     NSString *targetPath = nil;
-    if ([url isAbsoluteValid])
+    if ([url isValidString])
     {
         NSString *fileName = [url lastPathComponent].stringByDeletingPathExtension;
         fileName = [fileName stringByAppendingPathExtension:@"zip"];
@@ -460,7 +460,7 @@ DEF_SINGLETON(FileManager);
                         kPrivateKey];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjects:values forKeys:keys];
-    NSString *token = [[values componentsJoinedByString:@""] MD5Sum];
+    NSString *token = [[values componentsJoinedByString:@""] md5String];
     [parameters setValue:token forKey:@"token"];
     [parameters removeObjectForKey:@"privateKey"];
     
@@ -501,10 +501,10 @@ DEF_SINGLETON(FileManager);
           model.userVersion = tempModel.userVersion;
           model.versionCode = [NSString stringWithFormat:@"%@", tempModel.versionCode];
           
-          long long space = [[UIDevice currentDevice] freeDiskSpaceBytes];
+          long long space = [[UIDevice currentDevice] diskSpaceFree];
           
           // 计算要合并的包的大小是否小于总内存的1/4
-          NSInteger memory = [[UIDevice currentDevice] totalMemoryBytes] / 1000  / 1000;
+          NSInteger memory = [[UIDevice currentDevice] memoryTotal] / 1000  / 1000;
           NSInteger fileSize = 0;
           NSString *filePath = [[weakSelf class] getFilePathByFileType:type];
           NSDictionary *attributesOfFile = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:NULL];
@@ -518,7 +518,7 @@ DEF_SINGLETON(FileManager);
                       if (autoDownload) {
                           // 下载库
                           // 下载完成后继续检测是否有下一个下载任务
-                          if ([model.patchUrl isAbsoluteValid] && ![model.dbMergeFailedVersionColde isEqualToString:model.versionCode] && (memory / 4) >= fileSize) {
+                          if ([model.patchUrl isValidString] && ![model.dbMergeFailedVersionColde isEqualToString:model.versionCode] && (memory / 4) >= fileSize) {
                               [weakSelf toDownloadWithUrl:model.patchUrl
                                                  fileType:type
                                                   isPatch:YES
@@ -541,7 +541,7 @@ DEF_SINGLETON(FileManager);
                           if ([model.allowCellular isEqualToString:@"1"]) {
                               
                               // 移动网络下，不进行检测是否有下一个下载任务
-                              if ([model.patchUrl isAbsoluteValid] && ![model.dbMergeFailedVersionColde isEqualToString:model.versionCode]  && (memory / 4) >= fileSize) {
+                              if ([model.patchUrl isValidString] && ![model.dbMergeFailedVersionColde isEqualToString:model.versionCode]  && (memory / 4) >= fileSize) {
                                   [weakSelf toDownloadWithUrl:model.patchUrl
                                                      fileType:type
                                                       isPatch:YES
@@ -735,7 +735,7 @@ DEF_SINGLETON(FileManager);
         // 下载
         BOOL flag = [NetworkStatusManager isEnableWIFI];
         if (flag) {
-            if ([notice isAbsoluteValid]) {
+            if ([notice isValidString]) {
                 WEAKSELF
                 [PRPAlertView showWithTitle:notice
                                     message:nil
@@ -752,7 +752,7 @@ DEF_SINGLETON(FileManager);
             BOOL flag = [NetworkStatusManager isConnectNetwork];
             if (flag) {
                 NSString *packageSizeStr = [FileManager packageSizeWithFileType:type];
-                packageSizeStr = [packageSizeStr isAbsoluteValid] ? [NSString stringWithFormat:@"（%@）", packageSizeStr] : @"";
+                packageSizeStr = [packageSizeStr isValidString] ? [NSString stringWithFormat:@"（%@）", packageSizeStr] : @"";
                 
                 WEAKSELF
                 [PRPAlertView showWithTitle:[NSString stringWithFormat:@"当前处于移动网络，下载离线包会耗费您的流量%@，确定下载？\n（建议您连接wifi下载）", packageSizeStr]
@@ -822,7 +822,7 @@ DEF_SINGLETON(FileManager);
             BOOL flag = [NetworkStatusManager isConnectNetwork];
             if (flag) {
                 NSString *packageSizeStr = [FileManager packageSizeWithFileType:type];
-                packageSizeStr = [packageSizeStr isAbsoluteValid] ? [NSString stringWithFormat:@"（%@）", packageSizeStr] : @"";
+                packageSizeStr = [packageSizeStr isValidString] ? [NSString stringWithFormat:@"（%@）", packageSizeStr] : @"";
                 
                 WEAKSELF
                 [PRPAlertView showWithTitle:[NSString stringWithFormat:@"当前处于移动网络，下载离线包会耗费您的流量%@，确定下载？\n（建议您连接wifi下载）", packageSizeStr]

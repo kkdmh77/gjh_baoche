@@ -117,7 +117,7 @@ DEF_SINGLETON(CommentSendController);
 
 - (void)sendCommentWithText:(NSString *)text
 {
-    if ([text isAbsoluteValid])
+    if ([text isValidString])
     {
         [[NetRequestManager sharedInstance] sendRequest:_toSendUrl
                                            parameterDic:@{@"comment": text}

@@ -129,7 +129,7 @@ static NSString *currentLanguageType = nil;
 
 + (NSString *)getCurLanguagesTypeStrWithStr:(NSString *)str
 {
-    if (![str isAbsoluteValid]) return str;
+    if (![str isValidString]) return str;
     
     // 繁体->简体
     if ([currentLanguageType isEqualToString:SimpleChinese])

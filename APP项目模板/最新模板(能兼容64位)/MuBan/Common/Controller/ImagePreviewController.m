@@ -52,7 +52,7 @@
 
 - (void)unpackSourceData
 {
-    if ([_imageItemsArray isAbsoluteValid])
+    if ([_imageItemsArray isValidArray])
     {
         self.imageSourceArray = [NSMutableArray arrayWithCapacity:_imageItemsArray.count];
         self.imageDescArray = [NSMutableArray arrayWithCapacity:_imageItemsArray.count];
@@ -143,7 +143,7 @@
     textView.textColor = [UIColor whiteColor];
     textView.font = SP12Font;
     [BGView addSubview:textView];
-    textView.text = [_imageDescArray isAbsoluteValid] ? _imageDescArray[0] : nil;
+    textView.text = [_imageDescArray isValidArray] ? _imageDescArray[0] : nil;
     textView.backgroundColor = [UIColor clearColor];
     _descTV = textView;
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {

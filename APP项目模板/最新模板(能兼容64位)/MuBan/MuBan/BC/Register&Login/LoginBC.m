@@ -74,7 +74,7 @@ DEF_SINGLETON(LoginBC);
 {
     if ([StringJudgeManager isValidateStr:phoneNumber regexStr:MobilePhoneNumRegex])
     {
-        if ([code isAbsoluteValid])
+        if ([code isValidString])
         {
             _success = success;
             _failed = failed;

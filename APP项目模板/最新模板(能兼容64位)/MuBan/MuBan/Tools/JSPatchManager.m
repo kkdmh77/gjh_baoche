@@ -8,10 +8,7 @@
 
 #import "JSPatchManager.h"
 #import <JSPatch/JPEngine.h>
-#import "NSData+SSToolkitAdditions.h"
-#import "NSString+SSToolkitAdditions.h"
 #import "OpenUDID.h"
-#import "NSObject+SSToolkitAdditions.h"
 #import "NetworkStatusManager.h"
 
 static NSString * const kPatchFileName = @"patch.js"; // 执行的补丁文件名
@@ -62,7 +59,7 @@ static NSString * const kJSPatchVersionKey = @"kJSPatchVersionKey";
                             @((long)([NSDate date].timeIntervalSince1970 * 1000))];
         
         dic = [NSMutableDictionary dictionaryWithObjects:values forKeys:keys];
-        NSString *token = [[NSString stringWithFormat:@"%@%@", [values componentsJoinedByString:@""], @"123456789#$(&*>kl"] MD5Sum];
+        NSString *token = [[NSString stringWithFormat:@"%@%@", [values componentsJoinedByString:@""], @"123456789#$(&*>kl"] md5String];
         [dic setObject:token forKey:@"md5"];
         [dic setObject:openUDID forKey:@"uuid"];
     }
@@ -100,7 +97,7 @@ static NSString * const kJSPatchVersionKey = @"kJSPatchVersionKey";
                  [dicData writeToFile:JSPatchPath atomically:YES];
                  
                  // 执行
-                 NSString *scriptStr = [NSString stringWithBase64String:base64ScriptStr];
+                 NSString *scriptStr = [NSString stringWithBase64EncodedString:base64ScriptStr];
                  [JPEngine evaluateScript:scriptStr];
              }
          } else {
@@ -174,7 +171,7 @@ static NSString * const kJSPatchVersionKey = @"kJSPatchVersionKey";
             if ([nowAppVersion isEqualToString:appVersion] &&
                 [patchVersion isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kJSPatchVersionKey]] &&
                 [base64ScriptStr isValidString]) {
-                NSString *scriptStr = [NSString stringWithBase64String:base64ScriptStr];
+                NSString *scriptStr = [NSString stringWithBase64EncodedString:base64ScriptStr];
                 
                 [JPEngine evaluateScript:scriptStr];
             }

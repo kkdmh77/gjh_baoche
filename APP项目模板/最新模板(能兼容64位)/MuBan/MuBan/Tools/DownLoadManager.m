@@ -235,10 +235,10 @@ DEF_SINGLETON(DownloadManager);
             [weakSelf.failDownloadContainer removeObjectForKey:urlString];
             
             // MD5校验
-            NSString *md5String = [[[NSData dataWithContentsOfFile:targetPath] MD5Sum] lowercaseString];
+            NSString *md5String = [[[NSData dataWithContentsOfFile:targetPath] md5String] lowercaseString];
             NSString *toCheckMD5Str = nil;
             // 下载的是增量包
-            if (isPatch && [model.patchMd5 isAbsoluteValid]) {
+            if (isPatch && [model.patchMd5 isValidString]) {
                 toCheckMD5Str = [model.patchMd5 lowercaseString];
                 // 校验增量包的MD5和解压增量包
                 if ([md5String isEqualToString:toCheckMD5Str] && [FileManager unPackageFileWithPath:targetPath toPath:[FileManager getTempPath] fileType:fileType])
@@ -255,7 +255,7 @@ DEF_SINGLETON(DownloadManager);
                         // NSData *mergeData = [NSData dataWithData:[NSData dataWithContentsOfFile:oldDBFilePath] andPatch:[NSData dataWithContentsOfFile:patchFilePath]];
                         BOOL flag = [NSData mergeDataWithOldFilePath:oldDBFilePath newFilePath:mergePaht patchPath:patchFilePath];
                         
-                        if (flag && [[[[NSData dataWithContentsOfFile:mergePaht] MD5Sum] lowercaseString] isEqualToString:[model.sourceMd5 lowercaseString]] /*&& [mergeData writeToFile:mergePaht atomically:YES]*/)
+                        if (flag && [[[[NSData dataWithContentsOfFile:mergePaht] md5String] lowercaseString] isEqualToString:[model.sourceMd5 lowercaseString]] /*&& [mergeData writeToFile:mergePaht atomically:YES]*/)
                         {
                             DeleteFiles(patchFilePath);
                             

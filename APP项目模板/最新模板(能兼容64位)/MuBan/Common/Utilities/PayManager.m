@@ -241,7 +241,7 @@ DEF_SINGLETON(PayManager);
                             value:[NSString stringWithFormat:@"application/json; charset=%@",charset]];
         
         // 以对象方式设置请求消息体
-        if ([parameterDic isAbsoluteValid])
+        if ([parameterDic isValidDictionary])
         {
             NSString *postBodyStr = [parameterDic jsonStringByError:NULL];
             NSData *postBodyData = [postBodyStr dataUsingEncoding:NSUTF8StringEncoding];

@@ -59,7 +59,7 @@
 {
     [HUDManager hideHUD];
     NSDictionary *appInfo = (NSDictionary*)infoObj;
-    if ([appInfo isAbsoluteValid])
+    if ([appInfo isValidDictionary])
     {
         _appInfo = appInfo;
         _hasNewVersion = [self compareVersion];
