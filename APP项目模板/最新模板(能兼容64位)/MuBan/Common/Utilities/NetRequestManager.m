@@ -120,13 +120,13 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
 // 解析cookies
 - (NSArray *)cookiesArrayByResponseHeaders:(NSDictionary *)responseHeaders url:(NSURL *)url
 {
-    if (SafetyObject(responseHeaders) && [responseHeaders isAbsoluteValid])
+    if (SafetyObject(responseHeaders) && [responseHeaders isValidDictionary])
     {
         BOOL isNeedToRequestSetCookies = NO;
         NSArray *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:responseHeaders forURL:url];
         for (NSHTTPCookie *cookieItem in cookies)
         {
-            if ([cookieItem.name isEqualToString:@"ss"] && [cookieItem.value isAbsoluteValid] &&
+            if ([cookieItem.name isEqualToString:@"ss"] && [cookieItem.value isValidString] &&
                 ![cookieItem.value isEqualToString:@"\"\""])
             {
                 isNeedToRequestSetCookies = YES;
@@ -144,7 +144,7 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
 
 + (NSArray<NSDictionary *> *)cookiesToDic:(NSArray<NSHTTPCookie *> *)cookies
 {
-    if ([cookies isAbsoluteValid]) {
+    if ([cookies isValidArray]) {
         NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:cookies.count];
         
         for (NSHTTPCookie *cookie in cookies) {
@@ -159,7 +159,7 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
 
 + (NSArray<NSHTTPCookie *> *)dicToCookies:(NSArray<NSDictionary *> *)dics
 {
-    if ([dics isAbsoluteValid]) {
+    if ([dics isValidArray]) {
         NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:dics.count];
         
         for (NSDictionary *dic in dics) {
@@ -193,7 +193,7 @@ static NSString * const CacheExpiresInSecondsKey = @"CacheExpiresInSecondsKey";
     
     // 解析cookies
     NSArray *cookies = [self cookiesArrayByResponseHeaders:responseHeaders url:request.url];
-    if ([cookies isAbsoluteValid])
+    if ([cookies isValidArray])
     {
         [UserInfoModel setObject:cookies forKey:kCookiesKey];
     }

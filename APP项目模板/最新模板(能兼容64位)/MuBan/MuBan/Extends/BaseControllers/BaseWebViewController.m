@@ -103,10 +103,8 @@
         
         [WebViewJavascriptBridge enableLogging];
         
-        _bridge = [WebViewJavascriptBridge bridgeForWebView:_webView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
-            NSLog(@"ObjC received message from JS: %@", data);
-            responseCallback(@"Response for message from ObjC");
-        }];
+        _bridge = [WebViewJavascriptBridge bridgeForWebView:_webView];
+        [_bridge setWebViewDelegate:self];
         
         [_bridge registerHandler:@"productJSBack" handler:^(id data, WVJBResponseCallback responseCallback) {
             /*
