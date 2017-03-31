@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KKInterstitialAdContentVC">
+            <connections>
+                <outlet property="closeBtn" destination="C1E-XS-im9" id="kO8-cY-ruz"/>
+                <outlet property="imageBtn" destination="rI4-tw-Z05" id="muz-Jx-bq9"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rI4-tw-Z05">
+                    <rect key="frame" x="213.5" y="101" width="240" height="173"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="N8N-EU-5qi"/>
+                        <constraint firstAttribute="height" constant="173" id="QUc-rx-KxS"/>
+                    </constraints>
+                    <connections>
+                        <action selector="clickAdContentBtn:" destination="-1" eventType="touchUpInside" id="g8m-TL-aqF"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1E-XS-im9">
+                    <rect key="frame" x="433.5" y="101" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="B9U-d1-bLQ"/>
+                        <constraint firstAttribute="width" constant="20" id="Z18-g9-SBR"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="ad_close.png"/>
+                    <state key="highlighted" backgroundImage="ad_close_press.png"/>
+                    <connections>
+                        <action selector="clickCloseBtn:" destination="-1" eventType="touchUpInside" id="Jrb-ss-H06"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="C1E-XS-im9" firstAttribute="trailing" secondItem="rI4-tw-Z05" secondAttribute="trailing" id="Hxw-ul-ZNJ"/>
+                <constraint firstItem="rI4-tw-Z05" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="T6I-Xt-NxU"/>
+                <constraint firstItem="C1E-XS-im9" firstAttribute="top" secondItem="rI4-tw-Z05" secondAttribute="top" id="XIB-pT-8xJ"/>
+                <constraint firstItem="rI4-tw-Z05" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YiZ-pm-jnw"/>
+            </constraints>
+            <point key="canvasLocation" x="17" y="33"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ad_close.png" width="20" height="20"/>
+        <image name="ad_close_press.png" width="20" height="20"/>
+    </resources>
+</document>

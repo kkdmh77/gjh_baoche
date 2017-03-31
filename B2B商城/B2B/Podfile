@@ -1,0 +1,23 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target ‘MuBan’ do
+
+platform :ios, '7.0'
+
+pod 'AFNetworking', '2.6.3'
+pod 'MagicalRecord'
+pod 'MJRefresh', '~> 3.1.12'
+#pod 'ZipArchive', '~> 1.4.0'
+pod 'FMDB', '2.5'
+pod 'JSPatch'
+pod 'BlocksKit'
+pod 'DZNEmptyDataSet'
+pod 'Masonry'
+pod 'LKDBHelper'
+pod 'SDWebImage'
+pod 'IQKeyboardManager'
+pod 'WebViewJavascriptBridge'
+pod 'ZXingObjC'
+pod 'JZNavigationExtension'
+
+end

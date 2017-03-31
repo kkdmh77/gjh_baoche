@@ -45,85 +45,47 @@
         UIImage *tabBarTopBackgroundImg = [[UIImage alloc] init];
         [[UITabBar appearance] setShadowImage:tabBarTopBackgroundImg];
         /*
-        [[UITabBar appearance] setBackgroundImage:tabBarTopBackgroundImg];
+         [[UITabBar appearance] setBackgroundImage:tabBarTopBackgroundImg];
          */
     }
     
     NSArray *items = [self.tabBar items];
     
-    for (int i = 0; i < items.count; i++)
-    {
-        UITabBarItem *aItem = [items objectAtIndex:i];
-        [aItem setTitleTextAttributes:@{UITextAttributeTextColor: HEXCOLOR(0X306CC5)} forState:UIControlStateSelected];
-        [aItem setTitleTextAttributes:@{UITextAttributeTextColor: HEXCOLOR(0X4F555F)} forState:UIControlStateNormal];
-        
-        NSString *title = nil;
-        UIImage *normalImage = nil;
-        UIImage *selectedImage = nil;
-        
-        switch (i)
-        {
-            case 0:
-            {
-                title = @"新闻";
-                
-                normalImage = [UIImage imageNamed:@"tab_news_normal"];
-                selectedImage = [UIImage imageNamed:@"tab_news_selected"];
-            }
-                break;
-            case 1:
-            {
-                title = @"图片";
-                
-                normalImage = [UIImage imageNamed:@"tab_image_normal"];
-                selectedImage = [UIImage imageNamed:@"tab_image_selected"];
-            }
-                break;
-            case 2:
-            {
-                title = @"视频";
-                
-                normalImage = [UIImage imageNamed:@"tab_video_normal"];
-                selectedImage = [UIImage imageNamed:@"tab_video_selected"];
-            }
-                break;
-            case 3:
-            {
-                title = @"论坛";
-                
-                normalImage = [UIImage imageNamed:@"tab_bbs_normal"];
-                selectedImage = [UIImage imageNamed:@"tab_bbs_selected"];
-            }
-                break;
-                
-            default:
-                break;
-        }
-        
-        aItem.title = title;
-        
-        UIViewController *viewController = [self.viewControllers objectAtIndex:i];
-        if ([viewController isKindOfClass:[UINavigationController class]])
-        {
-            ((UINavigationController *)viewController).topViewController.title = title;
-        }
-        else
-        {
-            viewController.title = title;
-        }
-        
-        if (IOS7)
-        {
-            normalImage = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-            selectedImage = [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    NSArray *tabItemTitles = @[@"店铺", @"服务", @"产品", @"分享", @"分享"];
+    NSArray *tabItemImgaeKeys = @[@[@"tab_dianpu_normal", @"tab_dianpu_selected"],
+                                  @[@"tab_fuwu_normal", @"tab_fuwu_selected"],
+                                  @[@"tab_chanpin_normal", @"tab_chanpin_selected"],
+                                  @[@"tab_fengxiang_normal",  @"tab_fengxiang_selected"],
+                                  @[@"tab_mine_normal", @"tab_mine_selected"]];
+    
+    if (items.count == tabItemTitles.count && items.count == tabItemImgaeKeys.count) {
+        for (int i = 0; i < items.count; i++) {
+            UITabBarItem *aItem = [items objectAtIndex:i];
+            [aItem setTitleTextAttributes:@{NSForegroundColorAttributeName: HEXCOLOR(0X306CC5)}
+                                 forState:UIControlStateSelected];
+            [aItem setTitleTextAttributes:@{NSForegroundColorAttributeName: HEXCOLOR(0X4F555F)}
+                                 forState:UIControlStateNormal];
             
-            [aItem setImage:normalImage];
-            [aItem setSelectedImage:selectedImage];
-        }
-        else
-        {
-            [aItem setFinishedSelectedImage:normalImage
-                withFinishedUnselectedImage:selectedImage];
+            NSString *title = tabItemTitles[i];
+            aItem.title = title;
+            
+            UIViewController *viewController = [self.viewControllers objectAtIndex:i];
+            if ([viewController isKindOfClass:[UINavigationController class]]) {
+                ((UINavigationController *)viewController).topViewController.title = title;
+            } else {
+                viewController.title = title;
+            }
+            
+            UIImage *normalImage = [UIImage imageNamed:tabItemImgaeKeys[i][0]];
+            UIImage *selectedImage = [UIImage imageNamed:tabItemImgaeKeys[i][1]];
+            
+            if (IOS7) {
+                normalImage = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                selectedImage = [selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                
+                [aItem setImage:normalImage];
+                [aItem setSelectedImage:selectedImage];
+            }
         }
     }
 }
