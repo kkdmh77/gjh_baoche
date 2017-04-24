@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RDVTabBarController.h"
+#import "RequestParameterTool.h"
 
-@interface BaseTabBarVC : UITabBarController
+@interface BaseTabBarVC : RDVTabBarController
+
+- (void)refreshTabItemAttributes:(NSArray<BaseTabBarItemModel *> *)tabBarItemModelArray;
 
 @end
+

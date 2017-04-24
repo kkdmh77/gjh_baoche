@@ -418,7 +418,7 @@ DEF_SINGLETON(NetRequestManager);
     
     [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@",charset]];
     
-    if ([parameterDic isAbsoluteValid])
+    if ([parameterDic isValidDictionary])
     {
         for (NSString *key in parameterDic.allKeys)
         {
@@ -438,7 +438,7 @@ DEF_SINGLETON(NetRequestManager);
         [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/json; charset=%@",charset]];
         
         // 以对象方式设置请求消息体
-        if ([parameterDic isAbsoluteValid])
+        if ([parameterDic isValidDictionary])
         {
             NSString *postBodyStr = [parameterDic jsonStringByError:NULL];
             NSData *postBodyData = [postBodyStr dataUsingEncoding:NSUTF8StringEncoding];
@@ -449,7 +449,7 @@ DEF_SINGLETON(NetRequestManager);
     */
     // 修改结束
     
-    if ([fileDic isAbsoluteValid])
+    if ([fileDic isValidDictionary])
     {
         for (NSString *key in fileDic.allKeys)
         {
@@ -464,7 +464,7 @@ DEF_SINGLETON(NetRequestManager);
         }
     }
 
-    if ([headers isAbsoluteValid])
+    if ([headers isValidDictionary])
     {
         for (NSString *headerKey in headers.allKeys)
         {

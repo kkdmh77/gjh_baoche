@@ -17,6 +17,7 @@
 #import <WebKit/WebKit.h>
 #import <StoreKit/StoreKit.h>
 #import "KKAdAnalytics.h"
+#import "RequestParameterTool.h"
 
 #define Request_Ad_NameSpace @""
 
@@ -36,9 +37,11 @@ DEF_SINGLETON(KKAdManager);
 
 - (void)loadLaunchAdAndShowWithPlacementId:(NSString *)placementId txAppKey:(NSString *)txAppKey txPlacementId:(NSString *)txPlacementId placeholderImage:(UIImage *)placeholderImage inWindow:(UIWindow *)window delegate:(id)delegate requestFailureAdNotShow:(void (^)(void))failure success:(void (^ _Nullable)(id _Nonnull))success {
     // 先请求自己的广告如果没有就显示腾讯广告
+    /*
     if (![placementId isValidString] || ![txAppKey isValidString] || ![txPlacementId isValidString] || !window) {
         return;
     }
+    */
     
     // 放自己接口异步请求时的占位图
     UIImageView *requestPlaceholderImageView = [self addRequestPlaceholderImageViewToWindow:window
@@ -46,22 +49,23 @@ DEF_SINGLETON(KKAdManager);
     
     WEAKSELF
     NSURL *ulr = [self url];
-    NSDictionary *parameterDic = [self parameterDicWithPlacementId:placementId];
+    NSDictionary *parameterDic = [RequestParameterTool parameterWithMethodName:@"system.data"];
     
     [KKAdRequest sendAdRequest:ulr.absoluteString
-                           tag:0
-                    parameters:parameterDic
+                           tag:1
+                    parameters:[parameterDic modelToJSONString]
                        success:^(AFHTTPRequestOperation *operation, id responseObject, NSInteger tag) {
         // 移除占位图
         [weakSelf removeRequestPlaceholderImageView:requestPlaceholderImageView];
             
         // 如果没有自己的广告且需要显示腾讯广告（openThird = 1）时就显示腾讯广告
-        NSArray *tempArray = [responseObject safeObjectForKey:@"ads"]; // 广告数据
-        BOOL isNeedLoadTXAd = [[responseObject safeObjectForKey:@"openThird"] boolValue]; // 是否需要加载腾讯广告
-
-        if ([tempArray isValidArray]) { // 加载自己的广告
-            KKAdModel *adModel = [KKAdModel modelWithDictionary:tempArray.firstObject];
-            adModel.requestId = [responseObject safeObjectForKey:@"reqId"];
+        // NSArray *tempArray = [responseObject safeObjectForKey:@"ads"]; // 广告数据
+        // BOOL isNeedLoadTXAd = [[responseObject safeObjectForKey:@"openThird"] boolValue]; // 是否需要加载腾讯广告
+        NSDictionary *tempDic = [responseObject safeObjectForKey:@"startImage"];
+                           
+        if ([tempDic isValidDictionary]) { // 加载自己的广告
+            KKAdModel *adModel = [KKAdModel modelWithDictionary:tempDic];
+            // adModel.requestId = [responseObject safeObjectForKey:@"reqId"];
             
             KKLaunchAd *launchAd = [[KKLaunchAd alloc] init];
             launchAd.delegate = delegate;
@@ -71,10 +75,23 @@ DEF_SINGLETON(KKAdManager);
             
             weakSelf.staticLaunchAdObj = launchAd;
             
+            // 解析tabBar相关的数据
+            NSArray *tempTabBarMenuArray = [responseObject safeObjectForKey:@"mainMenu"];
+            if ([tempTabBarMenuArray isValidArray]) {
+                NSMutableArray *tempResultArray = [NSMutableArray arrayWithCapacity:tempTabBarMenuArray.count];
+                
+                for (NSDictionary *itemDic in tempTabBarMenuArray) {
+                    BaseTabBarItemModel *model = [BaseTabBarItemModel modelWithDictionary:itemDic];
+                    
+                    [tempResultArray addObject:model];
+                }
+                [UserInfoCache sharedInstance].tabBarItemModelArray = tempResultArray;
+            }
+            
             if (success) {
                 success(launchAd);
             }
-        } else if (isNeedLoadTXAd) { // 加载腾讯广告
+        } /*else if (isNeedLoadTXAd) { // 加载腾讯广告
             // 腾讯开屏广告只支持竖屏
             if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
                 GDTSplashAd *splashAd = [[GDTSplashAd alloc] initWithAppkey:txAppKey
@@ -97,7 +114,7 @@ DEF_SINGLETON(KKAdManager);
                     failure();
                 }
             }
-        } else {
+        }*/ else {
             weakSelf.staticLaunchAdObj = nil;
             
             if (failure) {
@@ -337,8 +354,12 @@ DEF_SINGLETON(KKAdManager);
 #pragma mark - 工具
 
 - (NSURL *)url {
+    return [NSURL URLWithString:kUlrStr];
+    
+    /*
     return [UrlManager getRequestUrlByNameSpace:Request_Ad_NameSpace
                                      methodName:[BaseNetworkViewController getRequestURLStr:0]];
+     */
 }
 
 - (NSDictionary *)parameterDicWithPlacementId:(NSString *)placementId {

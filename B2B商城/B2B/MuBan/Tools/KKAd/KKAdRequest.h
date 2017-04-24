@@ -22,7 +22,7 @@
  */
 + (void)sendAdRequest:(NSString *)urlString
                   tag:(NSInteger)tag
-           parameters:(NSDictionary *)parameters
+           parameters:(id)parameters
               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSInteger tag))success
               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error, NSInteger tag))failure;
 

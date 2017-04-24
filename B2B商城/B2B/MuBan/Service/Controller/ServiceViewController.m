@@ -14,9 +14,20 @@
 
 @implementation ServiceViewController
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if (self) {
+        self.loadUrlStr = @"http://120.76.188.84:8085/plugin/testAppUTIL.html";
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self setupPDRUI];
 }
 
 - (void)didReceiveMemoryWarning {

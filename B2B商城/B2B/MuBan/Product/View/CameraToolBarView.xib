@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CameraToolBarView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xVN-fb-nPg">
+                    <rect key="frame" x="158" y="15" width="4" height="4"/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="4" id="UpU-Q0-aH0"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d0W-u2-qMr">
+                    <rect key="frame" x="85" y="19" width="150" height="35"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILi-MY-xSf">
+                            <rect key="frame" x="85" y="0.0" width="65" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="65" id="vOg-fe-9sO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="扫条形码"/>
+                            <connections>
+                                <action selector="clickActionBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vo2-gW-ZVv"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdZ-WZ-6PS">
+                            <rect key="frame" x="0.0" y="0.0" width="65" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="65" id="C98-px-EDG"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="拍课本"/>
+                            <connections>
+                                <action selector="clickActionBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="Jnk-gQ-Ti9"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="ILi-MY-xSf" secondAttribute="trailing" id="1t9-FM-Aba"/>
+                        <constraint firstItem="hdZ-WZ-6PS" firstAttribute="top" secondItem="d0W-u2-qMr" secondAttribute="top" id="8ER-FF-TQq"/>
+                        <constraint firstAttribute="bottom" secondItem="hdZ-WZ-6PS" secondAttribute="bottom" id="Vgs-tm-SAo"/>
+                        <constraint firstItem="ILi-MY-xSf" firstAttribute="top" secondItem="d0W-u2-qMr" secondAttribute="top" id="Y83-1r-JCx"/>
+                        <constraint firstAttribute="bottom" secondItem="ILi-MY-xSf" secondAttribute="bottom" id="eCS-gX-quf"/>
+                        <constraint firstAttribute="width" constant="150" id="tbt-2z-byb"/>
+                        <constraint firstItem="hdZ-WZ-6PS" firstAttribute="leading" secondItem="d0W-u2-qMr" secondAttribute="leading" id="vqd-Z3-F6m"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfO-Zs-6UK">
+                    <rect key="frame" x="124" y="54" width="72" height="72"/>
+                    <color key="backgroundColor" red="0.89569755819999997" green="0.62194508739999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="72" id="VIi-Fj-aao"/>
+                        <constraint firstAttribute="width" constant="72" id="nJb-mY-OUA"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="clickActionBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="eoy-B6-4Xj"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="xVN-fb-nPg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0j6-Dx-Kz5"/>
+                <constraint firstItem="xVN-fb-nPg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="TBT-7k-PA5"/>
+                <constraint firstItem="d0W-u2-qMr" firstAttribute="top" secondItem="xVN-fb-nPg" secondAttribute="bottom" id="evh-vE-b2f"/>
+                <constraint firstAttribute="bottom" secondItem="kfO-Zs-6UK" secondAttribute="bottom" constant="15" id="hYa-Fc-Zyc"/>
+                <constraint firstItem="kfO-Zs-6UK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qsb-SR-5a8"/>
+                <constraint firstItem="kfO-Zs-6UK" firstAttribute="top" secondItem="d0W-u2-qMr" secondAttribute="bottom" id="zCt-pg-WOj"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="pointView" destination="xVN-fb-nPg" id="94q-sJ-PIR"/>
+                <outlet property="scanBarCodeBtn" destination="ILi-MY-xSf" id="cqB-qD-8b5"/>
+                <outlet property="scanTextbookBtn" destination="hdZ-WZ-6PS" id="4Mo-Vs-3Di"/>
+                <outlet property="takePhotoBtn" destination="kfO-Zs-6UK" id="pXR-NW-wkm"/>
+                <outlet property="typeBgView" destination="d0W-u2-qMr" id="M1T-Z7-yUM"/>
+            </connections>
+            <point key="canvasLocation" x="380" y="598.5"/>
+        </view>
+    </objects>
+</document>

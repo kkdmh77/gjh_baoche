@@ -14,6 +14,8 @@
 #import <StoreKit/StoreKit.h>
 #import "UINavigationController+FDFullscreenPopGesture.h"
 
+#define kBarButtonItemSize CGRectMake(0, 0, 40, 40)
+
 @interface BaseViewController () <UINavigationControllerDelegate, CTAssetsPickerControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIScrollViewDelegate, SKStoreProductViewControllerDelegate>
 {
     PickPhotoFinishHandle _pickPhotoFinishHandle;
@@ -423,7 +425,7 @@
 
 - (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalImg:(UIImage *)normalImg highlightedImg:(UIImage *)highlightedImg selectedImg:(UIImage *)selectedImg isSelected:(BOOL)isSelected action:(SEL)action
 {
-    UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 40, 40) normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
+    UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:kBarButtonItemSize normalImg:normalImg highlightedImg:highlightedImg target:self action:action];
     UIButton *btn = (UIButton *)[barItem.customView viewWithTag:kBarButtonItemViewTag];
     [btn setImage:selectedImg forState:UIControlStateSelected];
     [btn setImage:selectedImg forState:UIControlStateSelected | UIControlStateHighlighted];
@@ -447,7 +449,7 @@
 
 - (UIBarButtonItem *)configureBarbuttonItemByPosition:(BarbuttonItemPosition)position normalPicker:(DKImagePicker)normalPicker normalHighlightedPicker:(DKImagePicker)normalHighlightedPicker selectedPicker:(DKImagePicker)selectedPicker selectedHighlightedPicker:(DKImagePicker)selectedHighlightedPicker isSelected:(BOOL)isSelected action:(SEL)action
 {
-    UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:CGRectMake(0, 0, 40, 40) normalImg:nil highlightedImg:nil target:self action:action];
+    UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:kBarButtonItemSize normalImg:nil highlightedImg:nil target:self action:action];
     UIButton *btn = (UIButton *)[barItem.customView viewWithTag:kBarButtonItemViewTag];
     if (normalPicker) {
         [btn dk_setImage:normalPicker forState:UIControlStateNormal];
@@ -501,6 +503,35 @@
         self.navigationItem.rightBarButtonItem = barItem;
     }
     return barItem;
+}
+
+- (NSArray<UIBarButtonItem *> *)configureBarbuttonItemsByPosition:(BarbuttonItemPosition)position normalImgs:(NSArray<NSString *> *)normalImgs highlightedImgs:(NSArray<NSString *> *)highlightedImgs actions:(NSArray<void (^)(id)> *)actionBlocks {
+    if (normalImgs.count == highlightedImgs.count && normalImgs.count == actionBlocks.count) {
+        NSMutableArray<UIBarButtonItem *> *barButtonItemsArray = [NSMutableArray arrayWithCapacity:normalImgs.count];
+        
+        for (int i = 0; i < normalImgs.count; ++i) {
+            UIBarButtonItem *barItem = [UIBarButtonItem barButtonItemWithFrame:kBarButtonItemSize
+                                                                     normalImg:[UIImage imageNamed:normalImgs[i]]
+                                                                highlightedImg:[UIImage imageNamed:highlightedImgs[i]]
+                                                                        target:nil
+                                                                        action:NULL];
+            UIButton *customBtn = (UIButton *)[barItem.customView viewWithTag:kBarButtonItemViewTag];
+            [customBtn setBlockForControlEvents:UIControlEventTouchUpInside
+                                          block:actionBlocks[i]];
+            [barButtonItemsArray addObject:barItem];
+        }
+        
+        if ([barButtonItemsArray isValidArray]) {
+            if (BarbuttonItemPosition_Left == position) {
+                self.navigationItem.leftBarButtonItems = barButtonItemsArray;
+            } else {
+                self.navigationItem.rightBarButtonItems = barButtonItemsArray;
+            }
+        }
+        
+        return barButtonItemsArray;
+    }
+    return nil;
 }
 
 - (void)pickSinglePhotoFromCameraOrAlbumByIsCropped:(BOOL)isCropped cancelHandle:(PickPhotoCancelHandle)cancelHandle finishPickingHandle:(PickPhotoFinishHandle)finishHandle

@@ -54,6 +54,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>NerdyUI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MuBan.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,27 +87,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3AD73299A8E921035330688229822894</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>461B2EE26BF282ED420761A8D55E37F5</key>
+		<key>4F819BA351711B4D86A6F6281735DC7C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>55DBDD8B7D446F1D618F303A9FB53209</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,17 +112,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>7FD65283A1662F4879891D38D1C2F15E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8EE8E2BD1C426B84D6D58639A79119B5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A3F173FACC267ADC5A65471387D04CDD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BC9CF7FAD6EF05A3BADE8B414D5F53BC</key>
+		<key>D0D0C9D20C43FA94D4C88FBFE2601B8E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -138,6 +138,16 @@
 			<true/>
 		</dict>
 		<key>DA1A7295DF2A99609DA0EEBF5E83233D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E914948486125828F1C026F76BE19BD6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EAC4DAFDC259BFBCC3AFC86C4C969DBB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

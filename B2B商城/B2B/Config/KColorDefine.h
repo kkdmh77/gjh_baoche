@@ -23,13 +23,13 @@
 #define TextPlaceholderColor           HEXCOLOR(0X999999)   // 灰色
 
 // 全局控件
-#define PageBackgroundColor            HEXCOLOR(0XF8F6F4)   // 灰色  viewController的背景色
+#define PageBackgroundColor            HEXCOLOR(0X181818)   // 灰色  viewController的背景色
 #define CellSeparatorColor             HEXCOLOR(0XD9D4CE)   // 灰色  tabViewCell的间隔线
 #define CellBgColor                    HEXCOLOR(0XFFFFFF)   //
 #define CellSelectedBgColor            HEXCOLOR(0XF5F3EF)   //
 #define TabBarColor                    HEXCOLOR(0XF5F5F5)   // 灰色
 
-#define Common_ThemeColor              HEXCOLOR(0XFDFBF8)   // 主题颜色 淡黄色
+#define Common_ThemeColor              HEXCOLOR(0XFFFFFF)   // 主题颜色 淡黄色
 
 /**************************** 夜间模式 ********************************/
 

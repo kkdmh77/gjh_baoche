@@ -1,8 +1,10 @@
+inhibit_all_warnings!
+
 source 'https://github.com/CocoaPods/Specs.git'
 
 target ‘MuBan’ do
 
-platform :ios, '7.0'
+platform :ios, '8.0'
 
 pod 'AFNetworking', '2.6.3'
 pod 'MagicalRecord'
@@ -19,5 +21,15 @@ pod 'IQKeyboardManager'
 pod 'WebViewJavascriptBridge'
 pod 'ZXingObjC'
 pod 'JZNavigationExtension'
+pod 'NerdyUI', :git => 'https://github.com/nerdycat/NerdyUI.git'
+#pod 'RDVTabBarController'
 
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['ONLY_ACTIVE_ARCH'] = "NO"
+        end
+    end
 end

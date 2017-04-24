@@ -30,7 +30,7 @@ static UIView *statusBarCoverView = nil;
     }
     
     // 开启键盘管理
-    [self setKeyboardManagerEnable:YES];
+    [self setKeyboardManagerEnable:NO];
     
     // 本地化语言
     [LanguagesManager initialization];

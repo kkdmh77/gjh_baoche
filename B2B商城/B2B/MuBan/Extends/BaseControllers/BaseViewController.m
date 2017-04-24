@@ -13,6 +13,7 @@
 #import "CTAssetsPickerController.h"
 #import <StoreKit/StoreKit.h>
 #import "UINavigationController+FDFullscreenPopGesture.h"
+#import "NIImageUtilities.h"
 
 #define kBarButtonItemSize CGRectMake(0, 0, 40, 40)
 
@@ -108,9 +109,9 @@
      */
     // 返回Btn
     [self configureBarbuttonItemByPosition:BarbuttonItemPosition_Left
-                                 normalImg:[UIImage imageNamed:@"Return_btn_3.png"]
-                            highlightedImg:[UIImage imageNamed:@"Return_btn_4.png"]
-                                    action:NULL];
+                                 normalImg:[UIImage imageNamed:@"nav_back"]
+                            highlightedImg:[UIImage imageNamed:@"nav_back"]
+                                    action:@selector(backViewController)];
     
     // 加此代码可以在自定义leftBarButtonItem之后还保持IOS7以上系统自带的滑动返回效果
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)])
@@ -240,7 +241,7 @@
     {
         backColor = PageBackgroundColor;
         navTextColor = [UIColor blackColor];
-        navBgColor = Common_ThemeColor;
+        navBgColor = [UIColor blueColor] /*Common_ThemeColor*/;
     }
     
     [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle animated:YES];
@@ -842,9 +843,12 @@
 - (UIButton *)setupNavSearchBarWithActionHandle:(void (^)(id sender))handler {
     if (self.navigationController.navigationBar) {
         UIButton *searchBarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        searchBarBtn.frame = CGRectMake(0, 0, self.navigationController.navigationBar.width - 50 * 2, NAV_BAR_HEIGHT - 6 * 2);
-        searchBarBtn.backgroundColor = [UIColor redColor];
-        [searchBarBtn setBackgroundImage:nil forState:UIControlStateNormal];
+        searchBarBtn.frame = CGRectMake(0, 0, self.navigationController.navigationBar.width - 50 * 2, NAV_BAR_HEIGHT - 10 * 2);
+        searchBarBtn.titleLabel.fnt(13).color(@"white");
+        [searchBarBtn setBackgroundImage:NIStretchableImageFromImage([UIImage imageNamed:@"nav_search_bar"])
+                                forState:UIControlStateNormal];
+        searchBarBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        searchBarBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
         [searchBarBtn setBlockForControlEvents:UIControlEventTouchUpInside
                                          block:handler];
         self.navigationItem.titleView = searchBarBtn;

@@ -50,6 +50,7 @@ DEF_SINGLETON(ShareManager);
     self.contentImage = contentImage;
     
     NSMutableArray *types = [NSMutableArray arrayWithObject:@(UMSocialPlatformType_Email)];
+    /*
     if ([WeiboSDK isWeiboAppInstalled]) {
         [types insertObject:@(UMSocialPlatformType_Sina) atIndex:0];
     }
@@ -57,6 +58,7 @@ DEF_SINGLETON(ShareManager);
         [types insertObject:@(UMSocialPlatformType_Qzone) atIndex:0];
         [types insertObject:@(UMSocialPlatformType_QQ) atIndex:0];
     }
+    */
     if ([WXApi isWXAppInstalled]) {
         [types insertObject:@(UMSocialPlatformType_WechatTimeLine) atIndex:0];
         [types insertObject:@(UMSocialPlatformType_WechatSession) atIndex:0];
@@ -82,11 +84,11 @@ DEF_SINGLETON(ShareManager);
     }
     NSString *contentText = _content;
     if (![contentText isValidString]) {
-        contentText = @"test"; // SHARE_TEXT;
+        contentText = @"share_test"; // SHARE_TEXT;
     }
     id insetImage = _insetImage;
     if (!insetImage) {
-        insetImage = [UIImage imageNamed:@"home_page_book_delete"];
+        insetImage = [UIImage imageNamed:@"net_status_lost"];
     }
     id contentImage = _contentImage;
     NSString *targetUrlStr = [_urlStr isValidString] ? _urlStr : @"";

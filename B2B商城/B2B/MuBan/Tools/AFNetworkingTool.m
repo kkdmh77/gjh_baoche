@@ -12,7 +12,7 @@
 
 @implementation AFNetworkingTool
 
-+ (NSURLSessionDataTask *)request:(NSString *)URLString tag:(NSInteger)tag methodType:(RequestMethodType)methodType parameters:(NSDictionary *)parameters success:(RequestSuccessBlock)success failure:(RequestFailedBlock)failure
++ (NSURLSessionDataTask *)request:(NSString *)URLString tag:(NSInteger)tag methodType:(RequestMethodType)methodType parameters:(id)parameters success:(RequestSuccessBlock)success failure:(RequestFailedBlock)failure
 {
     return [self request:URLString
                      tag:tag
@@ -23,7 +23,7 @@
                  failure:failure];
 }
 
-+ (NSURLSessionDataTask *)request:(NSString *)URLString tag:(NSInteger)tag methodType:(RequestMethodType)methodType parameters:(NSDictionary *)parameters noNetwork:(RequestNoNetworkBlock)noNetwork success:(RequestSuccessBlock)success failure:(RequestFailedBlock)failure
++ (NSURLSessionDataTask *)request:(NSString *)URLString tag:(NSInteger)tag methodType:(RequestMethodType)methodType parameters:(id)parameters noNetwork:(RequestNoNetworkBlock)noNetwork success:(RequestSuccessBlock)success failure:(RequestFailedBlock)failure
 {
     return [self request:URLString
                      tag:tag
@@ -35,7 +35,7 @@
                  failure:failure];
 }
 
-+ (NSURLSessionDataTask *)request:(NSString *)URLString tag:(NSInteger)tag methodType:(RequestMethodType)methodType parameters:(NSDictionary *)parameters noNetwork:(RequestNoNetworkBlock)noNetwork start:(RequestStartBlock)start success:(RequestSuccessBlock)success failure:(RequestFailedBlock)failure
++ (NSURLSessionDataTask *)request:(NSString *)URLString tag:(NSInteger)tag methodType:(RequestMethodType)methodType parameters:(id)parameters noNetwork:(RequestNoNetworkBlock)noNetwork start:(RequestStartBlock)start success:(RequestSuccessBlock)success failure:(RequestFailedBlock)failure
 {
     if (![NetworkStatusManager isConnectNetwork])
     {
@@ -68,14 +68,14 @@
     id (*response)(id, SEL, id, id, id, id) = (id (*)(id, SEL, id, id, id, id)) objc_msgSend;
     task = response(manager, sel, URLString, parameters, ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // 解析数据
-        if ([responseObject isValidDictionary] && 200 == [[responseObject objectForKey:@"status"] integerValue]) {
+        if ([responseObject isValidDictionary] && 0 == [[[responseObject objectForKey:@"state"] objectForKey:@"code"] integerValue]) {
             NSDictionary *dataDic = [responseObject objectForKey:@"data"];
             if (success) {
                 success(task, dataDic, tag);
             }
         } else {
             if (failure) {
-                NSString *message = [responseObject safeObjectForKey:@"message"];
+                NSString *message = [[responseObject safeObjectForKey:@"state"] safeObjectForKey:@"msg"];
                 NSString *errorMessage = [message isValidString] ? message : @"AFNetworkingTool 请求失败！";
                 NSError *error = [[NSError alloc] initWithDomain:@"KKPOEM_REQUEST_ERROR_DOMAIN"
                                                             code:1500

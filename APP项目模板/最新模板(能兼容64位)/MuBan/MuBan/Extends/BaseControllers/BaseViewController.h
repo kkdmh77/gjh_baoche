@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <NerdyUI.h>
 
 #define kBarButtonItemViewTag 8888
 
@@ -192,6 +193,11 @@ typedef void (^PickPhotoCancelHandle) (void);
                             selectedHighlightedPicker:(DKImagePicker)selectedHighlightedPicker
                                            isSelected:(BOOL)isSelected
                                                action:(SEL)action;
+
+- (NSArray<UIBarButtonItem *> *)configureBarbuttonItemsByPosition:(BarbuttonItemPosition)position
+                                                       normalImgs:(NSArray<NSString *> *)normalImgs
+                                                  highlightedImgs:(NSArray<NSString *> *)highlightedImgs
+                                                          actions:(NSArray<void (^) (id)> *)actionBlocks;
 
 /**
  @ 方法描述    配置导航栏按钮

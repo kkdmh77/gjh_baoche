@@ -133,8 +133,8 @@ static NSDictionary* dictFromString(NSString* string)
     [btn setBackgroundImage:nil forState:UIControlStateNormal];
     [btn setBackgroundImage:nil forState:UIControlStateHighlighted];
     
-    [btn setImage:normalImg forState:UIControlStateNormal];
-    [btn setImage:highlightedImg forState:UIControlStateNormal | UIControlStateHighlighted];
+    [btn setImage:[normalImg imageByResizeToSize:CGSizeMake(22, 22)] forState:UIControlStateNormal];
+    [btn setImage:[highlightedImg imageByResizeToSize:CGSizeMake(22, 22)] forState:UIControlStateNormal | UIControlStateHighlighted];
     
     // 调整点击范围扩大的问题
     UIView *backView = [[UIView alloc] initWithFrame:btn.bounds];

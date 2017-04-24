@@ -10,7 +10,7 @@
 #define KURLDefine_h
 
 // appDownload的URL
-#define AppDownloadUrl                     @"https://itunes.apple.com/cn/app/id675486231"
+#define kAppDownloadUrl                    @"http://sz.duowan.com/s/huodong/kuaikuai/xqjy/index.html"
 
 // Request的nameSpace
 #define Request_NameSpace                  @"http: //o2o.yijushang.com"                         // 调试

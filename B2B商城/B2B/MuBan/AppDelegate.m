@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "BaseTabBarVC.h"
 #import "AppPropertiesInitialize.h"
 #import "PRPAlertView.h"
 #import "UrlManager.h"
@@ -18,16 +17,25 @@
 #import "ProductViewController.h"
 #import "ShareViewController.h"
 #import "MineViewController.h"
+#import "PDRCore.h"
+#import "AFNetworkingTool.h"
+#import "RequestParameterTool.h"
+#import "KKAdManager.h"
+// #import "KKDAnalytics.h"
+#import <UMSocialCore/UMSocialCore.h>
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialSinaHandler.h"
+#import <UMSocialCore/UMSocialCore.h>
+#import "GCDThread.h"
 
-@interface AppDelegate () <NetRequestDelegate>
-{
-    BaseTabBarVC *_baseTabBarController;
+@interface AppDelegate () <NetRequestDelegate> {
+    
 }
 
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -36,6 +44,40 @@
     // 进行应用程序一系列属性的初始化设置
     [AppPropertiesInitialize startAppPropertiesInitialize];
     
+    NSDictionary *parameter = [RequestParameterTool parameterWithMethodName:@"system.init"];
+    [AFNetworkingTool request:kUlrStr
+                          tag:0
+                   methodType:POST
+                   parameters:[parameter modelToJSONString]
+                      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject, NSInteger tag) {
+        [[UserInfoCache cache] setObject:[responseObject safeObjectForKey:@"appid"]
+                                  forKey:kAppIdKey];
+        [[UserInfoCache cache] setObject:[responseObject safeObjectForKey:@"appkey"]
+                                  forKey:kMD5KeyKey];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error, NSInteger tag) {
+        
+    }];
+    
+    // 统计
+#ifndef DEBUG
+    /*
+    [[KKDAnalytics sharedInstance] startWithAppkey];
+    [[KKDAnalytics sharedInstance] setAppVersion:APP_VERSION];
+     */
+#endif
+    
+    // 社会化分享
+    [GCDThread enqueueBackground:^{
+        [[UMSocialManager defaultManager] setUmSocialAppkey:kUMengAppKey];
+        
+        [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession
+                                              appKey:kWeiXinKey
+                                           appSecret:kWeiXinSecret
+                                         redirectURL:kWeixinUrl];
+        [[UMSocialManager defaultManager] removePlatformProviderWithPlatformType:UMSocialPlatformType_WechatFavorite];
+    }];
+    
+    // 控制器
     ShopViewController *shop = [[ShopViewController alloc] init];
     BaseNavigationController *shopNav = [[BaseNavigationController alloc] initWithRootViewController:shop];
     
@@ -51,15 +93,33 @@
     MineViewController *mine = [[MineViewController alloc] init];
     BaseNavigationController *mineNav = [[BaseNavigationController alloc] initWithRootViewController:mine];
     
-    _baseTabBarController = [[BaseTabBarVC alloc] init];
-    _baseTabBarController.viewControllers = @[shopNav, serviceNav, productNav, shareNav, mineNav];
+    self.baseTabBarController = [[BaseTabBarVC alloc] init];
+    self.baseTabBarController.viewControllers = @[shopNav, serviceNav, productNav, shareNav, mineNav];
     
     self.window.rootViewController = _baseTabBarController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    return YES;
+    // 请求广告页&tabBarItem等数据
+//    @weakify(self);
+//    [[KKAdManager sharedInstance] loadLaunchAdAndShowWithPlacementId:@""
+//                                                            txAppKey:@""
+//                                                       txPlacementId:@""
+//                                                    placeholderImage:[UIImage new]
+//                                                            inWindow:self.window
+//                                                            delegate:nil
+//                                             requestFailureAdNotShow:^{
+//         
+//     } success:^(id  _Nonnull toShowAdObj) {
+//         [weak_self.baseTabBarController refreshTabItemAttributes:[UserInfoCache sharedInstance].tabBarItemModelArray];
+//     }];
+    
+    // 设置当前SDK运行模式
+    // 使用WebView集成时使用的启动参数
+    return [PDRCore initEngineWihtOptions:launchOptions withRunMode:PDRCoreRunModeWebviewClient];
+    
+    // return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -71,11 +131,15 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
+    [[PDRCore Instance] handleSysEvent:PDRCoreSysEventEnterBackground withObject:nil];
+    
     [[UserInfoModel sharedInstance] saveGlobalUserInfoModel];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    [[PDRCore Instance] handleSysEvent:PDRCoreSysEventEnterForeGround withObject:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -87,6 +151,28 @@
     // Saves changes in the application's managed object context before the application terminates.
     
     [[UserInfoModel sharedInstance] saveGlobalUserInfoModel];
+}
+
+#pragma mark -  URL
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    [self application:application handleOpenURL:url];
+    
+    return YES;
+}
+
+/*
+ * @Summary:程序被第三方调用，传入参数启动
+ *
+ */
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    [[PDRCore Instance] handleSysEvent:PDRCoreSysEventOpenURL withObject:url];
+    
+    return YES;
 }
 
 #pragma mark - /***************************推送相关***************************/
@@ -107,16 +193,22 @@
     // 保存token值
     [UserInfoModel sharedInstance].deviceToken = deviceTokenStr;
     [self sendDeviceToken:deviceTokenStr];
+    
+    [[PDRCore Instance] handleSysEvent:PDRCoreSysEventRevDeviceToken withObject:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [self handleRemoteNotificationWithApplication:application notification:userInfo];
+    
+    [[PDRCore Instance] handleSysEvent:PDRCoreSysEventRevRemoteNotification withObject:userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     [self handleRemoteNotificationWithApplication:application notification:userInfo];
+    
+    [[PDRCore Instance] handleSysEvent:PDRCoreSysEventRevRemoteNotification withObject:userInfo];
 }
 
 ////////////////////////////////////////////////////////////////////////////////

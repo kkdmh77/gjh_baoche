@@ -10,8 +10,7 @@
 
 @interface BaseNetworkViewController ()
 {
-    __weak UIImageView *netBackgroundStatusImgView;
-    __weak UILabel     *netStatusRemindLabel;
+    __weak UIView *netStatusBackgroundView;
 }
 
 @end
@@ -101,41 +100,27 @@
 
 - (void)setNetworkStatusViewWithFrame:(CGRect)frame Image:(UIImage *)image remindText:(NSString *)text userInteractionEnabled:(BOOL)yesOrNo
 {
-    if (!netBackgroundStatusImgView)
-    {
-        netBackgroundStatusImgView = InsertImageView(self.view, frame, nil, nil);
-        netBackgroundStatusImgView.contentMode = UIViewContentModeCenter;
-        netBackgroundStatusImgView.backgroundColor = self.view.backgroundColor;
-        [netBackgroundStatusImgView keepAutoresizingInFull];
-        
-        [self.view addSubview:netBackgroundStatusImgView];
-    }
-    if (!netStatusRemindLabel)
-    {
-        netStatusRemindLabel = InsertLabel(netBackgroundStatusImgView,
-                                           CGRectMake(0, 0, netBackgroundStatusImgView.boundsWidth - 10 * 2, 0),
-                                           NSTextAlignmentCenter,
-                                           text,
-                                           SP15Font,
-                                           [UIColor grayColor],
-                                           YES);
+    if (netStatusBackgroundView.superview) {
+        [netStatusBackgroundView removeGestureWithTarget:self
+                                               andAction:@selector(getNetworkData)];
+        [netStatusBackgroundView removeFromSuperview];
     }
     
-    netBackgroundStatusImgView.image = image;
+    netStatusBackgroundView = View.xywh(frame).bgColor(self.view.backgroundColor).addTo(self.view);
+    [netStatusBackgroundView keepAutoresizingInFull];
     
-    netStatusRemindLabel.text = text;
-    [netStatusRemindLabel sizeToFit];
-    // netStatusRemindLabel.center = CGPointMake(netBackgroundStatusImgView.center.x, netBackgroundStatusImgView.center.y + (image.size.height / 2) + 10);
-    [netStatusRemindLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(netBackgroundStatusImgView).centerOffset(CGPointMake(0, 30));
-    }];
+    UIImageView *imageView = ImageView.img(image).fitSize.addTo(netStatusBackgroundView).makeCons(^{
+        make.top.equal.superview.constants(50).And.centerX.equal.superview.constants(0);
+    });
     
-    [netBackgroundStatusImgView removeGestureWithTarget:self andAction:@selector(getNetworkData)];
+    Label.str(text).fnt(SP15Font).color([UIColor grayColor]).centerAlignment.preferWidth(netStatusBackgroundView.width - 10 * 2).multiline.addTo(netStatusBackgroundView).makeCons(^{
+        make.top.equal.view(imageView).bottom.constants(15).And.centerX.equal.view(imageView);
+    });
     
     if (yesOrNo && [self respondsToSelector:@selector(getNetworkData)])
     {
-        netBackgroundStatusImgView.userInteractionEnabled = yesOrNo;
-        [netBackgroundStatusImgView addTarget:self action:@selector(getNetworkData)];
+        netStatusBackgroundView.userInteractionEnabled = yesOrNo;
+        [netStatusBackgroundView addTarget:self action:@selector(getNetworkData)];
     }
 }
 
@@ -161,7 +146,7 @@
 - (void)setLoadFailureStatusView
 {
     [self setNetworkStatusViewByImage:[UIImage imageNamed:@"gouwuche_morentupian"]
-                           remindText:OperationFailure
+                           remindText:LoadFailed
                userInteractionEnabled:YES];
 }
 
@@ -453,9 +438,9 @@
     [self hideHUDInView:self.view];
     
     // 清空加载网络数据的背景图
-    if (netBackgroundStatusImgView.superview)
+    if (netStatusBackgroundView.superview)
     {
-        [netBackgroundStatusImgView removeFromSuperview];
+        [netStatusBackgroundView removeFromSuperview];
     }
     
     if (self.successBlock)

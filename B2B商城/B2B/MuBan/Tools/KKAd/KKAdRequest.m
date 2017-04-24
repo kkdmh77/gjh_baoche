@@ -14,10 +14,10 @@
 
 @implementation KKAdRequest
 
-+ (void)sendAdRequest:(NSString *)urlString tag:(NSInteger)tag parameters:(NSDictionary *)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSInteger tag))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error, NSInteger tag))failure {
++ (void)sendAdRequest:(NSString *)urlString tag:(NSInteger)tag parameters:(id)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject, NSInteger tag))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error, NSInteger tag))failure {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer.timeoutInterval = 3;
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    // manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:
                                                          @"application/json",
                                                          @"text/html",
@@ -29,29 +29,21 @@
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
         // 解析数据
-        if ([responseObject isValidData]) {
-            NSData *resultData = [self decryptBase64Data:responseObject];
-            
-            responseObject = [NSJSONSerialization JSONObjectWithData:resultData
-                                                             options:NSJSONReadingMutableContainers
-                                                               error:NULL];
-        }
-              
-        if ([responseObject isValidDictionary] && 200 == [[responseObject objectForKey:@"status"] integerValue]) {
-          NSDictionary *dataDic = [responseObject objectForKey:@"data"];
-          if (success) {
-              success(operation, dataDic, tag);
-          }
+        if ([responseObject isValidDictionary] && 0 == [[[responseObject objectForKey:@"state"] objectForKey:@"code"] integerValue]) {
+        NSDictionary *dataDic = [responseObject objectForKey:@"data"];
+            if (success) {
+                success(operation, dataDic, tag);
+            }
         } else {
-          if (failure) {
-              NSString *message = [responseObject safeObjectForKey:@"message"];
-              NSString *errorMessage = [message isValidString] ? message : @"KKAdRequest 请求失败！";
-              NSError *error = [[NSError alloc] initWithDomain:@"KKYINGYU100K_REQUEST_ERROR_DOMAIN"
-                                                          code:PARSE_JSON_ERROR
-                                                      userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
-              
-              failure(operation, error, tag);
-          }
+            if (failure) {
+                NSString *message = [[responseObject safeObjectForKey:@"state"] safeObjectForKey:@"msg"];
+                NSString *errorMessage = [message isValidString] ? message : @"AFNetworkingTool 请求失败！";
+                NSError *error = [[NSError alloc] initWithDomain:@"KKPOEM_REQUEST_ERROR_DOMAIN"
+                                                            code:1500
+                                                        userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
+                
+                failure(operation, error, tag);
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {

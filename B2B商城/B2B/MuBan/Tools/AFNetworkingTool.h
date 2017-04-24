@@ -28,14 +28,14 @@ typedef void (^RequestFailedBlock)    (NSURLSessionDataTask * _Nullable task, NS
 + (nullable NSURLSessionDataTask *)request:(NSString *)URLString
                                        tag:(NSInteger)tag
                                 methodType:(RequestMethodType)methodType
-                                parameters:(nullable NSDictionary *)parameters
+                                parameters:(nullable id)parameters
                                    success:(nullable RequestSuccessBlock)success
                                    failure:(nullable RequestFailedBlock)failure;
 
 + (nullable NSURLSessionDataTask *)request:(NSString *)URLString
                                        tag:(NSInteger)tag
                                 methodType:(RequestMethodType)methodType
-                                parameters:(nullable NSDictionary *)parameters
+                                parameters:(nullable id)parameters
                                  noNetwork:(nullable RequestNoNetworkBlock)noNetwork
                                    success:(nullable RequestSuccessBlock)success
                                    failure:(nullable RequestFailedBlock)failure;
@@ -43,7 +43,7 @@ typedef void (^RequestFailedBlock)    (NSURLSessionDataTask * _Nullable task, NS
 + (nullable NSURLSessionDataTask *)request:(NSString *)URLString
                                        tag:(NSInteger)tag
                                 methodType:(RequestMethodType)methodType
-                                parameters:(nullable NSDictionary *)parameters
+                                parameters:(nullable id)parameters
                                  noNetwork:(nullable RequestNoNetworkBlock)noNetwork
                                      start:(nullable RequestStartBlock)start
                                    success:(nullable RequestSuccessBlock)success

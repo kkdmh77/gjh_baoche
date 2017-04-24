@@ -27,7 +27,7 @@
 "All_No_Network"                     = "网络异常，请检查网络后重试";
 "All_AlertTitle"                     = "温馨提示";
 "All_Loading"                        = "加载中...";
-"All_LoadFailed"                     = "加载失败";
+"All_LoadFailed"                     = "网络异常，请刷新重试";
 "All_SaveFailed"                     = "保存失败";
 "All_OperationSuccess"               = "操作成功";
 "All_DeprecatedYourInputInfo"        = "是否放弃您所输入的信息?";

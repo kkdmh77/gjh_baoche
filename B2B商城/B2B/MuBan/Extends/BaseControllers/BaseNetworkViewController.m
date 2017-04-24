@@ -7,11 +7,12 @@
 //
 
 #import "BaseNetworkViewController.h"
+#import <NerdyUI.h>
+#import "GCDThread.h"
 
 @interface BaseNetworkViewController ()
 {
-    __weak UIImageView *netBackgroundStatusImgView;
-    __weak UILabel     *netStatusRemindLabel;
+    __weak UIView      *netStatusBackgroundView;
 }
 
 @end
@@ -101,41 +102,27 @@
 
 - (void)setNetworkStatusViewWithFrame:(CGRect)frame Image:(UIImage *)image remindText:(NSString *)text userInteractionEnabled:(BOOL)yesOrNo
 {
-    if (!netBackgroundStatusImgView)
-    {
-        netBackgroundStatusImgView = InsertImageView(self.view, frame, nil, nil);
-        netBackgroundStatusImgView.contentMode = UIViewContentModeCenter;
-        netBackgroundStatusImgView.backgroundColor = self.view.backgroundColor;
-        [netBackgroundStatusImgView keepAutoresizingInFull];
-        
-        [self.view addSubview:netBackgroundStatusImgView];
-    }
-    if (!netStatusRemindLabel)
-    {
-        netStatusRemindLabel = InsertLabel(netBackgroundStatusImgView,
-                                           CGRectMake(0, 0, netBackgroundStatusImgView.boundsWidth - 10 * 2, 0),
-                                           NSTextAlignmentCenter,
-                                           text,
-                                           SP15Font,
-                                           [UIColor grayColor],
-                                           YES);
+    if (netStatusBackgroundView.superview) {
+        [netStatusBackgroundView removeGestureWithTarget:self
+                                               andAction:@selector(getNetworkData)];
+        [netStatusBackgroundView removeFromSuperview];
     }
     
-    netBackgroundStatusImgView.image = image;
+    netStatusBackgroundView = View.xywh(frame).bgColor(self.view.backgroundColor).addTo(self.view);
+    [netStatusBackgroundView keepAutoresizingInFull];
     
-    netStatusRemindLabel.text = text;
-    [netStatusRemindLabel sizeToFit];
-    // netStatusRemindLabel.center = CGPointMake(netBackgroundStatusImgView.center.x, netBackgroundStatusImgView.center.y + (image.size.height / 2) + 10);
-    [netStatusRemindLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(netBackgroundStatusImgView).centerOffset(CGPointMake(0, 30));
-    }];
+    UIImageView *imageView = ImageView.img(image).fitSize.addTo(netStatusBackgroundView).makeCons(^{
+        make.top.equal.superview.constants(50).And.centerX.equal.superview.constants(0);
+    });
     
-    [netBackgroundStatusImgView removeGestureWithTarget:self andAction:@selector(getNetworkData)];
+    Label.str(text).fnt(SP15Font).color([UIColor grayColor]).centerAlignment.preferWidth(netStatusBackgroundView.width - 10 * 2).multiline.addTo(netStatusBackgroundView).makeCons(^{
+        make.top.equal.view(imageView).bottom.constants(15).And.centerX.equal.view(imageView);
+    });
     
     if (yesOrNo && [self respondsToSelector:@selector(getNetworkData)])
     {
-        netBackgroundStatusImgView.userInteractionEnabled = yesOrNo;
-        [netBackgroundStatusImgView addTarget:self action:@selector(getNetworkData)];
+        netStatusBackgroundView.userInteractionEnabled = yesOrNo;
+        [netStatusBackgroundView addTarget:self action:@selector(getNetworkData)];
     }
 }
 
@@ -160,8 +147,8 @@
 
 - (void)setLoadFailureStatusView
 {
-    [self setNetworkStatusViewByImage:[UIImage imageNamed:@"gouwuche_morentupian"]
-                           remindText:OperationFailure
+    [self setNetworkStatusViewByImage:[UIImage imageNamed:@"net_status_lost"]
+                           remindText:LoadFailed
                userInteractionEnabled:YES];
 }
 
@@ -453,9 +440,9 @@
     [self hideHUDInView:self.view];
     
     // 清空加载网络数据的背景图
-    if (netBackgroundStatusImgView.superview)
+    if (netStatusBackgroundView.superview)
     {
-        [netBackgroundStatusImgView removeFromSuperview];
+        [netStatusBackgroundView removeFromSuperview];
     }
     
     if (self.successBlock)
@@ -485,5 +472,105 @@
     // do nothing
 }
  */
+
+////////////////////////////////////////////////////////////////////////////////
+
+- (void)reloadPDRCoreAppFrameUrl:(NSString *)urlStr {
+    self.loadUrlStr = urlStr;
+    
+    [self setupPDRUI];
+}
+
+- (void)setupPDRUI {
+    /*
+     http://120.76.188.84:8085/plugin/testAppNAV.html
+     http://120.76.188.84:8085/plugin/testAppUI.html
+     http://120.76.188.84:8085/plugin/testAppUTIL.html
+     */
+    
+    if (self.appFrame) {
+        [self.appFrame removeFromSuperview];
+        self.appFrame = nil;
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+    
+    PDRCore *pCoreHandle = [PDRCore Instance];
+    
+    [pCoreHandle regPluginWithName:@"appNAV"
+                      impClassName:@"ProductPlugin"
+                              type:PDRExendPluginTypeFrame
+                        javaScript:nil];
+    [pCoreHandle regPluginWithName:@"appUI"
+                      impClassName:@"ProductPlugin"
+                              type:PDRExendPluginTypeFrame
+                        javaScript:nil];
+    [pCoreHandle regPluginWithName:@"appUTIL"
+                      impClassName:@"ProductPlugin"
+                              type:PDRExendPluginTypeFrame
+                        javaScript:nil];
+    
+    if (pCoreHandle != nil) {
+        // NSString* pFilePath = [NSString stringWithFormat:@"file://%@/%@", [NSBundle mainBundle].bundlePath, @"Pandora/apps/MuBan/www/plugin.html"];
+        [pCoreHandle start];
+        // 如果路径中包含中文，或Xcode工程的targets名为中文则需要对路径进行编码
+        //NSString* pFilePath =  (NSString *)CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)pTempString, NULL, NULL,  kCFStringEncodingUTF8 );
+        
+        // 单页面集成时可以设置打开的页面是本地文件或者是网络路径
+        NSString* pFilePath = [self.loadUrlStr isValidString] ? self.loadUrlStr : @"http://120.76.188.84:8085/plugin/testAppNAV.html";
+        
+        // 用户在集成5+SDK时，需要在5+内核初始化时设置当前的集成方式，
+        // 请参考AppDelegate.m文件的- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions方法
+        
+        CGRect StRect = CGRectMake(0, 0, self.view.width, self.view.height);
+        
+        self.appFrame = [[PDRCoreAppFrame alloc] initWithName:@"WebViewID1" loadURL:pFilePath frame:StRect];
+        if (self.appFrame) {
+            [pCoreHandle.appManager.activeApp.appWindow registerFrame:self.appFrame];
+            
+            [self.view addSubview:self.appFrame];
+            
+            // 注册通知
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(pageDidLoad:)
+                                                         name:PDRCoreAppFrameDidLoadNotificationKey
+                                                       object:nil];
+            /*
+             [[NSNotificationCenter defaultCenter] addObserver:self
+             selector:@selector(pageDidLoad:)
+             name:PDRCoreAppFrameDidCloseNotificationKey
+             object:nil];
+             [[NSNotificationCenter defaultCenter] addObserver:self
+             selector:@selector(pageDidLoad:)
+             name:PDRCoreAppFrameTitleUpdaedNotificationKey
+             object:nil];
+             */
+        }
+    }
+}
+
+- (void)test {
+    /*
+     NSString *evalString = @"initAppUI();";
+     
+     [self.appFrame evaluateJavaScript:evalString completionHandler:^(id obj, NSError *error) {
+     
+     }];
+     */
+}
+
+#pragma mark - Notifications Methods
+
+// 页面加载完成
+- (void)pageDidLoad:(NSNotification *)notification {
+    if (self.appFrame) {
+        @weakify(self);
+        [GCDThread enqueueBackgroundWithDelay:1 block:^{
+            [weak_self performSelectorOnMainThread:@selector(test)
+                                        withObject:nil
+                                     waitUntilDone:YES];
+        }];
+    }
+}
 
 @end

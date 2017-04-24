@@ -311,5 +311,14 @@
 		<key>global</key>
 		<false/>
 	</dict>
+	<key>ProductPlugin</key>
+	<dict>
+		<key>class</key>
+		<string>ProductPlugin</string>
+		<key>autostart</key>
+		<true/>
+		<key>global</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

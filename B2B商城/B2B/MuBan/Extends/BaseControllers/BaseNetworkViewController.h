@@ -12,6 +12,15 @@
 #import "NetworkStatusManager.h"
 #import "UrlManager.h"
 
+#import "PDRToolSystem.h"
+#import "PDRToolSystemEx.h"
+#import "PDRCoreAppFrame.h"
+#import "PDRCoreAppManager.h"
+#import "PDRCoreAppWindow.h"
+#import "PDRCoreAppInfo.h"
+#import "RDVTabBarController.h"
+#import "NavMenuView.h"
+
 // 缓存网络数据的时间
 typedef enum
 {
@@ -72,6 +81,10 @@ typedef void (^ExtendVCNetRequestFailedBlock)    (NetRequest *request, NSError *
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+@property (nonatomic, strong) PDRCoreAppFrame *appFrame;
+@property (nonatomic, copy) NSString *loadUrlStr;
+
+////////////////////////////////////////////////////////////////////////////////
 
 /// 设置网络背景状态图
 - (void)setNetworkStatusViewByImage:(UIImage *)image
@@ -188,5 +201,10 @@ typedef void (^ExtendVCNetRequestFailedBlock)    (NetRequest *request, NSError *
 - (NetRequest *)sendRequest:(NSString *)urlMethodName parameterDic:(NSDictionary *)parameterDic requestHeaders:(NSDictionary *)headers requestMethodType:(NSString *)methodType requestTag:(int)tag delegate:(id<NetRequestDelegate>)delegate userInfo:(NSDictionary *)userInfo;
 
 - (NetRequest *)sendRequest:(NSString *)urlMethodName parameterDic:(NSDictionary *)parameterDic requestHeaders:(NSDictionary *)headers requestMethodType:(NSString *)methodType requestTag:(int)tag delegate:(id<NetRequestDelegate>)delegate userInfo:(NSDictionary *)userInfo netCachePolicy:(NetCachePolicy)cachePolicy cacheSeconds:(NSTimeInterval)cacheSeconds;
+
+////////////////////////////////////////////////////////////////////////////////
+
+- (void)reloadPDRCoreAppFrameUrl:(NSString *)urlStr;
+- (void)setupPDRUI;
 
 @end

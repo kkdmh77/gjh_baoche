@@ -22,4 +22,18 @@
 #define AnimationShowTime                   0.25      // 常见动画的持续时间:0.25秒
 #define KeyboardHeight                      252       // 键盘的高度
 
+/**************************** 统计 & 分享 ********************************/
+
+/*
+ 极光推送：
+ AppKey:063cbe4ed8b61e2b86a544eb
+ Master Secret:a20cdf480e8152da5cebb587
+ */
+
+#define kUMengAppKey       @"58f38349cae7e771a600168d"
+
+#define kWeiXinKey         @"wx740a9727e0e59866"
+#define kWeiXinSecret      @"8254c2d4610f993932ef897355ee6e68"
+#define kWeixinUrl         kAppDownloadUrl
+
 #endif /* KKeyDefine_h */

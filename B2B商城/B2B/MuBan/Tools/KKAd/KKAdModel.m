@@ -11,10 +11,7 @@
 @implementation KKAdModel
 
 + (NSDictionary<NSString *,id> *)modelCustomPropertyMapper {
-    return @{@"adId": @"id",
-             @"imgUrlStr": @"imgUri",
-             @"contentStr": @"targetUrl",
-             @"targetType": @"targetType"};
+    return @{@"imgUrlStr": @"url"};
 }
 
 @end

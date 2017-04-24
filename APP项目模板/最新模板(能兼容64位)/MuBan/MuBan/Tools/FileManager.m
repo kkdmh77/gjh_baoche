@@ -15,7 +15,8 @@
 #import "HUDManager.h"
 #import "PRPAlertView.h"
 #import "GCDThread.h"
-#import "GYDataCenter.h"
+#import <LKDBHelper/LKDBHelper.h>
+#import <FMDB/FMDB.h>
 
 #define kChannelID       @"AppStore"
 #define kPrivateKey      @"1e63bd8c12e0b5ef"
@@ -661,7 +662,12 @@ DEF_SINGLETON(FileManager);
         else
         */
         {
-            NSUInteger version = [[GYDataContext sharedInstance] userVersion:[self getFileNameByFileType:fileType]];
+            LKDBHelper *helper = [[LKDBHelper alloc] initWithDBPath:[self getFilePathByFileType:fileType]];
+            __block NSUInteger version = 0;
+            
+            [helper executeDB:^(FMDatabase * _Nonnull db) {
+                version = db.userVersion;
+            }];
             
             return version;
         }
