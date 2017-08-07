@@ -418,7 +418,7 @@ DEF_SINGLETON(NetRequestManager);
     
     [netRequest.asiFormRequest addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@",charset]];
     
-    if ([parameterDic isAbsoluteValid])
+    if ([parameterDic isValidDictionary])
     {
         for (NSString *key in parameterDic.allKeys)
         {
@@ -449,7 +449,7 @@ DEF_SINGLETON(NetRequestManager);
     */
     // 修改结束
     
-    if ([fileDic isAbsoluteValid])
+    if ([fileDic isValidDictionary])
     {
         for (NSString *key in fileDic.allKeys)
         {
@@ -464,7 +464,7 @@ DEF_SINGLETON(NetRequestManager);
         }
     }
 
-    if ([headers isAbsoluteValid])
+    if ([headers isValidDictionary])
     {
         for (NSString *headerKey in headers.allKeys)
         {
@@ -599,11 +599,15 @@ DEF_SINGLETON(NetRequestManager);
 
 - (void)clearDelegate:(id<NetRequestDelegate>)delegate
 {
+    [self clearDelegate:delegate withRequestTag:-1];
+}
+
+- (void)clearDelegate:(id<NetRequestDelegate>)delegate withRequestTag:(NSInteger)tag {
     NSMutableArray *toRemoveRequestArray = [NSMutableArray array];
     
     for (NetRequest *request in netRequestArray)
     {
-        if (delegate == request.delegate)
+        if (delegate == request.delegate && (-1 == tag || tag == request.tag))
         {
             [request.asiFormRequest clearDelegatesAndCancel];
             request.delegate = nil;

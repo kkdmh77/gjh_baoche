@@ -1,0 +1,81 @@
+/* 
+  Localizable.strings
+  MuBan
+
+  Created by swift on 15/1/26.
+  Copyright (c) 2015年 com.gjh. All rights reserved.
+*/
+
+// 所有模块
+"All_DataSourceNotFound"             = "无法找到资源";
+"All_Confirm"                        = "确定";
+"All_Cancel"                         = "取消";
+"All_Delete"                         = "删除";
+"All_Check"                          = "查看";
+"All_Edit"                           = "编辑";
+"All_PickFromCamera"                 = "拍照";
+"All_PickFromAlbum"                  = "从相册选择";
+"All_SaveToAlbum"                    = "保存到相册";
+"All_SaveSuccess"                    = "保存成功";
+"All_OperationFailure"               = "操作失败，请重试！";
+"All_Notification"                   = "消息推送";
+"All_No"                             = "否";
+"All_Yes"                            = "是";
+"All_Done"                           = "完成";
+"All_Save"                           = "保存";
+"All_Saveing"                        = "保存中...";
+"All_No_Network"                     = "网络异常，请检查网络后重试";
+"All_AlertTitle"                     = "温馨提示";
+"All_Loading"                        = "加载中...";
+"All_LoadFailed"                     = "加载失败";
+"All_SaveFailed"                     = "保存失败";
+"All_OperationSuccess"               = "操作成功";
+"All_DeprecatedYourInputInfo"        = "是否放弃您所输入的信息?";
+"All_Delete_Success"                 = "删除成功";
+"All_Delete_Failed"                  = "删除失败，请重试";
+"All_Device_Non_Space"               = "手机存储空间已满，请删除一些数据后再尝试下载";
+"All_Unselected"                     = "未选择";
+
+// 注册&登陆
+"Login_From_Wechat"                  = "微信";
+"Login_From_QQ"                      = "QQ";
+"Login_From_Sina"                    = "新浪";
+"Login_Third_Platform_Choose"        = "请选择登录方式";
+"Login_Love_Learn"                   = "让你爱上学习\n简 单 · 有 趣 · 轻 松";
+
+"Login_Login"                        = "登录";
+"Login_UserName"                     = "用户名";
+"Login_Password"                     = "密码";
+"Login_AutoLogin"                    = "自动登录";
+"Login_ForgetPassword"               = "忘记密码";
+"Login_LoginNow"                     = "立即登录";
+
+"Register_Register"                  = "注册";
+"Register_MobileNumber"              = "11位手机号码";
+"Register_Email"                     = "邮箱";
+"Register_PleaseInputPassword"       = "请输入密码(6-18位数字或字母)";
+"Register_PleaseInputPasswordAgain"  = "请再次输入密码";
+"Register_VerificationCode"          = "手机收到的验证码";
+"Register_GetVerificationCode"       = "获取验证码";
+"Register_RegisterNow"               = "确认注册";
+"Register_UseMobileNumberToRegister" = "使用手机号码注册";
+"Register_UseEmailToRegister"        = "使用邮箱注册";
+
+"Login_NoUser"                       = "请输入有效的用户名";
+"Login_NoPassword"                   = "请输入有效的密码";
+"Login_NoPasswordConfirm"            = "请再次输入密码";
+"Login_PasswordNotEqual"             = "密码输入不一致";
+"Login_NoAgreeProtocol"              = "请同意寰居服务协议";
+"Login_LoginFail"                    = "登录失败";
+"Login_Loading"                      = "正在登录...";
+
+// 设置
+
+// 其他
+
+// 版本检测
+"Version_NowNewVersion"              = "当前为最新版本";
+"Version_LoadingShowKey"             = "正在检测更新...";
+
+// 各控制器导航栏标题
+"NavTitle_HomePage"                  = "首页";

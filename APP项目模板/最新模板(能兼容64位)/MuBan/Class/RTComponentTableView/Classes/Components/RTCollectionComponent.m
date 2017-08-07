@@ -116,9 +116,10 @@
 - (void)collectionView:(UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.delegate respondsToSelector:@selector(tableComponent:didTapItemAtIndex:)]) {
+    if ([self.delegate respondsToSelector:@selector(tableComponent:didTapItemAtIndex:userInfo:)]) {
         [self.delegate tableComponent:self
-                    didTapItemAtIndex:indexPath.item];
+                    didTapItemAtIndex:indexPath.item
+                             userInfo:nil];
     }
 }
 

@@ -24,6 +24,8 @@
     #import "UserInfoModel.h"
     #import "YYKit.h"
     #import "CommonCategories.h"
+    #import "UserInfoCache.h"
+    #import <RTRootNavigationController/RTRootNavigationController.h>
 
     // define this constant if you want to use Masonry without the 'mas_' prefix
     // #define MAS_SHORTHAND

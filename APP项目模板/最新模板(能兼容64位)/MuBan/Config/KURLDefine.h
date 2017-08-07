@@ -10,19 +10,15 @@
 #define KURLDefine_h
 
 // appDownload的URL
-#define AppDownloadUrl                     @"https://itunes.apple.com/cn/app/id675486231"
+#define kAppStoreUrl      @"https://itunes.apple.com/cn/app/id1174305818"
+#define kUseProtocolUrl   @"https://zidian.yy.com/kkcpc/lisence-mobile-kkunion.html"  // 使用协议
+#define kAppDownloadUrl   @"http: //sz.duowan.com/s/huodong/kuaikuai/xqjy/index.html" // APP下载网页分享
+#define kAboutUrl         @"http: //sz.duowan.com/s/huodong/kuaikuai/xqjy/index.html" // 关于
 
 // Request的nameSpace
-#define Request_NameSpace                  @"http: //o2o.yijushang.com"                         // 调试
-
-#define Request_NameSpace_company_internal @"http: //192.168.0.105:9999"                        // 内网 测试
-#define Request_NameSpace_company_external @""     // 外网 测试
-#define Request_NameSpace_gov              @""     // 外网(上架正式)
+#define Request_NameSpace @""     // 主域名
 
 // Img的nameSpace
-#define Img_NameSpace                      @""     // 调试
-
-#define Img_NameSpace_company_internal     @""     // 内网 测试
-#define Img_NameSpace_company_external     @""     // 外网 测试
+#define Img_NameSpace     @""     // 主域名
 
 #endif /* KURLDefine_h */

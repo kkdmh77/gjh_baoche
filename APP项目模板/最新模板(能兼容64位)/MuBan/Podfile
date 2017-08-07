@@ -20,6 +20,11 @@ pod 'SDWebImage'
 pod 'IQKeyboardManager'
 pod 'WebViewJavascriptBridge'
 pod 'NerdyUI', :git => 'https://github.com/nerdycat/NerdyUI.git'
+pod 'TLYShyNavBar'
+pod 'IDMPhotoBrowser'
+pod 'DACircularProgress'
+pod 'pop'
+pod 'RTRootNavigationController'
 
 end
 

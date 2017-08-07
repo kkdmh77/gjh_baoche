@@ -102,9 +102,9 @@
     CGFloat titlesTotalWidth = _contentInset.left + _contentInset.right;
     BOOL isLineFirst = YES; // 是否为每一行的第一个
     
-    for (NSString *title in _titlesArray) {
+    for (int index = 0; index < _titlesArray.count; index++) {
         
-        NSInteger index = [_titlesArray indexOfObject:title];
+        NSString *title = _titlesArray[index];
         
         CGFloat width = [self stringWidth:title];
         titlesTotalWidth += (width + (isLineFirst ? 0 : _interitemSpacing));

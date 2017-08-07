@@ -1,6 +1,6 @@
 {
   "name": "NerdyUI",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "summary": "An easy way to create and layout UI components for iOS.",
   "description": "An easy way to create and layout UI components for iOS. Written in Objective-C.",
   "homepage": "https://github.com/nerdycat/NerdyUI",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/nerdycat/NerdyUI.git",
-    "tag": "1.1.0"
+    "tag": "1.2.0"
   },
   "requires_arc": true,
   "source_files": "NerdyUI/NerdyUI.h",

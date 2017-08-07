@@ -8,16 +8,22 @@
 
 #import "CommentSendController.h"
 #import "PopupController.h"
-#import "NetRequestManager.h"
-#import "HPGrowingTextView.h"
+#import <NerdyUI.h>
+#import "LanguagesManager.h"
+#import "HUDManager.h"
 
-@interface CommentSendController () <NetRequestDelegate>
+static const CGFloat btnWidthAndHeight = 35.0;
+static const CGFloat viewBetweenSpaceValue = 10.0;
+
+@interface CommentSendController () <PopupControllerDelegate, HPGrowingTextViewDelegate>
 {
-    NSURL                       *_toSendUrl;
     SendCommentCompleteHandle   _completeHandle;
     PopupController             *_commentInputShowPop;
-    UITextView                  *_inputTV;
+    HPGrowingTextView           *_inputTV;
+    UIView                      *_containerView;
 }
+
+@property (nonatomic, copy) SendCommentCompleteHandle completeHandle;
 
 @end
 
@@ -25,15 +31,12 @@
 
 DEF_SINGLETON(CommentSendController);
 
-- (void)showCommentInputViewAndSendUrl:(NSURL *)url completeHandle:(SendCommentCompleteHandle)handle
+- (void)showCommentInputViewWithCompleteHandle:(SendCommentCompleteHandle)handle
 {
     if (!_commentInputShowPop)
     {
-        const CGFloat btnWidthAndHeight = 35.0;
-        const CGFloat viewBetweenSpaceValue = 10.0;
-        
-        UIView *containerView = InsertView(nil, CGRectMake(0, 0, IPHONE_WIDTH, 200));
-        containerView.backgroundColor = [UIColor whiteColor];
+        UIView *containerView = InsertView(nil, CGRectMake(0, 0, IPHONE_WIDTH, 0));
+        containerView.backgroundColor = HEXCOLOR(0XECECEC);
         
         UIButton *cancelBtn = InsertImageButton(containerView,
                                                 CGRectZero,
@@ -42,11 +45,10 @@ DEF_SINGLETON(CommentSendController);
                                                 nil,
                                                 self,
                                                 @selector(clickCancelBtn:));
-        [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.equalTo(CGSizeMake(btnWidthAndHeight, btnWidthAndHeight));
-            make.left.equalTo(containerView).with.offset(@(viewBetweenSpaceValue));
-            make.top.equalTo(containerView).with.offset(@(viewBetweenSpaceValue));
-        }];
+        cancelBtn.makeCons(^{
+            make.size.equal.constants(btnWidthAndHeight, btnWidthAndHeight);
+            make.left.top.equal.superview.constants(viewBetweenSpaceValue);
+        });
         
         UIButton *sendBtn = InsertImageButton(containerView,
                                               CGRectZero,
@@ -55,48 +57,73 @@ DEF_SINGLETON(CommentSendController);
                                               nil,
                                               self,
                                               @selector(clickSendBtn:));
-        [sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(cancelBtn.mas_width);
-            make.height.equalTo(cancelBtn.mas_height);
-            make.right.equalTo(containerView).with.offset(@(-viewBetweenSpaceValue));
-            make.top.equalTo(cancelBtn);
-        }];
-        
+        sendBtn.makeCons(^{
+            make.size.top.equal.view(cancelBtn);
+            make.right.equal.superview.constants(-viewBetweenSpaceValue);
+        });
+
         UILabel *titleLabel = InsertLabel(containerView,
                                           CGRectZero,
                                           NSTextAlignmentCenter,
-                                          @"写跟帖",
+                                          @"写评论",
                                           SP15Font,
                                           [UIColor blackColor],
                                           NO);
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(cancelBtn);
-            make.height.equalTo(cancelBtn);
-            make.left.equalTo(cancelBtn.mas_right).with.offset(@(viewBetweenSpaceValue));
-            make.right.equalTo(sendBtn.mas_left).with.offset(@(-viewBetweenSpaceValue));
-        }];
+        titleLabel.makeCons(^{
+            make.top.height.equal.view(cancelBtn);
+            make.left.equal.view(cancelBtn).right.constants(viewBetweenSpaceValue);
+            make.right.equal.view(sendBtn).left.constants(-viewBetweenSpaceValue);
+        });
         
         // 输入控件
-        /*
-        HPGrowingTextView *inputTV = [[HPGrowingTextView alloc] init];
-         */
-        UITextView *inputTV = [[UITextView alloc] init];
-        inputTV.font = SP14Font;
-        inputTV.textColor = [UIColor blackColor];
-        [inputTV addBorderToViewWitBorderColor:[UIColor grayColor] borderWidth:0.5];
+        HPGrowingTextView *inputTV = [[HPGrowingTextView alloc] initWithFrame:CGRectZero];
+        // UITextView *inputTV = [[UITextView alloc] init];
+        inputTV.delegate = self;
+        inputTV.font = kCustomFont_Size(16);
+        inputTV.textColor = Common_BlackColor;
+        inputTV.maxNumberOfLines = 4;
+        inputTV.minNumberOfLines = 1;
+        inputTV.placeholder = @"请输入评论";
+        [inputTV addBorderToViewWitBorderColor:[UIColor lightGrayColor]
+                                   borderWidth:ThinLineWidth];
+        inputTV.backgroundColor = [UIColor whiteColor];
         [containerView addSubview:inputTV];
         _inputTV = inputTV;
-        [inputTV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(containerView).with.offset(@(viewBetweenSpaceValue));
-            make.right.equalTo(containerView).with.offset(@(-viewBetweenSpaceValue));
-            make.top.equalTo(cancelBtn.mas_bottom).with.offset(@(viewBetweenSpaceValue));
-            make.bottom.equalTo(containerView).with.offset(@(-viewBetweenSpaceValue));
-        }];
         
-        _commentInputShowPop = [[PopupController alloc] initWithContentView:containerView];
+        inputTV.makeCons(^{
+            make.left.right.bottom.superview.constants(viewBetweenSpaceValue, -viewBetweenSpaceValue, -viewBetweenSpaceValue);
+            make.top.equal.view(cancelBtn).bottom.constants(viewBetweenSpaceValue);
+        });
+        
+        _containerView = containerView;
+        _commentInputShowPop = [[PopupController alloc] initWithContentView:_containerView];
+        _commentInputShowPop.delegate = self;
+        _commentInputShowPop.behavior = PopupBehavior_MessageBox;
+    }
+    self.completeHandle = handle;
+    
+    // 设置展示时的默认高度
+    NSString *tempStr = @"设置inputTv初始高度的临时字符串";
+    if (![_inputTV.text isValidString]) { // 没有输入文字时
+        _inputTV.text = tempStr;
+    } else { // 上一次有输入文字时
+        NSString *preInputText = _inputTV.text;
+        _inputTV.text = nil;
+        _inputTV.text = preInputText;
     }
     
-    _toSendUrl = url;
+    CGFloat defaultHeight = [_containerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    _containerView.height = defaultHeight + _inputTV.height;
+    
+    // 如果没有输入文字，则计算完一行的默认高度后清空文字
+    if ([_inputTV.text isEqualToString:tempStr]) {
+        _inputTV.text = nil;
+    }
+    
+    if (!_commentInputShowPop.contentView) {
+        _commentInputShowPop.contentView = _containerView;
+    }
+    
     _completeHandle = [handle copy];
     
     [_commentInputShowPop showInView:[UIApplication sharedApplication].keyWindow
@@ -105,51 +132,43 @@ DEF_SINGLETON(CommentSendController);
 
 - (void)clickSendBtn:(UIButton *)sender
 {
-    [self sendCommentWithText:_inputTV.text];
+    if (![_inputTV.text isValidString]) {
+        [HUDManager showAutoHideHUDWithToShowStr:@"发送的内容不能为空"
+                                         HUDMode:MBProgressHUDModeText];
+    } else {
+        [_commentInputShowPop hide];
 
-    [_commentInputShowPop hide];
+        [self performActionHandleWithType:SendCommentActionTypeToSend];
+    }
 }
 
 - (void)clickCancelBtn:(UIButton *)sender
 {
     [_commentInputShowPop hide];
+    
+    [self performActionHandleWithType:SendCommentActionTypeCancel];
 }
 
-- (void)sendCommentWithText:(NSString *)text
-{
-    if ([text isValidString])
-    {
-        [[NetRequestManager sharedInstance] sendRequest:_toSendUrl
-                                           parameterDic:@{@"comment": text}
-                                             requestTag:1000
-                                               delegate:self
-                                               userInfo:nil];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"发送的内容不能为空"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"确定"
-                                              otherButtonTitles:nil, nil];
-        [alert show];
+- (void)performActionHandleWithType:(SendCommentActionType)type {
+    if (_completeHandle) {
+        _completeHandle(type, _inputTV.text);
     }
 }
 
-#pragma mark - NetRequestDelegate methods
+#pragma mark - HPGrowingTextViewDelegate methods
 
-- (void)netRequest:(NetRequest *)request successWithInfoObj:(id)infoObj
-{
-    if (_completeHandle) _completeHandle(YES);
-
-    _toSendUrl = nil;
-    _completeHandle = nil;
-    _inputTV.text = nil;
+- (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
+    CGFloat difHeight = height - _inputTV.height;
+    _containerView.top -= difHeight;
+    _containerView.height += difHeight;
 }
 
-- (void)netRequest:(NetRequest *)request failedWithError:(NSError *)error
-{
-    if (_completeHandle) _completeHandle(NO);
+/*
+#pragma mark - PopupControllerDelegate methods
+
+- (void) PopupControllerDidHidden:(PopupController *)aController {
+    [self performActionHandleWithType:SendCommentActionTypeCancel];
 }
+*/
 
 @end

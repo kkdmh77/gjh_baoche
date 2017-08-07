@@ -7,20 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HPGrowingTextView.h"
 
-typedef void(^SendCommentCompleteHandle) (BOOL isSendSuccess);
+typedef NS_ENUM(NSInteger, SendCommentActionType) {
+    SendCommentActionTypeToSend = 0, ///< 点击发送
+    SendCommentActionTypeCancel ///< 取消
+};
+
+typedef void(^SendCommentCompleteHandle) (SendCommentActionType actionType, NSString *inputText);
 
 @interface CommentSendController : NSObject
 
 AS_SINGLETON(CommentSendController);
 
+@property (nonatomic, strong, readonly) HPGrowingTextView *inputTV;
 /**
- @ 方法描述    显示评论输入界面,完成输入后发送评论
- @ 输入参数    url: 发送评论的URL
+ @ 方法描述    显示评论输入界面
+ @ 输入参数    SendCommentCompleteHandle: 回调block
  @ 返回值      void
  @ 创建人      龚俊慧
  @ 创建时间    2014-12-10
  */
-- (void)showCommentInputViewAndSendUrl:(NSURL *)url completeHandle:(SendCommentCompleteHandle)handle;
+- (void)showCommentInputViewWithCompleteHandle:(SendCommentCompleteHandle)handle;
 
 @end

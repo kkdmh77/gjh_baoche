@@ -61,17 +61,17 @@
     if (items.count == tabItemTitles.count && items.count == tabItemImgaeKeys.count) {
         for (int i = 0; i < items.count; i++) {
             UITabBarItem *aItem = [items objectAtIndex:i];
-            [aItem setTitleTextAttributes:@{NSForegroundColorAttributeName: HEXCOLOR(0X306CC5)}
+            [aItem setTitleTextAttributes:@{NSForegroundColorAttributeName: Common_ThemeColor}
                                  forState:UIControlStateSelected];
-            [aItem setTitleTextAttributes:@{NSForegroundColorAttributeName: HEXCOLOR(0X4F555F)}
+            [aItem setTitleTextAttributes:@{NSForegroundColorAttributeName: TabBarTextColor}
                                  forState:UIControlStateNormal];
             
             NSString *title = tabItemTitles[i];
             aItem.title = title;
             
             UIViewController *viewController = [self.viewControllers objectAtIndex:i];
-            if ([viewController isKindOfClass:[UINavigationController class]]) {
-                ((UINavigationController *)viewController).topViewController.title = title;
+            if ([viewController isKindOfClass:[RTRootNavigationController class]]) {
+                ((RTRootNavigationController *)viewController).rt_topViewController.title = title;
             } else {
                 viewController.title = title;
             }

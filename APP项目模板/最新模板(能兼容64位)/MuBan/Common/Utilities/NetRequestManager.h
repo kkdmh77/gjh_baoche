@@ -136,6 +136,7 @@ AS_SINGLETON(NetRequestManager);
 
 - (void)removeRequest:(NetRequest*)request;
 - (void)clearDelegate:(id<NetRequestDelegate>)delegate;
+- (void)clearDelegate:(id<NetRequestDelegate>)delegate withRequestTag:(NSInteger)tag;
 
 @end
 

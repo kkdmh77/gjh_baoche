@@ -34,8 +34,11 @@ forHeaderFooterViewReuseIdentifier:self.headerIdentifier];
 
 - (void)willDisplayHeader:(__kindof UIView *)header
 {
+    /*
     UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)header;
     headerView.textLabel.font = self.titleFont ?: [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+     */
+    
     self.accessoryView.frame = [self accessoryRectForBounds:header.bounds];
 }
 

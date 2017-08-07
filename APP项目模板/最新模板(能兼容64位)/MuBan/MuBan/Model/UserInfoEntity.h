@@ -6,9 +6,9 @@
 //  Copyright © 2016年 com.gjh. All rights reserved.
 //
 
-#import "Jastor.h"
+#import <Foundation/Foundation.h>
 
-@interface UserInfoEntity : Jastor
+@interface UserInfoEntity : NSObject
 
 @property (nonatomic, copy  ) NSString       *userId;
 @property (nonatomic, copy  ) NSString       *accessToken;

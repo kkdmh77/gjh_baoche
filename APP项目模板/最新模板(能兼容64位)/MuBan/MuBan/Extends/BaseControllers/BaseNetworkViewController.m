@@ -237,6 +237,10 @@
     [[NetRequestManager sharedInstance] clearDelegate:self];
 }
 
+- (void)clearDelegateWithRequestTag:(NSInteger)tag {
+    [[NetRequestManager sharedInstance] clearDelegate:self withRequestTag:tag];
+}
+
 - (void)setNetworkRequestStatusBlocks
 {
     // 子类实现,需在getNetworkData方法前调用

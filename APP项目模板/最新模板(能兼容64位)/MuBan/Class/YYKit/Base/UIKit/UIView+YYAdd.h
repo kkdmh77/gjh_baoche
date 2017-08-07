@@ -152,7 +152,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIView *)addLineWithPosition:(ViewDrawLinePostionType)position
                startPointOffset:(CGFloat)startOffset
                  endPointOffset:(CGFloat)endOffset
-                      lineColor:(UIColor *)lineColor
+                      lineColor:(UIColor * _Nullable)lineColor
                       lineWidth:(float)lineWidth;
 
 /**

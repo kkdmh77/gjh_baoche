@@ -11,7 +11,7 @@
 #import "RTBaseComponent.h"
 
 @interface RTComponentController ()
-// @property (nonatomic, strong) UITableView *tableView;
+
 @end
 
 @implementation RTComponentController
@@ -19,28 +19,29 @@
 - (void)loadView
 {
     [super loadView];
-    [self.view addSubview:self.tableView];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // [self.view addSubview:self.tableView];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    
     self.tableView.frame = [self tableViewRectForBounds:self.view.bounds];
 }
 
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:[self tableViewRectForBounds:self.view.bounds]
-                                                  style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self setupTableViewWithFrame:self.view.bounds
+                                style:UITableViewStylePlain
+                      registerNibName:nil
+                      reuseIdentifier:nil];
         _tableView.dk_backgroundColorPicker = DKColorWithColors(PageBackgroundColor, PageBackgroundColor_Night);
         
         /* @龚俊慧
@@ -61,6 +62,11 @@
 {
     if (_components != components) {
         _components = components;
+        
+        for (id<RTTableComponent> component in components) {
+            component.sectionOfTableView = [components indexOfObject:component];
+        }
+        
         [self.tableView reloadData];
     }
 }
@@ -95,10 +101,16 @@
     return self.components[section].heightForComponentHeader;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return self.components[section].heightForComponentFooter;
+}
+
+/*
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
 {
     return self.components[section].estimatedHeightForComponentHeader;
 }
+*/
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -113,6 +125,10 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return [self.components[section] headerForTableView:tableView];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [self.components[section] footerForTableView:tableView];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView

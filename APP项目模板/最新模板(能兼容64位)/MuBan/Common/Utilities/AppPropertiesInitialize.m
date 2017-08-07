@@ -49,7 +49,7 @@ static UIView *statusBarCoverView = nil;
     [FileManager creatCacheFolder];
     
     // 夜间-日间模式
-    if ([UserInfoModel sharedInstance].isNightThemeStyle)
+    if ([UserInfoCache sharedInstance].isNightThemeStyle)
     {
         [DKNightVersionManager nightFalling];
     }

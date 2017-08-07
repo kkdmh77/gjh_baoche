@@ -10,13 +10,15 @@
 #import <UIKit/UIKit.h>
 
 #import "RTTableComponent.h"
-
+#import "GlobalConfig.h"
+#import "EmptyDataCell.h"
 
 @interface RTBaseComponent : NSObject <RTTableComponent>
 
 @property (nonatomic, weak, readonly) UITableView *tableView;
 
 @property (nonatomic, weak) id<RTTableComponentDelegate> delegate;
+@property (nonatomic, assign) NSInteger sectionOfTableView; ///< 这个component在table的section位置
 
 @property (nonatomic, strong) NSString *cellIdentifier;
 @property (nonatomic, strong) NSString *headerIdentifier;
@@ -30,5 +32,10 @@
 
 - (void)registerWithTableView:(UITableView *)tableView NS_REQUIRES_SUPER;
 - (void)setNeedUpdateHeightForSection:(NSInteger)section;
+
+/**************************** 网络数据加载状态相关 ********************************/
+
+@property (nonatomic, assign) ViewLoadType loadType; // 数据加载类型 defuatl is ViewLoadTypeLoading
+@property (nonatomic, strong, readonly) EmptyDataCell *emptyDataCell;
 
 @end

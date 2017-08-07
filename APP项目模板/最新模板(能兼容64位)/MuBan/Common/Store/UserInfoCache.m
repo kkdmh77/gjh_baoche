@@ -34,11 +34,22 @@ DEF_SINGLETON(UserInfoCache);
             // 加载已经保存在磁盘里的值
             id value = [[UserInfoCache cache] objectForKey:property.name];
             
-            if ([property.name isEqualToString:@"NSObject"]) {
-                value = [NSArray modelArrayWithClass:[NSObject class] json:value];
+            if (SafetyObject(value)) {
+                // 对象或者字典类型的
+                if ([value isKindOfClass:[NSDictionary class]]) {
+                    id propertyValue = [[property.cls alloc] init];
+                    [propertyValue modelSetWithJSON:value];
+                    
+                    value = propertyValue;
+                } else {
+                    // 数组包对象类型的
+                    if ([property.name isEqualToString:@"NSObject"]) {
+                        value = [NSArray modelArrayWithClass:[NSObject class] json:value];
+                    }
+                }
+                
+                [self setValue:value forKey:property.name];
             }
-            
-            [self setValue:value forKey:property.name];
         }
     }
     return self;

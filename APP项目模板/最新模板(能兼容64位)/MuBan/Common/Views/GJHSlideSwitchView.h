@@ -53,6 +53,10 @@ static const CGFloat kDefaultSlideSwitchViewHeight = 38.0f; // 纯文字时候�
 @property (nonatomic, strong) UIImage *shadowImage;                     // btn选择时的下划线图
 @property (nonatomic, strong) NSArray *shadowImageArray;                // btn选择时的下划线图数组(如果有数组会用数组里的图赋值给对应的btn,如果没有就统一用shadowImage)
 
+@property (nonatomic, assign) CGFloat tabItemFontSize;                  // btn字体大小
+@property (nonatomic, assign) CGFloat horizontalTabItemEdgeInsets;      // item起始左右2端的间距
+@property (nonatomic, assign) CGFloat horizontalTabItemSpace;           // item之间的间距
+
 @property (nonatomic, strong) UIButton *rigthSideButton;
 
 @property (nonatomic, assign) BOOL isTabItemEqualWidthInFullScreenWidth; // 顶部标签子视图是否等宽且只限制在屏幕宽度中显示(scrollview不横向滚动) default is NO

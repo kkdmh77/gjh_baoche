@@ -9,8 +9,9 @@
 #import "GJHSlideSwitchView.h"
 
 static CGFloat kHeightOfTopScrollView = 0.0f;           // 会根据文字和图片自动调整
-static const CGFloat kWidthOfButtonMargin = 20.0f;
-static const CGFloat kFontSizeOfTabButton = 14.0f;
+static CGFloat kBtnsHorizontalEdgeInsets = 20.0f;       // item起始左右2端的间距
+static CGFloat kWidthOfButtonMargin = 20.0f;            // item之间的间距
+static CGFloat kFontSizeOfTabButton = 14.0f;            // btn字体大小
 static const NSUInteger kTagOfRightSideButton = 999;
 static const CGFloat kHeightOfShadowImageView = 3.0f;
 
@@ -87,6 +88,18 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
     rigthSideButton.tag = kTagOfRightSideButton;
     _rigthSideButton = rigthSideButton;
     [self addSubview:_rigthSideButton];
+}
+
+- (void)setTabItemFontSize:(CGFloat)tabItemFontSize {
+    kFontSizeOfTabButton = tabItemFontSize;
+}
+
+- (void)setHorizontalTabItemEdgeInsets:(CGFloat)horizontalTabItemEdgeInsets {
+    kBtnsHorizontalEdgeInsets = horizontalTabItemEdgeInsets;
+}
+
+- (void)setHorizontalTabItemSpace:(CGFloat)horizontalTabItemSpace {
+    kWidthOfButtonMargin = horizontalTabItemSpace;
 }
 
 #pragma mark - 创建控件
@@ -174,9 +187,10 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
     _topScrollView.backgroundColor = _topScrollViewBackgroundColor;
     
     //顶部tabbar的总长度
-    CGFloat topScrollViewContentWidth = kWidthOfButtonMargin;
+    CGFloat topScrollViewContentWidth = kBtnsHorizontalEdgeInsets * 2;
     //每个tab偏移量
-    CGFloat xOffset = kWidthOfButtonMargin;
+    CGFloat xOffset = kBtnsHorizontalEdgeInsets;
+    
     for (int i = 0; i < [_titlesArray count]; i++) {
         NSString *title = [_titlesArray objectAtIndex:i];
         UIImage *normalImage = i < _imageNamesArray.count ? [UIImage imageNamed:_imageNamesArray[i]] : nil;
@@ -205,20 +219,20 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
         }
         else
         {
-            btnSize = CGSizeMake((self.bounds.size.width - _rigthSideButton.bounds.size.width - kWidthOfButtonMargin * (_titlesArray.count + 1)) / _titlesArray.count, kHeightOfTopScrollView);
+            btnSize = CGSizeMake((self.bounds.size.width - _rigthSideButton.bounds.size.width - kBtnsHorizontalEdgeInsets * 2 - kWidthOfButtonMargin * (_titlesArray.count - 1)) / _titlesArray.count, kHeightOfTopScrollView);
         }
         
         //累计每个tab文字的长度
-        topScrollViewContentWidth += kWidthOfButtonMargin+btnSize.width;
+        topScrollViewContentWidth += btnSize.width + (i != _titlesArray.count - 1 ? kWidthOfButtonMargin : 0);
         //设置按钮尺寸
-        [button setFrame:CGRectMake(xOffset,0,
+        [button setFrame:CGRectMake(xOffset, 0,
                                     btnSize.width, kHeightOfTopScrollView)];
         //计算下一个tab的x偏移量
         xOffset += btnSize.width + kWidthOfButtonMargin;
         
         [button setTag:i+100];
         if (i == 0) {
-            _shadowImageView.frame = CGRectMake(kWidthOfButtonMargin, kHeightOfTopScrollView - kHeightOfShadowImageView, btnSize.width, kHeightOfShadowImageView);
+            _shadowImageView.frame = CGRectMake(kBtnsHorizontalEdgeInsets, kHeightOfTopScrollView - kHeightOfShadowImageView, btnSize.width, kHeightOfShadowImageView);
             button.selected = YES;
         }
         /*

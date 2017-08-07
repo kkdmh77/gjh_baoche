@@ -175,17 +175,12 @@
         _contentView.frame = CGRectMake(0, _containerView.frameHeight, _contentView.boundsWidth, _contentView.boundsHeight);
         
         // 弹出键盘
-        if ([_contentView canBecomeFirstResponder])
-        {
-            [_contentView becomeFirstResponder];
-        }
-        else
+        if (![_contentView becomeFirstResponder])
         {
             for (UIView *subview in _contentView.subviews)
             {
-                if ([subview canBecomeFirstResponder])
+                if ([subview becomeFirstResponder])
                 {
-                    [subview becomeFirstResponder];
                     break;
                 }
             }

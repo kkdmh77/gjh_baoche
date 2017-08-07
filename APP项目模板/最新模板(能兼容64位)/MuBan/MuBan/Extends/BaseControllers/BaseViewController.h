@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <NerdyUI.h>
+#import "GlobalConfig.h"
 
 #define kBarButtonItemViewTag 8888
 
@@ -70,6 +71,13 @@ typedef void (^PickPhotoCancelHandle) (void);
 
 /// tab滚到到最底部要执行的回调
 @property (nonatomic, copy) void (^tabScrollToBottomOperationHandle) (UIScrollView *scrollView);
+
+/**************************** 加载数据状态相关 ********************************/
+
+@property (nonatomic, assign) ViewLoadType loadType; // 数据加载类型
+
+/// 配置tableView & 设置加载数据时的状态占位视图
+- (void)configureTableViewAndSetupLoadDataStatus;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 

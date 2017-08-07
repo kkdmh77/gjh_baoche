@@ -13,6 +13,7 @@
 #import "CTAssetsPickerController.h"
 #import <StoreKit/StoreKit.h>
 #import "UINavigationController+FDFullscreenPopGesture.h"
+#import <UIScrollView+EmptyDataSet.h>
 
 #define kBarButtonItemSize CGRectMake(0, 0, 40, 40)
 
@@ -29,12 +30,23 @@
 
 @implementation BaseViewController
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     [self hideHUD];
     
     // 注销通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    self.tableView.dataSource = nil;
+    self.tableView.delegate = nil;
 }
 
 - (void)loadView
@@ -154,20 +166,20 @@
     
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
-    if ([self.navigationController.viewControllers isValidArray]) {
-        UIViewController *root = self.navigationController.viewControllers[0];
+    if ([self.rt_navigationController.rt_viewControllers isValidArray]) {
+        UIViewController *root = self.rt_navigationController.rt_viewControllers[0];
         BOOL isRootViewController = (self == root);
         
         if (isRootViewController) {
             // self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-            self.fd_interactivePopDisabled = YES;
+            self.rt_disableInteractivePop = YES;
         } else {
             // self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-            self.fd_interactivePopDisabled = NO;
+            self.rt_disableInteractivePop = NO;
         }
     } else {
         // self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-        self.fd_interactivePopDisabled = YES;
+        self.rt_disableInteractivePop = YES;
     }
 }
 
@@ -231,15 +243,15 @@
     
     if (DKNightVersionManager.currentThemeVersion == DKThemeVersionNight)
     {
-        backColor = PageBackgroundColor;
-        navTextColor = [UIColor blackColor];
-        navBgColor = Common_ThemeColor;
+        backColor = PageBackgroundColor_Night;
+        navTextColor = NavTextColor_Night;
+        navBgColor = Common_ThemeColor_Night;
         statusBarStyle = UIStatusBarStyleLightContent;
     }
     else
     {
         backColor = PageBackgroundColor;
-        navTextColor = [UIColor blackColor];
+        navTextColor = NavTextColor;
         navBgColor = Common_ThemeColor;
     }
     
@@ -657,7 +669,7 @@
 
 - (void)backViewController
 {
-    NSArray *viewControllers = [self.navigationController viewControllers];
+    NSArray *viewControllers = [self.rt_navigationController rt_viewControllers];
     
     // 根据viewControllers的个数来判断此控制器是被present的还是被push的
     if (1 <= viewControllers.count && 0 < [viewControllers indexOfObject:self])
@@ -725,18 +737,20 @@
 
 #pragma mark - UIImagePickerControllerDelegate
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info;
 {
     /*
-    if (UIImagePickerControllerSourceTypeCamera == picker.sourceType)
-    {
-        UIImageWriteToSavedPhotosAlbum(image, nil, NULL, NULL);
-    }
-    */
+     if (UIImagePickerControllerSourceTypeCamera == picker.sourceType)
+     {
+     UIImageWriteToSavedPhotosAlbum(image, nil, NULL, NULL);
+     }
+     */
+    
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
-     if (_pickPhotoFinishHandle) _pickPhotoFinishHandle(@[image]);
+    if (_pickPhotoFinishHandle) _pickPhotoFinishHandle(@[image]);
     [self clearPickPhotoCallBackHandle];
 }
 
@@ -799,7 +813,7 @@
     if (scrollView == _tableView)
     {
         // 滚动到了最底部
-        float value = fabsf(scrollView.contentOffset.y - (scrollView.contentSize.height - _tableView.boundsHeight));
+        float value = fabs(scrollView.contentOffset.y - (scrollView.contentSize.height - _tableView.boundsHeight));
         if (value < 50)
         {
             if (_tabScrollToBottomOperationHandle) _tabScrollToBottomOperationHandle(scrollView);
@@ -832,5 +846,101 @@
     return UIStatusBarStyleDefault;
 }
 #endif
+
+/**************************** 加载数据状态相关 ********************************/
+
+#pragma mark - DZNEmptyDataSetSource & DZNEmptyDataSetDelegate methods
+
+- (BOOL)emptyDataSetShouldBeForcedToDisplay:(UIScrollView *)scrollView {
+    return _loadType != ViewLoadTypeSuccess;
+}
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
+    return _loadType != ViewLoadTypeSuccess;
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *desc = @"";
+    switch (_loadType) {
+        case ViewLoadTypeLoading:
+            desc = @"正在加载中...";
+            break;
+        case ViewLoadTypeFailed:
+            desc = @"数据加载失败";
+            break;
+        case ViewLoadTypeNoNet:
+            desc = @"网络加载失败";
+            break;
+        default:
+            break;
+    }
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:desc];
+    str.color = TextPlaceholderColor;
+    str.font = kCustomFont_Size(14);
+    
+    return str;
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *imageName = @"";
+    switch (_loadType) {
+        case ViewLoadTypeLoading:
+            imageName = @"dataLoadingMid";
+            break;
+        case ViewLoadTypeFailed:
+        case ViewLoadTypeNoNet:
+            imageName = @"dataLoadFailedMid";
+            break;
+        default:
+            break;
+    }
+    
+    return [UIImage imageNamed:imageName];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+    return [UIColor whiteColor];
+}
+
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView {
+    return 0;
+}
+
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView {
+    return 11;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+    return YES;
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view {
+    SEL selector = NSSelectorFromString(@"getNetworkData");
+    if (ViewLoadTypeLoading != _loadType && ViewLoadTypeSuccess != _loadType && [self respondsToSelector:selector]) {
+        [self performSelectorOnMainThread:selector
+                               withObject:nil
+                            waitUntilDone:YES];
+    }
+}
+
+#pragma mark - getter & setter methods
+
+- (void)setLoadType:(ViewLoadType)loadType {
+    _loadType = loadType;
+    
+    [self.tableView reloadEmptyDataSet];
+}
+
+- (void)configureTableViewAndSetupLoadDataStatus {
+    [self setupTableViewWithFrame:self.view.bounds
+                            style:UITableViewStylePlain
+                  registerNibName:nil
+                  reuseIdentifier:nil];
+    
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+    
+    self.loadType = ViewLoadTypeLoading;
+}
 
 @end

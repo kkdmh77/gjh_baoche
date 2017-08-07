@@ -220,7 +220,7 @@ DEF_SINGLETON(LoginBC);
         UserInfoEntity *userInfo = [UserInfoEntity new];
         // 解析数据...
         
-        [UserInfoModel sharedInstance].userInfo = userInfo;
+        [UserInfoCache sharedInstance].userInfo = userInfo;
     }
     
     // 发送通知
@@ -265,7 +265,7 @@ DEF_SINGLETON(LoginBC);
     else if (request.tag == NetUserCenterRequestType_Logout)
     {
         // 清空数据
-        [UserInfoModel sharedInstance].userInfo = nil;
+        [UserInfoCache sharedInstance].userInfo = nil;
         [UserInfoModel setObject:nil forKey:kCookiesKey];
     }
     

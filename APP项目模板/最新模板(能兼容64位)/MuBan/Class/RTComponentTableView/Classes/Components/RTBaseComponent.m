@@ -69,6 +69,10 @@
     return 0.f;
 }
 
+- (CGFloat)heightForComponentFooter {
+    return 0.f;
+}
+
 - (CGFloat)estimatedHeightForComponentItemWithTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
     
     return 0.f;
@@ -93,11 +97,16 @@
     return nil;
 }
 
+- (__kindof UIView *)footerForTableView:(UITableView *)tableView {
+    return nil;
+}
+
 - (void)didSelectItemAtIndex:(NSUInteger)index
 {
-    if ([self.delegate respondsToSelector:@selector(tableComponent:didTapItemAtIndex:)]) {
+    if ([self.delegate respondsToSelector:@selector(tableComponent:didTapItemAtIndex:userInfo:)]) {
         [self.delegate tableComponent:self
-                    didTapItemAtIndex:index];
+                    didTapItemAtIndex:index
+                             userInfo:nil];
     }
 }
 
@@ -111,6 +120,15 @@
 {
     [tableView registerClass:[UITableViewCell class]
       forCellReuseIdentifier:self.cellIdentifier];
+    
+    @weakify(self)
+    _emptyDataCell = [[EmptyDataCell alloc] init];
+    _emptyDataCell.loadType = ViewLoadTypeLoading;
+    _emptyDataCell.tapActionHandle = ^(EmptyDataCell *cell) {
+        if ([weak_self.delegate respondsToSelector:@selector(emptyViewTapActionToReloadData:)]) {
+            [weak_self.delegate emptyViewTapActionToReloadData:weak_self];
+        }
+    };
 }
 
 - (void)setNeedUpdateHeightForSection:(NSInteger)section
@@ -119,6 +137,14 @@
         [self.tableView reloadData];
     });
     CFRunLoopAddObserver(CFRunLoopGetMain(), observer, kCFRunLoopDefaultMode);
+}
+
+/**************************** 网络数据加载状态相关 ********************************/
+
+- (void)setLoadType:(ViewLoadType)loadType {
+    _loadType = loadType;
+    
+    self.emptyDataCell.loadType = loadType;
 }
 
 @end

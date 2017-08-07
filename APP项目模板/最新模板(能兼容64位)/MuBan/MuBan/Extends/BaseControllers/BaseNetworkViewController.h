@@ -142,6 +142,7 @@ typedef void (^ExtendVCNetRequestFailedBlock)    (NetRequest *request, NSError *
 
 /// 清空request委托
 - (void)clearDelegate;
+- (void)clearDelegateWithRequestTag:(NSInteger)tag;
 
 /// 设置代码块
 - (void)setNetSuccessBlock:(ExtendVCNetRequestSuccessBlock)successBlock;
