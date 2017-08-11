@@ -1,52 +1,42 @@
 //
-//  EmptyDataCell.m
+//  BaseTableView.m
 //  Biuu
 //
-//  Created by 龚 俊慧 on 2017/7/20.
+//  Created by 龚 俊慧 on 2017/8/10.
 //  Copyright © 2017年 com.gjh. All rights reserved.
 //
 
-#import "EmptyDataCell.h"
+#import "BaseTableView.h"
 #import <UIScrollView+EmptyDataSet.h>
-#import <NerdyUI.h>
 
-@interface EmptyDataCell ()<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
-
-@property (nonatomic, strong) UIScrollView *emptyScrollView;
+@interface BaseTableView ()<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
 
-@implementation EmptyDataCell
+@implementation BaseTableView
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
+    self = [super initWithFrame:frame style:style];
     if (self) {
-        [self initialization];
+        [self commonInit];
     }
     return self;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
 }
 
 #pragma mark - custom methods
 
-- (void)initialization {
-    @weakify(self)
-    _emptyScrollView = (UIScrollView *)[UIScrollView new].addTo(self.contentView).makeCons(^{
-        make.edge.equal.view(weak_self.contentView);
-    });
-    
-    _emptyScrollView.emptyDataSetSource = self;
-    _emptyScrollView.emptyDataSetDelegate = self;
+- (void)commonInit {
+    self.emptyDataSetSource = self;
+    self.emptyDataSetDelegate = self;
+    self.loadType = ViewLoadTypeSuccess;
 }
 
 #pragma mark - getter & setter methods
@@ -54,7 +44,7 @@
 - (void)setLoadType:(ViewLoadType)loadType {
     _loadType = loadType;
     
-    [_emptyScrollView reloadEmptyDataSet];
+    [self reloadEmptyDataSet];
 }
 
 #pragma mark - DZNEmptyDataSetSource & DZNEmptyDataSetDelegate methods
@@ -122,6 +112,10 @@
 
 - (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView {
     return 11;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+    return YES;
 }
 
 - (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view {

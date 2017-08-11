@@ -13,7 +13,6 @@
 #import "CTAssetsPickerController.h"
 #import <StoreKit/StoreKit.h>
 #import "UINavigationController+FDFullscreenPopGesture.h"
-#import <UIScrollView+EmptyDataSet.h>
 
 #define kBarButtonItemSize CGRectMake(0, 0, 40, 40)
 
@@ -158,6 +157,8 @@
      }
      */
     
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
+    
     [super viewWillDisappear:animated];
 }
 
@@ -294,13 +295,27 @@
 
 - (void)setupTableViewWithFrame:(CGRect)frame style:(UITableViewStyle)style registerNibName:(NSString *)nibName reuseIdentifier:(NSString *)identifier
 {
-    _tableView = InsertTableView(nil, frame, self, self, style);
+    @weakify(self)
+    _tableView = [[BaseTableView alloc] initWithFrame:frame style:style];
+    [_tableView keepAutoresizingInFull];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    // _tableView.dk_backgroundColorPicker = DKColorWithColors(Common_WhiteColor, Common_WhiteColor_Night);
     _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.backgroundView = nil;
     if ([nibName isValidString] && [identifier isValidString])
     {
         [_tableView registerNib:[UINib nibWithNibName:nibName bundle:nil] forCellReuseIdentifier:identifier];
     }
+    _tableView.tapActionHandle = ^(BaseTableView *view) {
+        SEL selector = NSSelectorFromString(@"getNetworkData");
+        if ([weak_self respondsToSelector:selector]) {
+            [weak_self performSelectorOnMainThread:selector
+                                        withObject:nil
+                                     waitUntilDone:YES];
+        }
+    };
     
     [self.view addSubview:_tableView];
 }
@@ -715,14 +730,12 @@
     return 0.0;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return [UIView new];
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.0;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    return [UIView new];
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -846,101 +859,5 @@
     return UIStatusBarStyleDefault;
 }
 #endif
-
-/**************************** 加载数据状态相关 ********************************/
-
-#pragma mark - DZNEmptyDataSetSource & DZNEmptyDataSetDelegate methods
-
-- (BOOL)emptyDataSetShouldBeForcedToDisplay:(UIScrollView *)scrollView {
-    return _loadType != ViewLoadTypeSuccess;
-}
-
-- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
-    return _loadType != ViewLoadTypeSuccess;
-}
-
-- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *desc = @"";
-    switch (_loadType) {
-        case ViewLoadTypeLoading:
-            desc = @"正在加载中...";
-            break;
-        case ViewLoadTypeFailed:
-            desc = @"数据加载失败";
-            break;
-        case ViewLoadTypeNoNet:
-            desc = @"网络加载失败";
-            break;
-        default:
-            break;
-    }
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:desc];
-    str.color = TextPlaceholderColor;
-    str.font = kCustomFont_Size(14);
-    
-    return str;
-}
-
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *imageName = @"";
-    switch (_loadType) {
-        case ViewLoadTypeLoading:
-            imageName = @"dataLoadingMid";
-            break;
-        case ViewLoadTypeFailed:
-        case ViewLoadTypeNoNet:
-            imageName = @"dataLoadFailedMid";
-            break;
-        default:
-            break;
-    }
-    
-    return [UIImage imageNamed:imageName];
-}
-
-- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
-    return [UIColor whiteColor];
-}
-
-- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView {
-    return 0;
-}
-
-- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView {
-    return 11;
-}
-
-- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
-    return YES;
-}
-
-- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view {
-    SEL selector = NSSelectorFromString(@"getNetworkData");
-    if (ViewLoadTypeLoading != _loadType && ViewLoadTypeSuccess != _loadType && [self respondsToSelector:selector]) {
-        [self performSelectorOnMainThread:selector
-                               withObject:nil
-                            waitUntilDone:YES];
-    }
-}
-
-#pragma mark - getter & setter methods
-
-- (void)setLoadType:(ViewLoadType)loadType {
-    _loadType = loadType;
-    
-    [self.tableView reloadEmptyDataSet];
-}
-
-- (void)configureTableViewAndSetupLoadDataStatus {
-    [self setupTableViewWithFrame:self.view.bounds
-                            style:UITableViewStylePlain
-                  registerNibName:nil
-                  reuseIdentifier:nil];
-    
-    self.tableView.emptyDataSetSource = self;
-    self.tableView.emptyDataSetDelegate = self;
-    
-    self.loadType = ViewLoadTypeLoading;
-}
 
 @end

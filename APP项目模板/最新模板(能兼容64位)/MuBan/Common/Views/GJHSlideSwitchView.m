@@ -102,6 +102,10 @@ static const CGFloat kHeightOfShadowImageView = 3.0f;
     kWidthOfButtonMargin = horizontalTabItemSpace;
 }
 
+- (NSInteger)curIndex {
+    return _userSelectedChannelID - 100;
+}
+
 #pragma mark - 创建控件
 
 //当横竖屏切换时可通过此方法调整布局

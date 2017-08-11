@@ -24,13 +24,34 @@ typedef enum
 #if NS_BLOCKS_AVAILABLE
 
 /// 异步加载网络图片
-- (void)gjh_setImageWithURL:(NSURL *)url success:(void (^)(UIImage *image))success;
+- (void)gjh_setImageWithURL:(NSURL *)url
+                    success:(void (^)(UIImage *image))success;
 
-- (void)gjh_setImageWithURL:(NSURL *)url imageShowStyle:(ImageShowStyle)style success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
+- (void)gjh_setImageWithURL:(NSURL *)url
+             imageShowStyle:(ImageShowStyle)style
+                    success:(void (^)(UIImage *image))success
+                    failure:(void (^)(NSError *error))failure;
 
-- (void)gjh_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder imageShowStyle:(ImageShowStyle)style success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
+- (void)gjh_setImageWithURL:(NSURL *)url
+           placeholderImage:(UIImage *)placeholder
+             imageShowStyle:(ImageShowStyle)style
+                    success:(void (^)(UIImage *image))success
+                    failure:(void (^)(NSError *error))failure;
 
-- (void)gjh_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder imageShowStyle:(ImageShowStyle)style options:(SDWebImageOptions)options success:(void (^)(UIImage *image))success failure:(void (^)(NSError *error))failure;
+- (void)gjh_setImageWithURL:(NSURL *)url
+           placeholderImage:(UIImage *)placeholder
+             imageShowStyle:(ImageShowStyle)style
+                    options:(YYWebImageOptions)options
+                    success:(void (^)(UIImage *image))success
+                    failure:(void (^)(NSError *error))failure;
+
+- (void)gjh_setImageWithURL:(NSURL *)url
+           placeholderImage:(UIImage *)placeholder
+             imageShowStyle:(ImageShowStyle)style
+                    options:(YYWebImageOptions)options
+                  transform:(YYWebImageTransformBlock)transform
+                    success:(void (^)(UIImage *image))success
+                    failure:(void (^)(NSError *error))failure;
 
 #endif
 

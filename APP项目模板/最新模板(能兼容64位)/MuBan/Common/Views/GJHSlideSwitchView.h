@@ -60,6 +60,7 @@ static const CGFloat kDefaultSlideSwitchViewHeight = 38.0f; // 纯文字时候�
 @property (nonatomic, strong) UIButton *rigthSideButton;
 
 @property (nonatomic, assign) BOOL isTabItemEqualWidthInFullScreenWidth; // 顶部标签子视图是否等宽且只限制在屏幕宽度中显示(scrollview不横向滚动) default is NO
+@property (nonatomic, assign, readonly) NSInteger curIndex;
 
 /*!
  * @method 初始化
